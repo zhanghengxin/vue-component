@@ -2,8 +2,11 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import demoBlock from './components/demo-block.vue'
 import router from './router'
+// import JKUI from '../packages/index'
 
+Vue.component('demo-block', demoBlock)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
