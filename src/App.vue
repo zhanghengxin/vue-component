@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import mainHeader from './components/header'
-import menuNav from './components/nav'
+import mainHeader from './components/Header'
+import menuNav from './components/Nav'
 
 export default {
     name: 'App',
@@ -23,11 +23,11 @@ export default {
 
 <style lang="scss">
     #app {
-
         margin: 0 auto;
     }
+
     .content {
-        width: 1200px;
+        width: 1400px;
         padding: 0;
         margin: 0 auto;
         box-shadow: rgba(223, 225, 230, 0.5) 0px 4px 30px 0px;

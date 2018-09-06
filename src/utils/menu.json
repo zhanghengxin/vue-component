@@ -8,12 +8,7 @@
     {
       "name": "install",
       "path": "/install",
-      "title": "安装"
-    },
-    {
-      "name": "start",
-      "path": "/start",
-      "title": "注意事项"
+      "title": "快速上手"
     }
   ],
   "组件": [

@@ -1,18 +1,7 @@
-$headerBg: #495060; // 头部背景色
-$font: #1C2438; // 主字体颜色
-$assist: #9EA7B4; //  辅助颜色
-$contentbg: #F8F8F9; // 内容背景色
-$border: #E9EAEC; // 内容背景色
+//全局组件库样式
+@import "color";
 
-// 基础色
-$white: #FFFFFF; // 白色
-$orange: #FF8F00; //  橘色
-$lightGreen: #1FCA74; //  浅绿色
-$lightBlue: #0079CC; //  浅蓝色
-$border: #DDDEE1; //  边框
-
-
-// button组件
+// button组件  示例
 .b-btn {
   display: inline-block;
   font-weight: 400;
@@ -28,10 +17,6 @@ $border: #DDDEE1; //  边框
   font-size: 12px;
   border-radius: 2px;
   transition: color .2s linear, background-color .2s linear, border .2s linear, box-shadow .2s linear;
-}
-
-.b-btn-fixed {
-  padding: 0 15px;
 }
 
 .b-btn-info {
