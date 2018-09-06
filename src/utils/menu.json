@@ -36,11 +36,6 @@
       "path": "/",
       "items": [
         {
-          "title": "Message 信息",
-          "path": "/message",
-          "name": "message"
-        },
-        {
           "title": "Page 分页",
           "path": "/page",
           "name": "page"
