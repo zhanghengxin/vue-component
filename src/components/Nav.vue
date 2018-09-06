@@ -2,7 +2,11 @@
     <div class="nav">
         <div v-for="(title, index) in Object.keys(data)" :key="index" class="nav-container">
             <p class="nav-title">{{title}}</p>
-            <div class="nav-items" v-for="nav in data[title]" :key="nav.name">
+            <div
+                    class="nav-items"
+                    v-for="nav in data[title]"
+                    :key="nav.name"
+                    v-if="nav.title">
                 <router-link
                         :to="{name: nav.name}"
                         v-if="nav.name"
