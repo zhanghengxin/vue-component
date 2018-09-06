@@ -9,6 +9,14 @@
       "name": "install",
       "path": "/install",
       "title": "快速上手"
+    },
+    {
+      "path": "/",
+      "redirect": "/guide"
+    },
+    {
+      "path": "*",
+      "redirect": "/guide"
     }
   ],
   "组件": [

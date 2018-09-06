@@ -15,8 +15,10 @@ let addRoute = (router) => {
             addRoute(route.items)
             routes = routes.concat(route.items)
         } else {
-            route.component = r => require.ensure([], () =>
-                r(require(`../docments/${route.name}.md`)))
+            if (route.name) {
+                route.component = r => require.ensure([], () =>
+                    r(require(`../docments/${route.name}.md`)))
+            }
         }
     })
 }
