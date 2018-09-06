@@ -2,10 +2,10 @@
  * Created by gaoguoqing on 2018/9/5.
  *
  */
-import BButton from './button/index'
+import Button from './button/index'
 
 const components = [
-    BButton
+    Button
 ]
 
 const install = function (Vue) {
@@ -15,5 +15,5 @@ const install = function (Vue) {
 
 export default {
     install,
-    BButton
+    Button
 }
