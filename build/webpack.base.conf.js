@@ -1,63 +1,60 @@
 'use strict'
 const path = require('path')
 const utils = require('./utils')
-const config = require('../config')
+const config = require('../config/index')
 const vueLoaderConfig = require('./vue-loader.conf')
 const MarkdownItContainer = require('markdown-it-container')
-const striptags = require('./strip-tags')
 
-const vueMarkdown = {
+function resolve (dir) {
+    return path.join(__dirname, '..', dir)
+}
+
+//增加hljs classs
+function wrapCustomClass (render) {
+    return function (...args) {
+        return render(...args)
+            .replace('<code class="', '<code class="hljs ')
+            .replace('<code>', '<code class="hljs">')
+    }
+}
+
+const markdownOpt = {
     preprocess: (MarkdownIt, source) => {
         MarkdownIt.renderer.rules.table_open = function () {
             return '<table class="table">'
         }
-        MarkdownIt.renderer.rules.fence = utils.wrapCustomClass(MarkdownIt.renderer.rules.fence)
-
-        // ```html `` 给这种样式加个class hljs
-        //  但是markdown-it 有个bug fence整合attr的时候直接加载class数组上而不是class的值上
-        //  markdown-it\lib\renderer.js 71行 这么修改可以修复bug
-        //  tmpAttrs[i] += ' ' + options.langPrefix + langName; --> tmpAttrs[i][1] += ' ' + options.langPrefix + langName;
-        // const fence = MarkdownIt.renderer.rules.fence
-        // MarkdownIt.renderer.rules.fence = function(...args){
-        //   args[0][args[1]].attrJoin('class', 'hljs')
-        //   var a = fence(...args)
-        //   return a
-        // }
-
+        MarkdownIt.renderer.rules.fence = wrapCustomClass(MarkdownIt.renderer.rules.fence)
         const code_inline = MarkdownIt.renderer.rules.code_inline
         MarkdownIt.renderer.rules.code_inline = function (...args) {
-            args[0][args[1]].attrJoin('class', 'code_inline')
+            args[0][args[1]].attrJoin('class', 'code-show')
             return code_inline(...args)
         }
         return source
     },
     use: [
-        [MarkdownItContainer, 'demo', {
-            // 用于校验包含demo的代码块
-            validate: params => params.trim().match(/^demo\s*(.*)$/),
+        [MarkdownItContainer, 'code', {
+            validate: params => params.trim().match(/^code\s*(.*)$/),
             render: function (tokens, idx) {
-
-                var m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
                 if (tokens[idx].nesting === 1) {
-                    var desc = tokens[idx + 2].content;
-                    // 编译成html
-                    const html = utils.convertHtml(striptags(tokens[idx + 1].content, 'script'))
-                    // 移除描述，防止被添加到代码块
-                    tokens[idx + 2].children = [];
-                    return `<demo-block>
-                        <div slot="desc">${html}</div>
-                        <div slot="highlight">`;
+                    return `<code-show>
+                        <div slot="highlight">`
                 }
-                return '</div></demo-block>\n';
+                return '</div></code-show>'
             }
         }]
     ]
 }
 
-function resolve(dir) {
-    return path.join(__dirname, '..', dir)
-}
-
+const createLintingRule = () => ({
+    test: /\.(js|vue)$/,
+    loader: 'eslint-loader',
+    enforce: 'pre',
+    include: [resolve('src'), resolve('test')],
+    options: {
+        formatter: require('eslint-friendly-formatter'),
+        emitWarning: !config.dev.showEslintErrorsInOverlay
+    }
+})
 
 module.exports = {
     context: path.resolve(__dirname, '../'),
@@ -80,6 +77,7 @@ module.exports = {
     },
     module: {
         rules: [
+            ...(config.dev.useEslint ? [createLintingRule()] : []),
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
@@ -117,7 +115,7 @@ module.exports = {
             {
                 test: /\.md$/,
                 loader: 'vue-markdown-loader',
-                options: vueMarkdown
+                options: markdownOpt
             }
         ]
     },

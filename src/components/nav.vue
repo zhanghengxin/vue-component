@@ -1,0 +1,89 @@
+<template>
+    <div class="nav">
+        <div v-for="(title, index) in Object.keys(data)" :key="index" class="nav-container">
+            <p class="nav-title">{{title}}</p>
+            <div class="nav-items" v-for="nav in data[title]" :key="nav.name">
+                <router-link
+                        :to="{name: nav.name}"
+                        v-if="nav.name"
+                        :class="$route.name===nav.name ? 'active' : ''">
+                    {{nav.title}}
+                </router-link>
+                <p v-else class="nav-group">{{nav.title}}</p>
+                <div v-for="item in nav.items" :key="item.name">
+                    <router-link
+                            :to="{name: item.name}"
+                            :class="$route.name===item.name? 'active': ''"
+                            class="nav-component">{{item.title}}
+                    </router-link>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import menu from '../utils/menu.json'
+
+export default {
+    data () {
+        return {
+            data: menu
+        }
+    }
+}
+</script>
+
+<style lang="scss">
+    .nav {
+        padding: 0;
+        color: #3F536E;
+        height: 100%;
+        background-color: #fff;
+        .nav-container {
+            margin-bottom: 20px;
+        }
+        .nav-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin: 8px 0;
+            padding-left: 15px;
+        }
+        .nav-items {
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.8;
+            .active {
+                color: $lightBlue;
+            }
+        }
+        a {
+            display: block;
+            color: #3F536E;
+            padding: 8px 24px;
+            position: relative;
+            line-height: 1.5;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        .nav-group {
+            display: block;
+            position: relative;
+            padding: 6px 0px 6px 24px;
+            color: #2C405A;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .nav-component {
+            display: block;
+            position: relative;
+            padding: 6px 24px 6px 32px;
+            color: #616367;
+            font-size: 14px;
+            &:hover {
+                color: $lightBlue;
+            }
+        }
+    }
+</style>

@@ -2,17 +2,18 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import demoBlock from './components/demo-block.vue'
+import codeShow from './components/codeShow.vue'
 import router from './router'
-// import JKUI from '../packages/index'
+import bwUI from './libs'
 
-Vue.component('demo-block', demoBlock)
+Vue.use(bwUI)
+Vue.component('code-show', codeShow)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    router,
+    components: {App},
+    template: '<App/>'
 })

@@ -1,20 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import menuList from '../utils/menu.json'
 
 Vue.use(Router)
 
-export default new Router({
-    routes: [
-        {
-            path: '/',
-            name: 'HelloWorld',
-            component: HelloWorld
-        },
-        {
-            path: '/hello',
-            name: 'hello',
-            component: r => require.ensure([], () => r(require('../docments/test.md')))
+let routes = []
+
+Object.keys(menuList).forEach((item) => {
+    routes = routes.concat(menuList[item])
+})
+let addRoute = (router) => {
+    router.forEach((route) => {
+        if (route.items) {
+            addRoute(route.items)
+            routes = routes.concat(route.items)
+        } else {
+            route.component = r => require.ensure([], () =>
+                r(require(`../docments/${route.name}.md`)))
         }
-    ]
+    })
+}
+addRoute(routes)
+export default new Router({
+    routes: routes
 })

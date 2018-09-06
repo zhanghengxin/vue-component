@@ -1,23 +1,47 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+    <div id="app">
+        <main-header></main-header>
+        <div class="content clearfix">
+            <menu-nav class="nav"></menu-nav>
+            <router-view class="doc"/>
+        </div>
+    </div>
 </template>
 
 <script>
+import mainHeader from './components/header'
+import menuNav from './components/nav'
+
 export default {
-  name: 'App'
+    name: 'App',
+    components: {
+        mainHeader,
+        menuNav
+    }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+    #app {
+
+        margin: 0 auto;
+    }
+    .content {
+        width: 1200px;
+        padding: 0;
+        margin: 0 auto;
+        box-shadow: rgba(223, 225, 230, 0.5) 0px 4px 30px 0px;
+        height: auto;
+    }
+
+    .nav {
+        float: left;
+        width: 200px;
+    }
+
+    .doc {
+        float: left;
+        border-left: 1px solid #eaeefb;
+        padding: 20px;
+    }
 </style>

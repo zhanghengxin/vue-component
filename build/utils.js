@@ -1,6 +1,6 @@
 'use strict'
 const path = require('path')
-const config = require('../config')
+const config = require('../config/index')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
 
@@ -64,7 +64,7 @@ exports.cssLoaders = function (options) {
             {
                 loader: 'sass-resources-loader',
                 options: {
-                    resources: path.resolve(__dirname, '../src/assets/scss/common.scss')
+                    resources: path.resolve(__dirname, '../src/assets/scss/index.scss')
                 }
             }
         ),
@@ -107,20 +107,3 @@ exports.createNotifierCallback = () => {
     }
 }
 
-/**
- * 增加 hljs 的 classname
- */
-exports.wrapCustomClass = function (render) {
-    return function (...args) {
-        return render(...args)
-            .replace('<code class="', '<code class="hljs ')
-            .replace('<code>', '<code class="hljs">')
-    }
-}
-
-/**
- * Format HTML string
- */
-exports.convertHtml = function (str) {
-    return str.replace(/(&#x)(\w{4});/gi, $0 => String.fromCharCode(parseInt(encodeURIComponent($0).replace(/(%26%23x)(\w{4})(%3B)/g, '$2'), 16)))
-}
