@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import codeShow from './components/CodeShow.vue'
 import router from './router'
-import bwUI from './libs'
+import bwUI from '../libs'
 
 Vue.use(bwUI)
 Vue.component('code-show', codeShow)

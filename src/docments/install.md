@@ -31,6 +31,11 @@ cnpm i
 │   ├── dev.env.js
 │   ├── index.js
 │   └── prod.env.js
+├── libs // 组件库
+│   ├── button // button 源码 【例子】
+│   ├── utils
+│   ├── common.js  //组件库公共资源
+│   └── index.js // 全局组件库注册
 ├── src // 组件资源区和文档放置区
 │   ├── assets // 静态资源
 │   │   ├── scss //
@@ -46,11 +51,6 @@ cnpm i
 │   │   └── Nav.vue // 侧边栏组件
 │   ├── docments // 示例文档
 │   │   ├── button.md // 按钮组件文档【例子】
-│   ├── libs // 组件库
-│   │   ├── button // button 源码 【例子】
-│   │   ├── utils
-│   │   │   ├── common.js  //组件库公共资源
-│   │   └── index.js // 全局组件库注册
 │   ├── utils // 项目资源目录
 │   │   ├── menu.json //  组件渲染列表
 │   └── router // 路由文件
