@@ -1,5 +1,5 @@
 {
-  "食用指南": [
+  "使用指南": [
     {
       "name": "guide",
       "path": "/guide",
@@ -28,6 +28,11 @@
           "title": "Button 按钮",
           "path": "/button",
           "name": "button"
+        },
+        {
+          "title": "Steps 步骤条",
+          "path": "/steps",
+          "name": "steps"
         }
       ]
     },
