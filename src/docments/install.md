@@ -57,7 +57,14 @@ cnpm i
 │   │     └── index.js // 路由配置文件
 │   ├── App.vue // 根文件
 │   ├── main.js // 入口文件
+├── test //  测试资源
+│   ├── unit // karma + moche
+│   │   ├── specs // 测试用例库
+│   │   │   ├── Button.spec.js  // Button 组件测试用例【例子】
+│   │   └──  index.js // 入口
+│   │   │──  karma.conf.js // 配置文件
+│   │   │──  utils // API
 ........略
 ```
-写了一个示例的 button 组件包括:注册流程、文档展示、样式归纳等等 集成了 [ESlint](https://standardjs.com/) ,测试用例模板后续添加。。
-同学们有好的建议欢迎提出0.0
+写了一个示例的 button 组件包括:注册流程、文档展示、样式归纳、测试用例模板等等，集成了 [ESlint](https://standardjs.com/)、
+SCSS，同学们有好的建议欢迎提出0.0
