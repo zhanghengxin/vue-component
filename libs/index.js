@@ -2,7 +2,7 @@
  * Created by gaoguoqing on 2018/9/5.
  *
  */
-import Button from './button/index'
+import Button from './button'
 
 const components = [
     Button
