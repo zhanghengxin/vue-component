@@ -32,9 +32,9 @@ cnpm i
 │   └── prod.env.js
 ├── libs // 组件库
 │   ├── button // button 源码 【例子】
-│   ├── utils
+│   ├── utils  // 组件公用 API
 │   ├── common.js  //组件库公共资源
-│   └── index.js // 全局组件库注册
+│   └── index.js // 入口文件
 ├── src // 组件资源区和文档放置区
 │   ├── assets // 静态资源
 │   │   ├── scss //

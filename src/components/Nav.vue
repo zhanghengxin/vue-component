@@ -58,7 +58,7 @@ export default {
             font-weight: normal;
             line-height: 1.8;
             .active {
-                color: $lightBlue;
+                color: $LightPrimary;
             }
         }
         a {
@@ -86,7 +86,7 @@ export default {
             color: #616367;
             font-size: 14px;
             &:hover {
-                color: $lightBlue;
+                color: $LightPrimary;
             }
         }
     }
