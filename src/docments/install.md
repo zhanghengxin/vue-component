@@ -21,7 +21,6 @@ cnpm i
 │   ├── build.js
 │   ├── check-versions.js
 │   ├── logo.png
-│   ├── strip-tags.js
 │   ├── utils.js
 │   ├── vue-loader.conf.js
 │   ├── webpack.base.conf.js
