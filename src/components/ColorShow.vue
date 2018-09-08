@@ -2,7 +2,7 @@
     <div :style="backgroundStyle" class="b-color-box">
         <div class="b-color-body">
             <div class="b-color-name" :style="fontColor">{{type}}</div>
-            <div class="b-color-desc":style="fontColor">{{colorName}}</div>
+            <div class="b-color-desc" :style="fontColor">{{colorName}}</div>
         </div>
     </div>
 </template>
@@ -20,9 +20,9 @@ export default {
             default: 'white'
         }
     },
-    computed: {
-        backgroundStyle () {
-            let obj = {
+    data () {
+        return {
+            colorObj: {
                 'LightPrimary': '52b7fc',
                 'Primary': '0079CC',
                 'DarkPrimary': '00558f',
@@ -42,32 +42,16 @@ export default {
                 'DisContent': 'cccccc',
                 'LinkContent': '0079cc'
             }
+        }
+    },
+    computed: {
+        backgroundStyle () {
             return {
-                background: '#' + obj[this.type]
+                background: '#' + this.colorObj[this.type]
             }
         },
         colorName () {
-            let obj = {
-                'LightPrimary': '52b7fc',
-                'Primary': '0079CC',
-                'DarkPrimary': '00558f',
-                'Info': '0079CC',
-                'Success': '1fca74',
-                'Warning': 'ff8f00',
-                'Error': 'f44336',
-                'Badge': 'ff5722',
-                'Background': 'f8f8f9',
-                'Sub': '80848f',
-                'Disabled': 'e8e8e8',
-                'Border': 'dddee1',
-                'Divider': 'e9eaec',
-                'Title': '1c2438',
-                'Content': '495060',
-                'SubContent': '9ea7b4',
-                'DisContent': 'cccccc',
-                'LinkContent': '0079cc'
-            }
-            return '#' + obj[this.type]
+            return '#' + this.colorObj[this.type]
         },
         fontColor () {
             return {
