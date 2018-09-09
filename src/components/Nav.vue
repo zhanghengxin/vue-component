@@ -61,16 +61,6 @@ export default {
                 color: $LightPrimary;
             }
         }
-        a {
-            display: block;
-            color: #3F536E;
-            padding: 8px 24px;
-            position: relative;
-            line-height: 1.5;
-            cursor: pointer;
-            font-weight: normal;
-        }
-
         .nav-group {
             display: block;
             position: relative;
