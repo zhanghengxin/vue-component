@@ -3,7 +3,7 @@
 ### 基础用法
 
 <div>
-    <b-carousel>
+    <b-carousel :auto='false'>
         <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
         <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
         <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
@@ -156,7 +156,9 @@
 | hoverPause | 鼠标划过时暂停 | boolean | `true`、`false` | true |
 
 ### events
-| 事件名	      | 说明	    | 返回值 |
-|---------- |-------- |---------- |
-| on-click     | 点击按钮时触发   | -  |
+| 事件名 | 说明	| 返回值 |
+| ---- | ---- | ---- |
+| on-click | 点击按钮时触发 | - |
+| after | 加载完成后 | - |
+| slideAfter | 滑动结束 | - |
 

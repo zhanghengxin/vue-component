@@ -174,7 +174,7 @@ export default {
             if (i > 0) {
                 this.previous = false
                 if (this.active < this.pages - 1) {
-                    this.active++
+                    this.active += i
                 } else {
                     if (this.loop) {
                         this.active = 0
@@ -185,7 +185,7 @@ export default {
             } else {
                 this.next = false
                 if (this.active > 0) {
-                    this.active--
+                    this.active += i
                 } else {
                     if (this.loop) {
                         this.active = this.pages - 1
@@ -217,7 +217,17 @@ export default {
         },
         // 点击下方导航
         handleClickPointer (i) {
-            console.log('current: %o, active: %o', i, this.active)
+            clearInterval(this.timer)
+            let current = 0
+            if (i > this.active) {
+                current = i - this.active
+            } else if (i === this.active) {
+                return
+            } else {
+                current = i - this.active
+            }
+            this.slideControl(current)
+            this.autoPlay()
         }
     }
 }
