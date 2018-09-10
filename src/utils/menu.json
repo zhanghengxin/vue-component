@@ -21,7 +21,7 @@
   ],
   "组件": [
     {
-        "title": "基础",
+      "title": "基础",
       "path": "/",
       "items": [
         {
@@ -33,6 +33,11 @@
           "title": "Button 按钮",
           "path": "/button",
           "name": "button"
+        },
+        {
+          "title": "Carousel 走马灯",
+          "path": "/carousel",
+          "name": "carousel"
         }
       ]
     },

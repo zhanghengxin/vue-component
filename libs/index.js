@@ -3,9 +3,10 @@
  *
  */
 import Button from './button'
+import { Carousel, CarouselItem } from './carousel'
 
 const components = [
-    Button
+    Button, Carousel, CarouselItem
 ]
 
 const install = function (Vue) {
@@ -15,5 +16,7 @@ const install = function (Vue) {
 
 export default {
     install,
-    Button
+    Button,
+    Carousel,
+    CarouselItem
 }
