@@ -1,6 +1,8 @@
 <template>
-    <div class="b-steps-area">
-        <slot></slot>
+    <div>
+        <div :class="[stepsArea,stepsSize()]">
+            <slot></slot>
+        </div>
     </div>
 </template>
 
@@ -23,13 +25,37 @@ export default {
     data () {
         return {}
     },
+    computed: {
+        stepsArea: () => {
+            return 'b-steps-area'
+        }
+    },
     mounted () {
+        let that = this
         // 设置子组件（Step）的默认值，比如index，showLine。
-        this.$children.map((seg, idx) => {
+        that.$children.map((seg, idx) => {
             let index = idx + 1
+            index === that.$children.length && (seg['showTail'] = false)
+            that.setChildrenIndexAndStatus(seg, index)
+        })
+    },
+    methods: {
+        // 获取steps组件的size属性
+        stepsSize () {
+            let size = this.size
+            console.log(size)
+            switch (size) {
+            case 'small':
+                return 'b-steps-area-small'
+                break
+            default :
+                return ' '
+            }
+        },
+        // setChildrenIndexAndStatus
+        setChildrenIndexAndStatus (seg, index) {
             let statusList = Common.statusList
             seg['index'] = index
-            index === 1 && (seg['showTail'] = false)
             switch (true) {
             case this.current == index :
                 if (this.status) {
@@ -46,7 +72,7 @@ export default {
                 seg['status'] = statusList[0]
                 break
             }
-        })
+        }
     }
 }
 </script>
