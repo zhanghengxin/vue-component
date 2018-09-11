@@ -7,7 +7,7 @@
     <button type="button"
             class="b-btn"
             :class='[typeClass,sizeClass]'
-            @click="handleClick">
+            @click="handleClick($event)">
         <span>
             <slot>按钮</slot>
         </span>

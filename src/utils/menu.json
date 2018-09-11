@@ -25,6 +25,11 @@
       "path": "/",
       "items": [
         {
+          "title": "Color 色彩",
+          "path": "/color",
+          "name": "color"
+        },
+        {
           "title": "Button 按钮",
           "path": "/button",
           "name": "button"
