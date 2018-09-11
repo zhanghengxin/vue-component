@@ -51,7 +51,6 @@ export default {
             }
         },
         colorName () {
-            let obj = this.colorObj
             return '#' + this.colorObj[this.type]
         },
         fontColor () {
