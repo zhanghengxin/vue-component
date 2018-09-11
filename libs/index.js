@@ -3,9 +3,12 @@
  *
  */
 import Button from './button/index'
+import {Steps, Step} from './steps/index'
 
 const components = [
-    Button
+    Button,
+    Steps,
+    Step
 ]
 
 const install = function (Vue) {
@@ -15,5 +18,7 @@ const install = function (Vue) {
 
 export default {
     install,
-    Button
+    Button,
+    Steps,
+    Step
 }

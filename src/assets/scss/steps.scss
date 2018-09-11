@@ -1,0 +1,42 @@
+/**
+ * @author 靳宏灿
+ * @date 2018/9/10
+ * @Description: steps组件的样式
+*/
+@import "color";
+
+//steps组件区域
+.b-steps-area{
+  //单个step节点的区域
+  .b-step-item {
+    display:inline-block;
+    height:32px;
+    line-height: 32px;
+    //步骤条的线
+    .b-step-tail {
+      width: 100px;
+      display: inline-block;
+      height: 1px;
+      margin: 0px auto;
+      padding: 0px;
+      overflow: hidden;
+      border-top: 1px $lightBlue solid;
+    }
+    //步骤条的节点
+    .b-step-point {
+      width:32px;
+      height:32px;
+      display: inline-block;
+      border:1px $lightBlue solid;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      text-align:center;
+      vertical-align: middle;
+    }
+  }
+  .b-step-status-process {
+      color:$white;
+      background-color:$lightBlue
+  }
+}

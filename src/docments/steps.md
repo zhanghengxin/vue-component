@@ -38,35 +38,6 @@
         <div>
            <b-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</b-button>
         </div>
-         <script>
-             export default {
-                 methods: {
-                     handleClick() {
-                         this.size = this.changeSize();
-                     },
-                     changeSize(){
-                        switch(this.size){
-                            case 'small':
-                                return 'normal';
-                                break;
-                            case 'normal':
-                                return 'small';
-                                break;
-                        }
-                     }
-                 },
-                 data:function(){
-                     return {
-                        size:'small'
-                     };
-                 },
-                 computed:{
-                      afterChangeSize() {
-                          return this.changeSize();
-                      }
-                 }
-             }
-         </script>
     </div>
 
 ::: code
@@ -317,7 +288,3 @@
 | 事件名	      | 说明	    | 返回值 |
 |---------- |-------- |---------- |
 | on-click     | 点击按钮时触发   | {```status```、```current```、```value```、```title```、```icon```、```content```、```size```} |
-
-
-
-
