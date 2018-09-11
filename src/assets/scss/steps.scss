@@ -20,23 +20,40 @@
       margin: 0px auto;
       padding: 0px;
       overflow: hidden;
-      border-top: 1px $lightBlue solid;
+      border-top: 1px $LightPrimary solid;
     }
     //步骤条的节点
     .b-step-point {
       width:32px;
       height:32px;
       display: inline-block;
-      border:1px $lightBlue solid;
+      border:1px $LightPrimary solid;
       border-radius: 50%;
       -webkit-border-radius: 50%;
       -moz-border-radius: 50%;
       text-align:center;
       vertical-align: middle;
     }
-  }
-  .b-step-status-process {
+    // 当前节点的css
+    .b-step-status-process {
       color:$white;
-      background-color:$lightBlue
+      background-color:$LightPrimary
+    }
+    // 已结束节点的css
+    .b-step-status-finish {
+      color:$white;
+      //background: url("../image/check.png") transparent no-repeat scroll ;
+      background: $Success;
+    }
+    // 出现错误的css
+    .b-step-status-error {
+      color:$white;
+      background: $Error;
+    }
+    // 单点的css
+    .b-step-status-single {
+      color:$white;
+      background: $DarkPrimary;
+    }
   }
 }
