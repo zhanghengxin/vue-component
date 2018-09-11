@@ -14,25 +14,23 @@ export default {
     name: 'b-carousel-item',
     computed: {
         style () {
-            if (this.$parent.animation === 'fade') {
+            let { animation, height, speed, conWidth } = this.$parent
+            if (animation === 'fade') {
                 return {
                     position: 'absolute',
                     opacity: 0,
                     width: '100%',
-                    height: `${this.$parent.height}px`,
-                    transition: `opacity ${this.$parent.speed / 1000}s`
+                    height: `${height}px`,
+                    transition: `opacity ${speed / 1000}s`
                 }
-            } else {
+            } else if (animation === 'slide') {
                 return {
-                    width: this.$parent.conWidth + 'px',
-                    height: `${this.$parent.height}px`,
+                    width: conWidth + 'px',
+                    height: `${height}px`,
                     float: 'left'
                 }
             }
         }
-    },
-    mounted () {
-        console.log('children: %o', this)
     }
 }
 </script>

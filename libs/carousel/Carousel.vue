@@ -1,30 +1,31 @@
 /**
+import func from './vue-temp/vue-editor-bridge';
 * 走马灯组件 b-carousel
 * Created by hanshuai on 2018/9/10.
 */
 
 <template>
-    <div class="b-carousel" :style="{height: height + 'px'}">
+    <div class="b-carousel" :style="animationStyle">
         <div
             v-if="animation=='fade'"
             class="b-carousel-wrapper"
-            :style="{height: height + 'px'}"
+            :style="animationStyle"
             @mouseover="mouseOver"
             @mouseleave="mouseLeave"
             ref="wrapper">
             <slot/>
         </div>
         <div
-          v-if="animation=='slide'"
-          class="b-carousel-wrapper"
-          :style="{height: height + 'px'}"
-          ref="wrapper">
-            <div
-              class="b-carousel-scroll"
-              :style="style"
-              ref="scroll">
-                <slot/>
-            </div>
+            v-if="animation=='slide'"
+            class="b-carousel-wrapper"
+            :style="[animationStyle, slideStyle]"
+            ref="wrapper">
+                <div
+                    class="b-carousel-scroll"
+                    :style="scrollStyle"
+                    ref="scroll">
+                    <slot/>
+                </div>
         </div>
         <ul
           class="b-carousel-control"
@@ -117,11 +118,27 @@ export default {
             type: Number,
             default: 300
         },
-        after: Function, // 加载完成
-        slideAfter: Function // 滑动结束
+        after: {
+            type: Function,
+            default: function () {}
+        }, // 加载完成
+        slideAfter: {
+            type: Function,
+            default: function (val) {}
+        } // 滑动结束
     },
     computed: {
-        style () {
+        animationStyle () {
+            return {
+                height: this.height + 'px'
+            }
+        },
+        slideStyle () {
+            return {
+                width: this.conWidth + 'px'
+            }
+        },
+        scrollStyle () {
             return {
                 width: this.conWidth * this.pages + 'px',
                 overflow: 'hidden',
@@ -139,14 +156,14 @@ export default {
             // 自动轮播
             this.autoPlay()
             // 加载完成
-            // this.after ? this.after() : ''
+            this.after()
         })
     },
     watch: {
         active (val, oldVal) {
             this.controlClass(this.animation, false, oldVal)
             this.controlClass(this.animation, true, val)
-            // this.slideAfter ? this.slideAfter(val) : ''
+            this.slideAfter(val)
         }
     },
     methods: {
