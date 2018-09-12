@@ -11,6 +11,11 @@
       "title": "快速上手"
     },
     {
+      "name": "standard",
+      "path": "/standard",
+      "title": "组件开发规范"
+    },
+    {
       "path": "/",
       "redirect": "/guide"
     },
