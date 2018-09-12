@@ -3,9 +3,10 @@
  *
  */
 import Button from './button'
+import Icon from './icon'
 
 const components = [
-    Button
+    Button, Icon
 ]
 
 const install = function (Vue) {
@@ -15,5 +16,6 @@ const install = function (Vue) {
 
 export default {
     install,
-    Button
+    Button,
+    Icon
 }
