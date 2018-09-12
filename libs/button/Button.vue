@@ -248,47 +248,47 @@ textarea {
   background-color: white;
   position: relative;
 }
-// .tynormal:hover{
-//    box-shadow: 0px 0px  3px gray;
+.tynormal:hover{
+   box-shadow: 0px 0px  3px gray;
 
-// }
-// .tynormal:after {
-//     content: "";
-//     display: block;
-//     position: absolute;
-//     top: -10px;
-//     left: -10px;
-//     right: -10px;
-//     bottom: -10px;
-//     pointer-events: none;
-//     background-color: gray;
-//     border-radius: 10px;
-//     background-repeat: no-repeat;
-//     background-position: 50%;
-//     opacity: 0;
-//     transition: all .3s;
-// }
-// .tynormal:focus{
-//     outline: none;
-// }
-// .tynormal:active:after {
-//     opacity: .3;
-//     top: 0;
-//     left: 0;
-//     right: 0;
-//     bottom: 0;
-//     transition: 0s;
-// }
+}
+.tynormal:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    pointer-events: none;
+    background-color: gray;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    opacity: 0;
+    transition: all .3s;
+}
+.tynormal:focus{
+    outline: none;
+}
+.tynormal:active:after {
+    opacity: .3;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0s;
+}
 
 /* 蓝色水波纹 */
 .typrimary {
-  border-color: #409eff;
+  border-color: #0079CC;
   color: white;
-  background-color: #409eff;
+  background-color: #0079CC;
   position: relative;
 }
 .typrimary:hover {
-  box-shadow: 0px 0px 4px #409eff;
+  box-shadow: 0px 0px 4px #0079CC;
 }
 .typrimary:after {
   content: "";
@@ -299,7 +299,7 @@ textarea {
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color: #409eff;
+  background-color: #0079CC;
   border-radius: 10px;
   background-repeat: no-repeat;
   background-position: 50%;
@@ -320,14 +320,14 @@ textarea {
 
 /* 绿色水波纹 */
 .tysuccess {
-  background-color: #19be6b;
-  border-color: #19be6b;
+  background-color: #1fca74;
+  border-color: #1fca74;
   color: white;
   position: relative;
 }
 
 .tysuccess:hover {
-  box-shadow: 0px 0px 5px #19be6b;
+  box-shadow: 0px 0px 5px #1fca74;
 }
 .tysuccess:after {
   content: "";
@@ -338,7 +338,7 @@ textarea {
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color: #19be6b;
+  background-color: #1fca74;
   border-radius: 10px;
   background-repeat: no-repeat;
   background-position: 50%;
@@ -358,13 +358,13 @@ textarea {
 }
 /* 黄色水波纹 */
 .tywarning {
-  background-color: #f90;
-  border-color: #f90;
+  background-color: #ff8f00;
+  border-color: #ff8f00;
   color: white;
   position: relative;
 }
 .tywarning:hover {
-  box-shadow: 0px 0px 5px #f90;
+  box-shadow: 0px 0px 5px #ff8f00;
 }
 
 .tywarning:after {
@@ -376,7 +376,7 @@ textarea {
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color: #f90;
+  background-color: #ff8f00;
   border-radius: 10px;
   background-repeat: no-repeat;
   background-position: 50%;
@@ -396,14 +396,14 @@ textarea {
 }
 /* 红色水波纹 */
 .tyerror {
-  background-color: #ed4014;
-  border-color: #ed4014;
+  background-color: #f44336;
+  border-color: #f44336;
   color: white;
   position: relative;
 }
 
 .tyerror:hover {
-  box-shadow: 0px 0px 5px #ed4014;
+  box-shadow: 0px 0px 5px #f44336;
 }
 .tyerror:after {
   content: "";
@@ -414,7 +414,7 @@ textarea {
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color: red;
+  background-color:  #f44336;
   border-radius: 10px;
   background-repeat: no-repeat;
   background-position: 50%;
