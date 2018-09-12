@@ -96,7 +96,7 @@ Icon 组件设置不同的颜色
             <li v-for="(item, index) in iconList" :key="index">
                 <b-icon :type="item.className" size=24></b-icon>
                 <div class="name">{{item.name}}</div>
-                <div class="fontclass">bw-{{item.className}}</div>
+                <div class="fontclass">{{item.className}}</div>
             </li>
         </ul>
     </div>
