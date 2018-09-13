@@ -7,19 +7,8 @@
     <button ref="button"
     :disabled="disabled"
     @click.prevent.stop='BwButtonclick($event)'
-    :class="{
-      'normal':isnormal,
-      'small':issmall,
-      'big':isbig,
-      'typrimary':istyprimary,
-      'tynormal':istynormal,
-      'tysuccess':istysuccess,
-      'tywarning':istywarning,
-      'tyerror':istyerror,
-      'pointer':ispointer,
-      'circle':iscircle}"
-      style="cursor:pointer"
-      >
+    :class="bclass"
+    >
       <i v-if='loading' class="iconfont icon-loading">
       </i>
       <i v-if='icon' :class="iclass">
@@ -36,6 +25,17 @@ export default {
     computed: {
         iclass () {
             return `iconfont ${this.icon}`
+        },
+        bclass () {
+            let style = {}
+            let style1 = {}
+            if (this.size) {
+                style1 = `${this.size}`
+            }
+            if (this.type) {
+                style = `${this.type} ${style1}`
+            }
+            return style
         }
     },
     props: {
@@ -88,6 +88,7 @@ export default {
         }
     },
     mounted () {
+        // 是否需要不可点击？
         if (this.loading) {
             // this.disabled = true
             // this.$refs.button.style.opacity = 1.0
@@ -172,6 +173,9 @@ button,
 select,
 textarea {
   outline: none;
+}
+button{
+    cursor: pointer;
 }
 
 @keyframes rotating {
