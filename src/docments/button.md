@@ -36,9 +36,9 @@ Button 组件可以在不同场景下选择合适的按钮尺寸。
 <div class="example">
     <div class="example-box">
         <div>
-         <bw-button size="small">危险按钮</bw-button>
-         <bw-button size="normal">危险按钮</bw-button>
-         <bw-button size="big">危险按钮</bw-button>
+         <bw-button size="small">主要按钮</bw-button>
+         <bw-button size="normal">主要按钮</bw-button>
+         <bw-button size="big">主要按钮</bw-button>
         </div>
     </div>
 
