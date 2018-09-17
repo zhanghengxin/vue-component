@@ -4,9 +4,11 @@
  */
 import Button from './button'
 import Icon from './icon'
+import Collapse from './collapse'
+import CollapseItem from './collapse-item'
 
 const components = [
-    Button, Icon
+    Button, Icon, Collapse, CollapseItem
 ]
 
 const install = function (Vue) {
@@ -17,5 +19,7 @@ const install = function (Vue) {
 export default {
     install,
     Button,
-    Icon
+    Icon,
+    Collapse,
+    CollapseItem
 }
