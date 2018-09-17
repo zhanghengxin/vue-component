@@ -9,10 +9,7 @@
 cnpm i
 ```
 
-### 建议
 
-在开始组件库开发之前，至少要先阅读并且练习一遍 vue的一些[基础知识](https://cn.vuejs.org/v2/guide/),以及遵守 vue 的开发
-[风格指南](https://cn.vuejs.org/v2/style-guide/)
 
 
 ### 项目目录

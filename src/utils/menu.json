@@ -11,6 +11,11 @@
       "title": "快速上手"
     },
     {
+      "name": "standard",
+      "path": "/standard",
+      "title": "组件开发规范"
+    },
+    {
       "path": "/",
       "redirect": "/guide"
     },
@@ -30,9 +35,19 @@
           "name": "color"
         },
         {
+          "title": "Icon 图标",
+          "path": "/icon",
+          "name": "icon"
+        },
+        {
           "title": "Button 按钮",
           "path": "/button",
           "name": "button"
+        },
+        {
+          "title": "Collapse 折叠面板",
+          "path": "/collapse",
+          "name": "collapse"
         },
         {
           "title": "Steps 步骤条",

@@ -12,6 +12,9 @@
 }
 
 .doc {
+  img{
+    max-width: 1000px;
+  }
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
   .code-show {
     color: #5e6d82;
@@ -77,8 +80,23 @@
   a {
     color: #0079CC;
   }
-  .language-bash{
+  .language-bash {
     background: #e2ecf4;
+  }
+  .icon-list {
+    overflow: hidden;
+    max-width: 1000px;
+    li {
+      float: left;
+      width: 220px;
+      height: 120px;
+      text-align: center;
+      list-style: none;
+    }
+    .icon {
+      line-height: 50px;
+      margin: 5px 0;
+    }
   }
 }
 
