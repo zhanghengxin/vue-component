@@ -17,6 +17,9 @@ time, mark, audio, video {
   border: 0;
   vertical-align: baseline;
 }
+input,div{
+  box-sizing: border-box;
+}
 
 article, aside, details, figcaption, figure,
 footer, header, menu, nav, section {
@@ -60,10 +63,6 @@ button, input, textarea, select {
 
 input[type='range'] {
   padding: 0;
-}
-
-input[type="text"]:focus, textarea:focus, select:focus {
-  border: 1px solid #53a1f0;
 }
 
 input[type="button"], button, select, label {
