@@ -4,7 +4,7 @@
  * @Author: yanghao
  * @Date: 2018-09-14 15:17:51
  * @Last Modified by: yanghao
- * @Last Modified time: 2018-09-14 18:18:58
+ * @Last Modified time: 2018-09-15 09:39:43
  *
  * --------------------------------------------------------------------------- *
  */
@@ -61,8 +61,6 @@ export default {
         },
         toggle (val) {
             this.$emit('change', val)
-            //   设置父组件的v - module的值
-            //   this.$emit('input', this.value)
         }
     }
 }

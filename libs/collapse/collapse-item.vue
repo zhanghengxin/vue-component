@@ -4,7 +4,7 @@
  * @Author: yanghao
  * @Date: 2018-09-14 15:17:37
  * @Last Modified by: yanghao
- * @Last Modified time: 2018-09-14 18:07:57
+ * @Last Modified time: 2018-09-17 09:44:55
  *
  * --------------------------------------------------------------------------- *
  */
@@ -12,7 +12,7 @@
 <template>
     <div :class="classtype" @click="handleChange">
         <div class="item-header">
-            <span :class="arrow"> > </span>
+            <b-icon type="xiala" size=12 :class="arrow" ></b-icon>
             <slot name="title"></slot>
         </div>
         <transition name="slideup">
@@ -49,7 +49,7 @@ export default {
             return ['item' + (this.show ? ' item-header-active' : '')]
         },
         arrow () {
-            return `${this.positionArrow}`
+            return `arrow  ${this.positionArrow}`
         }
     },
     mounted () {
@@ -98,15 +98,27 @@ export default {
 </script>
 
 <style scoped>
-.arrow-left{
-    float: left;
+.arrow{
+    margin-right: 5px;
+}
+.arrow-right{
     transform: rotate(0deg);
+    transition: transform 0.24s,
+}
+
+.item-header-active .arrow-right{
+    display:inline-block;
+    transform: rotate(90deg)
+}
+
+.arrow-left{
+    transform: rotate(-90deg);
     transition: transform 0.24s,
 }
 
 .item-header-active .arrow-left{
     display:inline-block;
-    transform: rotate(90deg)
+    transform: rotate(0deg)
 }
 
 </style>
