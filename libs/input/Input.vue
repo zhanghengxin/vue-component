@@ -1,3 +1,8 @@
+/**
+ * input 组件
+ * author ganbowen
+ * created 2018/09/18 20:05:54
+ */
 <template>
     <div :class="{'b-input-group':labelText}">
         <div v-if="labelText" class="b-input-label">{{labelText}}</div>
@@ -6,7 +11,7 @@
         <i class="b-icon" :class="['']" v-else-if="false" @click="handleSearch"></i>
         <input
                 class="b-input"
-                :class="['b-input-'+size,labelText ? '' : '']"
+                :class="['b-input-'+size]"
                 :value="currentValue"
                 :placeholder="placeholder"
                 :disabled="disabled"
@@ -15,6 +20,7 @@
                 :readonly="readonly"
                 :autofocus="autofocus"
                 :type="type"
+                :error='error'
                 @change="handleChange"
                 @input="handleInput"
                 @focus="handleFocus"
@@ -77,6 +83,10 @@ export default {
                 // 这个值必须匹配下列字符串中的一个
                 return ['large', 'small', 'normal'].indexOf(value) !== -1
             }
+        },
+        error: {
+            type: Boolean,
+            default: false
         },
         icon: {
             type: String,
@@ -141,6 +151,7 @@ export default {
         border-collapse: separate;
         .b-input {
             border: 0;
+            width: 100%;
             border-bottom-left-radius: 0;
             border-top-left-radius: 0;
             float: left;
@@ -175,7 +186,7 @@ export default {
 
     .b-input {
         display: inline-block;
-        width: 100%;
+        width: 180px;
         line-height: 1.5;
         font-size: 12px;
         border: 1px solid $border;
