@@ -27,14 +27,15 @@
       "title": "基础",
       "path": "/",
       "items": [{
-        "title": "Button 按钮",
-        "path": "/button",
-        "name": "button"
-      },{
-        "title": "Input 输入框",
-        "path": "/input",
-        "name": "input"
-      },
+          "title": "Button 按钮",
+          "path": "/button",
+          "name": "button"
+        },
+        {
+          "title": "Input 输入框",
+          "path": "/input",
+          "name": "input"
+        },
         {
           "title": "Color 色彩",
           "path": "/color",
@@ -44,11 +45,6 @@
           "title": "Icon 图标",
           "path": "/icon",
           "name": "icon"
-        },
-        {
-          "title": "Button 按钮",
-          "path": "/button",
-          "name": "button"
         },
         {
           "title": "Collapse 折叠面板",
@@ -69,24 +65,20 @@
     {
       "title": "导航",
       "path": "/",
-      "items": [
-        {
-          "title": "Breadcrumb 面包屑",
-          "path": "/breadcrumb",
-          "name": "Breadcrumb"
-        }
-      ]
+      "items": [{
+        "title": "Breadcrumb 面包屑",
+        "path": "/breadcrumb",
+        "name": "Breadcrumb"
+      }]
     },
     {
       "title": "其他",
       "path": "/",
-      "items": [
-        {
-          "title": "BackTop 返回顶部",
-          "path": "/backTop",
-          "name": "BackTop"
-        }
-      ]
+      "items": [{
+        "title": "BackTop 返回顶部",
+        "path": "/backTop",
+        "name": "BackTop"
+      }]
     }
   ]
 }
