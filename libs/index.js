@@ -2,12 +2,14 @@
  * Created by gaoguoqing on 2018/9/5.
  *
  */
-import Button from './button/index'
 import Input from './input/index'
-
+import Button from './button'
+import Icon from './icon'
+import Collapse from './collapse'
+import CollapseItem from './collapse-item'
 const components = [
-    Button,
-    Input
+    Input,
+    Button, Icon, Collapse, CollapseItem
 ]
 
 const install = function (Vue) {
@@ -18,5 +20,8 @@ const install = function (Vue) {
 export default {
     install,
     Button,
-    Input
+    Input,
+    Icon,
+    Collapse,
+    CollapseItem
 }

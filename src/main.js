@@ -3,11 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import codeShow from './components/CodeShow.vue'
+import ColorShow from './components/ColorShow.vue'
 import router from './router'
 import bwUI from '../libs'
+import './assets/iconfont/iconfont.css'
 
 Vue.use(bwUI)
 Vue.component('code-show', codeShow)
+Vue.component('color-show', ColorShow)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

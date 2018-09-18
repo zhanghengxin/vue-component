@@ -1,6 +1,19 @@
 //全局组件库样式
 @import "color";
 
+// icon 组件
+.b-icon {
+  display: inline-block;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  line-height: 1;
+  vertical-align: middle;
+}
+
 // button组件  示例
 .b-btn {
   display: inline-block;
@@ -20,15 +33,15 @@
 }
 
 .b-btn-info {
-  color: $white;
-  background-color: $lightBlue;
-  border-color: $lightBlue;
+  color: white;
+  background-color: $LightPrimary;
+  border-color: $LightPrimary;
 }
 
 .b-btn-white {
-  color: $lightBlue;
-  background-color: $white;
-  border-color: $border;
+  color: $LightPrimary;
+  background-color: white;
+  border-color: $Border;
 }
 
 .b-btn-small {
