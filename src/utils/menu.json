@@ -11,6 +11,11 @@
       "title": "快速上手"
     },
     {
+      "name": "standard",
+      "path": "/standard",
+      "title": "组件开发规范"
+    },
+    {
       "path": "/",
       "redirect": "/guide"
     },
@@ -30,6 +35,11 @@
           "name": "color"
         },
         {
+          "title": "Icon 图标",
+          "path": "/icon",
+          "name": "icon"
+        },
+        {
           "title": "Button 按钮",
           "path": "/button",
           "name": "button"
@@ -38,6 +48,11 @@
           "title": "Carousel 走马灯",
           "path": "/carousel",
           "name": "carousel"
+        },
+        {
+          "title": "Collapse 折叠面板",
+          "path": "/collapse",
+          "name": "collapse"
         }
       ]
     },
@@ -49,6 +64,28 @@
           "title": "Page 分页",
           "path": "/page",
           "name": "page"
+        }
+      ]
+    },
+    {
+      "title": "导航",
+      "path": "/",
+      "items": [
+        {
+          "title": "Breadcrumb 面包屑",
+          "path": "/breadcrumb",
+          "name": "Breadcrumb"
+        }
+      ]
+    },
+    {
+      "title": "其他",
+      "path": "/",
+      "items": [
+        {
+          "title": "BackTop 返回顶部",
+          "path": "/backTop",
+          "name": "BackTop"
         }
       ]
     }

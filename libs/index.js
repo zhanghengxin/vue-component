@@ -4,9 +4,12 @@
  */
 import Button from './button'
 import { Carousel, CarouselItem } from './carousel'
+import Icon from './icon'
+import Collapse from './collapse'
+import CollapseItem from './collapse-item'
 
 const components = [
-    Button, Carousel, CarouselItem
+    Button, Icon, Collapse, CollapseItem, Carousel, CarouselItem
 ]
 
 const install = function (Vue) {
@@ -18,5 +21,8 @@ export default {
     install,
     Button,
     Carousel,
-    CarouselItem
+    CarouselItem,
+    Icon,
+    Collapse,
+    CollapseItem
 }
