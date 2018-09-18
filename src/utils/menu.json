@@ -66,6 +66,28 @@
           "name": "page"
         }
       ]
+    },
+    {
+      "title": "导航",
+      "path": "/",
+      "items": [
+        {
+          "title": "Breadcrumb 面包屑",
+          "path": "/breadcrumb",
+          "name": "Breadcrumb"
+        }
+      ]
+    },
+    {
+      "title": "其他",
+      "path": "/",
+      "items": [
+        {
+          "title": "BackTop 返回顶部",
+          "path": "/backTop",
+          "name": "BackTop"
+        }
+      ]
     }
   ]
 }
