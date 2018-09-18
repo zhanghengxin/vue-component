@@ -1,9 +1,9 @@
 <template>
     <div :class="{'b-input-group':labelText}">
         <div v-if="labelText" class="b-input-label">{{labelText}}</div>
-        <div v-if="icon" :class="['b-input-icon-'+size]">
-            <solt name="leftIcon"></solt>
-        </div>
+        <i class="b-icon" :class="['']" v-if="false" @click="handleClear"></i>
+        <i class="b-icon" :class="['']" v-else-if="false" @click="handleIconClick"></i>
+        <i class="b-icon" :class="['']" v-else-if="false" @click="handleSearch"></i>
         <input
                 class="b-input"
                 :class="['b-input-'+size,labelText ? '' : '']"
@@ -37,7 +37,7 @@ export default {
         },
         type: {
             validator (value) {
-                return ['text', 'textarea', 'password', 'url', 'email'].indexOf(value) !== -1
+                return ['text', 'password', 'url', 'email'].indexOf(value) !== -1
             },
             default: 'text'
         },
@@ -72,7 +72,6 @@ export default {
         /* 控制样式 */
         // normal small large
         size: {
-            type: String,
             default: 'normal',
             validator: function (value) {
                 // 这个值必须匹配下列字符串中的一个
@@ -90,16 +89,7 @@ export default {
             currentValue: this.value
         }
     },
-    computed: {
-        inputClasses () {
-            return [
-                'b-input',
-                {
-                    [`b-input-${this.size}`]: !!this.size
-                }
-            ]
-        }
-    },
+    computed: {},
     methods: {
         handleChange (event) {
             this.$emit('on-change', event)
@@ -153,6 +143,7 @@ export default {
             border: 0;
             border-bottom-left-radius: 0;
             border-top-left-radius: 0;
+            float: left;
         }
         &:hover{
             border-color: $borderhover;
@@ -243,11 +234,4 @@ export default {
         white-space: nowrap;
         vertical-align: middle;
     }
-
-    .b-input-group {
-        .b-input {
-            float: left;
-        }
-    }
-
 </style>
