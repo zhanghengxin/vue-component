@@ -4,7 +4,7 @@
  * created 2018/09/18 20:05:54
  */
 <template>
-    <div :class="{'b-input-group':labelText,'b-input-error':error}">
+    <div class='b-input-box' :class="{'b-input-group':labelText,'b-input-error':error}">
         <div v-if="labelText" class="b-input-label">{{labelText}}</div>
         <i class="b-icon" :class="['']" v-if="false" @click="handleClear"></i>
         <i class="b-icon" :class="['']" v-else-if="false" @click="handleIconClick"></i>
