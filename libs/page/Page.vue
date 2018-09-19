@@ -1,13 +1,13 @@
 <template>
-    <div :class="simpleWrapCls" :style="styles" v-if="simple">
+    <div :class="simpleWrapCls" v-if="simple">
         <div
-                :class="prevClasses"
+                :class="prevCls"
                 @click="prev">
-            <a>
-                <i class="ivu-icon ivu-icon-ios-arrow-back"></i>
+            <a :class="[prefixCls + '-arrow']">
+                <b-icon type="zuola"></b-icon>
             </a>
         </div>
-        <div :class="[prefixCls + '-simple-pager']" :title="currentPage + '/' + allPages">
+        <div :class="[prefixCls + '-simple-pager']" :title="currentPage + '/' + pageCount">
             <input
                     type="text"
                     :value="currentPage"
@@ -17,38 +17,34 @@
                     @keyup="keyUp"
                     @change="keyUp">
             <span>/</span>
-            {{ allPages }}
+            {{ pageCount }}
         </div>
         <div
-                :class="nextClasses"
+                :class="nextCls"
                 @click="next">
-            <a>
-                <i class="ivu-icon ivu-icon-ios-arrow-forward"></i>
+            <a :class="[prefixCls + '-arrow']">
+                <b-icon type="youla"></b-icon>
             </a>
         </div>
     </div>
 </template>
 <script>
 import { oneOf } from '../utils/common'
+import Icon from '../icon'
 
 const prefixCls = 'b-page'
 
 export default {
     name: 'b-page',
+    components: {Icon},
     props: {
-        current: {
+        page: {
             type: Number,
             default: 1
         },
-        pageSize: {
+        size: {
             type: Number,
             default: 10
-        },
-        pageSizeOpts: {
-            type: Array,
-            default () {
-                return [10, 20, 30, 40]
-            }
         },
         placement: {
             validator (value) {
@@ -56,52 +52,28 @@ export default {
             },
             default: 'bottom'
         },
-        size: {
-            validator (value) {
-                return oneOf(value, ['small'])
-            }
-        },
         simple: {
             type: Boolean,
-            default: false
-        },
-        showTotal: {
-            type: Boolean,
-            default: false
-        },
-        showElevator: {
-            type: Boolean,
-            default: false
-        },
-        showSizer: {
-            type: Boolean,
-            default: false
+            default: true
         },
         className: {
             type: String
         },
-        styles: {
-            type: Object
-        },
-        prevText: {
-            type: String,
-            default: ''
-        },
-        nextText: {
-            type: String,
-            default: ''
+        total: {
+            type: Number,
+            default: 0
         }
     },
     data () {
         return {
             prefixCls: prefixCls,
-            currentPage: this.current,
-            currentPageSize: this.pageSize
+            currentPage: this.page,
+            currentSize: this.size
         }
     },
     computed: {
-        allPages () {
-            const allPage = Math.ceil(this.total / this.currentPageSize)
+        pageCount () {
+            const allPage = Math.ceil(this.total / this.currentSize)
             return (allPage === 0) ? 1 : allPage
         },
         simpleWrapCls () {
@@ -113,21 +85,19 @@ export default {
                 }
             ]
         },
-        prevClasses () {
+        prevCls () {
             return [
                 `${prefixCls}-prev`,
                 {
-                    [`${prefixCls}-disabled`]: this.currentPage === 1,
-                    [`${prefixCls}-custom-text`]: this.prevText !== ''
+                    [`${prefixCls}-disabled`]: this.currentPage === 1
                 }
             ]
         },
-        nextClasses () {
+        nextCls () {
             return [
                 `${prefixCls}-next`,
                 {
-                    [`${prefixCls}-disabled`]: this.currentPage === this.allPages,
-                    [`${prefixCls}-custom-text`]: this.nextText !== ''
+                    [`${prefixCls}-disabled`]: this.currentPage === this.pageCount
                 }
             ]
         }
@@ -136,7 +106,6 @@ export default {
         changePage (page) {
             if (this.currentPage !== page) {
                 this.currentPage = page
-                this.$emit('update:current', page)
                 this.$emit('on-change', page)
             }
         },
@@ -149,34 +118,10 @@ export default {
         },
         next () {
             const current = this.currentPage
-            if (current >= this.allPages) {
+            if (current >= this.pageCount) {
                 return false
             }
             this.changePage(current + 1)
-        },
-        fastPrev () {
-            const page = this.currentPage - 5
-            if (page > 0) {
-                this.changePage(page)
-            } else {
-                this.changePage(1)
-            }
-        },
-        fastNext () {
-            const page = this.currentPage + 5
-            if (page > this.allPages) {
-                this.changePage(this.allPages)
-            } else {
-                this.changePage(page)
-            }
-        },
-        onSize (pageSize) {
-            this.currentPageSize = pageSize
-            this.$emit('on-page-size-change', pageSize)
-            this.changePage(1)
-        },
-        onPage (page) {
-            this.changePage(page)
         },
         keyDown (e) {
             const key = e.keyCode
@@ -195,8 +140,8 @@ export default {
             } else if (key === 13) {
                 let page = 1
 
-                if (val > this.allPages) {
-                    page = this.allPages
+                if (val > this.pageCount) {
+                    page = this.pageCount
                 } else if (val <= 0 || !val) {
                     page = 1
                 } else {
@@ -209,3 +154,49 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+    .b-page {
+
+    }
+
+    .b-page-simple-pager {
+        display: inline-block;
+        margin-right: 8px;
+        vertical-align: middle;
+        input {
+            width: 48px;
+            height: 22px;
+            margin: 0 8px;
+            padding: 5px 8px;
+            text-align: center;
+            box-sizing: border-box;
+            outline: 0;
+            border: 1px solid $Border;
+            border-radius: 4px;
+            transition: border-color .2s ease-in-out;
+        }
+        span {
+            padding: 0 8px 0 2px;
+        }
+    }
+
+    .b-page-prev, .b-page-next {
+        display: inline-block;
+        border: 0;
+        height: 24px;
+        line-height: normal;
+        font-size: 18px;
+        /*.b-page-arrow {*/
+            /*color: #666;*/
+            /*font-size: 14px;*/
+        /*}*/
+    }
+
+    .b-page-disabled {
+        cursor: not-allowed;
+
+        .b-page-arrow {
+            color: $Disabled;
+        }
+    }
+</style>

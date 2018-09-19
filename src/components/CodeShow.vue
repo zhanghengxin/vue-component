@@ -1,7 +1,7 @@
 <template>
     <div class="code-box">
         <div :style="{height: isExpand ? 'auto' : '0'}"
-                class="code-container">
+             class="code-container">
             <slot name="highlight"></slot>
         </div>
         <span class="code-taggle"
@@ -56,10 +56,10 @@ export default {
         width: 100%;
         text-align: center;
         display: inline-block;
-        color: #d3dce6;
         font-size: 14px;
         cursor: pointer;
         padding: 10px 0;
+        background-color: $Background;
         &:hover {
             color: $LightPrimary;
         }

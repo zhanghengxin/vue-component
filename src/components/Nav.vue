@@ -41,7 +41,6 @@ export default {
 <style lang="scss">
     .nav {
         padding: 0;
-        color: #3F536E;
         height: 100%;
         .nav-container {
             margin-bottom: 20px;
