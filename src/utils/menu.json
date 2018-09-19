@@ -43,6 +43,11 @@
           "title": "Button 按钮",
           "path": "/button",
           "name": "button"
+        },
+        {
+          "title": "Circle 进度环",
+          "path": "/circle",
+          "name": "circle"
         }
       ]
     },

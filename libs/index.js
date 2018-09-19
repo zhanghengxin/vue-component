@@ -4,9 +4,9 @@
  */
 import Button from './button'
 import Icon from './icon'
-
+import Circle from './circle'
 const components = [
-    Button, Icon
+    Button, Icon, Circle
 ]
 
 const install = function (Vue) {
@@ -17,5 +17,6 @@ const install = function (Vue) {
 export default {
     install,
     Button,
-    Icon
+    Icon,
+    Circle
 }
