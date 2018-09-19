@@ -11,7 +11,7 @@ import Breadcrumb from './breadcrumb'
 import BreadcrumbItem from './breadcrumb-item'
 
 const components = [
-    Input,Button, Icon, Collapse, CollapseItem, Breadcrumb, BreadcrumbItem
+    Input, Button, Icon, Collapse, CollapseItem, Breadcrumb, BreadcrumbItem
 ]
 
 const install = function (Vue) {
