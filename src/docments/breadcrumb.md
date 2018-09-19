@@ -1,7 +1,35 @@
 # Breadcrumb 面包屑
-当数据过多时，配合 table 组件批量显示数据。
-- 页数过多时会自动折叠。
-- 可以切换每页显示的数量。
-- 快速跳转到某一页。
-- 显示总共多少条数据，接受 slot 来自定义内容。
-- 支持键盘前进后退以及跳转确认
+显示网站的层级结构，告知用户当前所在位置，以及在需要向上级导航时使用。
+-----
+### 基础用法
+最基础的用法，通过设置```to```属性添加链接。
+
+<template>
+    <Breadcrumb>
+        <BreadcrumbItem to="/">Home</BreadcrumbItem>
+        <BreadcrumbItem to="/libs/breadcrumb">libs</BreadcrumbItem>
+        <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+    </Breadcrumb>
+</template>
+<script>
+    export default {
+    }
+</script>
+
+::: code
+
+```html
+    <template>
+        <bw-breadcrumb>
+            <bw-breadcrumbItem to="/">Home</bw-breadcrumbItem>
+            <bw-breadcrumbItem to="/libs/breadcrumb">libs</bw-breadcrumbItem>
+            <bw-breadcrumbItem>Breadcrumb</bw-breadcrumbItem>
+        </bw-breadcrumb>
+    </template>
+    <script>
+        export default {
+
+        }
+    </script>
+```
+:::
