@@ -6,6 +6,7 @@ import codeShow from './components/CodeShow.vue'
 import ColorShow from './components/ColorShow.vue'
 import router from './router'
 import bwUI from '../libs'
+import './assets/iconfont/iconfont.css'
 
 Vue.use(bwUI)
 Vue.component('code-show', codeShow)
