@@ -5,10 +5,12 @@
 import Input from './input/index'
 import Button from './button'
 import Icon from './icon'
+import Page from './page'
 import Collapse from './collapse'
 import CollapseItem from './collapse-item'
 const components = [
     Input,
+    Page,
     Button, Icon, Collapse, CollapseItem
 ]
 
@@ -21,6 +23,7 @@ export default {
     install,
     Button,
     Input,
+    Page,
     Icon,
     Collapse,
     CollapseItem

@@ -1,12 +1,13 @@
 <template>
-    <ul :class="simpleWrapClasses" :style="styles" v-if="simple">
-        <li
-                :title="t('i.page.prev')"
+    <div :class="simpleWrapCls" :style="styles" v-if="simple">
+        <div
                 :class="prevClasses"
                 @click="prev">
-            <a><i class="ivu-icon ivu-icon-ios-arrow-back"></i></a>
-        </li>
-        <div :class="simplePagerClasses" :title="currentPage + '/' + allPages">
+            <a>
+                <i class="ivu-icon ivu-icon-ios-arrow-back"></i>
+            </a>
+        </div>
+        <div :class="[prefixCls + '-simple-pager']" :title="currentPage + '/' + allPages">
             <input
                     type="text"
                     :value="currentPage"
@@ -18,76 +19,26 @@
             <span>/</span>
             {{ allPages }}
         </div>
-        <li
-                :title="t('i.page.next')"
-                :class="nextClasses"
-                @click="next">
-            <a><i class="ivu-icon ivu-icon-ios-arrow-forward"></i></a>
-        </li>
-    </ul>
-    <ul :class="wrapClasses" :style="styles" v-else>
-        <span :class="[prefixCls + '-total']" v-if="showTotal">
-            <slot>{{ t('i.page.total') }} {{ total }} <template v-if="total <= 1">{{ t('i.page.item') }}</template><template
-                    v-else>{{ t('i.page.items') }}</template></slot>
-        </span>
-        <li
-                :title="t('i.page.prev')"
-                :class="prevClasses"
-                @click="prev">
-            <a>
-                <template v-if="prevText !== ''">{{ prevText }}</template>
-                <i v-else class="ivu-icon ivu-icon-ios-arrow-back"></i></a>
-        </li>
-        <li title="1" :class="firstPageClasses" @click="changePage(1)"><a>1</a></li>
-        <li :title="t('i.page.prev5')" v-if="currentPage > 5" :class="[prefixCls + '-item-jump-prev']"
-            @click="fastPrev"><a><i class="ivu-icon ivu-icon-ios-arrow-back"></i></a></li>
-        <li :title="currentPage - 3" v-if="currentPage === 5" :class="[prefixCls + '-item']"
-            @click="changePage(currentPage - 3)"><a>{{ currentPage - 3 }}</a></li>
-        <li :title="currentPage - 2" v-if="currentPage - 2 > 1" :class="[prefixCls + '-item']"
-            @click="changePage(currentPage - 2)"><a>{{ currentPage - 2 }}</a></li>
-        <li :title="currentPage - 1" v-if="currentPage - 1 > 1" :class="[prefixCls + '-item']"
-            @click="changePage(currentPage - 1)"><a>{{ currentPage - 1 }}</a></li>
-        <li :title="currentPage" v-if="currentPage != 1 && currentPage != allPages"
-            :class="[prefixCls + '-item',prefixCls + '-item-active']"><a>{{ currentPage }}</a></li>
-        <li :title="currentPage + 1" v-if="currentPage + 1 < allPages" :class="[prefixCls + '-item']"
-            @click="changePage(currentPage + 1)"><a>{{ currentPage + 1 }}</a></li>
-        <li :title="currentPage + 2" v-if="currentPage + 2 < allPages" :class="[prefixCls + '-item']"
-            @click="changePage(currentPage + 2)"><a>{{ currentPage + 2 }}</a></li>
-        <li :title="currentPage + 3" v-if="allPages - currentPage === 4" :class="[prefixCls + '-item']"
-            @click="changePage(currentPage + 3)"><a>{{ currentPage + 3 }}</a></li>
-        <li :title="t('i.page.next5')" v-if="allPages - currentPage >= 5" :class="[prefixCls + '-item-jump-next']"
-            @click="fastNext"><a><i class="ivu-icon ivu-icon-ios-arrow-forward"></i></a></li>
-        <li :title="allPages" v-if="allPages > 1" :class="lastPageClasses" @click="changePage(allPages)"><a>{{ allPages
-            }}</a></li>
-        <li
-                :title="t('i.page.next')"
+        <div
                 :class="nextClasses"
                 @click="next">
             <a>
-                <template v-if="nextText !== ''">{{ nextText }}</template>
-                <i v-else class="ivu-icon ivu-icon-ios-arrow-forward"></i></a>
-        </li>
-    </ul>
+                <i class="ivu-icon ivu-icon-ios-arrow-forward"></i>
+            </a>
+        </div>
+    </div>
 </template>
 <script>
-import { oneOf } from '../../utils/assist'
-import Options from './options.vue'
-import Locale from '../../mixins/locale'
+import { oneOf } from '../utils/common'
 
-const prefixCls = 'ivu-page'
+const prefixCls = 'b-page'
 
 export default {
-    name: 'Page',
-    mixins: [Locale],
-    components: {Options},
+    name: 'b-page',
     props: {
         current: {
             type: Number,
             default: 1
-        },
-        total: {
-            type: Number,
-            default: 0
         },
         pageSize: {
             type: Number,
@@ -104,12 +55,6 @@ export default {
                 return oneOf(value, ['top', 'bottom'])
             },
             default: 'bottom'
-        },
-        transfer: {
-            type: Boolean,
-            default () {
-                return !this.$IVIEW || this.$IVIEW.transfer === '' ? false : this.$IVIEW.transfer
-            }
         },
         size: {
             validator (value) {
@@ -154,46 +99,17 @@ export default {
             currentPageSize: this.pageSize
         }
     },
-    watch: {
-        total (val) {
-            let maxPage = Math.ceil(val / this.currentPageSize)
-            if (maxPage < this.currentPage && maxPage > 0) {
-                this.currentPage = maxPage
-            }
-        },
-        current (val) {
-            this.currentPage = val
-        },
-        pageSize (val) {
-            this.currentPageSize = val
-        }
-    },
     computed: {
-        isSmall () {
-            return !!this.size
-        },
         allPages () {
             const allPage = Math.ceil(this.total / this.currentPageSize)
             return (allPage === 0) ? 1 : allPage
         },
-        simpleWrapClasses () {
+        simpleWrapCls () {
             return [
                 `${prefixCls}`,
                 `${prefixCls}-simple`,
                 {
                     [`${this.className}`]: !!this.className
-                }
-            ]
-        },
-        simplePagerClasses () {
-            return `${prefixCls}-simple-pager`
-        },
-        wrapClasses () {
-            return [
-                `${prefixCls}`,
-                {
-                    [`${this.className}`]: !!this.className,
-                    'mini': !!this.size
                 }
             ]
         },
@@ -214,27 +130,11 @@ export default {
                     [`${prefixCls}-custom-text`]: this.nextText !== ''
                 }
             ]
-        },
-        firstPageClasses () {
-            return [
-                `${prefixCls}-item`,
-                {
-                    [`${prefixCls}-item-active`]: this.currentPage === 1
-                }
-            ]
-        },
-        lastPageClasses () {
-            return [
-                `${prefixCls}-item`,
-                {
-                    [`${prefixCls}-item-active`]: this.currentPage === this.allPages
-                }
-            ]
         }
     },
     methods: {
         changePage (page) {
-            if (this.currentPage != page) {
+            if (this.currentPage !== page) {
                 this.currentPage = page
                 this.$emit('update:current', page)
                 this.$emit('on-change', page)
@@ -288,7 +188,6 @@ export default {
         keyUp (e) {
             const key = e.keyCode
             const val = parseInt(e.target.value)
-
             if (key === 38) {
                 this.prev()
             } else if (key === 40) {
@@ -303,7 +202,6 @@ export default {
                 } else {
                     page = val
                 }
-
                 e.target.value = page
                 this.changePage(page)
             }
