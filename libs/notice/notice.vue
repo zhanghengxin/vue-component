@@ -1,17 +1,18 @@
 <template>
-  <transition name="fade" @after-leave="afterLeave" @after-enter="afterEnter">
-    <div :class="['notice',type]"
+  <transition :name="prefixCls+'-fade'" @after-leave="afterLeave" @after-enter="afterEnter">
+    <div :class="[prefixCls+'-notice',prefixType]"
       :style="style"
       v-show="visible"
       @mouseenter="clearTimer"
       @mouseleave="createTimer"
     >
-      <span class="content">{{content}}</span>
-      <img class="btn" src="./close.png" @click="handleClose" />
+      <span :class="prefixCls+'-content'">{{content}}</span>
+      <img :class="prefixCls+'-close'" src="./close.png" @click="handleClose" />
     </div>
   </transition>
 </template>
 <script>
+const prefixCls = 'bw-notice'
 export default {
     name: 'Notice',
     props: {
@@ -30,12 +31,16 @@ export default {
     },
     data () {
         return {
-            visible: true
+            visible: true,
+            prefixCls: prefixCls
         }
     },
     computed: {
         style () {
             return {}
+        },
+        prefixType () {
+            return this.prefixCls + '-' + this.type
         }
     },
     methods: {
@@ -53,7 +58,7 @@ export default {
 }
 </script>
 <style>
-.notice {
+.bw-notice-notice {
   position: fixed;
   width: 280px;
   background-color: white;
@@ -67,42 +72,42 @@ export default {
   transition: all 0.3s;
   display: flex;
 }
-.content {
+.bw-notice-content {
   padding: 0;
   word-wrap:break-word;
 }
-.btn {
+.bw-notice-close {
   width: 16px;
   height: 16px;
   position: absolute;
   top: 10px;
   right: 10px;
 }
-.fade{
+.bw-notice-fade{
   position: absolute;left:0;right: 0;
 }
-.fade-enter-active {
+.bw-notice-fade-enter-active {
   transition: all 1.2s ease;
 }
-.fade-leave-active {
+.bw-notice-fade-leave-active {
   transition: all .1s cubic-bezier(2.0, 0.5, 0.8, 1.0);
 }
-.fade-enter, .slide-fade-leave-to{
+.bw-notice-fade-enter, .slide-bw-notice-fade-leave-to{
   left:0;
   right: 0;
   transform: translateX(50px);
   opacity: 0;
 }
-.default{
+.bw-notice-default{
   border-left: none;
 }
-.success{
+.bw-notice-success{
   border-left: solid 8px #1fca74;
 }
-.warning{
+.bw-notice-warning{
   border-left: solid 8px #ff8f00;
 }
-.error{
+.bw-notice-error{
   border-left: solid 8px #f44336;
 }
 </style>
