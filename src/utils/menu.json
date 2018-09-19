@@ -44,6 +44,11 @@
           "title": "Page 分页",
           "path": "/page",
           "name": "page"
+        },
+        {
+          "title": "Modal 对话框",
+          "path": "/modal",
+          "name": "modal"
         }
       ]
     }
