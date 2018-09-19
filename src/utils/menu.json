@@ -69,7 +69,7 @@
         {
           "title": "Breadcrumb 面包屑",
           "path": "/breadcrumb",
-          "name": "Breadcrumb"
+          "name": "breadcrumb"
         }
       ]
     },
@@ -80,7 +80,7 @@
         {
           "title": "BackTop 返回顶部",
           "path": "/backTop",
-          "name": "BackTop"
+          "name": "backTop"
         }
       ]
     }
