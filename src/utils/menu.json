@@ -1,6 +1,5 @@
 {
-  "食用指南": [
-    {
+  "食用指南": [{
       "name": "guide",
       "path": "/guide",
       "title": "介绍"
@@ -28,7 +27,16 @@
     {
       "title": "基础",
       "path": "/",
-      "items": [
+      "items": [{
+          "title": "Button 按钮",
+          "path": "/button",
+          "name": "button"
+        },
+        {
+          "title": "Input 输入框",
+          "path": "/input",
+          "name": "input"
+        },
         {
           "title": "Color 色彩",
           "path": "/color",
@@ -40,11 +48,6 @@
           "name": "icon"
         },
         {
-          "title": "Button 按钮",
-          "path": "/button",
-          "name": "button"
-        },
-        {
           "title": "Collapse 折叠面板",
           "path": "/collapse",
           "name": "collapse"
@@ -54,24 +57,20 @@
     {
       "title": "视图",
       "path": "/",
-      "items": [
-        {
-          "title": "Page 分页",
-          "path": "/page",
-          "name": "page"
-        }
-      ]
+      "items": [{
+        "title": "Page 分页",
+        "path": "/page",
+        "name": "page"
+      }]
     },
     {
       "title": "导航",
       "path": "/",
-      "items": [
-        {
-          "title": "Breadcrumb 面包屑",
-          "path": "/breadcrumb",
-          "name": "Breadcrumb"
-        }
-      ]
+      "items": [{
+        "title": "Breadcrumb 面包屑",
+        "path": "/breadcrumb",
+        "name": "Breadcrumb"
+      }]
     },
     {
       "title": "其他",
