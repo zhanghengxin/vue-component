@@ -21,9 +21,31 @@
 </template>
 <script>
 const prefixCls = 'breadcrumb-item'
+export function oneOf (value, validList) {
+    for (let i = 0; i < validList.length; i++) {
+        if (value === validList[i]) {
+            return true
+        }
+    }
+    return false
+}
 export default {
     name: 'BreadcrumbItem',
     props: {
+        to: {
+            type: [Object, String]
+        },
+        replace: {
+            type: Boolean,
+            default: false
+        },
+        target: {
+            type: String,
+            validator (value) {
+                return oneOf(value, ['_blank', '_self', '_parent', '_top'])
+            },
+            default: '_self'
+        }
     },
     data () {
         return {
@@ -37,6 +59,10 @@ export default {
         },
         separatorClasses () {
             return `${prefixCls}-separator`
+        },
+        linkUrl () {
+            const type = typeof this.to
+            return type === 'string' ? this.to : null
         }
     },
     mounted () {

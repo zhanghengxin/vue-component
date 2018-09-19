@@ -3,21 +3,22 @@
 -----
 ### 基础用法
 最基础的用法，通过设置```to```属性添加链接。
-
-<template>
-    <Breadcrumb>
-        <BreadcrumbItem to="/">Home</BreadcrumbItem>
-        <BreadcrumbItem to="/libs/breadcrumb">libs</BreadcrumbItem>
-        <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
-    </Breadcrumb>
-</template>
-<script>
-    export default {
-    }
-</script>
+<div class="example">
+    <div class="example-box">
+        <template>
+            <Breadcrumb>
+                <BreadcrumbItem to="/">Home</BreadcrumbItem>
+                <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
+                <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+            </Breadcrumb>
+        </template>
+        <script>
+            export default {
+            }
+        </script>
+    </div>
 
 ::: code
-
 ```html
     <template>
         <bw-breadcrumb>
@@ -33,3 +34,62 @@
     </script>
 ```
 :::
+</div>
+
+### 分隔符
+通过设置```separator```属性来自定义分隔符，比如 > ，也可以接受自定义的HTML字符串。
+
+<div class="example">
+    <div class="example-box">
+        <style>
+            .demo-breadcrumb-separator{
+                color: #ff5500;
+                padding: 0 5px;
+            }
+        </style>
+        <template>
+            <Breadcrumb separator=">">
+                <BreadcrumbItem to="/">Home</BreadcrumbItem>
+                <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
+                <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+            </Breadcrumb>
+            <Breadcrumb separator="<b class='demo-breadcrumb-separator'>\</b>">
+                <BreadcrumbItem to="/">Home</BreadcrumbItem>
+                <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
+                <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+            </Breadcrumb>
+        </template>
+        <script>
+            export default {
+            }
+        </script>
+    </div>
+
+::: code
+```html
+    <style>
+    .demo-breadcrumb-separator{
+        color: #ff5500;
+        padding: 0 5px;
+    }
+    </style>
+    <template>
+        <Breadcrumb separator=">">
+            <BreadcrumbItem to="/">Home</BreadcrumbItem>
+            <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
+            <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+        </Breadcrumb>
+        <Breadcrumb separator="<b class='demo-breadcrumb-separator'>\</b>">
+            <BreadcrumbItem to="/">Home</BreadcrumbItem>
+            <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
+            <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+        </Breadcrumb>
+    </template>
+    <script>
+        export default {
+
+        }
+    </script>
+```
+:::
+</div>
