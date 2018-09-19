@@ -45,11 +45,6 @@
           "name": "button"
         },
         {
-          "title": "Carousel 走马灯",
-          "path": "/carousel",
-          "name": "carousel"
-        },
-        {
           "title": "Collapse 折叠面板",
           "path": "/collapse",
           "name": "collapse"
@@ -86,6 +81,11 @@
           "title": "BackTop 返回顶部",
           "path": "/backTop",
           "name": "BackTop"
+        },
+        {
+          "title": "Carousel 走马灯",
+          "path": "/carousel",
+          "name": "carousel"
         }
       ]
     }

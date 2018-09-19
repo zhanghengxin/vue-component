@@ -3,7 +3,8 @@
  *
  */
 import Button from './button'
-import { Carousel, CarouselItem } from './carousel'
+import Carousel from './carousel'
+import CarouselItem from './carousel-item'
 import Icon from './icon'
 import Collapse from './collapse'
 import CollapseItem from './collapse-item'
