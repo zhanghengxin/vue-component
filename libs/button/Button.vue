@@ -1,6 +1,6 @@
 /**
 * 示例组件，实际效果请负责的同学更改
-* Created by gaoguoqing on 2018/9/5.
+* Created by lijiahang on 2018/9/5.
 *
 */
 <template>
@@ -88,6 +88,9 @@ export default {
         }
     },
     mounted () {
+        console.log('ljh')
+        console.log(this.$parent)
+        console.log(this.$el)
         // 是否需要不可点击？
         if (this.loading) {
             // this.disabled = true
