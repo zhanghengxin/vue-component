@@ -93,3 +93,19 @@
 ```
 :::
 </div>
+
+### props
+
+Breadcrumb props
+
+| 属性      | 说明    | 类型      |  默认值   |
+|---------- |-------- |---------- |-------- |
+| separator     | 自定义分隔符   | String |    /   |
+
+BreadcrumbItem props
+
+| 属性      | 说明    | 类型      | 默认值   |
+|---------- |-------- |---------- |-------- |
+| to     | 链接，不传则没有链接，支持 vue-router 对象   | String | Object  |    -   |
+| replace     | 路由跳转时，开启 replace 将不会向 history 添加新记录   | Boolean    |     false  |
+| target     | 相当于 a 链接的 target 属性   | String    |     _self  |
