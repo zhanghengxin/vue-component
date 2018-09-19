@@ -43,7 +43,6 @@ export default {
         padding: 0;
         color: #3F536E;
         height: 100%;
-        background-color: #fff;
         .nav-container {
             margin-bottom: 20px;
         }
@@ -63,7 +62,6 @@ export default {
         }
         a {
             display: block;
-            color: #3F536E;
             padding: 8px 24px;
             position: relative;
             line-height: 1.5;
@@ -75,7 +73,6 @@ export default {
             display: block;
             position: relative;
             padding: 6px 0px 6px 24px;
-            color: #2C405A;
             font-size: 14px;
             font-weight: bold;
         }
@@ -83,7 +80,6 @@ export default {
             display: block;
             position: relative;
             padding: 6px 24px 6px 32px;
-            color: #616367;
             font-size: 14px;
             &:hover {
                 color: $LightPrimary;

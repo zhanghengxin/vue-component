@@ -31,10 +31,7 @@ export default {
         height: auto;
         overflow: hidden;
         box-sizing: border-box;
-        background-color: #f5f7fa;
-        border: 1px solid #e2ecf4;
-        border-top: none;
-        border-radius: 4px;
+        background-color: $Background;
         font-family: Source Code Pro, Monaco, Inconsolata, monospace;
         pre {
             padding: 10px 0;
@@ -43,13 +40,13 @@ export default {
             line-height: 22px;
             border: none;
             .hljs-tag {
-                color: #0079f3;
+                color: $LightPrimary;
             }
             .hljs-attr {
-                color: #e96900;
+                color: $Badge;
             }
             .hljs-string {
-                color: #42b983;
+                color: $Success;
             }
 
         }
@@ -63,9 +60,8 @@ export default {
         font-size: 14px;
         cursor: pointer;
         padding: 10px 0;
-        background-color: #FAFBFC;
         &:hover {
-            color: #0079f3
+            color: $LightPrimary;
         }
     }
 </style>
