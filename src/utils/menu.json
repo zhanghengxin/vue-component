@@ -60,6 +60,10 @@
         "title": "Page 分页",
         "path": "/page",
         "name": "page"
+      },{
+        "title": "Notice 通知",
+        "path": "/notice",
+        "name": "notice"
       }]
     },
     {
