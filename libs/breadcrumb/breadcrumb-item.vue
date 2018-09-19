@@ -20,51 +20,51 @@
     </span>
 </template>
 <script>
-  const prefixCls = 'breadcrumb-item';
-  export default {
+const prefixCls = 'breadcrumb-item'
+export default {
     name: 'BreadcrumbItem',
     props: {
     },
     data () {
-      return {
-        separator: '',
-        showSeparator: false
-      };
+        return {
+            separator: '',
+            showSeparator: false
+        }
     },
     computed: {
-      linkClasses () {
-        return `${prefixCls}-link`;
-      },
-      separatorClasses () {
-        return `${prefixCls}-separator`;
-      }
+        linkClasses () {
+            return `${prefixCls}-link`
+        },
+        separatorClasses () {
+            return `${prefixCls}-separator`
+        }
     },
     mounted () {
-      this.showSeparator = this.$slots.separator !== undefined;
+        this.showSeparator = this.$slots.separator !== undefined
     },
     methods: {
-      handleClick (new_window = false) {
-        if (new_window){
-          window.open(this.to);
-        } else {
-          const isRoute = this.$router;
-          if (isRoute) {
-            this.replace ? this.$router.replace(this.to) : this.$router.push(this.to);
-          } else {
-            window.location.href = this.to;
-          }
+        handleClick (newWindow = false) {
+            if (newWindow) {
+                window.open(this.to)
+            } else {
+                const isRoute = this.$router
+                if (isRoute) {
+                    this.replace ? this.$router.replace(this.to) : this.$router.push(this.to)
+                } else {
+                    window.location.href = this.to
+                }
+            }
+        },
+        handleCheckClick (event, newWindow = false) {
+            if (this.to) {
+                if (this.target === '_blank') {
+                    return false
+                } else {
+                    event.preventDefault()
+                    this.handleClick(newWindow)
+                }
+            }
         }
-      },
-      handleCheckClick (event, new_window = false) {
-        if (this.to) {
-          if (this.target === '_blank') {
-            return false;
-          } else {
-            event.preventDefault();
-            this.handleClick(new_window);
-          }
-        }
-      }
     }
-  };
+}
 </script>
