@@ -400,6 +400,7 @@ export default {
         height: 32px;
         line-height: 32px;
         margin-right: 10px;
+        vertical-align: middle;
     }
 
     // mini
