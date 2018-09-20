@@ -4,7 +4,7 @@
  */
 
 <template>
-    <transition class="b-message-fade" mode="in-out">
+    <transition name="b-message-fade" mode="in-out">
         <div
             v-show="show"
             class="b-message-wrapper"
