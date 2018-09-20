@@ -1,35 +1,140 @@
 <template>
     <div :class="simpleWrapCls" v-if="simple">
         <div
-                :class="prevCls"
-                @click="prev">
+            :class="prevCls"
+            @click="prev">
             <a :class="[prefixCls + '-arrow']">
                 <b-icon type="zuola"></b-icon>
             </a>
         </div>
         <div :class="[prefixCls + '-simple-pager']" :title="currentPage + '/' + pageCount">
             <input
-                    type="text"
-                    :value="currentPage"
-                    autocomplete="off"
-                    spellcheck="false"
-                    @keydown="keyDown"
-                    @keyup="keyUp"
-                    @change="keyUp">
+                type="text"
+                :value="currentPage"
+                @keydown="keyDown"
+                @keyup="keyUp"
+                @change="keyUp">
             <span>/</span>
             {{ pageCount }}
         </div>
         <div
-                :class="nextCls"
-                @click="next">
+            :class="nextCls"
+            @click="next">
             <a :class="[prefixCls + '-arrow']">
                 <b-icon type="youla"></b-icon>
             </a>
         </div>
     </div>
+    <ul :class="wrapCls" v-else>
+        <span :class="[prefixCls + '-total']" v-if="showTotal">
+            <slot name='total'>共计 {{ total }} 条</slot>
+        </span>
+        <li
+            :class="prevCls"
+            @click="prev">
+            <a :class="[prefixCls + '-arrow']">
+                <template v-if="prevText">{{prevText}}</template>
+                <b-icon v-else type="zuola"></b-icon>
+            </a>
+        </li>
+        <li title="1" :class="firstPageCls" @click="changePage(1)">
+            <a :class="[prefixCls + '-item-content']">1</a>
+        </li>
+        <li
+            v-if="currentPage > 5"
+            @click="fastPrev"
+            :class="[prefixCls + '-item-jump-prev']">
+            <a :class="[prefixCls + '-arrow']">
+                <b-icon type="yidongduan_navmore"></b-icon>
+            </a>
+        </li>
+        <li
+            :title="currentPage - 3"
+            v-if="currentPage === 5"
+            :class="[prefixCls + '-item']"
+            @click="changePage(currentPage - 3)">
+            <a :class="[prefixCls + '-item-content']">{{ currentPage - 3 }}</a>
+        </li>
+        <li
+            :title="currentPage - 2"
+            v-if="currentPage - 2 > 1"
+            :class="[prefixCls + '-item']"
+            @click="changePage(currentPage - 2)">
+            <a :class="[prefixCls + '-item-content']">{{ currentPage - 2 }}</a>
+        </li>
+        <li
+            :title="currentPage - 1"
+            v-if="currentPage - 1 > 1"
+            :class="[prefixCls + '-item']"
+            @click="changePage(currentPage - 1)">
+            <a :class="[prefixCls + '-item-content']">{{ currentPage - 1 }}</a>
+        </li>
+        <li
+            :title="currentPage"
+            v-if="currentPage != 1 && currentPage != pageCount"
+            :class="[prefixCls + '-item',prefixCls + '-item-active']">
+            <a :class="[prefixCls + '-item-content']">{{ currentPage }}</a>
+        </li>
+        <li
+            :title="currentPage + 1"
+            v-if="currentPage + 1 < pageCount"
+            :class="[prefixCls + '-item']"
+            @click="changePage(currentPage + 1)">
+            <a :class="[prefixCls + '-item-content']">{{ currentPage + 1 }}</a>
+        </li>
+        <li
+            :title="currentPage + 2"
+            v-if="currentPage + 2 < pageCount"
+            :class="[prefixCls + '-item']"
+            @click="changePage(currentPage + 2)">
+            <a :class="[prefixCls + '-item-content']">{{ currentPage + 2 }}</a>
+        </li>
+        <li
+            :title="currentPage + 3"
+            v-if="pageCount - currentPage === 4"
+            :class="[prefixCls + '-item']"
+            @click="changePage(currentPage + 3)">
+            <a :class="[prefixCls + '-item-content']">{{ currentPage + 3 }}</a>
+        </li>
+        <li
+            v-if="pageCount - currentPage >= 5"
+            @click="fastNext"
+            :class="[prefixCls + '-item-jump-next']">
+            <a :class="[prefixCls + '-arrow']">
+                <b-icon type="yidongduan_navmore"></b-icon>
+            </a>
+        </li>
+        <li
+            :title="pageCount"
+            v-if="pageCount > 1"
+            :class="lastPageCls"
+            @click="changePage(pageCount)">
+            <a :class="[prefixCls + '-item-content']">{{ pageCount }}</a>
+        </li>
+        <li
+            :class="nextCls"
+            @click="next">
+            <a :class="[prefixCls + '-arrow']">
+                <template v-if="nextText">{{nextText}}</template>
+                <b-icon v-else type="youla"></b-icon>
+            </a>
+        </li>
+        <div v-if="showElevator" :class="elevatorCls">
+            前往
+            <input
+                type="text"
+                autocomplete="off"
+                spellcheck="false"
+                :value="currentPage"
+                @keydown="keyDown"
+                @keyup="keyUp"
+                @change="keyUp"
+            >
+            页
+        </div>
+    </ul>
 </template>
 <script>
-import { oneOf } from '../utils/common'
 import Icon from '../icon'
 
 const prefixCls = 'b-page'
@@ -39,42 +144,54 @@ export default {
     components: {Icon},
     props: {
         page: {
-            type: Number,
+            type: [Number, String],
             default: 1
         },
         size: {
-            type: Number,
+            type: [Number, String],
             default: 10
         },
-        placement: {
-            validator (value) {
-                return oneOf(value, ['top', 'bottom'])
-            },
-            default: 'bottom'
+        total: {
+            type: [Number, String],
+            default: 0
+        },
+        showElevator: {
+            type: Boolean,
+            default: false
+        },
+        showTotal: {
+            type: Boolean,
+            default: false
         },
         simple: {
             type: Boolean,
-            default: true
+            default: false
         },
         className: {
             type: String
         },
-        total: {
-            type: Number,
-            default: 0
+        prevText: {
+            type: String
+        },
+        nextText: {
+            type: String
+        },
+        mini: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
         return {
             prefixCls: prefixCls,
-            currentPage: this.page,
-            currentSize: this.size
+            currentPage: Number(this.page),
+            currentSize: Number(this.size)
         }
     },
     computed: {
         pageCount () {
-            const allPage = Math.ceil(this.total / this.currentSize)
-            return (allPage === 0) ? 1 : allPage
+            const totalPage = Math.ceil(this.total / this.currentSize)
+            return (totalPage === 0) ? 1 : totalPage
         },
         simpleWrapCls () {
             return [
@@ -82,6 +199,16 @@ export default {
                 `${prefixCls}-simple`,
                 {
                     [`${this.className}`]: !!this.className
+                }
+            ]
+        },
+        wrapCls () {
+            return [
+                `${prefixCls}`,
+                `${prefixCls}-normal`,
+                {
+                    [`${this.className}`]: !!this.className,
+                    [`${prefixCls}-mini`]: !!this.mini
                 }
             ]
         },
@@ -99,6 +226,27 @@ export default {
                 {
                     [`${prefixCls}-disabled`]: this.currentPage === this.pageCount
                 }
+            ]
+        },
+        firstPageCls () {
+            return [
+                `${prefixCls}-item`,
+                {
+                    [`${prefixCls}-item-active`]: this.currentPage === 1
+                }
+            ]
+        },
+        lastPageCls () {
+            return [
+                `${prefixCls}-item`,
+                {
+                    [`${prefixCls}-item-active`]: this.currentPage === this.pageCount
+                }
+            ]
+        },
+        elevatorCls () {
+            return [
+                `${prefixCls}-elevator`
             ]
         }
     },
@@ -123,6 +271,22 @@ export default {
             }
             this.changePage(current + 1)
         },
+        fastPrev () {
+            const page = this.currentPage - 5
+            if (page > 0) {
+                this.changePage(page)
+            } else {
+                this.changePage(1)
+            }
+        },
+        fastNext () {
+            const page = this.currentPage + 5
+            if (page > this.pageCount) {
+                this.changePage(this.pageCount)
+            } else {
+                this.changePage(page)
+            }
+        },
         keyDown (e) {
             const key = e.keyCode
             const condition = (key >= 48 && key <= 57) || (key >= 96 && key <= 105) || key === 8 || key === 37 || key === 39
@@ -139,7 +303,6 @@ export default {
                 this.next()
             } else if (key === 13) {
                 let page = 1
-
                 if (val > this.pageCount) {
                     page = this.pageCount
                 } else if (val <= 0 || !val) {
@@ -156,13 +319,126 @@ export default {
 </script>
 <style lang="scss">
     .b-page {
+        font-size: 0;
+        .b-page-item-content {
+            color: $Content;
+        }
+        .b-page-arrow {
+            color: $Content;
+            &:hover {
+                color: $LightPrimary;
+            }
+        }
+    }
 
+    // normal
+    .b-page-normal {
+        .b-page-item, .b-page-prev, .b-page-next, .b-page-item-jump-next, .b-page-item-jump-prev {
+            font-size: 12px;
+            display: inline-block;
+            vertical-align: middle;
+            min-width: 32px;
+            height: 32px;
+            line-height: 30px;
+            margin-right: 10px;
+            text-align: center;
+            list-style: none;
+            user-select: none;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid $Border;
+            transition: border .2s ease-in-out, color .2s ease-in-out;
+            &:hover {
+                border-color: $Primary;
+            }
+        }
+        .b-page-prev, .b-page-next {
+            min-width: 5px;
+            padding: 0 10px;
+        }
+        .b-page-item {
+            &:hover {
+                background: $Primary;
+                .b-page-item-content {
+                    color: white;
+                }
+            }
+        }
+        .b-page-item-active {
+            background: $Primary;
+            .b-page-item-content {
+                color: white;
+            }
+        }
+        .b-page-disabled {
+            cursor: not-allowed;
+            background: $Disabled;
+            &:hover {
+                border-color: $Disabled;
+            }
+        }
+    }
+
+    // elevator
+    .b-page-elevator {
+        font-size: 12px;
+        display: inline-block;
+        vertical-align: middle;
+        height: 32px;
+        line-height: 32px;
+        input {
+            padding: 1px 7px;
+            height: 32px;
+            border-radius: 3px;
+            width: 44px;
+        }
+    }
+
+    .b-page-total {
+        font-size: 12px;
+        display: inline-block;
+        height: 32px;
+        line-height: 32px;
+        margin-right: 10px;
+    }
+
+    // mini
+    .b-page-mini {
+        .b-page-item, .b-page-prev, .b-page-next, .b-page-item-jump-next, .b-page-item-jump-prev {
+            min-width: 22px;
+            height: 22px;
+            line-height: 20px;
+            border: none;
+            margin-right: 5px;
+        }
+        .b-page-disabled {
+            background: white;
+        }
+        .b-page-elevator {
+            height: 22px;
+            line-height: 22px;
+            input {
+                height: 22px;
+                width: 32px;
+            }
+        }
+    }
+
+    // simple
+    .b-page-simple {
+        .b-page-prev, .b-page-next {
+            display: inline-block;
+            border: 0;
+            height: 24px;
+            line-height: normal;
+        }
     }
 
     .b-page-simple-pager {
         display: inline-block;
         margin-right: 8px;
         vertical-align: middle;
+        font-size: 12px;
         input {
             width: 48px;
             height: 22px;
@@ -174,29 +450,23 @@ export default {
             border: 1px solid $Border;
             border-radius: 4px;
             transition: border-color .2s ease-in-out;
+            &:hover {
+                border-color: $Primary;
+            }
         }
         span {
             padding: 0 8px 0 2px;
         }
-    }
 
-    .b-page-prev, .b-page-next {
-        display: inline-block;
-        border: 0;
-        height: 24px;
-        line-height: normal;
-        font-size: 18px;
-        /*.b-page-arrow {*/
-            /*color: #666;*/
-            /*font-size: 14px;*/
-        /*}*/
     }
 
     .b-page-disabled {
         cursor: not-allowed;
-
         .b-page-arrow {
-            color: $Disabled;
+            color: $DisContent;
+            &:hover {
+                color: $DisContent;
+            }
         }
     }
 </style>
