@@ -11,7 +11,6 @@ import Message from './message'
 import Breadcrumb from './breadcrumb'
 import BreadcrumbItem from './breadcrumb-item'
 
-
 const components = [
     Input, Button, Icon, Collapse, Message, CollapseItem, Breadcrumb, BreadcrumbItem
 ]

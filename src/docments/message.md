@@ -23,7 +23,8 @@
             handleClick(type) {
                 this.$message({
                     message: this.message,
-                    type
+                    type,
+                    duration: 1500
                 })
             },
             handleClickShowClose() {
