@@ -4,22 +4,6 @@
 ### 基础用法
 默认位置距离页面右部和底部 30px，滚动至距顶端 400px 时显示。
 
-<template>
-  <div>
 
-  </div>
-</template>
-
-<script>
-export default {
-  data () {
-
-  },
-  methods: {
-
-  }
-}
-</script>
-::: code
 
 
