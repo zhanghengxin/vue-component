@@ -6,11 +6,11 @@
 使用```message``` 属性来定义 Message 的显示内容
 
 <div style='margin-bottom: 10px;'>
-    <b-button
+    <bw-button
         type='white'
         @on-click="handleClick">
         信息
-    </b-button>
+    </bw-button>
 </div>
 <script>
     export default {
@@ -45,11 +45,11 @@
 ::: code 
 ```html
     <div>
-        <b-button
+        <bw-button
             type='white'
             @on-click="handleClick">
             信息
-        </b-button>
+        </bw-button>
     </div>
     <script>
         export default {
@@ -74,26 +74,26 @@
 使用```type``` 属性来定义 Message 的不同状态
 
 <div style='margin-bottom: 10px;'>
-    <b-button
+    <bw-button
         type='white'
         @on-click="handleClick('info')">
         信息
-    </b-button>
-    <b-button
+    </bw-button>
+    <bw-button
         type='white'
         @on-click="handleClick('success')">
         成功
-    </b-button>
-    <b-button
+    </bw-button>
+    <bw-button
         type='white'
         @on-click="handleClick('error')">
         错误
-    </b-button>
-    <b-button
+    </bw-button>
+    <bw-button
         type='white'
         @on-click="handleClick('warning')">
         警告
-    </b-button>
+    </bw-button>
 </div>
 <script>
     export default {
@@ -116,26 +116,26 @@
 ::: code
 ```html
     <div>
-        <b-button
+        <bw-button
             type='white'
             @on-click="handleClick('info')">
             信息
-        </b-button>
-        <b-button
+        </bw-button>
+        <bw-button
             type='white'
             @on-click="handleClick('success')">
             成功
-        </b-button>
-        <b-button
+        </bw-button>
+        <bw-button
             type='white'
             @on-click="handleClick('error')">
             错误
-        </b-button>
-        <b-button
+        </bw-button>
+        <bw-button
             type='white'
             @on-click="handleClick('warning')">
             警告
-        </b-button>
+        </bw-button>
     </div>
     <script>
         export default {
@@ -162,21 +162,21 @@
 使用```duration``` 属性来定义 Message 的显示时长
 
 <div style='margin-bottom: 10px;'>
-    <b-button
+    <bw-button
         type='white'
         @on-click="handleClickDruation">
         信息
-    </b-button>
+    </bw-button>
 </div>
 
 ::: code
 ```html
     <div>
-        <b-button
+        <bw-button
             type='white'
             @on-click="handleClick">
             信息
-        </b-button>
+        </bw-button>
     </div>
     <script>
         export default {
@@ -202,21 +202,21 @@
 使用```showClose``` 属性来显示 Message 的关闭按钮
 
 <div style='margin-bottom: 10px'>
-    <b-button
+    <bw-button
         type='white'
         @on-click="handleClickShowClose">
         信息
-    </b-button>
+    </bw-button>
 </div>
 
 ::: code
 ```html
     <div>
-        <b-button
+        <bw-button
             type='white'
             @on-click="handleClick">
             信息
-        </b-button>
+        </bw-button>
     </div>
     <script>
         export default {
