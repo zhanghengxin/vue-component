@@ -11,7 +11,6 @@
             :style="{ zIndex: zIndex }">
             <div
                 class="b-message"
-                :style="{ background: bgColor }"
                 @mouseenter="enter"
                 @mouseleave="leave">
                 <img
