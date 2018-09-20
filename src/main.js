@@ -6,9 +6,11 @@ import codeShow from './components/CodeShow.vue'
 import ColorShow from './components/ColorShow.vue'
 import router from './router'
 import bwUI from '../libs'
+import Notice from '../libs/Notice'
 import './assets/iconfont/iconfont.css'
 
 Vue.use(bwUI)
+Vue.use(Notice)
 Vue.component('code-show', codeShow)
 Vue.component('color-show', ColorShow)
 Vue.config.productionTip = false
