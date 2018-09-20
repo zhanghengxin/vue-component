@@ -10,20 +10,73 @@
 
 > 基本用法：组件会根据```current```自动判断各步骤状态。
 
+<div class="example-box">
+    <script>
+         export default {
+             methods: {
+                 handleClick() {
+                     this.size = this.changeSize();
+                 },
+                 changeSize(){
+                    switch(this.size){
+                        case 'small':
+                            return 'normal';
+                            break;
+                        case 'normal':
+                            return 'small';
+                            break;
+                    }
+                 },
+                 nextStep() {
+                    this.step == 3?(this.step = 1):(this.step += 1)
+                 }
+             },
+             data:function(){
+                 return {
+                    size:'small',
+                    step:2,
+                    content:'这里是该步骤的描述信息',
+                    errorContent:'该步骤出现问题'
+                 };
+             },
+             computed:{
+                  afterChangeSize() {
+                      return this.changeSize();
+                  }
+             }
+         }
+     </script>
+</div>
+
 <div class="example">
     <div class="example-box">
         <div>
-            这里会放置一个基础样子的steps组件
+            <b-steps current='2' >
+                <b-step title='已完成' :content='content'></b-step>
+                <b-step title='正进行' :content='content'></b-step>
+                <b-step title='在等待' :content='content'></b-step>
+            </b-steps>
         </div>
     </div>
 
 ::: code
 ```html
-    <div class="example-box">
-        <div>
-            这里会放置一个基础样子的steps组件
-        </div>
+    <div>
+        <b-steps current='2' >
+            <b-step title='已完成' :content='content'></b-step>
+            <b-step title='正进行' :content='content'></b-step>
+            <b-step title='在等待' :content='content'></b-step>
+        </b-steps>
     </div>
+    <script>
+        export default {
+             data:function(){
+                 return {
+                    content:'这里是该步骤的描述信息'
+                 };
+             }
+         }
+    </script>
 ```
 :::
 </div>
@@ -33,10 +86,14 @@
 <div class="example">
     <div class="example-box">
         <div>
-            这里会放置一个型号为{{size}}的'steps'组件
+            <b-steps current='2' :size='size'>
+                <b-step title='已完成' :content='content'></b-step>
+                <b-step title='正进行' :content='content'></b-step>
+                <b-step title='在等待' :content='content'></b-step>
+            </b-steps>
         </div>
         <div>
-           <b-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</b-button>
+           <bw-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</bw-button>
         </div>
     </div>
 
@@ -44,10 +101,14 @@
 ```html
     <div class="example-box">
         <div>
-            这里会放置一个型号为{{size}}的'steps'组件
+            <b-steps current='2' :size='size'>
+                <b-step title='已完成' :content='content'></b-step>
+                <b-step title='正进行' :content='content'></b-step>
+                <b-step title='在等待' :content='content'></b-step>
+            </b-steps>
         </div>
         <div>
-           <b-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</b-button>
+           <bw-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</bw-button>
         </div>
          <script>
              export default {
@@ -107,38 +168,30 @@
 
 <div class="example">
     <div class="example-box">
+       <div>
+           <b-steps :current='step' >
+               <b-step title='步骤1' :content='content'></b-step>
+               <b-step title='步骤2' :content='content'></b-step>
+               <b-step title='步骤3' :content='content'></b-step>
+           </b-steps>
+       </div>
         <div>
-          （目前有冲突）
-           这里会放置随着鼠标点击切换进程的'steps'组件，当前位于第{{step}}步；
+           <bw-button size="normal" @on-click="nextStep">下一步</bw-button>
         </div>
-        <div>
-           <b-button size="normal" @on-click="nextStep">下一步</b-button>
-        </div>
-         <script>
-             export default {
-                 methods: {
-                     nextStep() {
-                         this.step += 1;
-                     }
-                 },
-                 data:function(){
-                     return {
-                        step:1
-                     };
-                 }
-             }
-         </script>
     </div>
 
 ::: code
 ```html
     <div class="example-box">
         <div>
-            （目前有冲突）
-            这里会放置随着鼠标点击切换进程的'steps'组件，当前位于第{{step}}步；
-        </div>
+          <b-steps :current='step' >
+             <b-step title='步骤1' :content='content'></b-step>
+             <b-step title='步骤2' :content='content'></b-step>
+             <b-step title='步骤3' :content='content'></b-step>
+          </b-steps>
+       </div>
         <div>
-           <b-button size="normal" @on-click="nextStep">下一步</b-button>
+           <bw-button size="normal" @on-click="nextStep">下一步</bw-button>
         </div>
          <script>
              export default {
@@ -185,7 +238,11 @@
 <div class="example">
     <div class="example-box">
         <div>
-            这里会放置一个有异常状态的steps组件
+            <b-steps current='2' status='error'>
+                <b-step title='已完成' :content='content'></b-step>
+                <b-step title='中断' :content='errorContent'></b-step>
+                <b-step title='在等待' :content='content'></b-step>
+            </b-steps>
         </div>
     </div>
 
@@ -193,7 +250,11 @@
 ```html
     <div class="example-box">
         <div>
-            这里会放置一个有异常状态的steps组件
+             <b-steps current='2' status='error'>
+                <b-step title='已完成' :content='content'></b-step>
+                <b-step title='中断' :content='content'></b-step>
+                <b-step title='在等待' :content='content'></b-step>
+            </b-steps>
         </div>
     </div>
 ```

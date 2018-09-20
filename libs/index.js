@@ -6,10 +6,10 @@ import Button from './button'
 import Icon from './icon'
 import Collapse from './collapse'
 import CollapseItem from './collapse-item'
-import {Steps, Step} from './steps/index'
+import { Steps, Step } from './steps/index'
 
 const components = [
-    Button, Icon, Collapse, CollapseItem,Steps,Step
+    Button, Icon, Collapse, CollapseItem, Steps, Step
 ]
 
 const install = function (Vue) {

@@ -5,25 +5,33 @@
 */
 @import "color";
 
-$normal : 24px;
-$small : 18px;
-$normalArea : 28px;
-$smallArea : 24px;
-$normalFontSize : 18px;
-$smallFontSize : 12px;
-$marginLength: 5px;
+/*********正常情况下的数据**************/
+$normal : 24px;//圆形的高宽
+$normalFontSize : 18px;//字体大小
+$normalContentPaddingLeft:30px;//contend距离左侧向内缩进距离
+
+/********small类型下的数据**************/
+$small : 18px;//圆形的高宽
+$smallFontSize : 12px;//字体大小
+$smallContentPaddingLeft:24px;//contend距离左侧向内缩进距离
+
+/*******其他********/
+$marginLength: 5px;//无content距离下测距离
+$marginLengthHaveContent:30px;//有content距离下测距离
 
 /********正常的size下steps组件区域的css开始*********/
 .b-steps-area{
   height:$normal;
-  display: inline-block;
   margin-top:$marginLength;
   margin-bottom:$marginLength;
+  display: block;
   /************单个step节点的区域的css开始*******************/
   .b-step-item {
     display:inline-block;
     height:$normal;
     line-height: $normal;
+    vertical-align: top;
+
     //步骤条的节点
     .b-step-point {
       width:$normal;
@@ -40,7 +48,7 @@ $marginLength: 5px;
     }
     // step组件的展示区域（线，title，content）
     .b-step-main {
-      display: inline-block;
+      display: inline;
       //步骤条的线
       .b-step-tail {
         width: 100px;
@@ -57,6 +65,11 @@ $marginLength: 5px;
         color:$SubContent;
         text-align:center;
         vertical-align: sub;
+      }
+      // step的content部分
+      .b-step-content{
+        padding-left: $normalContentPaddingLeft;
+        font-size: $smallFontSize;
       }
     }
   }
@@ -78,6 +91,9 @@ $marginLength: 5px;
       .b-step-title {
         color:$Title;
       }
+      .b-step-content{
+        color:$Title;
+      }
     }
   }
   // 已结束节点的css
@@ -91,6 +107,9 @@ $marginLength: 5px;
     .b-step-main {
       .b-step-tail{
         border-top-color: $LightPrimary;
+      }
+      .b-step-content{
+        color:$SubContent;
       }
     }
   }
@@ -108,6 +127,9 @@ $marginLength: 5px;
       .b-step-title {
         color:$Error;
       }
+      .b-step-content{
+        color:$Error;
+      }
     }
   }
   // 单（抛弃点）点的css
@@ -121,6 +143,9 @@ $marginLength: 5px;
       .b-step-tail{
         border-top-color: $DarkPrimary;
       }
+      .b-step-content{
+        color:$DarkPrimary;
+      }
     }
   }
   // 处于等待状态的节点
@@ -133,6 +158,9 @@ $marginLength: 5px;
     .b-step-main {
       .b-step-tail{
         border-top-color: $SubContent;
+      }
+      .b-step-content{
+        color:$SubContent;
       }
     }
   }
@@ -154,6 +182,23 @@ $marginLength: 5px;
       font-size: $smallFontSize;
       line-height: $small;
     }
+    // step组件的展示区域（线，title，content）
+    .b-step-main {
+      // step的title部分
+      .b-step-title {
+        font-size: $smallFontSize;
+      }
+      // step的content部分
+      .b-step-content{
+        padding-left: $smallContentPaddingLeft;
+        font-size: $smallFontSize;
+      }
+    }
   }
 }
 /**********steps组件的size为small时的css设置结束*************/
+
+/**************steps组件包含content时的样式**************/
+.b-steps-area.b-steps-area-haveContent{
+    margin-bottom: $marginLengthHaveContent;
+}
