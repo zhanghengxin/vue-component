@@ -23,7 +23,8 @@
       "redirect": "/guide"
     }
   ],
-  "组件": [{
+  "组件": [
+    {
       "title": "基础",
       "path": "/",
       "items": [{
@@ -55,6 +56,11 @@
           "title": "Message 消息",
           "path": "/message",
           "name": "message"
+        },
+        {
+          "title": "Steps 步骤条",
+          "path": "/steps",
+          "name": "steps"
         }
       ]
     },
@@ -90,6 +96,11 @@
           "title": "BackTop 返回顶部",
           "path": "/backTop",
           "name": "backTop"
+        },
+        {
+          "title": "Carousel 走马灯",
+          "path": "/carousel",
+          "name": "carousel"
         }
       ]
     }
