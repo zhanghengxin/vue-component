@@ -5,13 +5,14 @@
 import Input from './input/index'
 import Button from './button'
 import Icon from './icon'
+import Page from './page'
 import Collapse from './collapse'
 import CollapseItem from './collapse-item'
 import Breadcrumb from './breadcrumb'
 import BreadcrumbItem from './breadcrumb-item'
 
 const components = [
-    Input, Button, Icon, Collapse, CollapseItem, Breadcrumb, BreadcrumbItem
+    Input, Page, Button, Icon, Collapse, CollapseItem, Breadcrumb, BreadcrumbItem
 ]
 
 const install = function (Vue) {
@@ -23,6 +24,7 @@ export default {
     install,
     Button,
     Input,
+    Page,
     Icon,
     Collapse,
     CollapseItem,
