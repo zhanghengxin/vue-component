@@ -13,10 +13,12 @@
                 class="b-message"
                 @mouseenter="enter"
                 @mouseleave="leave">
-                <img
+                <b-icon
                     v-if="imgSrc"
                     class="b-message-img"
-                    :src="imgSrc">
+                    :color="fsColor"
+                    :type="imgSrc">
+                 </b-icon>
                 {{message}}
                 <button
                     v-if="showClose"
@@ -30,11 +32,6 @@
 </template>
 
 <script>
-// import info from '@/assets/info.svg'
-// import error from '@/assets/error.svg'
-// import success from '@/assets/success.svg'
-// import warning from '@/assets/warning.svg'
-// import closeImg from '@/assets/close.svg'
 
 export default {
     name: 'b-message',
@@ -55,16 +52,16 @@ export default {
     computed: {
         imgSrc () {
             let img = {
-                info: '',
-                error: '',
-                success: '',
-                warning: ''
+                info: 'yiban',
+                error: 'shibai',
+                success: 'chenggong',
+                warning: 'yichang'
             }
             return img[this.type]
         },
-        bgColor () {
+        fsColor () {
             let colors = {
-                info: '#fff',
+                info: '#0079CC',
                 error: '#f44336',
                 success: '#1fca74',
                 warning: '#ff8f00'
