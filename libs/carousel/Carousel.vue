@@ -255,6 +255,14 @@ export default {
                     this.moveWidth = 0
                     this.speeded = 0
                 }, this.interval / 20)
+            } else if (oldVal === 0 && val === 4) {
+                this.moveWidth = this.conWidth
+                let timer = null
+                clearTimeout(timer)
+                timer = setTimeout(() => {
+                    this.moveWidth = -this.conWidth * (this.pages - 1)
+                    this.speeded = 0
+                }, this.interval / 20)
             } else {
                 this.speeded = this.speed
                 this.moveWidth = -this.conWidth * val
