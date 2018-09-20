@@ -165,12 +165,12 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | page     |  当前页数   | string、number  |  -    |    1   |
-| size     |  每页条数   | string、number    |  -|     1  |
+| size     |  每页条数   | string、number    |  -|     10  |
 | total     | 数据总数	   | string、number    |  -  |     10  |
 | simple     | 是否选用简易版   | boolean    |  -  |     false  |
-| mini     |  是否选用mini 版 | boolean    |    |     false  |
-| show-elevator     |  是否显示电梯功能 | boolean    |    |     false  |
-| show-total     |  是否显示总数 | boolean    |    |     false  |
+| mini     |  是否选用mini 版 | boolean    |  -  |     false  |
+| show-elevator     |  是否显示电梯功能 | boolean    |  -  |     false  |
+| show-total     |  是否显示总数 | boolean    |  -  |     false  |
 | prev-text     |  自定义上一页的文本   | 	string    |   -  |     -  |
 | next-text     | 自定义下一页的文本   | 	string    |  -  |   -    |
 
