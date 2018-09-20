@@ -21,7 +21,7 @@ export default {
                     opacity: 0,
                     width: '100%',
                     height: `${height}px`,
-                    transition: `opacity ${speed / 1000}s`
+                    transition: `opacity ${speed / 500}s `
                 }
             } else if (animation === 'slide') {
                 return {

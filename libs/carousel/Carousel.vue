@@ -1,5 +1,4 @@
 /**
-import func from './vue-temp/vue-editor-bridge';
 * 走马灯组件 b-carousel
 * Created by hanshuai on 2018/9/10.
 */
@@ -54,6 +53,8 @@ import func from './vue-temp/vue-editor-bridge';
     </div>
 </template>
 <script>
+import { oneOf } from '../utils/common.js'
+
 export default {
     name: 'b-carousel',
     data () {
@@ -64,11 +65,11 @@ export default {
             next: false,
             pages: 0, // 共有多少页
             conWidth: '', // 组件宽度
-            moveWidth: '' // 每次移动的宽
+            moveWidth: '', // 每次移动的宽
+            speeded: 0
         }
     },
     props: {
-        className: String,
         height: {
             type: Number,
             default: 360
@@ -76,7 +77,10 @@ export default {
         // 目前支持 fade 和 slide 两种
         animation: {
             type: String,
-            default: 'fade'
+            default: 'fade',
+            validator (value) {
+                return oneOf(value, ['fade', 'slide'])
+            }
         },
         // 停留时间，毫秒
         interval: {
@@ -140,19 +144,31 @@ export default {
         },
         scrollStyle () {
             return {
-                width: this.conWidth * this.pages + 'px',
+                width: this.conWidth * (this.pages + 2) + 'px',
                 overflow: 'hidden',
-                transform: `translate(${this.moveWidth}, 0)`,
-                transition: `transform ${this.speed / 1000}s`
+                transform: `translate(${this.moveWidth - this.conWidth}px, 0)`,
+                transition: `transform ${this.speeded / 1000}s ease`
             }
         }
     },
     mounted () {
-        this.controlClass(this.animation, true, this.active)
+        if (this.animation === 'fade') {
+            this.controlFade(this.animation, true, this.active)
+        } else {
+            this.controlSlide(this.animation, this.active)
+        }
 
         this.$nextTick(() => {
             this.pages = this.$children.length
             this.conWidth = this.$refs.wrapper.offsetWidth
+            if (this.animation === 'slide') {
+                let firstNode = this.$children[0].$el.cloneNode(true)
+                firstNode.style.width = this.conWidth + 'px'
+                let lastNode = this.$children[this.pages - 1].$el.cloneNode(true)
+                lastNode.style.width = this.conWidth + 'px'
+                this.$refs.scroll.appendChild(firstNode)
+                this.$refs.scroll.insertBefore(lastNode, this.$children[0].$el)
+            }
             // 自动轮播
             this.autoPlay()
             // 加载完成
@@ -161,8 +177,12 @@ export default {
     },
     watch: {
         active (val, oldVal) {
-            this.controlClass(this.animation, false, oldVal)
-            this.controlClass(this.animation, true, val)
+            if (this.animation === 'fade') {
+                this.controlFade(this.animation, false, oldVal)
+                this.controlFade(this.animation, true, val)
+            } else if (this.animation === 'slide') {
+                this.controlSlide(this.animation, val, oldVal)
+            }
             this.slideAfter(val)
         }
     },
@@ -188,6 +208,7 @@ export default {
         },
         // 切换当前内容
         slideControl (i) {
+            clearInterval(this.timer)
             if (i > 0) {
                 this.previous = false
                 if (this.active < this.pages - 1) {
@@ -211,25 +232,32 @@ export default {
                     }
                 }
             }
+            this.autoPlay()
         },
-        // 控制样式
-        controlClass (animation, show, index) {
+        // 控制样式 fade
+        controlFade (animation, show, index) {
             let el = this.$children[index].$el
-
-            if (animation === 'fade') {
-                if (show) {
-                    el.style.opacity = 1
-                    el.style.zIndex = 1
-                } else {
-                    el.style.opacity = 0
-                    el.style.zIndex = 0
-                }
-            } else if (animation === 'slide') {
-                if (show) {
-                    this.moveWidth = -this.conWidth * index + 'px'
-                } else {
-                    this.moveWidth = this.conWidth * index + 'px'
-                }
+            if (show) {
+                el.style.opacity = 1
+                el.style.zIndex = 1
+            } else {
+                el.style.opacity = 0
+                el.style.zIndex = 0
+            }
+        },
+        // 控制样式 slide
+        controlSlide (animation, val, oldVal) {
+            if (oldVal === 4 && val === 0) {
+                this.moveWidth = -this.conWidth * this.pages
+                let timer = null
+                clearTimeout(timer)
+                timer = setTimeout(() => {
+                    this.moveWidth = 0
+                    this.speeded = 0
+                }, this.interval / 20)
+            } else {
+                this.speeded = this.speed
+                this.moveWidth = -this.conWidth * val
             }
         },
         // 点击下方导航
