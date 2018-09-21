@@ -1,7 +1,9 @@
 @import "reset";
 @import "doc";
 @import "bwUI";
+@import "message";
 @import "carousel";
+@import "steps";
 
 .clearfix::after {
   content: ".";

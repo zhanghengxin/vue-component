@@ -51,6 +51,16 @@
           "title": "Collapse 折叠面板",
           "path": "/collapse",
           "name": "collapse"
+        },
+        {
+          "title": "Message 消息",
+          "path": "/message",
+          "name": "message"
+        },
+        {
+          "title": "Steps 步骤条",
+          "path": "/steps",
+          "name": "steps"
         }
       ]
     },
