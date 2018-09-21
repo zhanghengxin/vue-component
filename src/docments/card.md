@@ -5,14 +5,42 @@
 <div class='example'>
     <div class='example-box'>
         <b-card title='我是卡片' icon='yonghuzhongxin'>
-            <div>哈哈哈，我是 Title!</div>
+            <div>哈哈哈，我是 Body!</div>
         </b-card>
     </div>
 
 ::: code
 
 ```html
-     <b-card title='我是卡片' icon='yonghuzhongxin'>
+    <b-card title='我是卡片' icon='yonghuzhongxin'>
+        <div>哈哈哈，我是 Body!</div>
+    </b-card>
+```
+
+:::
+</div>
+
+### 自定义 Header
+
+<div class='example'>
+    <div class='example-box'>
+        <b-card>
+            <div slot='title'>
+                <b-icon type='yonghuzhongxin'></b-icon>
+                <span>我是 Title</span>
+            </div>
+            <div>哈哈哈，我是 Body!</div>
+        </b-card>
+    </div>
+
+::: code
+
+```html
+    <b-card title='我是卡片' icon='yonghuzhongxin'>
+        <div slot='title'>
+            <b-icon type='yonghuzhongxin'></b-icon>
+            <span>我是 Title</span>
+        </div>
         <div>哈哈哈，我是 Body!</div>
     </b-card>
 ```
@@ -28,7 +56,7 @@
             <div slot='extra'>
                 <b-icon type='xiayibu'></b-icon>
             </div>
-            <div>哈哈哈，我是 Title!</div>
+            <div>哈哈哈，我是 Body!</div>
         </b-card>
     </div>
 
@@ -39,7 +67,7 @@
         <div slot='extra'>
             <b-icon type='xiayibu'></b-icon>
         </div>
-        <div>哈哈哈，我是 Title!</div>
+        <div>哈哈哈，我是 Body!</div>
     </b-card>
 ```
 
@@ -51,7 +79,7 @@
 <div class='example' style='background: #ccc;'>
     <div class='example-box'>
         <b-card title='我是卡片' icon='yonghuzhongxin' :border='false'>
-            <div>哈哈哈，我是 Title!</div>
+            <div>哈哈哈，我是 Body!</div>
         </b-card>
     </div>
 
@@ -59,7 +87,7 @@
 
 ```html
     <b-card title='我是卡片' icon='yonghuzhongxin' :border='false'>
-        <div>哈哈哈，我是 Title!</div>
+        <div>哈哈哈，我是 Body!</div>
     </b-card>
 ```
 
@@ -71,7 +99,7 @@
 <div class='example'>
     <div class='example-box'>
         <b-card title='我是卡片' icon='yonghuzhongxin' :shadow='true'>
-            <div>哈哈哈，我是 Title!</div>
+            <div>哈哈哈，我是 Body!</div>
         </b-card>
     </div>
 
@@ -79,7 +107,7 @@
 
 ```html
     <b-card title='我是卡片' icon='yonghuzhongxin' :shadow='true'>
-        <div>哈哈哈，我是 Title!</div>
+        <div>哈哈哈，我是 Body!</div>
     </b-card>
 ```
 
@@ -91,7 +119,7 @@
 <div class='example'>
     <div class='example-box'>
         <b-card title='我是卡片' icon='yonghuzhongxin' :disHover='true'>
-            <div>哈哈哈，我是 Title!</div>
+            <div>哈哈哈，我是 Body!</div>
         </b-card>
     </div>
 
@@ -99,7 +127,7 @@
 
 ```html
     <b-card title='我是卡片' icon='yonghuzhongxin' :disHover='true'>
-        <div>哈哈哈，我是 Title!</div>
+        <div>哈哈哈，我是 Body!</div>
     </b-card>
 ```
 
@@ -120,5 +148,5 @@
 
 | 参数 | 说明 |
 | ---- | ---- |
-| title | 自定义卡片标题，需自定义样式 |
+| title | 自定义卡片标题 |
 | extra | 额外显示的内容，于右上角 |
