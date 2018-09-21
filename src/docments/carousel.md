@@ -4,7 +4,7 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-carousel :auto='false'>
+        <b-carousel>
             <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
             <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
             <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>

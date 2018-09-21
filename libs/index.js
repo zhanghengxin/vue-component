@@ -14,9 +14,23 @@ import Message from './message'
 import Breadcrumb from './breadcrumb'
 import BreadcrumbItem from './breadcrumb-item'
 import { Steps, Step } from './steps/index'
+import Card from './card'
 
 const components = [
-    Input, Page, Button, Icon, Message, Collapse, CollapseItem, Breadcrumb, BreadcrumbItem, Carousel, CarouselItem, Steps, Step
+    Input,
+    Page,
+    Button,
+    Icon,
+    Message,
+    Collapse,
+    CollapseItem,
+    Breadcrumb,
+    BreadcrumbItem,
+    Carousel,
+    CarouselItem,
+    Steps,
+    Step,
+    Card
 ]
 
 const install = function (Vue) {
@@ -39,5 +53,6 @@ export default {
     Breadcrumb,
     BreadcrumbItem,
     Steps,
-    Step
+    Step,
+    Card
 }
