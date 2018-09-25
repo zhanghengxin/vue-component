@@ -4,39 +4,39 @@
   </div>
 </template>
 <script>
-  const prefixCls = 'breadcrumb';
-  export default {
+const prefixCls = 'breadcrumb'
+export default {
     name: 'Breadcrumb',
     props: {
-      separator: {
-        type: String,
-        default: '/'
-      }
+        separator: {
+            type: String,
+            default: '/'
+        }
     },
     computed: {
-      classes () {
-        return `${prefixCls}`;
-      }
+        classes () {
+            return `${prefixCls}`
+        }
     },
     mounted () {
-      this.updateChildren();
+        this.updateChildren()
     },
     updated () {
-      this.$nextTick(() => {
-        this.updateChildren();
-      });
+        this.$nextTick(() => {
+            this.updateChildren()
+        })
     },
     methods: {
-      updateChildren () {
-        this.$children.forEach((child) => {
-          child.separator = this.separator;
-        });
-      }
+        updateChildren () {
+            this.$children.forEach((child) => {
+                child.separator = this.separator
+            })
+        }
     },
     watch: {
-      separator () {
-        this.updateChildren();
-      }
+        separator () {
+            this.updateChildren()
+        }
     }
-  };
+}
 </script>
