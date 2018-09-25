@@ -4,14 +4,21 @@
 */
 
 <template>
-    <div class="b-carousel-slide" :style="style">
+    <div :class="[prefixCls + '-slide']" :style="style">
         <slot></slot>
     </div>
 </template>
 
 <script>
+const prefixCls = 'b-carousel'
+
 export default {
     name: 'b-carousel-item',
+    data () {
+        return {
+            prefixCls
+        }
+    },
     computed: {
         style () {
             let { animation, height, speed, conWidth } = this.$parent
