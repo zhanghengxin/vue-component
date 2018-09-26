@@ -81,17 +81,17 @@
         信息
     </bw-button>
     <bw-button
-        type='white'
+        type='tysuccess'
         @on-click="handleClick('success')">
         成功
     </bw-button>
     <bw-button
-        type='white'
+        type='tyerror'
         @on-click="handleClick('error')">
         错误
     </bw-button>
     <bw-button
-        type='white'
+        type='tywarning'
         @on-click="handleClick('warning')">
         警告
     </bw-button>

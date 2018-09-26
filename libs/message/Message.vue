@@ -18,7 +18,7 @@
                     class="b-message-img"
                     :color="fsColor"
                     :type="imgSrc">
-                 </b-icon>
+                </b-icon>
                 {{message}}
                 <button
                     v-if="showClose"
