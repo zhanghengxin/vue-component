@@ -65,6 +65,15 @@
       ]
     },
     {
+      "title": "布局",
+      "path": "/",
+      "items": [{
+        "title": "Card 卡片",
+        "path": "/card",
+        "name": "card"
+      }]
+    },
+    {
       "title": "视图",
       "path": "/",
       "items": [{
