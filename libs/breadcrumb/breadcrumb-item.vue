@@ -21,9 +21,31 @@
 </template>
 <script>
 const prefixCls = 'breadcrumb-item'
+export function oneOf (value, validList) {
+    for (let i = 0; i < validList.length; i++) {
+        if (value === validList[i]) {
+            return true
+        }
+    }
+    return false
+}
 export default {
     name: 'BreadcrumbItem',
     props: {
+        to: {
+            type: [Object, String]
+        },
+        replace: {
+            type: Boolean,
+            default: false
+        },
+        target: {
+            type: String,
+            validator (value) {
+                return oneOf(value, ['_blank', '_self', '_parent', '_top'])
+            },
+            default: '_self'
+        }
     },
     data () {
         return {
@@ -37,14 +59,18 @@ export default {
         },
         separatorClasses () {
             return `${prefixCls}-separator`
+        },
+        linkUrl () {
+            const type = typeof this.to
+            return type === 'string' ? this.to : null
         }
     },
     mounted () {
         this.showSeparator = this.$slots.separator !== undefined
     },
     methods: {
-        handleClick (new_window = false) {
-            if (new_window) {
+        handleClick (newWindow = false) {
+            if (newWindow) {
                 window.open(this.to)
             } else {
                 const isRoute = this.$router
@@ -55,13 +81,13 @@ export default {
                 }
             }
         },
-        handleCheckClick (event, new_window = false) {
+        handleCheckClick (event, newWindow = false) {
             if (this.to) {
                 if (this.target === '_blank') {
                     return false
                 } else {
                     event.preventDefault()
-                    this.handleClick(new_window)
+                    this.handleClick(newWindow)
                 }
             }
         }
