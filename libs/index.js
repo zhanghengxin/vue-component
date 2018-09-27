@@ -3,9 +3,11 @@
  *
  */
 import Button from './button'
+import Progress from './progress'
 
 const components = [
-    Button
+    Button,
+    Progress
 ]
 
 const install = function (Vue) {
@@ -15,5 +17,6 @@ const install = function (Vue) {
 
 export default {
     install,
-    Button
+    Button,
+    Progress
 }

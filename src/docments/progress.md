@@ -1,4 +1,4 @@
-# Button 按钮
+# Progress进度条
 常用的操作按钮。【展示用例（高国庆），具体效果相关负责同学来改（李佳航）】
 -----
 ### 基础用法
@@ -7,6 +7,7 @@
 <div class="example">
     <div class="example-box">
         <div>
+        <Progress :strokeWidth='a' :percentage="b" :status="sta"  :vertical="false" :color="yellow"></Progress>
             <bw-button type="tynormal">默认按钮</bw-button>
             <bw-button type="typrimary">主要按钮</bw-button>
             <bw-button type="tysuccess">成功按钮</bw-button>
