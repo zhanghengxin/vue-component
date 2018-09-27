@@ -45,7 +45,7 @@ cnpm i
 │   │   ├── CodeShow.vue // 文档组件
 │   │   ├── Header.vue // header组件
 │   │   └── Nav.vue // 侧边栏组件
-│   ├── docments // 示例文档
+│   ├── documents // 示例文档
 │   │   ├── page.md // 按钮组件文档【例子】
 │   ├── utils // 项目资源目录
 │   │   ├── menu.json //  组件渲染列表
