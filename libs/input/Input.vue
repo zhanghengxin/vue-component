@@ -1,7 +1,7 @@
 /**
  * input 组件
- * author ganbowen
- * created 2018/09/18 20:05:54
+ * @author ganbowen
+ * @created 2018/09/18 20:05:54
  */
 <template>
     <div class='b-input-box' :class="{'b-input-group':labelText,'b-input-error':error}">
