@@ -5,19 +5,13 @@
 import Input from './input/index'
 import Button from './button'
 import Icon from './icon'
-<<<<<<< HEAD
-import Circle from './circle'
-const components = [
-    Button, Icon, Circle
-=======
 import Collapse from './collapse'
 import CollapseItem from './collapse-item'
 import Breadcrumb from './breadcrumb'
 import BreadcrumbItem from './breadcrumb-item'
-
+import Circle from './circle'
 const components = [
-    Input,Button, Icon, Collapse, CollapseItem, Breadcrumb, BreadcrumbItem
->>>>>>> develop
+    Input, Button, Icon, Collapse, CollapseItem, Breadcrumb, BreadcrumbItem, Circle
 ]
 
 const install = function (Vue) {
@@ -28,15 +22,11 @@ const install = function (Vue) {
 export default {
     install,
     Button,
-<<<<<<< HEAD
-    Icon,
-    Circle
-=======
     Input,
     Icon,
     Collapse,
     CollapseItem,
     Breadcrumb,
-    BreadcrumbItem
->>>>>>> develop
+    BreadcrumbItem,
+    Circle
 }
