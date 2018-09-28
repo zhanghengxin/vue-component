@@ -1,5 +1,6 @@
 {
-  "食用指南": [{
+  "食用指南": [
+    {
       "name": "guide",
       "path": "/guide",
       "title": "介绍"
@@ -23,19 +24,11 @@
       "redirect": "/guide"
     }
   ],
-  "组件": [{
+  "组件": [
+    {
       "title": "基础",
       "path": "/",
-      "items": [{
-          "title": "Button 按钮",
-          "path": "/button",
-          "name": "button"
-        },
-        {
-          "title": "Input 输入框",
-          "path": "/input",
-          "name": "input"
-        },
+      "items": [
         {
           "title": "Color 色彩",
           "path": "/color",
@@ -47,20 +40,58 @@
           "name": "icon"
         },
         {
+          "title": "Input 输入框",
+          "path": "/input",
+          "name": "input"
+        },
+        {
           "title": "Collapse 折叠面板",
           "path": "/collapse",
           "name": "collapse"
+        },
+        {
+          "title": "Button 按钮",
+          "path": "/button",
+          "name": "button"
+        },
+        {
+          "title": "Message 消息",
+          "path": "/message",
+          "name": "message"
+        },
+        {
+          "title": "Steps 步骤条",
+          "path": "/steps",
+          "name": "steps"
+        }
+      ]
+    },
+    {
+      "title": "布局",
+      "path": "/",
+      "items": [
+        {
+          "title": "Card 卡片",
+          "path": "/card",
+          "name": "card"
         }
       ]
     },
     {
       "title": "视图",
       "path": "/",
-      "items": [{
-        "title": "Page 分页",
-        "path": "/page",
-        "name": "page"
-      }]
+      "items": [
+        {
+          "title": "Page 分页",
+          "path": "/page",
+          "name": "page"
+        },
+        {
+          "title": "Notice 通知",
+          "path": "/notice",
+          "name": "notice"
+        }
+      ]
     },
     {
       "title": "导航",
@@ -83,7 +114,12 @@
           "name": "backTop"
         },
         {
-        	  "title": "Circle 进度环",
+          "title": "Carousel 走马灯",
+          "path": "/carousel",
+          "name": "carousel"
+        },
+        {
+          "title": "Circle 进度环",
           "path": "/circle",
           "name": "circle"
         }
