@@ -39,7 +39,7 @@ export default {
                 'Title': '1c2438',
                 'Content': '495060',
                 'SubContent': '9ea7b4',
-                'DisContent': 'cccccc',
+                'DisContent': 'bbbbbb',
                 'LinkContent': '0079cc'
             }
         }
@@ -51,7 +51,6 @@ export default {
             }
         },
         colorName () {
-            let obj = this.colorObj
             return '#' + this.colorObj[this.type]
         },
         fontColor () {

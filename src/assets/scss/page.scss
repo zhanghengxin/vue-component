@@ -1,0 +1,153 @@
+@import "color";
+.b-page {
+  font-size: 0;
+  .b-page-item-content {
+    color: $Content;
+  }
+  .b-page-arrow {
+    color: $Content;
+    &:hover {
+      color: $LightPrimary;
+    }
+  }
+}
+
+// normal
+.b-page-normal {
+  .b-page-item, .b-page-prev, .b-page-next, .b-page-item-jump-next, .b-page-item-jump-prev {
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 32px;
+    height: 32px;
+    line-height: 30px;
+    margin-right: 10px;
+    text-align: center;
+    list-style: none;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid $Border;
+    transition: border .2s ease-in-out, color .2s ease-in-out;
+    &:hover {
+      border-color: $Primary;
+    }
+  }
+  .b-page-prev, .b-page-next {
+    min-width: 5px;
+    padding: 0 10px;
+  }
+  .b-page-item {
+    &:hover {
+      background: $Primary;
+      .b-page-item-content {
+        color: white;
+      }
+    }
+  }
+  .b-page-item-active {
+    background: $Primary;
+    .b-page-item-content {
+      color: white;
+    }
+  }
+  .b-page-disabled {
+    cursor: not-allowed;
+    background: $Disabled;
+    &:hover {
+      border-color: $Disabled;
+    }
+  }
+}
+
+// elevator
+.b-page-elevator {
+  font-size: 12px;
+  display: inline-block;
+  vertical-align: middle;
+  height: 32px;
+  line-height: 32px;
+  input {
+    padding: 1px 7px;
+    height: 32px;
+    border-radius: 3px;
+    width: 44px;
+  }
+}
+
+.b-page-total {
+  font-size: 12px;
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+// mini
+.b-page-mini {
+  .b-page-item, .b-page-prev, .b-page-next, .b-page-item-jump-next, .b-page-item-jump-prev {
+    min-width: 22px;
+    height: 22px;
+    line-height: 20px;
+    border: none;
+    margin-right: 5px;
+  }
+  .b-page-disabled {
+    background: white;
+  }
+  .b-page-elevator {
+    height: 22px;
+    line-height: 22px;
+    input {
+      height: 22px;
+      width: 32px;
+    }
+  }
+}
+
+// simple
+.b-page-simple {
+  .b-page-prev, .b-page-next {
+    display: inline-block;
+    border: 0;
+    height: 24px;
+    line-height: normal;
+  }
+}
+
+.b-page-simple-pager {
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+  font-size: 12px;
+  input {
+    width: 48px;
+    height: 22px;
+    margin: 0 8px;
+    padding: 5px 8px;
+    text-align: center;
+    box-sizing: border-box;
+    outline: 0;
+    border: 1px solid $Border;
+    border-radius: 4px;
+    transition: border-color .2s ease-in-out;
+    &:hover {
+      border-color: $Primary;
+    }
+  }
+  span {
+    padding: 0 8px 0 2px;
+  }
+
+}
+
+.b-page-disabled {
+  cursor: not-allowed;
+  .b-page-arrow {
+    color: $DisContent;
+    &:hover {
+      color: $DisContent;
+    }
+  }
+}

@@ -9,10 +9,7 @@
 cnpm i
 ```
 
-### 建议
 
-在开始组件库开发之前，至少要先阅读并且练习一遍 vue的一些[基础知识](https://cn.vuejs.org/v2/guide/),以及遵守 vue 的开发
-[风格指南](https://cn.vuejs.org/v2/style-guide/)
 
 
 ### 项目目录
@@ -31,7 +28,7 @@ cnpm i
 │   ├── index.js
 │   └── prod.env.js
 ├── libs // 组件库
-│   ├── button // button 源码 【例子】
+│   ├── page // page 源码 【例子】
 │   ├── utils  // 组件公用 API
 │   ├── common.js  //组件库公共资源
 │   └── index.js // 入口文件
@@ -48,8 +45,8 @@ cnpm i
 │   │   ├── CodeShow.vue // 文档组件
 │   │   ├── Header.vue // header组件
 │   │   └── Nav.vue // 侧边栏组件
-│   ├── docments // 示例文档
-│   │   ├── button.md // 按钮组件文档【例子】
+│   ├── documents // 示例文档
+│   │   ├── page.md // 按钮组件文档【例子】
 │   ├── utils // 项目资源目录
 │   │   ├── menu.json //  组件渲染列表
 │   └── router // 路由文件
@@ -59,11 +56,11 @@ cnpm i
 ├── test //  测试资源
 │   ├── unit // karma + moche
 │   │   ├── specs // 测试用例库
-│   │   │   ├── Button.spec.js  // Button 组件测试用例【例子】
+│   │   │   ├── icon.spec.js  // icon 组件测试用例【例子】
 │   │   └──  index.js // 入口
 │   │   │──  karma.conf.js // 配置文件
 │   │   │──  utils // API
 ........略
 ```
-写了一个示例的 button 组件包括:注册流程、文档展示、样式归纳、测试用例模板等等，集成了 [ESlint](https://standardjs.com/)、
+一个完整的组件开发应该包括:组件代码、文档展示、样式归纳、测试用例模板等等，项目中集成了 [ESlint](https://standardjs.com/)、
 SCSS，同学们有好的建议欢迎提出0.0

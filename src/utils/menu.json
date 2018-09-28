@@ -11,6 +11,11 @@
       "title": "快速上手"
     },
     {
+      "name": "standard",
+      "path": "/standard",
+      "title": "组件开发规范"
+    },
+    {
       "path": "/",
       "redirect": "/guide"
     },
@@ -21,7 +26,7 @@
   ],
   "组件": [
     {
-        "title": "基础",
+      "title": "基础",
       "path": "/",
       "items": [
         {
@@ -30,9 +35,45 @@
           "name": "color"
         },
         {
+          "title": "Icon 图标",
+          "path": "/icon",
+          "name": "icon"
+        },
+        {
+          "title": "Input 输入框",
+          "path": "/input",
+          "name": "input"
+        },
+        {
+          "title": "Collapse 折叠面板",
+          "path": "/collapse",
+          "name": "collapse"
+        },
+        {
           "title": "Button 按钮",
           "path": "/button",
           "name": "button"
+        },
+        {
+          "title": "Message 消息",
+          "path": "/message",
+          "name": "message"
+        },
+        {
+          "title": "Steps 步骤条",
+          "path": "/steps",
+          "name": "steps"
+        }
+      ]
+    },
+    {
+      "title": "布局",
+      "path": "/",
+      "items": [
+        {
+          "title": "Card 卡片",
+          "path": "/card",
+          "name": "card"
         }
       ]
     },
@@ -46,9 +87,41 @@
           "name": "page"
         },
         {
+          "title": "Notice 通知",
+          "path": "/notice",
+          "name": "notice"
+        },
+        {
           "title": "Modal 对话框",
           "path": "/modal",
           "name": "modal"
+        }
+      ]
+    },
+    {
+      "title": "导航",
+      "path": "/",
+      "items": [
+        {
+          "title": "Breadcrumb 面包屑",
+          "path": "/breadcrumb",
+          "name": "breadcrumb"
+        }
+      ]
+    },
+    {
+      "title": "其他",
+      "path": "/",
+      "items": [
+        {
+          "title": "BackTop 返回顶部",
+          "path": "/backTop",
+          "name": "backTop"
+        },
+        {
+          "title": "Carousel 走马灯",
+          "path": "/carousel",
+          "name": "carousel"
         }
       ]
     }
