@@ -11,7 +11,7 @@
         <i class="b-icon" :class="['']" v-else-if="false" @click="handleSearch"></i>
         <input
                 class="b-input"
-                :class="['b-input-'+size]"
+                :class="[`b-input-${size}`]"
                 :value="currentValue"
                 :placeholder="placeholder"
                 :disabled="disabled"
