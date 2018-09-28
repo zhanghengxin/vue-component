@@ -1,4 +1,4 @@
-# Page 按钮
+# Page 分页
 当数据过多时，配合 table 组件批量显示数据。
 - 简单和复合模式切换。
 - 页数过多时会自动折叠。
@@ -7,7 +7,6 @@
 - 显示总共多少条数据，接受 slot 来自定义内容。
 - 可以自定义上一页和下一页的文字
 - 支持键盘前进后退以及跳转确认
------
 
 ### 基础用法
 基本的分页，页数过多时会自动折叠。
@@ -88,7 +87,7 @@
 </div>
 
 ### mini 模式
-使用```mini``` 属性来定义Page是否采用mini方式， 当 ```mini``` 为 ```false``` 时，page 采用mini方式
+使用```mini``` 属性来定义Page是否采用mini方式， 当 ```mini``` 为 ```true``` 时，page 采用mini方式
 <div class="example">
     <div class="example-box">
         <div>
@@ -106,7 +105,7 @@
 </div>
 
 ### 简易版
-使用```simple``` 属性来定义Page是否采用简易方式， 当 simple 为 true 时，page 采用简易方式
+使用```simple``` 属性来定义Page是否采用简易方式， 当 ```simple``` 为 ```true``` 时，page 采用简易方式
 
 <div class="example">
     <div class="example-box">
@@ -164,9 +163,9 @@
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| page     |  当前页数   | string、number  |  -    |    1   |
-| size     |  每页条数   | string、number    |  -|     10  |
-| total     | 数据总数	   | string、number    |  -  |     10  |
+| page     |  当前页数   | string / number  |  -    |    1   |
+| size     |  每页条数   | string / number    |  -|     10  |
+| total     | 数据总数	   | string / number    |  -  |     10  |
 | simple     | 是否选用简易版   | boolean    |  -  |     false  |
 | mini     |  是否选用mini 版 | boolean    |  -  |     false  |
 | show-elevator     |  是否显示电梯功能 | boolean    |  -  |     false  |

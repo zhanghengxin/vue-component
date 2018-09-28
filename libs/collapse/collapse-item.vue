@@ -53,9 +53,9 @@ export default {
         }
     },
     mounted () {
-    // this.$parent.$children.forEach((item, index) => {
-    //   item.showname = item.name || index.toString()
-    // })
+        // this.$parent.$children.forEach((item, index) => {
+        //   item.showname = item.name || index.toString()
+        // })
         var index = [].indexOf.call(this.$el.parentNode.children, this.$el)
         this.showname = this.name || index.toString()
         this.isShow(this.showname)

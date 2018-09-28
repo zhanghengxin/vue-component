@@ -4,10 +4,10 @@
 */
 
 <template>
-    <div class="b-carousel" :style="animationStyle">
+    <div :class="[prefixCls]" :style="animationStyle">
         <div
             v-if="animation=='fade'"
-            class="b-carousel-wrapper"
+            :class="[prefixCls + '-wrapper']"
             :style="animationStyle"
             @mouseover="mouseOver"
             @mouseleave="mouseLeave"
@@ -16,18 +16,18 @@
         </div>
         <div
             v-if="animation=='slide'"
-            class="b-carousel-wrapper"
+            :class="[prefixCls + '-wrapper']"
             :style="[animationStyle, slideStyle]"
             ref="wrapper">
                 <div
-                    class="b-carousel-scroll"
+                    :class="[prefixCls + '-scroll']"
                     :style="scrollStyle"
                     ref="scroll">
                     <slot/>
                 </div>
         </div>
         <ul
-          class="b-carousel-control"
+          :class="[prefixCls + '-control']"
           v-if="pointer">
             <li
               :class="{'active':index===active}"
@@ -37,17 +37,15 @@
             </li>
         </ul>
         <ul
-          class="b-carousel-direction"
+          :class="[prefixCls + '-direction']"
           v-if="arrow">
             <li
-              class="b-carousel-prev"
-              @click="slideControl(-1)"
-              :class="{'disable':previous}">
+              :class="[prefixCls + '-prev', { disable: previous }]"
+              @click="slideControl(-1)">
             </li>
             <li
-              class="b-carousel-next"
-              @click="slideControl(1)"
-              :class="{'disable':next}">
+              :class="[prefixCls + '-next', { disable: next }]"
+              @click="slideControl(1)">
             </li>
         </ul>
     </div>
@@ -55,10 +53,13 @@
 <script>
 import { oneOf } from '../utils/common.js'
 
+const prefixCls = 'b-carousel'
+
 export default {
     name: 'b-carousel',
     data () {
         return {
+            prefixCls,
             timer: null, // 定时器
             active: this.current,
             previous: !this.loop, // 上下可点击，循环时就一直是false
