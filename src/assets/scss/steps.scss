@@ -1,0 +1,204 @@
+/**
+ * @author 靳宏灿
+ * @date 2018/9/10
+ * @Description: steps组件的样式
+*/
+@import "color";
+
+/*********正常情况下的数据**************/
+$normal : 24px;//圆形的高宽
+$normalFontSize : 18px;//字体大小
+$normalContentPaddingLeft:30px;//contend距离左侧向内缩进距离
+
+/********small类型下的数据**************/
+$small : 18px;//圆形的高宽
+$smallFontSize : 12px;//字体大小
+$smallContentPaddingLeft:24px;//contend距离左侧向内缩进距离
+
+/*******其他********/
+$marginLength: 5px;//无content距离下测距离
+$marginLengthHaveContent:30px;//有content距离下测距离
+
+/********正常的size下steps组件区域的css开始*********/
+.b-steps-area{
+  height:$normal;
+  margin-top:$marginLength;
+  margin-bottom:$marginLength;
+  display: block;
+  /************单个step节点的区域的css开始*******************/
+  .b-step-item {
+    display:inline-block;
+    height:$normal;
+    line-height: $normal;
+    vertical-align: top;
+
+    //步骤条的节点
+    .b-step-point {
+      width:$normal;
+      height:$normal;
+      line-height:$normal;
+      font-size:$normalFontSize;
+      display: inline-block;
+      border:1px $LightPrimary solid;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      text-align:center;
+      vertical-align: middle;
+    }
+    // step组件的展示区域（线，title，content）
+    .b-step-main {
+      display: inline;
+      //步骤条的线
+      .b-step-tail {
+        width: 100px;
+        display: inline-block;
+        height: 1px;
+        margin: 0px auto;
+        padding: 0px;
+        overflow: hidden;
+        border-top: 1px $LightPrimary solid;
+      }
+      // step的title部分
+      .b-step-title {
+        display: inline-block;
+        color:$SubContent;
+        text-align:center;
+        vertical-align: sub;
+      }
+      // step的content部分
+      .b-step-content{
+        padding-left: $normalContentPaddingLeft;
+        font-size: $smallFontSize;
+      }
+    }
+  }
+  /************单个step节点的区域的css结束*******************/
+
+
+  /************step不同status的css微调开始*******************/
+  // 当前节点的css
+  .b-step-status-process {
+    .b-step-point{
+      color:$white;
+      background-color:$LightPrimary;
+      border-color:$LightPrimary;
+    }
+    .b-step-main {
+      .b-step-tail{
+        border-top-color: $SubContent;
+      }
+      .b-step-title {
+        color:$Title;
+      }
+      .b-step-content{
+        color:$Title;
+      }
+    }
+  }
+  // 已结束节点的css
+  .b-step-status-finish{
+    .b-step-point{
+      color:$white;
+      //background: url("../image/check.png") transparent no-repeat scroll ;
+      background: $LightPrimary;
+      border-color:$LightPrimary;
+    }
+    .b-step-main {
+      .b-step-tail{
+        border-top-color: $LightPrimary;
+      }
+      .b-step-content{
+        color:$SubContent;
+      }
+    }
+  }
+  // 出现错误的css
+  .b-step-status-error{
+    .b-step-point{
+      color:$white;
+      background: $Error;
+      border-color: $Error;
+    }
+    .b-step-main {
+      .b-step-tail{
+        border-top-color: $SubContent;
+      }
+      .b-step-title {
+        color:$Error;
+      }
+      .b-step-content{
+        color:$Error;
+      }
+    }
+  }
+  // 单（抛弃点）点的css
+  .b-step-status-single{
+    .b-step-point{
+      color:$white;
+      background: $DarkPrimary;
+      border-color:$DarkPrimary;
+    }
+    .b-step-main {
+      .b-step-tail{
+        border-top-color: $DarkPrimary;
+      }
+      .b-step-content{
+        color:$DarkPrimary;
+      }
+    }
+  }
+  // 处于等待状态的节点
+  .b-step-status-wait{
+    .b-step-point{
+      color: $SubContent;
+      border-color: $SubContent;
+      border-color:$SubContent;
+    }
+    .b-step-main {
+      .b-step-tail{
+        border-top-color: $SubContent;
+      }
+      .b-step-content{
+        color:$SubContent;
+      }
+    }
+  }
+  /************step不同status的css微调结束*******************/
+}
+/********正常的size下steps组件区域的css结束*********/
+
+
+/**********steps组件的size为small时的css设置开始*************/
+.b-steps-area.b-steps-area-small {
+  height:$small;
+  .b-step-item {
+    height:$normal;
+    line-height: $normal;
+    //步骤条的节点
+    .b-step-point {
+      width:$small;
+      height:$small;
+      font-size: $smallFontSize;
+      line-height: $small;
+    }
+    // step组件的展示区域（线，title，content）
+    .b-step-main {
+      // step的title部分
+      .b-step-title {
+        font-size: $smallFontSize;
+      }
+      // step的content部分
+      .b-step-content{
+        padding-left: $smallContentPaddingLeft;
+        font-size: $smallFontSize;
+      }
+    }
+  }
+}
+/**********steps组件的size为small时的css设置结束*************/
+
+/**************steps组件包含content时的样式**************/
+.b-steps-area.b-steps-area-haveContent{
+    margin-bottom: $marginLengthHaveContent;
+}

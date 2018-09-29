@@ -1,19 +1,18 @@
 <template>
-<div style='width:500px;height:500px'>
+<div style="width:100%;height:100%">
   <div class='box'>
     <div class='left' :style='left'>
         <div class='progress' :style='progress'>
-
         </div>
     </div>
     <div class='right' v-if='showText'>
       <slot>
         <div v-if="status!='Success'&&status!='Exception'">{{value}}%</div>
         <div v-if="status=='Success'">
-          <!-- <img class='statusPic' src='../assets/gouM.png'> -->
+          <img class='statusPic' src='@/assets/image/gouM.png'>
         </div>
         <div v-if="status=='Exception'">
-          <!-- <img class='statusPic' src='../assets/cuoM.png'> -->
+          <img class='statusPic' src='@/assets/image/cuoM.png'>
         </div>
       </slot>
 
@@ -24,13 +23,9 @@
 
 <script>
 export default {
-    name: 'progress',
+    name: 'bwProgress',
     data () {
         return {
-            progress: {width: this.percentage + '%', height: this.strokeWidth + 'px', borderRadius: this.strokeWidth / 2 + 'px'},
-            left: {width: '100%', height: this.strokeWidth + 'px', borderRadius: this.strokeWidth / 2 + 'px'},
-            bClass: {},
-            value: this.percentage
         }
     },
     props: {
@@ -46,10 +41,6 @@ export default {
             type: String,
             default: ''
         },
-        textInside: {
-            type: Boolean,
-            default: true
-        },
         showText: {
             type: Boolean,
             default: true
@@ -64,82 +55,30 @@ export default {
             default: 'blue'
         }
     },
-    created () {
-        if (this.value < 0 || this.value > 100) {
-            this.value = 0
-            return false
-        }
-        if (this.status === 'Success') {
-            // this.value=100
-            this.$set(this.progress, 'width', '100%')
-            this.$set(this.progress, 'backgroundColor', '#3CB371')
-        } else if (this.status === 'Exception') {
-            this.$set(this.progress, 'backgroundColor', 'red')
-        } else {
-            this.$set(this.progress, 'backgroundColor', this.color)
-        }
-        if (this.vertical) {
-            this.$set(this.progress, 'height', this.value + '%')
-            this.$set(this.progress, 'width', this.strokeWidth + 'px')
-            this.$set(this.left, 'height', '100%')
-            this.$set(this.left, 'width', this.strokeWidth + 'px')
-        }
-        if (this.value === 100) {
-            this.$set(this.progress, 'backgroundColor', '#3CB371')
-            this.status = 'Success'
-        }
-    },
-    watch: {
-        color () {
-            this.$set(this.progress, 'backgroundColor', this.color)
-        },
-        percentage () {
-            if (this.percentage < 0 || this.percentage > 100) {
-                return false
-            }
-            this.value = this.percentage
-            if (this.vertical) {
-                this.$set(this.progress, 'height', this.value + '%')
-            } else {
-                this.$set(this.progress, 'width', this.value + '%')
-            }
-            this.$set(this.progress, 'backgroundColor', this.color)
-            if (this.value === 100) {
-                this.$set(this.progress, 'backgroundColor', '#3CB371')
-                this.status = 'Success'
-            } else {
-                this.status = ''
+    computed: {
+        progress () {
+            return {
+                'width': this.vertical ? this.strokeWidth + 'px' : (this.value === 100 || this.status === 'Success' ? '100%' : this.percentage + '%'),
+                'height': this.vertical ? (this.value === 100 || this.status === 'Success' ? '100%' : this.percentage + '%') : this.strokeWidth + 'px',
+                'borderRadius': this.strokeWidth / 2 + 'px',
+                'backgroundColor': this.status === 'Success' || this.value === 100 ? '#3CB371' : (this.status === 'Exception' ? 'red' : this.color)
             }
         },
-        status () {
-            if (this.status === 'Success') {
-                if (this.vertical) {
-                    this.$set(this.progress, 'height', '100%')
-                } else {
-                    this.$set(this.progress, 'width', '100%')
-                }
-                this.$set(this.progress, 'backgroundColor', '#3CB371')
-            } else if (this.status === 'Exception') {
-                this.$set(this.progress, 'backgroundColor', 'red')
-                if (this.vertical) {
-                    this.$set(this.progress, 'height', this.value + '%')
-                } else {
-                    this.$set(this.progress, 'width', this.value + '%')
-                }
-            } else {
-                if (this.vertical) {
-                    this.$set(this.progress, 'height', this.value + '%')
-                } else {
-                    this.$set(this.progress, 'width', this.value + '%')
-                }
-                this.$set(this.progress, 'backgroundColor', this.color)
+        left () {
+            return {
+                'width': this.vertical ? this.strokeWidth + 'px' : '100%',
+                'height': this.vertical ? '100%' : this.strokeWidth + 'px',
+                'borderRadius': this.strokeWidth / 2 + 'px'
             }
+        },
+        value () {
+            return this.percentage
         }
     }
 }
 </script>
 
-<style lang="" scoped>
+<style scoped>
   .box{
     width:100%;
     height:100%;
@@ -156,7 +95,7 @@ export default {
     width: 40px;
     height: 40px;
     line-height: 40px;
-    padding-top:6px
+    padding-left:6px
   }
   .statusPic{
     width: 15px;

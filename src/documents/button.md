@@ -1,5 +1,5 @@
 # Button 按钮
-常用的操作按钮。【展示用例（高国庆），具体效果相关负责同学来改（李佳航）】
+常用的操作按钮。【李佳航】
 -----
 ### 基础用法
 使用```type``` 属性来定义Button 的样式
@@ -36,9 +36,9 @@ Button 组件可以在不同场景下选择合适的按钮尺寸。
 <div class="example">
     <div class="example-box">
         <div>
-         <bw-button size="small">危险按钮</bw-button>
-         <bw-button size="normal">危险按钮</bw-button>
-         <bw-button size="big">危险按钮</bw-button>
+         <bw-button size="small">主要按钮</bw-button>
+         <bw-button size="normal">主要按钮</bw-button>
+         <bw-button size="big">主要按钮</bw-button>
         </div>
     </div>
 
@@ -130,8 +130,8 @@ Button 组件可以在不同场景下选择是否可以点击。
 ```html
     <div>
         <bw-button type="tynormal"  disabled="disabled">默认按钮</bw-button>
-        <bw-button type="typrimary" disabled="disabled">主要按钮</bw-button>
-        <bw-button type="tysuccess" disabled="disabled">成功按钮</bw-button>
+        <bw-button type="typrimary"  disabled="disabled">主要按钮</bw-button>
+        <bw-button type="tysuccess"  disabled="disabled">成功按钮</bw-button>
         <bw-button type="tywarning" disabled="disabled">警告按钮</bw-button>
         <bw-button type="tyerror"   disabled="disabled">危险按钮</bw-button>
     </div>
@@ -139,50 +139,71 @@ Button 组件可以在不同场景下选择是否可以点击。
 :::
 </div>
 
-### 图标按钮
+### 圆形按钮
 Button 组件可以在不同场景下选择是否可以点击。
-使用```icon``` 属性来定义Button图标样式
+使用```circle``` 属性来定义圆形Button
 
 
 <div class="example">
     <div class="example-box">
         <div>
-            <bw-button type="tynormal"  icon="icon-jianshao"></bw-button>
-            <bw-button type="typrimary" icon="icon-QQ2"></bw-button>
-            <bw-button type="tysuccess" icon="icon-weixin"></bw-button>
-            <bw-button type="tywarning" icon="icon-weibo"></bw-button>
-            <bw-button type="tyerror"   icon="icon-lajitong"></bw-button>
-            <bw-button type="tyerror"   icon="icon-pan_icon"></bw-button>
-            <bw-button type="tyerror"   icon="icon-share"></bw-button>
-        </div>
-         <div style="margin-top:10px">
-            <bw-button type="tynormal"  icon="icon-fapiao"></bw-button>
-            <bw-button type="typrimary" icon="icon-xiayiye"></bw-button>
-            <bw-button type="tysuccess" icon="icon-shangyiye"></bw-button>
-            <bw-button type="tywarning" icon="icon-tianjia"></bw-button>
-            <bw-button type="tyerror"   icon="icon-youxiang"></bw-button>
-            <bw-button type="tyerror"   icon="icon-shanchu"></bw-button>
-            <bw-button type="tyerror"   icon="icon-soushuo"></bw-button>
+            <bw-button type="tynormal"  :circle="true"></bw-button>
+            <bw-button type="typrimary" :circle="true"></bw-button>
+            <bw-button type="tysuccess" :circle="true"></bw-button>
+            <bw-button type="tywarning" :circle="true"></bw-button>
+            <bw-button type="tyerror"   :circle="true"></bw-button>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <bw-button type="tynormal"  icon="icon-jianshao"></bw-button>
-        <bw-button type="typrimary" icon="icon-QQ2"></bw-button>
-        <bw-button type="tysuccess" icon="icon-weixin"></bw-button>
-        <bw-button type="tywarning" icon="icon-weibo"></bw-button>
-        <bw-button type="tyerror"   icon="icon-lajitong"></bw-button>
-        <bw-button type="tysuccess" icon="icon-pan_icon"></bw-button>
-        <bw-button type="typrimary" icon="icon-share"></bw-button>
-        <bw-button type="tynormal"  icon="icon-fapiao"></bw-button>
-        <bw-button type="typrimary" icon="icon-xiayiye"></bw-button>
-        <bw-button type="tysuccess" icon="icon-shangyiye"></bw-button>
-        <bw-button type="tywarning" icon="icon-tianjia"></bw-button>
-        <bw-button type="tyerror"   icon="icon-youxiang"></bw-button>
-        <bw-button type="tysuccess" icon="icon-shanchu"></bw-button>
-        <bw-button type="tywarning" icon="icon-soushuo"></bw-button>
+        <bw-button type="tynormal"  :circle="true"></bw-button>
+        <bw-button type="typrimary" :circle="true"></bw-button>
+        <bw-button type="tysuccess" :circle="true"></bw-button>
+        <bw-button type="tywarning" :circle="true"></bw-button>
+        <bw-button type="tyerror"   :circle="true"></bw-button>
+    </div>
+```
+:::
+</div>
+
+### 图标按钮
+Button 组件可以在不同场景下选择是否可以点击。
+使用```icon``` 属性来定义Button图标样式。
+更多图标参考百望[Icon组件](http://localhost:8080/#/icon)
+
+
+
+<div class="example">
+    <div class="example-box">
+        <div>
+            <bw-button type="tynormal"  icon="daochukehuxinxi"></bw-button>
+            <bw-button type="typrimary" icon="fapiaoshengcheng"></bw-button>
+            <bw-button type="tysuccess" icon="pipeixinxi"></bw-button>
+            <bw-button type="tywarning" icon="qianshouxinxi"></bw-button>
+            <bw-button type="tyerror"   icon="chuangjianyonghu"></bw-button>
+            <bw-button type="tyerror"   icon="shengchengdaikai"></bw-button>
+            <bw-button type="tywarning" icon="daochuduanxinjilu"></bw-button>
+            <bw-button type="tysuccess" icon="dayin"></bw-button>
+            <bw-button type="typrimary" icon="daochuwordwendang"></bw-button>
+            <bw-button type="tynormal"  icon="wangshangbaoshui"></bw-button> 
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+        <bw-button type="tynormal"  icon="daochukehuxinxi"></bw-button>
+        <bw-button type="typrimary" icon="fapiaoshengcheng"></bw-button>
+        <bw-button type="tysuccess" icon="pipeixinxi"></bw-button>
+        <bw-button type="tywarning" icon="qianshouxinxi"></bw-button>
+        <bw-button type="tyerror"   icon="chuangjianyonghu"></bw-button>
+        <bw-button type="tyerror"   icon="shengchengdaikai"></bw-button>
+        <bw-button type="tywarning" icon="daochuduanxinjilu"></bw-button>
+        <bw-button type="tysuccess" icon="dayin"></bw-button>
+        <bw-button type="typrimary" icon="daochuwordwendang"></bw-button>
+        <bw-button type="tynormal"  icon="wangshangbaoshui"></bw-button> 
     </div>
 ```
 :::

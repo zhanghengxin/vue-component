@@ -1,18 +1,11 @@
 # Progress进度条
-常用的操作按钮。【展示用例（高国庆），具体效果相关负责同学来改（李佳航）】
------
 ### 基础用法
 使用```type``` 属性来定义Button 的样式
 
 <div class="example">
     <div class="example-box">
-        <div>
-        <Progress :strokeWidth='a' :percentage="b" :status="sta"  :vertical="false" :color="yellow"></Progress>
-            <bw-button type="tynormal">默认按钮</bw-button>
-            <bw-button type="typrimary">主要按钮</bw-button>
-            <bw-button type="tysuccess">成功按钮</bw-button>
-            <bw-button type="tywarning">警告按钮</bw-button>
-            <bw-button type="tyerror">危险按钮</bw-button>
+        <div style="width:500px;height:100px">
+            <bw-progress :strokeWidth='10' :percentage=50 :vertical='false'></bw-progress>
         </div>
     </div>
 
