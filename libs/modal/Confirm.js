@@ -5,9 +5,8 @@
  */
 
 import Vue from 'vue'
-import BModal from 'Modal'
+import BModal from './Modal'
 import BButton from '../button'
-// import BIcon from '../icon'
 
 const prefixCls = 'ivu-modal-confirm'
 

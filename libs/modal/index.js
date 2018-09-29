@@ -1,7 +1,8 @@
 /**
  * modal
  */
-import Modal from 'Confirm'
+import Modal from './Confirm'
+import './style/modal.scss'
 
 // modal 实例 单一
 let modalInstance
@@ -59,6 +60,10 @@ Modal.error = options => {
 Modal.confirm = options => {
     options.icon = 'confirm'
     confirmModal(options)
+}
+
+Modal.install = function (Vue) {
+    Vue.component(Modal.name, Modal)
 }
 
 export default Modal

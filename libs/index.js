@@ -15,6 +15,7 @@ import Breadcrumb from './breadcrumb'
 import BreadcrumbItem from './breadcrumb-item'
 import { Steps, Step } from './steps/index'
 import Card from './card'
+import Modal from './modal'
 
 const components = [
     Input,
@@ -30,7 +31,8 @@ const components = [
     CarouselItem,
     Steps,
     Step,
-    Card
+    Card,
+    Modal
 ]
 
 const install = function (Vue) {
@@ -54,5 +56,6 @@ export default {
     BreadcrumbItem,
     Steps,
     Step,
-    Card
+    Card,
+    Modal
 }

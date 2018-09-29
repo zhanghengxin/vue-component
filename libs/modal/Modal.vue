@@ -20,8 +20,8 @@
                         <div :class="[prefixCls + '-body']"><slot></slot></div>
                         <div :class="[prefixCls + '-footer']" v-if="!footerHide">
                             <slot name="footer">
-                                <b-button type="text" @click.native="cancel">{{ localeCancelText }}</b-button>
-                                <b-button type="primary" :loading="okLoading" @click.native="ok">{{ localeOkText }}</b-button>
+                                <b-button @click.native="cancel">{{ localeCancelText }}</b-button>
+                                <b-button :loading="okLoading" @click.native="ok">{{ localeOkText }}</b-button>
                             </slot>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
 <script>
 
 import BButton from '../button'
-// import BIcon from '../icon'
+import BIcon from '../icon'
 import { ModalDefaultProps } from './util'
 import Scrollbar from './mixins/scrollbar'
 
@@ -46,7 +46,7 @@ export default {
         ...ModalDefaultProps()
     },
     components: {
-        // BIcon,
+        BIcon,
         BButton
     },
     mixins: [ Scrollbar ],
@@ -79,7 +79,7 @@ export default {
             return [
                 `${prefixCls}-content`,
                 {
-                    [`${prefixCls}-content-no-mask`]: !this.showMask,
+                    [`${prefixCls}-content-no-mask`]: !this.showMask
                     // [`${prefixCls}-content-drag`]: this.draggable,
                     // [`${prefixCls}-content-dragging`]: this.draggable && this.dragData.dragging
                 }
@@ -89,7 +89,7 @@ export default {
         mainStyles () {
             let style = {}
 
-            const width = parseInt(this.width)
+            // const width = parseInt(this.width)
             // const styleWidth = this.dragData.x !== null ? {
             //     top: 0
             // } : {
@@ -136,17 +136,17 @@ export default {
         }
     },
     mounted () {
-        if (visible) {
+        if (this.visible) {
             this.wrapShow = true
         }
 
         if (this.$slots.header === undefined && !this.title) {
-            this.showHead = false;
+            this.showHead = false
         }
 
         // 挂载到 body 下
         if (this.appendToBody) {
-            document.body.appendChild(this.$el);
+            document.body.appendChild(this.$el)
         }
 
         // esc close
@@ -211,7 +211,7 @@ export default {
             } else {
                 // 挂载到 body 下
                 if (this.appendToBody) {
-                    document.body.appendChild(this.$el);
+                    document.body.appendChild(this.$el)
                 }
             }
 
@@ -235,7 +235,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

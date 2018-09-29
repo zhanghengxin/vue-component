@@ -17,8 +17,8 @@ $zindex-modal-mask      : 1000;
 
 // Border
 $border-radius-base     : 4px;
-$border-color-base      : hsv(0, 0, 85%);  // base border outline a component
-$border-color-split     : hsv(0, 0, 91%);  // split border inside a component
+// $border-color-base      : hsv(0, 0, 85%);
+$border-color-split     : #e8eaec;
 
 // Animation
 $animation-time         : .3s;
@@ -29,7 +29,7 @@ $ease-in-out            : ease-in-out;
 $legend-color           : #999;
 
 // Color
-$primary                : #1890ff;
-$success                : #52c41a;
+$primary-color          : #1890ff;
+$success-color          : #52c41a;
 $error-color            : #f5222d;
 $warning-color          : #faad14;
