@@ -13,6 +13,7 @@ import CollapseItem from './collapse-item'
 import Message from './message'
 import Breadcrumb from './breadcrumb'
 import BreadcrumbItem from './breadcrumb-item'
+import Circle from './circle'
 import { Steps, Step } from './steps/index'
 import Card from './card'
 
@@ -30,7 +31,8 @@ const components = [
     CarouselItem,
     Steps,
     Step,
-    Card
+    Card,
+    Circle
 ]
 
 const install = function (Vue) {
@@ -52,6 +54,7 @@ export default {
     Message,
     Breadcrumb,
     BreadcrumbItem,
+    Circle,
     Steps,
     Step,
     Card

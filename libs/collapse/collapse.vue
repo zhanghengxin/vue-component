@@ -4,32 +4,39 @@
  * @Author: yanghao
  * @Date: 2018-09-14 15:17:51
  * @Last Modified by: yanghao
- * @Last Modified time: 2018-09-15 09:39:43
+ * @Last Modified time: 2018-09-27 16:20:01
  *
  * --------------------------------------------------------------------------- *
  */
 
 <template>
-    <div :class="classtype">
+    <div :class="classtype" >
         <slot></slot>
     </div>
 </template>
 
 <script>
-const Cls = 'collapsebox'
+const Cls = 'bw-collapsebox'
 export default {
-    name: 'Collapse',
+    name: 'bw-collapse',
     props: {
         accordion: {
             type: Boolean,
             default: false
         },
         value: {
-            type: [String, Array]
+            type: [String, Array],
+            default () {
+                return []
+            }
         },
         simple: {
             type: Boolean,
             default: false
+        },
+        positionArrow: {
+            type: String,
+            default: 'left'
         }
     },
     data () {
@@ -47,7 +54,7 @@ export default {
     },
     computed: {
         classtype () {
-            return [`${Cls}`]
+            return [`${Cls}`, {[`${Cls}-simple`]: this.simple}]
         }
     },
     methods: {
@@ -65,32 +72,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.collapsebox{
-    border-radius: 3px;
-    border: 1px solid #dcdee2;
-}
-.item{
-    border-top: 1px solid #dcdee2;
-}
-.collapsebox .item:first-child{
-    border-top:0
-}
-.item-header{
-    cursor: pointer;
-    height: 38px;
-    line-height: 38px;
-    padding-left: 16px;
-    background: #f7f7f7;
-}
-/* 展开 */
-.item-header-active .item-header{
-    border-bottom: 1px solid #dcdee2;
-}
-.item-content{
-    color: #515a6e;
-    padding: 16px;
-    background-color: #fff;
-}
-</style>
