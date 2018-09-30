@@ -145,18 +145,21 @@ export default {
         },
         scrollStyle () {
             return {
+                position: 'absolute',
+                left: `${-this.conWidth}px`,
                 width: this.conWidth * (this.pages + 2) + 'px',
                 overflow: 'hidden',
-                transform: `translate(${this.moveWidth - this.conWidth}px, 0)`,
+                transform: `translate(${this.moveWidth}px, 0)`,
                 transition: `transform ${this.speeded / 1000}s ease`
             }
         }
     },
     mounted () {
         if (this.animation === 'fade') {
-            this.controlFade(this.animation, true, this.active)
-        } else {
-            this.controlSlide(this.animation, this.active)
+            this.controlFade(true, this.active)
+        } else if (this.animation === 'slide') {
+            let oldVal = this.current === 0 ? 0 : this.current - 1
+            this.controlSlide(this.active, oldVal)
         }
 
         this.$nextTick(() => {
@@ -179,10 +182,10 @@ export default {
     watch: {
         active (val, oldVal) {
             if (this.animation === 'fade') {
-                this.controlFade(this.animation, false, oldVal)
-                this.controlFade(this.animation, true, val)
+                this.controlFade(false, oldVal)
+                this.controlFade(true, val)
             } else if (this.animation === 'slide') {
-                this.controlSlide(this.animation, val, oldVal)
+                this.controlSlide(val, oldVal)
             }
             this.slideAfter(val)
         }
@@ -236,7 +239,7 @@ export default {
             this.autoPlay()
         },
         // 控制样式 fade
-        controlFade (animation, show, index) {
+        controlFade (show, index) {
             let el = this.$children[index].$el
             if (show) {
                 el.style.opacity = 1
@@ -247,20 +250,16 @@ export default {
             }
         },
         // 控制样式 slide
-        controlSlide (animation, val, oldVal) {
+        controlSlide (val, oldVal) {
             if (oldVal === 4 && val === 0) {
                 this.moveWidth = -this.conWidth * this.pages
-                let timer = null
-                clearTimeout(timer)
-                timer = setTimeout(() => {
+                setTimeout(() => {
                     this.moveWidth = 0
                     this.speeded = 0
                 }, this.interval / 20)
             } else if (oldVal === 0 && val === 4) {
                 this.moveWidth = this.conWidth
-                let timer = null
-                clearTimeout(timer)
-                timer = setTimeout(() => {
+                setTimeout(() => {
                     this.moveWidth = -this.conWidth * (this.pages - 1)
                     this.speeded = 0
                 }, this.interval / 20)
