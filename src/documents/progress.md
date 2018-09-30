@@ -1,242 +1,226 @@
 # Progress进度条
 ### 基础用法
-使用```type``` 属性来定义Button 的样式
+使用```percentage``` 属性来定义Progress 的值
 
 <div class="example">
     <div class="example-box">
-        <div style="width:500px;height:100px">
-            <bw-progress :strokeWidth='10' :percentage=50 :vertical='false'></bw-progress>
+        <div style="width:500px">
+            <bw-progress percentage=30></bw-progress>
+            <bw-progress percentage=100></bw-progress>
         </div>
     </div>
 
 :::code
 ```html
-    <div>
-        <bw-button type="tynormal">默认按钮</bw-button>
-        <bw-button type="typrimary">主要按钮</bw-button>
-        <bw-button type="tysuccess">成功按钮</bw-button>
-        <bw-button type="tywarning">警告按钮</bw-button>
-        <bw-button type="tyerror">危险按钮</bw-button>
+    <div style="width:500px">
+        <bw-progress percentage=30></bw-progress>
+        <bw-progress percentage=70></bw-progress>
     </div>
 ```
 :::
 </div>
 
 
-### 不同尺寸
-Button 组件可以在不同场景下选择合适的按钮尺寸。
-尺寸选项：```normal```、```small```，通过设置```size```属性来配置它们。
+### 设置状态
+Progress 组件可通过属性```status```设置成功和异常状态。
+状态选项```Success``` 、```Exception```
 
 <div class="example">
     <div class="example-box">
-        <div>
-         <bw-button size="small">危险按钮</bw-button>
-         <bw-button size="normal">危险按钮</bw-button>
-         <bw-button size="big">危险按钮</bw-button>
+        <div style="width:500px">
+            <bw-progress percentage=50 status="Exception"></bw-progress>
+            <bw-progress percentage=30 status="Success"></bw-progress>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-        <bw-button size="small">危险按钮</bw-button>
-        <bw-button size="normal">危险按钮</bw-button>
-        <bw-button size="big">危险按钮</bw-button>
+    <div style="width:500px">
+        <bw-progress percentage=50 status="Exception"></bw-progress>
+        <bw-progress percentage=30 status="Success"></bw-progress>
     </div>
 ```
 :::
 </div>
 
-### 圆角按钮
-Button 组件可以在不同场景下选择是否可以点击。
-使用```round``` 属性来定义Button是否为圆角按钮。
+### 设置颜色
+Progress 组件可通过 ```color``` 设置进度条颜色
 
 <div class="example">
     <div class="example-box">
-        <div>
-            <bw-button type="tynormal" :round="true">默认按钮</bw-button>
-            <bw-button type="typrimary" :round="true">主要按钮</bw-button>
-            <bw-button type="tysuccess" :round="true">成功按钮</bw-button>
-            <bw-button type="tywarning" :round="true">警告按钮</bw-button>
-            <bw-button type="tyerror" :round="true">危险按钮</bw-button>
+        <div style="width:500px;height:120px">
+            <bw-progress percentage=30 color="#7171C6"></bw-progress>
+            <bw-progress percentage=50 color="#ff8f00"></bw-progress>
+            <bw-progress percentage=90 color="#CD6889"></bw-progress>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-        <bw-button type="tynormal" :round="true">默认按钮</bw-button>
-        <bw-button type="typrimary" :round="true">主要按钮</bw-button>
-        <bw-button type="tysuccess" :round="true">成功按钮</bw-button>
-        <bw-button type="tywarning" :round="true">警告按钮</bw-button>
-        <bw-button type="tyerror" :round="true">危险按钮</bw-button>
+    <div style="width:500px;height:120px">
+        <bw-progress percentage=30 color="yellow"></bw-progress>
+        <bw-progress percentage=50 color="#ff8f00"></bw-progress>
+        <bw-progress percentage=90 color="pink"></bw-progress>
     </div>
 ```
 :::
 </div>
 
-### 朴素按钮
-Button 组件可以在不同场景下选择是否可以点击。
-使用```plain``` 属性来定义Button是否为朴素按钮。
+### 设置是否显示标注
+Progress 组件可通过 ```showText``` 设置是否显示文字
 
 <div class="example">
     <div class="example-box">
-        <div>
-            <bw-button type="tynormal" :plain="true">默认按钮</bw-button>
-            <bw-button type="typrimary" :plain="true">主要按钮</bw-button>
-            <bw-button type="tysuccess" :plain="true">成功按钮</bw-button>
-            <bw-button type="tywarning" :plain="true">警告按钮</bw-button>
-            <bw-button type="tyerror" :plain="true">危险按钮</bw-button>
+        <div style="width:500px;">
+            <bw-progress percentage=60 :showText='false'></bw-progress>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-        <bw-button type="tynormal" :plain="true">默认按钮</bw-button>
-        <bw-button type="typrimary" :plain="true">主要按钮</bw-button>
-        <bw-button type="tysuccess" :plain="true">成功按钮</bw-button>
-        <bw-button type="tywarning" :plain="true">警告按钮</bw-button>
-        <bw-button type="tyerror" :plain="true">危险按钮</bw-button>
+    <div style="width:500px;">
+        <bw-progress percentage=60 :showText='false'></bw-progress>
     </div>
 ```
 :::
 </div>
 
-
-### 禁用状态
-Button 组件可以在不同场景下选择是否可以点击。
-使用```disable``` 属性来定义Button是否可点击
+### 设置方向
+Progress 组件可通过设置 ```vertical``` 设置进度条方向
 
 
 <div class="example">
     <div class="example-box">
-        <div>
-            <bw-button type="tynormal"  disabled="disabled">默认按钮</bw-button>
-            <bw-button type="typrimary" disabled="disabled">主要按钮</bw-button>
-            <bw-button type="tysuccess" disabled="disabled">成功按钮</bw-button>
-            <bw-button type="tywarning" disabled="disabled">警告按钮</bw-button>
-            <bw-button type="tyerror"   disabled="disabled">危险按钮</bw-button>
+        <div style="height:200px;">
+            <bw-progress percentage=30 :vertical="true"></bw-progress>
+            <bw-progress percentage=70 :vertical="true"></bw-progress>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-        <bw-button type="tynormal"  disabled="disabled">默认按钮</bw-button>
-        <bw-button type="typrimary" disabled="disabled">主要按钮</bw-button>
-        <bw-button type="tysuccess" disabled="disabled">成功按钮</bw-button>
-        <bw-button type="tywarning" disabled="disabled">警告按钮</bw-button>
-        <bw-button type="tyerror"   disabled="disabled">危险按钮</bw-button>
+    <div style="height:200px;">
+        <bw-progress percentage=30 :vertical="true"></bw-progress>
+        <bw-progress percentage=70 :vertical="true"></bw-progress>
     </div>
 ```
 :::
 </div>
 
-### 图标按钮
-Button 组件可以在不同场景下选择是否可以点击。
-使用```icon``` 属性来定义Button图标样式
 
+### 设置宽度
+Progress 组件可通过 ```strokeWidth``` 设置线条宽度
 
 <div class="example">
     <div class="example-box">
-        <div>
-            <bw-button type="tynormal"  icon="icon-jianshao"></bw-button>
-            <bw-button type="typrimary" icon="icon-QQ2"></bw-button>
-            <bw-button type="tysuccess" icon="icon-weixin"></bw-button>
-            <bw-button type="tywarning" icon="icon-weibo"></bw-button>
-            <bw-button type="tyerror"   icon="icon-lajitong"></bw-button>
-            <bw-button type="tyerror"   icon="icon-pan_icon"></bw-button>
-            <bw-button type="tyerror"   icon="icon-share"></bw-button>
-        </div>
-         <div style="margin-top:10px">
-            <bw-button type="tynormal"  icon="icon-fapiao"></bw-button>
-            <bw-button type="typrimary" icon="icon-xiayiye"></bw-button>
-            <bw-button type="tysuccess" icon="icon-shangyiye"></bw-button>
-            <bw-button type="tywarning" icon="icon-tianjia"></bw-button>
-            <bw-button type="tyerror"   icon="icon-youxiang"></bw-button>
-            <bw-button type="tyerror"   icon="icon-shanchu"></bw-button>
-            <bw-button type="tyerror"   icon="icon-soushuo"></bw-button>
+        <div style="width:500px;">
+            <bw-progress percentage=90 strokeWidth=5></bw-progress>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-        <bw-button type="tynormal"  icon="icon-jianshao"></bw-button>
-        <bw-button type="typrimary" icon="icon-QQ2"></bw-button>
-        <bw-button type="tysuccess" icon="icon-weixin"></bw-button>
-        <bw-button type="tywarning" icon="icon-weibo"></bw-button>
-        <bw-button type="tyerror"   icon="icon-lajitong"></bw-button>
-        <bw-button type="tysuccess" icon="icon-pan_icon"></bw-button>
-        <bw-button type="typrimary" icon="icon-share"></bw-button>
-        <bw-button type="tynormal"  icon="icon-fapiao"></bw-button>
-        <bw-button type="typrimary" icon="icon-xiayiye"></bw-button>
-        <bw-button type="tysuccess" icon="icon-shangyiye"></bw-button>
-        <bw-button type="tywarning" icon="icon-tianjia"></bw-button>
-        <bw-button type="tyerror"   icon="icon-youxiang"></bw-button>
-        <bw-button type="tysuccess" icon="icon-shanchu"></bw-button>
-        <bw-button type="tywarning" icon="icon-soushuo"></bw-button>
+    <div style="width:500px;">
+        <bw-progress percentage=90 strokeWidth=5></bw-progress>
     </div>
 ```
 :::
 </div>
 
-### 是否为加载状态
-Button 组件可以在不同场景下选择是否可以点击。
-使用```loading``` 属性来定义Button是否为正在加载状态
-
+### 自定义标注
 
 <div class="example">
     <div class="example-box">
-        <div>
-            <bw-button  type="typrimary" :loading="true">加载中</bw-button>
+        <div style="width:500px;">
+            <bw-progress percentage=30 status="Success">
+                <b-icon type="queding" color="green"></b-icon>
+            </bw-progress>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-        <bw-button type="typrimary" :loading="true">加载中</bw-button>
+    <div style="width:500px;">
+        <bw-progress percentage=30 status="Success">
+            <b-icon type="queding" color="green"></b-icon>
+        </bw-progress>
     </div>
 ```
 :::
 </div>
 
-### 事件
-Button 支持click 事件
+### Example
 
 <div class="example">
     <div class="example-box">
-        <div>
-            <bw-button  @on-click="handleClick">点击事件</bw-button>
+        <div style="width:500px;">
+            <bw-progress :percentage='percent'></bw-progress>
+            <bw-button type="tynormal" size="small" @on-click='add'>增加</bw-button>
+            <bw-button type="tynormal" size="small" @on-click='reduce'>减小</bw-button>
         </div>
+        <script>
+            export default {
+                data () {
+                    return {
+                        percent: 30
+                    }
+                },
+                methods: {
+                    add () {
+                        let result = this.percent + 3
+                        if (result > 100) {
+                            this.percent = 100
+                        } else {
+                            this.percent +=3
+                        }
+                    },
+                    reduce () {
+                        let result = this.percent - 3
+                        if (result <0) {
+                            this.percent = 0
+                        } else {
+                            this.percent -=3
+                        }
+                    }
+                }
+            }
+        </script>
     </div>
-
-<script>
-    export default {
-        methods: {
-            handleClick(event) {
-                alert('点击事件！来自百望Button组件')
+    
+::: code
+```html
+    <div style="width:500px;">
+        <bw-progress :percentage='percent'></bw-progress>
+        <bw-button type="typrimary" size="small" @on-click='add'>增加</bw-button>
+        <bw-button type="typrimary" size="small" @on-click='reduce'>减小</bw-button>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    percent: 30
+                }
+            },
+            methods: {
+                add () {
+                    let result = this.percent + 3
+                    if (result > 100) {
+                        this.percent = 100
+                    } else {
+                        this.percent +=3
+                    }
+                },
+                reduce () {
+                    let result = this.percent - 3
+                    if (result <0) {
+                        this.percent = 0
+                    } else {
+                        this.percent -=3
+                    }
+                }
             }
         }
-    }
-</script>
-
-::: code
-```html
-   <div>
-       <bw-button  @on-click="handleClick">点击事件</bw-button>
-   </div>
-   <script>
-       export default {
-           methods: {
-               handleClick(event) {
-                   alert('点击事件！')
-               }
-           }
-       }
-   </script>
+    </script>
 ```
 :::
 </div>
@@ -244,15 +228,9 @@ Button 支持click 事件
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | 尺寸   | string  |  `normal`、`small`  、`big`       |    normal   |
-| type     | 类型   | string    |   `tynormal` 、`typrimary`、`tysuccess`  、`tywarning` 、`tyerror`|     typrimary  |
-| loading     | 是否圆角按钮   | boolean    |    |     false  |
-| round     | 是否加载中状态   | boolean    |    |     false  |
-| plain     | 是否朴素按钮   | boolean    |    |     false  |
-| disabled     | 是否禁用状态   | 	boolean    |   `无`  |     false  |
-| icon     | 图表类型   | 	string    |   `参考icon代码`  |       |
-
-### events
-| 事件名	      | 说明	    | 返回值 |
-|---------- |-------- |---------- |
-| on-click     | 点击按钮时触发   | -  |
+| percentage     | 值 （必填）  | number  |         |    0   |
+| status     | 状态   | string    |   `Success` 、`Exception`|     无  |
+| color     | 颜色   | string    |    |     #0079CC  |
+| vertical     | 是否纵向   | boolean    |    |     false  |
+| showText     | 是否显示标注   | boolean    |    |     true  |
+| strokeWidth     | 线条宽度   | 	number    |   |     10px  |

@@ -1,18 +1,18 @@
 <template>
-<div style="width:100%;height:100%">
-  <div class='box'>
-    <div class='left' :style='left'>
-        <div class='progress' :style='progress'>
+<div :style="outbox">
+  <div :class='boxStyle'>
+    <div :class='leftStyle' :style='left'>
+        <div :class='progressStyle' :style='progress'>
         </div>
     </div>
-    <div class='right' v-if='showText'>
+    <div :class='rightStyle' v-if='ishowText'>
       <slot>
-        <div v-if="status!='Success'&&status!='Exception'">{{value}}%</div>
-        <div v-if="status=='Success'">
-          <img class='statusPic' src='@/assets/image/gouM.png'>
+        <div v-if="percent">{{value}}%</div>
+        <div v-if="complete">
+          <img :class='statusPicStyle' src='@/assets/image/gouM.png'>
         </div>
-        <div v-if="status=='Exception'">
-          <img class='statusPic' src='@/assets/image/cuoM.png'>
+        <div v-if="error">
+          <img :class='statusPicStyle' src='@/assets/image/cuoM.png'>
         </div>
       </slot>
 
@@ -22,10 +22,14 @@
 </template>
 
 <script>
+
+const styleHead = 'bw-progress'
+
 export default {
     name: 'bwProgress',
     data () {
         return {
+            styleHead
         }
     },
     props: {
@@ -47,21 +51,54 @@ export default {
         },
         percentage: {
             type: Number,
-            default: 30,
+            default: 0,
             required: true
         },
         color: {
             type: String,
-            default: 'blue'
+            default: '#0079CC'
         }
     },
     computed: {
+        value () {
+            return this.percentage
+        },
+        ishowText () {
+            return this.showText
+        },
+        error () {
+            return status === 'Exception'
+        },
+        complete () {
+            return this.status === 'Success' || this.value === 100
+        },
+        percent () {
+            return this.status !== 'Success' && this.status !== 'Exception' && this.value !== 100
+        },
+        outbox () {
+            return this.vertical ? {height: '100%', display: 'inline-block'} : {width: '100%', display: 'inline-block'}
+        },
+        leftStyle () {
+            return `${styleHead}-left`
+        },
+        rightStyle () {
+            return `${styleHead}-right`
+        },
+        progressStyle () {
+            return `${styleHead}-progress`
+        },
+        statusPicStyle () {
+            return `${styleHead}-statusPic`
+        },
+        boxStyle () {
+            return `${styleHead}-box`
+        },
         progress () {
             return {
                 'width': this.vertical ? this.strokeWidth + 'px' : (this.value === 100 || this.status === 'Success' ? '100%' : this.percentage + '%'),
                 'height': this.vertical ? (this.value === 100 || this.status === 'Success' ? '100%' : this.percentage + '%') : this.strokeWidth + 'px',
                 'borderRadius': this.strokeWidth / 2 + 'px',
-                'backgroundColor': this.status === 'Success' || this.value === 100 ? '#3CB371' : (this.status === 'Exception' ? 'red' : this.color)
+                'backgroundColor': this.status === 'Success' || this.value === 100 ? '#1fca74' : (this.status === 'Exception' ? '#f44336' : this.color)
             }
         },
         left () {
@@ -70,38 +107,7 @@ export default {
                 'height': this.vertical ? '100%' : this.strokeWidth + 'px',
                 'borderRadius': this.strokeWidth / 2 + 'px'
             }
-        },
-        value () {
-            return this.percentage
         }
     }
 }
-</script>
-
-<style scoped>
-  .box{
-    width:100%;
-    height:100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  .left{
-    background-color: rgb(238, 233, 233);
-    display: flex;
-    align-items: flex-end;
-  }
-  .right{
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    padding-left:6px
-  }
-  .statusPic{
-    width: 15px;
-    height: 15px;
-  }
-  .progress{
-    transition: all .2s linear;
-  }
-</style>
+</script>]
