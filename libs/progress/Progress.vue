@@ -67,7 +67,7 @@ export default {
             return this.showText
         },
         error () {
-            return status === 'Exception'
+            return this.status === 'Exception'
         },
         complete () {
             return this.status === 'Success' || this.value === 100
