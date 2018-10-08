@@ -6,11 +6,11 @@
 使用```message``` 属性来定义 Message 的显示内容
 
 <div style='margin-bottom: 10px;'>
-    <bw-button
+    <b-button
         type='white'
         @on-click="handleClick">
         信息
-    </bw-button>
+    </b-button>
 </div>
 <script>
     export default {
@@ -21,20 +21,20 @@
         },
         methods: {
             handleClick(type) {
-                this.$message({
+                this.$Message({
                     message: this.message,
                     type,
                     duration: 1500
                 })
             },
             handleClickShowClose() {
-                this.$message({
+                this.$Message({
                     message: this.message,
                     showClose: true
                 })
             },
             handleClickDruation() {
-                this.$message({
+                this.$Message({
                     message: this.message,
                     duration: 5000
                 })
@@ -46,11 +46,11 @@
 ::: code 
 ```html
     <div>
-        <bw-button
+        <b-button
             type='white'
             @on-click="handleClick">
             信息
-        </bw-button>
+        </b-button>
     </div>
     <script>
         export default {
@@ -61,7 +61,7 @@
             },
             methods: {
                 handleClick() {
-                    this.$message({
+                    this.$Message({
                         message: this.message,
                     })
                 }
@@ -75,26 +75,26 @@
 使用```type``` 属性来定义 Message 的不同状态
 
 <div style='margin-bottom: 10px;'>
-    <bw-button
+    <b-button
         type='white'
         @on-click="handleClick('info')">
         信息
-    </bw-button>
-    <bw-button
+    </b-button>
+    <b-button
         type='white'
         @on-click="handleClick('success')">
         成功
-    </bw-button>
-    <bw-button
+    </b-button>
+    <b-button
         type='white'
         @on-click="handleClick('error')">
         错误
-    </bw-button>
-    <bw-button
+    </b-button>
+    <b-button
         type='white'
         @on-click="handleClick('warning')">
         警告
-    </bw-button>
+    </b-button>
 </div>
 <script>
     export default {
@@ -105,7 +105,7 @@
         },
         methods: {
             handleClick(type) {
-                this.$message({
+                this.$Message({
                     message: this.message,
                     type,
                 })
@@ -117,26 +117,26 @@
 ::: code
 ```html
     <div>
-        <bw-button
+        <b-button
             type='white'
             @on-click="handleClick('info')">
             信息
-        </bw-button>
-        <bw-button
+        </b-button>
+        <b-button
             type='white'
             @on-click="handleClick('success')">
             成功
-        </bw-button>
-        <bw-button
+        </b-button>
+        <b-button
             type='white'
             @on-click="handleClick('error')">
             错误
-        </bw-button>
-        <bw-button
+        </b-button>
+        <b-button
             type='white'
             @on-click="handleClick('warning')">
             警告
-        </bw-button>
+        </b-button>
     </div>
     <script>
         export default {
@@ -147,7 +147,7 @@
             },
             methods: {
                 handleClick(type) {
-                    this.$message({
+                    this.$Message({
                         message: this.message,
                         type,
                     })
@@ -163,21 +163,21 @@
 使用```duration``` 属性来定义 Message 的显示时长
 
 <div style='margin-bottom: 10px;'>
-    <bw-button
+    <b-button
         type='white'
         @on-click="handleClickDruation">
         信息
-    </bw-button>
+    </b-button>
 </div>
 
 ::: code
 ```html
     <div>
-        <bw-button
+        <b-button
             type='white'
             @on-click="handleClick">
             信息
-        </bw-button>
+        </b-button>
     </div>
     <script>
         export default {
@@ -188,7 +188,7 @@
             },
             methods: {
                 handleClick() {
-                    this.$message({
+                    this.$Message({
                         message: this.message,
                         duration: 5000
                     })
@@ -203,21 +203,21 @@
 使用```showClose``` 属性来显示 Message 的关闭按钮
 
 <div style='margin-bottom: 10px'>
-    <bw-button
+    <b-button
         type='white'
         @on-click="handleClickShowClose">
         信息
-    </bw-button>
+    </b-button>
 </div>
 
 ::: code
 ```html
     <div>
-        <bw-button
+        <b-button
             type='white'
             @on-click="handleClick">
             信息
-        </bw-button>
+        </b-button>
     </div>
     <script>
         export default {
@@ -228,7 +228,7 @@
             },
             methods: {
                 handleClick() {
-                    this.$message({
+                    this.$Message({
                         message: this.message,
                         showClose: true
                     })

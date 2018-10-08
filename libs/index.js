@@ -17,6 +17,7 @@ import Circle from './circle'
 import { Steps, Step } from './steps/index'
 import Card from './card'
 import Progress from './progress'
+import Modal from './modal'
 
 const components = [
     Input,
@@ -34,13 +35,15 @@ const components = [
     Step,
     Card,
     Progress,
+    Modal,
     Circle
 ]
 
 const install = function (Vue) {
     if (install.installed) return
     components.map(component => Vue.component(component.name, component))
-    Vue.prototype.$message = Message
+    Vue.prototype.$Message = Message
+    Vue.prototype.$Modal = Modal
 }
 
 export default {
@@ -60,5 +63,6 @@ export default {
     Steps,
     Step,
     Card,
-    Progress
+    Progress,
+    Modal
 }
