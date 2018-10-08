@@ -62,8 +62,14 @@ Modal.confirm = options => {
     confirmModal(options)
 }
 
-Modal.install = function (Vue) {
-    Vue.component(Modal.name, Modal)
+Modal.remove = function () {
+    if (!modalInstance) {
+        return false
+    }
+
+    const instance = getModalInstance()
+
+    instance.remove()
 }
 
 export default Modal

@@ -11,11 +11,12 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
 <div class="example">
     <div class="example-box">
         <div>
-            <b-button @on-click="handleShow">基本弹框</b-button>
+            <b-button @on-click="modal1 = true">基本弹框</b-button>
             <b-modal
                 v-model="modal1"
                 title="Common Modal dialog box title"
-            >
+                @on-ok="ok"
+                @on-cancel="cancel">
                 <p>Content of dialog</p>
                 <p>Content of dialog</p>
                 <p>Content of dialog</p>
@@ -31,10 +32,13 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
             }
         },
         methods: {
-            handleShow () {
-                console.log(this.modal1)
-                this.modal1 = true
-                console.log(this.modal1)
+            ok () {
+                this.modal1 = false
+                console.log('Clicked ok')
+            },
+            cancel () {
+                this.modal1 = false
+                console.log('Clicked cancel')
             }
         }
     }
@@ -43,7 +47,7 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
 ::: code
 ```html
     <div>
-        <b-button type="tynormal" @on-click="handleShow">Display dialog box</b-button>
+        <b-button type="tynormal" @on-click="modal1 = true">Display dialog box</b-button>
         <b-modal
             v-model="modal1"
             title="Common Modal dialog box title"
@@ -61,10 +65,13 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
                 }
             },
             methods: {
-                handleShow () {
-                    console.log(this.modal1)
-                    this.modal1 = true
-                    console.log(this.modal1)
+                ok () {
+                    this.modal1 = false
+                    console.log('Clicked ok')
+                },
+                cancel () {
+                    this.modal1 = false
+                    console.log('Clicked cancel')
                 }
             }
         }
@@ -72,6 +79,61 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
 ```
 :::
 </div>
+
+### 实例化使用方法
+
+<!-- <div class="example">
+    <div class="example-box">
+        <div>
+            <b-button @on-click="instance">Info</b-button>
+            <b-button @on-click="instance('success')">Success</b-button>
+            <b-button @on-click="instance('warning')">Warning</b-button>
+            <b-button @on-click="instance('error')">Error</b-button>
+        </div>
+    </div>
+
+<script>
+export default {
+    methods: {
+        instance () {
+            console.log(this.$Modal)
+            this.$Modal.info({
+                title: 'Title',
+                content: '内容',
+                onOk: () => {
+                        setTimeout(() => {
+                            this.$Modal.remove();
+                        }, 2000);
+                    }
+            })
+        }
+    }
+}
+</script>
+
+::: code
+```html
+    <div>
+        <b-button @on-click="instance('info')">Info</b-button>
+        <b-button @on-click="instance('success')">Success</b-button>
+        <b-button @on-click="instance('warning')">Warning</b-button>
+        <b-button @on-click="instance('error')">Error</b-button>
+    </div>
+    <script>
+        export default {
+            methods: {
+                instance (type) {
+                    this.$Modal[type]({
+                        title: 'Title',
+                        content: '内容'
+                    })
+                }
+            }
+        }
+    </script>
+```
+:::
+</div> -->
 
 ### props
 | 参数      | 说明    | 类型        | 默认值   |

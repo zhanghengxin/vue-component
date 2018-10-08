@@ -8,7 +8,7 @@ import Vue from 'vue'
 import BModal from './Modal'
 import BButton from '../button'
 
-const prefixCls = 'ivu-modal-confirm'
+const prefixCls = 'bw-modal-confirm'
 
 BModal.Instance = (params = {}) => {
     const Instance = new Vue({
@@ -23,7 +23,7 @@ BModal.Instance = (params = {}) => {
                 iconName: '',
                 okText: undefined,
                 cancelText: undefined,
-                showCancel: false,
+                showCancel: true,
                 loading: false,
                 okLoading: false,
                 scrollable: false,
@@ -169,6 +169,7 @@ BModal.Instance = (params = {}) => {
                 this.remove()
             },
             ok () {
+                debugger
                 if (this.loading) {
                     this.okLoading = true
                 } else {
@@ -208,7 +209,7 @@ BModal.Instance = (params = {}) => {
 
     return {
         show (props) {
-            modal.$parent.showCancel = props.showCancel
+            modal.$parent.showCancel = props.showCancel ? props.showCancel : true
             modal.$parent.iconType = props.icon
 
             modal.$parent.iconName = iconNameStore[props.icon]

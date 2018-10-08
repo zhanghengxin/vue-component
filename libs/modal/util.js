@@ -2,82 +2,41 @@
  * 默认 的 modal props
  * author by @zhengshuai
  */
-export const ModalDefaultProps = () => {
-    return {
-        value: {
-            type: Boolean,
-            default: false
-        },
-        closable: {
-            type: Boolean,
-            default: true
-        },
-        maskClosable: {
-            type: Boolean,
-            default: false
-        },
-        title: {
-            type: String
-        },
-        width: {
-            type: [Number, String],
-            default: 520
-        },
-        okText: {
-            type: String
-        },
-        cancelText: {
-            type: String
-        },
-        loading: {
-            type: Boolean,
-            default: false
-        },
-        styles: {
-            type: Object
-        },
-        className: {
-            type: String
-        },
-        // for instance
-        footerHide: {
-            type: Boolean,
-            default: false
-        },
-        scrollable: {
-            type: Boolean,
-            default: false
-        },
-        transitionNames: {
-            type: Array,
-            default () {
-                return ['ease', 'fade']
+import Vue from 'vue'
+const isServer = Vue.prototype.$isServer
+
+export const prefixCls = 'bw-modal'
+
+/* istanbul ignore next */
+export const on = (() => {
+    if (!isServer && document.addEventListener) {
+        return function (element, event, handler) {
+            if (element && event && handler) {
+                element.addEventListener(event, handler, false)
             }
-        },
-        appendToBody: {
-            type: Boolean,
-            default: false
-        },
-        fullscreen: {
-            type: Boolean,
-            default: false
-        },
-        mask: {
-            type: Boolean,
-            default: true
-        },
-        zIndex: {
-            type: Number,
-            default: 1000
-        },
-        center: {
-            type: Boolean,
-            default: true
-        },
-        // 拖拽 功能
-        draggable: {
-            type: Boolean,
-            default: false
+        }
+    } else {
+        return function (element, event, handler) {
+            if (element && event && handler) {
+                element.attachEvent('on' + event, handler)
+            }
         }
     }
-}
+})()
+
+/* istanbul ignore next */
+export const off = (() => {
+    if (!isServer && document.removeEventListener) {
+        return function (element, event, handler) {
+            if (element && event) {
+                element.removeEventListener(event, handler, false)
+            }
+        }
+    } else {
+        return function (element, event, handler) {
+            if (element && event) {
+                element.detachEvent('on' + event, handler)
+            }
+        }
+    }
+})()

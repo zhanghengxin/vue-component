@@ -13,6 +13,7 @@ import CollapseItem from './collapse-item'
 import Message from './message'
 import Breadcrumb from './breadcrumb'
 import BreadcrumbItem from './breadcrumb-item'
+import Circle from './circle'
 import { Steps, Step } from './steps/index'
 import Card from './card'
 import Modal from './modal'
@@ -32,13 +33,15 @@ const components = [
     Steps,
     Step,
     Card,
-    Modal
+    Modal,
+    Circle
 ]
 
 const install = function (Vue) {
     if (install.installed) return
     components.map(component => Vue.component(component.name, component))
     Vue.prototype.$message = Message
+    Vue.prototype.$Modal = Modal
 }
 
 export default {
@@ -54,6 +57,7 @@ export default {
     Message,
     Breadcrumb,
     BreadcrumbItem,
+    Circle,
     Steps,
     Step,
     Card,

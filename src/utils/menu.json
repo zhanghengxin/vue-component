@@ -122,6 +122,11 @@
           "title": "Carousel 走马灯",
           "path": "/carousel",
           "name": "carousel"
+        },
+        {
+          "title": "Circle 进度环",
+          "path": "/circle",
+          "name": "circle"
         }
       ]
     }

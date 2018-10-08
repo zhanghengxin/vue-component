@@ -20,7 +20,7 @@
 
 <script>
 export default {
-    name: 'bwButton',
+    name: 'bButton',
     computed: {
         iclass () {
             return `${this.icon}`
