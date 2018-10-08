@@ -16,6 +16,7 @@ import BreadcrumbItem from './breadcrumb-item'
 import Circle from './circle'
 import { Steps, Step } from './steps/index'
 import Card from './card'
+import Modal from './modal'
 
 const components = [
     Input,
@@ -32,6 +33,7 @@ const components = [
     Steps,
     Step,
     Card,
+    Modal,
     Circle
 ]
 
@@ -39,6 +41,7 @@ const install = function (Vue) {
     if (install.installed) return
     components.map(component => Vue.component(component.name, component))
     Vue.prototype.$message = Message
+    Vue.prototype.$Modal = Modal
 }
 
 export default {
@@ -57,5 +60,6 @@ export default {
     Circle,
     Steps,
     Step,
-    Card
+    Card,
+    Modal
 }

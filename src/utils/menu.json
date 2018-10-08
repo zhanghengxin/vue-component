@@ -90,6 +90,11 @@
           "title": "Notice 通知",
           "path": "/notice",
           "name": "notice"
+        },
+        {
+          "title": "Modal 对话框",
+          "path": "/modal",
+          "name": "modal"
         }
       ]
     },
