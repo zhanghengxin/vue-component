@@ -7,22 +7,22 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <bw-button type="tynormal">默认按钮</bw-button>
-            <bw-button type="typrimary">主要按钮</bw-button>
-            <bw-button type="tysuccess">成功按钮</bw-button>
-            <bw-button type="tywarning">警告按钮</bw-button>
-            <bw-button type="tyerror">危险按钮</bw-button>
+            <b-button type="tynormal">默认按钮</b-button>
+            <b-button type="typrimary">主要按钮</b-button>
+            <b-button type="tysuccess">成功按钮</b-button>
+            <b-button type="tywarning">警告按钮</b-button>
+            <b-button type="tyerror">危险按钮</b-button>
         </div>
     </div>
 
 :::code
 ```html
     <div>
-        <bw-button type="tynormal">默认按钮</bw-button>
-        <bw-button type="typrimary">主要按钮</bw-button>
-        <bw-button type="tysuccess">成功按钮</bw-button>
-        <bw-button type="tywarning">警告按钮</bw-button>
-        <bw-button type="tyerror">危险按钮</bw-button>
+        <b-button type="tynormal">默认按钮</b-button>
+        <b-button type="typrimary">主要按钮</b-button>
+        <b-button type="tysuccess">成功按钮</b-button>
+        <b-button type="tywarning">警告按钮</b-button>
+        <b-button type="tyerror">危险按钮</b-button>
     </div>
 ```
 :::
@@ -36,18 +36,18 @@ Button 组件可以在不同场景下选择合适的按钮尺寸。
 <div class="example">
     <div class="example-box">
         <div>
-         <bw-button size="small">主要按钮</bw-button>
-         <bw-button size="normal">主要按钮</bw-button>
-         <bw-button size="big">主要按钮</bw-button>
+         <b-button size="small">主要按钮</b-button>
+         <b-button size="normal">主要按钮</b-button>
+         <b-button size="big">主要按钮</b-button>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <bw-button size="small">危险按钮</bw-button>
-        <bw-button size="normal">危险按钮</bw-button>
-        <bw-button size="big">危险按钮</bw-button>
+        <b-button size="small">危险按钮</b-button>
+        <b-button size="normal">危险按钮</b-button>
+        <b-button size="big">危险按钮</b-button>
     </div>
 ```
 :::
@@ -60,22 +60,22 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <bw-button type="tynormal" :round="true">默认按钮</bw-button>
-            <bw-button type="typrimary" :round="true">主要按钮</bw-button>
-            <bw-button type="tysuccess" :round="true">成功按钮</bw-button>
-            <bw-button type="tywarning" :round="true">警告按钮</bw-button>
-            <bw-button type="tyerror" :round="true">危险按钮</bw-button>
+            <b-button type="tynormal" :round="true">默认按钮</b-button>
+            <b-button type="typrimary" :round="true">主要按钮</b-button>
+            <b-button type="tysuccess" :round="true">成功按钮</b-button>
+            <b-button type="tywarning" :round="true">警告按钮</b-button>
+            <b-button type="tyerror" :round="true">危险按钮</b-button>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <bw-button type="tynormal" :round="true">默认按钮</bw-button>
-        <bw-button type="typrimary" :round="true">主要按钮</bw-button>
-        <bw-button type="tysuccess" :round="true">成功按钮</bw-button>
-        <bw-button type="tywarning" :round="true">警告按钮</bw-button>
-        <bw-button type="tyerror" :round="true">危险按钮</bw-button>
+        <b-button type="tynormal" :round="true">默认按钮</b-button>
+        <b-button type="typrimary" :round="true">主要按钮</b-button>
+        <b-button type="tysuccess" :round="true">成功按钮</b-button>
+        <b-button type="tywarning" :round="true">警告按钮</b-button>
+        <b-button type="tyerror" :round="true">危险按钮</b-button>
     </div>
 ```
 :::
@@ -88,22 +88,22 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <bw-button type="tynormal" :plain="true">默认按钮</bw-button>
-            <bw-button type="typrimary" :plain="true">主要按钮</bw-button>
-            <bw-button type="tysuccess" :plain="true">成功按钮</bw-button>
-            <bw-button type="tywarning" :plain="true">警告按钮</bw-button>
-            <bw-button type="tyerror" :plain="true">危险按钮</bw-button>
+            <b-button type="tynormal" :plain="true">默认按钮</b-button>
+            <b-button type="typrimary" :plain="true">主要按钮</b-button>
+            <b-button type="tysuccess" :plain="true">成功按钮</b-button>
+            <b-button type="tywarning" :plain="true">警告按钮</b-button>
+            <b-button type="tyerror" :plain="true">危险按钮</b-button>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <bw-button type="tynormal" :plain="true">默认按钮</bw-button>
-        <bw-button type="typrimary" :plain="true">主要按钮</bw-button>
-        <bw-button type="tysuccess" :plain="true">成功按钮</bw-button>
-        <bw-button type="tywarning" :plain="true">警告按钮</bw-button>
-        <bw-button type="tyerror" :plain="true">危险按钮</bw-button>
+        <b-button type="tynormal" :plain="true">默认按钮</b-button>
+        <b-button type="typrimary" :plain="true">主要按钮</b-button>
+        <b-button type="tysuccess" :plain="true">成功按钮</b-button>
+        <b-button type="tywarning" :plain="true">警告按钮</b-button>
+        <b-button type="tyerror" :plain="true">危险按钮</b-button>
     </div>
 ```
 :::
@@ -118,22 +118,22 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <bw-button type="tynormal"  disabled="disabled">默认按钮</bw-button>
-            <bw-button type="typrimary" disabled="disabled">主要按钮</bw-button>
-            <bw-button type="tysuccess" disabled="disabled">成功按钮</bw-button>
-            <bw-button type="tywarning" disabled="disabled">警告按钮</bw-button>
-            <bw-button type="tyerror"   disabled="disabled">危险按钮</bw-button>
+            <b-button type="tynormal"  disabled="disabled">默认按钮</b-button>
+            <b-button type="typrimary" disabled="disabled">主要按钮</b-button>
+            <b-button type="tysuccess" disabled="disabled">成功按钮</b-button>
+            <b-button type="tywarning" disabled="disabled">警告按钮</b-button>
+            <b-button type="tyerror"   disabled="disabled">危险按钮</b-button>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <bw-button type="tynormal"  disabled="disabled">默认按钮</bw-button>
-        <bw-button type="typrimary"  disabled="disabled">主要按钮</bw-button>
-        <bw-button type="tysuccess"  disabled="disabled">成功按钮</bw-button>
-        <bw-button type="tywarning" disabled="disabled">警告按钮</bw-button>
-        <bw-button type="tyerror"   disabled="disabled">危险按钮</bw-button>
+        <b-button type="tynormal"  disabled="disabled">默认按钮</b-button>
+        <b-button type="typrimary"  disabled="disabled">主要按钮</b-button>
+        <b-button type="tysuccess"  disabled="disabled">成功按钮</b-button>
+        <b-button type="tywarning" disabled="disabled">警告按钮</b-button>
+        <b-button type="tyerror"   disabled="disabled">危险按钮</b-button>
     </div>
 ```
 :::
@@ -147,22 +147,22 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <bw-button type="tynormal"  :circle="true"></bw-button>
-            <bw-button type="typrimary" :circle="true"></bw-button>
-            <bw-button type="tysuccess" :circle="true"></bw-button>
-            <bw-button type="tywarning" :circle="true"></bw-button>
-            <bw-button type="tyerror"   :circle="true"></bw-button>
+            <b-button type="tynormal"  :circle="true"></b-button>
+            <b-button type="typrimary" :circle="true"></b-button>
+            <b-button type="tysuccess" :circle="true"></b-button>
+            <b-button type="tywarning" :circle="true"></b-button>
+            <b-button type="tyerror"   :circle="true"></b-button>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <bw-button type="tynormal"  :circle="true"></bw-button>
-        <bw-button type="typrimary" :circle="true"></bw-button>
-        <bw-button type="tysuccess" :circle="true"></bw-button>
-        <bw-button type="tywarning" :circle="true"></bw-button>
-        <bw-button type="tyerror"   :circle="true"></bw-button>
+        <b-button type="tynormal"  :circle="true"></b-button>
+        <b-button type="typrimary" :circle="true"></b-button>
+        <b-button type="tysuccess" :circle="true"></b-button>
+        <b-button type="tywarning" :circle="true"></b-button>
+        <b-button type="tyerror"   :circle="true"></b-button>
     </div>
 ```
 :::
@@ -178,32 +178,32 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <bw-button type="tynormal"  icon="daochukehuxinxi"></bw-button>
-            <bw-button type="typrimary" icon="fapiaoshengcheng"></bw-button>
-            <bw-button type="tysuccess" icon="pipeixinxi"></bw-button>
-            <bw-button type="tywarning" icon="qianshouxinxi"></bw-button>
-            <bw-button type="tyerror"   icon="chuangjianyonghu"></bw-button>
-            <bw-button type="tyerror"   icon="shengchengdaikai"></bw-button>
-            <bw-button type="tywarning" icon="daochuduanxinjilu"></bw-button>
-            <bw-button type="tysuccess" icon="dayin"></bw-button>
-            <bw-button type="typrimary" icon="daochuwordwendang"></bw-button>
-            <bw-button type="tynormal"  icon="wangshangbaoshui"></bw-button> 
+            <b-button type="tynormal"  icon="daochukehuxinxi"></b-button>
+            <b-button type="typrimary" icon="fapiaoshengcheng"></b-button>
+            <b-button type="tysuccess" icon="pipeixinxi"></b-button>
+            <b-button type="tywarning" icon="qianshouxinxi"></b-button>
+            <b-button type="tyerror"   icon="chuangjianyonghu"></b-button>
+            <b-button type="tyerror"   icon="shengchengdaikai"></b-button>
+            <b-button type="tywarning" icon="daochuduanxinjilu"></b-button>
+            <b-button type="tysuccess" icon="dayin"></b-button>
+            <b-button type="typrimary" icon="daochuwordwendang"></b-button>
+            <b-button type="tynormal"  icon="wangshangbaoshui"></b-button> 
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <bw-button type="tynormal"  icon="daochukehuxinxi"></bw-button>
-        <bw-button type="typrimary" icon="fapiaoshengcheng"></bw-button>
-        <bw-button type="tysuccess" icon="pipeixinxi"></bw-button>
-        <bw-button type="tywarning" icon="qianshouxinxi"></bw-button>
-        <bw-button type="tyerror"   icon="chuangjianyonghu"></bw-button>
-        <bw-button type="tyerror"   icon="shengchengdaikai"></bw-button>
-        <bw-button type="tywarning" icon="daochuduanxinjilu"></bw-button>
-        <bw-button type="tysuccess" icon="dayin"></bw-button>
-        <bw-button type="typrimary" icon="daochuwordwendang"></bw-button>
-        <bw-button type="tynormal"  icon="wangshangbaoshui"></bw-button> 
+        <b-button type="tynormal"  icon="daochukehuxinxi"></b-button>
+        <b-button type="typrimary" icon="fapiaoshengcheng"></b-button>
+        <b-button type="tysuccess" icon="pipeixinxi"></b-button>
+        <b-button type="tywarning" icon="qianshouxinxi"></b-button>
+        <b-button type="tyerror"   icon="chuangjianyonghu"></b-button>
+        <b-button type="tyerror"   icon="shengchengdaikai"></b-button>
+        <b-button type="tywarning" icon="daochuduanxinjilu"></b-button>
+        <b-button type="tysuccess" icon="dayin"></b-button>
+        <b-button type="typrimary" icon="daochuwordwendang"></b-button>
+        <b-button type="tynormal"  icon="wangshangbaoshui"></b-button> 
     </div>
 ```
 :::
@@ -217,14 +217,14 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <bw-button  type="typrimary" :loading="true">加载中</bw-button>
+            <b-button  type="typrimary" :loading="true">加载中</b-button>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <bw-button type="typrimary" :loading="true">加载中</bw-button>
+        <b-button type="typrimary" :loading="true">加载中</b-button>
     </div>
 ```
 :::
@@ -236,7 +236,7 @@ Button 支持click 事件
 <div class="example">
     <div class="example-box">
         <div>
-            <bw-button  @on-click="handleClick">点击事件</bw-button>
+            <b-button  @on-click="handleClick">点击事件</b-button>
         </div>
     </div>
 
@@ -253,7 +253,7 @@ Button 支持click 事件
 ::: code
 ```html
    <div>
-       <bw-button  @on-click="handleClick">点击事件</bw-button>
+       <b-button  @on-click="handleClick">点击事件</b-button>
    </div>
    <script>
        export default {
