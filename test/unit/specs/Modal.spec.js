@@ -130,7 +130,7 @@ describe('Modal', () => {
         })
 
         it('z-index', () => {
-            vm = getModalVm('z-index="1024"')
+            vm = getModalVm('z-index=1024')
             expect(vm.$children[0].$el.querySelector('.bw-modal-wrap').style.zIndex).to.equal('1024')
         })
 
@@ -268,7 +268,7 @@ describe('Modal', () => {
         vm = createVue({
             template: `
                 <div>
-                    <b-modal :title="title" v-mode="visible">
+                    <b-modal :title="title" v-model="visible">
                         <span>这是一段信息</span>
                     </b-modal>
                 </div>
@@ -300,7 +300,7 @@ describe('Modal', () => {
     //     vm = createVue({
     //         template: `
     //         <div>
-    //             <b-modal :title="title" v-mode="visible" @on-after-close="afterClose"></b-modal>
+    //             <b-modal :title="title" v-model="visible" @on-after-close="afterClose"></b-modal>
     //         </div>
     //         `,
 

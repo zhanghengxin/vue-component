@@ -400,11 +400,11 @@ export default {
 ### props
 | 参数      | 说明    | 类型        | 默认值   |
 |---------- |-------- |---------- |-------------  |
-| value            | 对话框是否显示, 可使用 v-model 双向绑定数据                                 | Boolean        | false      |
-| closable         | 是否显示右上角的关闭按钮, 关闭后 Esc 按键也将关闭                             | Boolean        | true       |
-| mask-closable    | 是否允许点击遮罩层关闭                                                     | Boolean        | false   |
-| title            | 对话框标题, 如果使用 slot 自定义了页头, 则 title 无效                        | String         |  -  |
-| width            | 对话框宽度, 对话框的宽度是响应式的                                          | Number, String |  520  |
+| value            | 对话框是否显示, 可使用 v-model 双向绑定数据                                | Boolean        | false      |
+| closable         | 是否显示右上角的关闭按钮, 关闭后 Esc 按键也将关闭                            | Boolean        | true       |
+| mask-closable    | 是否允许点击遮罩层关闭                                                    | Boolean        | false   |
+| title            | 对话框标题, 如果使用 slot 自定义了页头, 则 title 无效                       | String         |  -  |
+| width            | 对话框宽度, 对话框的宽度是响应式的                                         | Number, String |  520  |
 | ok-text          | 确定按钮文字                                                            | String         | 确定   |
 | cancel-text      | 取消按钮文字                                                            | String         | 取消   |
 | loading          | 点击确定按钮时, 确定按钮是否显示 loading 状态, 开启则需手动设置value来关闭对话框 | Boolean        | false   |
@@ -414,10 +414,10 @@ export default {
 | footer-hide      | 不显示底部                                                              | Boolean         | false   |
 | scrollable       | 页面是否可以滚动                                                         | Boolean         | false   |
 | transition-names | 自定义显示动画, 第一项是模态框, 第二项是背景                                 | Array           | ['ease', 'fade']   |
-| transfer         | 是否将弹层放置于 body 内                                                 | Boolean        | true   |
-| fullscreen       | 是否全屏显示                                                            | Boolean        | false   |
+| transfer         | 是否将弹层放置于 body 内                                                 | Boolean         | true   |
+| fullscreen       | 是否全屏显示                                                            | Boolean         | false   |
 | mask             | 是否显示遮罩层, 开启 draggable 时, 强制不显示                              | Boolean         | true   |
-| z-index          | 层级                                                                   | Numbber         | 1000 |
+| z-index          | 层级                                                                   | Number, String  | 1000 |
 | draggable        | 是否可以拖拽移动                                                         | Boolean         | false   |
 
 ### events

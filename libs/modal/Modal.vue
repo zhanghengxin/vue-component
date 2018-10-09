@@ -109,7 +109,7 @@ export default {
             default: true
         },
         zIndex: {
-            type: Number,
+            type: [Number, String],
             default () {
                 return 1000
             }
