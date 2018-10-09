@@ -102,7 +102,7 @@ $icon-prefix-cls: "b-icon";
         cursor: pointer;
 
         .#{$icon-prefix-cls} {
-            font-size: 24px;
+            font-size: 16px!important;
             color: $legend-color;
             transition: color $transition-time ease;
             position: relative;
@@ -173,6 +173,9 @@ $icon-prefix-cls: "b-icon";
         display: flex;
         align-items: center;
         justify-content: center;
+        .#{$modal-prefix-cls} {
+            top: 0;
+        }
     }
 }
 

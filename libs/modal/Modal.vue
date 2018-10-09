@@ -10,7 +10,7 @@
                     <div :class="contentClasses" ref="content" :style="contentStyles">
                         <a :class="[prefixCls + '-close']" v-if="closable" @click="close">
                             <slot name="close">
-                                <b-icon type="ios-close"></b-icon>
+                                <b-icon type="quxiao"></b-icon>
                             </slot>
                         </a>
                         <div :class="[prefixCls + '-header']" @mousedown="handleMoveStart" v-if="showHead">
@@ -339,6 +339,7 @@ export default {
                     this.wrapShow = false
                     this.removeScrollEffect()
                 }, 300)
+                this.$emit('on-after-close')
             } else {
                 if (this.timer) clearTimeout(this.timer)
                 this.wrapShow = true

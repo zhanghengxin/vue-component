@@ -19,18 +19,14 @@ $ease-in-out            : ease-in-out;
         animation-play-state: paused;
     }
     .#{$className}-enter-active, .#{$className}-appear {
-        animation-name: "@{keyframeName}In";
+        animation-name: "#{$keyframeName}In";
         animation-play-state: running;
     }
     .#{$className}-leave-active {
-        animation-name: "@{keyframeName}Out";
+        animation-name: "#{$keyframeName}Out";
         animation-play-state: running;
     }
 }
 
 @import "./fade.scss";
 @import "./ease.scss";
-
-.collapse-transition {
-    transition: $transition-time height ease-in-out, $transition-time padding-top ease-in-out, $transition-time padding-bottom ease-in-out;
-}

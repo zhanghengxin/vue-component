@@ -1,5 +1,6 @@
 /**
  * modal
+ * author by @zhengshuai
  */
 import Modal from './Confirm'
 import './style/modal.scss'
@@ -12,7 +13,8 @@ const getModalInstance = (render = undefined) => {
         modalInstance = Modal.Instance({
             closable: false,
             maskClosable: false,
-            footerHide: false,
+            footerHide: true,
+            center: false,
             render: render
         })
     }
