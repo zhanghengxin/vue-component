@@ -10,7 +10,7 @@ describe('Modal', () => {
         vm = createVue({
             template: `
                 <div>
-                    <b-modal v-model="modal" :title="title">
+                    <b-modal v-model="visible" :title="title">
                         <p>对话框内容</p>
                     </b-modal>
                 </div>
@@ -26,12 +26,11 @@ describe('Modal', () => {
         const modal = vm.$children[0]
         setTimeout(() => {
             expect(document.querySelector('.bw-modal')).to.exist
-            expect(document.body.style.overflow).to.equal('hidden')
+            expect(modal.$el.querySelector('.bw-modal-header-inner').textContent).to.equal('modal test')
             expect(modal.$el.parentNode).to.equal(document.body)
-            expect(vm.$el.querySelector('.bw-modal-header-inner').textContent).to.equal('modal test')
             expect(modal.$el.style.display).to.not.equal('none')
             done()
-        }, 10)
+        }, 100)
     })
 
     // 测试 content|body 内容
@@ -56,9 +55,10 @@ describe('Modal', () => {
                 }
             }
         }, true)
+        const modal = vm.$children[0]
         setTimeout(() => {
-            const footerBtns = vm.$el.querySelectorAll('.bw-modal-footer button')
-            expect(vm.$el.querySelector('.bw-modal-body span').textContent).to.equal('Content of modal')
+            expect(modal.$el.querySelector('.bw-modal-body span').textContent).to.equal('Content of modal')
+            const footerBtns = modal.$el.querySelectorAll('.bw-modal-footer button')
             expect(footerBtns.length).to.equal(2)
             expect(footerBtns[0].querySelector('span').textContent).to.equal('cancel')
             expect(footerBtns[1].querySelector('span').textContent).to.equal('ok')
@@ -84,14 +84,14 @@ describe('Modal', () => {
                 }
             }
         }, true)
-        const modal = vm.$children[0]
-        expect(modal.$el.style.display).to.equal('none')
+        const modal = vm.$children[0].$el.querySelector('.bw-modal')
+        expect(modal.style.display).to.equal('none')
         vm.visible = true
         setTimeout(() => {
-            expect(modal.$el.style.display).to.not.equal('none')
+            expect(modal.style.display).to.not.equal('none')
             vm.visible = false
             setTimeout(() => {
-                expect(modal.$el.style.display).to.equal('none')
+                expect(modal.style.display).to.equal('none')
                 done()
             }, 400)
         }, 50)
@@ -120,35 +120,34 @@ describe('Modal', () => {
 
         it('width', () => {
             vm = getModalVm('width="360px"')
-            expect(vm.$el.querySelector('.bw-modal').style.width).to.equal('360px')
+            expect(vm.$children[0].$el.querySelector('.bw-modal').style.width).to.equal('360px')
         })
 
         it('fullscreen', () => {
-            vm = getModalVm('fullscreen width="40%"')
-            const modalEl = vm.$el.querySelector('.bw-modal')
+            vm = getModalVm('fullscreen')
+            const modalEl = vm.$children[0].$el.querySelector('.bw-modal')
             expect(modalEl.classList.contains('bw-modal-fullscreen')).to.be.true
-            expect(modalEl.style.width.contains('100%')).to.be.true
         })
 
         it('z-index', () => {
             vm = getModalVm('z-index="1024"')
-            expect(vm.$el.querySelector('.bw-modal-wrap').style.zIndex).to.equal('1024')
+            expect(vm.$children[0].$el.querySelector('.bw-modal-wrap').style.zIndex).to.equal('1024')
         })
 
         it('class-name', () => {
             vm = getModalVm('class-name="my-modal"')
-            expect(vm.$el.querySelector('.bw-modal-wrap').classList.contains('my-modal')).to.be.true
+            expect(vm.$children[0].$el.querySelector('.bw-modal-wrap').classList.contains('my-modal')).to.be.true
         })
 
         it('ok-text', () => {
             vm = getModalVm('ok-text="ok"')
-            const footerBtns = vm.$el.querySelectorAll('.bw-modal-footer button')
+            const footerBtns = vm.$children[0].$el.querySelectorAll('.bw-modal-footer button')
             expect(footerBtns[1].querySelector('span').textContent).to.equal('ok')
         })
 
         it('cancel-text', () => {
             vm = getModalVm('cancel-text="cancel"')
-            const footerBtns = vm.$el.querySelectorAll('.bw-modal-footer button')
+            const footerBtns = vm.$children[0].$el.querySelectorAll('.bw-modal-footer button')
             expect(footerBtns[0].querySelector('span').textContent).to.equal('cancel')
         })
     })
@@ -178,6 +177,11 @@ describe('Modal', () => {
                 },
                 visibleChange (val) {
                     this.value = val
+                    if (val) {
+                        this.handleOk()
+                    } else {
+                        this.handleCancel()
+                    }
                 }
             },
 
@@ -223,7 +227,7 @@ describe('Modal', () => {
         }, true)
         const modal = vm.$children[0]
         setTimeout(() => {
-            modal.$el.click()
+            modal.$el.querySelector('.bw-modal-wrap').click()
             setTimeout(() => {
                 expect(vm.visible).to.be.false
                 done()
@@ -284,7 +288,7 @@ describe('Modal', () => {
                 vm.visible = false
             }
             setTimeout(() => {
-                expect(vm.value).to.be.false
+                expect(vm.visible).to.be.false
                 done()
             }, 500)
         }, 10)
