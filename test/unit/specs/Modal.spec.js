@@ -1,13 +1,12 @@
-
 import { createVue, destroyVM } from '../utils'
 
 describe('Modal', () => {
-    let vm;
+    let vm
     afterEach(() => {
-        destroyVM(vm);
-    });
+        destroyVM(vm)
+    })
 
-    it ('create', done => {
+    it('create', done => {
         vm = createVue({
             template: `
                 <div>
@@ -21,19 +20,19 @@ describe('Modal', () => {
                 return {
                     title: 'modal test',
                     visible: true
-                };
+                }
             }
-        }, true);
-        const modal = vm.$children[0];
+        }, true)
+        const modal = vm.$children[0]
         setTimeout(() => {
-            expect(document.querySelector('.bw-modal')).to.exist;
-            expect(document.body.style.overflow).to.equal('hidden');
-            expect(modal.$el.parentNode).to.equal(document.body);
-            expect(vm.$el.querySelector('.bw-modal-header-inner').textContent).to.equal('modal test');
-            expect(modal.$el.style.display).to.not.equal('none');
-            done();
-        }, 10);
-    });
+            expect(document.querySelector('.bw-modal')).to.exist
+            expect(document.body.style.overflow).to.equal('hidden')
+            expect(modal.$el.parentNode).to.equal(document.body)
+            expect(vm.$el.querySelector('.bw-modal-header-inner').textContent).to.equal('modal test')
+            expect(modal.$el.style.display).to.not.equal('none')
+            done()
+        }, 10)
+    })
 
     // 测试 content|body 内容
     it('render correct content', done => {
@@ -49,23 +48,23 @@ describe('Modal', () => {
                     </b-modal>
                 </div>
             `,
-        
-            data() {
+
+            data () {
                 return {
                     title: 'modal test',
                     visible: true
-                };
+                }
             }
-        }, true);
+        }, true)
         setTimeout(() => {
-            const footerBtns = vm.$el.querySelectorAll('.bw-modal-footer button');
-            expect(vm.$el.querySelector('.bw-modal-body span').textContent).to.equal('Content of modal');
-            expect(footerBtns.length).to.equal(2);
-            expect(footerBtns[0].querySelector('span').textContent).to.equal('cancel');
-            expect(footerBtns[1].querySelector('span').textContent).to.equal('ok');
-            done();
-        }, 100);
-    });
+            const footerBtns = vm.$el.querySelectorAll('.bw-modal-footer button')
+            expect(vm.$el.querySelector('.bw-modal-body span').textContent).to.equal('Content of modal')
+            expect(footerBtns.length).to.equal(2)
+            expect(footerBtns[0].querySelector('span').textContent).to.equal('cancel')
+            expect(footerBtns[1].querySelector('span').textContent).to.equal('ok')
+            done()
+        }, 100)
+    })
 
     // 测试
     it('open and close', done => {
@@ -77,26 +76,26 @@ describe('Modal', () => {
                     </b-modal>
                 </div>
             `,
-        
-            data() {
+
+            data () {
                 return {
                     title: 'modal test',
                     visible: false
-                };
+                }
             }
-        }, true);
-        const modal = vm.$children[0];
-        expect(modal.$el.style.display).to.equal('none');
-        vm.visible = true;
+        }, true)
+        const modal = vm.$children[0]
+        expect(modal.$el.style.display).to.equal('none')
+        vm.visible = true
         setTimeout(() => {
-            expect(modal.$el.style.display).to.not.equal('none');
-            vm.visible = false;
+            expect(modal.$el.style.display).to.not.equal('none')
+            vm.visible = false
             setTimeout(() => {
-                expect(modal.$el.style.display).to.equal('none');
-                done();
-            }, 400);
-        }, 50);
-    });
+                expect(modal.$el.style.display).to.equal('none')
+                done()
+            }, 400)
+        }, 50)
+    })
 
     // 测试 props
     describe('props', () => {
@@ -104,57 +103,55 @@ describe('Modal', () => {
             return createVue(Object.assign({
                 template: `
                     <div>
-                        <b-modal ${ props } :title="title" v-model="visible">
+                        <b-modal ${props} :title="title" v-model="visible">
                         <span>这是一段信息</span>
                         </b-modal>
                     </div>
                 `,
-        
-                data() {
+
+                data () {
                     return {
                         title: 'modal test',
                         visible: true
-                    };
+                    }
                 }
-            }, options), true);
-        };
+            }, options), true)
+        }
 
-        if ('width', () => {
-            vm = getModalVm('width="360px"');
-            expect(vm.$el.querySelector('.bw-modal').style.width).to.equal('360px');
-        });
-    
+        it('width', () => {
+            vm = getModalVm('width="360px"')
+            expect(vm.$el.querySelector('.bw-modal').style.width).to.equal('360px')
+        })
+
         it('fullscreen', () => {
-            vm = getModalVm('fullscreen width="40%"');
-            const modalEl = vm.$el.querySelector('.bw-modal');
-            expect(modalEl.classList.contains('bw-modal-fullscreen')).to.true;
-            expect(modalEl.style.width.contains('100%')).to.be.true;
-        });
-    
+            vm = getModalVm('fullscreen width="40%"')
+            const modalEl = vm.$el.querySelector('.bw-modal')
+            expect(modalEl.classList.contains('bw-modal-fullscreen')).to.be.true
+            expect(modalEl.style.width.contains('100%')).to.be.true
+        })
+
         it('z-index', () => {
-            vm = getModalVm('z-index="1024"');
-            expect(vm.$el.querySelector('.bw-modal-wrap').style.zIndex).to.equal('1024');
-        });
-    
+            vm = getModalVm('z-index="1024"')
+            expect(vm.$el.querySelector('.bw-modal-wrap').style.zIndex).to.equal('1024')
+        })
+
         it('class-name', () => {
-            vm = getModalVm('class-name="my-modal"');
-            expect(vm.$el.querySelector('.bw-modal-wrap').classList.contains('my-modal')).to.true;
-        });
-        
+            vm = getModalVm('class-name="my-modal"')
+            expect(vm.$el.querySelector('.bw-modal-wrap').classList.contains('my-modal')).to.be.true
+        })
+
         it('ok-text', () => {
-            vm = getModalVm('ok-text="ok"');
-            const footerBtns = vm.$el.querySelectorAll('.bw-modal-footer button');
-            expect(footerBtns[1].querySelector('span').textContent).to.equal('ok');
-        });
+            vm = getModalVm('ok-text="ok"')
+            const footerBtns = vm.$el.querySelectorAll('.bw-modal-footer button')
+            expect(footerBtns[1].querySelector('span').textContent).to.equal('ok')
+        })
 
         it('cancel-text', () => {
-            vm = getModalVm('cancel-text="cancel"');
-            const footerBtns = vm.$el.querySelectorAll('.bw-modal-footer button');
-            expect(footerBtns[0].querySelector('span').textContent).to.equal('cancel');
-        });
-
-        it ('styles', () => {});
-    });
+            vm = getModalVm('cancel-text="cancel"')
+            const footerBtns = vm.$el.querySelectorAll('.bw-modal-footer button')
+            expect(footerBtns[0].querySelector('span').textContent).to.equal('cancel')
+        })
+    })
 
     // 测试 event
     it('events', done => {
@@ -171,41 +168,40 @@ describe('Modal', () => {
                     </b-modal>
                 </div>
             `,
-        
+
             methods: {
-                handleOk() {
-                    this.state = 'open';
+                handleOk () {
+                    this.state = 'open'
                 },
-        
-                handleCancel() {
-                    this.state = 'closed';
+                handleCancel () {
+                    this.state = 'closed'
                 },
-                visibleChange(val) {
+                visibleChange (val) {
                     this.value = val
                 }
             },
-        
-            data() {
+
+            data () {
                 return {
                     state: '',
                     title: 'modal test',
                     visible: false,
                     value: false
-                };
+                }
             }
-        }, true);
-        vm.visible = true;
+        }, true)
+        vm.visible = true
         setTimeout(() => {
-            expect(vm.state).to.equal('open');
-            expect(vm.value).to.be.true;
-            vm.visible = false;
+            expect(vm.state).to.equal('open')
+            expect(vm.value).to.be.true
+            vm.visible = false
             setTimeout(() => {
-                expect(vm.state).to.equal('closed');
-                expect(vm.value).to.be.false;
-                done();
-            }, 50);
-        }, 50);
-    });
+                expect(vm.state).to.equal('closed')
+                expect(vm.value).to.be.false
+                done()
+            }, 50)
+        }, 50)
+    })
 
     // 测试 点击 遮罩 关闭
     it('click modal to close', done => {
@@ -218,22 +214,22 @@ describe('Modal', () => {
                 </div>
             `,
 
-            data() {
+            data () {
                 return {
                     title: 'modal test',
                     visible: true
-                };
+                }
             }
-        }, true);
-        const modal = vm.$children[0];
+        }, true)
+        const modal = vm.$children[0]
         setTimeout(() => {
-            modal.$el.click();
+            modal.$el.click()
             setTimeout(() => {
-                expect(vm.visible).to.be.false;
-                done();
-            }, 400);
-        }, 50);
-    });
+                expect(vm.visible).to.be.false
+                done()
+            }, 400)
+        }, 50)
+    })
 
     // 测试 点击关闭 按钮 x
     it('click header btn', done => {
@@ -245,56 +241,23 @@ describe('Modal', () => {
                     </b-modal>
                 </div>
             `,
-        
-            data() {
+
+            data () {
                 return {
                     title: 'modal test',
                     visible: true
-                };
+                }
             }
-        }, true);
-        const modal = vm.$children[0];
+        }, true)
+        const modal = vm.$children[0]
         setTimeout(() => {
-            modal.$el.querySelector('.bw-modal-close').click();
+            modal.$el.querySelector('.bw-modal-close').click()
             setTimeout(() => {
-                expect(vm.visible).to.be.false;
-                done();
-            }, 500);
-        }, 50);
-    });
-
-    // 测试 on-after-close
-    // it('after close', done => {
-    //     const spy = sinon.spy();
-    //     vm = createVue({
-    //         template: `
-    //         <div>
-    //             <b-modal :title="title" v-mode="visible" @on-after-close="afterClose"></b-modal>
-    //         </div>
-    //         `,
-
-    //         data() {
-    //             return {
-    //                 title: 'modal test',
-    //                 visible: true
-    //             };
-    //         },
-    //         methods: {
-    //             afterClose(done) {
-    //                 spy();
-    //                 done();
-    //             }
-    //         }
-    //     }, true);
-    //     const modal = vm.$children[0];
-    //     setTimeout(() => {
-    //         modal.$el.click();
-    //         setTimeout(() => {
-    //             expect(spy.called).to.be.true;
-    //             done();
-    //         }, 500);
-    //     }, 10);
-    // });
+                expect(vm.visible).to.be.false
+                done()
+            }, 500)
+        }, 50)
+    })
 
     // 测试 esc 关闭
     it('esc close', done => {
@@ -307,25 +270,56 @@ describe('Modal', () => {
                 </div>
             `,
 
-            data() {
+            data () {
                 return {
                     title: 'modal test',
                     visible: true,
                     closable: true,
                     escCode: 27
-                };
+                }
             }
-        }, true);
-        const modal = vm.$children[0];
+        }, true)
         setTimeout(() => {
             if (vm.escCode === 27 && vm.closable) {
                 vm.visible = false
             }
             setTimeout(() => {
-                expect(vm.value).to.be.false;
-                done();
-            }, 500);
-        }, 10);
-    });
+                expect(vm.value).to.be.false
+                done()
+            }, 500)
+        }, 10)
+    })
 
+    // 测试 on-after-close
+    // it('after close', done => {
+    //     const spy = sinon.spy()
+    //     vm = createVue({
+    //         template: `
+    //         <div>
+    //             <b-modal :title="title" v-mode="visible" @on-after-close="afterClose"></b-modal>
+    //         </div>
+    //         `,
+
+    //         data () {
+    //             return {
+    //                 title: 'modal test',
+    //                 visible: true
+    //             }
+    //         },
+    //         methods: {
+    //             afterClose(done) {
+    //                 spy()
+    //                 done()
+    //             }
+    //         }
+    //     }, true)
+    //     const modal = vm.$children[0]
+    //     setTimeout(() => {
+    //         modal.$el.click()
+    //         setTimeout(() => {
+    //             expect(spy.called).to.be.true
+    //             done()
+    //         }, 500)
+    //     }, 10)
+    // })
 })
