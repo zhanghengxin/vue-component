@@ -25,7 +25,7 @@ export default {
         typeClass () {
             return [
                 {
-                    [`bw-${this.type}`]: this.type !== ''
+                    [`b-${this.type}`]: this.type !== ''
                 }
             ]
         },

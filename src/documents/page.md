@@ -87,7 +87,7 @@
 </div>
 
 ### mini 模式
-使用```mini``` 属性来定义Page是否采用mini方式， 当 ```mini``` 为 ```false``` 时，page 采用mini方式
+使用```mini``` 属性来定义Page是否采用mini方式， 当 ```mini``` 为 ```true``` 时，page 采用mini方式
 <div class="example">
     <div class="example-box">
         <div>
@@ -105,7 +105,7 @@
 </div>
 
 ### 简易版
-使用```simple``` 属性来定义Page是否采用简易方式， 当 simple 为 true 时，page 采用简易方式
+使用```simple``` 属性来定义Page是否采用简易方式， 当 ```simple``` 为 ```true``` 时，page 采用简易方式
 
 <div class="example">
     <div class="example-box">

@@ -4,35 +4,34 @@
  * @Author: yanghao
  * @Date: 2018-09-14 15:17:37
  * @Last Modified by: yanghao
- * @Last Modified time: 2018-09-17 09:44:55
+ * @Last Modified time: 2018-09-28 17:03:03
  *
  * --------------------------------------------------------------------------- *
  */
 
 <template>
-    <div :class="classtype" @click="handleChange">
-        <div class="item-header">
+    <div :class="classtype" >
+        <div class="bw-collapse-item-header" @click="handleChange">
             <b-icon type="xiala" size=12 :class="arrow" ></b-icon>
             <slot name="title"></slot>
         </div>
-        <transition name="slideup">
-            <div class="item-content" v-show="show">
+        <CollapseTransition>
+            <div class="bw-collapse-item-content" v-show="show">
                 <slot name="content"></slot>
             </div>
-        </transition>
+        </CollapseTransition>
     </div>
 </template>
 
 <script>
+import CollapseTransition from './collapse-transition'
+
 export default {
-    name: 'CollapseItem',
+    name: 'bw-collapse-item',
+    components: {CollapseTransition},
     props: {
         name: {
             type: String
-        },
-        positionArrow: {
-            type: String,
-            default: 'arrow-left'
         }
     },
     data () {
@@ -40,28 +39,34 @@ export default {
             show: false,
             showname: '',
             isAccordion: this.collapse.getShowIndexArray().accordion,
-            showIndexArray: this.collapse.getShowIndexArray().showIndexArray
+            showIndexArray: this.collapse.getShowIndexArray().showIndexArray,
+            positionArrow: this.collapse.positionArrow
         }
     },
     inject: ['collapse'],
     computed: {
         classtype () {
-            return ['item' + (this.show ? ' item-header-active' : '')]
+            return ['bw-collapse-item' + (this.show ? ' bw-collapse-item-header-active' : '')]
         },
         arrow () {
-            return `arrow  ${this.positionArrow}`
+            let Cls
+            if (this.show) {
+                Cls = `bw-collapse-arrow  bw-collapse-arrow-${this.positionArrow}  bw-collapse-arrow-active-${this.positionArrow}`
+            } else {
+                Cls = `bw-collapse-arrow  bw-collapse-arrow-${this.positionArrow}`
+            }
+            return Cls
         }
     },
     mounted () {
-    // this.$parent.$children.forEach((item, index) => {
-    //   item.showname = item.name || index.toString()
-    // })
+        // this.$parent.$children.forEach((item, index) => {
+        //   item.showname = item.name || index.toString()
+        // })
         var index = [].indexOf.call(this.$el.parentNode.children, this.$el)
         this.showname = this.name || index.toString()
         this.isShow(this.showname)
     },
     methods: {
-    // 只关心当前自己是否展示
         isShow (name) {
             this.show = this.showIndexArray.indexOf(name) > -1
         },
@@ -96,29 +101,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.arrow{
-    margin-right: 5px;
-}
-.arrow-right{
-    transform: rotate(0deg);
-    transition: transform 0.24s,
-}
-
-.item-header-active .arrow-right{
-    display:inline-block;
-    transform: rotate(90deg)
-}
-
-.arrow-left{
-    transform: rotate(-90deg);
-    transition: transform 0.24s,
-}
-
-.item-header-active .arrow-left{
-    display:inline-block;
-    transform: rotate(0deg)
-}
-
-</style>

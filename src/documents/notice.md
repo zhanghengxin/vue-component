@@ -8,12 +8,12 @@
 <div class="example">
   <div class="example-box">
       <div>
-          <bw-button type="tynormal" @on-click="tynormal">默认通知</bw-button>
-          <bw-button type="tysuccess" @on-click="tysuccess">成功通知</bw-button>
-          <bw-button type="tywarning"
-          @on-click="tywarning">警告警告</bw-button>
-          <bw-button type="tyerror"
-          @on-click="tyerror">失败通知</bw-button>
+          <b-button type="tynormal" @on-click="tynormal">默认通知</b-button>
+          <b-button type="tysuccess" @on-click="tysuccess">成功通知</b-button>
+          <b-button type="tywarning"
+          @on-click="tywarning">警告警告</b-button>
+          <b-button type="tyerror"
+          @on-click="tyerror">失败通知</b-button>
       </div>
   </div>
   <script>
@@ -49,10 +49,10 @@
 ::: code
 ```html
     <div>
-      <bw-button type="tynormal" @on-click="tynormal">默认通知</bw-button>
-      <bw-button type="tysuccess" @on-click="tysuccess">成功通知</bw-button>
-      <bw-button type="tywarning" @on-click="tywarning">警告警告</bw-button>
-      <bw-button type="tyerror" @on-click="tyerror">失败通知</bw-button>
+      <b-button type="tynormal" @on-click="tynormal">默认通知</b-button>
+      <b-button type="tysuccess" @on-click="tysuccess">成功通知</b-button>
+      <b-button type="tywarning" @on-click="tywarning">警告警告</b-button>
+      <b-button type="tyerror" @on-click="tyerror">失败通知</b-button>
    </div>
    <script>
       export default {
