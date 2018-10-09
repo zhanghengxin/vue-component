@@ -15,6 +15,8 @@ import Breadcrumb from './breadcrumb'
 import BreadcrumbItem from './breadcrumb-item'
 import { Steps, Step } from './steps/index'
 import Card from './card'
+import Checkbox from './checkbox'
+import CheckboxGroup from './checkboxGroup'
 
 const components = [
     Input,
@@ -30,7 +32,9 @@ const components = [
     CarouselItem,
     Steps,
     Step,
-    Card
+    Card,
+    Checkbox,
+    CheckboxGroup
 ]
 
 const install = function (Vue) {
@@ -54,5 +58,7 @@ export default {
     BreadcrumbItem,
     Steps,
     Step,
-    Card
+    Card,
+    Checkbox,
+    CheckboxGroup
 }

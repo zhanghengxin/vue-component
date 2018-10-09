@@ -38,6 +38,11 @@
           "name": "input"
         },
         {
+          "title": "CheckBox 多选框",
+          "path": "/checkbox",
+          "name": "checkbox"
+        },
+        {
           "title": "Color 色彩",
           "path": "/color",
           "name": "color"
