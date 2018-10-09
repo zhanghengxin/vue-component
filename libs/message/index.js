@@ -79,7 +79,7 @@ Message.install = function (Vue, options) {
     if (options && options.name) {
         Vue.prototype[`$${options.name}`] = Message
     } else {
-        Vue.prototype.$message = Message
+        Vue.prototype.$Message = Message
     }
 }
 
