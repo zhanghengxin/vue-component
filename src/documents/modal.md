@@ -14,7 +14,7 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
             <b-button @on-click="modal1 = true">基本弹框</b-button>
             <b-modal
                 v-model="modal1"
-                title="Common Modal dialog box title"
+                title="普通对话框"
                 @on-ok="ok"
                 @on-cancel="cancel">
                 <p>对话框内容</p>
@@ -27,10 +27,10 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
 ::: code
 ```html
     <div>
-        <b-button type="tynormal" @on-click="modal1 = true">Display dialog box</b-button>
+        <b-button type="tynormal" @on-click="modal1 = true">基本弹框</b-button>
         <b-modal
             v-model="modal1"
-            title="Common Modal dialog box title"
+            title="普通对话框"
         >
             <p>对话框内容</p>
             <p>对话框内容</p>
@@ -46,11 +46,9 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
             },
             methods: {
                 ok () {
-                    this.modal1 = false
                     console.log('Clicked ok')
                 },
                 cancel () {
-                    this.modal1 = false
                     console.log('Clicked cancel')
                 }
             }
@@ -195,6 +193,69 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
 :::
 </div>
 
+### 点击打开嵌套的 modal
+
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-button @on-click="modal7 = true">点击打开嵌套的 modal</b-button>
+            <b-modal
+                v-model="modal7"
+                title="外层 Dialog"
+                :transfer="false"
+            >
+                <p>我是 外层 Dialog</p>
+                <b-modal
+                    v-model="modal8"
+                    width="360"
+                    title="内层 Dialog"
+                >
+                    <p>我是 内层 Dialog</p>
+                </b-modal>
+                <div slot="footer">
+                    <b-button @on-click="modal7 = false">取 消</b-button>
+                    <b-button  @on-click="modal8 = true">打开内层 Dialog</b-button>
+                </div>
+            </b-modal>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-button @on-click="modal7 = true">点击打开嵌套的 modal</b-button>
+        <b-modal
+            v-model="modal7"
+            title="外层 Dialog"
+            :transfer="false"
+        >
+            <p>我是 外层 Dialog</p>
+            <b-modal
+                v-model="modal8"
+                title="内层 Dialog"
+            >
+                <p>我是 内层 Dialog</p>
+            </b-modal>
+            <div slot="footer">
+                <b-button @on-click="modal7 = false">取 消</b-button>
+                <b-button  @on-click="modal8 = true">打开内层 Dialog</b-button>
+            </div>
+        </b-modal>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    modal7: false,
+                    modal8: false
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
 ### 实例化使用方法
 
 <div class="example">
@@ -292,12 +353,13 @@ export default {
             modal4: false,
             modal5: false,
             modal6: false,
+            modal7: false,
+            modal8: false,
             name: ''
         }
     },
     methods: {
         ok () {
-            this.modal1 = false
             console.log('Clicked ok')
         },
         del () {
@@ -305,7 +367,6 @@ export default {
             console.log('Successfully delete')
         },
         cancel () {
-            this.modal1 = false
             console.log('Clicked cancel')
         },
         instance (type) {
