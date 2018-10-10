@@ -7,6 +7,7 @@
 import Vue from 'vue'
 import BModal from './Modal'
 import BButton from '../button'
+import BIcon from '../icon'
 
 const prefixCls = 'bw-modal-confirm'
 
@@ -16,7 +17,7 @@ BModal.Instance = (params = {}) => {
             return {
                 ...params,
                 visible: false,
-                width: 416,
+                width: 400,
                 title: '',
                 body: '',
                 iconType: '',
@@ -42,8 +43,12 @@ BModal.Instance = (params = {}) => {
                     h('div', {
                         class: this.iconTypeCls
                     }, [
-                        h('i', {
-                            class: this.iconNameCls
+                        h(BIcon, {
+                            class: this.iconNameCls,
+                            attrs: {
+                                type: this.iconName,
+                                size: 24
+                            }
                         })
                     ]),
                     h('div', {
@@ -88,7 +93,7 @@ BModal.Instance = (params = {}) => {
                         type: 'default'
                     },
                     on: {
-                        click: this.cancel
+                        'on-click': this.cancel
                     }
                 }, this.localeCancelText))
             }
@@ -98,7 +103,7 @@ BModal.Instance = (params = {}) => {
                     loading: this.okLoading
                 },
                 on: {
-                    click: this.ok
+                    'on-click': this.ok
                 }
             }, this.localeOkText))
             footerRender = h('div', {
@@ -142,8 +147,8 @@ BModal.Instance = (params = {}) => {
             },
             iconNameCls () {
                 return [
-                    'ivu-icon',
-                    `ivu-icon-${this.iconName}`
+                    'b-icon'
+                    // `bw-${this.iconName}`
                 ]
             },
             localeOkText () {
@@ -169,7 +174,6 @@ BModal.Instance = (params = {}) => {
                 this.remove()
             },
             ok () {
-                debugger
                 if (this.loading) {
                     this.okLoading = true
                 } else {
@@ -200,11 +204,11 @@ BModal.Instance = (params = {}) => {
 
     // TODO UI图标
     const iconNameStore = {
-        info: 'ios-information-circle',
-        success: 'ios-checkmark-circle',
-        warning: 'ios-alert',
-        error: 'ios-close-circle',
-        confirm: 'ios-help-circle'
+        info: 'yiban',
+        success: 'chenggong',
+        warning: 'yichang',
+        error: 'shibai',
+        confirm: 'yiban'
     }
 
     return {

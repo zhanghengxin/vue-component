@@ -15,7 +15,7 @@ describe('Icon.vue', () => {
             type: 'fapiaoshengcheng'
         }, true)
         let Elm = vm.$el
-        expect(Elm.classList.contains('bw-fapiaoshengcheng')).to.be.true
+        expect(Elm.classList.contains('b-fapiaoshengcheng')).to.be.true
     })
     it('size', () => {
         vm = createTest(Icon, {
