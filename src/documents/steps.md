@@ -93,7 +93,7 @@
             </b-steps>
         </div>
         <div>
-           <bw-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</bw-button>
+           <b-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</b-button>
         </div>
     </div>
 
@@ -108,7 +108,7 @@
             </b-steps>
         </div>
         <div>
-           <bw-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</bw-button>
+           <b-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</b-button>
         </div>
          <script>
              export default {
@@ -176,7 +176,7 @@
            </b-steps>
        </div>
         <div>
-           <bw-button size="normal" @on-click="nextStep">下一步</bw-button>
+           <b-button size="normal" @on-click="nextStep">下一步</b-button>
         </div>
     </div>
 
@@ -191,7 +191,7 @@
           </b-steps>
        </div>
         <div>
-           <bw-button size="normal" @on-click="nextStep">下一步</bw-button>
+           <b-button size="normal" @on-click="nextStep">下一步</b-button>
         </div>
          <script>
              export default {
