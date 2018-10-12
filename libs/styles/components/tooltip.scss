@@ -1,5 +1,5 @@
 
-@import 'tooltip.common';
+@import '../common/tooltip.scss';
 
 .#{$tooltip-prefix-cls} {
     display: inline-block;

@@ -20,7 +20,6 @@ $shadow-down            : 0 1px 6px $shadow-color;
 $shadow-base            : $shadow-down;
 
 // Tooltip
-$css-prefix: "bw-";
 $tooltip-prefix-cls: "#{$css-prefix}tooltip";
 $tooltip-arrow: "#{$tooltip-prefix-cls}-arrow";
 $tooltip-max-width: 250px;

@@ -29,7 +29,7 @@ import Popper from './popper'
 import TransferDom from '../modal/directive/transfer-dom'
 import { oneOf } from '../../utils/common'
 
-const prefixCls = 'bw-tooltip'
+const prefixCls = 'b-tooltip'
 
 export default {
     name: 'BTooltip',

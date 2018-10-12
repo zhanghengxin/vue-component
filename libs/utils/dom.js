@@ -1,11 +1,5 @@
-/**
- * 默认 的 modal props
- * author by @zhengshuai
- */
 import Vue from 'vue'
 const isServer = Vue.prototype.$isServer
-
-export const prefixCls = 'bw-modal'
 
 /* istanbul ignore next */
 export const on = (() => {
