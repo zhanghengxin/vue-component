@@ -47,4 +47,4 @@
 
 以下是测试用例执行成功的截图
 
-![avatar](../assets/image/test.jpg)
+![avatar](../../assets/image/test.jpg)

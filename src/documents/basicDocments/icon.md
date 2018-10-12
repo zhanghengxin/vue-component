@@ -1,5 +1,5 @@
 <script>
-    var iconList = require('../utils/icon.json')
+    var iconList = require('../../utils/icon.json')
 
     export default {
         data () {

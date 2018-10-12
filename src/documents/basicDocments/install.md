@@ -9,9 +9,6 @@
 cnpm i
 ```
 
-
-
-
 ### 项目目录
 ```
 ├── build  // 配置文件目录
@@ -28,14 +25,13 @@ cnpm i
 │   ├── index.js
 │   └── prod.env.js
 ├── libs // 组件库
-│   ├── page // page 源码 【例子】
+│   ├── components //  组件库js源码
+│   ├── styles  // 组件库css源码
 │   ├── utils  // 组件公用 API
-│   ├── common.js  //组件库公共资源
 │   └── index.js // 入口文件
 ├── src // 组件资源区和文档放置区
 │   ├── assets // 静态资源
 │   │   ├── scss //
-│   │   │   ├── bwUI.scss 全局组件库样式
 │   │   │   ├── color.scss 全局样色表
 │   │   │   ├── doc.scss  示例文档样式
 │   │   │   ├── index.scss  全局样式引用
