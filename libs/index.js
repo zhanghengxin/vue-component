@@ -15,6 +15,7 @@ import Breadcrumb from './breadcrumb'
 import BreadcrumbItem from './breadcrumb-item'
 import Circle from './circle'
 import { Steps, Step } from './steps/index'
+import { Row, Col } from './grid'
 import Card from './card'
 import Modal from './modal'
 
@@ -33,6 +34,8 @@ const components = [
     Steps,
     Step,
     Card,
+    Row,
+    Col,
     Modal,
     Circle
 ]
@@ -60,6 +63,8 @@ export default {
     Circle,
     Steps,
     Step,
+    Row,
+    Col,
     Card,
     Modal
 }
