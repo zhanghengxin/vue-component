@@ -24,7 +24,7 @@
       "redirect": "/guide"
     }
   ],
-  "组件": [
+  "基础组件": [
     {
       "title": "基础",
       "path": "/",
@@ -132,6 +132,32 @@
           "title": "Circle 进度环",
           "path": "/circle",
           "name": "circle"
+        }
+      ]
+    }
+  ],
+  "业务组件": [
+    {
+      "title": "进项",
+      "path": "/",
+      "items": [
+        {
+          "title": "invoice 发票票面",
+          "path": "/incomeInvoice",
+          "name": "incomeInvoice",
+          "incomeName": "invoice"
+        }
+      ]
+    },
+    {
+      "title": "销项",
+      "path": "/",
+      "items": [
+        {
+          "title": "invoice 发票票面",
+          "path": "/outputIncome",
+          "name": "outputIncome",
+          "outputName": "invoice"
         }
       ]
     }

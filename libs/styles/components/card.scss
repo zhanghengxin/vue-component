@@ -1,0 +1,51 @@
+@import "../common/color";
+.b-card-wrapper {
+    background: $white;
+    border-radius: 4px;
+    font-size: 14px;
+    position: relative;
+    &:hover {
+        box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+        border-color: $Border;
+    }
+    &.b-card-dis-hover {
+        box-shadow: none;
+    }
+    .b-card-header {
+        border-bottom: 1px solid $Border;
+        padding: 14px 16px;
+
+        .b-card-header-inner {
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
+            font-size: 14px;
+            color: $Title;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            &.span {
+                vertical-align:middle;
+            }
+        }
+    }
+
+    .b-card-body {
+        padding: 16px;
+    }
+
+    .b-card-extra {
+        position: absolute;
+        right: 16px;
+        top: 14px;
+    }
+}
+
+.b-card-border {
+    border: 1px solid $Border;
+}
+
+.b-card-shadow {
+    box-shadow: 0 1px 6px rgba(0,0,0,.2);
+}
