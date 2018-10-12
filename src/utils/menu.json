@@ -24,7 +24,7 @@
       "redirect": "/guide"
     }
   ],
-  "组件": [
+  "基础组件": [
     {
       "title": "基础",
       "path": "/",
@@ -90,6 +90,16 @@
           "title": "Notice 通知",
           "path": "/notice",
           "name": "notice"
+        },
+        {
+          "title": "Modal 对话框",
+          "path": "/modal",
+          "name": "modal"
+        },
+        {
+          "title": "Tooltip 文字提示",
+          "path": "/tooltip",
+          "name": "tooltip"
         }
       ]
     },
@@ -122,6 +132,32 @@
           "title": "Circle 进度环",
           "path": "/circle",
           "name": "circle"
+        }
+      ]
+    }
+  ],
+  "业务组件": [
+    {
+      "title": "进项",
+      "path": "/",
+      "items": [
+        {
+          "title": "invoice 发票票面",
+          "path": "/incomeInvoice",
+          "name": "incomeInvoice",
+          "incomeName": "invoice"
+        }
+      ]
+    },
+    {
+      "title": "销项",
+      "path": "/",
+      "items": [
+        {
+          "title": "invoice 发票票面",
+          "path": "/outputIncome",
+          "name": "outputIncome",
+          "outputName": "invoice"
         }
       ]
     }
