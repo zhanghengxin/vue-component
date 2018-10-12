@@ -17,6 +17,7 @@ import Circle from './circle'
 import { Steps, Step } from './steps/index'
 import Card from './card'
 import Modal from './modal'
+import Tooltip from './tooltip'
 
 const components = [
     Input,
@@ -34,11 +35,13 @@ const components = [
     Step,
     Card,
     Modal,
-    Circle
+    Circle,
+    Tooltip
 ]
 
 const install = function (Vue) {
     if (install.installed) return
+    components.map(component => console.log(component.name))
     components.map(component => Vue.component(component.name, component))
     Vue.prototype.$Message = Message
     Vue.prototype.$Modal = Modal
@@ -61,5 +64,6 @@ export default {
     Steps,
     Step,
     Card,
-    Modal
+    Modal,
+    Tooltip
 }
