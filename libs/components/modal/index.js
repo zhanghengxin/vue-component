@@ -3,7 +3,6 @@
  * author by @zhengshuai
  */
 import Modal from './Confirm'
-import './style/modal.scss'
 
 // modal 实例 单一
 let modalInstance

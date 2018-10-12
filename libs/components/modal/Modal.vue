@@ -35,8 +35,10 @@
 import BButton from '../button'
 import BIcon from '../icon'
 import TransferDom from './directive/transfer-dom'
-import { prefixCls, on, off } from './util'
+import { on, off } from '../../utils/dom'
 import Scrollbar from './mixins/scrollbar'
+
+const prefixCls = 'b-modal'
 
 export default {
     name: 'BModal',
