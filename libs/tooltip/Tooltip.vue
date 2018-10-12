@@ -48,7 +48,7 @@ export default {
         },
         delay: {
             type: Number,
-            default: 100
+            default: 0
         },
         disabled: {
             type: Boolean,
@@ -80,8 +80,7 @@ export default {
     },
     data () {
         return {
-            prefixCls: prefixCls,
-            timeout: null
+            prefixCls: prefixCls
         }
     },
     computed: {
@@ -103,7 +102,6 @@ export default {
         handleShowPopper () {
             if (this.timeout) {
                 clearTimeout(this.timeout)
-                this.timeout = null
             }
             this.timeout = setTimeout(() => {
                 this.visible = true
@@ -112,7 +110,6 @@ export default {
         handleClosePopper () {
             if (this.timeout) {
                 clearTimeout(this.timeout)
-                this.timeout = null
                 if (!this.controlled) {
                     this.timeout = setTimeout(() => {
                         this.visible = false

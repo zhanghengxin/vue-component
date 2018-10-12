@@ -41,7 +41,6 @@ const components = [
 
 const install = function (Vue) {
     if (install.installed) return
-    components.map(component => console.log(component.name))
     components.map(component => Vue.component(component.name, component))
     Vue.prototype.$Message = Message
     Vue.prototype.$Modal = Modal

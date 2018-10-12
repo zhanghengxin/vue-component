@@ -13,7 +13,7 @@
     &-popper{
         @include popper($tooltip-arrow, $tooltip-arrow-width, $tooltip-distance, $tooltip-bg);
     }
-    &-light&-popper{
+    &-light{
         @include popper($tooltip-arrow, $tooltip-arrow-width-light, $tooltip-distance-light, $tooltip-arrow-color);
 
         &[x-placement^="top"] .#{$tooltip-arrow}:after {
