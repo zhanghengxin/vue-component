@@ -4,14 +4,17 @@
  * @created 2018/09/18 20:05:54
  */
 <template>
-    <div class='b-input-box' :class="{'b-input-group':labelText,'b-input-error':error}">
-        <div v-if="labelText" class="b-input-label">{{labelText}}</div>
-        <i class="b-icon" :class="['']" v-if="false" @click="handleClear"></i>
-        <i class="b-icon" :class="['']" v-else-if="false" @click="handleIconClick"></i>
-        <i class="b-icon" :class="['']" v-else-if="false" @click="handleSearch"></i>
-        <input
+    <div class="b-input-box">
+        <div v-if="type != 'textarea'" :class="{'b-input-group':labelText,'b-input-error':error}">
+            <div v-if="labelText" class="b-input-label">{{labelText}}</div>
+            <i class="b-icon" :class="['']" v-if="false" @click="handleClear"></i>
+            <i class="b-icon" :class="['']" v-else-if="false" @click="handleIconClick"></i>
+            <i class="b-icon" :class="['']" v-else-if="false" @click="handleSearch"></i>
+            <input
                 class="b-input"
+                :id="elementId"
                 :class="[`b-input-${size}`]"
+                ref="input"
                 :value="currentValue"
                 :placeholder="placeholder"
                 :disabled="disabled"
@@ -26,6 +29,27 @@
                 @blur="handleBlur"
                 @keyup="handleKeyup"
                 @keydown="handleKeydown"/>
+        </div>
+        <textarea
+            v-else
+            :id="elementId"
+            :class="[`b-input-${size}`]"
+            ref="textarea"
+            :value="currentValue"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            :maxlength="maxlength"
+            :minlength="minlength"
+            :readonly="readonly"
+            :autofocus="autofocus"
+            :type="type"
+            @change="handleChange"
+            @input="handleInput"
+            @focus="handleFocus"
+            @blur="handleBlur"
+            @keyup="handleKeyup"
+            @keydown="handleKeydown">
+        </textarea>
     </div>
 </template>
 
@@ -36,13 +60,16 @@ export default {
     props: {
         /* 控制input的自带属性 */
         // 接收input的value
+        elementId: {
+            type: String
+        },
         value: {
             type: [String, Number],
             default: ''
         },
         type: {
             validator (value) {
-                return ['text', 'password', 'url', 'email'].indexOf(value) !== -1
+                return ['text', 'textarea', 'password', 'url', 'email'].indexOf(value) !== -1
             },
             default: 'text'
         },
@@ -79,7 +106,6 @@ export default {
         size: {
             default: 'normal',
             validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
                 return ['large', 'small', 'normal'].indexOf(value) !== -1
             }
         },

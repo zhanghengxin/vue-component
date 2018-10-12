@@ -37,6 +37,7 @@
         <div>
             <b-input v-model="value" placeholder="请输入..." /></b-input>
             <b-input v-model="value" placeholder="请输入..." :error='error' /></b-input>
+            <b-input v-model="value" type='textarea' placeholder="请输入..." :error='error' /></b-input>
             <span>{{value}}</div>
         </div>
     </div>
@@ -47,13 +48,15 @@
 
     <template>
         <b-input v-model="value" placeholder="请输入..." /></b-input>
+        <b-input v-model="value" placeholder="请输入..." :error='error' /></b-input>
         <span>{{value}}</span>
     </template>
     <script>
         export default {
             data () {
                 return {
-                    value: ''
+                    value: '',
+                    error:true
                 }
             }
         }
@@ -70,9 +73,11 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
     <div class="example-box">
         <div>
             <b-input v-model="value1" size="large" placeholder="large" ></b-input>
-            <hr/>
+            <br/>
+            <br/>
             <b-input v-model="value2" size="normal" placeholder="normal" ></b-input>
-            <hr/>
+            <br/>
+            <br/>
             <b-input v-model="value3" size="small" placeholder="small" ></b-input>
         </div>
     </div>
@@ -83,9 +88,9 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 
     <template>
         <b-input v-model="value1" size="large" placeholder="large" ></b-input>
-        <hr/>
+        <br/>
         <b-input v-model="value2" size="normal" placeholder="normal" ></b-input>
-        <hr/>
+        <br/>
         <b-input v-model="value3" size="small" placeholder="small" ></b-input>
     </template>
     <script>
@@ -107,10 +112,12 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
     <div class="example-box">
         <div>
             <b-input v-model="value5" size="large" placeholder="large" disabled></b-input>
-            <hr/>
+            <br/>
+            <br/>
             <b-input v-model="value6" size="normal" placeholder="normal" :disabled='disabled'></b-input>
-            <hr/>
-            <b-input v-model="value7" size="small" placeholder="small" :disabled='disabled'></b-input>
+            <br/>
+            <br/>
+            <b-input v-model="value7" size="small" :labelText="name" placeholder="small" :disabled='disabled'></b-input>
         </div>
     </div>
 </div>
@@ -118,11 +125,11 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ::: code
 ```html
 
-    <template
+    <template>
         <b-input v-model="value5" size="large" placeholder="large" disabled></b-input>
-        <hr/>
+        <br/>
         <b-input v-model="value6" size="normal" placeholder="normal" :disabled='disabled'></b-input>
-        <hr/>
+        <br/>
         <b-input v-model="value7" size="small" placeholder="small" :disabled='disabled'></b-input>
     </template>
     <script>
@@ -147,9 +154,9 @@ Input 组件可以在不同场景下选择合适的样式。<br/>
     <div class="example-box">
         <div>
             <b-input v-model="value4" @change='changemal' size="large" :labelText="name"></b-input>
-            <hr/>
+            <br/>
             <b-input v-model="value4" @change='changemal' :labelText="pwd" :error='error'></b-input>
-            <hr/>
+            <br/>
             <b-input v-model="value4" @change='changemal' size="small" :labelText="name"></b-input>
         </div>
     </div>
@@ -160,9 +167,9 @@ Input 组件可以在不同场景下选择合适的样式。<br/>
 
     <template>
         <b-input v-model="value4" @change='changemal' size="large" :labelText="name"></b-input>
-        <hr/>
+        <br/>
         <b-input v-model="value4" @change='changemal' :labelText="pwd" :error='error'></b-input>
-        <hr/>
+        <br/>
         <b-input v-model="value4" @change='changemal' size="small" :labelText="name"></b-input>
     </template>
     <script>
