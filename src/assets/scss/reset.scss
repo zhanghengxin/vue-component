@@ -74,6 +74,10 @@ input[disabled=disabled] {
   cursor: no-drop;
 }
 
+textarea{
+  resize: vertical;
+}
+
 fieldset, img {
   border: none;
 }

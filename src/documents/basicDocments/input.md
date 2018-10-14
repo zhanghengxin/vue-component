@@ -4,6 +4,7 @@
         data () {
             return {
                 value: '',
+                value0: '',
                 value1: '',
                 value2: '',
                 value3: '',
@@ -11,10 +12,20 @@
                 value5: '',
                 value6: '',
                 value7: '',
+                value8: '',
+                value9: '',
+                value10: '',
+                value11: '',
+                value12: '',
                 name:'姓名',
                 pwd:'密码',
                 disabled:true,
-                error:true
+                error:true,
+                clearable:true,
+                prefix:true,
+                suffix:true,
+                icon:'chaxun',
+                autosize:true
             }
         },
         methods:{
@@ -30,14 +41,13 @@
 -----
 ### 基础用法
 可使用 v-model 实现数据的双向绑定。<br/>
-可直接设置 style 来改变输入框的宽度，默认 180px。
-可直接设置 error 来改变输入框的hover focus，默认 180px。
+可直接设置 style 来改变输入框的宽度，默认 100%。<br/>
+可直接设置 error 来改变输入框的hover focus样式
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value" placeholder="请输入..." /></b-input>
-            <b-input v-model="value" placeholder="请输入..." :error='error' /></b-input>
-            <b-input v-model="value" type='textarea' placeholder="请输入..." :error='error' /></b-input>
+            <b-input v-model="value" placeholder="请输入..." style='width:200px' /></b-input>
+            <b-input v-model="value0" placeholder="请输入..." style='width:200px' :error='error' /></b-input>
             <span>{{value}}</div>
         </div>
     </div>
@@ -47,15 +57,16 @@
 ```html
 
     <template>
-        <b-input v-model="value" placeholder="请输入..." /></b-input>
-        <b-input v-model="value" placeholder="请输入..." :error='error' /></b-input>
-        <span>{{value}}</span>
+        <b-input v-model="value" placeholder="请输入..." style='width:200px' /></b-input>
+        <b-input v-model="value0" placeholder="请输入..." style='width:200px' :error='error' /></b-input>
+        <span>{{value}}</div>
     </template>
     <script>
         export default {
             data () {
                 return {
                     value: '',
+                    value0: '',
                     error:true
                 }
             }
@@ -63,7 +74,6 @@
     </script>
 ```
 :::
-</div>
 
 
 ### 尺寸
@@ -73,11 +83,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
     <div class="example-box">
         <div>
             <b-input v-model="value1" size="large" placeholder="large" ></b-input>
-            <br/>
-            <br/>
             <b-input v-model="value2" size="normal" placeholder="normal" ></b-input>
-            <br/>
-            <br/>
             <b-input v-model="value3" size="small" placeholder="small" ></b-input>
         </div>
     </div>
@@ -88,36 +94,29 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 
     <template>
         <b-input v-model="value1" size="large" placeholder="large" ></b-input>
-        <br/>
         <b-input v-model="value2" size="normal" placeholder="normal" ></b-input>
-        <br/>
         <b-input v-model="value3" size="small" placeholder="small" ></b-input>
     </template>
     <script>
         export default {
             data () {
                 return {
-                    value1: ''
+                    value1: '',
+                    value2: '',
+                    value3: ''
                 }
             }
         }
     </script>
 ```
 :::
-</div>
 
 ### 禁用
 通过添加disabled属性可设置为不可用状态。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value5" size="large" placeholder="large" disabled></b-input>
-            <br/>
-            <br/>
-            <b-input v-model="value6" size="normal" placeholder="normal" :disabled='disabled'></b-input>
-            <br/>
-            <br/>
-            <b-input v-model="value7" size="small" :labelText="name" placeholder="small" :disabled='disabled'></b-input>
+            <b-input v-model="value4" :disabled='disabled'></b-input>
         </div>
     </div>
 </div>
@@ -126,58 +125,12 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```html
 
     <template>
-        <b-input v-model="value5" size="large" placeholder="large" disabled></b-input>
-        <br/>
-        <b-input v-model="value6" size="normal" placeholder="normal" :disabled='disabled'></b-input>
-        <br/>
-        <b-input v-model="value7" size="small" placeholder="small" :disabled='disabled'></b-input>
+        <b-input v-model="value4" :disabled='disabled'></b-input>
     </template>
     <script>
         export default {
             data () {
                 return {
-                    value5: '',
-                    value6: '',
-                    value7: ''
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-### 样式类型
-Input 组件可以在不同场景下选择合适的样式。<br/>
-样式选项：通过设置```labelText```属性来配置它们。
-<div class="example">
-    <div class="example-box">
-        <div>
-            <b-input v-model="value4" @change='changemal' size="large" :labelText="name"></b-input>
-            <br/>
-            <b-input v-model="value4" @change='changemal' :labelText="pwd" :error='error'></b-input>
-            <br/>
-            <b-input v-model="value4" @change='changemal' size="small" :labelText="name"></b-input>
-        </div>
-    </div>
-</div>
-
-::: code
-```html
-
-    <template>
-        <b-input v-model="value4" @change='changemal' size="large" :labelText="name"></b-input>
-        <br/>
-        <b-input v-model="value4" @change='changemal' :labelText="pwd" :error='error'></b-input>
-        <br/>
-        <b-input v-model="value4" @change='changemal' size="small" :labelText="name"></b-input>
-    </template>
-    <script>
-        export default {
-            data () {
-                return {
-                    name:'姓名'
-                    pwd:'密码',
                     value4: ''
                 }
             }
@@ -185,28 +138,163 @@ Input 组件可以在不同场景下选择合适的样式。<br/>
     </script>
 ```
 :::
+
+### 清空
+通过添加clearable属性可设置带清空按钮的功能。<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-input v-model="value5" :clearable='clearable'></b-input>
+        </div>
+    </div>
 </div>
+
+::: code
+```html
+
+    <template>
+        <b-input v-model="value5" :clearable='clearable'></b-input>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    clearable: true,
+                    value5:''
+                }
+            }
+        }
+    </script>
+```
+:::
+
+### icon
+通过添加icon 属性可设置带icon的样式 ```prefix```设置显示在前 ```suffix```设置显示在后。<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-input v-model="value6" :icon='icon' :prefix='prefix' ></b-input>
+            <b-input v-model="value7" :icon='icon' :suffix='suffix' ></b-input>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+        <b-input v-model="value6" :icon='icon' :prefix='prefix' ></b-input>
+        <b-input v-model="value7" :icon='icon' :suffix='suffix' ></b-input>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    icon:'chaxun',
+                    value6:'',
+                    value7:'',
+                    prefix:true,
+                    suffix:true
+                }
+            }
+        }
+    </script>
+```
+:::
+
+### textarea
+通过设置属性 type 为 textarea 来使用文本域，用于多行输入。
+通过设置属性 rows 控制文本域默认显示的行数， 默认2行。
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-input v-model="value8" type="textarea" /></b-input>
+            <b-input v-model="value9" type="textarea" :rows="4" /></b-input>
+            <b-input v-model="value10" type="textarea" :rows="4" disabled></b-input>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+        <b-input v-model="value8" type="textarea" /></b-input>
+        <b-input v-model="value9" type="textarea" :rows="4" /></b-input>
+        <b-input v-model="value10" type="textarea" :rows="4" disabled></b-input>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    value8: '',
+                    value9: '',
+                    value10: ''
+                }
+            }
+        }
+    </script>
+```
+:::
+
+### textarea
+设置属性```autosize```，文本域会自动适应高度的变化。autosize也可以设定为一个对象，指定最小行数和最大行数。
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-input v-model="value11"  type="textarea" :autosize='autosize'></b-input>
+            <b-input v-model="value12"  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+        <b-input v-model="value11"  type="textarea" :autosize='autosize'></b-input>
+        <b-input v-model="value12"  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    value8: '',
+                    value9: '',
+                    value10: ''
+                }
+            }
+        }
+    </script>
+```
+:::
 
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |----------|--------|---------- |-------------  |-------- |
 | value    | 绑定的值，可使用 v-model 双向绑定   | String,Number  | - |   -  |
 | type     | 输入框类型   | String  | `text`、`password`、`textarea`、`url`、`email` |   -  |
-| placeholder | 占位文本   | String  | - |   -  |
+| placeholder | 占位文本   | String  | - |   请输入..  |
 | disabled | 设置输入框为禁用状态   | Boolean  | `true`、`false` |   false  |
 | readonly | 设置输入框为只读   | Boolean  | `true`、`false` |   false  |
 | error | 设置输入框为error状态   | Boolean  | `true`、`false` |   false  |
 | name | 设置输入框name   | String  | - |   -  |
 | maxlength | 最大输入长度   | Number  | - |   -  |
 | minlength | 最大输入长度   | Number  | - |   -  |
+| clearable | 是否显示清空按钮   | Boolean  | `true`、`false` | false  |
+| spellcheck | 是否拼写检查   | Boolean  | `true`、`false` | false  |
 | autofocus | 自动获取焦点   | Boolean  | `true`、`false` |   false  |
-| size     | 尺寸   | String  |  `large`、`normal`、`small` |   normal  |
-| labelText| 输入框前的文字   | String    |   -  |   -  |
+| icon     | icon的名称class   | String  |  详见icon组件 |   -  |
+| prefix     | icon的在前面   | Boolean  |  `true`、`false` |  false   |
+| suffix     | icon的在后面   | Boolean  |  `true`、`false` |  false   |
+| rows     | 文本域默认行数，仅在 textarea 类型下有效   | Number  |  - |   2  |
+| autosize | 自适应内容高度，仅在 textarea 类型下有效，可传入对象，如 { minRows: 2, maxRows: 6 }   | Boolean,Object  |  - |   false  |
+| wrap     | 原生的 wrap 属性，仅在 textarea 下生效   | String  |  `soft`、`hard` |   soft  |
 
 ### events
 | 事件名	      | 说明	    | 返回值 |
 |-------------|---------|----------|
-| on-click    | 点击时触发    | -  |
+| on-click    | 点击icon时触发    | -  |
 | on-change   | 数据改变时触发 | event |
 | on-focus   | 输入框聚焦时触发 | - |
 | on-blur   | 输入框失去聚焦时触发 | - |

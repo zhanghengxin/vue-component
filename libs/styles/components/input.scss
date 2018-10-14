@@ -1,157 +1,208 @@
+/**
+ * input scss
+ * author ganbowen
+ * created 2018/10/14 17:35:46
+ */
 @import "../common/color";
+@import "../common/prefix";
+
+$css-prefix-input: $css-prefix + 'input';
+$css-prefix-input-icon: $css-prefix-input + '-icon';
+$input-base-border:1px solid $Border;
+$input-small-size:24px;
+$input-normal-size:32px;
+$input-large-size:40px;
+
+//input 的hover focus 等效果
+@mixin inputMockClass($color,$shadowColor){
+  &:hover {
+    border-color: $color;
+  }
+
+  &:focus {
+    border-color: $color;
+    box-shadow: $shadowColor;
+  }
+
+  &:disabled {
+    background-color: $Disabled;
+  }
+
+  &:disabled:hover {
+    border-color: $Border;
+  }
+}
+
+// input 的icon配合时的padding
+@mixin inputSize($input-size,$input-padding,$input-font-size) {
+  height: $input-size;
+  padding: $input-padding;
+  font-size: $input-font-size;
+  &.#{$css-prefix-input}-prefix{
+    padding-left: $input-size;
+  }
+  &.#{$css-prefix-input}-suffix{
+    padding-right: $input-size;
+  }
+}
+
+// icon 的大小
+@mixin inputIconSize($icon-size,$fontSize){
+  font-size: $fontSize;
+  width: $icon-size;
+  line-height: $icon-size;
+}
 
 //input 组件
 //input基础样式
-.b-input-box {
+.#{$css-prefix-input}-box {
   display: inline-block;
-  .b-input {
+  position: relative;
+  //b-input-box：hover 显示clear-icon
+  &:hover{
+    .#{$css-prefix-input-icon}-clear{
+      display: inline-block;
+    }
+  }
+  .#{$css-prefix-input} {
     display: inline-block;
-    width: 180px;
+    width: 100%;
     line-height: 1.5;
     font-size: 12px;
-    border: 1px solid $Border;
+    border: $input-base-border;
     border-radius: 4px;
     color: $Content;
     background-color: #fff;
     background-image: none;
-    position: relative;
     cursor: text;
+    outline: none;
     transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
-
-    &:hover {
-      border-color: $LightPrimary;
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
-    }
-
-    &:disabled {
-      background-color: $Disabled;
-    }
-
-    &:disabled:hover {
-      border-color: $Border;
+    margin: 0;
+    vertical-align: middle;
+    box-sizing: border-box;
+    @include inputMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2))
+  }
+  
+  // error input样式
+  &.#{$css-prefix-input}-error {
+    .#{$css-prefix-input} {
+      @include inputMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2))
     }
   }
-
-  .b-input-small {
-    padding: 4px 8px;
-    height: 24px;
-    border-radius: 3px;
+  //Reset height for textarea
+  textarea.#{$css-prefix-input}{
+    max-width: 100%;
+    height: auto;
+    min-height: $input-normal-size;
+    vertical-align: bottom;
   }
 
-  .b-input-normal {
-    font-size: 12px;
-    padding: 8px;
-    height: 32px;
+  .#{$css-prefix-input}-small {
+    @include inputSize($input-small-size,4px 8px,12px);
   }
 
-  .b-input-large {
-    font-size: 14px;
-    padding: 12px 8px;
-    height: 40px;
+  .#{$css-prefix-input}-normal {
+    @include inputSize($input-normal-size,8px,14px);
+  }
+
+  .#{$css-prefix-input}-large {
+    @include inputSize($input-large-size,12px 8px,16px);
+  }
+
+  //icon样式
+  .#{$css-prefix-input-icon}{
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    text-align: center;
+    height: 100%;
+  }
+  .#{$css-prefix-input-icon}-prefix{
+    left: 0;
+  }
+  .#{$css-prefix-input-icon}-suffix{
+    right: 0;
+  }
+  .#{$css-prefix-input-icon}-clear{
+    display: none;
+    z-index: 3;
+  }
+  .#{$css-prefix-input-icon}-small {
+    @include inputIconSize($input-small-size,12px);
+  }
+
+  .#{$css-prefix-input-icon}-normal {
+    @include inputIconSize($input-normal-size,14px);
+  }
+
+  .#{$css-prefix-input-icon}-large {
+    @include inputIconSize($input-large-size,16px);
   }
 
   // input组合
-  &.b-input-group {
-    position: relative;
-    width: 200px;
-    display: table;
-    border: 1px solid $Border;
-    border-radius: 4px;
-    border-collapse: separate;
+  // &.#{$css-prefix-input}-group {
+  //   position: relative;
+  //   width: 100%;
+  //   display: table;
+  //   border: $input-base-border;
+  //   border-radius: 4px;
+  //   border-collapse: separate;
 
-    .b-input {
-      border: 0;
-      width: 100%;
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      float: left;
-    }
+  //   .#{$css-prefix-input} {
+  //     border: 0;
+  //     width: 100%;
+  //     border-bottom-left-radius: 0;
+  //     border-top-left-radius: 0;
+  //     float: left;
+  //   }
 
-    &:hover {
-      border-color: $LightPrimary;
-      box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
-    }
+  //   &:hover {
+  //     border-color: $LightPrimary;
+  //   }
 
-    &:hover input {
-      box-shadow: none;
-    }
+  //   &:hover input {
+  //     box-shadow: none;
+  //   }
 
-    &:disabled :hover {
-      border-color: $Border;
-      box-shadow: none;
-    }
+  //   &:disabled :hover {
+  //     border-color: $Border;
+  //     box-shadow: none;
+  //   }
 
-    .b-input-icon-normal {
-      position: absolute;
-      right: 0px;
-      padding: 8px;
-    }
+  //   .#{$css-prefix-input}-icon-normal {
+  //     position: absolute;
+  //     right: 0px;
+  //     padding: 8px;
+  //   }
 
-    .b-input-icon-large {
-      position: absolute;
-      right: 0px;
-      padding: 8px;
-    }
+  //   .#{$css-prefix-input}-icon-large {
+  //     position: absolute;
+  //     right: 0px;
+  //     padding: 8px;
+  //   }
 
-    .b-input-icon-small {
-      position: absolute;
-      right: 0px;
-      padding: 8px;
-    }
-  }
+  //   .#{$css-prefix-input}-icon-small {
+  //     position: absolute;
+  //     right: 0px;
+  //     padding: 8px;
+  //   }
+  // }
 
-  // error input样式
-  &.b-input-error {
-    .b-input {
-      &:hover {
-        border-color: $Error;
-      }
-
-      &:focus {
-        box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.2);
-      }
-
-      &:disabled {
-        background-color: $Disabled;
-      }
-
-      &:disabled:hover {
-        border-color: $Border;
-      }
-    }
-    &:hover {
-      border-color: $Error;
-      box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.2);
-    }
-
-    &:hover input {
-      box-shadow: none;
-    }
-
-    &:disabled :hover {
-      border-color: $Border;
-      box-shadow: none;
-    }
-  }
-
-  //input label样式
-  .b-input-label {
-    display: table-cell;
-    padding: 4px 7px;
-    font-size: inherit;
-    font-weight: normal;
-    line-height: 1;
-    color: #515a6e;
-    text-align: center;
-    background-color: #f8f8f9;
-    border-right: 1px solid $Border;
-    border-bottom-left-radius: 4px;
-    border-top-left-radius: 4px;
-    white-space: nowrap;
-    vertical-align: middle;
-  }
+  // //input label样式
+  // .#{$css-prefix-input}-label {
+  //   display: table-cell;
+  //   padding: 4px 7px;
+  //   font-size: inherit;
+  //   font-weight: normal;
+  //   line-height: 1;
+  //   color: #515a6e;
+  //   text-align: center;
+  //   background-color: #f8f8f9;
+  //   border-right: $input-base-border;
+  //   border-bottom-left-radius: 4px;
+  //   border-top-left-radius: 4px;
+  //   white-space: nowrap;
+  //   vertical-align: middle;
+  // }
 }

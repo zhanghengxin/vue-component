@@ -4,18 +4,46 @@
  * @created 2018/09/18 20:05:54
  */
 <template>
-    <div class="b-input-box">
-        <div v-if="type != 'textarea'" :class="{'b-input-group':labelText,'b-input-error':error}">
-            <div v-if="labelText" class="b-input-label">{{labelText}}</div>
-            <i class="b-icon" :class="['']" v-if="false" @click="handleClear"></i>
-            <i class="b-icon" :class="['']" v-else-if="false" @click="handleIconClick"></i>
-            <i class="b-icon" :class="['']" v-else-if="false" @click="handleSearch"></i>
+    <div :class="boxClasses">
+        <template v-if="type !== 'textarea'">
+            <b-icon
+                v-if="prefix"
+                size
+                :type="icon"
+                :class="[
+                prefixCls+`-icon`,
+                prefixCls+`-icon-`+size,
+                prefixCls+`-icon-prefix`]"
+                @click="handleIconClick">
+            </b-icon>
+            <b-icon
+                v-if="suffix"
+                size
+                :type="icon"
+                :class="[
+                prefixCls+`-icon`,
+                prefixCls+`-icon-`+size,
+                prefixCls+`-icon-suffix`]"
+                @click="handleIconClick">
+            </b-icon>
+            <b-icon
+                v-if="clearable && currentValue"
+                size
+                type="yidongduan_conclose"
+                :class="[
+                prefixCls+`-icon`,
+                prefixCls+`-icon-`+size,
+                prefixCls+`-icon-suffix`,
+                prefixCls+`-icon-clear`]"
+                @click="handleClear">
+            </b-icon>
             <input
-                class="b-input"
                 :id="elementId"
-                :class="[`b-input-${size}`]"
+                :class="inputClasses"
+                :spellcheck="spellcheck"
                 ref="input"
                 :value="currentValue"
+                :name="name"
                 :placeholder="placeholder"
                 :disabled="disabled"
                 :maxlength="maxlength"
@@ -29,20 +57,25 @@
                 @blur="handleBlur"
                 @keyup="handleKeyup"
                 @keydown="handleKeydown"/>
-        </div>
+        </template>
         <textarea
             v-else
             :id="elementId"
-            :class="[`b-input-${size}`]"
+            :class="textareaClasses"
+            :style="textareaStyles"
+            :spellcheck="spellcheck"
             ref="textarea"
             :value="currentValue"
+            :name="name"
             :placeholder="placeholder"
             :disabled="disabled"
             :maxlength="maxlength"
             :minlength="minlength"
             :readonly="readonly"
             :autofocus="autofocus"
-            :type="type"
+            :rows="rows"
+            :wrap="wrap"
+            :autosize="autosize"
             @change="handleChange"
             @input="handleInput"
             @focus="handleFocus"
@@ -54,12 +87,14 @@
 </template>
 
 <script>
+import calcTextareaHeight from './calcTeatareaHeight.js'
+import Icon from '../icon/index'
+const prefixCls = 'b-input'
 
 export default {
     name: 'b-input',
     props: {
-        /* 控制input的自带属性 */
-        // 接收input的value
+        // 接收input的自带属性
         elementId: {
             type: String
         },
@@ -98,11 +133,11 @@ export default {
             type: Boolean,
             default: false
         },
-        labelText: {
-            type: String
+        spellcheck: {
+            type: Boolean,
+            default: false
         },
-        /* 控制样式 */
-        // normal small large
+        // 样式属性
         size: {
             default: 'normal',
             validator: function (value) {
@@ -113,18 +148,76 @@ export default {
             type: Boolean,
             default: false
         },
+        clearable: {
+            type: Boolean,
+            default: false
+        },
+        // icon属性
         icon: {
             type: String,
             default: ''
+        },
+        prefix: {
+            type: Boolean,
+            default: false
+        },
+        suffix: {
+            type: Boolean,
+            default: false
+        },
+        // textarea
+        rows: {
+            type: Number,
+            default: 2
+        },
+        autosize: {
+            type: [Boolean, Object],
+            default: false
+        },
+        wrap: {
+            validator (value) {
+                return function (value) {
+                    return ['hard', 'soft'].indexOf(value) !== -1
+                }
+            },
+            default: 'soft'
         }
-
     },
     data () {
         return {
-            currentValue: this.value
+            currentValue: this.value,
+            prefixCls: prefixCls,
+            textareaStyles: {}
         }
     },
-    computed: {},
+    computed: {
+        boxClasses () {
+            return [
+                `${prefixCls}-box`,
+                {
+                    [`${prefixCls}-error`]: this.error
+                }
+            ]
+        },
+        inputClasses () {
+            return [
+                `${prefixCls}`,
+                `${prefixCls}-${this.size}`,
+                {
+                    [`${prefixCls}-prefix`]: this.prefix,
+                    [`${prefixCls}-suffix`]: this.suffix
+                }
+            ]
+        },
+        textareaClasses () {
+            return [
+                `${prefixCls}`
+            ]
+        }
+    },
+    components: {
+        'b-icon': Icon
+    },
     methods: {
         handleChange (event) {
             this.$emit('on-change', event)
@@ -150,13 +243,52 @@ export default {
         },
         setCurrentValue (value) {
             if (value === this.currentValue) return
+            this.$nextTick(() => {
+                this.resizeTextarea()
+            })
             this.currentValue = value
+        },
+        resizeTextarea () {
+            const autosize = this.autosize
+            if (!autosize || this.type !== 'textarea') {
+                return false
+            }
+            const minRows = autosize.minRows
+            const maxRows = autosize.maxRows
+            this.textareaStyles = calcTextareaHeight(this.$refs.textarea, minRows, maxRows)
+        },
+        handleIconClick (e) {
+            this.$emit('on-click', e)
+        },
+        handleClear () {
+            const e = { target: { value: '' } }
+            this.$emit('input', '')
+            this.setCurrentValue('')
+            this.$emit('on-change', e)
+        },
+        focus () {
+            console.log(32)
+            if (this.type === 'textarea') {
+                this.$refs.textarea.focus()
+            } else {
+                this.$refs.input.focus()
+            }
+        },
+        blur () {
+            if (this.type === 'textarea') {
+                this.$refs.textarea.blur()
+            } else {
+                this.$refs.input.blur()
+            }
         }
     },
     watch: {
         value (val) {
             this.setCurrentValue(val)
         }
+    },
+    mounted () {
+        this.resizeTextarea()
     }
 }
 
