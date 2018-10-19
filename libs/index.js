@@ -2,19 +2,22 @@
  * Created by gaoguoqing on 2018/9/5.
  *
  */
-import Input from './input/index'
-import Button from './button'
-import Carousel from './carousel'
-import CarouselItem from './carousel-item'
-import Icon from './icon'
-import Page from './page'
-import Collapse from './collapse'
-import CollapseItem from './collapse-item'
-import Message from './message'
-import Breadcrumb from './breadcrumb'
-import BreadcrumbItem from './breadcrumb-item'
-import { Steps, Step } from './steps/index'
-import Card from './card'
+import Input from './components/input/index'
+import Button from './components/button'
+import Carousel from './components/carousel'
+import CarouselItem from './components/carousel-item'
+import Icon from './components/icon'
+import Page from './components/page'
+import Collapse from './components/collapse'
+import CollapseItem from './components/collapse-item'
+import Message from './components/message'
+import Breadcrumb from './components/breadcrumb'
+import BreadcrumbItem from './components/breadcrumb-item'
+import Circle from './components/circle'
+import { Steps, Step } from './components/steps/index'
+import Card from './components/card'
+import Modal from './components/modal'
+import Tooltip from './components/tooltip'
 
 const components = [
     Input,
@@ -30,13 +33,17 @@ const components = [
     CarouselItem,
     Steps,
     Step,
-    Card
+    Card,
+    Modal,
+    Circle,
+    Tooltip
 ]
 
 const install = function (Vue) {
     if (install.installed) return
     components.map(component => Vue.component(component.name, component))
-    Vue.prototype.$message = Message
+    Vue.prototype.$Message = Message
+    Vue.prototype.$Modal = Modal
 }
 
 export default {
@@ -52,7 +59,10 @@ export default {
     Message,
     Breadcrumb,
     BreadcrumbItem,
+    Circle,
     Steps,
     Step,
-    Card
+    Card,
+    Modal,
+    Tooltip
 }

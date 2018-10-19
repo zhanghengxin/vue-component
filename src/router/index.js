@@ -15,8 +15,16 @@ let addRoute = (router) => {
             addRoute(route.items)
             routes = routes.concat(route.items)
         } else if (route.name) {
-            route.component = r => require.ensure([], () =>
-                r(require(`../docments/${route.name}.md`)))
+            if (route.incomeName) {
+                route.component = r => require.ensure([], () =>
+                    r(require(`../documents/businessLibs/income/${route.incomeName}.md`)))
+            } else if (route.outputName) {
+                route.component = r => require.ensure([], () =>
+                    r(require(`../documents/businessLibs/output/${route.outputName}.md`)))
+            } else {
+                route.component = r => require.ensure([], () =>
+                    r(require(`../documents/basicDocments/${route.name}.md`)))
+            }
         }
     })
 }

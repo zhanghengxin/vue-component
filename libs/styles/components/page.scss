@@ -1,0 +1,157 @@
+@import "../common/color";
+//@import "../common/prefix";
+
+$css-prefix-page: $css-prefix + 'page';
+
+.#{$css-prefix-page} {
+  font-size: 0;
+  .#{$css-prefix-page}-item-content {
+    color: $Content;
+  }
+  .#{$css-prefix-page}-arrow {
+    color: $Content;
+    &:hover {
+      color: $LightPrimary;
+    }
+  }
+}
+
+// normal
+.#{$css-prefix-page}-normal {
+  .#{$css-prefix-page}-item, .#{$css-prefix-page}-prev, .#{$css-prefix-page}-next, .#{$css-prefix-page}-item-jump-next, .#{$css-prefix-page}-item-jump-prev {
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 32px;
+    height: 32px;
+    line-height: 30px;
+    margin-right: 10px;
+    text-align: center;
+    list-style: none;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid $Border;
+    transition: border .2s ease-in-out, color .2s ease-in-out;
+    &:hover {
+      border-color: $Primary;
+    }
+  }
+  .#{$css-prefix-page}-prev, .#{$css-prefix-page}-next {
+    min-width: 5px;
+    padding: 0 10px;
+  }
+  .#{$css-prefix-page}-item {
+    &:hover {
+      background: $Primary;
+      .#{$css-prefix-page}-item-content {
+        color: white;
+      }
+    }
+  }
+  .#{$css-prefix-page}-item-active {
+    background: $Primary;
+    .#{$css-prefix-page}-item-content {
+      color: white;
+    }
+  }
+  .#{$css-prefix-page}-disabled {
+    cursor: not-allowed;
+    background: $Disabled;
+    &:hover {
+      border-color: $Disabled;
+    }
+  }
+}
+
+// elevator
+.#{$css-prefix-page}-elevator {
+  font-size: 12px;
+  display: inline-block;
+  vertical-align: middle;
+  height: 32px;
+  line-height: 32px;
+  input {
+    padding: 1px 7px;
+    height: 32px;
+    border-radius: 3px;
+    width: 44px;
+  }
+}
+
+.#{$css-prefix-page}-total {
+  font-size: 12px;
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+// mini
+.#{$css-prefix-page}-mini {
+  .#{$css-prefix-page}-item, .#{$css-prefix-page}-prev, .#{$css-prefix-page}-next, .#{$css-prefix-page}-item-jump-next, .#{$css-prefix-page}-item-jump-prev {
+    min-width: 22px;
+    height: 22px;
+    line-height: 20px;
+    border: none;
+    margin-right: 5px;
+  }
+  .#{$css-prefix-page}-disabled {
+    background: white;
+  }
+  .#{$css-prefix-page}-elevator {
+    height: 22px;
+    line-height: 22px;
+    input {
+      height: 22px;
+      width: 32px;
+    }
+  }
+}
+
+// simple
+.#{$css-prefix-page}-simple {
+  .#{$css-prefix-page}-prev, .#{$css-prefix-page}-next {
+    display: inline-block;
+    border: 0;
+    height: 24px;
+    line-height: normal;
+  }
+}
+
+.#{$css-prefix-page}-simple-pager {
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+  font-size: 12px;
+  input {
+    width: 48px;
+    height: 22px;
+    margin: 0 8px;
+    padding: 5px 8px;
+    text-align: center;
+    box-sizing: border-box;
+    outline: 0;
+    border: 1px solid $Border;
+    border-radius: 4px;
+    transition: border-color .2s ease-in-out;
+    &:hover {
+      border-color: $Primary;
+    }
+  }
+  span {
+    padding: 0 8px 0 2px;
+  }
+
+}
+
+.#{$css-prefix-page}-disabled {
+  cursor: not-allowed;
+  .#{$css-prefix-page}-arrow {
+    color: $DisContent;
+    &:hover {
+      color: $DisContent;
+    }
+  }
+}

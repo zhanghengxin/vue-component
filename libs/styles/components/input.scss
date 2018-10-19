@@ -1,0 +1,156 @@
+
+//input 组件
+//input基础样式
+.b-input-box {
+  display: inline-block;
+  .b-input {
+    display: inline-block;
+    width: 180px;
+    line-height: 1.5;
+    font-size: 12px;
+    border: 1px solid $Border;
+    border-radius: 4px;
+    color: $Content;
+    background-color: #fff;
+    background-image: none;
+    position: relative;
+    cursor: text;
+    transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+
+    &:hover {
+      border-color: $LightPrimary;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
+    }
+
+    &:disabled {
+      background-color: $Disabled;
+    }
+
+    &:disabled:hover {
+      border-color: $Border;
+    }
+  }
+
+  .b-input-small {
+    padding: 4px 8px;
+    height: 24px;
+    border-radius: 3px;
+  }
+
+  .b-input-normal {
+    font-size: 12px;
+    padding: 8px;
+    height: 32px;
+  }
+
+  .b-input-large {
+    font-size: 14px;
+    padding: 12px 8px;
+    height: 40px;
+  }
+
+  // input组合
+  &.b-input-group {
+    position: relative;
+    width: 200px;
+    display: table;
+    border: 1px solid $Border;
+    border-radius: 4px;
+    border-collapse: separate;
+
+    .b-input {
+      border: 0;
+      width: 100%;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      float: left;
+    }
+
+    &:hover {
+      border-color: $LightPrimary;
+      box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
+    }
+
+    &:hover input {
+      box-shadow: none;
+    }
+
+    &:disabled :hover {
+      border-color: $Border;
+      box-shadow: none;
+    }
+
+    .b-input-icon-normal {
+      position: absolute;
+      right: 0px;
+      padding: 8px;
+    }
+
+    .b-input-icon-large {
+      position: absolute;
+      right: 0px;
+      padding: 8px;
+    }
+
+    .b-input-icon-small {
+      position: absolute;
+      right: 0px;
+      padding: 8px;
+    }
+  }
+
+  // error input样式
+  &.b-input-error {
+    .b-input {
+      &:hover {
+        border-color: $Error;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.2);
+      }
+
+      &:disabled {
+        background-color: $Disabled;
+      }
+
+      &:disabled:hover {
+        border-color: $Border;
+      }
+    }
+    &:hover {
+      border-color: $Error;
+      box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.2);
+    }
+
+    &:hover input {
+      box-shadow: none;
+    }
+
+    &:disabled :hover {
+      border-color: $Border;
+      box-shadow: none;
+    }
+  }
+
+  //input label样式
+  .b-input-label {
+    display: table-cell;
+    padding: 4px 7px;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 1;
+    color: #515a6e;
+    text-align: center;
+    background-color: #f8f8f9;
+    border-right: 1px solid $Border;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+}
