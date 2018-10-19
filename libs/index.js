@@ -18,6 +18,7 @@ import { Steps, Step } from './components/steps/index'
 import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
+import BackTop from './components/backTop'
 
 const components = [
     Input,
@@ -36,7 +37,8 @@ const components = [
     Card,
     Modal,
     Circle,
-    Tooltip
+    Tooltip,
+    BackTop
 ]
 
 const install = function (Vue) {
@@ -64,5 +66,6 @@ export default {
     Step,
     Card,
     Modal,
-    Tooltip
+    Tooltip,
+    BackTop
 }
