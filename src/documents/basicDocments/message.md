@@ -79,18 +79,18 @@
         type='white'
         @on-click="handleClick('info')">
         信息
-    </bw-button>
-    <bw-button
+    </b-button>
+    <b-button
         type='tysuccess'
         @on-click="handleClick('success')">
         成功
-    </bw-button>
-    <bw-button
+    </b-button>
+    <b-button
         type='tyerror'
         @on-click="handleClick('error')">
         错误
-    </bw-button>
-    <bw-button
+    </b-button>
+    <b-button
         type='tywarning'
         @on-click="handleClick('warning')">
         警告
