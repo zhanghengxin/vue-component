@@ -5,7 +5,7 @@
 <template>
     <button ref="button"
     :disabled="disabled"
-    @click.stop='BwButtonclick($event)'
+    @click='BwButtonclick($event)'
     :class="bclass"
     >
       <i v-if='loading' class="iconfont icon-loading">
@@ -31,6 +31,7 @@ export default {
             if (this.size) {
                 style1 = `b-btn-${this.size}`
             }
+            true ? style + '' : style
             if (this.type) {
                 style = `${style1} b-btn-${this.type} `
             }
