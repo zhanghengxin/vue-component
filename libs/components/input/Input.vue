@@ -88,7 +88,7 @@
 
 <script>
 import calcTextareaHeight from './calcTeatareaHeight.js'
-import Icon from '../icon/index'
+import Icon from '../icon'
 const prefixCls = 'b-input'
 
 export default {
@@ -150,7 +150,7 @@ export default {
         },
         clearable: {
             type: Boolean,
-            default: false
+            default: true
         },
         // icon属性
         icon: {
@@ -267,7 +267,6 @@ export default {
             this.$emit('on-change', e)
         },
         focus () {
-            console.log(32)
             if (this.type === 'textarea') {
                 this.$refs.textarea.focus()
             } else {
