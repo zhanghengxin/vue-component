@@ -4,6 +4,10 @@
 ### 基础用法
 默认位置距离页面右部和底部 30px，滚动至距顶端 400px 时显示。
 
+<BackTop :height="50" :bottom="200">
+        <div class="top">返回顶端</div>
+</BackTop>
+
 ::: code
 ```html
 <style scoped>
@@ -17,7 +21,7 @@
 </style>
 
 <template>
-    <BackTop :height="100" :bottom="200">
+    <BackTop :height="50" :bottom="200">
         <div class="top">返回顶端</div>
     </BackTop>
 </template>
