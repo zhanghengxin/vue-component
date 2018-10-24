@@ -3,9 +3,9 @@
 </template>
 
 <script>
-// const prefixCls = 'b-back-top' // 防止与别人发生冲突
+const prefixCls = 'b-back-top' // 特殊标识
 export default {
-    name: 'Backtop',
+    name: 'BackTop',
     props: {
         height: { // 当滚动至高度是400的时候出现
             type: Number,
@@ -80,6 +80,7 @@ export default {
                 }
                 window.requestAnimationFrame(() => scroll(d, end, step))
             }
+
             scroll(from, to, step)
         }
     },
