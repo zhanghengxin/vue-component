@@ -17,7 +17,6 @@
                 :disabled="disabled"
                 :maxlength="maxlength"
                 :minlength="minlength"
-                :readonly="readonly"
                 :autofocus="autofocus"
                 :type="type"
                 @change="handleChange"

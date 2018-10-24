@@ -4,6 +4,7 @@
  */
 import Input from './components/input/index'
 import Button from './components/button'
+import Drawer from './components/drawer'
 import Carousel from './components/carousel'
 import CarouselItem from './components/carousel-item'
 import Icon from './components/icon'
@@ -23,6 +24,7 @@ const components = [
     Input,
     Page,
     Button,
+    Drawer,
     Icon,
     Message,
     Collapse,
@@ -49,6 +51,7 @@ const install = function (Vue) {
 export default {
     install,
     Button,
+    Drawer,
     Carousel,
     CarouselItem,
     Input,
