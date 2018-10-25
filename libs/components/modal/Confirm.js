@@ -9,7 +9,7 @@ import BModal from './Modal'
 import BButton from '../button'
 import BIcon from '../icon'
 
-const prefixCls = 'bw-modal-confirm'
+const prefixCls = 'b-modal-confirm'
 
 BModal.Instance = (params = {}) => {
     const Instance = new Vue({
@@ -201,7 +201,6 @@ BModal.Instance = (params = {}) => {
     const component = Instance.$mount()
     document.body.appendChild(component.$el)
     const modal = Instance.$children[0]
-
     // TODO UI图标
     const iconNameStore = {
         info: 'yiban',
