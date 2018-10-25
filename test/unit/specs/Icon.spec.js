@@ -2,7 +2,7 @@
  * Created by gaoguoqing on 2018/9/12.
  *
  */
-import Icon from '&/icon'
+import Icon from '&/components/icon'
 import { createTest, createVue, destroyVM } from '../utils'
 
 describe('Icon.vue', () => {
@@ -30,7 +30,6 @@ describe('Icon.vue', () => {
         }, true)
         let Elm = vm.$el
         expect(Elm.style.color).to.equal('red')
-    
     })
     it('click', done => {
         let result

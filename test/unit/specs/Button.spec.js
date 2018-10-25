@@ -2,7 +2,7 @@
  * Created by gaoguoqing on 2018/9/8.
  *
  */
-import Button from '&/button'
+import Button from '&/components/button'
 import { createTest, createVue, destroyVM } from '../utils'
 
 describe('Button.vue', () => {
