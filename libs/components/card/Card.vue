@@ -26,11 +26,12 @@
 
 <script>
 import Icon from '../icon/index'
+import { prefix } from '../../utils/common'
 
-const prefixCls = 'b-card'
+const prefixCls = prefix + 'card'
 
 export default {
-    name: 'b-card',
+    name: prefixCls,
     components: { Icon },
     data () {
         return {
