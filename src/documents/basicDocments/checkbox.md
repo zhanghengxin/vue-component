@@ -30,20 +30,21 @@
 多选框不可用状态
 
 <div>
-    <!-- <Checkbox v-model="test2" disabled>测试失效未选中</Checkbox>
-    <Checkbox v-model="test3" disabled>测试失效选中</Checkbox> -->
+    <Checkbox v-model="test2" disabled>测试失效未选中</Checkbox>
+    <Checkbox v-model="test3" disabled>测试失效选中</Checkbox>
     
 ::: code
 ```html
     <template>
-        <Checkbox v-model="test2">测试失效未选中</Checkbox>
-        <Checkbox v-model="test3">测试失效选中</Checkbox>
+        <Checkbox v-model="test2" disabled>测试失效未选中</Checkbox>
+        <Checkbox v-model="test3" disabled>测试失效选中</Checkbox>
     </template>
     <script>
         export default {
             data () {
                 return {
-                    testgroup: ['测试1','测试2']
+                    test2:false,
+                    test3:true
                 }
             }
         }
@@ -57,8 +58,11 @@
 
 <div>
     <CheckboxGroup v-model="testgroup"  @on-change="changeGroup">
-        <!-- <Checkbox label="测试1"></Checkbox>
-        <Checkbox label="测试2"></Checkbox> -->
+    <div>
+        <Checkbox label="测试1"></Checkbox>
+        <Checkbox label="测试2"></Checkbox>
+        <Checkbox label="测试3">444</Checkbox>
+        </div>
     </CheckboxGroup>
     <p>{{testgroup}}</p>
     

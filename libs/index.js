@@ -20,8 +20,8 @@ import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
 import BackTop from './components/backTop'
-import Checkbox from './checkbox'
-import CheckboxGroup from './checkboxGroup'
+import Checkbox from './components/checkbox'
+import CheckboxGroup from './components/checkboxGroup'
 
 const components = [
     Input,
@@ -76,5 +76,5 @@ export default {
     Tooltip,
     BackTop,
     Checkbox,
-    CheckboxGroup,
+    CheckboxGroup
 }
