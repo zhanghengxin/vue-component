@@ -5,7 +5,7 @@
 <template>
     <button ref="button"
     :disabled="disabled"
-    @click='BwButtonclick($event)'
+    @click='handleClick($event)'
     :class="bclass"
     >
       <i v-if='loading' class="iconfont icon-loading">
@@ -19,7 +19,9 @@
 </template>
 
 <script>
-const prefixCls = 'b-btn'
+import { prefix } from '../../utils/common'
+
+const prefixCls = prefix + 'btn'
 export default {
     name: 'bButton',
     computed: {
@@ -81,7 +83,7 @@ export default {
         }
     },
     methods: {
-        BwButtonclick (e) {
+        handleClick (e) {
             this.$emit('on-click', e)
         }
     }
