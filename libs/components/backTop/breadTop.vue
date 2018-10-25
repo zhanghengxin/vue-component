@@ -8,7 +8,7 @@ export default {
     name: 'Backtop',
     props: {
         height: { // 当滚动至高度是400的时候出现
-            type: Number,
+            type: [Number, String],
             default: 400
         },
         bottom: { // 距离下面默认显示30
