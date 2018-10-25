@@ -80,7 +80,8 @@ export default {
     },
     data () {
         return {
-            prefixCls: prefixCls
+            prefixCls: prefixCls,
+            timeout: null
         }
     },
     computed: {
@@ -102,6 +103,7 @@ export default {
         handleShowPopper () {
             if (this.timeout) {
                 clearTimeout(this.timeout)
+                this.timeout = null
             }
             this.timeout = setTimeout(() => {
                 this.visible = true
@@ -110,6 +112,7 @@ export default {
         handleClosePopper () {
             if (this.timeout) {
                 clearTimeout(this.timeout)
+                this.timeout = null
                 if (!this.controlled) {
                     this.timeout = setTimeout(() => {
                         this.visible = false
