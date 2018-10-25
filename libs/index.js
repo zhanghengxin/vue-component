@@ -4,6 +4,7 @@
  */
 import Input from './components/input/index'
 import Button from './components/button'
+import Drawer from './components/drawer'
 import Carousel from './components/carousel'
 import CarouselItem from './components/carousel-item'
 import Icon from './components/icon'
@@ -18,11 +19,13 @@ import { Steps, Step } from './components/steps/index'
 import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
+import BackTop from './components/backTop'
 
 const components = [
     Input,
     Page,
     Button,
+    Drawer,
     Icon,
     Message,
     Collapse,
@@ -36,7 +39,8 @@ const components = [
     Card,
     Modal,
     Circle,
-    Tooltip
+    Tooltip,
+    BackTop
 ]
 
 const install = function (Vue) {
@@ -49,6 +53,7 @@ const install = function (Vue) {
 export default {
     install,
     Button,
+    Drawer,
     Carousel,
     CarouselItem,
     Input,
@@ -64,5 +69,6 @@ export default {
     Step,
     Card,
     Modal,
-    Tooltip
+    Tooltip,
+    BackTop
 }

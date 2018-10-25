@@ -55,6 +55,11 @@
           "name": "button"
         },
         {
+          "title": "Drawer 抽屉",
+          "path": "/drawer",
+          "name": "drawer"
+        },
+        {
           "title": "Message 消息",
           "path": "/message",
           "name": "message"
