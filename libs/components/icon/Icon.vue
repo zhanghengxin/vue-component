@@ -1,15 +1,17 @@
 <template>
     <i
-            class="b-icon icon iconfont"
-            :class="typeClass"
-            :style="styles"
-            @click="handleClick">
+        class="icon iconfont"
+        :class="typeClass"
+        :style="styles"
+        @click="handleClick">
     </i>
 </template>
 <script>
+import { prefix } from '../../utils/common'
 
+const prefixCls = prefix + 'icon'
 export default {
-    name: 'b-icon',
+    name: prefixCls,
     props: {
         type: {
             type: String,
@@ -24,8 +26,9 @@ export default {
     computed: {
         typeClass () {
             return [
+                `${prefixCls}`,
                 {
-                    [`b-${this.type}`]: this.type !== ''
+                    [`${prefix}${this.type}`]: this.type !== ''
                 }
             ]
         },
