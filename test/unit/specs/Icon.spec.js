@@ -4,6 +4,7 @@
  */
 import Icon from '&/components/icon'
 import { createTest, createVue, destroyVM } from '../utils'
+import {prefix} from '&/utils/common'
 
 describe('Icon.vue', () => {
     let vm
@@ -15,7 +16,7 @@ describe('Icon.vue', () => {
             type: 'fapiaoshengcheng'
         }, true)
         let Elm = vm.$el
-        expect(Elm.classList.contains('b-fapiaoshengcheng')).to.be.true
+        expect(Elm.classList.contains(`${prefix}fapiaoshengcheng`)).to.be.true
     })
     it('size', () => {
         vm = createTest(Icon, {

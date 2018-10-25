@@ -136,11 +136,12 @@
 </template>
 <script>
 import Icon from '../icon'
+import { prefix } from '../../utils/common'
 
-const prefixCls = 'b-page'
+const prefixCls = prefix + 'page'
 
 export default {
-    name: 'b-page',
+    name: prefixCls,
     components: {Icon},
     props: {
         page: {

@@ -40,7 +40,7 @@ export default {
     },
 
     methods: {
-        menu: function () {
+        menu: function () { // pageYOffset设置或返回当前页面相对于窗口显示区左上角的 Y 位置
             this.srcoll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
             this.backTop = window.pageYOffset >= this.height
         },
@@ -49,18 +49,19 @@ export default {
             this.scrollTop(window, sTop, 0, this.duration)
         },
         scrollTop: function (el, from = 0, to, duration = 500, endCallback) {
-            if (!window.requestAnimationFrame) {
+            if (!window.requestAnimationFrame) { // window.requestAnimationFrame() 方法告诉浏览器您希望执行动画并请求浏览器在下一次重绘之前调用指定的函数来更新动画。
                 window.requestAnimationFrame = (
                     window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            function (callback) {
-                return window.setTimeout(callback, 1000 / 60)
-            }
+                    window.mozRequestAnimationFrame ||
+                    window.msRequestAnimationFrame ||
+                    function (callback) {
+                        return window.setTimeout(callback, 1000 / 60) // 因为延时器而setTimeout和setInterval的问题是，它们都不精确。它们的内在运行机制决定了时间间隔参数实际上只是指定了把动画代码添加到浏览器UI线程队列中以等待执行的时间。如果队列前面已经加入了其他任务，那动画代码就要等前面的任务完成后再执行
+                    }
                 )
             }
+            // 计算速率
             const difference = Math.abs(from - to)
-            const step = Math.ceil(difference / duration * 50)
+            const step = Math.ceil(difference / duration * 50) // 是向上取整计算
 
             function scroll (start, end, step) {
                 if (start === end) {
