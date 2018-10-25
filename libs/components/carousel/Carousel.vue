@@ -19,44 +19,44 @@
             :class="[prefixCls + '-wrapper']"
             :style="[animationStyle, slideStyle]"
             ref="wrapper">
-                <div
-                    :class="[prefixCls + '-scroll']"
-                    :style="scrollStyle"
-                    ref="scroll">
-                    <slot/>
-                </div>
+            <div
+                :class="[prefixCls + '-scroll']"
+                :style="scrollStyle"
+                ref="scroll">
+                <slot/>
+            </div>
         </div>
         <ul
-          :class="[prefixCls + '-control']"
-          v-if="pointer">
+            :class="[prefixCls + '-control']"
+            v-if="pointer">
             <li
-              :class="{'active':index===active}"
-              v-for="(item,index) in pages"
-              :key="index"
-              @click="handleClickPointer(index)">
+                :class="{'active':index===active}"
+                v-for="(item,index) in pages"
+                :key="index"
+                @click="handleClickPointer(index)">
             </li>
         </ul>
         <ul
-          :class="[prefixCls + '-direction']"
-          v-if="arrow">
+            :class="[prefixCls + '-direction']"
+            v-if="arrow">
             <li
-              :class="[prefixCls + '-prev', { disable: previous }]"
-              @click="slideControl(-1)">
+                :class="[prefixCls + '-prev', { disable: previous }]"
+                @click="slideControl(-1)">
             </li>
             <li
-              :class="[prefixCls + '-next', { disable: next }]"
-              @click="slideControl(1)">
+                :class="[prefixCls + '-next', { disable: next }]"
+                @click="slideControl(1)">
             </li>
         </ul>
     </div>
 </template>
 <script>
-import { oneOf } from '../../utils/common.js'
+import { oneOf, prefix } from '../../utils/common.js'
 
-const prefixCls = 'b-carousel'
+const prefixCls = prefix + 'carousel'
 
 export default {
-    name: 'b-carousel',
+    name: prefixCls,
     data () {
         return {
             prefixCls,
