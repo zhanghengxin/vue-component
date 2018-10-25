@@ -50,6 +50,31 @@ export default {
             ]
         }
     },
+    beforeCreate () {
+        console.log('beforeCreate')
+    },
+    created () {
+        console.log('created')
+    },
+    beforeMount () {
+        console.log('beforeMount')
+    },
+    beforeUpdate () {
+        console.log('beforeUpdate')
+    },
+    updated () {
+        console.log('updated')
+    },
+    beforeDestroy () {
+        console.log('beforeDestroy')
+    },
+    destroyed () {
+        console.log('destroyed')
+    },
+    mounted () {
+        console.log('mounted')
+    },
+
     methods: {
         change (e) {
             if (this.disabled) return
@@ -58,18 +83,8 @@ export default {
                 this.$parent.change(this.label, this.checked)
                 return
             }
-            console.log(this.$parent)
-            console.log(e.target.checked)
-
-            console.log(this.checked)
-            if (this.checked) {
-                this.checkboxCheck = ''
-            } else {
-                this.checkboxCheck = 'checkbox-checked'
-            }
             this.$emit('input', this.checked)
-            //   this.checked = !this.checked
-            this.$emit('change', this.checked)
+            this.$emit('on-change', this.checked)
         }
     }
 }

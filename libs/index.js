@@ -2,28 +2,32 @@
  * Created by gaoguoqing on 2018/9/5.
  *
  */
-import Input from './input/index'
-import Button from './button'
-import Carousel from './carousel'
-import CarouselItem from './carousel-item'
-import Icon from './icon'
-import Page from './page'
-import Collapse from './collapse'
-import CollapseItem from './collapse-item'
-import Message from './message'
-import Breadcrumb from './breadcrumb'
-import BreadcrumbItem from './breadcrumb-item'
-import Circle from './circle'
-import { Steps, Step } from './steps/index'
-import Card from './card'
+import Input from './components/input/index'
+import Button from './components/button'
+import Drawer from './components/drawer'
+import Carousel from './components/carousel'
+import CarouselItem from './components/carousel-item'
+import Icon from './components/icon'
+import Page from './components/page'
+import Collapse from './components/collapse'
+import CollapseItem from './components/collapse-item'
+import Message from './components/message'
+import Breadcrumb from './components/breadcrumb'
+import BreadcrumbItem from './components/breadcrumb-item'
+import Circle from './components/circle'
+import { Steps, Step } from './components/steps/index'
+import Card from './components/card'
+import Modal from './components/modal'
+import Tooltip from './components/tooltip'
+import BackTop from './components/backTop'
 import Checkbox from './checkbox'
 import CheckboxGroup from './checkboxGroup'
-import Modal from './modal'
 
 const components = [
     Input,
     Page,
     Button,
+    Drawer,
     Icon,
     Message,
     Collapse,
@@ -38,7 +42,9 @@ const components = [
     Checkbox,
     CheckboxGroup,
     Modal,
-    Circle
+    Circle,
+    Tooltip,
+    BackTop
 ]
 
 const install = function (Vue) {
@@ -51,6 +57,7 @@ const install = function (Vue) {
 export default {
     install,
     Button,
+    Drawer,
     Carousel,
     CarouselItem,
     Input,
@@ -65,7 +72,9 @@ export default {
     Steps,
     Step,
     Card,
+    Modal,
+    Tooltip,
+    BackTop,
     Checkbox,
     CheckboxGroup,
-    Modal
 }

@@ -47,6 +47,7 @@ export default {
             console.log(checked)
             console.log(value)
             this.$emit('input', value)
+            this.$emit('on-change', value)
         }
     }
 }
