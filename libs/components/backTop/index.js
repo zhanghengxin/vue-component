@@ -1,4 +1,4 @@
 
-import breadTop from './breadTop.vue'
+import Backtop from './Backtop.vue'
 
-export default breadTop
+export default Backtop
