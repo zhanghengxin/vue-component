@@ -1,14 +1,14 @@
 <template>
-    <label class="b-checkbox">
+    <label :class="prefixCls">
         <span :class="checkbboxLeftClass">
             <input
-                class="b-checkbox-input"
+                :class="prefixCls + '-input'"
                 type="checkbox"
                 :value="value"
                 :checked="checked"
                 @change="change"/>
         </span>
-        <span class="b-checkbox-right">
+        <span :class="prefixCls + '-right'">
             <slot>
                 <span v-if="!showSlot">{{label}}</span>
             </slot>
@@ -25,7 +25,8 @@ export default {
     data () {
         return {
             checked: this.value,
-            showSlot: true
+            showSlot: true,
+            prefixCls
         }
     },
     props: {
