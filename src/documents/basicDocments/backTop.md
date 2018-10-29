@@ -4,7 +4,7 @@
 ### 基础用法
 默认位置距离页面右部和底部 30px，滚动至距顶端 400px 时显示。
 
-<backtop :height='200' :right='20' :bottom='20' :duration='20'>
+<backtop :height='200' :right='20' :bottom='20' :duration='200' :show='true'>
 	        <div>返回顶端</div>
 </backtop>
 
