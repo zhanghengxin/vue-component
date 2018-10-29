@@ -5,7 +5,7 @@
 单独使用可以表示两种状态之间的切换
 
 <div>
-    <Checkbox v-model="test1" @on-change="change">测试</Checkbox>
+    <Checkbox v-model="test1"  @on-change="change">测试</Checkbox>
     <p>{{test1}}</p>
 
 ::: code
@@ -57,7 +57,7 @@
 使用CheckboxGroup配合数组来生成组合。在组合使用时，Checkbox 使用 label 来自动判断选中状态。每个 Checkbox 的内容可以自定义，如不填写则默认使用 label 的值。
 
 <div>
-    <CheckboxGroup v-model="testgroup"  @on-change="changeGroup">
+    <CheckboxGroup v-model="testgroup"   @on-change="changeGroup">
     <div>
         <Checkbox label="测试1"></Checkbox>
         <Checkbox label="测试2"></Checkbox>
@@ -79,6 +79,7 @@
         export default {
             data () {
                 return {
+                    testgroup1:[],
                     testgroup: ['测试1','测试2']
                 }
             }

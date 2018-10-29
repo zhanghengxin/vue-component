@@ -2,7 +2,7 @@
     font-size: 12px;
     margin:0;
     padding:0;
-    color: #495060;
+    color: $Content;
     cursor: pointer;
     .b-checkbox-left{
         box-sizing: border-box;
@@ -11,7 +11,7 @@
         margin-right:8px;
         width:14px;
         height:14px;
-        border: 1px solid #DDDEE1;
+        border: 1px solid $Border;
         border-radius: 2px;
         position:relative;
         background-color: $white;
@@ -22,8 +22,8 @@
         vertical-align: middle;
     }
     .b-checkbox-checked{
-        background: #0079CC;
-        border: 1px solid #0079CC;
+        background: $LinkContent;
+        border: 1px solid $LinkContent;
     }
     .b-checkbox-checked::after{
         content: '';
@@ -40,8 +40,8 @@
         transition: all .2s ease-in-out;
     }
     .b-checkbox-disabled{
-        background: #E8E8E8;
-        border: 1px solid #DDDEE1;
+        background: $Disabled;
+        border: 1px solid $Border;
     }
     .b-checkbox-disabled.b-checkbox-checked::after{
         content: '';
@@ -51,14 +51,14 @@
         position: absolute;
         top: 1px;
         left: 4px;
-        border: 2px solid #CCC;
+        border: 2px solid $DisabledBorder;
         border-top: 0;
         border-left: 0;
         transform: rotate(45deg) scale(1);
         transition: all .2s ease-in-out;
     }
     .b-checkbox-left:hover{
-        border: 1px solid #CCCCCC;
+        border: 1px solid $DisabledBorder;
     }
     .b-checkbox-input{
         width: 100%;
