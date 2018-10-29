@@ -2,7 +2,7 @@
 
 import Vue from 'vue'
 const isServer = Vue.prototype.$isServer
-const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g
+const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.)) /g
 const MOZ_HACK_REGEXP = /^moz([A-Z])/
 const ieVersion = isServer ? 0 : Number(document.documentMode)
 const trim = function (string) {
@@ -112,3 +112,35 @@ export function setStyle (element, styleName, value) {
         }
     }
 }
+export const on = (() => {
+    if (!isServer && document.addEventListener) {
+        return function (element, event, handler) {
+            if (element && event && handler) {
+                element.addEventListener(event, handler, false)
+            }
+        }
+    } else {
+        return function (element, event, handler) {
+            if (element && event && handler) {
+                element.attachEvent('on' + event, handler)
+            }
+        }
+    }
+})()
+
+/* istanbul ignore next */
+export const off = (() => {
+    if (!isServer && document.removeEventListener) {
+        return function (element, event, handler) {
+            if (element && event) {
+                element.removeEventListener(event, handler, false)
+            }
+        }
+    } else {
+        return function (element, event, handler) {
+            if (element && event) {
+                element.detachEvent('on' + event, handler)
+            }
+        }
+    }
+})()
