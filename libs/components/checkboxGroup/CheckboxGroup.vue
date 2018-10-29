@@ -5,9 +5,11 @@
 </template>
 
 <script>
+import { prefix } from '../../utils/common'
 
+const prefixCls = prefix + 'checkboxGroup'
 export default {
-    name: 'CheckboxGroup',
+    name: prefixCls,
     data () {
         return {
         }
@@ -21,16 +23,28 @@ export default {
     computed: {
 
     },
+    watch: {
+        value: {
+            handler: function () {
+                this.renderChecked()
+            },
+            deep: true
+        }
+    },
     mounted () {
-        this.$children.map((item) => {
-            this.value.map((valueItem) => {
-                if (item.label === valueItem) {
-                    item.checked = true
-                }
-            })
-        })
+        this.renderChecked()
     },
     methods: {
+        renderChecked () {
+            this.$children.map((item) => {
+                item.checked = false
+                this.value.map((valueItem) => {
+                    if (item.label === valueItem) {
+                        item.checked = true
+                    }
+                })
+            })
+        },
         change (label, checked) {
             let value = this.value
             let index = this.value.indexOf(label)

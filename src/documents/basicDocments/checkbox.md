@@ -2,16 +2,16 @@
 多选框
 -----
 ### 基础用法
-单独使用可以表示两种状态之间的切换
+单独使用可以表示两种状态之间的切换,使用 v-model 可以双向绑定数据
 
 <div>
-    <Checkbox v-model="test1"  @on-change="change">测试</Checkbox>
+    <b-checkbox v-model="test1"  @on-change="change">测试1</b-checkbox>
     <p>{{test1}}</p>
 
 ::: code
 ```html
     <template>
-        <Checkbox v-model="test1">测试</Checkbox>
+        <b-checkbox v-model="test1">测试</b-checkbox>
     </template>
     <script>
         export default {
@@ -27,17 +27,17 @@
 </div>
 
 ### 禁用状态
-多选框不可用状态
+多选框不可用状态,通过设置disabled属性来禁用多选框。
 
 <div>
-    <Checkbox v-model="test2" disabled>测试失效未选中</Checkbox>
-    <Checkbox v-model="test3" disabled>测试失效选中</Checkbox>
+    <b-checkbox v-model="test2" disabled>测试失效未选中</b-checkbox>
+    <b-checkbox v-model="test3" disabled>测试失效选中</b-checkbox>
     
 ::: code
 ```html
     <template>
-        <Checkbox v-model="test2" disabled>测试失效未选中</Checkbox>
-        <Checkbox v-model="test3" disabled>测试失效选中</Checkbox>
+        <b-checkbox v-model="test2" disabled>测试失效未选中</b-checkbox>
+        <b-checkbox v-model="test3" disabled>测试失效选中</b-checkbox>
     </template>
     <script>
         export default {
@@ -57,29 +57,27 @@
 使用CheckboxGroup配合数组来生成组合。在组合使用时，Checkbox 使用 label 来自动判断选中状态。每个 Checkbox 的内容可以自定义，如不填写则默认使用 label 的值。
 
 <div>
-    <CheckboxGroup v-model="testgroup"   @on-change="changeGroup">
-    <div>
-        <Checkbox label="测试1"></Checkbox>
-        <Checkbox label="测试2"></Checkbox>
-        <Checkbox label="测试3">444</Checkbox>
-        </div>
-    </CheckboxGroup>
+    <b-checkboxGroup v-model="testgroup"   @on-change="changeGroup">
+        <b-checkbox label="测试1"></b-checkbox>
+        <b-checkbox label="测试2"></b-checkbox>
+        <b-checkbox label="测试3">444</b-checkbox>
+    </b-checkboxGroup>
     <p>{{testgroup}}</p>
     
 ::: code
 ```html
     <template>
-        <CheckboxGroup v-model="testgroup">
-            <Checkbox label="测试1"></Checkbox>
-            <Checkbox label="测试2"></Checkbox>
-        </CheckboxGroup>
+        <b-checkboxGroup v-model="testgroup">
+            <b-checkbox label="测试1"></b-checkbox>
+            <b-checkbox label="测试2"></b-checkbox>
+            <b-checkbox label="测试3">444</b-checkbox>
+        </b-checkboxGroup>
         <p>{{testgroup}}</p>
     </template>
     <script>
         export default {
             data () {
                 return {
-                    testgroup1:[],
                     testgroup: ['测试1','测试2']
                 }
             }

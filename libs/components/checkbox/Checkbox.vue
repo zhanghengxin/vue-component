@@ -21,7 +21,7 @@ import { prefix } from '../../utils/common'
 
 const prefixCls = prefix + 'checkbox'
 export default {
-    name: 'Checkbox',
+    name: prefixCls,
     data () {
         return {
             checked: this.value,
@@ -60,8 +60,8 @@ export default {
         change (e) {
             if (this.disabled) return
             this.checked = e.target.checked
-            if (this.$parent.$options.name === 'CheckboxGroup') {
-                this.$parent.change(this.label ? this.label : this.value, this.checked)
+            if (this.$parent.$options.name === prefix + 'checkboxGroup') {
+                this.$parent.change(this.label, this.checked)
                 return
             }
             this.$emit('input', this.checked)
