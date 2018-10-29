@@ -63,6 +63,11 @@
           "title": "Steps 步骤条",
           "path": "/steps",
           "name": "steps"
+        },
+        {
+          "title": "label 输入组合",
+          "path": "/label",
+          "name": "label"
         }
       ]
     },

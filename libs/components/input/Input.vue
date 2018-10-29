@@ -88,7 +88,6 @@
 
 <script>
 import calcTextareaHeight from './calcTeatareaHeight.js'
-import Icon from '../icon'
 const prefixCls = 'b-input'
 
 export default {
@@ -215,9 +214,6 @@ export default {
             ]
         }
     },
-    components: {
-        'b-icon': Icon
-    },
     methods: {
         handleChange (event) {
             this.$emit('on-change', event)
@@ -236,7 +232,6 @@ export default {
         },
         handleInput (event) {
             let value = event.target.value
-            // if (this.number && value !== '') value = Number.isNaN(Number(value)) ? value : Number(value)
             this.$emit('input', value)
             this.setCurrentValue(value)
             this.$emit('on-change', event)
