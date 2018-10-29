@@ -1,14 +1,14 @@
 <template>
-    <div v-if="backTop" class="classStyle" :style="styles" @click='back'>返回顶端</div>
+    <div v-if="backTop" :class="prefixCls" :style="styles" @click='back'>返回顶端</div>
 </template>
 
 <script>
-// const prefixCls = 'b-back-top' // 防止与别人发生冲突
+const prefixCls = 'b-back-top' // 防止与别人发生冲突
 export default {
     name: 'Backtop',
     props: {
         height: { // 当滚动至高度是400的时候出现
-            type: Number,
+            type: [Number, String],
             default: 400
         },
         bottom: { // 距离下面默认显示30
@@ -27,7 +27,8 @@ export default {
     data () {
         return {
             backTop: false, //  初始化默认是隐藏的
-            srcoll: ''
+            srcoll: '',
+            prefixCls:prefixCls
         }
     },
     computed: { // 在DOM节点加载后马上执行
@@ -89,16 +90,3 @@ export default {
     }
 }
 </script>
-<style scoped>
-  .classStyle {
-    padding: 10px;
-    cursor: pointer;
-    font-size: 12px;
-    line-height: 1.5;
-    background: rgba(0, 153, 229, .7);
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    position: fixed;
-  }
-</style>
