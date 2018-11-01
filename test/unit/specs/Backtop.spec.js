@@ -1,6 +1,5 @@
 
 /*  前者一个测试套执行一次, 后者每个测试用例执行一次。 */
-
 import {destroyVM, createTest, createVue} from '../utils'
 import Backtop from '&/components/backTop'
 
