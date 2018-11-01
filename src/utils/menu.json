@@ -23,10 +23,15 @@
             "redirect": "/guide"
         }
     ],
-    "组件": [{
+    "基础组件": [{
             "title": "基础",
             "path": "/",
             "items": [{
+                    "title": "CheckBox 多选框",
+                    "path": "/checkbox",
+                    "name": "checkbox"
+                },
+                {
                     "title": "Color 色彩",
                     "path": "/color",
                     "name": "color"
@@ -52,6 +57,11 @@
                     "name": "button"
                 },
                 {
+                    "title": "Drawer 抽屉",
+                    "path": "/drawer",
+                    "name": "drawer"
+                },
+                {
                     "title": "Message 消息",
                     "path": "/message",
                     "name": "message"
@@ -62,7 +72,7 @@
                     "name": "steps"
                 },
                 {
-                    "title": "radio 单选框",
+                    "title": "Radio 单选框",
                     "path": "/radio",
                     "name": "radio"
                 }
@@ -89,6 +99,16 @@
                     "title": "Notice 通知",
                     "path": "/notice",
                     "name": "notice"
+                },
+                {
+                    "title": "Modal 对话框",
+                    "path": "/modal",
+                    "name": "modal"
+                },
+                {
+                    "title": "Tooltip 文字提示",
+                    "path": "/tooltip",
+                    "name": "tooltip"
                 }
             ]
         },
@@ -113,8 +133,34 @@
                     "title": "Carousel 走马灯",
                     "path": "/carousel",
                     "name": "carousel"
+                },
+                {
+                    "title": "Circle 进度环",
+                    "path": "/circle",
+                    "name": "circle"
                 }
             ]
+        }
+    ],
+    "业务组件": [{
+            "title": "进项",
+            "path": "/",
+            "items": [{
+                "title": "invoice 发票票面",
+                "path": "/incomeInvoice",
+                "name": "incomeInvoice",
+                "incomeName": "invoice"
+            }]
+        },
+        {
+            "title": "销项",
+            "path": "/",
+            "items": [{
+                "title": "invoice 发票票面",
+                "path": "/outputIncome",
+                "name": "outputIncome",
+                "outputName": "invoice"
+            }]
         }
     ]
 }

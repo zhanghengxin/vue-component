@@ -5,10 +5,10 @@ Vue.use(bwUI)
 let id = 0
 const createElm = function () {
     const elm = document.createElement('div')
-    
+
     elm.id = 'app' + ++id
     document.body.appendChild(elm)
-    
+
     return elm
 }
 /**
@@ -59,7 +59,7 @@ exports.createTest = function (Compo, propsData = {}, mounted = false) {
  */
 exports.triggerEvent = function (elm, name, ...opts) {
     let eventName
-    
+
     if (/^mouse|click/.test(name)) {
         eventName = 'MouseEvents'
     } else if (/^key/.test(name)) {
@@ -68,12 +68,12 @@ exports.triggerEvent = function (elm, name, ...opts) {
         eventName = 'HTMLEvents'
     }
     const evt = document.createEvent(eventName)
-    
+
     evt.initEvent(name, ...opts)
     elm.dispatchEvent
         ? elm.dispatchEvent(evt)
         : elm.fireEvent('on' + name, evt)
-    
+
     return elm
 }
 /**
@@ -84,7 +84,7 @@ exports.triggerEvent = function (elm, name, ...opts) {
 exports.triggerClick = function (elm, ...opts) {
     exports.triggerEvent(elm, 'mousedown', ...opts)
     exports.triggerEvent(elm, 'mouseup', ...opts)
-    
+
     return elm
 }
 /**
