@@ -53,4 +53,21 @@ describe('Backtop.vue', () => { // describe相当于一个测试套，可以嵌�
             done()
         })
     })
+    it('click', done => {
+        vm = createVue({
+            template: `
+              <backtop :show='true' @on-click="back"></backtop>
+            `,
+            methods: {
+                back () {
+                    // result = evt
+                }
+            }
+        }, true)
+        vm.$el.click()
+        setTimeout(_ => {
+            expect(document.documentElement.scrollTop).to.equal(0)
+            done()
+        }, 1000)
+    })
 })
