@@ -1,5 +1,5 @@
 <template>
-    <div v-if="backTop" :class="prefixCls" :style="styles" @click='back'>返回顶端</div>
+    <div v-show="backTop" :class="prefixCls" :style="styles" @click='back'>返回顶端</div>
 </template>
 
 <script>
@@ -7,12 +7,16 @@ const prefixCls = 'b-back-top' // 防止与别人发生冲突
 export default {
     name: 'Backtop',
     props: {
+        show: {
+            type: Boolean,
+            default: false
+        },
         height: { // 当滚动至高度是400的时候出现
             type: [Number, String],
             default: 400
         },
         bottom: { // 距离下面默认显示30
-            type: Number,
+            type: [Number, String],
             default: 30
         },
         right: { // 距离右边默认显示30
@@ -86,7 +90,11 @@ export default {
         }
     },
     mounted () {
-        window.addEventListener('scroll', this.menu)
+        if (this.show) {
+            this.backTop = true
+        } else {
+            window.addEventListener('scroll', this.menu)
+        }
     }
 }
 </script>

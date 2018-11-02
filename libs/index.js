@@ -23,6 +23,8 @@ import BackTop from './components/backTop'
 import Dropdown from './components/dropdown'
 import DropdownItem from './components/dropdown-item'
 import DropdownMenu from './components/dropdown-menu'
+import Checkbox from './components/checkbox'
+import CheckboxGroup from './components/checkboxGroup'
 
 const components = [
     Input,
@@ -43,6 +45,8 @@ const components = [
     Dropdown,
     DropdownItem,
     DropdownMenu,
+    Checkbox,
+    CheckboxGroup,
     Modal,
     Circle,
     Tooltip,
@@ -79,5 +83,7 @@ export default {
     DropdownMenu,
     Modal,
     Tooltip,
-    BackTop
+    BackTop,
+    Checkbox,
+    CheckboxGroup
 }
