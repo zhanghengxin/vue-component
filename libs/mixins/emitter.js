@@ -1,6 +1,6 @@
 function broadcast (componentName, eventName, params) {
     this.$children.forEach(child => {
-        var name = child.$options.componentName
+        var name = child.$options._componentTag
         if (name === componentName) {
             child.$emit.apply(child, [eventName].concat(params))
         } else {
@@ -12,11 +12,11 @@ export default {
     methods: {
         dispatch (componentName, eventName, params) {
             var parent = this.$parent || this.$root
-            var name = parent.$options.componentName
+            var name = parent.$options._componentTag
             while (parent && (!name || name !== componentName)) {
                 parent = parent.$parent
                 if (parent) {
-                    name = parent.$options.componentName
+                    name = parent.$options._componentTag
                 }
             }
             if (parent) {

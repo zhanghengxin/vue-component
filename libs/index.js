@@ -20,9 +20,9 @@ import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
 import BackTop from './components/backTop'
-import Dropdown from './dropdown'
-import DropdownItem from './dropdown-item'
-import DropdownMenu from './dropdown-menu'
+import Dropdown from './components/dropdown'
+import DropdownItem from './components/dropdown-item'
+import DropdownMenu from './components/dropdown-menu'
 
 const components = [
     Input,

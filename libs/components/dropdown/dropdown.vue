@@ -1,19 +1,26 @@
 <template>
-  <div class="" v-click-outside="onClickoutside">
-      <div @click="handleClick"><slot></slot></div>
+  <div
+      :class="[prefixCls]"
+      v-click-outside="hide">
+      <div>
+          <slot></slot>
+      </div>
       <slot name="list"></slot>
   </div>
 </template>
 
 <script>
-import clickOutside from '../../directives/clickOutside'
-import Emitter from '../mixins/emitter'
+import clickOutside from '../../../directives/clickOutside'
+import Emitter from '../../mixins/emitter'
+import { findComponentUpward } from '../../utils/utils'
+const prefixCls = 'b-dropdown'
 export default {
-    name: 'Dropdown',
+    name: 'BDropdown',
     directives: {clickOutside},
     mixins: [Emitter],
     data () {
         return {
+            prefixCls: prefixCls,
             show: false,
             visible: false,
             triggerElm: null,
@@ -30,37 +37,53 @@ export default {
             type: String,
             default: 'hover'
         },
-        size: {
+        placement: {
             type: String,
-            default: ''
-        },
-        visibleArrow: {
-            default: 'true'
+            default: 'bottom-end'
         },
         showTimeout: {
             type: Number,
-            default: 250
+            default: 300
         },
         hideTimeout: {
             type: Number,
-            default: 150
+            default: 200
         }
     },
     mounted () {
+        this.$on('menu-item-click', this.handleMenuItemClick)
         this.initEvent()
-        console.log(this.$el)
+        this.$on('on-haschild-click', () => {
+            this.$nextTick(() => {
+                this.visible = true
+            })
+        })
+        this.$on('on-hover-click', () => {
+            this.$nextTick(() => {
+                this.visible = false
+            })
+        })
     },
     watch: {
         visible (val) {
-            this.broadcast('DropdownMenu', 'visible', val)
+            this.broadcast('b-dropdown-menu', 'visible', val)
             this.$emit('visible-change', val)
         }
     },
     methods: {
+        hasParent () {
+            const $parent = findComponentUpward(this, 'b-dropdown')
+            if ($parent) {
+                return $parent
+            } else {
+                return false
+            }
+        },
         showItem () {
             if (this.triggerElm.disabled) {
                 return
             }
+            this.visible = true
             clearTimeout(this.timeout)
             this.timeout = setTimeout(() => {
                 this.visible = true
@@ -82,8 +105,8 @@ export default {
                 this.showItem()
             }
         },
-        onClickoutside () {
-            this.show = false
+        handleMenuItemClick (command) {
+            this.$emit('command', command)
         },
         initEvent () {
             let { trigger, showItem, hide, handleClick } = this
@@ -92,15 +115,16 @@ export default {
             if (trigger === 'hover') {
                 this.triggerElm.addEventListener('mouseenter', showItem)
                 this.triggerElm.addEventListener('mouseleave', hide)
+                dropdownElm.addEventListener('mouseenter', showItem)
+                dropdownElm.addEventListener('mouseleave', hide)
             } else if (trigger === 'click') {
                 this.triggerElm.addEventListener('click', handleClick)
             }
-
         }
     }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 
 </style>

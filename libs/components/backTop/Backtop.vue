@@ -28,7 +28,7 @@ export default {
         return {
             backTop: false, //  初始化默认是隐藏的
             srcoll: '',
-            prefixCls:prefixCls
+            prefixCls: prefixCls
         }
     },
     computed: { // 在DOM节点加载后马上执行

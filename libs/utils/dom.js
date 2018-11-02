@@ -2,7 +2,7 @@
 
 import Vue from 'vue'
 const isServer = Vue.prototype.$isServer
-const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.)) /g
+const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.)) /g // eslint-disable-line
 const MOZ_HACK_REGEXP = /^moz([A-Z])/
 const ieVersion = isServer ? 0 : Number(document.documentMode)
 const trim = function (string) {

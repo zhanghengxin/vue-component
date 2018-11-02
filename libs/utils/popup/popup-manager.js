@@ -19,7 +19,7 @@ const getModal = function () {
             event.stopPropagation()
         })
         modalDom.addEventListener('click', function () {
-            PopupManager.doOnModalClick && PopupManager.doOnModalClick();
+            PopupManager.doOnModalClick && PopupManager.doOnModalClick()
         })
     }
     return modalDom

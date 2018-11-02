@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import PopupManager from './popup/popup-manager.js'
-const PopperJS = Vue.prototype.$isServer ? function () {} : require('./popper')
+// import Popper from 'popper.js'
+const isServer = Vue.prototype.$isServer
+const Popper = isServer ? function() {} : require('popper.js/dist/umd/popper.js');  // eslint-disable-line
 const stop = e => e.stopPropagation()
 /*
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
@@ -29,7 +31,10 @@ export default {
         offset: {
             default: 0
         },
-        visibleArrow: Boolean,
+        visibleArrow: {
+            type: Boolean,
+            default: true
+        },
         arrowOffset: {
             type: Number,
             default: 35
@@ -79,30 +84,26 @@ export default {
             if (!popper || !reference) return
             if (this.visibleArrow) this.appendArrow(popper)
             if (this.appendToBody) document.body.appendChild(this.popperElm)
-            if (this.popperJS && this.popperJS.destroy) {
-                this.popperJS.destroy()
+            if (this.Popper && this.Popper.destroy) {
+                this.Popper.destroy()
             }
             options.placement = this.currentPlacement
             options.offset = this.offset
             options.arrowOffset = this.arrowOffset
-            this.popperJS = new PopperJS(reference, popper, options)
-            this.popperJS.onCreate(_ => {
-                this.$emit('created', this)
-                this.resetTransformOrigin()
-                this.$nextTick(this.updatePopper)
-            })
+            this.Popper = new Popper(reference, popper, options)
+            this.resetTransformOrigin()
             if (typeof options.onUpdate === 'function') {
-                this.popperJS.onUpdate(options.onUpdate)
+                this.Popper.onUpdate(options.onUpdate)
             }
-            this.popperJS._popper.style.zIndex = PopupManager.nextZIndex()
+            this.Popper.popper.style.zIndex = PopupManager.nextZIndex()
             this.popperElm.addEventListener('click', stop)
         },
         updatePopper () {
-            const popperJS = this.popperJS
-            if (popperJS) {
-                popperJS.update()
-                if (popperJS._popper) {
-                    popperJS._popper.style.zIndex = PopupManager.nextZIndex()
+            const Popper = this.Popper
+            if (Popper) {
+                Popper.update()
+                if (Popper._popper) {
+                    Popper._popper.style.zIndex = PopupManager.nextZIndex()
                 }
             } else {
                 this.createPopper()
@@ -110,30 +111,26 @@ export default {
         },
 
         doDestroy (forceDestroy) {
-            /* istanbul ignore if */
-            if (!this.popperJS || (this.showPopper && !forceDestroy)) return
-            this.popperJS.destroy()
-            this.popperJS = null
+            if (!this.Popper || (this.showPopper && !forceDestroy)) return
+            this.Popper.destroy()
+            this.Popper = null
         },
         destroyPopper () {
-            if (this.popperJS) {
-                this.resetTransformOrigin()
+            if (this.Popper) {
+                this.resetTransformOrigin(this.Popper)
+                this.doDestroy(true)
             }
         },
-
-        resetTransformOrigin() {
-            if (!this.transformOrigin) return
+        resetTransformOrigin () {
             let placementMap = {
                 top: 'bottom',
                 bottom: 'top',
                 left: 'right',
                 right: 'left'
             }
-            let placement = this.popperJS._popper.getAttribute('x-placement').split('-')[0]
-            let origin = placementMap[placement];
-            this.popperJS._popper.style.transformOrigin = typeof this.transformOrigin === 'string'
-                ? this.transformOrigin
-                : ['top', 'bottom'].indexOf(placement) > -1 ? `center ${origin}` : `${origin} center`
+            let placement = this.Popper.popper.getAttribute('x-placement').split('-')[0]
+            let origin = placementMap[placement]
+            this.Popper.popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1 ? `center ${origin}` : `${origin} center` || this.transformOrigin
         },
 
         appendArrow (element) {
@@ -153,7 +150,7 @@ export default {
                 arrow.setAttribute(hash, '')
             }
             arrow.setAttribute('x-arrow', '')
-            arrow.className = 'popper__arrow'
+            arrow.className = 'popper_arrow'
             element.appendChild(arrow)
         }
     },

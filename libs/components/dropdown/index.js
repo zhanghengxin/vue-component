@@ -1,7 +1,4 @@
-/**
- * Created by wuqian
- *
- */
+
 import Dropdown from './dropdown.vue'
 
 Dropdown.install = function (Vue) {
