@@ -15,6 +15,7 @@ describe('Drawer.vue', () => {
             local: 'right'
         }, true)
         let Elm = vm.$el
-        expect(Elm.classList.contains('b-drawer-right')).to.be.true
+        // expect(Elm.classList.contains('b-drawer-right')).to.be.true
+        expect(Elm.querySelector('.b-drawer-right')).to.exist
     })
 })
