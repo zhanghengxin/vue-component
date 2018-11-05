@@ -18,10 +18,12 @@
 
 <script>
 import { prefix } from '../../utils/common'
+import Emitter from '../../mixins/emitter'
 
 const prefixCls = prefix + 'checkbox'
 export default {
     name: prefixCls,
+    mixins: [Emitter],
     data () {
         return {
             checked: this.value,
@@ -67,6 +69,7 @@ export default {
             }
             this.$emit('input', this.checked)
             this.$emit('on-change', this.checked)
+            this.dispatch(prefix + 'form-item', 'on-form-change', this.checked)
         }
     }
 }
