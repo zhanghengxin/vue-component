@@ -60,6 +60,11 @@
           "name": "button"
         },
         {
+          "title": "Switch 开关",
+          "path": "/switch",
+          "name": "switch"
+        },
+        {
           "title": "Drawer 抽屉",
           "path": "/drawer",
           "name": "drawer"

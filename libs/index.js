@@ -25,6 +25,7 @@ import DropdownItem from './components/dropdown-item'
 import DropdownMenu from './components/dropdown-menu'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkboxGroup'
+import Switch from './components/switch/index'
 
 const components = [
     Input,
@@ -50,7 +51,8 @@ const components = [
     Modal,
     Circle,
     Tooltip,
-    BackTop
+    BackTop,
+    Switch
 ]
 
 const install = function (Vue) {
@@ -85,5 +87,6 @@ export default {
     Tooltip,
     BackTop,
     Checkbox,
-    CheckboxGroup
+    CheckboxGroup,
+    Switch
 }
