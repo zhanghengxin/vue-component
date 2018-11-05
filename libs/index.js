@@ -23,9 +23,9 @@ import BackTop from './components/backTop'
 import Dropdown from './components/dropdown'
 import DropdownItem from './components/dropdown-item'
 import DropdownMenu from './components/dropdown-menu'
+import Switch from './components/switch/index'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkboxGroup'
-import Switch from './components/switch/index'
 
 const components = [
     Input,
