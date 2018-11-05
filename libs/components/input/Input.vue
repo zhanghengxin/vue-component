@@ -76,6 +76,7 @@
             :rows="rows"
             :wrap="wrap"
             :autosize="autosize"
+            :type="type"
             @change="handleChange"
             @input="handleInput"
             @focus="handleFocus"
@@ -88,10 +89,11 @@
 
 <script>
 import calcTextareaHeight from './calcTeatareaHeight.js'
-const prefixCls = 'b-input'
+import { prefix } from '../../utils/common'
+const prefixCls = prefix + 'input'
 
 export default {
-    name: 'b-input',
+    name: prefixCls,
     props: {
         // 接收input的自带属性
         elementId: {

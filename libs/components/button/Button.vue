@@ -5,7 +5,7 @@
 <template>
     <button ref="button"
     :disabled="disabled"
-    @click.stop='BwButtonclick($event)'
+    @click='handleClick($event)'
     :class="bclass"
     >
       <i v-if='loading' class="iconfont icon-loading">
@@ -19,6 +19,9 @@
 </template>
 
 <script>
+import { prefix } from '../../utils/common'
+
+const prefixCls = prefix + 'btn'
 export default {
     name: 'bButton',
     computed: {
@@ -26,54 +29,13 @@ export default {
             return `${this.icon}`
         },
         bclass () {
-            let style = {}
-            let style1 = {}
-            if (this.size) {
-                style1 = `b-btn-${this.size}`
-            }
-            if (this.type) {
-                style = `${style1} b-btn-${this.type} `
-            }
-            if (this.round) {
-                style = `b-btn-${this.type} ${style1} b-btn-round`
-            }
-            if (this.circle) {
-                style = `b-btn-${this.type} ${style1} b-btn-circle`
-            }
-            if (this.icon) {
-                style = `b-btn-${this.type} ${style1} b-btn-circle`
-            }
-            if (this.disabled) {
-                style = `b-btn-${this.type} ${style1} b-btn-disabled`
-            }
-            if (this.plain) {
-                style = `b-btn-${this.type} ${style1} b-btn-plain`
-            }
-            if (this.plain && this.round) {
-                style = `b-btn-${this.type} ${style1} b-btn-plain b-btn-round`
-            }
-            if (this.icon && this.disabled) {
-                style = `b-btn-${this.type} ${style1} b-btn-circle b-btn-disabled`
-            }
-            if (this.icon && this.plain) {
-                style = `b-btn-${this.type} ${style1} b-btn-circle b-btn-plain`
-            }
-            if (this.circle && this.disabled) {
-                style = `b-btn-${this.type} ${style1} b-btn-circle b-btn-disabled`
-            }
-            if (this.circle && this.plain) {
-                style = `b-btn-${this.type} ${style1} b-btn-circle b-btn-plain`
-            }
-            if (this.plain && this.disabled) {
-                style = `b-btn-${this.type} ${style1} b-btn-plain b-btn-disabled`
-            }
-            if (this.round && this.disabled) {
-                style = `b-btn-${this.type} ${style1} b-btn-round b-btn-disabled`
-            }
-            if (this.round && this.disabled && this.plain) {
-                style = `b-btn-${this.type} ${style1} b-btn-round b-btn-disabled b-btn-plain`
-            }
-            return style
+            return [ `${prefixCls}-${this.size}`,
+                `${prefixCls}-${this.type} `,
+                this.round ? `${prefixCls}-round` : '',
+                (this.circle || this.icon) ? `${prefixCls}-circle` : '',
+                this.disabled ? `${prefixCls}-disabled` : '',
+                this.plain ? `${prefixCls}-plain` : ''
+            ]
         }
     },
     props: {
@@ -121,7 +83,7 @@ export default {
         }
     },
     methods: {
-        BwButtonclick (e) {
+        handleClick (e) {
             this.$emit('on-click', e)
         }
     }

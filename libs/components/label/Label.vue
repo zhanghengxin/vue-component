@@ -12,11 +12,11 @@
 </template>
 
 <script>
-
-const prefixCls = 'b-label'
+import { prefix } from '../../utils/common'
+const prefixCls = prefix + 'label'
 
 export default {
-    name: 'b-label',
+    name: prefixCls,
     props: {
         type: {
             type: String,
