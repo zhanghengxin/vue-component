@@ -30,7 +30,7 @@
 
 <script>
 import { prefix } from '../../utils/common'
-// import { findComponentUpward } from '../../utils/assist'
+import { findComponentUpward } from '../../utils/assist'
 import Emitter from '../../mixins/emitter'
 
 const prefixCls = prefix + 'input'
@@ -46,7 +46,7 @@ export default {
         },
         type: {
             validator (value) {
-                return ['text', 'password', 'url', 'email'].indexOf(value) !== -1
+                return ['text', 'password', 'url', 'email', 'textarea'].indexOf(value) !== -1
             },
             default: 'text'
         },
@@ -112,9 +112,9 @@ export default {
         },
         handleBlur (event) {
             this.$emit('on-blur', event)
-            // if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
-            // }
-            this.dispatch(prefix + 'form-item', 'on-form-blur', this.currentValue)
+            if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
+                this.dispatch(prefix + 'form-item', 'on-form-blur', this.currentValue)
+            }
         },
         handleKeyup (event) {
             this.$emit('on-keyup', event)
@@ -132,10 +132,9 @@ export default {
         setCurrentValue (value) {
             if (value === this.currentValue) return
             this.currentValue = value
-            // if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
-            //     this.dispatch(prefix + 'form-item', 'on-form-change', this.currentValue)
-            // }
-            this.dispatch(prefix + 'form-item', 'on-form-change', this.currentValue)
+            if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
+                this.dispatch(prefix + 'form-item', 'on-form-change', this.currentValue)
+            }
         }
     },
     watch: {

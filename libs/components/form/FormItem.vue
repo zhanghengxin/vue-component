@@ -19,6 +19,7 @@
 import AsyncValidator from 'async-validator'
 import Emitter from '../../mixins/emitter'
 import { prefix } from '../../utils/common'
+import { deepCopy } from '../../utils/assist'
 
 const prefixCls = prefix + 'form-item'
 
@@ -93,6 +94,9 @@ export default {
                 return
             }
             this.validate('change')
+        },
+        handleInitValue () {
+            return deepCopy(this.fieldValue())
         }
     },
     props: {
@@ -166,7 +170,7 @@ export default {
         if (this.prop) {
             this.dispatch(this.form.$options.name, 'on-form-item-add', this)
             Object.defineProperty(this, 'initValue', {
-                value: this.fieldValue()
+                value: this.handleInitValue()
             })
             let rules = this.getRules()
             if (rules.length) {

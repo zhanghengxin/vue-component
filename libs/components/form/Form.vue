@@ -53,7 +53,6 @@ export default {
     methods: {
     // 对整个表单进行校验
         validate (callback) {
-            debugger
             let isValid = true
             let count = 0
             let length = this.fields.length
@@ -83,7 +82,6 @@ export default {
 
         // 对整个表单进行重置，将所有字段值重置为空并移除校验结果
         resetFields () {
-            console.log('ssss')
             this.fields.forEach(field => {
                 field.resetField()
             })
