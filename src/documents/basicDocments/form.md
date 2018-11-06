@@ -47,8 +47,7 @@ export default {
             formCustom: {
                 passwd: '',
                 passwdCheck: '',
-                age: '',
-                accept: false
+                age: ''
             },
             ruleCustom: {
                 passwd: [
@@ -59,13 +58,6 @@ export default {
                 ],
                 age: [
                     { validator: validateAge, trigger: 'blur' }
-                ],
-                accept: [
-                     {
-                        validator: (rule, value, callback) => {
-                        value ? callback() : callback(new Error('您需要接受用户协议'))},
-                                                       trigger: 'change'
-                     }
                 ]
             },
             formValidate: {
@@ -381,9 +373,6 @@ export default {
                  <b-form-item label="年龄" prop="age">
                    <b-input v-model="formCustom.age" placeholder="请输入你的年龄" type="text"></b-input>
                  </b-form-item>
-                  <b-form-item label="是否同意协议" prop="accept">
-                      <b-checkbox v-model="formCustom.accept">协议内容</b-checkbox>
-                  </b-form-item>
                  <b-button @on-click="handleSubmit('formCustom')">提交</b-button>
                  <b-button @on-click="handleReset('formCustom')">重置</b-button>
       </b-form>
