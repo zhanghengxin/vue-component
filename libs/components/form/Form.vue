@@ -58,8 +58,8 @@ export default {
             let length = this.fields.length
             this.fields.forEach(field => {
                 // '' 标识校验每一个FormItem的所有规则
-                field.validate('', errorField => {
-                    if (errorField) {
+                field.validate('', errorMsg => {
+                    if (errorMsg) {
                         isValid = false
                     }
                     if (++count === length) {

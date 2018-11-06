@@ -45,6 +45,11 @@ export default {
             default: ''
         }
     },
+    watch: {
+        value (checked) {
+            this.checked = checked
+        }
+    },
     computed: {
         checkbboxLeftClass: function () {
             return [
