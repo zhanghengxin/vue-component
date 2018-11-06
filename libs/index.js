@@ -20,6 +20,10 @@ import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
 import BackTop from './components/backTop'
+import Dropdown from './components/dropdown'
+import DropdownItem from './components/dropdown-item'
+import DropdownMenu from './components/dropdown-menu'
+import Switch from './components/switch/index'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkboxGroup'
 import Form from './components/form'
@@ -40,6 +44,9 @@ const components = [
     Steps,
     Step,
     Card,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
     Checkbox,
     CheckboxGroup,
     Modal,
@@ -47,7 +54,8 @@ const components = [
     Tooltip,
     BackTop,
     Form,
-    Form.FormItem
+    Form.FormItem,
+    Switch
 ]
 
 const install = function (Vue) {

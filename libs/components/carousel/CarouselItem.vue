@@ -1,4 +1,4 @@
-/**
+6/**
 * 走马灯组件 b-carousel-item
 * Created by hanshuai on 2018/9/10.
 */
