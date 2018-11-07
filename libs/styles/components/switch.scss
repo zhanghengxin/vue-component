@@ -1,0 +1,85 @@
+$switch-prefix-cls: "#{$css-prefix}switch";
+$switch-checked-prefix-cls: "#{$switch-prefix-cls}-checked";
+$switch-disabled-prefix-cls: "#{$switch-prefix-cls}-disabled";
+$switch-large-prefix-cls: "#{$switch-prefix-cls}-large";
+$switch-small-prefix-cls: "#{$switch-prefix-cls}-small";
+.#{$switch-prefix-cls} {
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+  line-height: 20px;
+  border-radius: 22px;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  background-color: #ccc;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: all .2s ease-in-out;
+  &:after{
+    content: "";
+    width: 18px;
+    height: 18px;
+    border-radius: 18px;
+    background-color: #fff;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    cursor: pointer;
+    transition: left .2s ease-in-out,width .2s ease-in-out
+  }
+}
+.#{$switch-checked-prefix-cls} {
+    background: #0079CC;
+    border: #0079CC;
+    &:after{
+      left:22px;
+    }
+    .#{$switch-prefix-cls}-inner{
+      left:7px !important;
+    }
+}
+.#{$switch-disabled-prefix-cls} {
+    cursor: not-allowed;
+    background: #e9eaec;
+    border-color: #e9eaec;
+    &:after{
+      background: #bbbbbb;
+    }
+}
+.#{$switch-large-prefix-cls} {
+    width: 56px;
+    .#{$switch-prefix-cls}-inner{
+        left:35px;
+    }
+    &.#{$switch-checked-prefix-cls}{
+      &:after{
+        left:35px;
+      }
+    }
+}
+.#{$switch-small-prefix-cls} {
+    width: 26px;
+    height: 16px;
+    &:after{
+      width: 12px;
+      height: 12px;
+    }
+    &.#{$switch-checked-prefix-cls}{
+      &:after{
+        width: 12px;
+        height: 12px;
+        left:12px;
+      }
+    }
+}
+.#{$switch-prefix-cls}-inner {
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    left: 23px;
+    top: 1px;
+}
