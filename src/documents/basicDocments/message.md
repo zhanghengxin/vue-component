@@ -24,7 +24,7 @@
                 this.$Message({
                     message: this.message,
                     type,
-                    duration: 1500
+                    duration: 15000
                 })
             },
             handleClickShowClose() {

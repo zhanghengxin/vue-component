@@ -4,13 +4,13 @@
     描述：circle进度环
 -->
 <template>
-    <div class="inlinb">
+    <div :class="prefixCls">
         <svg :xmlns='xmlns' :height='getHw' :width='getHw'>
-            <circle :cx='getCxy' :cy='getCxy' :r='radiusVal' fill='none' :stroke='strokecVal' :stroke-width='strokewVal' stroke-linecap='round'></circle>
-            <circle :style='bruStro' ref='probar' :cx='getCxy' :cy='getCxy' :r='radiusVal' fill='none' :stroke='probarcVal' :stroke-width='strokewVal' stroke-dasharray='0,10000' stroke-linecap='round'></circle>
+            <circle :class="prefixCls + strokeccl" :style="strokecValsty" :cx='getCxy' :cy='getCxy' :r='radiusVal' fill='none' :stroke-width='strokewVal' stroke-linecap='round'></circle>
+            <circle :class="prefixCls + probarccl"  :style='bruStro' ref='probar' :cx='getCxy' :cy='getCxy' :r='radiusVal' fill='none'  :stroke-width='strokewVal' stroke-dasharray='0,10000' stroke-linecap='round'></circle>
             <foreignObject :width='getHw' :height='getHw' >
                 <html :xmlns='textxmlns'>
-                    <div :height='getHw' :width='getHw' class="foreigntext">
+                    <div :height='getHw' :width='getHw' :style="textcsty" :class="[prefixCls + '-foreigntext',prefixCls + textccl]">
                         <slot>{{percent}}%</slot>
                     </div>
                 </html>
@@ -23,8 +23,27 @@
 </template>
 
 <script>
+import { prefix } from '../../utils/common'
+
+const prefixCls = prefix + 'circle'
 export default {
-    name: 'bwCircle',
+    name: prefixCls,
+    data () {
+        return {
+            prefixCls: prefixCls,
+            strokeccl: '-strokec',
+            probarccl: '-essco',
+            textccl: '-textc',
+            xmlns: 'http://www.w3.org/200/svg',
+            radiusVal: this.radius,
+            strokewVal: this.strokew,
+            strokecVal: this.strokec,
+            probarcVal: this.probarc,
+            textcVal: this.textc,
+            percentVal: this.percent,
+            textxmlns: 'http://www.w3.org/1999/xhtml'
+        }
+    },
     props: {
         radius: { // 半径
             type: Number,
@@ -36,11 +55,11 @@ export default {
         },
         strokec: { // 圆环颜色
             type: String,
-            default: '#eceef2'
+            default: ''
         },
         probarc: { // 进度条颜色
             type: String,
-            default: '#43a3fb'
+            default: ''
         },
         percent: { // 百分数
             type: Number,
@@ -48,7 +67,7 @@ export default {
         },
         textc: { // 文字颜色
             type: String,
-            default: '#2db7f5'
+            default: ''
         },
         size: { // 尺寸
             type: String,
@@ -60,6 +79,20 @@ export default {
         }
     },
     computed: {
+        textcsty: function () {
+            if (this.textcVal !== '') {
+                return 'color:' + this.textcVal
+            } else {
+                return ''
+            }
+        },
+        strokecValsty: function () {
+            if (this.strokecVal !== '') {
+                return 'stroke:' + this.strokecVal
+            } else {
+                return ''
+            }
+        },
         getCxy () {
             if (this.size) {
                 this.circleSize(this.size)
@@ -74,7 +107,11 @@ export default {
         },
         bruStro () {
             let traor = this.getCxy + 'px'
-            return {'transformOrigin': `${traor} ${traor}`, 'transform': 'rotate(-90deg)', 'transition': 'stroke-dasharray .3s ease-in'}
+            var bru = {'transformOrigin': `${traor} ${traor}`, 'transform': 'rotate(-90deg)', 'transition': 'stroke-dasharray .3s ease-in'}
+            if (this.probarcVal !== '') {
+                bru['stroke'] = this.probarcVal
+            }
+            return bru
         }
     },
     watch: {
@@ -86,18 +123,30 @@ export default {
         },
         comatch: function (newvalue, oldvalue) {
             this.circlecoMatch(newvalue)
-        }
-    },
-    data () {
-        return {
-            xmlns: 'http://www.w3.org/200/svg',
-            radiusVal: this.radius,
-            strokewVal: this.strokew,
-            strokecVal: this.strokec,
-            probarcVal: this.probarc,
-            textcVal: this.textc,
-            percentVal: this.percent,
-            textxmlns: 'http://www.w3.org/1999/xhtml'
+        },
+        radius: function (newvalue, oldvalue) {
+            this.radiusVal = newvalue
+            this.getCxy()
+            this.getHw()
+            this.rotateCircle(this.percentVal)
+        },
+        strokew: function (newvalue, oldvalue) {
+            this.strokewVal = newvalue
+            this.getCxy()
+            this.getHw()
+            this.rotateCircle(this.percentVal)
+        },
+        strokec: function (newvalue, oldvalue) {
+            this.strokecVal = newvalue
+            this.strokecValsty()
+        },
+        probarc: function (newvalue, oldvalue) {
+            this.probarcVal = newvalue
+            this.bruStro()
+        },
+        textc: function (newvalue, oldvalue) {
+            this.textcVal = newvalue
+            this.textcsty()
         }
     },
     mounted () {
@@ -130,22 +179,16 @@ export default {
             }
         },
         circlecoMatch: function (standard) {
+            this.strokeccl = '-strokec'
+            this.textccl = '-textc'
             if (standard === 'essco') { // 主色
-                this.strokecVal = '#eceef2'
-                this.probarcVal = '#43a3fb'
-                this.textcVal = '#2db7f5'
+                this.probarccl = '-essco'
             } else if (standard === 'secco') { // 辅色
-                this.strokecVal = '#eceef2'
-                this.probarcVal = '#0eb83a'
-                this.textcVal = '#0eb83a'
+                this.probarccl = '-secco'
             } else if (standard === 'neuco') { // 中性色
-                this.strokecVal = '#eceef2'
-                this.probarcVal = '#474847'
-                this.textcVal = '#7e7d83'
+                this.probarccl = '-neuco'
             } else {
-                this.strokecVal = this.strokec
-                this.probarcVal = this.probarc
-                this.textcVal = this.textc
+                this.probarccl = '-essco'
             }
         }
     }
@@ -153,19 +196,4 @@ export default {
 </script>
 
 <style>
-    .inlinb {
-        display: inline-block;
-    }
-    text {
-        text-anchor: middle;/*水平居中*/
-        dominant-baseline: middle;/*垂直居中*/
-    }
-    .foreigntext {
-        position: absolute;
-        top:50%;
-        left:50%;
-        width:100%;
-        transform:translate(-50%,-50%);
-        text-align: center;
-    }
 </style>

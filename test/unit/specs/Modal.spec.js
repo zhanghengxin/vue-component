@@ -1,4 +1,6 @@
 import { createVue, destroyVM } from '../utils'
+import { prefix } from '&/utils/common'
+const prefixCls = `.${prefix}modal`
 
 describe('Modal', () => {
     let vm
@@ -25,8 +27,8 @@ describe('Modal', () => {
         }, true)
         const modal = vm.$children[0]
         setTimeout(() => {
-            expect(document.querySelector('.b-modal')).to.exist
-            expect(modal.$el.querySelector('.b-modal-header-inner').textContent).to.equal('modal test')
+            expect(document.querySelector(`${prefixCls}`)).to.exist
+            expect(modal.$el.querySelector(`${prefixCls}-header-inner`).textContent).to.equal('modal test')
             expect(modal.$el.parentNode).to.equal(document.body)
             expect(modal.$el.style.display).to.not.equal('none')
             done()
@@ -57,8 +59,8 @@ describe('Modal', () => {
         }, true)
         const modal = vm.$children[0]
         setTimeout(() => {
-            expect(modal.$el.querySelector('.b-modal-body span').textContent).to.equal('Content of modal')
-            const footerBtns = modal.$el.querySelectorAll('.b-modal-footer button')
+            expect(modal.$el.querySelector(`${prefixCls}-body span`).textContent).to.equal('Content of modal')
+            const footerBtns = modal.$el.querySelectorAll(`${prefixCls}-footer button`)
             expect(footerBtns.length).to.equal(2)
             expect(footerBtns[0].querySelector('span').textContent).to.equal('cancel')
             expect(footerBtns[1].querySelector('span').textContent).to.equal('ok')
@@ -84,7 +86,7 @@ describe('Modal', () => {
                 }
             }
         }, true)
-        const modal = vm.$children[0].$el.querySelector('.b-modal')
+        const modal = vm.$children[0].$el.querySelector(`${prefixCls}`)
         expect(modal.style.display).to.equal('none')
         vm.visible = true
         setTimeout(() => {
@@ -120,34 +122,34 @@ describe('Modal', () => {
 
         it('width', () => {
             vm = getModalVm('width="360px"')
-            expect(vm.$children[0].$el.querySelector('.b-modal').style.width).to.equal('360px')
+            expect(vm.$children[0].$el.querySelector(`${prefixCls}`).style.width).to.equal('360px')
         })
 
         it('fullscreen', () => {
             vm = getModalVm('fullscreen')
-            const modalEl = vm.$children[0].$el.querySelector('.b-modal')
+            const modalEl = vm.$children[0].$el.querySelector(`${prefixCls}`)
             expect(modalEl.classList.contains('b-modal-fullscreen')).to.be.true
         })
 
         it('z-index', () => {
             vm = getModalVm('z-index=1024')
-            expect(vm.$children[0].$el.querySelector('.b-modal-wrap').style.zIndex).to.equal('1024')
+            expect(vm.$children[0].$el.querySelector(`${prefixCls}-wrap`).style.zIndex).to.equal('1024')
         })
 
         it('class-name', () => {
             vm = getModalVm('class-name="my-modal"')
-            expect(vm.$children[0].$el.querySelector('.b-modal-wrap').classList.contains('my-modal')).to.be.true
+            expect(vm.$children[0].$el.querySelector(`${prefixCls}-wrap`).classList.contains('my-modal')).to.be.true
         })
 
         it('ok-text', () => {
             vm = getModalVm('ok-text="ok"')
-            const footerBtns = vm.$children[0].$el.querySelectorAll('.b-modal-footer button')
+            const footerBtns = vm.$children[0].$el.querySelectorAll(`${prefixCls}-footer button`)
             expect(footerBtns[1].querySelector('span').textContent).to.equal('ok')
         })
 
         it('cancel-text', () => {
             vm = getModalVm('cancel-text="cancel"')
-            const footerBtns = vm.$children[0].$el.querySelectorAll('.b-modal-footer button')
+            const footerBtns = vm.$children[0].$el.querySelectorAll(`${prefixCls}-footer button`)
             expect(footerBtns[0].querySelector('span').textContent).to.equal('cancel')
         })
     })
@@ -227,7 +229,7 @@ describe('Modal', () => {
         }, true)
         const modal = vm.$children[0]
         setTimeout(() => {
-            modal.$el.querySelector('.b-modal-wrap').click()
+            modal.$el.querySelector(`${prefixCls}-wrap`).click()
             setTimeout(() => {
                 expect(vm.visible).to.be.false
                 done()
@@ -255,7 +257,7 @@ describe('Modal', () => {
         }, true)
         const modal = vm.$children[0]
         setTimeout(() => {
-            modal.$el.querySelector('.b-modal-close').click()
+            modal.$el.querySelector(`${prefixCls}-close`).click()
             setTimeout(() => {
                 expect(vm.visible).to.be.false
                 done()

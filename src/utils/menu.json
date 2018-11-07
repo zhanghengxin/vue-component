@@ -1,5 +1,5 @@
 {
-  "食用指南": [
+  "使用指南": [
     {
       "name": "guide",
       "path": "/guide",
@@ -30,6 +30,11 @@
       "path": "/",
       "items": [
         {
+          "title": "CheckBox 多选框",
+          "path": "/checkbox",
+          "name": "checkbox"
+        },
+        {
           "title": "Color 色彩",
           "path": "/color",
           "name": "color"
@@ -55,6 +60,11 @@
           "name": "button"
         },
         {
+          "title": "Switch 开关",
+          "path": "/switch",
+          "name": "switch"
+        },
+        {
           "title": "Drawer 抽屉",
           "path": "/drawer",
           "name": "drawer"
@@ -68,6 +78,11 @@
           "title": "Steps 步骤条",
           "path": "/steps",
           "name": "steps"
+        },
+        {
+          "title": "Dropdown下拉",
+          "path": "/dropdown",
+          "name": "dropdown"
         }
       ]
     },
@@ -121,6 +136,17 @@
           "title": "Breadcrumb 面包屑",
           "path": "/breadcrumb",
           "name": "breadcrumb"
+        }
+      ]
+    },
+    {
+      "title": "表单",
+      "path": "/",
+      "items": [
+        {
+          "title": "Form 表单",
+          "path": "/form",
+          "name": "form"
         }
       ]
     },
