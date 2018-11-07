@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import InvoiceCar from './InvoiceCar'
+import InvoiceCar from './invoice/InvoiceCar'
 
 export default {
-    name: '',
+    name: 'BasicInvoice',
     components: {
         InvoiceCar
     },
