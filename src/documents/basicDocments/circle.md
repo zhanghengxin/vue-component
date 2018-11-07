@@ -98,11 +98,11 @@
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size   | 尺寸      | string  |  normal、big、small  |  normal     | 
+| size   | 尺寸      | string  |  normal、big、small  |  -    | 
 | comatch  | 配色      | string  |  essco、secco、neuco  |   essco    |
 | radius   | 半径      | number  |    -  |   50    |
 | strokew  | 环宽      | number  |    -  |   5    |
 | percent  | 百分数    | number   |    -   |  30     |
-| strokec  | 圆环颜色   | string  |     -   |   -    |
+| strokec  | 圆环颜色   | string  |     -   |   #eceef2    |
 | probarc  | 进度条颜色 | string  |      -  |    -    |
-| textc    | 文字颜色  | string   |     -  |    -    |
+| textc    | 文字颜色  | string   |     -  |    #495060   |
