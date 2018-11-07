@@ -1,8 +1,8 @@
 /**
- * input 组件
- * author ganbowen
- * created 2018/09/18 20:05:54
- */
+* input 组件
+* author ganbowen
+* created 2018/09/18 20:05:54
+*/
 <template>
     <div class='b-input-box' :class="{'b-input-group':labelText,'b-input-error':error}">
         <div v-if="labelText" class="b-input-label">{{labelText}}</div>
@@ -10,29 +10,30 @@
         <i class="b-icon" :class="['']" v-else-if="false" @click="handleIconClick"></i>
         <i class="b-icon" :class="['']" v-else-if="false" @click="handleSearch"></i>
         <input
-                class="b-input"
-                :class="['b-input-'+size]"
-                :value="currentValue"
-                :placeholder="placeholder"
-                :disabled="disabled"
-                :maxlength="maxlength"
-                :minlength="minlength"
-                :readonly="readonly"
-                :autofocus="autofocus"
-                :type="type"
-                @change="handleChange"
-                @input="handleInput"
-                @focus="handleFocus"
-                @blur="handleBlur"
-                @keyup="handleKeyup"
-                @keydown="handleKeydown"/>
+            class="b-input"
+            :class="['b-input-'+size]"
+            :value="currentValue"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            :maxlength="maxlength"
+            :minlength="minlength"
+            :autofocus="autofocus"
+            :type="type"
+            @change="handleChange"
+            @input="handleInput"
+            @focus="handleFocus"
+            @blur="handleBlur"
+            @keyup="handleKeyup"
+            @keydown="handleKeydown"/>
     </div>
 </template>
 
 <script>
+import { prefix } from '../../utils/common'
 
+const prefixCls = prefix + 'input'
 export default {
-    name: 'b-input',
+    name: prefixCls,
     props: {
         /* 控制input的自带属性 */
         // 接收input的value

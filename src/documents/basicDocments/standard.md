@@ -8,39 +8,56 @@
 [风格指南](https://cn.vuejs.org/v2/style-guide/)
 
 ### 组件样式
-所有组件样式不建议用 scoped 属性，而是添加统一前缀 【b-组件名-属性的模式】，以下是组件样式示例：
+所有组件样式不建议用 scoped 属性，而是添加统一前缀 【$css-prefix-组件名-属性的模式】，以下是组件样式示例：
+组件所有的颜色要用颜色表里的变量名来写，便于以后定制化 UI。
 
-// button组件  示例
+// page组件  示例
 ```bash
-.b-btn {
-...
-}
+$css-prefix-page: $css-prefix + 'page';
 
-.b-btn-info {
-  color: white;
-  background-color: $LightPrimary; // 所有颜色统一用全局颜色表的变量来写，方便统一管理
-  border-color: $LightPrimary;
-}
-
-.b-btn-white {
-  color: $LightPrimary;
-  background-color: white;
-  border-color: $Border;
-}
-
-.b-btn-small {
-  height: 25px;
-}
-
-.b-btn-normal {
-  height: 32px;
+.#{$css-prefix-page} {
+  font-size: 0;
+  .#{$css-prefix-page}-item-content {
+    color: $Content;
+  }
+  .#{$css-prefix-page}-arrow {
+    color: $Content;
+    &:hover {
+      color: $LightPrimary;
+    }
+  }
 }
 ```
 
 ### 开发规范
-- 所有组件的`组件名`、`样式名`均以`b-`为公用前缀，不要用`bw-`，组件库不要和业务相关，就是单纯的组件库
-- 组件所有的颜色要用颜色表里的变量名来写，便于以后定制化 UI。
+- 所有组件的`组件名`、`样式名`均以`prefix`为公用前缀，不要用`bw-`，组件库不要和业务相关，就是单纯的组件库,示例
+```bash
+    <div :class="[prefixCls + '-simple-pager']" :title="currentPage + '/' + pageCount">
+        <input
+            type="text"
+            :value="currentPage"
+            @keydown="keyDown"
+            @keyup="keyUp"
+            @change="keyUp">
+        <span>/</span>
+        {{ pageCount }}s
+    </div>
+    ...
+    import { prefix } from '../../utils/common'
 
+    const prefixCls = prefix + 'page'
+    ...
+    wrapCls () {
+        return [
+            `${prefixCls}`,
+            `${prefixCls}-normal`,
+            {
+                [`${this.className}`]: !!this.className,
+                [`${prefixCls}-mini`]: !!this.mini
+            }
+        ]
+    }
+```
 
 ### 测试
 初期 UI 测试采用常见的的Karma + Mocha单元测试，测试用例请参考test/unit/specs/Icon.spec.js,测试用例编写以后，执行 npm run unit 进行测试
