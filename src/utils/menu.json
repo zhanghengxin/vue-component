@@ -132,6 +132,17 @@
       }]
     },
     {
+      "title": "表单",
+      "path": "/",
+      "items": [
+        {
+          "title": "Form 表单",
+          "path": "/form",
+          "name": "form"
+        }
+      ]
+    },
+    {
       "title": "其他",
       "path": "/",
       "items": [{

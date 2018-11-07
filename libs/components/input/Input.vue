@@ -90,10 +90,14 @@
 <script>
 import calcTextareaHeight from './calcTeatareaHeight.js'
 import { prefix } from '../../utils/common'
+import { findComponentUpward } from '../../utils/assist'
+import Emitter from '../../mixins/emitter'
+
 const prefixCls = prefix + 'input'
 
 export default {
     name: prefixCls,
+    mixins: [Emitter],
     props: {
         // 接收input的自带属性
         elementId: {
@@ -225,6 +229,9 @@ export default {
         },
         handleBlur (event) {
             this.$emit('on-blur', event)
+            if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
+                this.dispatch(prefix + 'form-item', 'on-form-blur', this.currentValue)
+            }
         },
         handleKeyup (event) {
             this.$emit('on-keyup', event)
@@ -275,6 +282,9 @@ export default {
                 this.$refs.textarea.blur()
             } else {
                 this.$refs.input.blur()
+                if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
+                    this.dispatch(prefix + 'form-item', 'on-form-change', this.currentValue)
+                }
             }
         }
     },
