@@ -75,7 +75,7 @@ $css-prefix-drawer: $css-prefix + 'drawer';
     top: 0;
     border-radius: 4px;
     background-color: $white;
-    box-shadow: -2px 0 8px $Sub;
+    // box-shadow: -2px 0 8px $Sub;
     z-index: 100;
   }
   .#{$css-prefix-drawer}-top-enter-active {
