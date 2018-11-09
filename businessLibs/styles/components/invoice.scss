@@ -28,12 +28,36 @@ $css-prefix-invoice: $css-prefix + 'invoice';
   line-height: 38px;
 }
 
-.#{$css-prefix-invoice}-table {
+.#{$css-prefix-invoice}-top {
   width: 100%;
   border: none;
   margin: 0;
   padding: 0;
-  .#{$css-prefix-invoice}-table-td {
+  .#{$css-prefix-invoice}-top-td {
     border: none;
+  }
+  .#{$css-prefix-invoice}-table-clumn {
+    text-align: center;
+    color: $Sub;
+  }
+}
+
+.#{$css-prefix-invoice}-table {
+  width: 100%;
+  .#{$css-prefix-invoice}-table-td {
+    line-height: 25px;
+    border: 1px solid $Border;
+    margin: 0 auto;
+    vertical-align: middle;
+  }
+  .#{$css-prefix-invoice}-table-column {
+    text-align: center;
+    color: $Sub;
+  }
+
+  .#{$css-prefix-invoice}-table-content {
+    text-align: left;
+    padding-left: 10px;
+    color: $Content;
   }
 }

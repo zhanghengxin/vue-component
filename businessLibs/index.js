@@ -2,6 +2,8 @@
  * Created by gaoguoqing on 2018/9/5.
  *
  */
+import './utils/protoType'
+
 import BasicInvoice from './components/income'
 
 const components = [

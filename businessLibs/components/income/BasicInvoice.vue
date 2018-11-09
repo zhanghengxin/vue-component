@@ -26,7 +26,6 @@ export default {
     },
     computed: {
         invoiceType () {
-            return 'car'
             let type = this.invoiceData.invoiceTypeCode
             if (type === '03') {
                 return 'car'

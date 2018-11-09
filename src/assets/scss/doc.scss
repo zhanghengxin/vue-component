@@ -33,13 +33,13 @@
     font-size: 18px;
     margin: 10px 0 15px;
   }
-  p {
+  h3 + p {
     font-size: 14px;
     color: $Content;
     line-height: 1.5em;
     margin-bottom: 10px;
   }
-  table {
+  .table {
     width: 100%;
     font-size: 13px;
     line-height: 1.5;
