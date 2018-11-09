@@ -3,16 +3,20 @@
         <div v-if="invoiceType === 'car'">
             <invoice-car :invoiceData='invoiceData'></invoice-car>
         </div>
+        <div v-if="invoiceType === 'normal'">
+            <invoice-normal :invoiceData='invoiceData'></invoice-normal>
+        </div>
     </div>
 </template>
 
 <script>
 import InvoiceCar from './invoice/InvoiceCar'
+import InvoiceNormal from './invoice/InvoiceNormal'
 
 export default {
     name: 'BasicInvoice',
     components: {
-        InvoiceCar
+        InvoiceCar, InvoiceNormal
     },
     props: {
         invoiceData: {
@@ -20,9 +24,7 @@ export default {
         }
     },
     data () {
-        return {
-            // invoiceAllData: {}
-        }
+        return {}
     },
     computed: {
         invoiceType () {

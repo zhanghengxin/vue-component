@@ -1,3 +1,8 @@
+/**
+* 机动车发票票面
+* Created by gaoguoqing on 2018/11/8.
+*
+*/
 <template>
     <div :class="[prefixCls+'-box']">
         <div :class="[prefixCls+'-title']">
@@ -46,12 +51,14 @@
                     <p v-text="invoiceCarData.cardid"></p>
                 </td>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-column']">纳税人识别号</td>
-                <td colspan="3" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.buyerTaxNo}}
+                <td colspan="3" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">
+                    {{invoiceCarData.buyerTaxNo}}
                 </td>
             </tr>
             <tr>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-column']">车 辆 类 型</td>
-                <td colspan="2" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.cartype}}</td>
+                <td colspan="2" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.cartype}}
+                </td>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-column']">厂 牌 型 号</td>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.makeModel}}</td>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-column']">产 地</td>
@@ -78,7 +85,8 @@
                 <td colspan="3" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.engineNo}}
                 </td>
                 <td colspan="2" :class="[prefixCls+'-table-td',prefixCls+'-table-column']">车辆识别代号/车架号码</td>
-                <td colspan="2" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.frameNo}}</td>
+                <td colspan="2" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.frameNo}}
+                </td>
             </tr>
             <tr>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-column']">价 税 合 计</td>
@@ -88,10 +96,12 @@
             </tr>
             <tr>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-column']">销货单位名称</td>
-                <td colspan="4" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.sellerName}}
+                <td colspan="4" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">
+                    {{invoiceCarData.sellerName}}
                 </td>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-column']">电 话</td>
-                <td colspan="2" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.phoneNo}}</td>
+                <td colspan="2" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.phoneNo}}
+                </td>
             </tr>
             <tr>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-column']">纳税人识别号</td>
@@ -99,11 +109,13 @@
                     {{invoiceCarData.sellerTaxNo}}
                 </td>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-column']">账 号</td>
-                <td colspan="2" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.account}}</td>
+                <td colspan="2" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.account}}
+                </td>
             </tr>
             <tr>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-column']">地 址</td>
-                <td colspan="4" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.address}}</td>
+                <td colspan="4" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.address}}
+                </td>
                 <td :class="[prefixCls+'-table-td',prefixCls+'-table-column']">开 户 银 行</td>
                 <td colspan="2" :class="[prefixCls+'-table-td',prefixCls+'-table-content']">{{invoiceCarData.bank}}</td>
             </tr>

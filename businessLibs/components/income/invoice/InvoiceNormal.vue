@@ -1,5 +1,5 @@
 <template>
-    <div class="invoice-normal"></div>
+    <div class="invoice-normal">测试是</div>
 </template>
 
 <script>
