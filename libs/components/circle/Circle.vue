@@ -6,11 +6,11 @@
 <template>
     <div :class="prefixCls">
         <svg :xmlns='xmlns' :height='getHw' :width='getHw'>
-            <circle :class="prefixCls + strokeccl" :style="strokecValsty" :cx='getCxy' :cy='getCxy' :r='radiusVal' fill='none' :stroke-width='strokewVal' stroke-linecap='round'></circle>
-            <circle :class="prefixCls + probarccl"  :style='bruStro' ref='probar' :cx='getCxy' :cy='getCxy' :r='radiusVal' fill='none'  :stroke-width='strokewVal' stroke-dasharray='0,10000' stroke-linecap='round'></circle>
+            <circle :class="prefixCls + '-' + strokeccl" :style="strokecValsty" :cx='getCxy' :cy='getCxy' :r='radiusVal' fill='none' :stroke-width='strokewVal' stroke-linecap='round'></circle>
+            <circle :class="prefixCls + '-' + probarccl"  :style='bruStro' ref='probar' :cx='getCxy' :cy='getCxy' :r='radiusVal' fill='none'  :stroke-width='strokewVal' stroke-dasharray='0,10000' stroke-linecap='round'></circle>
             <foreignObject :width='getHw' :height='getHw' >
                 <html :xmlns='textxmlns'>
-                    <div :height='getHw' :width='getHw' :style="textcsty" :class="[prefixCls + '-foreigntext',prefixCls + textccl]">
+                    <div :height='getHw' :width='getHw' :style="textcsty" :class="[prefixCls + '-foreigntext',prefixCls + '-' + textccl]">
                         <slot>{{percent}}%</slot>
                     </div>
                 </html>
@@ -31,9 +31,9 @@ export default {
     data () {
         return {
             prefixCls: prefixCls,
-            strokeccl: '-strokec',
-            probarccl: '-essco',
-            textccl: '-textc',
+            strokeccl: 'strokec',
+            probarccl: this.comatch,
+            textccl: 'textc',
             xmlns: 'http://www.w3.org/200/svg',
             radiusVal: this.radius,
             strokewVal: this.strokew,
@@ -75,7 +75,7 @@ export default {
         },
         comatch: { // 配色
             type: String,
-            default: ''
+            default: 'essco'
         }
     },
     computed: {
@@ -126,27 +126,20 @@ export default {
         },
         radius: function (newvalue, oldvalue) {
             this.radiusVal = newvalue
-            this.getCxy()
-            this.getHw()
             this.rotateCircle(this.percentVal)
         },
         strokew: function (newvalue, oldvalue) {
             this.strokewVal = newvalue
-            this.getCxy()
-            this.getHw()
             this.rotateCircle(this.percentVal)
         },
         strokec: function (newvalue, oldvalue) {
             this.strokecVal = newvalue
-            this.strokecValsty()
         },
         probarc: function (newvalue, oldvalue) {
             this.probarcVal = newvalue
-            this.bruStro()
         },
         textc: function (newvalue, oldvalue) {
             this.textcVal = newvalue
-            this.textcsty()
         }
     },
     mounted () {
@@ -179,16 +172,12 @@ export default {
             }
         },
         circlecoMatch: function (standard) {
-            this.strokeccl = '-strokec'
-            this.textccl = '-textc'
-            if (standard === 'essco') { // 主色
-                this.probarccl = '-essco'
-            } else if (standard === 'secco') { // 辅色
-                this.probarccl = '-secco'
+            if (standard === 'secco') { // 辅色
+                this.probarccl = 'secco'
             } else if (standard === 'neuco') { // 中性色
-                this.probarccl = '-neuco'
-            } else {
-                this.probarccl = '-essco'
+                this.probarccl = 'neuco'
+            } else { // 主色、默认色
+                this.probarccl = 'essco'
             }
         }
     }
