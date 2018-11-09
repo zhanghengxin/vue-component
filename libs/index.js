@@ -21,8 +21,13 @@ import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
 import BackTop from './components/backTop'
+import Dropdown from './components/dropdown'
+import DropdownItem from './components/dropdown-item'
+import DropdownMenu from './components/dropdown-menu'
+import Switch from './components/switch/index'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkboxGroup'
+import Form from './components/form'
 
 const components = [
     Input,
@@ -41,42 +46,28 @@ const components = [
     Steps,
     Step,
     Card,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
     Checkbox,
     CheckboxGroup,
     Modal,
     Circle,
     Tooltip,
-    BackTop
+    BackTop,
+    Form,
+    Form.FormItem,
+    Switch
 ]
 
 const install = function (Vue) {
     if (install.installed) return
-    components.map(component => Vue.component(component.name, component))
+    components.forEach(component => Vue.component(component.name, component))
     Vue.prototype.$Message = Message
     Vue.prototype.$Modal = Modal
 }
 
 export default {
     install,
-    Button,
-    Drawer,
-    Carousel,
-    CarouselItem,
-    Input,
-    Page,
-    Icon,
-    Collapse,
-    CollapseItem,
-    Message,
-    Breadcrumb,
-    BreadcrumbItem,
-    Circle,
-    Steps,
-    Step,
-    Card,
-    Modal,
-    Tooltip,
-    BackTop,
-    Checkbox,
-    CheckboxGroup
+    ...components
 }
