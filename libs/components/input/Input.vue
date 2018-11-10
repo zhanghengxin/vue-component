@@ -89,8 +89,8 @@
 
 <script>
 import calcTextareaHeight from './calcTeatareaHeight.js'
-import { prefix } from '../../utils/common'
 import { findComponentUpward } from '../../utils/assist'
+import { prefix } from '../../utils/common'
 import Emitter from '../../mixins/emitter'
 
 const prefixCls = prefix + 'input'
