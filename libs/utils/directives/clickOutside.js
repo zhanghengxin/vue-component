@@ -1,5 +1,5 @@
 export default {
-    bind (el, binding, vnode) {
+    bind (el, binding) {
         function documentHandler (e) {
             if (el.contains(e.target)) {
                 return false
@@ -11,7 +11,7 @@ export default {
         el._vueClickOutSide_ = documentHandler
         document.addEventListener('click', documentHandler)
     },
-    unbind (el, binding) {
+    unbind (el) {
         document.removeEventListener('click', el._vueClickOutSide_)
         delete el._vueClickOutSide_
     }

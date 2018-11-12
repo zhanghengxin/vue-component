@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import clickOutside from '../../../directives/clickOutside'
+import clickOutside from '../../utils/directives/clickOutside'
 import Emitter from '../../mixins/emitter'
 import { findComponentUpward } from '../../utils/utils'
 const prefixCls = 'b-dropdown'
