@@ -31,7 +31,6 @@ describe('Icon.vue', () => {
         }, true)
         let Elm = vm.$el
         expect(Elm.style.color).to.equal('red')
-    
     })
     it('click', done => {
         let result
