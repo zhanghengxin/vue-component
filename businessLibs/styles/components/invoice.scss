@@ -1,5 +1,6 @@
 $css-prefix-invoice: $css-prefix + 'invoice';
 .#{$css-prefix-invoice}-box {
+  position: relative;
   width: 900px;
   box-sizing: border-box;
   padding: 23px 29px;
@@ -19,15 +20,15 @@ $css-prefix-invoice: $css-prefix + 'invoice';
     font-size: 18px;
     font-weight: normal;
   }
+  span {
+    display: block;
+    border-bottom: 1px solid $Border;
+    height: 38px;
+    line-height: 38px;
+  }
 }
 
-.#{$css-prefix-invoice}-title span {
-  display: block;
-  border-bottom: 1px solid $Border;
-  height: 38px;
-  line-height: 38px;
-}
-
+// car start
 .#{$css-prefix-invoice}-top {
   width: 100%;
   border: none;
@@ -44,6 +45,7 @@ $css-prefix-invoice: $css-prefix + 'invoice';
 
 .#{$css-prefix-invoice}-table {
   width: 100%;
+  border: 1px solid $Border;
   .#{$css-prefix-invoice}-table-td {
     line-height: 25px;
     border: 1px solid $Border;
@@ -60,4 +62,65 @@ $css-prefix-invoice: $css-prefix + 'invoice';
     padding-left: 10px;
     color: $Content;
   }
+  .#{$css-prefix-invoice}-table-name {
+    text-align: left;
+    border: none;
+    vertical-align: top;
+  }
+  .#{$css-prefix-invoice}-table-detail {
+    border-right: 1px solid $Border;
+    line-height: 25px;
+  }
+  .#{$css-prefix-invoice}-table-right {
+    text-align: right;
+    padding-right: 5px;
+    color: $Sub;
+  }
+  .#{$css-prefix-invoice}-table-left {
+    padding-left: 5px;
+    text-align: left;
+    color: $Sub;
+  }
 }
+
+// car end
+
+// normal start
+// 右上角悬浮列表
+.#{$css-prefix-invoice}-ul {
+  position: absolute;
+  text-align: right;
+  right: 30px;
+  top: 16px;
+  line-height: 2;
+  color: $Sub;
+  .#{$css-prefix-invoice}-ul-content {
+    color: $Content;
+  }
+}
+
+// 发票类型
+.#{$css-prefix-invoice}-type {
+  position: absolute;
+  left: 26px;
+  top: 12px;
+  box-sizing: border-box;
+  padding: 2px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: #e6d8bd;
+  text-align: center;
+  border: 4px solid #e6d8bd;
+  span {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    line-height: 40px;
+    box-sizing: border-box;
+    border: 2px solid #e6d8bd;
+    border-radius: 50%;
+    font-size: 30px;
+  }
+}
+
