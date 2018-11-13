@@ -1,0 +1,821 @@
+$scroll-width: 25px;
+    $invoice-height: 575px;
+    //$invoice-width: 875px;
+    $invoice-width-design: 875px;
+    $invoice-width: 875px + $scroll-width;
+    $label-color: #866d3d;
+    $label-font-size: 14px;
+    $type-color: #1fca74;
+    $grid-border-color: $label-color;
+    $inner-border-color: #dddee1;
+    $grid-border: 1px solid $label-color;
+    $inner-border: 1px solid $inner-border-color;
+    $trader-width: 516px;
+
+    @mixin inline-block {
+        display: inline-block;
+        //border: $grid-border;
+        //border-right: none;
+        //&.last {
+        //  border-right: $grid-border;
+        //}
+    }
+
+    @mixin vertical-line {
+        writing-mode: vertical-lr;
+        color: $label-color;
+    }
+
+    @mixin distributed {
+        text-align: justify;
+        text-align-last: justify;
+    }
+
+    @mixin invoiceLine {
+        color: $label-color;
+    }
+
+    @mixin elect {
+        border: 5px solid $type-color;
+        > div {
+            border: 2px solid $type-color;
+            color: $type-color;
+        }
+    }
+
+    @mixin invoicefontcolor {
+        color: $label-color;
+    }
+
+    @mixin special {
+        border: 5px solid red;
+        > div {
+            border: 2px solid red;
+            color: red;
+        }
+    }
+
+    @mixin input-style {
+        border: 1px solid $inner-border-color;
+        font-size: 14px;
+        border-radius: 3px;
+        color: #333333;
+        line-height: 18px;
+        height: 18px;
+        padding: 0px;
+    }
+
+    .col-index,.col-a, .col-b, .col-c, .col-d, .col-e, .col-f, .col-g, .col-h, .col-i {
+        border-right: $grid-border;
+    }
+
+    //grid header footer
+    .grid-hf {
+        //height:  percentage(87px / $invoice-height);
+        height: 87px;
+        font-size: 0px;
+        border-bottom: $grid-border;
+        &-col {
+            font-size: $label-font-size;
+            @include inline-block;
+            &.col-a, &.col-c {
+                height: 100%;
+                @include vertical-line;
+                @include distributed;
+            }
+        }
+        .col-a {
+            padding: 4px 5px;
+            width: percentage(32px / $invoice-width);
+        }
+        .col-b {
+            width: percentage($trader-width / $invoice-width);
+            vertical-align: top;
+        }
+        .col-c {
+            width: percentage(20px / $invoice-width);
+            padding: 4px 0px;
+        }
+        .col-d {
+            height: 100%;
+            vertical-align: top;
+            text-align: center;
+            width: percentage((302px + $scroll-width) / $invoice-width);
+            border-right: none;
+        }
+        .remark {
+            margin-top: 4px;
+            width: 96%;
+            height: 90%;
+            border: $inner-border;
+            border-radius: 4px;
+            overflow: auto;
+            resize: none;
+            padding: 0px 2px
+        }
+        .trader {
+            .label {
+                width: percentage(85px/$trader-width);
+                color: $label-color;
+                text-align: justify;
+                text-align-last: justify;
+                margin-left: 4px;
+                display: inline-block;
+            }
+            .name {
+                &.input {
+                    width: 100%;
+                    margin: 0 0 1px -4px;
+                }
+                .ivu-input {
+                    width: 100%;
+                    @include input-style;
+                    height: 20px;
+                }
+	            .ivu-input-wrapper{
+		            width: 100%;
+		            input{
+			            width: 100%;
+		            }
+	            }
+            }
+            .input {
+                width: percentage(400px/$trader-width);
+            }
+
+            .info {
+                overflow: hidden;
+                width: percentage(300px/$trader-width);
+                &.small {
+                    font-size: 10.5px;
+                }
+            }
+        }
+    }
+
+    .grid-list {
+        .red {
+            color: red;
+        }
+        font-size: 0px;
+        &-item {
+            &.discount-line {
+                .input{
+                    color:red !important;
+                }
+                .red, .red>.ivu-input {
+                    color: red;
+                }
+            }
+        }
+        &-col {
+            font-size: $label-font-size;
+            text-align: center;
+            color: $label-color;
+            @include inline-block;
+            .input, .ivu-input {
+                width: 90%;
+                @include input-style;
+            }
+
+            &.sum {
+                text-align: justify;
+                text-align-last: justify;
+                padding: 0px 7%;
+            }
+            &.col-index {
+                width: 31px;
+            }
+            &.col-a {
+                //width: percentage(206px/$invoice-width);
+                width: 206px;
+                border-left: none;
+                .name {
+                    // width: 85%;
+                    margin-right: 4px;
+                }
+            }
+            &.col-b {
+                //width: percentage(92px/$invoice-width)
+                width: 92px;
+            }
+            &.col-c {
+                //width: percentage(46px/$invoice-width)
+                width: 46px;
+            }
+            &.col-d {
+                //width: percentage(76px/$invoice-width)
+                width: 76px;
+            }
+            &.col-e {
+                //width: percentage(80px/$invoice-width)
+                width: 80px;
+            }
+            &.col-f {
+                //width: percentage(110px/$invoice-width)
+                width: 110px;
+            }
+            &.col-g {
+                //width: percentage(55px/$invoice-width)
+                width: 60px;
+            }
+            &.col-h {
+                //width: percentage(110px/$invoice-width)
+                width: 90px;
+            }
+            &.col-i {
+                //width: percentage(95px/$invoice-width);
+                width: 82px;
+                .op {
+                    background: #0079cc;
+                    color: #FFF;
+                    cursor: pointer;
+                    font-size: 12px;
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    line-height: 18px;
+                    text-align: center;
+                    /*border-right: 1px solid #caa55d;*/
+                    &:first-of-type {
+                        border: {
+                            top-left-radius: 4px;
+                            bottom-left-radius: 4px;
+                        }
+                    }
+                    &:last-of-type {
+                        border: {
+                            top-right-radius: 4px;
+                            bottom-right-radius: 4px;
+                        }
+                    }
+                }
+                border-right: none;
+            }
+            &.col-j {
+                //width:percentage($scroll-width/$invoice-width);
+                width: $scroll-width -2px; //滚动条和边框问题
+            }
+        }
+        &-head {
+            .col-i {
+                border-right: none;
+            }
+        }
+        &-body {
+            // height: percentage(142px/ $invoice-height);
+            height: 142px;
+            display: block;
+            border: {
+                left: none;
+                right: none;
+                bottom: $grid-border;
+            }
+            border-top: none;
+            overflow: hidden;
+            position: relative;
+            // margin-right: 1px;
+            &.scroll-bar {
+                margin-right: -15px; //滚动条问题
+            }
+            .col-a {
+                border-left: none;
+            }
+            .col-i {
+                border-right: none;
+            }
+            // .grid-list-col{
+            //   &.col-a {
+            //     width:206px;
+            //   }
+            //   &.col-b {
+            //     width:92px;
+            //   }
+            //   &.col-c {
+            //     width:46px;
+            //   }
+            //   &.col-d {
+            //     width:76px;
+            //   }
+            //   &.col-e {
+            //     width:80px;
+            //   }
+            //   &.col-f {
+            //     width:110px;
+            //   }
+            //   &.col-g {
+            //     width:55px;
+            //   }
+            //   &.col-h {
+            //     width:110px;
+            //   }
+            //   &.col-i {
+            //     width:95px;
+            //   }
+            //   &.col-j{
+            //     width:$scroll-width;
+            //   }
+            // }
+            &-outline {
+                overflow: hidden;
+                .col-index,.col-a, .col-b, .col-c, .col-d, .col-e, .col-f, .col-g, .col-h, .col-i {
+                    height: 142px;
+                }
+            }
+            &-data {
+                position: absolute;
+                overflow: auto;
+                height: 142px;
+                top: 0;
+                left: 0;
+                .col-b, .col-c, .col-d, .col-e, .col-f, .col-g, .col-h {
+                    border-left: none;
+                }
+                .col-i {
+                    border-left: none;
+                }
+                .ivu-select,.ivu-input-wrapper{
+                    width: 100%;
+                }
+            }
+        }
+        &-foot {
+            border-bottom: $grid-border;
+            .col-b, .col-c, .col-d, .col-e, .col-f, .col-g, .col-h {
+                border-left: none;
+                border-right: none;
+            }
+            .col-i {
+                border-left: none;
+            }
+
+        }
+        &-extra {
+            border-bottom: $grid-border;
+            .col-a {
+                width: percentage(206px/$invoice-width);
+            }
+            .col-b {
+                width: percentage(294px/$invoice-width);
+            }
+            .col-c {
+                width: percentage(165px/$invoice-width);
+            }
+            .col-d {
+                width: percentage((205px + $scroll-width)/$invoice-width);
+                border-right: none;
+            }
+        }
+    }
+    .selector-customer {
+        display: inline-block;
+        width: 72.5%;
+        margin-left: 1px;
+    }
+    .selector-goods {
+        display: inline-block;
+        width: 85%;
+    }
+    .selector-btn {
+        display: inline-block;
+        vertical-align: top;
+        width: 18px;
+        height: 18px;
+        background: $primary;
+        text-align: center;
+        color: #FFFFFF;
+        line-height: 18px;
+        border-radius: 4px;
+        position: relative;
+        top: 1px;
+        cursor: pointer
+    }
+
+    .fontColor {
+        color: $label-color;
+    }
+
+    .elecColor {
+        color: $primary;
+    }
+
+    .date {
+        color: #000000
+    }
+
+    .fl {
+        float: left
+    }
+
+    .fr {
+        float: right
+    }
+
+    .marginAuto {
+        margin: 0 auto
+    }
+
+    .invoice {
+        width: 1046px + $scroll-width;
+        margin: 0 auto;
+        height: auto;
+        overflow: hidden;
+        /*padding-bottom: 20px;*/
+    }
+
+    .pointGroup {
+        width: 55px;
+        height: auto;
+        overflow: hidden;
+        background: white;
+        border: 1px solid #e0e1e5;
+        float: left;
+        li {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #f0f0f3;
+            margin: 27.3px 17px;
+
+        }
+    }
+
+    .invoiceNumberbox {
+        position: absolute;
+        right: 124px;
+        top: 40px;
+    }
+
+    .invoiceNumberbox img {
+        width: 39px;
+        height: auto;
+    }
+
+    .invoiceNumberbox span {
+        display: inline-block;
+        height: 39px;
+        vertical-align: top;
+        line-height: 39px
+    }
+
+    .invoice-main {
+        font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "微软雅黑", Arial, sans-serif;
+        font-size: 14px;
+        padding: 0 30px 16px;
+        width: 935px + $scroll-width;
+        min-height: 604px;
+        float: left;
+        border: 1px solid #e0e1e5;
+        border-right: none;
+        border-left: none;
+        position: relative;
+        .invoiceType {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            // border: 5px solid #304FFE;
+            text-align: center;
+            // line-height: 45px;
+            // font-size: 28px;
+            // color: #a9eccb;
+            // padding: 1px 1px;
+            // font-weight: 900;
+            position: absolute;
+            left: 26px;
+            top: 0px;
+            // > div {
+            //   height: 48px;
+            //   border-radius: 50%;
+            //   border: 2px solid #a9eccb;
+            // }
+            .iconfont {
+                font-size: 60px;
+                &.bw-zhuanpiao {
+                    color: #304ffe;
+                }
+                &.bw-pupiao {
+                    color: #FF6D00;
+                }
+                &.bw-dianpiao {
+                    color: #0091e1;
+                }
+                &.bw-juanshi {
+                    color: #99CC00;
+                }
+                &.bw-huoyun {
+                    color: #5D4037;
+                }
+                &.bw-jidongche {
+                    color: #AA00FF;
+                }
+            }
+        }
+        // .electric {
+        //     @include elect
+        // }
+        .special {
+            @include special
+        }
+        .region {
+            width: 338px;
+            text-align: center;
+            font-size: 18px;
+            @include invoiceLine;
+            margin: 20px auto 0 auto;
+        }
+        .hr {
+            box-sizing: content-box;
+            border: 2px solid $label-color;
+            height: 1px;
+            border-left: none;
+            border-right: none;
+            margin-top: 5px;
+        }
+
+        .invoice-right-header {
+            position: absolute;
+            right: 30px;
+            top: 18px;
+        }
+        .invoice-head {
+            margin-top: 24px;
+            height: auto;
+            overflow: hidden;
+        }
+        .invoice-body {
+            margin-top: 4px;
+            border: $grid-border;
+            border-bottom: none;
+            /*height: 380px;*/
+        }
+        td {
+            border: $grid-border;
+            border-collapse: collapse;
+            border-right: none;
+            border-top: none;
+            @include invoicefontcolor
+        }
+        .pw {
+            width: 2.15%;
+            text-align: center
+        }
+        .buyName, .salerName {
+            width: 3.22%
+        }
+        input {
+            border: $inner-border;
+            width: 300px;
+            /*height: 18px;*/
+            font-size: 14px;
+            border-radius: 3px;
+            color: #333333;
+            line-height: 17px
+        }
+        .buyer, .saler {
+            width: 417px;
+            margin-left: 6px
+        }
+        .buyer li span, .saler li span {
+            width: 100px;
+            display: inline-block;
+            text-align: justify;
+            padding-left: 1px;
+            @include invoicefontcolor;
+            vertical-align: top
+        }
+        .buyer li p.kg4, .saler li p.kg4 {
+            width: 56px;
+            display: inline-block
+        }
+        .buyer li p.kg1, .saler li p.kg1 {
+            width: 10px;
+            display: inline-block
+        }
+        .saler li .information {
+            word-break: break-all;
+            width: 310px;
+            max-height: 21px;
+            overflow: auto;
+            vertical-align: top;
+            color: #000000
+        }
+        .saler li .longInfo {
+            font-size: 10.5px;
+            line-height: 10.5px;
+        }
+        .buyername, .sale-name {
+            width: 278px;
+            margin-right: 4px;
+            position: relative;
+            vertical-align: top;
+            top: 1px;
+        }
+        .buyer li .selectname, .information .selectname, .saler .selectname {
+            display: inline-block;
+            vertical-align: top;
+            width: 18px;
+            height: 18px;
+            background: $type-color;
+            text-align: center;
+            color: #FFFFFF;
+            line-height: 18px;
+            border-radius: 4px;
+            position: relative;
+            top: 1px;
+            cursor: pointer
+        }
+        .passwordArea {
+            width: 417px;
+            text-align: center;
+            border-right: $grid-border;
+        }
+        .passwordArea textarea {
+            margin-top: 4px;
+            width: 96%;
+            height: 74px;
+            border: $inner-border;
+            border-radius: 4px;
+            overflow: auto;
+            resize: none;
+            padding: 2px 2px;
+        }
+        .informationtitle td {
+            text-align: center;
+            border-bottom: none;
+            border-top: none;
+            line-height: 30px
+        }
+        .informationtitle td:last-of-type {
+            border-right: $grid-border;
+        }
+        .informationtitle tr {
+            height: 156px
+        }
+        .information td {
+            border: none;
+            text-align: center
+        }
+        .information td input {
+            width: 90%;
+        }
+        .information td input.itemname {
+            width: 85%;
+            margin-right: 4px
+        }
+        .informationtitle td {
+            vertical-align: top
+        }
+        .informationItem {
+            height: 126px;
+            overflow: auto;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 30px;
+            width: 101%
+        }
+        .heji {
+            height: 26px;
+            line-height: 26px;
+        }
+        .heji td {
+            text-align: center
+        }
+        .heji td:last-of-type {
+            border-right: $grid-border;
+        }
+        .heji td .textalignRight {
+            text-align: right;
+            padding-right: 2px;
+            color: #000000
+        }
+        .heji td.borderRightnone {
+            border-right: none;
+        }
+        .heji td.borderLeftnone {
+            border-left: none
+        }
+        .capital {
+            text-align: left;
+            padding-left: 4px;
+            color: #000000
+        }
+        .lowerCasebox {
+            border-right: none;
+            border-left: none
+        }
+        .lowerCasebox > div {
+            text-align: left
+        }
+        .lowercase {
+            text-align: right;
+            padding-left: 4px;
+            display: inline-block;
+            // float: right;
+            color: #000000
+        }
+        .operating span {
+            background: $label-color;
+            color: #FFFFFF;
+            cursor: pointer;
+            font-size: 12px;
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            text-align: center;
+            border-right: 1px solid #caa55d;
+        }
+        .operating span:first-of-type {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        .operating span:last-of-type {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px
+        }
+        .skxx {
+            padding: 6px 0 16px 24px
+        }
+        .skxx input:first-of-type {
+            width: 150px;
+            margin-right: 2px
+        }
+        .skxx input:nth-of-type(2) {
+            width: 120px;
+            margin-right: 2px;
+        }
+        .skxx .kpr {
+            display: inline-block;
+            width: 118px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            vertical-align: bottom;
+        }
+        .tishi {
+            height: 50px;
+            line-height: 50px;
+            border: 2px dotted $primary;
+            padding-left: 7px;
+            color: $primary;
+        }
+    }
+
+    .inputground {
+        width: 250px;
+        display: inline-block
+    }
+
+    .inputground_btn {
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 2px
+    }
+
+    .discount .zkhspan {
+        vertical-align: top
+    }
+
+    .discount > div {
+        line-height: 32px
+    }
+
+    .zkh {
+        width: 64px;
+        float: left;
+        height: 32px;
+        border: none
+    }
+
+    .zkl {
+        height: 32px;
+        line-height: 32px;
+        width: 90px;
+        border: 1px solid #999999;
+        border-radius: 6px;
+    }
+
+    .addOrLess {
+        display: inline-block;
+        border: 1px solid #52b7fc;
+        border-radius: 6px;
+        overflow: hidden
+    }
+
+    .addOrLess > div {
+        display: inline-block;
+        // float: left
+    }
+
+    .addOrLess .add, .addOrLess .less {
+        height: 16px;
+        width: 24px;
+        text-align: center;
+        border: $inner-border;
+        line-height: 16px
+    }
+
+    .wrap .ivu-input-type.ground {
+        box-shadow: none;
+    }
