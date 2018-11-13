@@ -70,11 +70,6 @@
           "name": "drawer"
         },
         {
-          "title": "Lswitch 开关",
-          "path": "/Lswitch",
-          "name": "Lswitch"
-        },
-        {
           "title": "Message 消息",
           "path": "/message",
           "name": "message"
