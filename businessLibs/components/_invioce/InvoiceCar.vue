@@ -6,22 +6,22 @@
             <h1 class="invoice_tit"><span><i>机动车销售统一发票</i></span></h1>
             <table style="width: 100%;" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
-                <tr height="30">
-                    <td class="align_left">发票代码：
-                        <span class="content_td_blue" v-text="InvoiceCarData.invoiceCode"> </span>
-                    </td>
-                    <td>&nbsp;</td>
-                    <td class="align_left">发票号码：
-                        <span class="content_td_blue" v-text="InvoiceCarData.invoiceNo"> </span>
-                    </td>
-                    <td>&nbsp;</td>
-                    <td class="align_left">开票日期：
-                        <span class="content_td_blue" v-text="InvoiceCarData.invoiceDate"> </span>
-                    </td>
-                    <td>&nbsp;</td>
-                    <td class="align_left">&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
+                    <tr height="30">
+                        <td class="align_left">发票代码：
+                            <span class="content_td_blue" v-text="InvoiceCarData.invoiceCode"> </span>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td class="align_left">发票号码：
+                            <span class="content_td_blue" v-text="InvoiceCarData.invoiceNo"> </span>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td class="align_left">开票日期：
+                            <span class="content_td_blue" v-text="InvoiceCarData.invoiceDate"> </span>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td class="align_left">&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
                 </tbody>
             </table>
             <table class="fppy_table" style="width: 100%;" border="0" cellspacing="0" cellpadding="0">

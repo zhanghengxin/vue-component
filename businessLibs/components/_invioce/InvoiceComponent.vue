@@ -42,23 +42,16 @@
         computed: {
             invoiceType() {
                 let type = this.invoiceData.invoiceTypeCode
-                /*if (type === '03') {
-                    return 'car';
-                } else if (type == '01' || type === '04'|| type === '10') {
-                    return 'normal'
-                } else {
-                    return 'roll'
-                }*/
                 if (type === '03') {
                     return 'car'
                 } else if (type === '11') {
                     return 'roll'
                 } else if (type === '14') {
                     return 'toll'
-                } else {
+                } else {xw
                     return 'normal'
                 }
-            },
+            }
         },
         components: {
             Invoice, InvoiceCar, InvoiceRoll,InvoiceToll

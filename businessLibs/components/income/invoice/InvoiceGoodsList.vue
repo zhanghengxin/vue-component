@@ -1,9 +1,37 @@
 <template>
-    <div>
-        <table :class="[prefixCls+'-table']" style="border: none;">
+    <div :class="[prefixCls+'-goods']">
+        <div :class="[prefixCls+'-title']">
+            <span><i>销 售 货 物 或 提 供 应 税 劳 务 清 单</i></span>
+        </div>
+        <ul :class="[prefixCls+'-ul']">
+            <li>购买方名称：
+                <i :class="[prefixCls+'-ul-content']">
+                    {{invoiceData.buyerName}}
+                </i>
+            </li>
+            <li>销售方名称：
+                <i :class="[prefixCls+'-ul-content']">
+                    {{invoiceData.sellerName}}
+                </i>
+            </li>
+        </ul>
+        <table style="margin: 3px 0" :class="[prefixCls+'-top']">
+            <tr height="30">
+                <td :class="[prefixCls+'-table-td']">
+                    <span :class="[prefixCls+'-table-clumn']">所属增值税专用发票代码：</span>{{invoiceData.invoiceCode}}
+                </td>
+                <td :class="[prefixCls+'-table-td']">
+                    <span :class="[prefixCls+'-table-clumn']">发票号码：</span>{{invoiceData.invoiceNo}}
+                </td>
+            </tr>
+        </table>
+        <table :class="[prefixCls+'-table']">
             <tr>
-                <td width="30%" :class="[prefixCls+'-table-detail',prefixCls+'-table-column']">
-                    货物或应税劳务、服务名称
+                <td width="5%" :class="[prefixCls+'-table-detail',prefixCls+'-table-column']">
+                    序号
+                </td>
+                <td width="25%" :class="[prefixCls+'-table-detail',prefixCls+'-table-column']">
+                    货物（劳务）名称
                 </td>
                 <td v-if="isToll" width="10%" :class="[prefixCls+'-table-detail',prefixCls+'-table-column']">
                     车牌号
@@ -17,6 +45,7 @@
                 <td v-if="isToll" width="10%" :class="[prefixCls+'-table-detail',prefixCls+'-table-column']">
                     通行日期止
                 </td>
+
                 <td v-if="!isToll" width="10%" :class="[prefixCls+'-table-detail',prefixCls+'-table-column']">
                     规格型号
                 </td>
@@ -41,9 +70,11 @@
             </tr>
             <tr v-for="(item,index) in invoiceDetail">
                 <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
+                    {{index + 1}}
+                </td>
+                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
                     {{item.goodsName}}
                 </td>
-
                 <td v-if="isToll" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
                     {{item.LicensePlateNum}}
                 </td>
@@ -56,7 +87,6 @@
                 <td v-if="isToll" :class="[prefixCls+'-table-detail',prefixCls+'-table-right']">
                     {{item.CurrentDateEnd}}
                 </td>
-
                 <td v-if="!isToll" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
                     {{item.goodsSpecification}}
                 </td>
@@ -79,134 +109,75 @@
                     {{item.goodsTotalTax}}
                 </td>
             </tr>
-            <tr v-if="!showListModal">
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-content']">
-                    &nbsp; <a @click="openDetailList">查看货物明细清单</a>
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-            </tr>
-            <tr>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-                    &nbsp;
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-            </tr>
         </table>
-        <table :class="[prefixCls+'-table']" style="border: none;">
+        <table :class="[prefixCls+'-table']" style="border-top:none ">
             <tr>
-                <td width="30%" :class="[prefixCls+'-table-detail',prefixCls+'-table-column']">
-                    合计
+                <td width="5%" :class="[prefixCls+'-table-detail',prefixCls+'-table-column']">
+                    小计
                 </td>
-                <td width="10%" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td width="5%" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td width="10%" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td width="10%" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
+                <td width="25%" :class="[prefixCls+'-table-detail',prefixCls+'-table-column']"></td>
+                <td width="10%" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']"></td>
+                <td width="5%" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']"></td>
+                <td width="10%" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']"></td>
+                <td width="10%" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']"></td>
                 <td width="15%" :class="[prefixCls+'-table-detail',prefixCls+'-table-right']">
                     {{monenyData.totalPrice}}
                 </td>
-                <td width="5%" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']">
-
-                </td>
-                <td width="15%" :class="[prefixCls+'-table-right']">
+                <td width="5%" :class="[prefixCls+'-table-detail',prefixCls+'-table-left']"></td>
+                <td width="15%" :class="[prefixCls+'-table-detail',prefixCls+'-table-right']">
                     {{monenyData.totalTax}}
                 </td>
             </tr>
             <tr>
                 <td :class="[prefixCls+'-table-total',prefixCls+'-table-column']">
-                    价税合计（大写）
+                    总计
                 </td>
                 <td colspan="4" :class="[prefixCls+'-table-total',prefixCls+'-table-left']">
                     {{monenyData.totalPriceTaxCn}}
                 </td>
-                <td colspan="3" :class="[prefixCls+'-table-total',prefixCls+'-table-column']">
-                    (小写) {{monenyData.totalPriceTax}}
+                <td colspan="4" :class="[prefixCls+'-table-total',prefixCls+'-table-right']">
+                    {{monenyData.totalPriceTax}}
+                </td>
+            </tr>
+            <tr>
+                <td :class="[prefixCls+'-table-total',prefixCls+'-table-column']">
+                    备注
+                </td>
+                <td colspan="8" :class="[prefixCls+'-table-total',prefixCls+'-table-left']">
+                    {{invoiceData.remarks}}
                 </td>
             </tr>
         </table>
-        <b-modal
-            v-model="isShow"
-            title="货物明细清单"
-            width="1200"
-        >
-            <invoice-goods-list
-                :monenyData="monenyData"
-                :invoiceData="invoiceData"
-                :isToll="isToll"
-                :invoiceDetail='detailData'>
-            </invoice-goods-list>
-            <div slot="footer"></div>
-        </b-modal>
+        <table style="margin-top: 20px" :class="[prefixCls+'-top']">
+            <tr height="30">
+                <td width="85%" :class="[prefixCls+'-table-td']">
+                    <span :class="[prefixCls+'-table-clumn']">销售方（章）:</span>
+                </td>
+                <td width="15%" :class="[prefixCls+'-table-td']">
+                    <span :class="[prefixCls+'-table-clumn']">填开日期:</span>{{invoiceData.createDate}}
+                </td>
+            </tr>
+        </table>
     </div>
 </template>
 
 
 <script>
 import { prefix } from '../../../utils/common'
-import InvoiceGoodsList from './InvoiceGoodsList.vue'
 
 const prefixCls = prefix + 'invoice'
 
 export default {
-    name: 'invoice-detail',
-    components: {InvoiceGoodsList},
+    name: 'invoice-goods-list',
     data () {
         return {
-            prefixCls: prefixCls,
-            isShow: false
+            prefixCls: prefixCls
         }
     },
     props: {
-        detailData: {
+        invoiceDetail: {
             type: Array,
-            default: function () {
+            default () {
                 return []
             }
         },
@@ -218,7 +189,7 @@ export default {
         },
         monenyData: {
             type: Object,
-            default: function () {
+            default () {
                 return {
                     totalPriceTaxCn: '',
                     totalPriceTax: '',
@@ -232,25 +203,9 @@ export default {
             default: false
         }
     },
-    computed: {
-        invoiceDetail () {
-
-            if (this.detailData.length < 9) {
-                return this.detailData
-            } else {
-                return []
-            }
-        },
-        showListModal () {
-            if (this.detailData.length < 9) {
-                return true
-            } else {
-                return false
-            }
-        }
-    },
     methods: {
         getGoodsTaxRate (goodsTaxRate) {
+            console.log('isToll', this.isToll)
             if (goodsTaxRate) {
                 return goodsTaxRate * 100 + '%'
             } else if (goodsTaxRate == 0) {
@@ -258,9 +213,6 @@ export default {
             } else {
                 return ''
             }
-        },
-        openDetailList () {
-            this.isShow = true
         }
     }
 }

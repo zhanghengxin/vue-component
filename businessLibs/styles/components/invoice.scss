@@ -56,7 +56,6 @@ $css-prefix-invoice: $css-prefix + 'invoice';
     text-align: center;
     color: $Sub;
   }
-
   .#{$css-prefix-invoice}-table-content {
     text-align: left;
     padding-left: 10px;
@@ -69,6 +68,11 @@ $css-prefix-invoice: $css-prefix + 'invoice';
   }
   .#{$css-prefix-invoice}-table-detail {
     border-right: 1px solid $Border;
+    line-height: 25px;
+  }
+  .#{$css-prefix-invoice}-table-total {
+    border-right: 1px solid $Border;
+    border-top: 1px solid $Border;
     line-height: 25px;
   }
   .#{$css-prefix-invoice}-table-right {
@@ -97,6 +101,16 @@ $css-prefix-invoice: $css-prefix + 'invoice';
   .#{$css-prefix-invoice}-ul-content {
     color: $Content;
   }
+
+}
+
+.#{$css-prefix-invoice}-goods {
+  .#{$css-prefix-invoice}-ul {
+    position: relative;
+    left: 0;
+    top: 0;
+    text-align: left;
+  }
 }
 
 // 发票类型
@@ -124,3 +138,37 @@ $css-prefix-invoice: $css-prefix + 'invoice';
   }
 }
 
+// 通行费
+.#{$css-prefix-invoice}-toll-content {
+  position: absolute;
+  top: 55px;
+  left: 90px;
+  color: $Sub;
+  span {
+    color: red;
+  }
+}
+
+// 卷票
+.#{$css-prefix-invoice}-roll-box {
+  width: 500px;
+  margin-left: 150px;
+  padding: 20px;
+  border: 1px dashed $Border;
+  line-height: 30px;
+  color: $Content;
+  .#{$css-prefix-invoice}-table {
+    border: none;
+    .#{$css-prefix-invoice}-table-td {
+      border: none;
+      line-height: 30px;
+    }
+    .#{$css-prefix-invoice}-table-content {
+      text-align: center;
+      padding-left: 0;
+    }
+    .#{$css-prefix-invoice}-table-column {
+      color: $Sub;
+    }
+  }
+}
