@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-const prefixCls = 'breadcrumb'
+const prefixCls = 'bw-breadcrumb'
 export default {
     name: 'Breadcrumb',
     props: {

@@ -8,7 +8,7 @@
         <template>
             <Breadcrumb>
                 <BreadcrumbItem to="/">Home</BreadcrumbItem>
-                <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
+                <BreadcrumbItem to="/libs/components/breadcrumb">Libs</BreadcrumbItem>
                 <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
             </Breadcrumb>
         </template>
@@ -23,7 +23,7 @@
     <template>
         <bw-breadcrumb>
             <bw-breadcrumbItem to="/">Home</bw-breadcrumbItem>
-            <bw-breadcrumbItem to="/libs/breadcrumb">libs</bw-breadcrumbItem>
+            <bw-breadcrumbItem to="/libs/components/breadcrumb">libs</bw-breadcrumbItem>
             <bw-breadcrumbItem>Breadcrumb</bw-breadcrumbItem>
         </bw-breadcrumb>
     </template>
@@ -50,12 +50,12 @@
         <template>
             <Breadcrumb separator=">">
                 <BreadcrumbItem to="/">Home</BreadcrumbItem>
-                <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
+                <BreadcrumbItem to="/libs/components/breadcrumb">Libs</BreadcrumbItem>
                 <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
             </Breadcrumb>
             <Breadcrumb separator="<b class='demo-breadcrumb-separator'>\</b>">
                 <BreadcrumbItem to="/">Home</BreadcrumbItem>
-                <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
+                <BreadcrumbItem to="/libs/components/breadcrumb">Libs</BreadcrumbItem>
                 <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
             </Breadcrumb>
         </template>
