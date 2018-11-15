@@ -1,3 +1,10 @@
+/*
+ * @Author: lijiahang
+ * @Date: 2018-11-15 17:52:20
+ * @Last Modified by:   lijiahang
+ * @Last Modified time: 2018-11-15 17:52:20
+ */
+
 <template>
   <div :class="btagoutclass" v-if="show">
     <span v-if="type" :class="btagdotclass"></span>

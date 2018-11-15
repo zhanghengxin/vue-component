@@ -1,0 +1,32 @@
+
+// Text
+$title-color            : #17233d;
+$text-color             : fade(#000, 65%);
+
+//  Font size
+$font-size-small        : 12px;
+$font-size-base         : 14px;
+$font-size-large        : 16px;
+
+// Zindex
+$zindex-modal           : 1000;
+$zindex-modal-mask      : 1000;
+
+// Border
+$border-radius-base     : 4px;
+// $border-color-base      : hsv(0, 0, 85%);
+$border-color-split     : #e8eaec;
+
+// Animation
+$animation-time         : .3s;
+$transition-time        : .2s;
+$ease-in-out            : ease-in-out;
+
+// Legend
+$legend-color           : #999;
+
+// Color
+$primary-color          : #1890ff;
+$success-color          : #52c41a;
+$error-color            : #f5222d;
+$warning-color          : #faad14;

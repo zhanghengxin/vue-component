@@ -88,6 +88,11 @@
           "title": "Dropdown下拉",
           "path": "/dropdown",
           "name": "dropdown"
+        },
+        {
+          "title": "Progress 进度条",
+          "path": "/progress",
+          "name": "progress"
         }
       ]
     },
