@@ -27,12 +27,14 @@ import Switch from './components/switch/index'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkboxGroup'
 import Form from './components/form'
+import Tag from './components/Tag'
 
 const components = [
     Input,
     Page,
     Button,
     Drawer,
+    Tag,
     Icon,
     Message,
     Collapse,

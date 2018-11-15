@@ -1,7 +1,10 @@
-/**
-* Created by lijiahang on 2018/9/5.
-*
-*/
+/*
+ * @Author: lijiahang
+ * @Date: 2018-11-14 15:32:43
+ * @Last Modified by:   lijiahang
+ * @Last Modified time: 2018-11-14 15:32:43
+ */
+
 <template>
     <button ref="button"
     :disabled="disabled"
