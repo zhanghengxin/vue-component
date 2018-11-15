@@ -16,7 +16,7 @@ export default {
             default: 400
         },
         bottom: { // 距离下面默认显示30
-            type: Number,
+            type: [Number, String],
             default: 30
         },
         right: { // 距离右边默认显示30
