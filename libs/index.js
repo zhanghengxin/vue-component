@@ -28,7 +28,7 @@ import Switch from './components/switch/index'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkboxGroup'
 import Form from './components/form'
-
+import Progress from './components/Progress'
 const components = [
     Input,
     Page,
@@ -57,7 +57,8 @@ const components = [
     BackTop,
     Form,
     Form.FormItem,
-    Switch
+    Switch,
+    Progress
 ]
 
 const install = function (Vue) {
