@@ -21,11 +21,11 @@
 ::: code
 ```html
     <template>
-        <bw-breadcrumb>
-            <bw-breadcrumbItem to="/">Home</bw-breadcrumbItem>
-            <bw-breadcrumbItem to="/libs/components/breadcrumb">libs</bw-breadcrumbItem>
-            <bw-breadcrumbItem>Breadcrumb</bw-breadcrumbItem>
-        </bw-breadcrumb>
+        <Breadcrumb>
+            <BreadcrumbItem to="/">Home</BreadcrumbItem>
+            <BreadcrumbItem to="/libs/components/breadcrumb">libs</BreadcrumbItem>
+            <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+        </Breadcrumb>
     </template>
     <script>
         export default {
