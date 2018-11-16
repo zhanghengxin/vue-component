@@ -46,9 +46,8 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value" placeholder="请输入..." style='width:200px' /></b-input>
-            <b-input v-model="value0" placeholder="请输入..." style='width:200px' :error='error' /></b-input>
-            <span>{{value}}</div>
+            <b-input v-model="value" placeholder="请输入..." /></b-input>
+            <b-input v-model="value0" placeholder="请输入..." :error='error'/></b-input>
         </div>
     </div>
 </div>
@@ -202,6 +201,77 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```
 :::
 
+### label属性的两种样式
+通过设置```label```属性 设置带文字描述的input组合组件 <br/>
+label文字大小可根据input的size变化<br/>
+通过设置```labelWidth```属性可设置label文字所占的宽度 labelWidth默认36px<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-input v-model="value6" label='姓名' placeholder="请输入..." /></b-input>
+            <b-input v-model="value6" label='密码' type='password' placeholder="请输入..." /></b-input>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+        <b-input v-model="value6" label='姓名' placeholder="请输入..." /></b-input>
+        <b-input v-model="value6" label='密码' type='password' placeholder="请输入..." /></b-input>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    icon:'chaxun',
+                    value6:'',
+                    value7:'',
+                    fixed:true
+                }
+            }
+        }
+    </script>
+```
+:::
+
+<br/>
+通过设置fixed为```true``` 属性可设置带label文字描述的样式 label文字与input的宽度根据自动适应 整体宽度默认280px
+<br/>
+<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-input v-model="value6" label='姓名' :fixed='disabled' placeholder="请输入..." /></b-input>
+            <br/>
+            <b-input v-model="value6" label='密码' :fixed='disabled' type='password' placeholder="请输入..." /></b-input>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+        <b-input v-model="value6" label='姓名' :fixed="fixed" placeholder="请输入..." /></b-input>
+        <b-input v-model="value6" label='密码' :fixed="fixed" type='password' placeholder="请输入..." /></b-input>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    icon:'chaxun',
+                    value6:'',
+                    value7:'',
+                    fixed:true
+                }
+            }
+        }
+    </script>
+```
+:::
+
 ### textarea
 通过设置属性 type 为 textarea 来使用文本域，用于多行输入。
 通过设置属性 rows 控制文本域默认显示的行数， 默认2行。
@@ -290,6 +360,9 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 | rows     | 文本域默认行数，仅在 textarea 类型下有效   | Number  |  - |   2  |
 | autosize | 自适应内容高度，仅在 textarea 类型下有效，可传入对象，如 { minRows: 2, maxRows: 6 }   | Boolean,Object  |  - |   false  |
 | wrap     | 原生的 wrap 属性，仅在 textarea 下生效   | String  |  `soft`、`hard` |   soft  |
+| label     | input前的说明文字   | String  |  - |   -  |
+| labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   36  |
+| fixed     | input的搭配文字的两种样式类型   | Boolean  |  `true`、`false` |   false  |
 
 ### events
 | 事件名	      | 说明	    | 返回值 |

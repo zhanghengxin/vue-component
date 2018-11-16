@@ -37,6 +37,12 @@
                 prefixCls+`-icon-clear`]"
                 @click="handleClear">
             </b-icon>
+            <label
+                :class="labelClasses"
+                :style='labelStyles'
+                v-if="label || $slots.label">
+                <slot name="label">{{label}}</slot>
+            </label>
             <input
                 :id="elementId"
                 :class="inputClasses"
@@ -93,7 +99,7 @@ import { findComponentUpward } from '../../utils/assist'
 import { prefix } from '../../utils/common'
 import Emitter from '../../mixins/emitter'
 
-const prefixCls = prefix + 'input'
+const prefixCls = prefix + 'input' // b-input
 
 export default {
     name: prefixCls,
@@ -155,7 +161,19 @@ export default {
         },
         clearable: {
             type: Boolean,
-            default: true
+            default: false
+        },
+        label: {
+            type: String
+        },
+        // 定长包裹着input的样式 true input前只有文字的样式 false
+        fixed: {
+            type: Boolean,
+            default: false
+        },
+        labelWidth: {
+            type: Number,
+            default: 36
         },
         // icon属性
         icon: {
@@ -192,7 +210,8 @@ export default {
         return {
             currentValue: this.value,
             prefixCls: prefixCls,
-            textareaStyles: {}
+            textareaStyles: {},
+            labelFocus: false
         }
     },
     computed: {
@@ -200,7 +219,9 @@ export default {
             return [
                 `${prefixCls}-box`,
                 {
-                    [`${prefixCls}-error`]: this.error
+                    [`${prefixCls}-error`]: this.error,
+                    [`${prefixCls}-group`]: this.label && this.fixed,
+                    'focus': this.label && this.labelFocus && this.fixed
                 }
             ]
         },
@@ -210,13 +231,30 @@ export default {
                 `${prefixCls}-${this.size}`,
                 {
                     [`${prefixCls}-prefix`]: this.prefix,
-                    [`${prefixCls}-suffix`]: this.suffix
+                    [`${prefixCls}-suffix`]: this.suffix,
+                    [`${prefixCls}-nobox`]: this.label && !this.fixed
+                }
+            ]
+        },
+        labelClasses () {
+            return [
+                prefixCls + `-label`,
+                prefixCls + `-label-` + this.size,
+                {
+                    [prefixCls + `-label-box`]: this.fixed
                 }
             ]
         },
         textareaClasses () {
             return [
                 `${prefixCls}`
+            ]
+        },
+        labelStyles () {
+            return [
+                {
+                    [`width: ${this.labelWidth}px`]: !this.fixed
+                }
             ]
         }
     },
@@ -225,9 +263,11 @@ export default {
             this.$emit('on-change', event)
         },
         handleFocus (event) {
+            this.labelFocus = true
             this.$emit('on-focus', event)
         },
         handleBlur (event) {
+            this.labelFocus = false
             this.$emit('on-blur', event)
             if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
                 this.dispatch(prefix + 'form-item', 'on-form-blur', this.currentValue)
@@ -274,6 +314,7 @@ export default {
             if (this.type === 'textarea') {
                 this.$refs.textarea.focus()
             } else {
+                this.labelFocus = true
                 this.$refs.input.focus()
             }
         },
@@ -281,6 +322,7 @@ export default {
             if (this.type === 'textarea') {
                 this.$refs.textarea.blur()
             } else {
+                this.labelFocus = false
                 this.$refs.input.blur()
                 if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
                     this.dispatch(prefix + 'form-item', 'on-form-change', this.currentValue)

@@ -80,11 +80,6 @@
           "title": "Dropdown下拉",
           "path": "/dropdown",
           "name": "dropdown"
-        },
-        {
-          "title": "label 输入组合",
-          "path": "/label",
-          "name": "label"
         }
       ]
     },

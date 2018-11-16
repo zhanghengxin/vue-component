@@ -1,5 +1,5 @@
-import Input from '&/components/input'
-import { createTest, createVue, destroyVM } from '../utils'
+// import Input from '&/components/input'
+import { createVue, destroyVM } from '../utils'
 import { prefix } from '&/utils/common'
 const prefixCls = `.${prefix}input`
 
@@ -63,327 +63,230 @@ describe('Input', () => {
         }
 
         it('type', () => {
-            vm = geInputVm("type='password'")
-            const inputEl = vm.$el.querySelector(`${prefixCls}`)
-            expect(inputEl.type).to.be.equal('password')
+            vm = geInputVm(`type='password'`)
+            expect(vm.$el.querySelector(`input`).type).to.be.equal('password')
         })
+
         it('disabled', () => {
-            vm = geInputVm("disabled='true'")
-            expect(vm.$el.querySelector(`${prefixCls}`).getAttribute('disabled')).to.be.ok
+            vm = createVue({
+                template: `
+                    <div>
+                        <${prefix}input :disabled='disabled'></${prefix}input>
+                    </div>`,
+                data () {
+                    return {
+                        disabled: true
+                    }
+                }
+            }, true)
+            expect(vm.$el.querySelector(`input`).disabled).to.be.ok
         })
+
         it('readonly', () => {
-            vm = geInputVm("readonly='true'")
-            expect(vm.$el.querySelector(`${prefixCls}`).getAttribute('readonly')).to.be.ok
+            vm = vm = createVue({
+                template: `
+                    <div>
+                        <${prefix}input :readonly='readonly'></${prefix}input>
+                    </div>`,
+                data () {
+                    return {
+                        readonly: true
+                    }
+                }
+            }, true)
+            expect(vm.$el.querySelector(`input`).getAttribute('readonly')).to.be.ok
         })
+
         it('name', () => {
-            vm = geInputVm("name='userName'")
-            expect(vm.$el.querySelector(`${prefixCls}`).getAttribute('name')).to.be.equal('userName')
+            vm = geInputVm(`name='userName'`)
+            expect(vm.$el.querySelector(`input`).getAttribute('name')).to.be.equal('userName')
         })
+
         it('size', () => {
-            vm = geInputVm("size='large'")
-            expect(vm.$el.classList.contains(`${prefixCls}-large`)).to.be.true
+            vm = geInputVm(`size='large'`)
+            expect(vm.$el.querySelector(`input`).getAttribute('class')).include(`${prefix}input-large`)
+        })
+
+        it('type', () => {
+            vm = createVue({
+                template: `
+                    <div>
+                        <${prefix}input 
+                        type='textarea'
+                        autosize='autosize'></${prefix}input>
+                    </div>`,
+                data () {
+                    return {
+                        autosize: {
+                            minRows: 3,
+                            maxRows: 5
+                        }
+                    }
+                }
+            }, true)
+            expect(vm.$el.querySelector('textarea')).to.exist
+        })
+
+        it('prefix', () => {
+            vm = createVue({
+                template: `
+                    <div>
+                        <${prefix}input :prefix='iconPrefix' icon='chaxun'></${prefix}input>
+                    </div>`,
+                data () {
+                    return {
+                        iconPrefix: true
+                    }
+                }
+            }, true)
+            expect(vm.$el.querySelector(`.${prefix}chaxun`)).to.exist
+            expect(vm.$el.querySelector(`${prefixCls}-icon`)).to.exist
+            expect(vm.$el.querySelector(`${prefixCls}-icon-prefix`)).to.exist
+        })
+
+        it('clear', () => {
+            vm = createVue({
+                template: `
+                    <div>
+                        <${prefix}input :clearable='clearable' v-model='value'></${prefix}input>
+                    </div>`,
+                data () {
+                    return {
+                        clearable: true,
+                        value: '清空'
+                    }
+                }
+            }, true)
+            const InputEl = vm.$el.querySelector(`input`)
+            const IconEl = vm.$el.querySelector(`.${prefix}icon`)
+            expect(vm.$el.querySelector(`.${prefix}yidongduan_conclose`)).to.exist
+            expect(vm.$el.querySelector(`${prefixCls}-icon-suffix`)).to.exist
+            expect(vm.$el.querySelector(`${prefixCls}-icon-clear`)).to.exist
+            setTimeout(() => {
+                IconEl.click()
+                setTimeout(() => {
+                    expect(InputEl.value).to.equal('')
+                    done()
+                }, 100)
+            }, 100)
+        })
+
+        it('error', () => {
+            vm = createVue({
+                template: `
+                    <div>
+                        <${prefix}input :error='error'></${prefix}input>
+                    </div>`,
+                data () {
+                    return {
+                        error: true
+                    }
+                }
+            }, true)
+            const InputEl = vm.$el.querySelector(`.${prefix}-box`)
+            setTimeout(() => {
+                InputEl.focus()
+                setTimeout(() => {
+                    expect(InputEl.style.borderColor).to.be.equal('#f44336')
+                    expect(InputEl.style.boxShadow).to.be('0 0 0 2px rgba(244, 67, 54, 0.2)')
+                    done()
+                }, 100)
+            }, 100)
+        })
+    })
+
+    describe('event', () => {
+        let eventsData = false
+        const geInputVm = (events = null) => {
+            return createVue(Object.assign({
+                template: `
+                    <${prefix}input @${events}='events'></${prefix}input>
+                `,
+                methods: {
+                    events (e) {
+                        eventsData = true
+                    }
+                }
+            }), true)
+        }
+
+        it('hover', () => {
+            vm = geInputVm()
+            const InputEl = vm.$el.querySelector(`.${prefix}-box`)
+            setTimeout(() => {
+                InputEl.hover()
+                setTimeout(() => {
+                    expect(InputEl.style.borderColor).to.be.equal('#52b7fc')
+                    done()
+                }, 100)
+            }, 100)
+        })
+
+        it('focus', () => {
+            vm = geInputVm('focus')
+            const InputEl = vm.$el.querySelector(`.${prefix}-box`)
+            setTimeout(() => {
+                InputEl.focus()
+                setTimeout(() => {
+                    expect(eventsData).to.be.true
+                    expect(InputEl.style.borderColor).to.be.equal('#52b7fc')
+                    expect(InputEl.style.boxShadow).to.be('0 0 0 2px rgba(45, 140, 240, 0.2)')
+                    done()
+                }, 100)
+            }, 100)
+        })
+
+        it('keyup', () => {
+            vm = geInputVm('keyup')
+            const InputEl = vm.$el.querySelector(`input`)
+            setTimeout(() => {
+                InputEl.keyup()
+                setTimeout(() => {
+                    expect(eventsData).to.be.true
+                    done()
+                }, 100)
+            }, 100)
+        })
+
+        it('keydown', () => {
+            vm = geInputVm('keydown')
+            const InputEl = vm.$el.querySelector(`input`)
+            setTimeout(() => {
+                InputEl.keydown()
+                setTimeout(() => {
+                    expect(eventsData).to.be.true
+                    done()
+                }, 100)
+            }, 100)
+        })
+
+        it('change', () => {
+            let changeData = ''
+            vm = createVue({
+                template: `
+                    <div>
+                        <${prefix}input @change='change' v-model='value'></${prefix}input>
+                    </div>`,
+                data () {
+                    return {
+                        clearable: true,
+                        value: '清空'
+                    }
+                },
+                methods: {
+                    change (e) {
+                        changeData = e
+                    }
+                }
+            }, true)
+            const InputEl = vm.$el.querySelector(`input`)
+            setTimeout(() => {
+                InputEl.setAttribute('value', 'test')
+                setTimeout(() => {
+                    expect(changeData).to.be.equal('test')
+                    done()
+                }, 100)
+            }, 100)
         })
     })
 })
-
-// describe('Input', () => {
-//     let vm
-//     afterEach(() => {
-//         destroyVM(vm)
-//     })
-
-//     it('create', () => {
-//         vm = createVue({
-//             template: `
-//           <el-input
-//             :minlength="3"
-//             :maxlength="5"
-//             placeholder="请输入内容"
-//             @focus="handleFocus"
-//             value="input">
-//           </el-input>
-//         `,
-//             data () {
-//                 return {
-//                     inputFocus: false
-//                 }
-//             },
-//             methods: {
-//                 handleFocus () {
-//                     this.inputFocus = true
-//                 }
-//             }
-//         }, true)
-//         let inputElm = vm.$el.querySelector('input')
-//         inputElm.focus()
-//         expect(vm.inputFocus).to.be.true
-//         expect(inputElm.getAttribute('placeholder')).to.equal('请输入内容')
-//         expect(inputElm.value).to.equal('input')
-//         expect(inputElm.getAttribute('minlength')).to.equal('3')
-//         expect(inputElm.getAttribute('maxlength')).to.equal('5')
-//     })
-
-//     it('disabled', () => {
-//         vm = createVue({
-//             template: `
-//           <el-input disabled>
-//           </el-input>
-//         `
-//         }, true)
-//         expect(vm.$el.querySelector('input').getAttribute('disabled')).to.ok
-//     })
-
-//     it('suffixIcon', () => {
-//         vm = createVue({
-//             template: `
-//           <el-input suffix-icon="time"></el-input>
-//         `
-//         }, true)
-//         var icon = vm.$el.querySelector('.el-input__icon')
-//         expect(icon).to.be.exist
-//     })
-
-//     it('prefixIcon', () => {
-//         vm = createVue({
-//             template: `
-//           <el-input prefix-icon="time"></el-input>
-//         `
-//         }, true)
-//         var icon = vm.$el.querySelector('.el-input__icon')
-//         expect(icon).to.be.exist
-//     })
-
-//     it('size', () => {
-//         vm = createVue({
-//             template: `
-//           <el-input size="large">
-//           </el-input>
-//         `
-//         }, true)
-
-//         expect(vm.$el.classList.contains('el-input--large')).to.true
-//     })
-
-//     it('type', () => {
-//         vm = createVue({
-//             template: `
-//           <el-input type="textarea">
-//           </el-input>
-//         `
-//         }, true)
-
-//         expect(vm.$el.classList.contains('el-textarea')).to.true
-//     })
-
-//     it('rows', () => {
-//         vm = createVue({
-//             template: `
-//           <el-input type="textarea" :rows="3">
-//           </el-input>
-//         `
-//         }, true)
-//         expect(vm.$el.querySelector('.el-textarea__inner').getAttribute('rows')).to.be.equal('3')
-//     })
-
-//     // Github issue #2836
-//     it('resize', done => {
-//         vm = createVue({
-//             template: `
-//           <div>
-//             <el-input type="textarea" :resize="resize"></el-input>
-//           </div>
-//         `,
-//             data: {
-//                 resize: 'none'
-//             }
-//         }, true)
-//         vm.$nextTick(() => {
-//             expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize)
-//             vm.resize = 'horizontal'
-//             vm.$nextTick(() => {
-//                 expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize)
-//                 done()
-//             })
-//         })
-//     })
-
-//     it('autosize', done => {
-//         vm = createVue({
-//             template: `
-//           <div>
-//             <el-input
-//               ref="limitSize"
-//               type="textarea"
-//               :autosize="{minRows: 3, maxRows: 5}"
-//               v-model="textareaValue"
-//             >
-//             </el-input>
-//             <el-input
-//               ref="limitlessSize"
-//               type="textarea"
-//               autosize
-//               v-model="textareaValue"
-//             >
-//             </el-input>
-//           </div>
-//         `,
-//             data () {
-//                 return {
-//                     textareaValue: 'sda\ndasd\nddasdsda\ndasd\nddasdsda\ndasd\nddasdsda\ndasd\nddasd'
-//                 }
-//             }
-//         }, true)
-
-//         var limitSizeInput = vm.$refs.limitSize
-//         var limitlessSizeInput = vm.$refs.limitlessSize
-//         expect(limitSizeInput.textareaStyle.height).to.be.equal('117px')
-//         expect(limitlessSizeInput.textareaStyle.height).to.be.equal('201px')
-
-//         vm.textareaValue = ''
-//         setTimeout(_ => {
-//             expect(limitSizeInput.textareaStyle.height).to.be.equal('75px')
-//             expect(limitlessSizeInput.textareaStyle.height).to.be.equal('33px')
-//             done()
-//         }, 200)
-//     })
-
-//     it('focus', done => {
-//         vm = createVue({
-//             template: `
-//           <el-input ref="input">
-//           </el-input>
-//         `
-//         }, true)
-
-//         const spy = sinon.spy()
-
-//         vm.$refs.input.$on('focus', spy)
-//         vm.$refs.input.focus()
-
-//         vm.$nextTick(_ => {
-//             expect(spy.calledOnce).to.be.true
-//             done()
-//         })
-//     })
-
-//     it('Input contains Select and append slot', (done) => {
-//         vm = createVue({
-//             template: `
-//         <el-input v-model="value" clearable class="input-with-select" ref="input">
-//           <el-select v-model="select" slot="prepend" placeholder="请选择">
-//             <el-option label="餐厅名" value="1"></el-option>
-//             <el-option label="订单号" value="2"></el-option>
-//             <el-option label="用户电话" value="3"></el-option>
-//           </el-select>
-//           <el-button slot="append" icon="el-icon-search"></el-button>
-//         </el-input>
-//         `,
-//             data () {
-//                 return {
-//                     value: '1234'
-//                 }
-//             }
-//         }, true)
-//         vm.$refs.input.hovering = true
-//         setTimeout(() => {
-//             const suffixEl = document.querySelector('.input-with-select > .el-input__suffix')
-//             expect(suffixEl).to.not.be.null
-//             expect(suffixEl.style.transform).to.not.be.empty
-//             done()
-//         }, 20)
-//     })
-
-//     describe('Input Events', () => {
-//         it('event:focus & blur', done => {
-//             vm = createVue({
-//                 template: `
-//             <el-input
-//               ref="input"
-//               placeholder="请输入内容"
-//               value="input">
-//             </el-input>
-//           `
-//             }, true)
-
-//             const spyFocus = sinon.spy()
-//             const spyBlur = sinon.spy()
-
-//             vm.$refs.input.$on('focus', spyFocus)
-//             vm.$refs.input.$on('blur', spyBlur)
-//             vm.$el.querySelector('input').focus()
-//             vm.$el.querySelector('input').blur()
-
-//             vm.$nextTick(_ => {
-//                 expect(spyFocus.calledOnce).to.be.true
-//                 expect(spyBlur.calledOnce).to.be.true
-//                 done()
-//             })
-//         })
-//         it('event:change', done => {
-//         // NOTE: should be same as native's change behavior
-//             vm = createVue({
-//                 template: `
-//             <el-input
-//               ref="input"
-//               placeholder="请输入内容"
-//               :value="input">
-//             </el-input>
-//           `,
-//                 data () {
-//                     return {
-//                         input: 'a'
-//                     }
-//                 }
-//             }, true)
-
-//             const inputElm = vm.$el.querySelector('input')
-//             const simulateEvent = (text, event) => {
-//                 inputElm.value = text
-//                 inputElm.dispatchEvent(new Event(event))
-//             }
-
-//             const spy = sinon.spy()
-//             vm.$refs.input.$on('change', spy)
-
-//             // simplified test, component should emit change when native does
-//             simulateEvent('1', 'input')
-//             simulateEvent('2', 'change')
-//             vm.$nextTick(_ => {
-//                 expect(spy.calledWith('2')).to.be.true
-//                 expect(spy.calledOnce).to.be.true
-//                 done()
-//             })
-//         })
-//         it('event:clear', done => {
-//             vm = createVue({
-//                 template: `
-//             <el-input
-//               ref="input"
-//               placeholder="请输入内容"
-//               clearable
-//               :value="input">
-//             </el-input>
-//           `,
-//                 data () {
-//                     return {
-//                         input: 'a'
-//                     }
-//                 }
-//             }, true)
-
-//             const spyClear = sinon.spy()
-//             const inputElm = vm.$el.querySelector('input')
-
-//             // focus to show clear button
-//             inputElm.focus()
-//             vm.$refs.input.$on('clear', spyClear)
-//             vm.$nextTick(_ => {
-//                 vm.$el.querySelector('.el-input__clear').click()
-//                 vm.$nextTick(_ => {
-//                     expect(spyClear.calledOnce).to.be.true
-//                     done()
-//                 })
-//             })
-//         })
-//     })
-// })
