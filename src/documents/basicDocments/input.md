@@ -25,7 +25,8 @@
                 prefix:true,
                 suffix:true,
                 icon:'chaxun',
-                autosize:true
+                autosize:true,
+                fixed:true
             }
         },
         methods:{
@@ -243,9 +244,9 @@ label文字大小可根据input的size变化<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" label='姓名' :fixed='disabled' placeholder="请输入..." /></b-input>
+            <b-input v-model="value6" label='姓名' :fixed='fixed' placeholder="请输入..." /></b-input>
             <br/>
-            <b-input v-model="value6" label='密码' :fixed='disabled' type='password' placeholder="请输入..." /></b-input>
+            <b-input v-model="value6" label='密码' :fixed='fixed' :error='error' type='password' placeholder="请输入..." /></b-input>
         </div>
     </div>
 </div>
@@ -255,7 +256,7 @@ label文字大小可根据input的size变化<br/>
 
     <template>
         <b-input v-model="value6" label='姓名' :fixed="fixed" placeholder="请输入..." /></b-input>
-        <b-input v-model="value6" label='密码' :fixed="fixed" type='password' placeholder="请输入..." /></b-input>
+        <b-input v-model="value6" label='密码' :fixed="fixed" :error='error' type='password' placeholder="请输入..." /></b-input>
     </template>
     <script>
         export default {
@@ -264,7 +265,8 @@ label文字大小可根据input的size变化<br/>
                     icon:'chaxun',
                     value6:'',
                     value7:'',
-                    fixed:true
+                    fixed:true,
+                    error:true
                 }
             }
         }
