@@ -57,6 +57,11 @@
           "name": "button"
         },
         {
+          "title": "Tag 标签",
+          "path": "/tag",
+          "name": "tag"
+        },
+        {
           "title": "Switch 开关",
           "path": "/switch",
           "name": "switch"
