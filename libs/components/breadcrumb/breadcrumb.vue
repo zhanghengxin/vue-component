@@ -29,9 +29,7 @@ export default {
     methods: {
         updateChildren () {
             this.$children.forEach((child, index) => {
-                if (index !== this.$children.length - 1) {
-                    child.separator = this.separator
-                }
+                if (index !== this.$children.length - 1) child.separator = this.separator
             })
         }
     },
