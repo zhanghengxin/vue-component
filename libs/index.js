@@ -5,7 +5,6 @@
 import Input from './components/input/index'
 import Button from './components/button'
 import Drawer from './components/drawer'
-import Lswitch from './components/Lswitch'
 import Carousel from './components/carousel'
 import CarouselItem from './components/carousel-item'
 import Icon from './components/icon'
@@ -28,13 +27,15 @@ import Switch from './components/switch/index'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkboxGroup'
 import Form from './components/form'
+import Tag from './components/Tag'
+
 import Progress from './components/Progress'
 const components = [
     Input,
     Page,
     Button,
     Drawer,
-    Lswitch,
+    Tag,
     Icon,
     Message,
     Collapse,
