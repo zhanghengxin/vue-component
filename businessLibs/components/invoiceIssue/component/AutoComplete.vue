@@ -1,4 +1,3 @@
-<!-- 负数开票 弹框 -->
 <template>
     <div>
 
@@ -11,6 +10,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

@@ -15,7 +15,7 @@
         </div>
     </div>
 
-::: code
+:::code
 ```html
     <div>
         <b-button type="tynormal">默认按钮</b-button>
