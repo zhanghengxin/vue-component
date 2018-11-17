@@ -1,7 +1,7 @@
 <template>
-  <div :class="classes">
-    <slot></slot>
-  </div>
+    <div :class="classes">
+        <slot></slot>
+    </div>
 </template>
 <script>
 const prefixCls = 'bw-breadcrumb'
@@ -28,8 +28,10 @@ export default {
     },
     methods: {
         updateChildren () {
-            this.$children.forEach((child) => {
-                child.separator = this.separator
+            this.$children.forEach((child, index) => {
+                if (index !== this.$children.length - 1) {
+                    child.separator = this.separator
+                }
             })
         }
     },
