@@ -11,6 +11,9 @@ $css-prefix-input-icon: $css-prefix-input+'-icon';
 $input-small-size:24px;
 $input-normal-size:32px;
 $input-large-size:40px;
+$input-small-font:12px;
+$input-normal-font:14px;
+$input-large-font:16px;
 
 //input 的hover focus 等效果
 @mixin inputMockClass($color, $shadowColor) {
@@ -54,6 +57,13 @@ $input-large-size:40px;
   line-height: $icon-size;
 }
 
+@mixin borderTrans() {
+  border: 1px solid $Border;
+  border-radius: 4px;
+  transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
 //input 组件
 //input基础样式
 .#{$css-prefix-input}-box {
@@ -78,15 +88,13 @@ $input-large-size:40px;
     background-image: none;
     cursor: text;
     outline: none;
-    border: 1px solid $Border;
-    border-radius: 4px;
-    transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
-      box-shadow 0.2s ease-in-out;
+
     margin: 0;
     box-sizing: border-box;
 
     vertical-align: middle;
-    @include inputMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2))
+    @include borderTrans();
+    @include inputMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
   }
 
   // error input样式
@@ -105,15 +113,15 @@ $input-large-size:40px;
   }
 
   .#{$css-prefix-input}-small {
-    @include inputSize($input-small-size, 4px 8px, 12px);
+    @include inputSize($input-small-size, 4px 8px,  $input-small-font);
   }
 
   .#{$css-prefix-input}-normal {
-    @include inputSize($input-normal-size, 8px, 14px);
+    @include inputSize($input-normal-size, 8px,  $input-normal-font);
   }
 
   .#{$css-prefix-input}-large {
-    @include inputSize($input-large-size, 12px 8px, 16px);
+    @include inputSize($input-large-size, 12px 8px,  $input-large-font);
   }
 
   //icon样式
@@ -141,27 +149,32 @@ $input-large-size:40px;
   }
 
   .#{$css-prefix-input-icon}-small {
-    @include inputIconSize($input-small-size, 12px);
+    @include inputIconSize($input-small-size, $input-small-font);
   }
 
   .#{$css-prefix-input-icon}-normal {
-    @include inputIconSize($input-normal-size, 14px);
+    @include inputIconSize($input-normal-size, $input-normal-font);
   }
 
   .#{$css-prefix-input-icon}-large {
-    @include inputIconSize($input-large-size, 16px);
+    @include inputIconSize($input-large-size, $input-large-font);
   }
 
-  // input label组合
+  //input label样式
+  .#{$css-prefix-input}-label {
+    line-height: 1;
+    font-weight: normal;
+    font-size: inherit;
+    padding: 4px 7px;
+    color: $Content;
+    display: inline-block;
+  }
+
+  // input label组合 固定长度label input的宽度自适应
   &.#{$css-prefix-input}-group {
     width: 280px;
     display: table;
-    
-    border: 1px solid $Border;
-    border-radius: 4px;
-    transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
-      box-shadow 0.2s ease-in-out;
-    border-collapse: separate;
+    @include borderTrans();
 
     &:hover {
       border-color: $LightPrimary;
@@ -187,16 +200,6 @@ $input-large-size:40px;
     }
   }
 
-  //input label样式
-  .#{$css-prefix-input}-label {
-    line-height: 1;
-    font-weight: normal;
-    font-size: inherit;
-    padding: 4px 7px;
-    color: $Content;
-    display: inline-block;
-  }
-
   .#{$css-prefix-input}-label-box {
     display: table-cell;
     text-align: center;
@@ -213,14 +216,14 @@ $input-large-size:40px;
   }
 
   .#{$css-prefix-input}-label-small {
-    font-size: 12px
+    font-size: $input-small-font;
   }
 
   .#{$css-prefix-input}-label-normal {
-    font-size: 14px
+    font-size: $input-normal-font;
   }
 
   .#{$css-prefix-input}-label-large {
-    font-size: 16px
+    font-size: $input-large-font;
   }
 }

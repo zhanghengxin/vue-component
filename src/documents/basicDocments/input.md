@@ -36,7 +36,7 @@
     }
 </script>
 
-# Input\Textarea 输入框（待完善..）
+# Input\Textarea 输入框
 基本表单组件，支持 input 和 textarea，并在原生控件基础上进行了功能扩展，可以组合使用。
 -----
 ### 基础用法
