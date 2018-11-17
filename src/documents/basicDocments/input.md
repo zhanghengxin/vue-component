@@ -314,7 +314,7 @@ label文字大小可根据input的size变化<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value11"  type="textarea" :autosize='autosize'></b-input>
+            <b-input v-model="value11"  type="textarea" :error='error' :autosize='autosize'></b-input>
             <b-input v-model="value12"  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
         </div>
     </div>
@@ -324,7 +324,7 @@ label文字大小可根据input的size变化<br/>
 ```html
 
     <template>
-        <b-input v-model="value11"  type="textarea" :autosize='autosize'></b-input>
+        <b-input v-model="value11"  type="textarea" :error='error' :autosize='autosize'></b-input>
         <b-input v-model="value12"  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
     </template>
     <script>

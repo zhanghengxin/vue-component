@@ -45,8 +45,6 @@ $input-large-font:16px;
     box-shadow: $shadowColor;
   }
 
-
-
   .#{$css-prefix-input}:focus {
     box-shadow: none;
     outline: none;
@@ -197,6 +195,10 @@ $input-large-font:16px;
 
     @include labelMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
 
+    &.#{$css-prefix-input}-error {
+      @include labelMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
+    }
+
     .#{$css-prefix-input} {
       border: 0;
       width: 100%;
@@ -206,9 +208,7 @@ $input-large-font:16px;
     }
   }
 
-  &.#{$css-prefix-input}-error {
-    @include labelMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
-  }
+
 
   .#{$css-prefix-input}-label-box {
     display: table-cell;
