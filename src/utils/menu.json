@@ -1,6 +1,5 @@
 {
-  "使用指南": [
-    {
+  "使用指南": [{
       "name": "guide",
       "path": "/guide",
       "title": "介绍"
@@ -24,12 +23,10 @@
       "redirect": "/guide"
     }
   ],
-  "基础组件": [
-    {
+  "基础组件": [{
       "title": "基础",
       "path": "/",
-      "items": [
-        {
+      "items": [{
           "title": "CheckBox 多选框",
           "path": "/checkbox",
           "name": "checkbox"
@@ -99,19 +96,16 @@
     {
       "title": "布局",
       "path": "/",
-      "items": [
-        {
-          "title": "Card 卡片",
-          "path": "/card",
-          "name": "card"
-        }
-      ]
+      "items": [{
+        "title": "Card 卡片",
+        "path": "/card",
+        "name": "card"
+      }]
     },
     {
       "title": "视图",
       "path": "/",
-      "items": [
-        {
+      "items": [{
           "title": "Page 分页",
           "path": "/page",
           "name": "page"
@@ -136,13 +130,11 @@
     {
       "title": "导航",
       "path": "/",
-      "items": [
-        {
-          "title": "Breadcrumb 面包屑",
-          "path": "/breadcrumb",
-          "name": "breadcrumb"
-        }
-      ]
+      "items": [{
+        "title": "Breadcrumb 面包屑",
+        "path": "/breadcrumb",
+        "name": "breadcrumb"
+      }]
     },
     {
       "title": "表单",
@@ -158,8 +150,7 @@
     {
       "title": "其他",
       "path": "/",
-      "items": [
-        {
+      "items": [{
           "title": "BackTop 返回顶部",
           "path": "/backTop",
           "name": "backTop"
@@ -177,30 +168,25 @@
       ]
     }
   ],
-  "业务组件": [
-    {
+  "业务组件": [{
       "title": "进项",
       "path": "/",
-      "items": [
-        {
-          "title": "invoice 发票票面",
-          "path": "/incomeInvoice",
-          "name": "incomeInvoice",
-          "incomeName": "invoice"
-        }
-      ]
+      "items": [{
+        "title": "invoice 发票票面",
+        "path": "/incomeInvoice",
+        "name": "incomeInvoice",
+        "incomeName": "invoice"
+      }]
     },
     {
       "title": "销项",
       "path": "/",
-      "items": [
-        {
-          "title": "invoice 发票票面",
-          "path": "/outputIncome",
-          "name": "outputIncome",
-          "outputName": "invoice"
-        }
-      ]
+      "items": [{
+        "title": "invoice 发票票面",
+        "path": "/outputIncome",
+        "name": "outputIncome",
+        "outputName": "invoice"
+      }]
     }
   ]
 }

@@ -128,9 +128,6 @@ export default {
         handleChange (event) {
             this.$emit('change', event, this.currentValue)
         },
-        toggleTax (hasTax) {
-            console.log('invoice edit:toggletax:', hasTax)
-        },
         syncGoodListInfo (infoList) {
             this.invoiceData.goodsInfoList = infoList
         },
