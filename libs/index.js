@@ -26,9 +26,10 @@ import DropdownMenu from './components/dropdown-menu'
 import Switch from './components/switch/index'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkboxGroup'
+import Radio from './components/radio'
+import RadioGroup from './components/radioGroup'
 import Form from './components/form'
 import Tag from './components/Tag'
-
 import Progress from './components/Progress'
 const components = [
     Input,
@@ -52,6 +53,8 @@ const components = [
     DropdownMenu,
     Checkbox,
     CheckboxGroup,
+    Radio,
+    RadioGroup,
     Modal,
     Circle,
     Tooltip,
@@ -71,5 +74,28 @@ const install = function (Vue) {
 
 export default {
     install,
+    Button,
+    Drawer,
+    Carousel,
+    CarouselItem,
+    Input,
+    Page,
+    Icon,
+    Collapse,
+    CollapseItem,
+    Message,
+    Breadcrumb,
+    BreadcrumbItem,
+    Circle,
+    Steps,
+    Step,
+    Card,
+    Modal,
+    Tooltip,
+    BackTop,
+    Checkbox,
+    CheckboxGroup,
+    Radio,
+    RadioGroup,
     ...components
 }
