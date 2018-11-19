@@ -115,7 +115,6 @@
 ```
 :::
  </div>
-\
   <script>
     export default {
         data () {
@@ -140,7 +139,7 @@
             }
         }
     }
-</script>
+</script> 
 
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
