@@ -1,6 +1,9 @@
 /*
-* @Author: lijiahang
-*/
+ * @Author: lijiahang
+ * @Date: 2018-11-12 10:51:51
+ * @Last Modified by:   lijiahang
+ * @Last Modified time: 2018-11-12 10:51:51
+ */
 <template>
     <div :class="[prefixCls+'-root']" ref='mask'>
         <div :class="mask" @click="maskclick"></div>

@@ -20,16 +20,23 @@ import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
 import BackTop from './components/backTop'
+import Dropdown from './components/dropdown'
+import DropdownItem from './components/dropdown-item'
+import DropdownMenu from './components/dropdown-menu'
+import Switch from './components/switch/index'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkboxGroup'
 import Radio from './components/radio'
 import RadioGroup from './components/radioGroup'
-
+import Form from './components/form'
+import Tag from './components/Tag'
+import Progress from './components/Progress'
 const components = [
     Input,
     Page,
     Button,
     Drawer,
+    Tag,
     Icon,
     Message,
     Collapse,
@@ -41,6 +48,9 @@ const components = [
     Steps,
     Step,
     Card,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
     Checkbox,
     CheckboxGroup,
     Radio,
@@ -48,12 +58,16 @@ const components = [
     Modal,
     Circle,
     Tooltip,
-    BackTop
+    BackTop,
+    Form,
+    Form.FormItem,
+    Switch,
+    Progress
 ]
 
 const install = function (Vue) {
     if (install.installed) return
-    components.map(component => Vue.component(component.name, component))
+    components.forEach(component => Vue.component(component.name, component))
     Vue.prototype.$Message = Message
     Vue.prototype.$Modal = Modal
 }
@@ -82,5 +96,6 @@ export default {
     Checkbox,
     CheckboxGroup,
     Radio,
-    RadioGroup
+    RadioGroup,
+    ...components
 }

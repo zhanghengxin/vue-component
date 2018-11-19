@@ -1,8 +1,45 @@
 {
-    "食用指南": [{
-            "name": "guide",
-            "path": "/guide",
-            "title": "介绍"
+  "使用指南": [{
+      "name": "guide",
+      "path": "/guide",
+      "title": "介绍"
+    },
+    {
+      "name": "install",
+      "path": "/install",
+      "title": "快速上手"
+    },
+    {
+      "name": "standard",
+      "path": "/standard",
+      "title": "组件开发规范"
+    },
+    {
+      "path": "/",
+      "redirect": "/guide"
+    },
+    {
+      "path": "*",
+      "redirect": "/guide"
+    }
+  ],
+  "基础组件": [{
+      "title": "基础",
+      "path": "/",
+      "items": [{
+          "title": "CheckBox 多选框",
+          "path": "/checkbox",
+          "name": "checkbox"
+        },
+        {
+          "title": "Radio 单选框",
+          "path": "/radio",
+          "name": "radio"
+        },
+        {
+          "title": "Color 色彩",
+          "path": "/color",
+          "name": "color"
         },
         {
             "name": "install",
@@ -70,13 +107,67 @@
                     "title": "Steps 步骤条",
                     "path": "/steps",
                     "name": "steps"
-                },
-                {
-                    "title": "Radio 单选框",
-                    "path": "/radio",
-                    "name": "radio"
                 }
             ]
+        },
+        {
+          "title": "Tag 标签",
+          "path": "/tag",
+          "name": "tag"
+        },
+        {
+          "title": "Switch 开关",
+          "path": "/switch",
+          "name": "switch"
+        },
+        {
+          "title": "Drawer 抽屉",
+          "path": "/drawer",
+          "name": "drawer"
+        },
+        {
+          "title": "Message 消息",
+          "path": "/message",
+          "name": "message"
+        },
+        {
+          "title": "Steps 步骤条",
+          "path": "/steps",
+          "name": "steps"
+        },
+        {
+          "title": "Dropdown下拉",
+          "path": "/dropdown",
+          "name": "dropdown"
+        },
+        {
+          "title": "Progress 进度条",
+          "path": "/progress",
+          "name": "progress"
+        }
+      ]
+    },
+    {
+      "title": "布局",
+      "path": "/",
+      "items": [{
+        "title": "Card 卡片",
+        "path": "/card",
+        "name": "card"
+      }]
+    },
+    {
+      "title": "视图",
+      "path": "/",
+      "items": [{
+          "title": "Page 分页",
+          "path": "/page",
+          "name": "page"
+        },
+        {
+          "title": "Notice 通知",
+          "path": "/notice",
+          "name": "notice"
         },
         {
             "title": "布局",
@@ -111,6 +202,36 @@
                     "name": "tooltip"
                 }
             ]
+        }
+      ]
+    },
+    {
+      "title": "导航",
+      "path": "/",
+      "items": [{
+        "title": "Breadcrumb 面包屑",
+        "path": "/breadcrumb",
+        "name": "breadcrumb"
+      }]
+    },
+    {
+      "title": "表单",
+      "path": "/",
+      "items": [
+        {
+          "title": "Form 表单",
+          "path": "/form",
+          "name": "form"
+        }
+      ]
+    },
+    {
+      "title": "其他",
+      "path": "/",
+      "items": [{
+          "title": "BackTop 返回顶部",
+          "path": "/backTop",
+          "name": "backTop"
         },
         {
             "title": "导航",
@@ -163,4 +284,27 @@
             }]
         }
     ]
+}
+  ],
+  "业务组件": [{
+      "title": "进项",
+      "path": "/",
+      "items": [{
+        "title": "invoice 发票票面",
+        "path": "/incomeInvoice",
+        "name": "incomeInvoice",
+        "incomeName": "invoice"
+      }]
+    },
+    {
+      "title": "销项",
+      "path": "/",
+      "items": [{
+        "title": "invoice 发票票面",
+        "path": "/outputIncome",
+        "name": "outputIncome",
+        "outputName": "invoice"
+      }]
+    }
+  ]
 }
