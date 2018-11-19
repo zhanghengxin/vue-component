@@ -1,16 +1,16 @@
 <template>
-    <label :class="wrapClasses">
+  <label :class="wrapClasses">
             <span :class="radioClasses">
                 <span :class="innerClasses"></span>
                 <input
-                    type="radio"
-                    :disabled='disabled'
-                    :checked='checkedValue'
-                    :class="inputClasse"
-                    @change="change">
+                  type="radio"
+                  :disabled='disabled'
+                  :checked='checkedValue'
+                  :class="inputClasse"
+                  @change="change">
             </span>
-            <slot>{{ label }}</slot>
-        </label>
+    <slot>{{ label }}</slot>
+  </label>
 </template>
 <script>
 import { prefix } from '../../utils/common'
@@ -55,35 +55,21 @@ export default {
             return wrapClasses
         },
         radioClasses () {
-            let radioClasses = ''
-            if (this.disabled) {
-                if (this.checkedValue) {
-                    // 已选失效项
-                    radioClasses = prefixCls + ` ${prefixCls}-disabled` + ` ${prefixCls}-checked`
-                } else {
-                    // 未选中
-                    radioClasses = prefixCls + ` ${prefixCls}-disabled`
+            return [
+                `prefixCls`,
+                {
+                    [` ${prefixCls}-disabled`]: this.disabled,
+                    [` ${prefixCls}-checked`]: this.checkedValue
                 }
-            } else {
-                if (this.checkedValue) {
-                    //  选中项
-                    radioClasses = prefixCls + ` ${prefixCls}-checked`
-                } else {
-                    // 未选失效项
-                    radioClasses = prefixCls
-                }
-            }
-            return radioClasses
+            ]
         },
         innerClasses () {
-            let innerClasses = ''
-            innerClasses = `${prefixCls}-inner`
-            return innerClasses
+            return `${prefixCls}-inner`
         },
         inputClasse () {
-            let inputRadio = `${prefixCls}-input`
-            return inputRadio
+            return `${prefixCls}-input`
         }
+
     },
     methods: {
         change (event) {

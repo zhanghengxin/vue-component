@@ -29,7 +29,7 @@ export default {
   }
 }
 </script>
-   
+
 
 ::: code
 ```html
@@ -119,7 +119,7 @@ export default {
 :::
 </div>
 
-### Radio props 
+### Radio props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | value     |  只在单独使用时有效。可以使用 v-model 双向绑定数据   | Boolean  |  -    |    false   |
@@ -127,7 +127,7 @@ export default {
 | disabled     | 是否禁用当前项	   | Boolean    |  -  |     false  |
 
 
-### Radio events 
+### Radio events
 | 事件名	      | 说明	    | 返回值 |
 |---------- |-------- |---------- |
 | on-change     |  在选项状态发生改变时触发，返回当前选中的项。通过修改外部的数据改变时不会触发   |  ...  |
@@ -139,7 +139,7 @@ export default {
 | value     |  只在单独使用时有效。可以使用 v-model 双向绑定数据   | Boolean  |  -    |    false   |
 | type     |  可选值为 button 或不填，为 button 时使用按钮样式   | String    |  -|     -  |
 
-### RadioGroup events 
+### RadioGroup events
 | 事件名	      | 说明	    | 返回值 |
 |---------- |-------- |---------- |
 | on-change     |  在选项状态发生改变时触发，返回当前选中的项。通过修改外部的数据改变时不会触发   |  ...  |

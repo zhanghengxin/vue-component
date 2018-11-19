@@ -25,11 +25,7 @@ export default {
     },
     computed: {
         radioGroupClass () {
-            let radioGroupClass = ''
-            if (this.type) {
-                radioGroupClass = `${prefixCls}-button`
-                return radioGroupClass
-            }
+            return [`${prefixCls}-button`]
         }
     },
     methods: {
