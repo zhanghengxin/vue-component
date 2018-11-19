@@ -12,19 +12,19 @@ describe('radio.vue', () => {
   afterEach(() => {
     destroyVM(vm)
   })
-  it('value', () => {
+  it('checkedValue', () => {
     vm = createTest(radio, {
       value: true
     }, true)
     let radioElm = vm.$el
-    expect(radioElm.children[0].classList.contains(`${prefixCls}-radio`)).to.be.true
+    expect(radioElm.children[0].classList.contains(`${prefixCls}-radio`)).to.be.checkedValue
   })
   it('disabled', () => {
-    vm = createTest(Checkbox, {
-      disabled: true
-    }, true)
+    vm = createTest(radio, {
+      disabled: false
+    }, false)
     let radioElm = vm.$el
-    expect(radioElm.children[0].classList.contains(`${prefixCls}-disabled`)).to.be.true
+    expect(radioElm.children[0].classList.contains(`${prefixCls}-disabled`)).to.be.false
   })
   it('change', done => {
     let result

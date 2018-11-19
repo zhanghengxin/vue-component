@@ -38,21 +38,13 @@ export default {
     },
     computed: {
         wrapClasses () {
-            let wrapClasses = ''
-            if (this.disabled) {
-                if (this.checkedValue) {
-                    wrapClasses = `${prefixCls}-wrapper` + ` ${prefixCls}-wrapper-disabled` + ` ${prefixCls}-wrapper-checked`
-                } else {
-                    wrapClasses = `${prefixCls}-wrapper` + ` ${prefixCls}-wrapper-disabled`
+            return [
+                `${prefixCls}-wrapper`,
+                {
+                    [` ${prefixCls}-wrapper-disabled`]: this.disabled,
+                    [` ${prefixCls}-wrapper-checked`]: this.checkedValue
                 }
-            } else {
-                if (this.checkedValue) {
-                    wrapClasses = `${prefixCls}-wrapper` + ` ${prefixCls}-wrapper-checked`
-                } else {
-                    wrapClasses = `${prefixCls}-wrapper`
-                }
-            }
-            return wrapClasses
+            ]
         },
         radioClasses () {
             return [
@@ -79,6 +71,8 @@ export default {
             }
             let checked = event.target.checked
             this.checkedValue = checked
+            this.$emit('input', this.checkedValue)
+            this.$emit('on-change', this.checkedValue)
         }
     },
     mounted () {
