@@ -4,14 +4,14 @@
         <Modal v-model="showOrderSerial" title="绑定订单流水" :maskClosable="false" class-name="vertical-center-modal serial-modal" @on-visible-change="showOrderSerial = arguments[0]" @on-ok="bindOrderSerial">
             <div class="clearfix tax_lab_flo">
                 <span>订单流水号</span>
-                <Input class="serial" v-model="serialNoModel" @on-blur="changeSerialNo" />
+                <i-input class="serial" v-model="serialNoModel" @on-blur="changeSerialNo"></i-input>
             </div>
         </Modal>
     </div>
 </template>
 
 <script>
-import { keyUtil } from '@/store/helper'
+import { keyUtil } from '../store/helper'
 
 export default {
     data () {

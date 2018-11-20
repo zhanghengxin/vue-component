@@ -1,6 +1,6 @@
 // 二手车机动车 相关
-import common from '@/utils/common'
-import typeUtil from '@/utils/typeUtil'
+import common from '../utils/common'
+import typeUtil from '../utils/typeUtil'
 
 export default {
     // 获取 机动车、二手车 的数据

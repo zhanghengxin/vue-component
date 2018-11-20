@@ -1,5 +1,5 @@
 // 专普电 相关
-import typeUtil from '@/utils/typeUtil'
+import typeUtil from '../utils/typeUtil'
 
 export default {
     // 获取 专普电 的数据，成品油, 农产品收购（普电）

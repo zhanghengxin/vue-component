@@ -48,10 +48,10 @@
 <script>
 // component 组件
 // 公共组件
-import CheckSwitch from '@common/CheckSwitch'
-import LabelInput from '@common/LabelInput'
-import LabelSelect from '@common/LabelSelect'
-import FuncButton from '@common/FuncButton'
+import CheckSwitch from '../component/CheckSwitch'
+import LabelInput from '../component/LabelInput'
+import LabelSelect from '../component/LabelSelect'
+import FuncButton from '../component/FuncButton'
 // 业务组件
 import Negative from './modal/negative'
 import Difference from './modal/difference'
@@ -60,8 +60,8 @@ import OrderSerial from './modal/orderSerial'
 import InvoiceTitle from './modal/invoiceTitle'
 import PageMargin from './modal/pageMargin'
 // helper vuex 帮助
-import { generateComputed, keyUtil } from '@/store/helper'
-import { getDefaultDetailTpl } from '@/store/stateHelper'
+import { generateComputed, keyUtil } from '../store/helper'
+import { getDefaultDetailTpl } from '../store/stateHelper'
 // mixins 混入
 import serverOrDish from './mixins/serverOrDish'
 import carMixin from './mixins/carMixin'

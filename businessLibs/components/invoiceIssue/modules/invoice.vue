@@ -49,7 +49,7 @@ import InvoiceFooter from './footer'
 import InvoiceContent from './content'
 import Customer from '../modal/customer'
 // vuex helper
-import {generateComputed, keyUtil} from '@/store/helper'
+import {generateComputed, keyUtil} from '../store/helper'
 // 混入 mixins
 import serverOrDish from '../mixins/serverOrDish'
 // 工具库 utils
@@ -264,6 +264,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+@import '../index.scss'
 </style>
