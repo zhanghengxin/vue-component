@@ -36,7 +36,7 @@
 
 <script>
 // vuex helper
-import { keyUtil, generateComputed } from '@/store/helper'
+import { keyUtil, generateComputed } from '../store/helper'
 // 组件 component
 import AutoComplete from '../component/AutoComplete'
 // 工具库 utils

@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import {generateComputed} from '@/store/helper'
+import {generateComputed} from '../store/helper'
 
 const DISCOUNT_TYPE_RATE = 'rate'
 // const DISCOUNT_TYPE_AMOUNT = 'amount'

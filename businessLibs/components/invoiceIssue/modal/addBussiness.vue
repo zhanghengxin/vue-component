@@ -127,7 +127,7 @@
 </template>
 <script>
 // 数组对象去重
-import {convertToNormal} from '@/utils/numberUtil'
+import {convertToNormal} from '../utils/numberUtil'
 function arrayUnique (arr, name) {
     var hash = {}
     return arr.reduce(function (item, next) {

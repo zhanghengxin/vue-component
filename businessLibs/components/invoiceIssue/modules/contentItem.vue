@@ -50,7 +50,7 @@ import typeUtil from '../utils/typeUtil'
 import NumberInput from '../component/NumberInput'
 import AutoComplete from '../component/AutoComplete'
 // vuex helper
-import { keyUtil } from '@/store/helper'
+import { keyUtil } from '../store/helper'
 // mixins 混入
 import goodsMixin from '../mixins/goodsMixin'
 import serverOrDish from '../mixins/serverOrDish'

@@ -113,8 +113,8 @@ import goodsAdd from '../modal/goodsAdd'
 // number 方法
 import {toMoneyFixedString, moneyToCharacter, toKeepFixed2, toKeepFixed6, toKeepFixed13} from '../utils/numberUtil'
 // helper vuex
-import {generateComputed} from '@/store/helper'
-import {getDefaultDetailTpl} from '@/store/stateHelper'
+import {generateComputed} from '../store/helper'
+import {getDefaultDetailTpl} from '../store/stateHelper'
 // mixins
 import serverOrDish from '../mixins/serverOrDish'
 import getTaxRates from '../mixins/getTaxRates'

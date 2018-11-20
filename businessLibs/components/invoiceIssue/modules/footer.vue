@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { keyUtil, generateComputed } from '@/store/helper'
+import { keyUtil, generateComputed } from '../store/helper'
 import customerMixin from '../mixins/customerMixin'
 
 const propMixin = {

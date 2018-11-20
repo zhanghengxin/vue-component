@@ -1,7 +1,7 @@
 /**
  * 商品弹框 选择 mixins
  */
-import { generateComputed } from '@/store/helper'
+import { generateComputed } from '../store/helper'
 
 export default {
     props: {

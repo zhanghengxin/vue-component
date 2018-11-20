@@ -13,7 +13,7 @@
  * --------------------------------------------------------------------------- *
  */
 
-import http from '@/utils/http'
+import http from '../utils/http'
 import typeUtil from '../../../utils/typeUtil'
 import {keyUtil} from '../../helper'
 import Message from 'iview/src/components/message/index.js'

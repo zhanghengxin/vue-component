@@ -44,7 +44,7 @@ import LabelSelect from '../component/LabelSelect'
 import LabelInput from '../component/LabelInput'
 import FuncButton from '../component/FuncButton'
 import typeUtil from '../utils/typeUtil'
-import {keyUtil, generateComputed} from '@/store/helper'
+import {keyUtil, generateComputed} from '../store/helper'
 
 const propMixin = {
     computed: {

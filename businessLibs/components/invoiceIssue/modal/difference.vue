@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { generateComputed } from '@/store/helper'
+import { generateComputed } from '../store/helper'
 
 const propMixin = {
     computed: {

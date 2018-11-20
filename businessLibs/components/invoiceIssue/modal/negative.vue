@@ -88,8 +88,8 @@
 </template>
 
 <script>
-import { keyUtil } from '@/store/helper'
-import { getDefaultDetailTpl } from '@/store/stateHelper'
+import { keyUtil } from '../store/helper'
+import { getDefaultDetailTpl } from '../store/stateHelper'
 import RedInfo from './modal/redInfo'
 // TODO → webpack 打包不同的绝对路径  需要再webpack 中配置，分别 开发 生产 预生产 环境
 const OUTPUT_URL = ''

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { keyUtil } from '@/store/helper'
+import { keyUtil } from '../store/helper'
 
 export default {
     data () {

@@ -1,5 +1,5 @@
 // 暂存 开具相关
-import { getDefaultDetailTpl } from '@/store/stateHelper'
+import { getDefaultDetailTpl } from '../store/stateHelper'
 
 export default {
     methods: {
