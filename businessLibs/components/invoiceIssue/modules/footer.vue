@@ -48,7 +48,7 @@
 
 <script>
 import { keyUtil, generateComputed } from '@/store/helper'
-import customerMixin from '@/mixins/invoice-issue/customerMixin'
+import customerMixin from '../mixins/customerMixin'
 
 const propMixin = {
     ...customerMixin,

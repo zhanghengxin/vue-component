@@ -48,10 +48,10 @@
 <script>
 // component 组件
 // 公共组件
-import CheckSwitch from '@common/CheckSwitch'
-import LabelInput from '@common/LabelInput'
-import LabelSelect from '@common/LabelSelect'
-import FuncButton from '@common/FuncButton'
+import CheckSwitch from '../component/CheckSwitch'
+import LabelInput from '../component/LabelInput'
+import LabelSelect from '../component/LabelSelect'
+import FuncButton from '../component/FuncButton'
 // 业务组件
 import Negative from './modal/negative'
 import Difference from './modal/difference'
