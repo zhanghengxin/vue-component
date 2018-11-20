@@ -7,7 +7,7 @@ $css-prefix-radio: $css-prefix + 'radio';
   line-height: 1;
   vertical-align: middle;
   cursor: pointer;
-  &-group{
+  &-group {
     display: inline-block;
     font-size: 12px;
     vertical-align: middle;
@@ -17,7 +17,7 @@ $css-prefix-radio: $css-prefix + 'radio';
     height: 30px;
     line-height: 30px;
   }
-  &-wrapper{
+  &-wrapper {
     font-size: 12px;
     vertical-align: middle;
     display: inline-block;
@@ -26,13 +26,13 @@ $css-prefix-radio: $css-prefix + 'radio';
     margin-right: 8px;
     cursor: pointer;
   }
-  &-wrapper-disabled{
+  &-wrapper-disabled {
     cursor: not-allowed;
   }
-  &:hover &-inner{
-    border-color: $Sub;
+  &:hover &-inner {
+    border-color: $Border;
   }
-  &-inner{
+  &-inner {
     display: inline-block;
     width: 14px;
     height: 14px;
@@ -40,12 +40,12 @@ $css-prefix-radio: $css-prefix + 'radio';
     top: 0;
     left: 0;
     background-color: $white;
-    border: 1px solid $Sub;
+    border: 1px solid $Border;
     border-radius: 50%;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
   }
-  &-inner:after{
+  &-inner:after {
     position: absolute;
     width: 8px;
     height: 8px;
@@ -56,7 +56,7 @@ $css-prefix-radio: $css-prefix + 'radio';
     border-top: 0;
     border-left: 0;
     content: ' ';
-    background-color:$Primary;
+    background-color: $Primary;
     opacity: 0;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -64,29 +64,29 @@ $css-prefix-radio: $css-prefix + 'radio';
     -ms-transform: scale(0);
     transform: scale(0);
   }
-  &-large{
+  &-large {
     font-size: 14px;
   }
-  &-large &-inner{
+  &-large &-inner {
     width: 16px;
     height: 16px;
   }
-  &-large &-inner:after{
+  &-large &-inner:after {
     width: 10px;
     height: 10px;
   }
-  &-large &-wrapper,&-large &-wrapper{
+  &-large &-wrapper{
     font-size: 14px;
   }
-  &-small &-inner{
+  &-small &-inner {
     width: 12px;
     height: 12px;
   }
-  &-small &-inner:after{
+  &-small &-inner:after {
     width: 6px;
     height: 6px;
   }
-  &-input{
+  &-input {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -96,10 +96,10 @@ $css-prefix-radio: $css-prefix + 'radio';
     opacity: 0;
     cursor: pointer;
   }
-  &-checked &-inner{
-    border-color:$Primary
+  &-checked &-inner {
+    border-color: $Primary;
   }
-  &-checked &-inner:after{
+  &-checked &-inner:after {
     opacity: 1;
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
@@ -107,38 +107,37 @@ $css-prefix-radio: $css-prefix + 'radio';
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
   }
-  &-checked:hover &-inner{
-    border-color:$Primary;
+  &-checked:hover &-inner {
+    border-color: $Primary;
   }
-  &-disabled{
+  &-disabled {
     cursor: not-allowed;
   }
-  &-disabled &-input{
+  &-disabled &-input {
     cursor: not-allowed;
   }
-  &-disabled:hover &-inner{
-    border-color: $Sub;
+  &-disabled:hover &-inner {
+    border-color: $Border;
   }
   &-disabled &-inner {
-    border-color: $Sub;
-    background-color: $white;
+    border-color: $Border;
+    background-color: #f3f3f3;
   }
-  &-disabled &-inner:after{
-    background-color: $Sub;
+  &-disabled &-inner:after {
+    background-color: #ccc;
   }
-
-  &-disabled &-disabled+span{
-    color: $Sub;
+  &-disabled &-disabled+span {
+    color: #ccc;
   }
   &-group-button {
     font-size: 0;
     -webkit-text-size-adjust: none;
   }
-  &-group-button &{
+  &-group-button & {
     width: 0;
     margin-right: 0;
   }
-  &-group-button &-wrapper{
+  &-group-button &-wrapper {
     display: inline-block;
     height: 32px;
     line-height: 30px;
@@ -149,15 +148,16 @@ $css-prefix-radio: $css-prefix + 'radio';
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     cursor: pointer;
-    border: 1px solid $Sub;
+    border: 1px solid $Border;
     border-left: 0;
     background: $white;
     position: relative;
   }
-  &-group-button &-wrapper>span{
+  &-group-button &-wrapper>span {
     margin-left: 0;
   }
-  &-group-button &-wrapper:after,&-group-button &-wrapper:before{
+  &-group-button &-wrapper:after,
+  &-group-button &-wrapper:before {
     content: '';
     display: block;
     position: absolute;
@@ -165,109 +165,122 @@ $css-prefix-radio: $css-prefix + 'radio';
     height: 100%;
     left: -1px;
     top: 0;
-    background: $Sub;
+    background: $Border;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
   }
-  &-group-button &-wrapper:after{
+  &-group-button &-wrapper:after {
     height: 36px;
     left: -1px;
     top: -3px;
     background: rgba(45, 140, 240, .2);
     opacity: 0;
   }
-  &-group-button &-wrapper:first-child{
+  &-group-button &-wrapper:first-child {
     border-radius: 4px 0 0 4px;
-    border-left: 1px solid $Sub;
+    border-left: 1px solid $Border;
   }
-  &-group-button &-wrapper:first-child:after,&-group-button &-wrapper:first-child:before{
+  &-group-button &-wrapper:first-child:after,
+  &-group-button &-wrapper:first-child:before {
     display: none;
   }
-  &-group-button &-wrapper:last-child{
+  &-group-button &-wrapper:last-child {
     border-radius: 0 4px 4px 0;
   }
-  &-group-button &-wrapper:first-child:last-child{
+  &-group-button &-wrapper:first-child:last-child {
     border-radius: 4px;
   }
-  &-group-button &-wrapper:hover{
+  &-group-button &-wrapper:hover {
     position: relative;
-    color:$Primary;
+    color: $Primary;
   }
-  &-group-button &-wrapper:hover &{
+  &-group-button &-wrapper:hover & {
     background-color: $Title;
   }
-  &-group-button &-wrapper &-inner,&-group-button &-wrapper input{
+  &-group-button &-wrapper &-inner,
+  &-group-button &-wrapper input {
     opacity: 0;
     width: 0;
     height: 0;
   }
-  &-group-button &-wrapper-checked{
+  &-group-button &-wrapper-checked {
     background: $white;
-    border-color:$Primary;
-    color:$Primary;
-    -webkit-box-shadow: -1px 0 0 0$Primary;
-    box-shadow: -1px 0 0 0$Primary;
+    border-color: $Primary;
+    color: $Primary;
+    -webkit-box-shadow: -1px 0 0 0 $Primary;
+    box-shadow: -1px 0 0 0 $Primary;
     z-index: 1;
   }
-  &-group-button &-wrapper-checked:before{
-    background:$Primary;
+  &-group-button &-wrapper-checked:before {
+    background: $Primary;
     opacity: .1;
   }
-  &-group-button &-wrapper-checked:first-child{
-    border-color:$Primary;
+  &-group-button &-wrapper-checked:first-child {
+    border-color: $Primary;
     -webkit-box-shadow: none;
     box-shadow: none;
   }
-  &-group-button &-wrapper-checked:hover{
+  &-group-button &-wrapper-checked:hover {
     border-color: $Primary;
-    color: $Primary
+    color: $Primary;
   }
-  &-group-button &-wrapper-checked:active{
+  &-group-button &-wrapper-checked:active {
     border-color: $Primary;
-    color: $Primary
+    color: $Primary;
   }
-  &-group-button &-wrapper-disabled{
-    border-color: $Sub;
-    background-color: $white;
-    cursor: not-allowed;
-    color: $Sub
-  }
-  &-group-button &-wrapper-disabled:first-child,&-group-button &-wrapper-disabled:hover{
-    border-color: $Sub;
-    background-color: $white;
-    color: $Sub
-  }
-  &-group-button &-wrapper-disabled:first-child{
-    border-left-color: $Sub
-  }
-  &-group-button &-wrapper-disabled &-wrapper-checked{
-    color: $white;
-    background-color: $Background;
+  &-group-button &-wrapper-disabled {
     border-color: $Border;
-    -webkit-box-shadow: none!important;
-    box-shadow: none!important;
+    background-color: $Background;
+    cursor: not-allowed;
+    color: #ccc;
   }
-  &-group-button &-group-large &-wrapper{
-    height: 36px;
-    line-height: 34px;
-    font-size: 14px;
+  &-group-button &-wrapper-disabled:first-child,
+  &-group-button &-wrapper-disabled:hover {
+    border-color: $Border;
+    background-color: $Background;
+    color: #ccc;
   }
-  &-group-button &-group-large &-wrapper:after{
-    height: 40px;
-  }
-  &-group-button &-group-small &-wrapper{
-    height: 24px;
-    line-height: 22px;
-    padding: 0 12px;
-    font-size: 12px;
-  }
-  &-group-button &-group-small &-wrapper:after{
-    height: 28px;
-  }
-  &-group-button &-group-small &-wrapper:first-child{
-    border-radius: 3px 0 0 3px;
-  }
-  &-group-button &-group-small &-wrapper:last-child{
-    border-radius: 0 3px 3px 0;
+  &-group-button &-wrapper-disabled:first-child {
+    border-left-color: $Border;
   }
 }
+.b-radio-group-button .b-radio-wrapper-disabled.b-radio-wrapper-checked {
+  color: $white;
+  background-color: $Border;
+  border-color: $Border;
+  -webkit-box-shadow: none!important;
+  box-shadow: none!important;
+}
+.b-radio-group-button.b-radio-group-large .b-radio-wrapper {
+  height: 36px;
+  line-height: 34px;
+  font-size: 14px;
+}
+.b-radio-group-button.b-radio-group-large .b-radio-wrapper:after {
+  height: 40px;
+}
+.b-radio-group-button.b-radio-group-small .b-radio-wrapper {
+  height: 24px;
+  line-height: 22px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+.b-radio-group-button.b-radio-group-small .b-radio-wrapper:after {
+  height: 28px;
+}
+.b-radio-group-button.b-radio-group-small .b-radio-wrapper:first-child {
+  border-radius: 3px 0 0 3px;
+}
+.b-radio-group-button.b-radio-group-small .b-radio-wrapper:last-child {
+  border-radius: 0 3px 3px 0;
+}
+span.b-radio+* {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+
+
+
+
+

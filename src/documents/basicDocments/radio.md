@@ -7,7 +7,7 @@
     <div class="example-box">
         <div>
              <!-- 未选中 -->
-            <b-radio :disabled='false' label="未选中"></b-radio>
+            <b-radio disabled label="未选中"></b-radio>
             <!-- 选中 -->
             <b-radio label="未选失效项"></b-radio>
             <!-- 禁止选中 -->
