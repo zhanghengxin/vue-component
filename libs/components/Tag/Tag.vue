@@ -1,8 +1,8 @@
 /*
  * @Author: lijiahang
  * @Date: 2018-11-15 17:52:20
- * @Last Modified by:   lijiahang
- * @Last Modified time: 2018-11-15 17:52:20
+ * @Last Modified by: lijiahang
+ * @Last Modified time: 2018-11-19 16:09:32
  */
 
 <template>
@@ -54,9 +54,9 @@ export default {
         }
     },
     methods: {
-        close () {
+        close (event) {
             this.show = false
-            this.$emit('on-close')
+            this.$emit('on-close', event)
         }
     }
 }

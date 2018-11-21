@@ -33,45 +33,45 @@
                         <div v-if="config.enableSpecialNagative">
                             <i-col span="12">
                                 <FormItem prop="redInfoNo" label="信息表编号:">
-                                    <Input type="text" icon="ios-search" v-model="nextModel.redInfoNo" placeholder="" @on-click="redInfoBtn" />
+                                    <i-input type="text" icon="ios-search" v-model="nextModel.redInfoNo" placeholder="" @on-click="redInfoBtn"></i-input>
                                 </FormItem>
                             </i-col>
                             <i-col span="12">
                                 <FormItem prop="repeatRedInfoNo" label="再次输入:">
-                                    <Input type="text" v-model="nextModel.repeatRedInfoNo" placeholder="" />
+                                    <i-input type="text" v-model="nextModel.repeatRedInfoNo" placeholder=""></i-input>
                                 </FormItem>
                             </i-col>
                             <i-col span="12">
                                 <FormItem prop="invoiceCode" label="发票代码:">
-                                    <Input type="text" v-model="nextModel.invoiceCode" :maxlength="12" placeholder="" />
+                                    <i-input type="text" v-model="nextModel.invoiceCode" :maxlength="12" placeholder=""></i-input>
                                 </FormItem>
                             </i-col>
                             <i-col span="12">
                                 <FormItem prop="invoiceNo" label="发票号码:">
-                                    <Input type="text" v-model="nextModel.invoiceNo" :maxlength="8" placeholder=" /">
+                                    <i-input type="text" v-model="nextModel.invoiceNo" :maxlength="8" placeholder=""></i-input>
                                 </FormItem>
                             </i-col>
                         </div>
                         <div v-else>
                             <i-col span="12">
                                 <FormItem prop="invoiceCode" label="发票代码:">
-                                    <Input type="text" v-model="nextModel.invoiceCode" :maxlength="12" placeholder="" />
+                                    <i-input type="text" v-model="nextModel.invoiceCode" :maxlength="12" placeholder=""></i-input>
                                 </FormItem>
                             </i-col>
                             <i-col span="12">
                                 <FormItem prop="invoiceNo" label="发票号码:">
-                                    <Input type="text" v-model="nextModel.invoiceNo" placeholder="" :maxlength="8" />
+                                    <i-input type="text" v-model="nextModel.invoiceNo" placeholder="" :maxlength="8"></i-input>
                                 </FormItem>
                             </i-col>
                             <i-col span="24"><p class="negative-tips">确认正数发票代码、号码</p></i-col>
                             <i-col span="12">
                                 <FormItem prop="repeatInvoiceCode" label="发票代码">
-                                    <Input type="text" v-model="nextModel.repeatInvoiceCode" :maxlength="12"/>
+                                    <i-input type="text" v-model="nextModel.repeatInvoiceCode" :maxlength="12"></i-input>
                                 </FormItem>
                             </i-col>
                             <i-col span="12">
                                 <FormItem prop="repeatInvoiceNo" label="发票号码">
-                                    <Input type="text" v-model="nextModel.repeatInvoiceNo" :maxlength="8"/>
+                                    <i-input type="text" v-model="nextModel.repeatInvoiceNo" :maxlength="8"></i-input>
                                 </FormItem>
                             </i-col>
                         </div>
@@ -88,8 +88,8 @@
 </template>
 
 <script>
-import { keyUtil } from '@/store/helper'
-import { getDefaultDetailTpl } from '@/store/stateHelper'
+import { keyUtil } from '../store/helper'
+import { getDefaultDetailTpl } from '../store/stateHelper'
 import RedInfo from './modal/redInfo'
 // TODO → webpack 打包不同的绝对路径  需要再webpack 中配置，分别 开发 生产 预生产 环境
 const OUTPUT_URL = ''
