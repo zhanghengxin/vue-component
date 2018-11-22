@@ -129,6 +129,11 @@
           "title": "Tooltip 文字提示",
           "path": "/tooltip",
           "name": "tooltip"
+        },
+        {
+          "title": "Tabs 标签页",
+          "path": "/tabs",
+          "name": "tabs"
         }
       ]
     },
