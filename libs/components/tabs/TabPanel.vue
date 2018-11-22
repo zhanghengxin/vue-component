@@ -22,6 +22,9 @@ export default {
         disabled: {
             type: Boolean,
             default: false
+        },
+        icon: {
+            type: String
         }
     },
     watch: {
@@ -29,6 +32,9 @@ export default {
             this.updateNav()
         },
         disabled () {
+            this.updateNav()
+        },
+        icon () {
             this.updateNav()
         }
     },

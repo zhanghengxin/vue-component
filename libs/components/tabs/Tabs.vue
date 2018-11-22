@@ -2,6 +2,7 @@
   <div class="tabs">
     <div class="tabs-bar">
           <div @click="handleChange(index)" v-for="(item,index) in navList" :key="index" :class="tabCls(item)">
+            <Icon v-if="item.icon !== ''" :type="item.icon"></Icon>
             <span>{{item.label}}</span>
           </div>
     </div>
@@ -12,7 +13,7 @@
 </template>
 <script>
 // import BScroll from 'better-scroll'
-
+import Icon from '../icon/Icon.vue'
 export default {
     name: 'Tabs',
     props: {
@@ -20,6 +21,7 @@ export default {
             type: [String, Number]
         }
     },
+    components: {Icon},
     data () {
         return {
             currentValue: this.value,
@@ -54,7 +56,8 @@ export default {
                 this.navList.push({
                     label: pane.label,
                     name: pane.name || index,
-                    disabled: pane.disabled
+                    disabled: pane.disabled,
+                    icon: pane.icon || ''
                 })
                 if (!pane.name) pane.name = index
                 if (index === 0) {

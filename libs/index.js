@@ -16,6 +16,8 @@ import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
 import Circle from './components/circle'
 import { Steps, Step } from './components/steps/index'
+import { Tabs, TabPanel } from './components/tabs/index'
+
 import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
@@ -63,7 +65,9 @@ const components = [
     Form,
     Form.FormItem,
     Switch,
-    Progress
+    Progress,
+    Tabs,
+    TabPanel
 ]
 
 const install = function (Vue) {
@@ -98,5 +102,7 @@ export default {
     CheckboxGroup,
     Radio,
     RadioGroup,
+    TabPanel,
+    Tabs,
     ...components
 }
