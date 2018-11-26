@@ -82,7 +82,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value1" size="large" placeholder="large" ></b-input>
+            <b-input v-model="value1" size="large" @on-change='changemal' placeholder="large" ></b-input>
             <b-input v-model="value2" size="normal" placeholder="normal" ></b-input>
             <b-input v-model="value3" size="small" placeholder="small" ></b-input>
         </div>

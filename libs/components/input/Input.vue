@@ -14,7 +14,7 @@
                 prefixCls+`-icon`,
                 prefixCls+`-icon-`+size,
                 prefixCls+`-icon-prefix`]"
-                @click="handleIconClick">
+                @on-click="handleIconClick">
             </b-icon>
             <b-icon
                 v-if="suffix"
@@ -24,7 +24,7 @@
                 prefixCls+`-icon`,
                 prefixCls+`-icon-`+size,
                 prefixCls+`-icon-suffix`]"
-                @click="handleIconClick">
+                @on-click="handleIconClick">
             </b-icon>
             <b-icon
                 v-if="clearable && currentValue"
@@ -35,7 +35,7 @@
                 prefixCls+`-icon-`+size,
                 prefixCls+`-icon-suffix`,
                 prefixCls+`-icon-clear`]"
-                @click="handleClear">
+                @on-click="handleClear">
             </b-icon>
             <label
                 :class="labelClasses"
