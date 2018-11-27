@@ -50,7 +50,7 @@ import typeUtil from '../utils/typeUtil'
 import NumberInput from '../component/NumberInput'
 import AutoComplete from '../component/AutoComplete'
 // vuex helper
-import { keyUtil } from '@/store/helper'
+import { keyUtil } from '../store/helper'
 // mixins 混入
 import goodsMixin from '../mixins/goodsMixin'
 import serverOrDish from '../mixins/serverOrDish'
@@ -208,7 +208,6 @@ export default {
                 return
             }
 
-            // 判断服务器或盘 用户
             num = this.reDishServer(num)
 
             if (num.length > 13) {
@@ -241,8 +240,6 @@ export default {
                     this.changeTotalTax()
                 } else if ((+dataObj.goodsTotalPrice)) {
                     let price = (+dataObj.goodsTotalPrice) / (+num)
-
-                    // 判断服务器或盘 用户
                     price = this.reDishServer(price)
                     this.$set(dataObj, 'goodsPrice', price)
                 } else {}
@@ -268,7 +265,6 @@ export default {
                 this.updateData()
                 return
             }
-            // 判断服务器或盘 用户
             price = this.reDishServer(price)
 
             let strtp = Number(price) + ''
@@ -295,7 +291,6 @@ export default {
                 this.changeTotalTax()
             } else if ((+dataObj.goodsTotalPrice)) {
                 let num = (+dataObj.goodsTotalPrice) / (+price)
-                // 判断服务器或盘 用户
                 num = this.reDishServer(num)
                 this.$set(dataObj, 'goodsQuantity', num)
             } else {}
@@ -334,18 +329,15 @@ export default {
 
             if ((+dataObj.goodsQuantity)) {
                 let price = (+totalPrice) / (+dataObj.goodsQuantity) + ''
-                // 判断服务器或盘 用户
                 price = this.reDishServer(price)
                 this.$set(dataObj, 'goodsPrice', price)
             } else if ((+dataObj.goodsPrice)) {
                 let num = (+totalPrice) / (+dataObj.goodsPrice) + ''
-                // 判断服务器或盘 用户
                 num = this.reDishServer(num)
                 this.$set(dataObj, 'goodsQuantity', num)
             } else {
                 // nothing
             }
-            // this.updateData();
             this.changeTotalTax()
             this.negativeNumber()
         },
@@ -397,7 +389,7 @@ export default {
             let quantity = Number(dataObj.goodsQuantity) > 0 ? dataObj.goodsQuantity : -dataObj.goodsQuantity
             let price = Number(dataObj.goodsTotalPrice) > 0 ? toKeepFixed2(dataObj.goodsTotalPrice) : toKeepFixed2(-dataObj.goodsTotalPrice)
             let tax = Number(dataObj.goodsTotalTax) > 0 ? toKeepFixed2(dataObj.goodsTotalTax) : toKeepFixed2(-dataObj.goodsTotalTax)
-            // console.log(tax, dataObj.goodsTotalTax)
+
             if (this.isNegative || (this.showCommonCopyEdit && dataObj.invoiceLineNature === '1')) {
                 if (+quantity) {
                     this.$set(dataObj, 'goodsQuantity', '-' + convertToNormal(quantity))
@@ -507,24 +499,11 @@ export default {
         }
     },
     watch: {
-        // priceTaxMark: {
-        //     handler (val) {
-        //         let dataObj = this.currentDataObj
-        //         if (dataObj.goodsTotalPrice !== '') {
-        //             // let total = (+dataObj.goodsTotalPrice)
-        //             // debugger
-        //             // this.changeTotalPrice(total)
-        //         }
-        //     },
-        //     immediate: true
-        // },
         dataObj: {
             deep: true,
             handler (value) {
                 // 删掉的时候 index 会变，需要更新内容
                 Object.assign(this.currentDataObj, value)
-                // this.$set(this.currentDataObj,'goodsName',value.goodsName);
-                // this.$set(this.currentDataObj,'goodsQuanlity',value.goodsQuantity);
                 // 只影响组件本身和插入插槽的子组件,而不是所有子组件
                 this.$forceUpdate()
             }
@@ -532,7 +511,6 @@ export default {
         currentDataObj: {
             deep: true,
             handler (target) {
-                // this.updateDataCallback.call(null,this.currentDataObj,this.dataIndex)
                 this.updateDataCallback.call(null, {
                     ...this.currentDataObj
                 }, this.dataIndex)

@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import LabelSelect from '@/components/page/common/LabelSelect'
-import LabelInput from '@/components/page/common/LabelInput'
-import FuncButton from '@/components/page/common/FuncButton'
-import { keyUtil, generateComputed } from '@/store/helper'
+import LabelSelect from '../component/LabelSelect'
+import LabelInput from '../component/LabelInput'
+import FuncButton from '../component/FuncButton'
+import { keyUtil, generateComputed } from '../store/helper'
 
 const propMixin = {
     computed: {

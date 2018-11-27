@@ -5,7 +5,7 @@
             <div class="wrap difference-setting">
                 <div class="m-bottom">
                     <span>含税销售额：</span>
-                    <SInputNumber :min="0" v-model="difference.sellerPrice" :formatter="value => value ? value : ''"></SInputNumber>
+                    <InputNumber :min="0" v-model="difference.sellerPrice" :formatter="value => value ? value : ''"></InputNumber>
                 </div>
                 <div>
                     <span>扣除额：</span>
@@ -21,8 +21,7 @@
 </template>
 
 <script>
-import { generateComputed } from '@/store/helper'
-import SInputNumber from '@common/input-number'
+import { generateComputed } from '../store/helper'
 
 const propMixin = {
     computed: {
@@ -46,7 +45,6 @@ export default {
             }
         }
     },
-    components: { SInputNumber },
     mixins: [ propMixin ],
     props: {
         isNegative: {
