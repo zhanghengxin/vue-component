@@ -9,7 +9,8 @@ export default {
     name: 'TabPanel',
     data () {
         return {
-            show: true
+            show: true,
+            currentName: this.name
         }
     },
     props: {
@@ -25,9 +26,17 @@ export default {
         },
         icon: {
             type: String
+        },
+        closable: {
+            type: Boolean,
+            default: null
         }
     },
     watch: {
+        name (val) {
+            this.currentName = val
+            this.updateNav()
+        },
         label () {
             this.updateNav()
         },
@@ -44,6 +53,9 @@ export default {
         }
     },
     mounted () {
+        this.updateNav()
+    },
+    destroyed () {
         this.updateNav()
     }
 }

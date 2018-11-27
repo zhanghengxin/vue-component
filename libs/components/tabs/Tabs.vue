@@ -1,31 +1,48 @@
 <template>
-  <div class="tabs">
-    <div class="tabs-bar">
-          <div @click="handleChange(index)" v-for="(item,index) in navList" :key="index" :class="tabCls(item)">
+  <div :class="[prefixCls,classes]" >
+    <div :class="[prefixCls+'-bar']" ref="tabHeaderItem">
+          <div @click="handleChange(index)" v-for="(item,index) in navList" :key="index" :class="[tabCls(item)]" >
             <Icon v-if="item.icon !== ''" :type="item.icon"></Icon>
             <span>{{item.label}}</span>
+            <Icon v-if="showClose(item)" type="yidongduan_conclose" @click.native.stop="handleRemove(index)"></Icon>
           </div>
     </div>
-    <div class="tabs-content">
+    <div :class="prefixCls+'-content'">
       <slot></slot>
     </div>
   </div>
 </template>
 <script>
 // import BScroll from 'better-scroll'
+import { prefix } from '../../utils/common'
 import Icon from '../icon/Icon.vue'
+const prefixCls = prefix + 'tabs'
 export default {
     name: 'Tabs',
     props: {
         value: {
             type: [String, Number]
+        },
+        type: {
+            type: String,
+            default: 'card'
+        },
+        size: {
+            type: String,
+            default: 'default'
+        },
+        closable: {
+            type: Boolean,
+            default: false
         }
     },
     components: {Icon},
     data () {
         return {
+            prefixCls: prefixCls,
             currentValue: this.value,
-            navList: []
+            navList: [],
+            activeKey: this.value
         }
     },
     watch: {
@@ -36,13 +53,29 @@ export default {
             this.updateStatus()
         }
     },
+    computed: {
+        classes () {
+            return [
+                {
+                    card: this.type === 'card',
+                    [`${prefixCls}-line`]: this.type === 'line',
+                    [`${prefixCls}-lineActive`]: this.type === 'line'
+
+                }
+            ]
+        }
+    },
     methods: {
         tabCls (item) {
             return [
-                'tabs-tab',
+                `${prefixCls}-tab`,
                 {
-                    'tab-disabled': item.disabled,
-                    'tabs-tab-active': item.name === this.currentValue
+                    [`${prefixCls}-disabled`]: item.disabled,
+                    [`${prefixCls}-active`]: item.name === this.currentValue,
+                    [`${prefixCls}-lineActive`]: this.type === 'line' && item.name === this.currentValue,
+                    [`${prefixCls}-mini`]: this.size === 'small' && this.type === 'line',
+                    [`${prefixCls}-line`]: this.type === 'line',
+                    [`${prefixCls}-lineActive`]: this.type === 'line'
                 }
             ]
         },
@@ -57,7 +90,8 @@ export default {
                     label: pane.label,
                     name: pane.name || index,
                     disabled: pane.disabled,
-                    icon: pane.icon || ''
+                    icon: pane.icon || '',
+                    closable: pane.closable
                 })
                 if (!pane.name) pane.name = index
                 if (index === 0) {
@@ -66,6 +100,42 @@ export default {
             })
             this.updateStatus()
             // this.updateBar();
+        },
+        showClose (item) {
+            if (this.type === 'card') {
+                if (item.closable !== null) {
+                    return item.closable
+                } else {
+                    return this.closable
+                }
+            } else {
+                return false
+            }
+        },
+        handleRemove (index) {
+            debugger
+            const tabs = this.getTabs()
+            const tab = tabs[index]
+            tab.$destroy()
+            if (tab.currentName === this.currentValue) {
+                const newTabs = this.getTabs()
+                let currentValue = -1
+                if (newTabs.length) {
+                    const leftNoDisabledTabs = tabs.filter((item, itemIndex) => !item.disabled && itemIndex < index)
+                    const rightNoDisabledTabs = tabs.filter((item, itemIndex) => !item.disabled && itemIndex > index)
+                    if (rightNoDisabledTabs.length) {
+                        currentValue = rightNoDisabledTabs[0].currentName
+                    } else if (leftNoDisabledTabs.length) {
+                        currentValue = leftNoDisabledTabs[leftNoDisabledTabs.length - 1].currentName
+                    } else {
+                        currentValue = newTabs[0].currentName
+                    }
+                }
+                this.currentValue = currentValue
+                this.$emit('input', currentValue)
+            }
+            this.$emit('on-tab-remove', tab.currentName)
+            this.updateNav()
         },
         updateStatus () {
             // debuggger
@@ -84,82 +154,28 @@ export default {
             this.$emit('input', name)
             this.$emit('on-click', name)
         }
-    //     _initScroll: function () {
-    //         new BScroll(this.$refs.tabHeaderItem, {
-    //             scrollX: true,
-    //             bounce: true
-    //         })
-    //     }
-    // }
-    // mounted () {
-    //     let self = this // 外层新建变量引用this
-    //     this.$slots.default.forEach((components) => { // 循环default内的内容
-    //         if (components.tag && components.componentOptions) { // 如果子元素tag键&&componentOptions有内容。
-    //             self.navList.push(components.componentOptions.propsData)
-    //             // 在components.componentOptions这个键内 有propsDate这个属性。我们可以通过这个属性拿到子组件的props值
-    //         }
-    //     })
-    //     this.$nextTick(() => { // 避免data未更新
-    //         this.activeTab = { // 给activeTab赋初始值
-    //             index: 0, // 默认选中第一个
-    //             name: this.tabList[0].name // 寻找tabList第一个元素 还有他的名字
-    //         }
-    //     })
-    //     setTimeout(() => {
-    //         this.$nextTick(() => { // 避免data未更新
-    //             this._initScroll()
-    //         }
-    //         )
-    //     }, 20)
+    },
+    mounted () {
+        // let self = this // 外层新建变量引用this
+        // this.$slots.default.forEach((components) => { // 循环default内的内容
+        //     if (components.tag && components.componentOptions) { // 如果子元素tag键&&componentOptions有内容。
+        //         self.navList.push(components.componentOptions.propsData)
+        //         // 在components.componentOptions这个键内 有propsDate这个属性。我们可以通过这个属性拿到子组件的props值
+        //     }
+        // })
+        // this.$nextTick(() => { // 避免data未更新
+        //    // this.activeTab = { // 给activeTab赋初始值
+        //        // index: 0, // 默认选中第一个
+        //         //name: this.navList[0].name // 寻找tabList第一个元素 还有他的名字
+        //     //}
+        //     this.currentValue = this.navList[0].name
+        // })
+        // setTimeout(() => {
+        //     this.$nextTick(() => { // 避免data未更新
+        //         this._initScroll()
+        //     }
+        //     )
+        // }, 20)
     }
 }
 </script>
-
-<style scoped>
-  [v-cloak] {
-      display:none;
-  }
-  .tabs {
-      font-size: 14px;
-      color: #657180
-  }
-  .tabs-bar:after {
-      content:'';
-      display: block;
-      width:100%;
-      height: 1px;
-      background: #d7dde4;
-      margin-top: -1px;
-  }
-  .tabs-tab {
-      display: inline-block;
-      padding: 4px 16px;
-      margin-right: 6px;
-      background: #fff;
-      border: 1px solid #d7dde4;
-      cursor:pointer;
-      position: relative;
-  }
-  .tabs-tab-active {
-      color: #3399ff;
-      border-top: 1px solid #3399ff;
-      border-bottom: 1px solid #fff;
-  }
-  .tabs-tab-active:before {
-      content:'';
-      display: block;
-      height: 1px;
-      background: #3399ff;
-      position: absolute;
-      top:0;
-      left: 0;
-      right:0;
-  }
-  .tabs-content {
-      padding: 8px 0;
-  }
-  .tab-disabled {
-    pointer-events: none;
-    color: #ccc;
-  }
-</style>
