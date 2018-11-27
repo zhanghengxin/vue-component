@@ -1,7 +1,4 @@
-/**
-* tab组件 
-* Created by guowenjuan .
-*/
+
 <template>
     <div class="pane" v-show="show">
       <slot></slot>
@@ -34,7 +31,7 @@ export default {
         closable: {
             type: Boolean,
             default: null
-            }
+        }
     },
     watch: {
         name (val) {
