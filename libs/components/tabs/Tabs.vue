@@ -1,7 +1,7 @@
 <template>
   <div :class="[prefixCls,classes]" >
-    <div :class="[prefixCls+'-bar']" ref="tabHeaderItem">
-          <div @click="handleChange(index)" v-for="(item,index) in navList" :key="index" :class="[tabCls(item)]" >
+    <div :class="prefixCls+'-bar'" ref="tabHeaderItem">
+          <div @click="handleChange(index)" v-for="(item,index) in navList" :key="index" :class="tabCls(item)" >
             <Icon v-if="item.icon !== ''" :type="item.icon"></Icon>
             <span>{{item.label}}</span>
             <Icon v-if="showClose(item)" type="yidongduan_conclose" @click.native.stop="handleRemove(index)"></Icon>
@@ -98,6 +98,7 @@ export default {
                     if (!this.currentValue) this.currentValue = pane.name || index
                 }
             })
+            console.log(this.navList)
             this.updateStatus()
             // this.updateBar();
         },
