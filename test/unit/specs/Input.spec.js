@@ -2,6 +2,7 @@
 import { createVue, destroyVM } from '../utils'
 import { prefix } from '&/utils/common'
 const prefixCls = `.${prefix}input`
+const Input = `${prefix}input`
 
 describe('Input', () => {
     let vm
@@ -12,12 +13,12 @@ describe('Input', () => {
     it('create', done => {
         vm = createVue({
             template: `
-            <b-input
+            <${Input}
             :minlength="3"
             :maxlength="5"
             placeholder="请输入"
             @focus="handleFocus"
-            value="input"></b-input>
+            value="input"></${Input}>
           `,
             data () {
                 return {
@@ -48,7 +49,7 @@ describe('Input', () => {
             return createVue(Object.assign({
                 template: `
                     <div>
-                        <${prefix}input ${props} v-model="value"></${prefix}input>
+                        <${Input} ${props} v-model="value"></${Input}>
                     </div>
                 `,
 
@@ -69,7 +70,7 @@ describe('Input', () => {
             vm = createVue({
                 template: `
                     <div>
-                        <${prefix}input :disabled='disabled'></${prefix}input>
+                        <${Input} :disabled='disabled'></${Input}>
                     </div>`,
                 data () {
                     return {
@@ -84,7 +85,7 @@ describe('Input', () => {
             vm = vm = createVue({
                 template: `
                     <div>
-                        <${prefix}input :readonly='readonly'></${prefix}input>
+                        <${Input} :readonly='readonly'></${Input}>
                     </div>`,
                 data () {
                     return {
@@ -109,9 +110,9 @@ describe('Input', () => {
             vm = createVue({
                 template: `
                     <div>
-                        <${prefix}input
+                        <${Input}
                         type='textarea'
-                        autosize='autosize'></${prefix}input>
+                        autosize='autosize'></${Input}>
                     </div>`,
                 data () {
                     return {
@@ -129,7 +130,7 @@ describe('Input', () => {
             vm = createVue({
                 template: `
                     <div>
-                        <${prefix}input :prefix='iconPrefix' icon='chaxun'></${prefix}input>
+                        <${Input} :prefix='iconPrefix' icon='chaxun'></${Input}>
                     </div>`,
                 data () {
                     return {
@@ -146,7 +147,7 @@ describe('Input', () => {
             vm = createVue({
                 template: `
                     <div>
-                        <${prefix}input :clearable='clearable' v-model='value'></${prefix}input>
+                        <${Input} :clearable='clearable' v-model='value'></${Input}>
                     </div>`,
                 data () {
                     return {
@@ -173,7 +174,7 @@ describe('Input', () => {
             vm = createVue({
                 template: `
                     <div>
-                        <${prefix}input :error='error'></${prefix}input>
+                        <${Input} :error='error'></${Input}>
                     </div>`,
                 data () {
                     return {
