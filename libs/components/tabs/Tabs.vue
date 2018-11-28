@@ -98,7 +98,6 @@ export default {
                     if (!this.currentValue) this.currentValue = pane.name || index
                 }
             })
-            console.log(this.navList)
             this.updateStatus()
             // this.updateBar();
         },

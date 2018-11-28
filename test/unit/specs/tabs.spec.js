@@ -1,4 +1,3 @@
-import {Tabs, TabsPanel} from '&/components/tabs'
 import { createTest, createVue, destroyVM } from '../utils'
 import {prefix} from '&/utils/common'
 const prefixCls = `${prefix}tabs`
@@ -23,27 +22,22 @@ describe('Tabs.vue', () => {
     //     expect(Elm.children[0].children[0].disabled).to.be.false
     // })
     it('disabled', () => {
-        vm = createVue(TabsPanel, {
-            disabled:false,
-            navList:[{closable: null,
-                disabled: false,
-                icon: "",
-                label: "标签一",
-                name: "0"},{closable: null,
-                disabled: false,
-                icon: "",
-                label: "标签二",
-                name: "1"}]
-        },true)
+        vm = createVue({
+            template: `
+            <tabs value ="0">
+                <tab-panel label="标签一" name="0">
+                    标签一
+                </tab-panel>
+                <tab-panel label="标签二" name="1" disabled>
+                    标签二
+                </tab-panel>
+            </tabs>
+            `
+        }, true)
         let Elm = vm.$el
-        console.log(Elm)
-        console.log(Elm.children[0])
-        console.log(Elm.children[0].children)
-        // expect(Elm.querySelector(`${prefixCls}`)).to.exist
-        // expect(Elm.classList.contains(`${prefixCls}`)).to.be.true
-        expect(Elm.children.classList.contains(`${prefixCls}-disabled`)).to.be.false
+        expect(Elm.querySelector(`${prefixCls}-disabled`)).to.not.exist
+        expect(Elm.querySelector(`${prefixCls}-bar`)).to.not.exist
     })
-    
     // it('type', () => {
     //     vm = createTest(Tabs, {
     //         type:"line"
