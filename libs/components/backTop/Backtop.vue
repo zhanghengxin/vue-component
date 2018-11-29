@@ -3,9 +3,11 @@
 </template>
 
 <script>
-const prefixCls = 'b-back-top' // 防止与别人发生冲突
+import { prefix } from '../../utils/common'
+
+const prefixCls = prefix + 'back-top' // 防止与别人发生冲突
 export default {
-    name: 'Backtop',
+    name: prefixCls,
     props: {
         show: {
             type: Boolean,
@@ -86,6 +88,7 @@ export default {
                 }
                 window.requestAnimationFrame(() => scroll(d, end, step))
             }
+
             scroll(from, to, step)
         }
     },
