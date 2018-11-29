@@ -82,7 +82,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value1" size="large" placeholder="large" ></b-input>
+            <b-input v-model="value1" size="large" @on-change='changemal' placeholder="large" ></b-input>
             <b-input v-model="value2" size="normal" placeholder="normal" ></b-input>
             <b-input v-model="value3" size="small" placeholder="small" ></b-input>
         </div>
@@ -314,7 +314,7 @@ label文字大小可根据input的size变化<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value11"  type="textarea" :autosize='autosize'></b-input>
+            <b-input v-model="value11"  type="textarea" :error='error' :autosize='autosize'></b-input>
             <b-input v-model="value12"  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
         </div>
     </div>
@@ -324,7 +324,7 @@ label文字大小可根据input的size变化<br/>
 ```html
 
     <template>
-        <b-input v-model="value11"  type="textarea" :autosize='autosize'></b-input>
+        <b-input v-model="value11"  type="textarea" :error='error' :autosize='autosize'></b-input>
         <b-input v-model="value12"  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
     </template>
     <script>
