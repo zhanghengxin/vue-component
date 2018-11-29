@@ -31,6 +31,9 @@ import RadioGroup from './components/radioGroup'
 import Form from './components/form'
 import Tag from './components/Tag'
 import Progress from './components/Progress'
+import DatePicker from './components/date-picker'
+import TimePicker from './components/time-picker'
+import DateTimePicker from './components/datetime-picker'
 
 const components = [
     Input,
@@ -63,7 +66,10 @@ const components = [
     Form,
     Form.FormItem,
     Switch,
-    Progress
+    Progress,
+    DatePicker,
+    TimePicker,
+    DateTimePicker
 ]
 
 const install = function (Vue) {
