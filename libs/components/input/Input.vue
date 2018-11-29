@@ -1,52 +1,121 @@
 /**
-* input 组件
-* author ganbowen
-* created 2018/09/18 20:05:54
-*/
+ * input 组件
+ * @author ganbowen
+ * @created 2018/09/18 20:05:54
+ */
 <template>
-    <div class='b-input-box' :class="{'b-input-group':labelText,'b-input-error':error}">
-        <div v-if="labelText" class="b-input-label">{{labelText}}</div>
-        <i class="b-icon" :class="['']" v-if="false" @click="handleClear"></i>
-        <i class="b-icon" :class="['']" v-else-if="false" @click="handleIconClick"></i>
-        <i class="b-icon" :class="['']" v-else-if="false" @click="handleSearch"></i>
-        <input
-            class="b-input"
-            :class="['b-input-'+size]"
+    <div :class="boxClasses">
+        <template v-if="type !== 'textarea'">
+            <b-icon
+                v-if="prefix"
+                size
+                :type="icon"
+                :class="[
+                prefixCls+`-icon`,
+                prefixCls+`-icon-`+size,
+                prefixCls+`-icon-prefix`]"
+                @on-click="handleIconClick">
+            </b-icon>
+            <b-icon
+                v-if="suffix"
+                size
+                :type="icon"
+                :class="[
+                prefixCls+`-icon`,
+                prefixCls+`-icon-`+size,
+                prefixCls+`-icon-suffix`]"
+                @on-click="handleIconClick">
+            </b-icon>
+            <b-icon
+                v-if="clearable && currentValue"
+                size
+                type="yidongduan_conclose"
+                :class="[
+                prefixCls+`-icon`,
+                prefixCls+`-icon-`+size,
+                prefixCls+`-icon-suffix`,
+                prefixCls+`-icon-clear`]"
+                @on-click="handleClear">
+            </b-icon>
+            <label
+                :class="labelClasses"
+                :style='labelStyles'
+                v-if="label || $slots.label">
+                <slot name="label">{{label}}</slot>
+            </label>
+            <input
+                :id="elementId"
+                :class="inputClasses"
+                :spellcheck="spellcheck"
+                ref="input"
+                :value="currentValue"
+                :name="name"
+                :placeholder="placeholder"
+                :disabled="disabled"
+                :maxlength="maxlength"
+                :minlength="minlength"
+                :readonly="readonly"
+                :autofocus="autofocus"
+                :type="type"
+                @change="handleChange"
+                @input="handleInput"
+                @focus="handleFocus"
+                @blur="handleBlur"
+                @keyup="handleKeyup"
+                @keydown="handleKeydown"/>
+        </template>
+        <textarea
+            v-else
+            :id="elementId"
+            :class="textareaClasses"
+            :style="textareaStyles"
+            :spellcheck="spellcheck"
+            ref="textarea"
             :value="currentValue"
+            :name="name"
             :placeholder="placeholder"
             :disabled="disabled"
             :maxlength="maxlength"
             :minlength="minlength"
+            :readonly="readonly"
             :autofocus="autofocus"
+            :rows="rows"
+            :wrap="wrap"
+            :autosize="autosize"
             :type="type"
             @change="handleChange"
             @input="handleInput"
             @focus="handleFocus"
             @blur="handleBlur"
             @keyup="handleKeyup"
-            @keydown="handleKeydown"/>
+            @keydown="handleKeydown">
+        </textarea>
     </div>
 </template>
 
 <script>
-import { prefix } from '../../utils/common'
+import calcTextareaHeight from './calcTeatareaHeight.js'
 import { findComponentUpward } from '../../utils/assist'
+import { prefix } from '../../utils/common'
 import Emitter from '../../mixins/emitter'
 
-const prefixCls = prefix + 'input'
+const prefixCls = prefix + 'input' // b-input
+
 export default {
     name: prefixCls,
     mixins: [Emitter],
     props: {
-        /* 控制input的自带属性 */
-        // 接收input的value
+        // 接收input的自带属性
+        elementId: {
+            type: String
+        },
         value: {
             type: [String, Number],
             default: ''
         },
         type: {
             validator (value) {
-                return ['text', 'password', 'url', 'email', 'textarea'].indexOf(value) !== -1
+                return ['text', 'textarea', 'password', 'url', 'email'].indexOf(value) !== -1
             },
             default: 'text'
         },
@@ -75,15 +144,14 @@ export default {
             type: Boolean,
             default: false
         },
-        labelText: {
-            type: String
+        spellcheck: {
+            type: Boolean,
+            default: false
         },
-        /* 控制样式 */
-        // normal small large
+        // 样式属性
         size: {
             default: 'normal',
             validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
                 return ['large', 'small', 'normal'].indexOf(value) !== -1
             }
         },
@@ -91,26 +159,115 @@ export default {
             type: Boolean,
             default: false
         },
+        clearable: {
+            type: Boolean,
+            default: false
+        },
+        label: {
+            type: String
+        },
+        // 定长包裹着input的样式 true input前只有文字的样式 false
+        fixed: {
+            type: Boolean,
+            default: false
+        },
+        labelWidth: {
+            type: Number,
+            default: 36
+        },
+        // icon属性
         icon: {
             type: String,
             default: ''
+        },
+        prefix: {
+            type: Boolean,
+            default: false
+        },
+        suffix: {
+            type: Boolean,
+            default: false
+        },
+        // textarea
+        rows: {
+            type: Number,
+            default: 2
+        },
+        autosize: {
+            type: [Boolean, Object],
+            default: false
+        },
+        wrap: {
+            validator (value) {
+                return function (value) {
+                    return ['hard', 'soft'].indexOf(value) !== -1
+                }
+            },
+            default: 'soft'
         }
-
     },
     data () {
         return {
-            currentValue: this.value
+            currentValue: this.value,
+            prefixCls: prefixCls,
+            textareaStyles: {},
+            labelFocus: false
         }
     },
-    computed: {},
+    computed: {
+        boxClasses () {
+            return [
+                `${prefixCls}-box`,
+                {
+                    [`${prefixCls}-error`]: this.error,
+                    [`${prefixCls}-group`]: this.label && this.fixed,
+                    'focus': this.label && this.labelFocus && this.fixed
+                }
+            ]
+        },
+        inputClasses () {
+            return [
+                `${prefixCls}`,
+                `${prefixCls}-${this.size}`,
+                {
+                    [`${prefixCls}-prefix`]: this.prefix,
+                    [`${prefixCls}-suffix`]: this.suffix,
+                    [`${prefixCls}-nobox`]: this.label && !this.fixed
+                }
+            ]
+        },
+        labelClasses () {
+            return [
+                prefixCls + `-label`,
+                prefixCls + `-label-` + this.size,
+                {
+                    [prefixCls + `-label-box`]: this.fixed
+                }
+            ]
+        },
+        textareaClasses () {
+            return [
+                `${prefixCls}`
+            ]
+        },
+        labelStyles () {
+            return [
+                {
+                    [`width: ${this.labelWidth}px`]: !this.fixed
+                }
+            ]
+        }
+    },
     methods: {
         handleChange (event) {
             this.$emit('on-change', event)
         },
         handleFocus (event) {
+            this.labelFocus = true
             this.$emit('on-focus', event)
         },
         handleBlur (event) {
+            this.labelFocus = false
             this.$emit('on-blur', event)
             if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
                 this.dispatch(prefix + 'form-item', 'on-form-blur', this.currentValue)
@@ -124,16 +281,52 @@ export default {
         },
         handleInput (event) {
             let value = event.target.value
-            // if (this.number && value !== '') value = Number.isNaN(Number(value)) ? value : Number(value)
             this.$emit('input', value)
             this.setCurrentValue(value)
             this.$emit('on-change', event)
         },
         setCurrentValue (value) {
             if (value === this.currentValue) return
+            this.$nextTick(() => {
+                this.resizeTextarea()
+            })
             this.currentValue = value
-            if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
-                this.dispatch(prefix + 'form-item', 'on-form-change', this.currentValue)
+        },
+        resizeTextarea () {
+            const autosize = this.autosize
+            if (!autosize || this.type !== 'textarea') {
+                return false
+            }
+            const minRows = autosize.minRows
+            const maxRows = autosize.maxRows
+            this.textareaStyles = calcTextareaHeight(this.$refs.textarea, minRows, maxRows)
+        },
+        handleIconClick (e) {
+            this.$emit('on-click', e)
+        },
+        handleClear () {
+            const e = { target: { value: '' } }
+            this.$emit('input', '')
+            this.setCurrentValue('')
+            this.$emit('on-change', e)
+        },
+        focus () {
+            if (this.type === 'textarea') {
+                this.$refs.textarea.focus()
+            } else {
+                this.labelFocus = true
+                this.$refs.input.focus()
+            }
+        },
+        blur () {
+            if (this.type === 'textarea') {
+                this.$refs.textarea.blur()
+            } else {
+                this.labelFocus = false
+                this.$refs.input.blur()
+                if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
+                    this.dispatch(prefix + 'form-item', 'on-form-change', this.currentValue)
+                }
             }
         }
     },
@@ -141,6 +334,9 @@ export default {
         value (val) {
             this.setCurrentValue(val)
         }
+    },
+    mounted () {
+        this.resizeTextarea()
     }
 }
 

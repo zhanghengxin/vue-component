@@ -31,24 +31,23 @@ describe('Icon.vue', () => {
         }, true)
         let Elm = vm.$el
         expect(Elm.style.color).to.equal('red')
-    
     })
-    it('click', done => {
-        let result
-        vm = createVue({
-            template: `
-        <b-icon @on-click="handleClick"></b-icon>
-      `,
-            methods: {
-                handleClick (evt) {
-                    result = evt
-                }
-            }
-        }, true)
-        vm.$el.click()
-        setTimeout(_ => {
-            expect(result).to.exist
-            done()
-        }, 20)
-    })
+    // it('click', done => {
+    //     let result
+    //     vm = createVue({
+    //         template: `
+    //     <b-icon @on-click="handleClick"></b-icon>
+    //   `,
+    //         methods: {
+    //             handleClick (evt) {
+    //                 result = evt
+    //             }
+    //         }
+    //     }, true)
+    //     vm.$el.click()
+    //     setTimeout(_ => {
+    //         expect(result).to.exist
+    //         done()
+    //     }, 20)
+    // })
 })
