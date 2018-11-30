@@ -1,16 +1,33 @@
-
-.b-carousel {
+$css-prefix-carousel: $css-prefix + 'carousel';
+.#{$css-prefix-carousel} {
   position: relative;
   background: $Disabled;
   overflow: hidden;
-  .b-carousel-wrapper {
+  .#{$css-prefix-carousel}-wrapper {
     overflow: hidden;
     position: relative;
-    .b-carousel-slide {
+    .#{$css-prefix-carousel}-fade {
       overflow: hidden;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .#{$css-prefix-carousel}-slide {
+      overflow: hidden;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      visibility: hidden;
+      overflow: hidden;
+      z-index: 0;
+      &.is-active {
+        z-index: 2;
+        visibility: visible;
+      }
     }
   }
-  .b-carousel-control {
+  .#{$css-prefix-carousel}-control {
     z-index: 80;
     text-align: center;
     position: absolute;
@@ -31,7 +48,7 @@
       }
     }
   }
-  .b-carousel-direction {
+  .#{$css-prefix-carousel}-direction {
     z-index: 80;
     position: absolute;
     left: 0;
@@ -50,11 +67,11 @@
       border-top-color: $SubContent;
       border-right-color: $SubContent;
       list-style: none;
-      &.b-carousel-prev {
+      &.#{$css-prefix-carousel}-prev {
         left: 4%;
         transform: rotate(-135deg);
       }
-      &.b-carousel-next {
+      &.#{$css-prefix-carousel}-next {
         right: 4%;
         transform: rotate(45deg);
       }
