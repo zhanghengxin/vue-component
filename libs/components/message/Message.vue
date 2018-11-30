@@ -18,7 +18,7 @@
                     :class="[prefixCls+'-img',fsColor]"
                     :type="imgSrc">
                 </b-icon>
-                {{message}}
+                <span :class="[prefixCls+'-content']">{{message}}</span>
                 <button
                     v-if="showClose"
                     :class="[prefixCls+'-close']"

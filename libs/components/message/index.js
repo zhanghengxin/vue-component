@@ -12,7 +12,6 @@ let count = 1
 let msgCon = null
 
 function Message (options) {
-    // console.log(options)
     let close = options.onClose
 
     if (!msgCon) {
