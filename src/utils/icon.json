@@ -1,627 +1,303 @@
 [
   {
-    "name": "发票生成",
-    "className": "fapiaoshengcheng"
+    "name": "NO",
+    "className": "NO"
   },
   {
-    "name": "匹配信息",
-    "className": "pipeixinxi"
+    "name": "风险中心",
+    "className": "fengxianzhongxin"
   },
   {
-    "name": "签收信息",
-    "className": "qianshouxinxi"
+    "name": "数据看版",
+    "className": "shujukanban"
   },
   {
-    "name": "物流信息",
-    "className": "wuliuxinxi"
+    "name": "影像管理",
+    "className": "yingxiangguanli"
   },
   {
-    "name": "查验",
-    "className": "chayan"
+    "name": "左2",
+    "className": "zuo1"
   },
   {
-    "name": "认证",
-    "className": "renzheng"
+    "name": "右2",
+    "className": "you1"
   },
   {
-    "name": "保存",
-    "className": "baocun"
+    "name": "打回",
+    "className": "dahui"
   },
   {
-    "name": "解绑开票员",
-    "className": "jiebangkaipiaoyuan"
+    "name": "交易",
+    "className": "jiaoyi"
   },
   {
-    "name": "分配开票员",
-    "className": "fenpeikaipiaoyuan"
+    "name": "电票",
+    "className": "dianpiao"
   },
   {
-    "name": "创建用户",
-    "className": "chuangjianyonghu"
+    "name": "卷式",
+    "className": "juanshi"
   },
   {
-    "name": "导出客户信息",
-    "className": "daochukehuxinxi"
+    "name": "普票",
+    "className": "pupiao"
   },
   {
-    "name": "编辑",
-    "className": "bianji"
+    "name": "货运",
+    "className": "huoyun"
   },
   {
-    "name": "导入客户信息",
-    "className": "daorukehuxinxi"
+    "name": "机动车",
+    "className": "jidongche"
   },
   {
-    "name": "提交开票申请单",
-    "className": "tijiaokaipiaoshenqingdan"
+    "name": "专票",
+    "className": "zhuanpiao"
   },
   {
-    "name": "拆分",
-    "className": "chaifen"
+    "name": "附件",
+    "className": "fujian"
   },
   {
-    "name": "读取税控盘",
-    "className": "duqushuikongpan"
+    "name": "解锁-解冻",
+    "className": "jiesuo-jiedong"
   },
   {
-    "name": "生成待开",
-    "className": "shengchengdaikai"
+    "name": "锁定-冻结",
+    "className": "suoding-dongjie"
   },
   {
-    "name": "合并",
-    "className": "hebing"
+    "name": "右三角",
+    "className": "yousanjiao"
   },
   {
-    "name": "导出excel文件",
-    "className": "daochuexcelwenjian"
-  },
-  {
-    "name": "返回上一页",
-    "className": "fanhuishangyiye"
-  },
-  {
-    "name": "添加客户",
-    "className": "tianjiakehu"
-  },
-  {
-    "name": "导出短信记录",
-    "className": "daochuduanxinjilu"
-  },
-  {
-    "name": "导出明细",
-    "className": "daochumingxi"
-  },
-  {
-    "name": "导出主信息",
-    "className": "daochuzhuxinxi"
-  },
-  {
-    "name": "导出word文档",
-    "className": "daochuwordwendang"
-  },
-  {
-    "name": "打印",
-    "className": "dayin"
+    "name": "左转",
+    "className": "zuozhuan"
   },
   {
     "name": "作废",
     "className": "zuofei"
   },
   {
-    "name": "认证信息",
-    "className": "renzhengxinxi"
+    "name": "左",
+    "className": "zuo"
   },
   {
-    "name": "监控信息反写",
-    "className": "jiankongxinxifanxie"
+    "name": "左三角",
+    "className": "zuosanjiao"
   },
   {
-    "name": "网上报税",
-    "className": "wangshangbaoshui"
-  },
-  {
-    "name": "查看监控信息",
-    "className": "chakanjiankongxinxi"
-  },
-  {
-    "name": "当前票号",
-    "className": "dangqianpiaohao"
-  },
-  {
-    "name": "请求流水号",
-    "className": "qingqiuliushuihao"
-  },
-  {
-    "name": "发票抬头",
-    "className": "fapiaotaitou"
-  },
-  {
-    "name": "扫码",
-    "className": "saoma"
-  },
-  {
-    "name": "获取当前号码",
-    "className": "huoqudangqianhaoma"
-  },
-  {
-    "name": "页边距设置",
-    "className": "yebianjushezhi"
-  },
-  {
-    "name": "开具",
-    "className": "kaiju"
-  },
-  {
-    "name": "领购",
-    "className": "linggou"
-  },
-  {
-    "name": "暂存",
-    "className": "zancun"
-  },
-  {
-    "name": "分发",
-    "className": "fenfa"
-  },
-  {
-    "name": "确定",
-    "className": "queding"
-  },
-  {
-    "name": "取消",
-    "className": "quxiao"
-  },
-  {
-    "name": "下一步",
-    "className": "xiayibu"
-  },
-  {
-    "name": "跳过",
-    "className": "tiaoguo"
-  },
-  {
-    "name": "上一步",
-    "className": "shangyibu"
-  },
-  {
-    "name": "下载",
-    "className": "xiazai"
-  },
-  {
-    "name": "检测税控信息",
-    "className": "jianceshuikongxinxi"
-  },
-  {
-    "name": "查看详情",
-    "className": "chakanxiangqing"
-  },
-  {
-    "name": "风险管理",
-    "className": "fengxianguanli"
-  },
-  {
-    "name": "立即进入",
-    "className": "lijijinru"
-  },
-  {
-    "name": "税控设备管理",
-    "className": "shuikongshebeiguanli"
-  },
-  {
-    "name": "权限管理",
-    "className": "quanxianguanli"
-  },
-  {
-    "name": "客户管理",
-    "className": "kehuguanli"
-  },
-  {
-    "name": "签章工单",
-    "className": "qianzhanggongdan"
-  },
-  {
-    "name": "商品管理",
-    "className": "shangpinguanli"
+    "name": "转入",
+    "className": "zhuanru"
   },
   {
     "name": "注册码工具",
     "className": "zhucemagongju"
   },
   {
-    "name": "查询",
-    "className": "chaxun"
+    "name": "在线客服",
+    "className": "zaixiankefu"
   },
   {
-    "name": "异常发票认证",
-    "className": "yichangfapiaorenzheng"
+    "name": "转出",
+    "className": "zhuanchu"
   },
   {
-    "name": "未认证发票预警",
-    "className": "weirenzhengfapiaoyujing"
+    "name": "右转",
+    "className": "youzhuan"
   },
   {
-    "name": "开票申请",
-    "className": "kaipiaoshenqing"
+    "name": "右",
+    "className": "you"
   },
   {
-    "name": "流水单管理",
-    "className": "liushuidanguanli"
+    "name": "异常发票",
+    "className": "yichangfapiao"
   },
   {
-    "name": "认证结果查询",
-    "className": "renzhengjieguochaxun"
+    "name": "用户-客户",
+    "className": "yonghu-kehu"
   },
   {
-    "name": "勾选认证",
-    "className": "gouxuanrenzheng"
+    "name": "下载",
+    "className": "xiazai"
   },
   {
-    "name": "扫码认证",
-    "className": "saomarenzheng"
+    "name": "异常",
+    "className": "yichang"
   },
   {
-    "name": "待开发票管理",
-    "className": "daikaifapiaoguanli"
+    "name": "信息-一般",
+    "className": "xinxi-yiban"
   },
   {
-    "name": "发票查询",
-    "className": "fapiaochaxun"
+    "name": "异常-面",
+    "className": "yichang-mian"
   },
   {
-    "name": "红字信息表管理",
-    "className": "hongzixinxibiaoguanli"
+    "name": "信息-一般-面",
+    "className": "xinxi-yiban-mian"
   },
   {
-    "name": "合规查验",
-    "className": "heguichayan"
+    "name": "下一步",
+    "className": "xiayibu"
   },
   {
-    "name": "数据处理",
-    "className": "shujuchuli"
+    "name": "下三角",
+    "className": "xiasanjiao"
   },
   {
-    "name": "发票查验",
-    "className": "fapiaochayan"
+    "name": "物流",
+    "className": "wuliu"
   },
   {
-    "name": "查询统计",
-    "className": "chaxuntongji"
+    "name": "图片",
+    "className": "tupian"
   },
   {
-    "name": "抄报税管理",
-    "className": "chaobaoshuiguanli"
+    "name": "下",
+    "className": "xia"
   },
   {
-    "name": "首页",
-    "className": "shouye"
+    "name": "网上报税",
+    "className": "wangshangbaoshui"
   },
   {
-    "name": "发票流转",
-    "className": "fapiaoliuzhuan"
+    "name": "退出",
+    "className": "tuichu"
   },
   {
-    "name": "发票开具",
-    "className": "fapiaokaiju"
+    "name": "问题反馈",
+    "className": "wentifankui"
   },
   {
-    "name": "发票icon",
-    "className": "shuikongshangpinbianmatongbu"
-  },
-  {
-    "name": "同步验签状态",
+    "name": "同步",
     "className": "tongbu"
   },
   {
-    "name": "移动端_con:我的资料",
-    "className": "yidongduan_conwodeziliao"
+    "name": "跳过",
+    "className": "tiaoguo"
   },
   {
-    "name": "移动端_tabbar:审批",
-    "className": "yidongduan_tabbarshenpi"
+    "name": "缩小",
+    "className": "suoxiao"
   },
   {
-    "name": "移动端_tabbar:认证",
-    "className": "yidongduan_tabbarrenzheng"
+    "name": "抬头",
+    "className": "taitou"
   },
   {
-    "name": "移动端_tabbar:待开",
-    "className": "yidongduan_tabbardaikai"
+    "name": "添加-创建",
+    "className": "tianjia-chuangjian"
   },
   {
-    "name": "移动端_tabbar:开票",
-    "className": "yidongduan_tabbarkaipiao"
+    "name": "提交",
+    "className": "tijiao"
   },
   {
-    "name": "移动端_con:打印",
-    "className": "yidongduan_condayin"
+    "name": "数据-统计",
+    "className": "shuju-tongji"
   },
   {
-    "name": "移动端_con:签收",
-    "className": "yidongduan_conqianshou"
+    "name": "失败",
+    "className": "shibai"
   },
   {
-    "name": "移动端_nav:cutover",
-    "className": "yidongduan_navcutover"
+    "name": "生成",
+    "className": "shengcheng"
   },
   {
-    "name": "移动端_nav:qr code",
-    "className": "yidongduan_navqrcode"
+    "name": "失败-面",
+    "className": "shibai-mian"
   },
   {
-    "name": "移动端_nav:preview",
-    "className": "yidongduan_navpreview"
+    "name": "申请",
+    "className": "shenqing"
   },
   {
-    "name": "移动端_image-开票",
-    "className": "yidongduan_image-kaipiao"
+    "name": "审批",
+    "className": "shenpi"
   },
   {
-    "name": "移动端_image-收票",
-    "className": "yidongduan_image-shoupiao"
+    "name": "设置",
+    "className": "shezhi"
   },
   {
-    "name": "移动端_con:进入官网",
-    "className": "yidongduan_conjinruguanwang"
+    "name": "设备",
+    "className": "shebei"
   },
   {
-    "name": "移动端_tabbar:我的",
-    "className": "yidongduan_tabbarwode"
+    "name": "商品",
+    "className": "shangpin"
   },
   {
-    "name": "移动端_con:企业名片",
-    "className": "yidongduan_conqiyemingpian"
+    "name": "上传",
+    "className": "shangchuan"
   },
   {
-    "name": "移动端_con:口令修改",
-    "className": "yidongduan_conkoulingxiugai"
+    "name": "上一步-返回",
+    "className": "shangyibu-fanhui"
   },
   {
-    "name": "移动端_image-查询失败",
-    "className": "yidongduan_image-chaxunshibai"
+    "name": "上三角",
+    "className": "shangsanjiao"
   },
   {
-    "name": "移动端_con:使用帮助",
-    "className": "yidongduan_conshiyongbangzhu"
+    "name": "扫码",
+    "className": "saoma"
   },
   {
-    "name": "移动端_con:版本升级",
-    "className": "yidongduan_conbanbenshengji"
+    "name": "上",
+    "className": "shang"
   },
   {
-    "name": "移动端_tabbar:收票",
-    "className": "yidongduan_tabbarshoupiao"
+    "name": "权限",
+    "className": "quanxian"
   },
   {
-    "name": "移动端_tabbar:票夹",
-    "className": "yidongduan_tabbarpiaojia"
+    "name": "日历",
+    "className": "rili"
   },
   {
-    "name": "移动端_tabbar:套餐",
-    "className": "yidongduan_tabbartaocan"
+    "name": "认证",
+    "className": "renzheng"
   },
   {
-    "name": "移动端_image:暂无内容",
-    "className": "yidongduan_imagezanwuneirong"
+    "name": "取消-关闭-删除",
+    "className": "quxiao-guanbi-shanchu"
   },
   {
-    "name": "移动端_tabbar:查验",
-    "className": "yidongduan_tabbarchayan"
+    "name": "确定",
+    "className": "queding"
   },
   {
-    "name": "移动端_con:公司资料",
-    "className": "yidongduan_congongsiziliao"
+    "name": "全选",
+    "className": "quanxuan"
   },
   {
-    "name": "移动端_tabbar:监控",
-    "className": "yidongduan_tabbarjiankong"
+    "name": "票号",
+    "className": "piaohao"
   },
   {
-    "name": "移动端_tabbar:工作台",
-    "className": "yidongduan_tabbargongzuotai"
+    "name": "签章",
+    "className": "qianzhang"
   },
   {
-    "name": "移动端_tabbar:消息",
-    "className": "yidongduan_tabbarxiaoxi"
+    "name": "签收",
+    "className": "qianshou"
   },
   {
-    "name": "移动端_tabbar:查询",
-    "className": "yidongduan_tabbarchaxun"
+    "name": "请求",
+    "className": "qingqiu"
   },
   {
-    "name": "移动端_label:红冲",
-    "className": "yidongduan_labelhongchong"
+    "name": "切换",
+    "className": "qiehuan"
   },
   {
-    "name": "移动端_label:作废",
-    "className": "yidongduan_labelzuofei"
-  },
-  {
-    "name": "移动端_label:异常",
-    "className": "yidongduan_labelyichang"
-  },
-  {
-    "name": "移动端_label:失控",
-    "className": "yidongduan_labelshikong"
-  },
-  {
-    "name": "移动端_label:无此信息",
-    "className": "yidongduan_labelwucixinxi"
-  },
-  {
-    "name": "移动端_label:自",
-    "className": "yidongduan_labelzi"
-  },
-  {
-    "name": "移动端_label:手",
-    "className": "yidongduan_labelshou"
-  },
-  {
-    "name": "移动端_label:拍",
-    "className": "yidongduan_labelpai"
-  },
-  {
-    "name": "移动端_label:验真",
-    "className": "yidongduan_labelyanzhen"
-  },
-  {
-    "name": "移动端_label:分",
-    "className": "yidongduan_labelfen"
-  },
-  {
-    "name": "移动端_label:负",
-    "className": "yidongduan_labelfu"
-  },
-  {
-    "name": "移动端_abel:红",
-    "className": "yidongduan_abelhong"
-  },
-  {
-    "name": "移动端_label:正",
-    "className": "yidongduan_labelzheng"
-  },
-  {
-    "name": "移动端_label:扫",
-    "className": "yidongduan_labelsao"
-  },
-  {
-    "name": "移动端_label:废",
-    "className": "yidongduan_labelfei"
-  },
-  {
-    "name": "移动端_label:章",
-    "className": "yidongduan_labelzhang"
-  },
-  {
-    "name": "移动端_label:签",
-    "className": "yidongduan_labelqian"
-  },
-  {
-    "name": "移动端_label:真",
-    "className": "yidongduan_labelzhen"
-  },
-  {
-    "name": "移动端_con:重新发送",
-    "className": "yidongduan_conzhongxinfasong"
-  },
-  {
-    "name": "移动端_con:重新打印",
-    "className": "yidongduan_conzhongxindayin"
-  },
-  {
-    "name": "移动端_con:红冲",
-    "className": "yidongduan_conhongchong"
-  },
-  {
-    "name": "移动端_con:作废",
-    "className": "yidongduan_conzuofei"
-  },
-  {
-    "name": "移动端_con:hide",
-    "className": "yidongduan_conhide"
-  },
-  {
-    "name": "移动端_con:修改",
-    "className": "yidongduan_conxiugai"
-  },
-  {
-    "name": "移动端_con:display",
-    "className": "yidongduan_condisplay"
-  },
-  {
-    "name": "移动端_con:查验",
-    "className": "yidongduan_conchayan"
-  },
-  {
-    "name": "移动端_con:dislike",
-    "className": "yidongduan_condislike"
-  },
-  {
-    "name": "移动端_con:like",
-    "className": "yidongduan_conlike"
-  },
-  {
-    "name": "移动端_con:close",
-    "className": "yidongduan_conclose"
-  },
-  {
-    "name": "移动端_con:lightning",
-    "className": "yidongduan_conlightning"
-  },
-  {
-    "name": "移动端_con:details",
-    "className": "yidongduan_condetails"
-  },
-  {
-    "name": "移动端_con:arrow-r",
-    "className": "yidongduan_conarrow-r"
-  },
-  {
-    "name": "移动端_con:delete",
-    "className": "yidongduan_condelete"
-  },
-  {
-    "name": "移动端_con:unselected:s",
-    "className": "yidongduan_conunselecteds"
-  },
-  {
-    "name": "移动端_con:must",
-    "className": "yidongduan_conmust"
-  },
-  {
-    "name": "移动端_nav:more",
-    "className": "yidongduan_navmore"
-  },
-  {
-    "name": "移动端_nav:history",
-    "className": "yidongduan_navhistory"
-  },
-  {
-    "name": "移动端_nav_id card",
-    "className": "yidongduan_nav_idcard"
-  },
-  {
-    "name": "移动端_nav:camera",
-    "className": "yidongduan_navcamera"
-  },
-  {
-    "name": "移动端_nav:back",
-    "className": "yidongduan_navback"
-  },
-  {
-    "name": "移动端_nav:close",
-    "className": "yidongduan_navclose"
-  },
-  {
-    "name": "移动端_nav:help",
-    "className": "yidongduan_navhelp"
-  },
-  {
-    "name": "商品黑名单",
-    "className": "shangpinheimingdan"
-  },
-  {
-    "name": "企业黑名单",
-    "className": "qiyeheimingdan"
-  },
-  {
-    "name": "查看基本信息",
-    "className": "chakanjibenxinxi"
-  },
-  {
-    "name": "导入编码",
-    "className": "daorubianma"
-  },
-  {
-    "name": "导入excel信息",
-    "className": "daoruexcelxinxi"
-  },
-  {
-    "name": "初始化",
-    "className": "chushihua"
-  },
-  {
-    "name": "导出配置",
-    "className": "daochupeizhi"
+    "name": "匹配",
+    "className": "pipei"
   },
   {
     "name": "批量删除",
@@ -632,483 +308,287 @@
     "className": "pilianghuanyuan"
   },
   {
-    "name": "还原",
-    "className": "huanyuan"
-  },
-  {
-    "name": "全选",
-    "className": "quanxuan"
-  },
-  {
-    "name": "删除",
-    "className": "shanchu"
-  },
-  {
-    "name": "切换",
-    "className": "qiehuan"
-  },
-  {
-    "name": "同步",
-    "className": "tongbu1"
-  },
-  {
-    "name": "添加",
-    "className": "tianjia"
-  },
-  {
-    "name": "选择公司",
-    "className": "xuanzegongsi"
-  },
-  {
-    "name": "上拉",
-    "className": "shangla"
-  },
-  {
-    "name": "下拉",
-    "className": "xiala"
-  },
-  {
-    "name": "批量导出",
-    "className": "piliangdaochu"
+    "name": "批量确定",
+    "className": "piliangqueding"
   },
   {
     "name": "批量导入",
     "className": "piliangdaoru"
   },
   {
-    "name": "进项税额明细表",
-    "className": "jinxiangshuiemingxibiao"
+    "name": "某某单管理",
+    "className": "moumoudanguanli"
   },
   {
-    "name": "进项税额报表",
-    "className": "jinxiangshuiebaobiao"
-  },
-  {
-    "name": "参数设置",
-    "className": "canshushezhi"
-  },
-  {
-    "name": "绑定",
-    "className": "bangding"
-  },
-  {
-    "name": "导出",
-    "className": "daochu"
-  },
-  {
-    "name": "即将逾期发票",
-    "className": "jijiangyuqifapiao"
-  },
-  {
-    "name": "导入",
-    "className": "daoru"
-  },
-  {
-    "name": "非防伪税控发票",
-    "className": "feifangweishuikongfapiao"
-  },
-  {
-    "name": "解除绑定",
-    "className": "jiechubangding"
-  },
-  {
-    "name": "认证期锁定",
-    "className": "renzhengqisuoding"
-  },
-  {
-    "name": "转入",
-    "className": "zhuanru"
-  },
-  {
-    "name": "转出",
-    "className": "zhuanchu"
-  },
-  {
-    "name": "录入",
-    "className": "luru"
-  },
-  {
-    "name": "销项标签",
-    "className": "xiaoxiangbiaoqian"
-  },
-  {
-    "name": "进项标签",
-    "className": "jinxiangbiaoqian"
-  },
-  {
-    "name": "工单管理",
-    "className": "gongdanguanli1"
-  },
-  {
-    "name": "系统管理",
-    "className": "xitongguanli1"
-  },
-  {
-    "name": "云单据",
-    "className": "yundanju1"
-  },
-  {
-    "name": "帮助中心",
-    "className": "bangzhuzhongxin1"
-  },
-  {
-    "name": "云归集",
-    "className": "yunguiji1"
-  },
-  {
-    "name": "基础信息管理",
-    "className": "jichuxinxiguanli1"
-  },
-  {
-    "name": "云开票",
-    "className": "yunkaipiao1"
-  },
-  {
-    "name": "风险监控",
-    "className": "fengxianjiankong"
-  },
-  {
-    "name": "发票管理",
-    "className": "fapiaoguanli1"
-  },
-  {
-    "name": "报表管理",
-    "className": "baobiaoguanli"
-  },
-  {
-    "name": "企业管理",
-    "className": "qiyeguanli1"
-  },
-  {
-    "name": "进项",
-    "className": "jinxiang1"
-  },
-  {
-    "name": "销项",
-    "className": "xiaoxiang1"
-  },
-  {
-    "name": "云控制台",
-    "className": "yunkongzhitai1"
-  },
-  {
-    "name": "上三角",
-    "className": "shangsanjiao"
-  },
-  {
-    "name": "下三角",
-    "className": "xiasanjiao"
-  },
-  {
-    "name": "左拉",
-    "className": "zuola"
-  },
-  {
-    "name": "右拉",
-    "className": "youla"
-  },
-  {
-    "name": "失败",
-    "className": "shibai"
-  },
-  {
-    "name": "一般",
-    "className": "yiban"
-  },
-  {
-    "name": "成功",
-    "className": "chenggong"
-  },
-  {
-    "name": "异常",
-    "className": "yichang"
-  },
-  {
-    "name": "筛选",
-    "className": "shaixuan"
-  },
-  {
-    "name": "发票采集",
-    "className": "fapiaocaiji"
-  },
-  {
-    "name": "风险监控",
-    "className": "fengxianjiankong1"
-  },
-  {
-    "name": "发票管理",
-    "className": "fapiaoguanli"
-  },
-  {
-    "name": "验收单管理",
-    "className": "yanshoudanguanli"
-  },
-  {
-    "name": "异常",
-    "className": "yichang1"
-  },
-  {
-    "name": "成功",
-    "className": "chenggong1"
-  },
-  {
-    "name": "一般",
-    "className": "yiban1"
-  },
-  {
-    "name": "失败",
-    "className": "shibai1"
-  },
-  {
-    "name": "供应链协同",
-    "className": "gongyinglianxietong"
-  },
-  {
-    "name": "发送",
-    "className": "fasong"
+    "name": "批量导出",
+    "className": "piliangdaochu"
   },
   {
     "name": "批量打回",
     "className": "piliangdahui"
   },
   {
-    "name": "批量确定",
-    "className": "piliangqueding"
+    "name": "领购",
+    "className": "linggou"
   },
   {
-    "name": "智能赋码_gw",
-    "className": "zhinengfuma_gw"
+    "name": "开具",
+    "className": "kaiju"
   },
   {
-    "name": "助手_gw",
-    "className": "zhushou_gw"
+    "name": "解绑",
+    "className": "jiebang"
   },
   {
-    "name": "云打印_gw",
-    "className": "yundayin_gw"
+    "name": "明细",
+    "className": "mingxi"
   },
   {
-    "name": "销项发票_gw",
-    "className": "xiaoxiangfapiao_gw"
-  },
-  {
-    "name": "云抬头_gw",
-    "className": "yuntaitou_gw"
-  },
-  {
-    "name": "增值税发票_gw",
-    "className": "zengzhishuifapiao_gw"
-  },
-  {
-    "name": "魔盒_gw",
-    "className": "mohe_gw"
-  },
-  {
-    "name": "SIMkey_gw",
-    "className": "SIMkey_gw"
-  },
-  {
-    "name": "税控服务器_gw",
-    "className": "shuikongfuwuqi_gw"
-  },
-  {
-    "name": "抵扣_gw",
-    "className": "dikou_gw"
-  },
-  {
-    "name": "供应链_gw",
-    "className": "gongyinglian_gw"
-  },
-  {
-    "name": "OCR_gw",
-    "className": "OCR_gw"
-  },
-  {
-    "name": "进项发票_gw",
-    "className": "jinxiangfapiao_gw"
-  },
-  {
-    "name": "结算开票_gw",
-    "className": "jiesuankaipiao_gw"
-  },
-  {
-    "name": "打印_gw",
-    "className": "dayin_gw"
-  },
-  {
-    "name": "提取码开票_gw",
-    "className": "tiqumakaipiao_gw"
-  },
-  {
-    "name": "对接开票_gw",
-    "className": "duijiekaipiao_gw"
-  },
-  {
-    "name": "发票帮_gw",
-    "className": "fapiaobang_gw"
-  },
-  {
-    "name": "接入_gw",
-    "className": "jieru_gw"
-  },
-  {
-    "name": "多场景_gw",
-    "className": "duochangjing_gw"
-  },
-  {
-    "name": "提升_gw",
-    "className": "tisheng_gw"
-  },
-  {
-    "name": "点击_gw",
-    "className": "dianji_gw"
-  },
-  {
-    "name": "笑脸_gw",
-    "className": "xiaolian_gw"
-  },
-  {
-    "name": "平台_gw",
-    "className": "pingtai_gw"
-  },
-  {
-    "name": "高效_gw",
-    "className": "gaoxiao_gw"
-  },
-  {
-    "name": "出错_gw",
-    "className": "chucuo_gw"
-  },
-  {
-    "name": "差_gw",
-    "className": "cha_gw"
-  },
-  {
-    "name": "操作_gw",
-    "className": "caozuo_gw"
-  },
-  {
-    "name": "集中管理_gw",
-    "className": "jizhongguanli_gw"
-  },
-  {
-    "name": "排队_gw",
-    "className": "paidui_gw"
-  },
-  {
-    "name": "发票推送_gw",
-    "className": "fapiaotuisong_gw"
-  },
-  {
-    "name": "税务_gw",
-    "className": "shuiwu_gw"
-  },
-  {
-    "name": "数据重复_gw",
-    "className": "shujuzhongfu_gw"
-  },
-  {
-    "name": "多清单_gw",
-    "className": "duoqingdan_gw"
-  },
-  {
-    "name": "纸质发票_gw",
-    "className": "zhizhifapiao_gw"
-  },
-  {
-    "name": "折扣_gw",
-    "className": "zhekou_gw"
-  },
-  {
-    "name": "钱_gw",
-    "className": "qian_gw"
-  },
-  {
-    "name": "在线客服",
-    "className": "zaixiankefu"
+    "name": "进入",
+    "className": "jinru"
   },
   {
     "name": "建议反馈",
     "className": "jianyifankui"
   },
   {
-    "name": "问题反馈",
-    "className": "wentifankui"
+    "name": "检测",
+    "className": "jiance"
   },
   {
-    "name": "电商",
-    "className": "dianshang"
+    "name": "监控",
+    "className": "jiankong"
   },
   {
-    "name": "商超",
-    "className": "shangchao"
+    "name": "减号",
+    "className": "jianhao"
   },
   {
-    "name": "餐饮",
-    "className": "canyin"
+    "name": "监控信息反写",
+    "className": "jiankongxinxifanxie"
   },
   {
-    "name": "退出-1",
-    "className": "tuichu-"
+    "name": "即将逾期发票",
+    "className": "jijiangyuqifapiao"
   },
   {
-    "name": "箭头上",
-    "className": "jiantoushang"
+    "name": "加号",
+    "className": "jiahao"
   },
   {
-    "name": "箭头下",
-    "className": "jiantouxia"
+    "name": "红字信息",
+    "className": "hongzixinxi"
   },
   {
-    "name": "左转",
-    "className": "zuozhuan"
+    "name": "还原",
+    "className": "huanyuan"
   },
   {
-    "name": "右转",
-    "className": "youzhuan"
+    "name": "机构",
+    "className": "jigou"
   },
   {
-    "name": "缩小",
-    "className": "suoxiao"
+    "name": "黑名单",
+    "className": "heimingdan"
+  },
+  {
+    "name": "读取-获取",
+    "className": "duqu-huoqu"
+  },
+  {
+    "name": "合并",
+    "className": "hebing"
+  },
+  {
+    "name": "分发",
+    "className": "fenfa"
+  },
+  {
+    "name": "发票预警",
+    "className": "fapiaoyujing"
+  },
+  {
+    "name": "发送",
+    "className": "fasong"
+  },
+  {
+    "name": "非防伪税控发票",
+    "className": "feifangweishuikongfapiao"
   },
   {
     "name": "放大",
     "className": "fangda"
   },
   {
-    "name": "机构管理",
-    "className": "jigouguanli"
+    "name": "发票流转",
+    "className": "fapiaoliuzhuan"
+  },
+  {
+    "name": "导入",
+    "className": "daoru"
+  },
+  {
+    "name": "待开",
+    "className": "daikai"
+  },
+  {
+    "name": "初始化",
+    "className": "chushihua"
+  },
+  {
+    "name": "导出",
+    "className": "daochu"
+  },
+  {
+    "name": "打印",
+    "className": "dayin"
+  },
+  {
+    "name": "成功",
+    "className": "chenggong"
+  },
+  {
+    "name": "拆分",
+    "className": "chaifen"
+  },
+  {
+    "name": "查看",
+    "className": "chakan"
+  },
+  {
+    "name": "查验",
+    "className": "chayan"
+  },
+  {
+    "name": "成功-面",
+    "className": "chenggong-mian"
+  },
+  {
+    "name": "抄报税管理",
+    "className": "chaobaoshuiguanli"
+  },
+  {
+    "name": "采集",
+    "className": "caiji"
+  },
+  {
+    "name": "查询",
+    "className": "chaxun"
+  },
+  {
+    "name": "编辑-录入",
+    "className": "bianji-luru"
+  },
+  {
+    "name": "保存",
+    "className": "baocun"
+  },
+  {
+    "name": "报表",
+    "className": "baobiao"
   },
   {
     "name": "标签",
     "className": "biaoqian"
   },
   {
+    "name": "绑定-分配",
+    "className": "bangding-fenpei"
+  },
+  {
+    "name": "帮助",
+    "className": "bangzhu"
+  },
+  {
+    "name": "帮助-面",
+    "className": "bangzhu-mian"
+  },
+  {
+    "name": "用户管理",
+    "className": "yonghuguanli"
+  },
+  {
+    "name": "角色管理",
+    "className": "jiaoseguanli"
+  },
+  {
+    "name": "机构管理",
+    "className": "jigouguanli"
+  },
+  {
+    "name": "云开票",
+    "className": "yunkaipiao"
+  },
+  {
+    "name": "云归集",
+    "className": "yunguiji"
+  },
+  {
+    "name": "结算单",
+    "className": "jiesuandan"
+  },
+  {
+    "name": "云单据",
+    "className": "yundanju"
+  },
+  {
+    "name": "基础信息管理",
+    "className": "jichuxinxiguanli"
+  },
+  {
+    "name": "系统管理",
+    "className": "xitongguanli"
+  },
+  {
+    "name": "工单管理",
+    "className": "gongdanguanli"
+  },
+  {
+    "name": "帮助中心",
+    "className": "bangzhuzhongxin"
+  },
+  {
+    "name": "报表管理",
+    "className": "baobiaoguanli"
+  },
+  {
+    "name": "发票管理",
+    "className": "fapiaoguanli"
+  },
+  {
+    "name": "企业管理",
+    "className": "qiyeguanli"
+  },
+  {
+    "name": "风险监控",
+    "className": "fengxianjiankong"
+  },
+  {
+    "name": "进项",
+    "className": "jinxiang"
+  },
+  {
+    "name": "供应链协同",
+    "className": "gongyinglianxietong"
+  },
+  {
+    "name": "销项",
+    "className": "xiaoxiang"
+  },
+  {
+    "name": "云控制台-首页",
+    "className": "yunkongzhitai-shouye"
+  },
+  {
+    "name": "统计报表",
+    "className": "tongjibaobiao"
+  },
+  {
     "name": "用户中心",
     "className": "yonghuzhongxin"
   },
   {
-    "name": "专票",
-    "className": "zhuanpiao"
-  },
-  {
-    "name": "机动车",
-    "className": "jidongche"
-  },
-  {
-    "name": "货运",
-    "className": "huoyun"
-  },
-  {
-    "name": "普票",
-    "className": "pupiao"
-  },
-  {
-    "name": "卷式",
-    "className": "juanshi"
-  },
-  {
-    "name": "电票",
-    "className": "dianpiao"
+    "name": "更多",
+    "className": "gengduo"
   }
 ]

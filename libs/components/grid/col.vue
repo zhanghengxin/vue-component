@@ -5,8 +5,9 @@
 </template>
 
 <script>
-const prefixCls = 'b-col'
+import { prefix } from '../../utils/common'
 
+const prefixCls = prefix + 'col'
 export default {
     name: prefixCls,
     props: {
@@ -34,21 +35,7 @@ export default {
                     [`${prefixCls}-order-${this.order}`]: this.order,
                     [`${this.className}`]: !!this.className
                 }
-            ];
-            ['xs', 'sm', 'md', 'lg'].forEach(size => {
-                if (typeof this[size] === 'number') {
-                    classList.push(`${prefixCls}-span-${size}-${this[size]}`)
-                } else if (typeof this[size] === 'object') {
-                    let props = this[size]
-                    Object.keys(props).forEach(prop => {
-                        classList.push(
-                            prop !== 'span'
-                                ? `${prefixCls}-${size}-${prop}-${props[prop]}`
-                                : `${prefixCls}-span-${size}-${props[prop]}`
-                        )
-                    })
-                }
-            })
+            ]
             return classList
         },
         styles () {

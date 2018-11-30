@@ -5,6 +5,7 @@
 
 import Input from './components/input/index'
 import Button from './components/button'
+import Drawer from './components/drawer'
 import Carousel from './components/carousel'
 import CarouselItem from './components/carousel-item'
 import Icon from './components/icon'
@@ -20,11 +21,30 @@ import { Row, Col } from './components/grid/index'
 import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
+import BackTop from './components/backTop'
+import Dropdown from './components/dropdown'
+import DropdownItem from './components/dropdown-item'
+import DropdownMenu from './components/dropdown-menu'
+import Switch from './components/switch/index'
+import Checkbox from './components/checkbox'
+import CheckboxGroup from './components/checkboxGroup'
+import Radio from './components/radio'
+import RadioGroup from './components/radioGroup'
+import Form from './components/form'
+import Tag from './components/Tag'
+import Tree from './components/tree'
+import Progress from './components/Progress'
+import DatePicker from './components/date-picker'
+import TimePicker from './components/time-picker'
+import DateTimePicker from './components/datetime-picker'
 
 const components = [
     Input,
     Page,
     Button,
+    Drawer,
+    Tag,
+    Tree,
     Icon,
     Message,
     Collapse,
@@ -38,37 +58,34 @@ const components = [
     Card,
     Row,
     Col,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    Checkbox,
+    CheckboxGroup,
+    Radio,
+    RadioGroup,
     Modal,
     Circle,
-    Tooltip
+    Tooltip,
+    BackTop,
+    Form,
+    Form.FormItem,
+    Switch,
+    Progress,
+    DatePicker,
+    TimePicker,
+    DateTimePicker
 ]
 
 const install = function (Vue) {
     if (install.installed) return
-    components.map(component => Vue.component(component.name, component))
+    components.forEach(component => Vue.component(component.name, component))
     Vue.prototype.$Message = Message
     Vue.prototype.$Modal = Modal
 }
 
 export default {
     install,
-    Button,
-    Carousel,
-    CarouselItem,
-    Input,
-    Page,
-    Icon,
-    Collapse,
-    CollapseItem,
-    Message,
-    Breadcrumb,
-    BreadcrumbItem,
-    Circle,
-    Steps,
-    Step,
-    Row,
-    Col,
-    Card,
-    Modal,
-    Tooltip
+    ...components
 }

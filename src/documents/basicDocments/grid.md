@@ -8,7 +8,6 @@
 - 支持左右偏移。
 - 支持flex栅格布局。
 - 支持flex栅格排序。
-- 支持响应式布局。
 
 ### 基础用法
 支持水平排列布局。
@@ -328,3 +327,21 @@
 ```
 :::
 </div>
+
+
+### row props
+| 参数      | 说明    | 类型      | 可选值       | 默认值   |
+|---------- |-------- |---------- |-------------  |-------- |
+| interval     | 栅格之间的间隔,单位为px  | Number    |   -  |     0  |
+| type     |  布局模式，切换栅格布局和普通布局   |  flex    |   - |     '' |
+| justify     |   flex 布局的垂直对齐方式，当 type 为 `flex`生效  | string   |   `start`、`end`、`center`、`space-around`、`space-between` |     - |
+| align     |   flex 布局的水平排列方式 ，当 type 为 `flex`生效   | string   |   `top`、`middle`、`bottom` |     - |
+
+
+### col props
+| 参数      | 说明    | 类型      | 可选值       | 默认值   |
+|---------- |-------- |---------- |-------------  |-------- |
+| span     | 栅格的占位格数  | Number    |  0~24的整数 |     -  |
+| forward     |  栅格向后移动格数   |  Number    |   - |     - |
+| back     |  栅格向前移动格数   |  Number    |   - |     - |
+| offset     |  栅格左侧的间隔格数	   |  Number    |   - |     - |

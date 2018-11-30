@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import { oneOf, findComponentDownward, findBrothersComponents } from '../../utils/common'
+import { prefix, oneOf, findComponentDownward, findBrothersComponents } from '../../utils/common'
 
-const prefixCls = 'b-row'
+const prefixCls = prefix + 'row'
 
 export default {
     name: `${prefixCls}`,

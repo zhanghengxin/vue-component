@@ -2,6 +2,8 @@
  * Created by gaoguoqing on 2018/9/6.
  *
  */
+const prefix = 'b-'
+export { prefix }
 
 // 判断参数是否是其中之一
 export function oneOf (value, validList) {

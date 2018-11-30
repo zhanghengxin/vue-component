@@ -1,5 +1,5 @@
 {
-  "食用指南": [
+  "使用指南": [
     {
       "name": "guide",
       "path": "/guide",
@@ -30,6 +30,11 @@
       "path": "/",
       "items": [
         {
+          "title": "CheckBox 多选框",
+          "path": "/checkbox",
+          "name": "checkbox"
+        },
+        {
           "title": "Color 色彩",
           "path": "/color",
           "name": "color"
@@ -55,6 +60,21 @@
           "name": "button"
         },
         {
+          "title": "Tag 标签",
+          "path": "/tag",
+          "name": "tag"
+        },
+        {
+          "title": "Switch 开关",
+          "path": "/switch",
+          "name": "switch"
+        },
+        {
+          "title": "Drawer 抽屉",
+          "path": "/drawer",
+          "name": "drawer"
+        },
+        {
           "title": "Message 消息",
           "path": "/message",
           "name": "message"
@@ -63,6 +83,36 @@
           "title": "Steps 步骤条",
           "path": "/steps",
           "name": "steps"
+        },
+        {
+          "title": "Dropdown下拉",
+          "path": "/dropdown",
+          "name": "dropdown"
+        },
+        {
+          "title": "Radio单选框",
+          "path": "/radio",
+          "name": "radio"
+        },
+        {
+          "title": "Progress 进度条",
+          "path": "/progress",
+          "name": "progress"
+        },
+        {
+          "title": "DatePicker 日期选择器",
+          "path": "/datepicker",
+          "name": "datepicker"
+        },
+        {
+          "title": "TimePicker 时间选择器",
+          "path": "/timepicker",
+          "name": "timepicker"
+        },
+        {
+          "title": "DateTimePicker选择器",
+          "path": "/datetimepicker",
+          "name": "datetimepicker"
         }
       ]
     },
@@ -116,6 +166,17 @@
           "title": "Breadcrumb 面包屑",
           "path": "/breadcrumb",
           "name": "breadcrumb"
+        }
+      ]
+    },
+    {
+      "title": "表单",
+      "path": "/",
+      "items": [
+        {
+          "title": "Form 表单",
+          "path": "/form",
+          "name": "form"
         }
       ]
     },
