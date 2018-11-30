@@ -52,7 +52,7 @@ export default {
     computed: {
         imgSrc () {
             let img = {
-                info: 'yiban',
+                info: 'xinxi-yiban',
                 error: 'shibai',
                 success: 'chenggong',
                 warning: 'yichang'

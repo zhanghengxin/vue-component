@@ -60,6 +60,11 @@
           "name": "button"
         },
         {
+          "title": "Tag 标签",
+          "path": "/tag",
+          "name": "tag"
+        },
+        {
           "title": "Switch 开关",
           "path": "/switch",
           "name": "switch"
@@ -83,6 +88,31 @@
           "title": "Dropdown下拉",
           "path": "/dropdown",
           "name": "dropdown"
+        },
+        {
+          "title": "Radio单选框",
+          "path": "/radio",
+          "name": "radio"
+        },
+        {
+          "title": "Progress 进度条",
+          "path": "/progress",
+          "name": "progress"
+        },
+        {
+          "title": "DatePicker 日期选择器",
+          "path": "/datepicker",
+          "name": "datepicker"
+        },
+        {
+          "title": "TimePicker 时间选择器",
+          "path": "/timepicker",
+          "name": "timepicker"
+        },
+        {
+          "title": "DateTimePicker选择器",
+          "path": "/datetimepicker",
+          "name": "datetimepicker"
         }
       ]
     },
