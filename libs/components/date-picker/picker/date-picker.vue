@@ -129,9 +129,10 @@
 
 <script>
 import picker from '../mixins/picker'
+import { prefix } from '../../../utils/common'
 
 export default {
-    name: 'b-datepicker',
+    name: `${prefix}datepicker`,
     mixins: [ picker ],
     props: {
         format: {
