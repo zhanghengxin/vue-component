@@ -7,7 +7,7 @@ import { prefix } from '../../utils/common'
 
 const prefixCls = prefix + 'back-top' // 防止与别人发生冲突
 export default {
-    name: prefixCls,
+    name: 'backtop',
     props: {
         show: {
             type: Boolean,

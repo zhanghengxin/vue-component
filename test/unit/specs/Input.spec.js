@@ -138,7 +138,7 @@ describe('Input', () => {
                     }
                 }
             }, true)
-            expect(vm.$el.querySelector(`.${prefix}chaxun`)).to.exist
+            expect(vm.$el.querySelector(`.bw-chaxun`)).to.exist
             expect(vm.$el.querySelector(`${prefixCls}-icon`)).to.exist
             expect(vm.$el.querySelector(`${prefixCls}-icon-prefix`)).to.exist
         })
@@ -158,7 +158,7 @@ describe('Input', () => {
             }, true)
             const InputEl = vm.$el.querySelector(`input`)
             const IconEl = vm.$el.querySelector(`.${prefix}icon`)
-            expect(vm.$el.querySelector(`.${prefix}yidongduan_conclose`)).to.exist
+            expect(vm.$el.querySelector(`.bw-shibai-mian`)).to.exist
             expect(vm.$el.querySelector(`${prefixCls}-icon-suffix`)).to.exist
             expect(vm.$el.querySelector(`${prefixCls}-icon-clear`)).to.exist
             setTimeout(() => {

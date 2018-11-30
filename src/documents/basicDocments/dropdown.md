@@ -7,7 +7,7 @@
             <b-dropdown>
                 <div>
                     <span class=>下拉菜单</span>
-                    <b-icon type="xiala" size="14" color="#52b7fc"></b-icon>
+                    <b-icon type="xia" size="14" color="#52b7fc"></b-icon>
                 </div>
                 <b-dropdown-menu slot="list">
                     <b-dropdown-item>1111</b-dropdown-item>
@@ -33,7 +33,7 @@
            <b-dropdown>
                  <div>
                        <span class=>下拉菜单</span>
-                       <b-icon type="xiala" size="14" color="#52b7fc"></b-icon>
+                       <b-icon type="xia" size="14" color="#52b7fc"></b-icon>
                  </div>
                  <b-dropdown-menu slot="list">
                        <b-dropdown-item>1111</b-dropdown-item>
@@ -158,7 +158,7 @@
                        <b-dropdown placement="right-start">
                             <b-dropdown-item>
                                   雁字回时，月满西楼
-                                  <b-icon  type="tijiaokaipiaoshenqingdan" size="14" color="#52b7fc"></b-icon>
+                                  <b-icon  type="shujukanban" size="14" color="#52b7fc"></b-icon>
                             </b-dropdown-item>
                             <b-dropdown-menu slot="list">
                                   <b-dropdown-item>花自飘零水自流</b-dropdown-item>
@@ -182,7 +182,7 @@
                        <b-dropdown placement="right-start">
                               <b-dropdown-item>
                                    雁字回时，月满西楼
-                                   <b-icon  type="tijiaokaipiaoshenqingdan" size="14" color="#52b7fc"></b-icon>
+                                   <b-icon  type="shujukanban" size="14" color="#52b7fc"></b-icon>
                               </b-dropdown-item>
                               <b-dropdown-menu slot="list">
                                      <b-dropdown-item>花自飘零水自流</b-dropdown-item>

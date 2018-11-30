@@ -137,11 +137,6 @@
           "name": "page"
         },
         {
-          "title": "tree 树形控件",
-          "path": "/tree",
-          "name": "tree"
-        },
-        {
           "title": "Notice 通知",
           "path": "/notice",
           "name": "notice"

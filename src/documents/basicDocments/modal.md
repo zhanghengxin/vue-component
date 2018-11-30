@@ -65,7 +65,7 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
             <b-button @on-click="modal3 = true">不带标题栏和自定义宽度</b-button>
             <b-modal v-model="modal2">
                 <p slot="header" style="color:#f60;text-align:center">
-                    <b-icon type="yiban" size="16"></b-icon>
+                    <b-icon type="xinxi-yiban" size="16"></b-icon>
                     <span>删除确认</span>
                 </p>
                 <div style="text-align:center">
@@ -91,7 +91,7 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
         <b-button @on-click="modal3 = true">不带标题栏和自定义宽度</b-button>
         <b-modal v-model="modal2">
             <p slot="header" style="color:#f60;text-align:center">
-                <b-icon type="yiban" size="16"></b-icon>
+                <b-icon type="xinxi-yiban" size="16"></b-icon>
                 <span>删除确认</span>
             </p>
             <div style="text-align:center">
