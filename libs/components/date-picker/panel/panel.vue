@@ -1,55 +1,55 @@
 <template>
-    <div class="b-calendar">
-        <div class="b-calendar-header">
+    <div :class="calendarCls">
+        <div :class="[`${calendarCls}-header`]">
             <a
                 v-if="panel !== 'TIME'"
-                class="b-icon-last-year"
+                :class="[`${icon}-last-year`]"
                 @click="handleIconYear(-1)">
                 &laquo;
             </a>
             <a
                 v-if="panel === 'DATE'"
-                class="b-icon-last-month"
+                :class="[`${icon}-last-month`]"
                 @click="handleIconMonth(-1)">
                 &lsaquo;
             </a>
             <a
                 v-if="panel === 'YEAR'"
-                class="b-current-year">
+                :class="[`${prefix}current-year`]">
                 {{yearHeader}}
             </a>
             <a
                 v-if="panel === 'DATE'"
-                class="b-current-month"
+                :class="[`${prefix}current-month`]"
                 @click="handleClickMonth">
                 {{months[month]}}
             </a>
             <a
                 v-if="panel === 'DATE' || panel === 'MONTH'"
-                class="b-current-year"
+                :class="[`${prefix}current-year`]"
                 @click="handleClickYear">
                 {{year}}
             </a>
             <a
                 v-if="panel === 'DATE'"
-                class="b-icon-next-month"
+                :class="[`${icon}-next-month`]"
                 @click="handleIconMonth(1)">
                 &rsaquo;
             </a>
             <a
                 v-if="panel !== 'TIME'"
-                class="b-icon-next-year"
+                :class="[`${icon}-next-year`]"
                 @click="handleIconYear(1)">
                 &raquo;
             </a>
             <a
                 v-if="panel === 'TIME'"
-                class="b-time-header"
+                :class="[`${prefix}time-header`]"
                 @click="handleTimeHeader">
                 {{timeHeader}}
             </a>
         </div>
-        <div class="b-calendar-content">
+        <div :class="contentCls">
             <table-year
                 v-if="panel === 'YEAR'"
                 :value='value'
@@ -93,9 +93,10 @@
 import { isValidDate, isDateObject, formatDate } from '../../../utils/date'
 import scrollIntoView from '../../../utils/scroll-into-view'
 import { TableYear, TableMonth, TableDate, TableTime } from '../base'
-
+import { prefix } from '../../../utils/common'
+const icon = `${prefix}icon`
 export default {
-    name: 'b-panel',
+    name: `${prefix}panel`,
     components: { TableYear, TableMonth, TableDate, TableTime },
     props: {
         value: {
@@ -160,6 +161,8 @@ export default {
         let firstYear = Math.floor(year / 10) * 10
 
         return {
+            icon,
+            prefix,
             panel: 'NONE',
             dates: [],
             year,
@@ -168,6 +171,12 @@ export default {
         }
     },
     computed: {
+        calendarCls () {
+            return `${prefix}calendar`
+        },
+        contentCls () {
+            return `${prefix}calendar-content`
+        },
         now: {
             get () {
                 return new Date(this.year, this.month).getTime()

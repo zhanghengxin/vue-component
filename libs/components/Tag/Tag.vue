@@ -11,7 +11,7 @@
     <span>
          <slot></slot>
     </span>
-     <b-icon  v-if="closeable" type="shibai1" @click.native='close'>
+     <b-icon  v-if="closeable" type="quxiao-guanbi-shanchu" @click.native='close'>
     </b-icon>
   </div>
 </template>
