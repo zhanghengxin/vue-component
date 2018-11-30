@@ -12,7 +12,7 @@
 <template>
     <div :class="classtype" >
         <div class="bw-collapse-item-header" @click="handleChange">
-            <b-icon type="xiala" size=12 :class="arrow" ></b-icon>
+            <b-icon type="xia" size=12 :class="arrow" ></b-icon>
             <slot name="title"></slot>
         </div>
         <CollapseTransition>

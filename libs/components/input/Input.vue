@@ -29,7 +29,7 @@
             <b-icon
                 v-if="clearable && currentValue"
                 size
-                type="yidongduan_conclose"
+                type="shibai-mian"
                 :class="[
                 prefixCls+`-icon`,
                 prefixCls+`-icon-`+size,

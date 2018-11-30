@@ -4,7 +4,7 @@
             :class="prevCls"
             @click="prev">
             <a :class="[prefixCls + '-arrow']">
-                <b-icon type="zuola"></b-icon>
+                <b-icon type="zuo"></b-icon>
             </a>
         </div>
         <div :class="[prefixCls + '-simple-pager']" :title="currentPage + '/' + pageCount">
@@ -21,7 +21,7 @@
             :class="nextCls"
             @click="next">
             <a :class="[prefixCls + '-arrow']">
-                <b-icon type="youla"></b-icon>
+                <b-icon type="you"></b-icon>
             </a>
         </div>
     </div>
@@ -34,7 +34,7 @@
             @click="prev">
             <a :class="[prefixCls + '-arrow']">
                 <template v-if="prevText">{{prevText}}</template>
-                <b-icon v-else type="zuola"></b-icon>
+                <b-icon v-else type="zuo"></b-icon>
             </a>
         </li>
         <li title="1" :class="firstPageCls" @click="changePage(1)">
@@ -116,7 +116,7 @@
             @click="next">
             <a :class="[prefixCls + '-arrow']">
                 <template v-if="nextText">{{nextText}}</template>
-                <b-icon v-else type="youla"></b-icon>
+                <b-icon v-else type="you"></b-icon>
             </a>
         </li>
         <div v-if="showElevator" :class="elevatorCls">

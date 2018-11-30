@@ -13,10 +13,10 @@ describe('Icon.vue', () => {
     })
     it('type', () => {
         vm = createTest(Icon, {
-            type: 'fapiaoshengcheng'
+            type: 'zuosanjiao'
         }, true)
         let Elm = vm.$el
-        expect(Elm.classList.contains(`${prefix}fapiaoshengcheng`)).to.be.true
+        expect(Elm.classList.contains(`bw-zuosanjiao`)).to.be.true
     })
     it('size', () => {
         vm = createTest(Icon, {
@@ -32,22 +32,22 @@ describe('Icon.vue', () => {
         let Elm = vm.$el
         expect(Elm.style.color).to.equal('red')
     })
-    // it('click', done => {
-    //     let result
-    //     vm = createVue({
-    //         template: `
-    //     <b-icon @on-click="handleClick"></b-icon>
-    //   `,
-    //         methods: {
-    //             handleClick (evt) {
-    //                 result = evt
-    //             }
-    //         }
-    //     }, true)
-    //     vm.$el.click()
-    //     setTimeout(_ => {
-    //         expect(result).to.exist
-    //         done()
-    //     }, 20)
-    // })
+    it('click', done => {
+        let result
+        vm = createVue({
+            template: `
+        <b-icon @on-click="handleClick"></b-icon>
+      `,
+            methods: {
+                handleClick (evt) {
+                    result = evt
+                }
+            }
+        }, true)
+        vm.$el.click()
+        setTimeout(_ => {
+            expect(result).to.exist
+            done()
+        }, 20)
+    })
 })
