@@ -103,9 +103,10 @@
 
 <script>
 import picker from '../mixins/picker'
+import { prefix } from '../../../utils/common'
 
 export default {
-    name: 'b-timepicker',
+    name: `${prefix}timepicker`,
     mixins: [ picker ],
     props: {
         format: {

@@ -58,7 +58,7 @@ import { formatTime, parseTime } from '../../../utils/date'
 import { prefix } from '../../../utils/common'
 
 export default {
-    name: 'b-table-time',
+    name: `${prefix}table-time`,
     props: {
         value: null,
         disabledTime: {

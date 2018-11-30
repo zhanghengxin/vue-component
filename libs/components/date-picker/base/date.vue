@@ -31,7 +31,7 @@ import { formatDate } from '../../../utils/date'
 import { prefix } from '../../../utils/common'
 
 export default {
-    name: 'b-table-date',
+    name: `${prefix}table-date`,
     props: {
         value: null,
         startAt: null,

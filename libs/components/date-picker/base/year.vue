@@ -15,7 +15,7 @@
 import { prefix } from '../../../utils/common'
 
 export default {
-    name: 'b-table-year',
+    name: `${prefix}table-year`,
     props: {
         value: null,
         firstYear: Number,
