@@ -96,6 +96,26 @@
   transition: all .2s ease-in-out;
   .example-box {
     margin: 10px;
+    .example-box-row-interval {
+      .b-col {
+        background: white;
+        padding: 0;
+        div{
+          padding: 10px 0;
+        }
+      }
+      .b-col:nth-child(odd) {
+        div {
+          background: $Primary;
+        }
+      }
+      .b-col:nth-child(even) {
+        div {
+          background: $LightPrimary;
+        }
+      }
+    }
+
   }
   ul {
     margin: 0;
@@ -104,4 +124,19 @@
   ul, ol {
     list-style-type: none;
   }
+  .b-row {
+    padding-bottom: 10px;
+  }
+  .b-col {
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+  }
+  .b-col:nth-child(odd) {
+    background: $Primary;
+  }
+  .b-col:nth-child(even) {
+    background: $LightPrimary;
+  }
+
 }

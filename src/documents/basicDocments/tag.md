@@ -81,7 +81,7 @@
    <div class="example-box">
 <div>
     <b-tag v-for="item in list" :key="item.name" :backcolor="item.color"  closeable @on-close="close">{{item.name}}</b-tag>
-    <b-button size="small" @on-click="click"><b-icon type="tianjia"></b-icon> 标签添加</b-button>
+    <b-button size="small" @on-click="click"><b-icon type="tianjia-chuangjian"></b-icon> 标签添加</b-button>
 </div>
 </div>
 
@@ -89,7 +89,7 @@
 ```html
 <div>
     <b-tag v-for="item in list" :key="item.name" :backcolor="item.color" closeable @on-close="close">{{item.name}}</b-tag>
-    <b-button size="small" @on-click="click"><b-icon type="tianjia"></b-icon> 标签添加</b-button>
+    <b-button size="small" @on-click="click"><b-icon type="tianjia-chuangjian"></b-icon> 标签添加</b-button>
       <script>
     export default {
         data () {

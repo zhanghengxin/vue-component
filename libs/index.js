@@ -2,6 +2,7 @@
  * Created by gaoguoqing on 2018/9/5.
  *
  */
+
 import Input from './components/input/index'
 import Button from './components/button'
 import Drawer from './components/drawer'
@@ -16,6 +17,7 @@ import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
 import Circle from './components/circle'
 import { Steps, Step } from './components/steps/index'
+import { Row, Col } from './components/grid/index'
 import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
@@ -54,6 +56,8 @@ const components = [
     Steps,
     Step,
     Card,
+    Row,
+    Col,
     Dropdown,
     DropdownItem,
     DropdownMenu,
