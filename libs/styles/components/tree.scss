@@ -1,0 +1,41 @@
+$css-prefix-tree: $css-prefix + 'tree';
+
+.#{$css-prefix-tree} {
+  position: relative;
+  cursor: default;
+  background: #fff;
+  color: $Content;
+  .#{$css-prefix-tree}-children {
+    margin: 0;
+    padding: 0 0 0 10px;
+    li {
+      list-style: none;
+      margin: 6px 0;
+      padding: 0;
+      white-space: nowrap;
+      outline: 0;
+    }
+  }
+}
+
+.#{$css-prefix-tree}-arrow {
+  cursor: pointer;
+  width: 12px;
+  text-align: center;
+  display: inline-block;
+  color: $Sub;
+}
+
+.#{$css-prefix-tree}-name {
+  display: inline-block;
+  margin: 0;
+  padding: 0 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  vertical-align: top;
+  transition: all .2s ease-in-out;
+}
+
+.#{$css-prefix-tree}-name-selected {
+  background: $LightPrimary;
+}

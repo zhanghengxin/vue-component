@@ -1,16 +1,21 @@
 <!-- 发票开具 入口 -->
 <template>
     <div :class="wrapCls">
-        <point-group :point-num="12"></point-group>
-        <div :class="prefixCls"></div>
-        <point-group :point-num="12"></point-group>
+        <div :class="`${prefixCls}-toolbar`">
+            <toolbar :prefixCls="prefixCls"></toolbar>
+        </div>
+        <div :class="`${prefixCls}-main`">
+            <invoice :prefixCls="prefixCls"></invoice>
+        </div>
     </div>
 </template>
 
 <script>
-import PointGroup from './modules/pointGroup'
+import Toolbar from './toolbar'
+import Invoice from './modules/invoice'
 
 const prefixCls = 'invoice'
+
 export default {
     name: 'invoiceIssue',
     data () {
@@ -19,7 +24,8 @@ export default {
         }
     },
     components: {
-        PointGroup
+        Toolbar,
+        Invoice
     },
     computed: {
         wrapCls () {
@@ -29,8 +35,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-// .invoice {
-//     &-container {}
-// }
+<style lang="scss">
+@import './index.scss'
 </style>

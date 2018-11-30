@@ -58,7 +58,7 @@ $css-prefix-page: $css-prefix + 'page';
         ]
     }
 ```
-
+- 每一个组件要单独拉一个分支管理，比如 `page` 组件的分支名为 `release-ggq-page`,方便以后迭代更新。
 ### 测试
 初期 UI 测试采用常见的的Karma + Mocha单元测试，测试用例请参考test/unit/specs/Icon.spec.js,测试用例编写以后，执行 npm run unit 进行测试
 

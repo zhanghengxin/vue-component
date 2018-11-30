@@ -15,4 +15,5 @@ function findComponentUpward (context, componentName, componentNames) {
     }
     return parent
 }
+
 export {findComponentUpward}

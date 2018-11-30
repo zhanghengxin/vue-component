@@ -13,10 +13,10 @@ describe('Icon.vue', () => {
     })
     it('type', () => {
         vm = createTest(Icon, {
-            type: 'fapiaoshengcheng'
+            type: 'zuosanjiao'
         }, true)
         let Elm = vm.$el
-        expect(Elm.classList.contains(`${prefix}fapiaoshengcheng`)).to.be.true
+        expect(Elm.classList.contains(`bw-zuosanjiao`)).to.be.true
     })
     it('size', () => {
         vm = createTest(Icon, {
@@ -31,7 +31,6 @@ describe('Icon.vue', () => {
         }, true)
         let Elm = vm.$el
         expect(Elm.style.color).to.equal('red')
-    
     })
     it('click', done => {
         let result

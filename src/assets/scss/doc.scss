@@ -1,7 +1,8 @@
 // 示例文档样式
 @import "color";
+
 .doc {
-  img{
+  img {
     max-width: 1000px;
   }
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
@@ -32,13 +33,13 @@
     font-size: 18px;
     margin: 10px 0 15px;
   }
-  p {
+  h3 + p {
     font-size: 14px;
     color: $Content;
     line-height: 1.5em;
     margin-bottom: 10px;
   }
-  table {
+  .table {
     width: 100%;
     font-size: 13px;
     line-height: 1.5;
@@ -95,6 +96,26 @@
   transition: all .2s ease-in-out;
   .example-box {
     margin: 10px;
+    .example-box-row-interval {
+      .b-col {
+        background: white;
+        padding: 0;
+        div{
+          padding: 10px 0;
+        }
+      }
+      .b-col:nth-child(odd) {
+        div {
+          background: $Primary;
+        }
+      }
+      .b-col:nth-child(even) {
+        div {
+          background: $LightPrimary;
+        }
+      }
+    }
+
   }
   ul {
     margin: 0;
@@ -103,4 +124,19 @@
   ul, ol {
     list-style-type: none;
   }
+  .b-row {
+    padding-bottom: 10px;
+  }
+  .b-col {
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+  }
+  .b-col:nth-child(odd) {
+    background: $Primary;
+  }
+  .b-col:nth-child(even) {
+    background: $LightPrimary;
+  }
+
 }

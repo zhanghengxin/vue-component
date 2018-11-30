@@ -39,11 +39,11 @@ describe('Circle.vue',()=>{
         expect(CircleEle.getElementsByTagName('circle')[0].getAttribute('r')).to.equal('40')
         expect(CircleEle.getElementsByTagName('circle')[0].getAttribute('stroke-width')).to.equal('6')
     })
-    it('comatch',() => {
-        vm = createTest(Circle, {
-            comatch: 'neuco'
-        }, true)
-        let CircleEle = vm.$el
-        expect(CircleEle.getElementsByTagName('circle')[1].getAttribute('class')).to.equal(`${prefixCls}-neuco`)
-    })
+    // it('comatch',() => {
+    //     vm = createTest(Circle, {
+    //         comatch: 'neuco'
+    //     }, true)
+    //     let CircleEle = vm.$el
+    //     expect(CircleEle.getElementsByTagName('circle')[1].getAttribute('class')).to.equal(`${prefixCls}-neuco`)
+    // })
 })

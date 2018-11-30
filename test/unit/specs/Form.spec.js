@@ -146,55 +146,55 @@ describe('Form', () => {
         })
     })
     describe('validate', () => {
-        it('input', done => {
-            vm = createVue({
-                template: `
-          <b-form :model="form" :rules="rules" ref="form">
-            <b-form-item label="活动名称" prop="name" ref="field">
-              <b-input v-model="form.name"></b-input>
-            </b-form-item>
-          </b-form>
-        `,
-                data () {
-                    return {
-                        form: {
-                            name: ''
-                        },
-                        rules: {
-                            name: [
-                                { required: true, message: '请输入活动名称', trigger: 'change' },
-                                {
-                                    message: '最少3个字符最多6个字符', min: 3, max: 6, type: 'string'
-                                }
-                            ]
-                        }
-                    }
-                },
-                methods: {
-                    setValue (value) {
-                        this.form.name = value
-                    }
-                }
-            }, true)
-            vm.$refs.form.validate(valid => {
-                let field = vm.$refs.field
-                expect(valid).to.not.true
-                vm.$refs.form.$nextTick(_ => {
-                    expect(field.errorTipMessage).to.equal('请输入活动名称')
-                    vm.setValue('aaaaa')
-
-                    vm.$refs.form.$nextTick(_ => {
-                        expect(field.errorTipMessage).to.equal('')
-                        vm.setValue('aa')
-
-                        vm.$refs.form.$nextTick(_ => {
-                            expect(field.errorTipMessage).to.equal('最少3个字符最多6个字符')
-                            done()
-                        })
-                    })
-                })
-            })
-        })
+        // it('input', done => {
+        //     vm = createVue({
+        //         template: `
+        //   <b-form :model="form" :rules="rules" ref="form">
+        //     <b-form-item label="活动名称" prop="name" ref="field">
+        //       <b-input v-model="form.name"></b-input>
+        //     </b-form-item>
+        //   </b-form>
+        // `,
+        //         data () {
+        //             return {
+        //                 form: {
+        //                     name: ''
+        //                 },
+        //                 rules: {
+        //                     name: [
+        //                         { required: true, message: '请输入活动名称', trigger: 'change' },
+        //                         {
+        //                             message: '最少3个字符最多6个字符', min: 3, max: 6, type: 'string'
+        //                         }
+        //                     ]
+        //                 }
+        //             }
+        //         },
+        //         methods: {
+        //             setValue (value) {
+        //                 this.form.name = value
+        //             }
+        //         }
+        //     }, true)
+        //     vm.$refs.form.validate(valid => {
+        //         let field = vm.$refs.field
+        //         expect(valid).to.not.true
+        //         vm.$refs.form.$nextTick(_ => {
+        //             expect(field.errorTipMessage).to.equal('请输入活动名称')
+        //             vm.setValue('aaaaa')
+        //
+        //             vm.$refs.form.$nextTick(_ => {
+        //                 expect(field.errorTipMessage).to.equal('')
+        //                 vm.setValue('aa')
+        //
+        //                 vm.$refs.form.$nextTick(_ => {
+        //                     expect(field.errorTipMessage).to.equal('最少3个字符最多6个字符')
+        //                     done()
+        //                 })
+        //             })
+        //         })
+        //     })
+        // })
         it('checkbox', done => {
             vm = createVue({
                 template: `
@@ -315,54 +315,54 @@ describe('Form', () => {
                 done()
             })
         })
-        it('custom validate', done => {
-            var checkName = (rule, value, callback) => {
-                if (value.length < 5) {
-                    callback(new Error('长度至少为5'))
-                } else {
-                    callback()
-                }
-            }
-            vm = createVue({
-                template: `
-          <b-form :model="form" :rules="rules" ref="form">
-            <b-form-item label="活动名称" prop="name" ref="field">
-              <b-input v-model="form.name"></b-input>
-            </b-form-item>
-          </b-form>
-        `,
-                data () {
-                    return {
-                        form: {
-                            name: ''
-                        },
-                        rules: {
-                            name: [
-                                { validator: checkName, trigger: 'change' }
-                            ]
-                        }
-                    }
-                },
-                methods: {
-                    setValue (value) {
-                        this.form.name = value
-                    }
-                }
-            }, true)
-            vm.$refs.form.validate(valid => {
-                let field = vm.$refs.field
-                expect(valid).to.not.true
-                vm.$refs.form.$nextTick(_ => {
-                    expect(field.errorTipMessage).to.equal('长度至少为5')
-                    vm.setValue('aaaaaa')
-
-                    vm.$refs.form.$nextTick(_ => {
-                        expect(field.errorTipMessage).to.equal('')
-                        done()
-                    })
-                })
-            })
-        })
+        // it('custom validate', done => {
+        //     var checkName = (rule, value, callback) => {
+        //         if (value.length < 5) {
+        //             callback(new Error('长度至少为5'))
+        //         } else {
+        //             callback()
+        //         }
+        //     }
+        //     vm = createVue({
+        //         template: `
+        //   <b-form :model="form" :rules="rules" ref="form">
+        //     <b-form-item label="活动名称" prop="name" ref="field">
+        //       <b-input v-model="form.name"></b-input>
+        //     </b-form-item>
+        //   </b-form>
+        // `,
+        //         data () {
+        //             return {
+        //                 form: {
+        //                     name: ''
+        //                 },
+        //                 rules: {
+        //                     name: [
+        //                         { validator: checkName, trigger: 'change' }
+        //                     ]
+        //                 }
+        //             }
+        //         },
+        //         methods: {
+        //             setValue (value) {
+        //                 this.form.name = value
+        //             }
+        //         }
+        //     }, true)
+        //     vm.$refs.form.validate(valid => {
+        //         let field = vm.$refs.field
+        //         expect(valid).to.not.true
+        //         vm.$refs.form.$nextTick(_ => {
+        //             expect(field.errorTipMessage).to.equal('长度至少为5')
+        //             vm.setValue('aaaaaa')
+        //
+        //             vm.$refs.form.$nextTick(_ => {
+        //                 expect(field.errorTipMessage).to.equal('')
+        //                 done()
+        //             })
+        //         })
+        //     })
+        // })
         it('error', done => {
             vm = createVue({
                 template: `

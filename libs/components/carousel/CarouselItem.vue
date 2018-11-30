@@ -1,40 +1,44 @@
-6/**
+/**
 * 走马灯组件 b-carousel-item
 * Created by hanshuai on 2018/9/10.
 */
 
 <template>
-    <div :class="[prefixCls + '-slide']" :style="style">
+    <div
+        :class="[wrapperCls, { 'is-active': translate === 0 && $parent.animation === 'slide' }]"
+        :style="style"
+        :current="$parent.active">
         <slot></slot>
     </div>
 </template>
-
 <script>
-const prefixCls = 'b-carousel'
+import { prefix } from '../../utils/common'
+const prefixCls = `${prefix}carousel`
 
 export default {
-    name: 'b-carousel-item',
+    name: `${prefixCls}-item`,
     data () {
         return {
-            prefixCls
+            prefixCls,
+            translate: 0
         }
     },
     computed: {
+        wrapperCls () {
+            if (this.$parent.animation === 'slide') return `${prefixCls}-slide`
+            return `${prefixCls}-fade`
+        },
         style () {
-            let { animation, height, speed, conWidth } = this.$parent
+            let { animation, speed } = this.$parent
             if (animation === 'fade') {
                 return {
-                    position: 'absolute',
                     opacity: 0,
-                    width: '100%',
-                    height: `${height}px`,
                     transition: `opacity ${speed / 500}s `
                 }
             } else if (animation === 'slide') {
                 return {
-                    width: conWidth + 'px',
-                    height: `${height}px`,
-                    float: 'left'
+                    transform: `translateX(${this.translate}px)`,
+                    transition: `transform ${speed / 1000}s ease`
                 }
             }
         }

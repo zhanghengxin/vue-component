@@ -82,8 +82,8 @@
             </b-switch>
             &nbsp;&nbsp;
             <b-switch>
-                <b-icon slot="open" type="chenggong1" size="14"></b-icon>
-                <b-icon slot="close" type="shibai1" size="14"></b-icon>
+                <b-icon slot="open" type="queding" size="14"></b-icon>
+                <b-icon slot="close" type="quxiao-guanbi-shanchu" size="14"></b-icon>
             </b-switch>
     </div>
 
@@ -94,8 +94,8 @@
                  <span slot="close">关</span>
             </b-switch>
             <b-switch>
-                  <b-icon slot="open" type="chenggong1" size="14"></b-icon>
-                  <b-icon slot="close" type="shibai1" size="14"></b-icon>
+                  <b-icon slot="open" type="queding" size="14"></b-icon>
+                  <b-icon slot="close" type="quxiao-guanbi-shanchu" size="14"></b-icon>
             </b-switch>
 ```
 :::
