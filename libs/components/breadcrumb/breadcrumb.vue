@@ -1,23 +1,29 @@
 <template>
-    <div :class="classes">
+    <div :class="prefixCls">
         <slot></slot>
     </div>
 </template>
 <script>
-const prefixCls = 'bw-breadcrumb'
+import { prefix } from '../../utils/common'
+const prefixCls = prefix + 'breadcrumb'
 export default {
-    name: 'Breadcrumb',
+    name: prefixCls,
     props: {
         separator: {
             type: String,
             default: '/'
         }
     },
-    computed: {
-        classes () {
-            return `${prefixCls}`
+    data () {
+        return {
+            prefixCls: prefixCls
         }
     },
+    // computed: {
+    //     classes () {
+    //         return `${prefixCls}`
+    //     }
+    // },
     mounted () {
         this.updateChildren()
     },
