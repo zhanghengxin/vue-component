@@ -47,17 +47,17 @@ button{
 }
 
 /* 正常水波纹 */
-.#{$css-prefix-button}-tynormal {
+.#{$css-prefix-button}-normal {
   border-color: $Sub;
   color: $Sub;
   background-color: $white;
   position: relative;
 }
-.#{$css-prefix-button}-tynormal:hover{
+.#{$css-prefix-button}-normal:hover{
    box-shadow: 0px 0px  3px $Sub;
 
 }
-.#{$css-prefix-button}-tynormal:after {
+.#{$css-prefix-button}-normal:after {
     content: "";
     display: block;
     position: absolute;
@@ -73,10 +73,10 @@ button{
     opacity: 0;
     transition: all .3s;
 }
-.#{$css-prefix-button}-tynormal:focus{
+.#{$css-prefix-button}-normal:focus{
     outline: none;
 }
-.#{$css-prefix-button}-tynormal:active:after {
+.#{$css-prefix-button}-normal:active:after {
     opacity: .3;
     top: 0;
     left: 0;
@@ -86,16 +86,16 @@ button{
 }
 
 /* 蓝色水波纹 */
-.#{$css-prefix-button}-typrimary {
+.#{$css-prefix-button}-primary {
   border-color: $Info;
   color: $white;
   background-color: $Info;
   position: relative;
 }
-.#{$css-prefix-button}-typrimary:hover {
+.#{$css-prefix-button}-primary:hover {
   box-shadow: 0px 0px 4px $Info;
 }
-.#{$css-prefix-button}-typrimary:after {
+.#{$css-prefix-button}-primary:after {
   content: "";
   display: block;
   position: absolute;
@@ -111,10 +111,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-typrimary:focus {
+.#{$css-prefix-button}-primary:focus {
   outline: none;
 }
-.#{$css-prefix-button}-typrimary:active:after {
+.#{$css-prefix-button}-primary:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -124,17 +124,17 @@ button{
 }
 
 /* 绿色水波纹 */
-.#{$css-prefix-button}-tysuccess {
+.#{$css-prefix-button}-success {
   background-color: $Success;
   border-color: $Success;
   color: $white;
   position: relative;
 }
 
-.#{$css-prefix-button}-tysuccess:hover {
+.#{$css-prefix-button}-success:hover {
   box-shadow: 0px 0px 5px $Success;
 }
-.#{$css-prefix-button}-tysuccess:after {
+.#{$css-prefix-button}-success:after {
   content: "";
   display: block;
   position: absolute;
@@ -150,10 +150,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-tysuccess:focus {
+.#{$css-prefix-button}-success:focus {
   outline: none;
 }
-.#{$css-prefix-button}-tysuccess:active:after {
+.#{$css-prefix-button}-success:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -162,17 +162,17 @@ button{
   transition: 0s;
 }
 /* 黄色水波纹 */
-.#{$css-prefix-button}-tywarning {
+.#{$css-prefix-button}-warning {
   background-color: $Warning;
   border-color: $Warning;
   color: $white;
   position: relative;
 }
-.#{$css-prefix-button}-tywarning:hover {
+.#{$css-prefix-button}-warning:hover {
   box-shadow: 0px 0px 5px $Warning;
 }
 
-.#{$css-prefix-button}-tywarning:after {
+.#{$css-prefix-button}-warning:after {
   content: "";
   display: block;
   position: absolute;
@@ -188,10 +188,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-tywarning:focus {
+.#{$css-prefix-button}-warning:focus {
   outline: none;
 }
-.#{$css-prefix-button}-tywarning:active:after {
+.#{$css-prefix-button}-warning:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -200,17 +200,17 @@ button{
   transition: 0s;
 }
 /* 红色水波纹 */
-.#{$css-prefix-button}-tyerror {
+.#{$css-prefix-button}-error {
   background-color: $Error;
   border-color: $Error;
   color: $white;
   position: relative;
 }
 
-.#{$css-prefix-button}-tyerror:hover {
+.#{$css-prefix-button}-error:hover {
   box-shadow: 0px 0px 5px $Error;
 }
-.#{$css-prefix-button}-tyerror:after {
+.#{$css-prefix-button}-error:after {
   content: "";
   display: block;
   position: absolute;
@@ -226,10 +226,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-tyerror:focus {
+.#{$css-prefix-button}-error:focus {
   outline: none;
 }
-.#{$css-prefix-button}-tyerror:active:after {
+.#{$css-prefix-button}-error:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -243,10 +243,10 @@ button{
     border-radius: 20px;
 }
 //圆角红色
-.#{$css-prefix-button}-tyerror.#{$css-prefix-button}-round:hover {
+.#{$css-prefix-button}-error.#{$css-prefix-button}-round:hover {
   box-shadow: 0px 0px 5px $Error;
 }
-.#{$css-prefix-button}-tyerror.#{$css-prefix-button}-round:after {
+.#{$css-prefix-button}-error.#{$css-prefix-button}-round:after {
   content: "";
   display: block;
   position: absolute;
@@ -262,10 +262,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-tyerror.#{$css-prefix-button}-round:focus {
+.#{$css-prefix-button}-error.#{$css-prefix-button}-round:focus {
   outline: none;
 }
-.#{$css-prefix-button}-tyerror.#{$css-prefix-button}-round:active:after {
+.#{$css-prefix-button}-error.#{$css-prefix-button}-round:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -274,10 +274,10 @@ button{
   transition: 0s;
 }
 //圆角绿色
-.#{$css-prefix-button}-tysuccess.#{$css-prefix-button}-round:hover {
+.#{$css-prefix-button}-success.#{$css-prefix-button}-round:hover {
   box-shadow: 0px 0px 5px $Success;
 }
-.#{$css-prefix-button}-tysuccess.#{$css-prefix-button}-round:after {
+.#{$css-prefix-button}-success.#{$css-prefix-button}-round:after {
   content: "";
   display: block;
   position: absolute;
@@ -293,10 +293,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-tysuccess.#{$css-prefix-button}-round:focus {
+.#{$css-prefix-button}-success.#{$css-prefix-button}-round:focus {
   outline: none;
 }
-.#{$css-prefix-button}-tysuccess.#{$css-prefix-button}-round:active:after {
+.#{$css-prefix-button}-success.#{$css-prefix-button}-round:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -306,10 +306,10 @@ button{
 }
 //圆角黄色
 
-.#{$css-prefix-button}-tywarning.#{$css-prefix-button}-round:hover {
+.#{$css-prefix-button}-warning.#{$css-prefix-button}-round:hover {
   box-shadow: 0px 0px 5px $Warning;
 }
-.#{$css-prefix-button}-tywarning.#{$css-prefix-button}-round:after {
+.#{$css-prefix-button}-warning.#{$css-prefix-button}-round:after {
   content: "";
   display: block;
   position: absolute;
@@ -325,10 +325,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-tywarning.#{$css-prefix-button}-round:focus {
+.#{$css-prefix-button}-warning.#{$css-prefix-button}-round:focus {
   outline: none;
 }
-.#{$css-prefix-button}-tywarning.#{$css-prefix-button}-round:active:after {
+.#{$css-prefix-button}-warning.#{$css-prefix-button}-round:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -338,10 +338,10 @@ button{
 }
 
 //圆角蓝色
-.#{$css-prefix-button}-typrimary.#{$css-prefix-button}-round:hover {
+.#{$css-prefix-button}-primary.#{$css-prefix-button}-round:hover {
   box-shadow: 0px 0px 5px $Info;
 }
-.#{$css-prefix-button}-typrimary.#{$css-prefix-button}-round:after {
+.#{$css-prefix-button}-primary.#{$css-prefix-button}-round:after {
   content: "";
   display: block;
   position: absolute;
@@ -357,10 +357,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-typrimary.#{$css-prefix-button}-round:focus {
+.#{$css-prefix-button}-primary.#{$css-prefix-button}-round:focus {
   outline: none;
 }
-.#{$css-prefix-button}-typrimary.#{$css-prefix-button}-round:active:after {
+.#{$css-prefix-button}-primary.#{$css-prefix-button}-round:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -371,10 +371,10 @@ button{
 
 //圆角普通
 
-.#{$css-prefix-button}-tynormal.#{$css-prefix-button}-round:hover {
+.#{$css-prefix-button}-normal.#{$css-prefix-button}-round:hover {
   box-shadow: 0px 0px 5px $Sub;
 }
-.#{$css-prefix-button}-tynormal.#{$css-prefix-button}-round:after {
+.#{$css-prefix-button}-normal.#{$css-prefix-button}-round:after {
   content: "";
   display: block;
   position: absolute;
@@ -390,10 +390,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-tynormal.#{$css-prefix-button}-round:focus {
+.#{$css-prefix-button}-normal.#{$css-prefix-button}-round:focus {
   outline: none;
 }
-.#{$css-prefix-button}-tynormal.#{$css-prefix-button}-round:active:after {
+.#{$css-prefix-button}-normal.#{$css-prefix-button}-round:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -408,10 +408,10 @@ button{
     border-radius: 25px;
 }
 //圆角红色
-.#{$css-prefix-button}-tyerror.#{$css-prefix-button}-circle:hover {
+.#{$css-prefix-button}-error.#{$css-prefix-button}-circle:hover {
   box-shadow: 0px 0px 5px $Error;
 }
-.#{$css-prefix-button}-tyerror.#{$css-prefix-button}-circle:after {
+.#{$css-prefix-button}-error.#{$css-prefix-button}-circle:after {
   content: "";
   display: block;
   position: absolute;
@@ -427,10 +427,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-tyerror.#{$css-prefix-button}-circle:focus {
+.#{$css-prefix-button}-error.#{$css-prefix-button}-circle:focus {
   outline: none;
 }
-.#{$css-prefix-button}-tyerror.#{$css-prefix-button}-circle:active:after {
+.#{$css-prefix-button}-error.#{$css-prefix-button}-circle:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -439,10 +439,10 @@ button{
   transition: 0s;
 }
 //圆角绿色
-.#{$css-prefix-button}-tysuccess.#{$css-prefix-button}-circle:hover {
+.#{$css-prefix-button}-success.#{$css-prefix-button}-circle:hover {
   box-shadow: 0px 0px 5px $Success;
 }
-.#{$css-prefix-button}-tysuccess.#{$css-prefix-button}-circle:after {
+.#{$css-prefix-button}-success.#{$css-prefix-button}-circle:after {
   content: "";
   display: block;
   position: absolute;
@@ -458,10 +458,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-tysuccess.#{$css-prefix-button}-circle:focus {
+.#{$css-prefix-button}-success.#{$css-prefix-button}-circle:focus {
   outline: none;
 }
-.#{$css-prefix-button}-tysuccess.#{$css-prefix-button}-circle:active:after {
+.#{$css-prefix-button}-success.#{$css-prefix-button}-circle:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -471,10 +471,10 @@ button{
 }
 //圆角黄色
 
-.#{$css-prefix-button}-tywarning.#{$css-prefix-button}-circle:hover {
+.#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:hover {
   box-shadow: 0px 0px 5px $Warning;
 }
-.#{$css-prefix-button}-tywarning.#{$css-prefix-button}-circle:after {
+.#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:after {
   content: "";
   display: block;
   position: absolute;
@@ -490,10 +490,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-tywarning.#{$css-prefix-button}-circle:focus {
+.#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:focus {
   outline: none;
 }
-.#{$css-prefix-button}-tywarning.#{$css-prefix-button}-circle:active:after {
+.#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -503,10 +503,10 @@ button{
 }
 
 //圆角蓝色
-.#{$css-prefix-button}-typrimary.#{$css-prefix-button}-circle:hover {
+.#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:hover {
   box-shadow: 0px 0px 5px $Info;
 }
-.#{$css-prefix-button}-typrimary.#{$css-prefix-button}-circle:after {
+.#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:after {
   content: "";
   display: block;
   position: absolute;
@@ -522,10 +522,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-typrimary.#{$css-prefix-button}-circle:focus {
+.#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:focus {
   outline: none;
 }
-.#{$css-prefix-button}-typrimary.#{$css-prefix-button}-circle:active:after {
+.#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -536,10 +536,10 @@ button{
 
 //圆角普通
 
-.#{$css-prefix-button}-tynormal.#{$css-prefix-button}-circle:hover {
+.#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:hover {
   box-shadow: 0px 0px 5px $Sub;
 }
-.#{$css-prefix-button}-tynormal.#{$css-prefix-button}-circle:after {
+.#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:after {
   content: "";
   display: block;
   position: absolute;
@@ -555,10 +555,10 @@ button{
   opacity: 0;
   transition: all 0.3s;
 }
-.#{$css-prefix-button}-tynormal.#{$css-prefix-button}-circle:focus {
+.#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:focus {
   outline: none;
 }
-.#{$css-prefix-button}-tynormal.#{$css-prefix-button}-circle:active:after {
+.#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:active:after {
   opacity: 0.3;
   top: 0;
   left: 0;

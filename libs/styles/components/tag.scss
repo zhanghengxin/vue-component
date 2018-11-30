@@ -21,25 +21,25 @@ $css-prefix-tag: $css-prefix+'tag';
   cursor: pointer;
 }
 
-.#{$css-prefix-tag}-back-primary {
+.#{$css-prefix-tag}-back-blue {
   background-color: rgba(64, 158, 255, .1);
   color: $Primary;
   border: 1px solid rgba(58, 64, 71, 0.2);
 }
 
-.#{$css-prefix-tag}-back-success {
+.#{$css-prefix-tag}-back-green {
   background-color: rgba(103, 194, 58, .1);
   border-color: rgba(103, 194, 58, .2);
   color: $Success;
 }
 
-.#{$css-prefix-tag}-back-warning {
+.#{$css-prefix-tag}-back-orange {
   background-color: rgba(230, 162, 60, .1);
   border-color: rgba(230, 162, 60, .2);
   color: $Warning;
 }
 
-.#{$css-prefix-tag}-back-error {
+.#{$css-prefix-tag}-back-red {
   background-color: hsla(0, 87%, 69%, .1);
   border-color: hsla(0, 87%, 69%, .2);
   color: $Error;
@@ -60,18 +60,18 @@ $css-prefix-tag: $css-prefix+'tag';
   top: 1px;
 }
 
-.#{$css-prefix-tag}-error {
+.#{$css-prefix-tag}-red {
   background: $Error;
 }
 
-.#{$css-prefix-tag}-success {
+.#{$css-prefix-tag}-green {
   background: $Success;
 }
 
-.#{$css-prefix-tag}-primary {
+.#{$css-prefix-tag}-blue {
   background: $LinkContent
 }
 
-.#{$css-prefix-tag}-warning {
+.#{$css-prefix-tag}-orange {
   background: $Warning
 }
