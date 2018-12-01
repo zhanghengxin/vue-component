@@ -66,8 +66,7 @@ export default {
             next: false,
             pages: 0, // 共有多少页
             conWidth: '', // 组件宽度
-            moveWidth: '', // 每次移动的宽
-            speeded: 0
+            moveWidth: '' // 每次移动的宽
         }
     },
     props: {
@@ -145,30 +144,22 @@ export default {
         },
         scrollStyle () {
             return {
-                width: this.conWidth * (this.pages + 2) + 'px',
+                position: 'absolute',
+                width: this.conWidth + 'px',
                 overflow: 'hidden',
-                transform: `translate(${this.moveWidth - this.conWidth}px, 0)`,
-                transition: `transform ${this.speeded / 1000}s ease`
+                height: this.height + 'px'
             }
         }
     },
     mounted () {
         if (this.animation === 'fade') {
-            this.controlFade(this.animation, true, this.active)
-        } else {
-            this.controlSlide(this.animation, this.active)
+            this.controlFade(true, this.active)
         }
-
         this.$nextTick(() => {
             this.pages = this.$children.length
-            this.conWidth = this.$refs.wrapper.offsetWidth
+            this.conWidth = this.getWidth(this.$refs.wrapper)
             if (this.animation === 'slide') {
-                let firstNode = this.$children[0].$el.cloneNode(true)
-                firstNode.style.width = this.conWidth + 'px'
-                let lastNode = this.$children[this.pages - 1].$el.cloneNode(true)
-                lastNode.style.width = this.conWidth + 'px'
-                this.$refs.scroll.appendChild(firstNode)
-                this.$refs.scroll.insertBefore(lastNode, this.$children[0].$el)
+                this.resetItemPosition()
             }
             // 自动轮播
             this.autoPlay()
@@ -179,10 +170,10 @@ export default {
     watch: {
         active (val, oldVal) {
             if (this.animation === 'fade') {
-                this.controlFade(this.animation, false, oldVal)
-                this.controlFade(this.animation, true, val)
+                this.controlFade(false, oldVal)
+                this.controlFade(true, val)
             } else if (this.animation === 'slide') {
-                this.controlSlide(this.animation, val, oldVal)
+                this.resetItemPosition()
             }
             this.slideAfter(val)
         }
@@ -236,7 +227,7 @@ export default {
             this.autoPlay()
         },
         // 控制样式 fade
-        controlFade (animation, show, index) {
+        controlFade (show, index) {
             let el = this.$children[index].$el
             if (show) {
                 el.style.opacity = 1
@@ -247,27 +238,30 @@ export default {
             }
         },
         // 控制样式 slide
-        controlSlide (animation, val, oldVal) {
-            if (oldVal === 4 && val === 0) {
-                this.moveWidth = -this.conWidth * this.pages
-                let timer = null
-                clearTimeout(timer)
-                timer = setTimeout(() => {
-                    this.moveWidth = 0
-                    this.speeded = 0
-                }, this.interval / 20)
-            } else if (oldVal === 0 && val === 4) {
-                this.moveWidth = this.conWidth
-                let timer = null
-                clearTimeout(timer)
-                timer = setTimeout(() => {
-                    this.moveWidth = -this.conWidth * (this.pages - 1)
-                    this.speeded = 0
-                }, this.interval / 20)
-            } else {
-                this.speeded = this.speed
-                this.moveWidth = -this.conWidth * val
+        resetItemPosition () {
+            this.$children.forEach((item, index) => {
+                this.translateItem(item, index, this.active)
+            })
+        },
+        translateItem (item, index, activeIndex) {
+            let parentWidth = this.conWidth
+            let length = this.$children.length
+            if (index !== activeIndex && length > 2) {
+                index = this.resetIndex(index, activeIndex, length)
             }
+            item.translate = parentWidth * (index - activeIndex)
+        },
+        resetIndex (index, activeIndex, length) {
+            if (activeIndex === 0 && index === length - 1) {
+                return -1
+            } else if (activeIndex === length - 1 && index === 0) {
+                return length
+            } else if (index < activeIndex - 1 && activeIndex - index >= length / 2) {
+                return length + 1
+            } else if (index > activeIndex + 1 && index - activeIndex >= length / 2) {
+                return -2
+            }
+            return index
         },
         // 点击下方导航
         handleClickPointer (i) {
@@ -282,6 +276,18 @@ export default {
             }
             this.slideControl(current)
             this.autoPlay()
+        },
+        getWidth (elements) {
+            // 处理两个特殊 window document
+            if (elements === window) {
+                return document.documentElement.clientWidth || document.body.clientWidth
+            } else if (elements === document) {
+                return document.documentElement.scrollWidth || document.body.scrollWidth
+            } else if (typeof elements === 'object') {
+                return elements.offsetWidth
+            } else if (typeof elements === 'string') {
+                return document.getElementById(elements).offsetWidth
+            }
         }
     }
 }
