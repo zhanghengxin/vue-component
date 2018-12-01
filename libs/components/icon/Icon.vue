@@ -28,7 +28,7 @@ export default {
             return [
                 `${prefixCls}`,
                 {
-                    [`${prefix}${this.type}`]: this.type !== ''
+                    [`bw-${this.type}`]: this.type !== ''
                 }
             ]
         },
@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         handleClick (event) {
-            this.$emit('click', event)
+            this.$emit('on-click', event)
         }
     }
 }

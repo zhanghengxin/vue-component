@@ -2,7 +2,7 @@
  * @Author: hanshuai
  * @Date: 2018-09-21 14:44:29
  * @Last Modified by: hanshuai
- * @Last Modified time: 2018-09-21 16:37:54
+ * @Last Modified time: 2018-11-26 18:58:57
  */
 
 <template>
@@ -18,7 +18,7 @@
         <div :class="extraCls" v-if="showExtra">
             <slot name="extra"></slot>
         </div>
-        <div :class="bodyCls">
+        <div :class="bodyCls" :style="bodyStyle">
             <slot></slot>
         </div>
     </div>
@@ -82,6 +82,11 @@ export default {
         },
         bodyCls () {
             return `${prefixCls}-body`
+        },
+        bodyStyle () {
+            return {
+                padding: this.padding + 'px'
+            }
         }
     },
     mounted () {
