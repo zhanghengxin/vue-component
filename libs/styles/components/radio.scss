@@ -1,286 +1,253 @@
-$css-prefix-radio: $css-prefix + 'radio';
+$css-prefix-radio: $css-prefix+'radio';
 .#{$css-prefix-radio} {
-  display: inline-block;
-  margin-right: 4px;
-  white-space: nowrap;
-  position: relative;
-  line-height: 1;
-  vertical-align: middle;
-  cursor: pointer;
-  &-group {
     display: inline-block;
-    font-size: 12px;
-    vertical-align: middle;
-  }
-  &-group-vertical &-wrapper {
-    display: block;
-    height: 30px;
-    line-height: 30px;
-  }
-  &-wrapper {
-    font-size: 12px;
-    vertical-align: middle;
-    display: inline-block;
-    position: relative;
+    margin-right: 4px;
     white-space: nowrap;
-    margin-right: 8px;
-    cursor: pointer;
-  }
-  &-wrapper-disabled {
-    cursor: not-allowed;
-  }
-  &:hover &-inner {
-    border-color: $Border;
-  }
-  &-inner {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
     position: relative;
-    top: 3px;
-    left: 0;
-    background-color: $white;
-    border: 1px solid $Border;
-    border-radius: 50%;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-  }
-  &-inner:after {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    left: 3px;
-    top: 3px;
-    border-radius: 6px;
-    display: table;
-    border-top: 0;
-    border-left: 0;
-    content: ' ';
-    background-color: $Primary;
-    opacity: 0;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    -webkit-transform: scale(0);
-    -ms-transform: scale(0);
-    transform: scale(0);
-  }
-  &-large {
-    font-size: 14px;
-  }
-  &-large &-inner {
-    width: 16px;
-    height: 16px;
-  }
-  &-large &-inner:after {
-    width: 10px;
-    height: 10px;
-  }
-  &-large &-wrapper{
-    font-size: 14px;
-  }
-  &-small &-inner {
-    width: 12px;
-    height: 12px;
-  }
-  &-small &-inner:after {
-    width: 6px;
-    height: 6px;
-  }
-  &-input {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    opacity: 0;
+    line-height: 1;
+    vertical-align: middle;
     cursor: pointer;
-  }
-  &-checked &-inner {
-    border-color: $Primary;
-  }
-  &-checked &-inner:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-  }
-  &-checked:hover &-inner {
-    border-color: $Primary;
-  }
-  &-disabled {
-    cursor: not-allowed;
-  }
-  &-disabled &-input {
-    cursor: not-allowed;
-  }
-  &-disabled:hover &-inner {
-    border-color: $Border;
-  }
-  &-disabled &-inner {
-    border-color: $Border;
-    background-color: #f3f3f3;
-  }
-  &-disabled &-inner:after {
-    background-color: #ccc;
-  }
-  &-disabled &-disabled+span {
-    color: #ccc;
-  }
-  &-group-button {
-    font-size: 0;
-    -webkit-text-size-adjust: none;
-  }
-  &-group-button & {
-    width: 0;
-    margin-right: 0;
-  }
-  &-group-button &-wrapper {
-    display: inline-block;
-    height: 32px;
-    line-height: 30px;
-    margin: 0;
-    padding: 0 15px;
-    font-size: 12px;
-    color: #495060;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    cursor: pointer;
-    border: 1px solid $Border;
-    border-left: 0;
-    background: $white;
-    position: relative;
-  }
-  &-group-button &-wrapper>span {
-    margin-left: 0;
-  }
-  &-group-button &-wrapper:after,
-  &-group-button &-wrapper:before {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 1px;
-    height: 100%;
-    left: -1px;
-    top: 0;
-    background: $Border;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-  }
-  &-group-button &-wrapper:after {
-    height: 36px;
-    left: -1px;
-    top: -3px;
-    background: rgba(45, 140, 240, .2);
-    opacity: 0;
-  }
-  &-group-button &-wrapper:first-child {
-    border-radius: 4px 0 0 4px;
-    border-left: 1px solid $Border;
-  }
-  &-group-button &-wrapper:first-child:after,
-  &-group-button &-wrapper:first-child:before {
-    display: none;
-  }
-  &-group-button &-wrapper:last-child {
-    border-radius: 0 4px 4px 0;
-  }
-  &-group-button &-wrapper:first-child:last-child {
-    border-radius: 4px;
-  }
-  &-group-button &-wrapper:hover {
-    position: relative;
-    color: $Primary;
-  }
-  &-group-button &-wrapper:hover & {
-    background-color: $Title;
-  }
-  &-group-button &-wrapper &-inner,
-  &-group-button &-wrapper input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  &-group-button &-wrapper-checked {
-    background: $white;
-    border-color: $Primary;
-    color: $Primary;
-    -webkit-box-shadow: -1px 0 0 0 $Primary;
-    box-shadow: -1px 0 0 0 $Primary;
-    z-index: 1;
-  }
-  &-group-button &-wrapper-checked:before {
-    background: $Primary;
-    opacity: .1;
-  }
-  &-group-button &-wrapper-checked:first-child {
-    border-color: $Primary;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-  }
-  &-group-button &-wrapper-checked:hover {
-    border-color: $Primary;
-    color: $Primary;
-  }
-  &-group-button &-wrapper-checked:active {
-    border-color: $Primary;
-    color: $Primary;
-  }
-  &-group-button &-wrapper-disabled {
-    border-color: $Border;
-    background-color: $Background;
-    cursor: not-allowed;
-    color: #ccc;
-  }
-  &-group-button &-wrapper-disabled:first-child,
-  &-group-button &-wrapper-disabled:hover {
-    border-color: $Border;
-    background-color: $Background;
-    color: #ccc;
-  }
-  &-group-button &-wrapper-disabled:first-child {
-    border-left-color: $Border;
-  }
+    &-group {
+        display: inline-block;
+        font-size: 12px;
+        vertical-align: middle;
+    }
+    &-group-vertical &-wrapper {
+        display: block;
+        height: 30px;
+        line-height: 30px;
+    }
+    &-wrapper {
+        font-size: 12px;
+        vertical-align: middle;
+        display: inline-block;
+        position: relative;
+        white-space: nowrap;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+    &-wrapper-disabled {
+        cursor: not-allowed;
+    }
+    &:hover &-inner {
+        border-color: $Border;
+    }
+    &-inner {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        position: relative;
+        top: 3px;
+        left: 0;
+        background-color: $white;
+        border: 1px solid $Border;
+        border-radius: 50%;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+    &-inner:after {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        left: 3px;
+        top: 3px;
+        border-radius: 6px;
+        display: table;
+        border-top: 0;
+        border-left: 0;
+        content: ' ';
+        background-color: $Primary;
+        opacity: 0;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+        transform: scale(0);
+    }
+    &-large {
+        font-size: 14px;
+    }
+    &-large &-inner {
+        width: 16px;
+        height: 16px;
+    }
+    &-large &-inner:after {
+        width: 10px;
+        height: 10px;
+    }
+    &-large &-wrapper {
+        font-size: 14px;
+    }
+    &-small &-inner {
+        width: 12px;
+        height: 12px;
+    }
+    &-small &-inner:after {
+        width: 6px;
+        height: 6px;
+    }
+    &-input {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        opacity: 0;
+        cursor: pointer;
+    }
+    &-checked &-inner {
+        border-color: $Primary;
+    }
+    &-checked &-inner:after {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+    &-checked:hover &-inner {
+        border-color: $Primary;
+    }
+    &-disabled {
+        cursor: not-allowed;
+    }
+    &-disabled &-input {
+        cursor: not-allowed;
+    }
+    &-disabled:hover &-inner {
+        border-color: $Border;
+    }
+    &-disabled &-inner {
+        border-color: $Border;
+        background-color: $Background;
+    }
+    &-disabled &-inner:after {
+        background-color: $DisContent;
+    }
+    &-disabled &-disabled+span {
+        color: $DisContent;
+    }
+    &-group-button {
+        font-size: 0;
+        -webkit-text-size-adjust: none;
+    }
+    &-group-button & {
+        width: 0;
+        margin-right: 0;
+    }
+    &-group-button &-wrapper {
+        display: inline-block;
+        height: 32px;
+        line-height: 30px;
+        margin: 0;
+        padding: 0 15px;
+        font-size: 12px;
+        color: $Content;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        cursor: pointer;
+        border: 1px solid $Border;
+        border-left: 0;
+        background: $white;
+        position: relative;
+    }
+    &-group-button &-wrapper>span {
+        margin-left: 0;
+    }
+    &-group-button &-wrapper:after,
+    &-group-button &-wrapper:before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: 100%;
+        left: -1px;
+        top: 0;
+        background: $Border;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+    &-group-button &-wrapper:after {
+        height: 36px;
+        left: -1px;
+        top: -3px;
+        background: rgba(45, 140, 240, .2);
+        opacity: 0;
+    }
+    &-group-button &-wrapper:first-child {
+        border-radius: 4px 0 0 4px;
+        border-left: 1px solid $Border;
+    }
+    &-group-button &-wrapper:first-child:after,
+    &-group-button &-wrapper:first-child:before {
+        display: none;
+    }
+    &-group-button &-wrapper:last-child {
+        border-radius: 0 4px 4px 0;
+    }
+    &-group-button &-wrapper:first-child:last-child {
+        border-radius: 4px;
+    }
+    &-group-button &-wrapper:hover {
+        position: relative;
+        color: $Primary;
+    }
+    &-group-button &-wrapper:hover & {
+        background-color: $Title;
+    }
+    &-group-button &-wrapper &-inner,
+    &-group-button &-wrapper input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    &-group-button &-wrapper-checked {
+        background: $white;
+        border-color: $Primary;
+        color: $Primary;
+        -webkit-box-shadow: -1px 0 0 0 $Primary;
+        box-shadow: -1px 0 0 0 $Primary;
+        z-index: 1;
+    }
+    &-group-button &-wrapper-checked:before {
+        background: $Primary;
+        opacity: .1;
+    }
+    &-group-button &-wrapper-checked:first-child {
+        border-color: $Primary;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    &-group-button &-wrapper-checked:hover {
+        border-color: $Primary;
+        color: $Primary;
+    }
+    &-group-button &-wrapper-checked:active {
+        border-color: $Primary;
+        color: $Primary;
+    }
+    &-group-button &-wrapper-disabled {
+        border-color: $Border;
+        background-color: $Background;
+        cursor: not-allowed;
+        color: $DisContent;
+    }
+    &-group-button &-wrapper-disabled:first-child,
+    &-group-button &-wrapper-disabled:hover {
+        border-color: $Border;
+        background-color: $Background;
+        color: $DisContent;
+    }
+    &-group-button &-wrapper-disabled:first-child {
+        border-left-color: $Border;
+    }
+    &-group-button &-wrapper-disabled.#{$css-prefix-radio}-wrapper-checked {
+        color: $white;
+        background-color: $Border;
+        border-color: $Border;
+        -webkit-box-shadow: none!important;
+        box-shadow: none!important;
+    }
 }
-.b-radio-group-button .b-radio-wrapper-disabled.b-radio-wrapper-checked {
-  color: $white;
-  background-color: $Border;
-  border-color: $Border;
-  -webkit-box-shadow: none!important;
-  box-shadow: none!important;
-}
-.b-radio-group-button.b-radio-group-large .b-radio-wrapper {
-  height: 36px;
-  line-height: 34px;
-  font-size: 14px;
-}
-.b-radio-group-button.b-radio-group-large .b-radio-wrapper:after {
-  height: 40px;
-}
-.b-radio-group-button.b-radio-group-small .b-radio-wrapper {
-  height: 24px;
-  line-height: 22px;
-  padding: 0 12px;
-  font-size: 12px;
-}
-.b-radio-group-button.b-radio-group-small .b-radio-wrapper:after {
-  height: 28px;
-}
-.b-radio-group-button.b-radio-group-small .b-radio-wrapper:first-child {
-  border-radius: 3px 0 0 3px;
-}
-.b-radio-group-button.b-radio-group-small .b-radio-wrapper:last-child {
-  border-radius: 0 3px 3px 0;
-}
-span.b-radio+* {
-  margin-left: 2px;
-  margin-right: 2px;
-}
-
-
-
-
-
-

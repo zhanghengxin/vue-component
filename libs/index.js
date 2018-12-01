@@ -30,7 +30,11 @@ import Radio from './components/radio'
 import RadioGroup from './components/radioGroup'
 import Form from './components/form'
 import Tag from './components/Tag'
+import Tree from './components/tree'
 import Progress from './components/Progress'
+import DatePicker from './components/date-picker'
+import TimePicker from './components/time-picker'
+import DateTimePicker from './components/datetime-picker'
 
 const components = [
     Input,
@@ -38,6 +42,7 @@ const components = [
     Button,
     Drawer,
     Tag,
+    Tree,
     Icon,
     Message,
     Collapse,
@@ -63,7 +68,10 @@ const components = [
     Form,
     Form.FormItem,
     Switch,
-    Progress
+    Progress,
+    DatePicker,
+    TimePicker,
+    DateTimePicker
 ]
 
 const install = function (Vue) {
@@ -75,28 +83,5 @@ const install = function (Vue) {
 
 export default {
     install,
-    Button,
-    Drawer,
-    Carousel,
-    CarouselItem,
-    Input,
-    Page,
-    Icon,
-    Collapse,
-    CollapseItem,
-    Message,
-    Breadcrumb,
-    BreadcrumbItem,
-    Circle,
-    Steps,
-    Step,
-    Card,
-    Modal,
-    Tooltip,
-    BackTop,
-    Checkbox,
-    CheckboxGroup,
-    Radio,
-    RadioGroup,
     ...components
 }

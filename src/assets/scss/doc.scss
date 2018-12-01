@@ -1,7 +1,8 @@
 // 示例文档样式
 @import "color";
+
 .doc {
-  img{
+  img {
     max-width: 1000px;
   }
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
@@ -32,13 +33,13 @@
     font-size: 18px;
     margin: 10px 0 15px;
   }
-  p {
+  h3 + p {
     font-size: 14px;
     color: $Content;
     line-height: 1.5em;
     margin-bottom: 10px;
   }
-  table {
+  .table {
     width: 100%;
     font-size: 13px;
     line-height: 1.5;
