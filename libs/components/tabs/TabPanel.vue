@@ -1,13 +1,15 @@
 
 <template>
-    <div class="pane" v-show="show">
+    <div  v-show="show">
       <slot></slot>
     </div>
 </template>
 
 <script>
+import { prefix } from '../../utils/common'
+const prefixCls = prefix + 'tabsPanel'
 export default {
-    name: 'TabPanel',
+    name: prefixCls,
     data () {
         return {
             show: true,

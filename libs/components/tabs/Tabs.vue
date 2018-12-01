@@ -4,7 +4,7 @@
           <div @click="handleChange(index)" v-for="(item,index) in navList" :key="index" :class="tabCls(item)" >
             <Icon v-if="item.icon !== ''" :type="item.icon"></Icon>
             <span>{{item.label}}</span>
-            <Icon v-if="showClose(item)" type="yidongduan_conclose" @click.native.stop="handleRemove(index)"></Icon>
+            <Icon v-if="showClose(item)" type="yidongduan_conclose" @click.native.stop="handleRemove(index)" :class="prefixCls+'-icon'"></Icon>
           </div>
     </div>
     <div :class="prefixCls+'-content'">
@@ -13,12 +13,11 @@
   </div>
 </template>
 <script>
-// import BScroll from 'better-scroll'
 import { prefix } from '../../utils/common'
 import Icon from '../icon/Icon.vue'
 const prefixCls = prefix + 'tabs'
 export default {
-    name: 'Tabs',
+    name: prefixCls,
     props: {
         value: {
             type: [String, Number]
@@ -80,10 +79,9 @@ export default {
             ]
         },
         getTabs () {
-            return this.$children.filter(item => item.$options.name === 'TabPanel')
+            return this.$children.filter(item => item.$options.name === 'b-tabsPanel')
         },
         updateNav () {
-            // debugger
             this.navList = []
             this.getTabs().forEach((pane, index) => {
                 this.navList.push({
@@ -113,7 +111,6 @@ export default {
             }
         },
         handleRemove (index) {
-            debugger
             const tabs = this.getTabs()
             const tab = tabs[index]
             tab.$destroy()

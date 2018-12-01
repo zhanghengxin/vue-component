@@ -8,26 +8,26 @@
 
 <div class="example">
     <div class="example-box">
-            <tabs value ="0" >
-                <tab-panel label="标签一" name="0" >
+            <b-tabs value ="0" >
+                <b-tabsPanel label="标签一" name="0" >
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1">
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1">
                     标签二
-                </tab-panel>
-            </tabs>
+                </b-tabsPanel>
+            </b-tabs>
     </div>
 
 ::: code
 ```html
-         <tabs value ="0">
-                <tab-panel label="标签一" name="0">
+         <b-tabs value ="0">
+                <b-tabsPanel label="标签一" name="0">
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1">
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1">
                     标签二
-                </tab-panel>
-            </tabs>  
+                </b-tabsPanel>
+            </b-tabs>  
 ```
 :::
 </div>
@@ -36,26 +36,26 @@
 
 <div class="example">
     <div class="example-box">
-            <tabs value ="0">
-                <tab-panel label="标签一" name="0">
+            <b-tabs value ="0">
+                <b-tabsPanel label="标签一" name="0">
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1" disabled>
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1" disabled>
                     标签二
-                </tab-panel>
-            </tabs>
+                </b-tabsPanel>
+            </b-tabs>
     </div>
 
 ::: code
 ```html
-         <tabs value ="0">
-                <tab-panel label="标签一" name="0" >
+         <b-tabs value ="0">
+                <b-tabsPanel label="标签一" name="0" >
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1" disabled>
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1" disabled>
                     标签二
-                </tab-panel>
-            </tabs>  
+                </b-tabsPanel>
+            </b-tabs>  
 ```
 :::
 </div>
@@ -64,26 +64,26 @@
 
 <div class="example">
     <div class="example-box">
-            <tabs value ="0">
-                <tab-panel label="标签一" name="0"  icon="zhushou_gw">
+            <b-tabs value ="0">
+                <b-tabsPanel label="标签一" name="0"  icon="zhushou_gw">
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1"icon="biaoqian" >
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1"icon="biaoqian" >
                     标签二
-                </tab-panel>
-            </tabs>
+                </b-tabsPanel>
+            </b-tabs>
     </div>
 
 ::: code
 ```html
-         <tabs value ="0">
-                <tab-panel label="标签一" name="0" icon="zhushou_gw">
+         <b-tabs value ="0">
+                <b-tabsPanel label="标签一" name="0" icon="zhushou_gw">
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1" icon="biaoqian">
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1" icon="biaoqian">
                     标签二
-                </tab-panel>
-            </tabs>  
+                </b-tabsPanel>
+            </b-tabs>  
 ```
 :::
 </div>
@@ -92,26 +92,26 @@
 
 <div class="example">
     <div class="example-box">
-            <tabs value ="0" type="line">
-                <tab-panel label="标签一" name="0">
+            <b-tabs value ="0" type="line">
+                <b-tabsPanel label="标签一" name="0">
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1">
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1">
                     标签二
-                </tab-panel>
-            </tabs>
+                </b-tabsPanel>
+            </b-tabs>
     </div>
 
 ::: code
 ```html
-         <tabs value ="0">
-                <tab-panel label="标签一" name="0" type="line">
+         <b-tabs value ="0">
+                <b-tabsPanel label="标签一" name="0" type="line">
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1">
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1">
                     标签二
-                </tab-panel>
-            </tabs>  
+                </b-tabsPanel>
+            </b-tabs>  
 ```
 :::
 </div>
@@ -120,26 +120,26 @@
 
 <div class="example">
     <div class="example-box">
-            <tabs value ="0" type="line" size="small">
-                <tab-panel label="标签一" name="0">
+            <b-tabs value ="0" type="line" size="small">
+                <b-tabsPanel label="标签一" name="0">
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1">
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1">
                     标签二
-                </tab-panel>
-            </tabs>
+                </b-tabsPanel>
+            </b-tabs>
     </div>
 
 ::: code
 ```html
-         <tabs value ="0">
-                <tab-panel label="标签一" name="0" type="line" size="small">
+         <b-tabs value ="0" type="line" size="small">
+                <b-tabsPanel label="标签一" name="0" >
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1">
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1">
                     标签二
-                </tab-panel>
-            </tabs>  
+                </b-tabsPanel>
+            </b-tabs>  
 ```
 :::
 </div>
@@ -148,14 +148,14 @@
 
 <div class="example">
     <div class="example-box">
-            <tabs value ="0" closable @on-tab-remove="handleTabRemove">
-                <tab-panel label="标签一" name="0" v-if="tab0">
+            <b-tabs value ="0" closable @on-tab-remove="handleTabRemove">
+                <b-tabsPanel label="标签一" name="0" v-if="tab0">
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1" v-if="tab1">
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1" v-if="tab1">
                     标签二
-                </tab-panel>
-            </tabs>
+                </b-tabsPanel>
+            </b-tabs>
 <script>
     export default {
         data () {
@@ -176,14 +176,14 @@
 
 ::: code
 ```html
-         <tabs value ="0" closable @on-tab-remove="handleTabRemove">
-                <tab-panel label="标签一" name="0" >
+         <b-tabs value ="0" closable @on-tab-remove="handleTabRemove">
+                <b-tabsPanel label="标签一" name="0" >
                     标签一
-                </tab-panel>
-                <tab-panel label="标签二" name="1">
+                </b-tabsPanel>
+                <b-tabsPanel label="标签二" name="1">
                     标签二
-                </tab-panel>
-            </tabs>
+                </b-tabsPanel>
+            </b-tabs>
             <script>
     export default {
         data () {
