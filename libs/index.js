@@ -17,12 +17,9 @@ import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
 import Circle from './components/circle'
 import { Steps, Step } from './components/steps/index'
-<<<<<<< HEAD
 import { Tabs, TabPanel } from './components/tabs/index'
 
-=======
 import { Row, Col } from './components/grid/index'
->>>>>>> develop
 import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
