@@ -18,7 +18,6 @@ import BreadcrumbItem from './components/breadcrumb-item'
 import Circle from './components/circle'
 import { Steps, Step } from './components/steps/index'
 import { Tabs, TabPanel } from './components/tabs/index'
-
 import { Row, Col } from './components/grid/index'
 import Card from './components/card'
 import Modal from './components/modal'
@@ -91,33 +90,5 @@ const install = function (Vue) {
 
 export default {
     install,
-<<<<<<< HEAD
-    Button,
-    Drawer,
-    Carousel,
-    CarouselItem,
-    Input,
-    Page,
-    Icon,
-    Collapse,
-    CollapseItem,
-    Message,
-    Breadcrumb,
-    BreadcrumbItem,
-    Circle,
-    Steps,
-    Step,
-    Card,
-    Modal,
-    Tooltip,
-    BackTop,
-    Checkbox,
-    CheckboxGroup,
-    Radio,
-    RadioGroup,
-    TabPanel,
-    Tabs,
-=======
->>>>>>> develop
     ...components
 }

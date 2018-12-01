@@ -4,7 +4,7 @@
           <div @click="handleChange(index)" v-for="(item,index) in navList" :key="index" :class="tabCls(item)" >
             <Icon v-if="item.icon !== ''" :type="item.icon"></Icon>
             <span>{{item.label}}</span>
-            <Icon v-if="showClose(item)" type="yidongduan_conclose" @click.native.stop="handleRemove(index)" :class="prefixCls+'-icon'"></Icon>
+            <Icon v-if="showClose(item)" type="quxiao-guanbi-shanchu" @click.native.stop="handleRemove(index)" :class="prefixCls+'-icon'"></Icon>
           </div>
     </div>
     <div :class="prefixCls+'-content'">
