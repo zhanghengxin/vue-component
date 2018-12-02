@@ -26,17 +26,6 @@ let findComponentUpwards = function (context, componentName) {
     return parents
 }
 
-let findNearestComponent = (element, componentName) => {
-    let target = element
-    while (target && target.tagName !== 'BODY') {
-        if (target.__vue__ && target.__vue__.$options.name === componentName) {
-            return target.__vue__
-        }
-        target = target.parentNode
-    }
-    return null
-}
-
 function typeOf (obj) {
     const toString = Object.prototype.toString
     const map = {
@@ -77,4 +66,4 @@ function deepCopy (data) {
     return o
 }
 
-export { findComponentUpward, deepCopy, findComponentUpwards, findNearestComponent }
+export { findComponentUpward, deepCopy, findComponentUpwards }

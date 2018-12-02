@@ -2,6 +2,7 @@
  * Created by gaoguoqing on 2018/9/5.
  *
  */
+
 import Input from './components/input/index'
 import Button from './components/button'
 import Drawer from './components/drawer'
@@ -16,6 +17,8 @@ import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
 import Circle from './components/circle'
 import { Steps, Step } from './components/steps/index'
+import { Tabs, TabPanel } from './components/tabs/index'
+import { Row, Col } from './components/grid/index'
 import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
@@ -32,6 +35,9 @@ import Form from './components/form'
 import Tag from './components/Tag'
 import Tree from './components/tree'
 import Progress from './components/Progress'
+import DatePicker from './components/date-picker'
+import TimePicker from './components/time-picker'
+import DateTimePicker from './components/datetime-picker'
 
 const components = [
     Input,
@@ -51,6 +57,8 @@ const components = [
     Steps,
     Step,
     Card,
+    Row,
+    Col,
     Dropdown,
     DropdownItem,
     DropdownMenu,
@@ -65,7 +73,12 @@ const components = [
     Form,
     Form.FormItem,
     Switch,
-    Progress
+    Progress,
+    Tabs,
+    TabPanel,
+    DatePicker,
+    TimePicker,
+    DateTimePicker
 ]
 
 const install = function (Vue) {

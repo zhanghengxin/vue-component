@@ -34,6 +34,7 @@
 </template>
 <script>
 import { findComponentUpwards, findComponentUpward } from '../../utils/assist'
+
 import Checkbox from '../checkbox/Checkbox.vue'
 import Icon from '../icon/Icon.vue'
 import { prefix } from '../../utils/common'
@@ -70,6 +71,7 @@ export default {
             default: false
         },
         draggable: {
+
             type: Boolean,
             default: false
         }
@@ -102,6 +104,7 @@ export default {
                 {
                     [`${prefixCls}-name-selected`]: this.data[this.defaultOpt.selectedKey],
                     [`${prefixCls}-name-draggable`]: this.draggable
+
                 }
             ]
         },

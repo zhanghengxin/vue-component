@@ -1,4 +1,5 @@
 <template>
+
     <div
         :class="wrapCls"
     >
@@ -16,7 +17,6 @@
 
 <script>
 import { prefix } from '../../utils/common'
-// import { findNearestComponent } from '../../utils/assist'
 import TreeNode from './Node.vue'
 import Emitter from '../../mixins/emitter'
 
@@ -33,6 +33,7 @@ export default {
             rootData: this.data,
             dataList: [],
             dargState: {}
+
         }
     },
     watch: {
@@ -66,6 +67,7 @@ export default {
         },
         defaultOpt: {
             type: Object,
+
             default () {
                 return {
                     childrenKey: 'children',
@@ -224,6 +226,7 @@ export default {
             }
         },
         // 单选
+
         handleSelect (nodeKey) {
             const selectedKey = this.defaultOpt.selectedKey
             const node = this.dataList[nodeKey].node
@@ -322,12 +325,6 @@ export default {
                 return
             }
             this.dargState.startNode = options.treeNode.data
-        },
-        handleDragOver () {
-            // const dropNode = findNearestComponent(event.target, 'tree-node')
-        },
-        handleDragEnd () {
-
         },
         handleDrop (options) {
             let childrenKey = this.defaultOpt.childrenKey

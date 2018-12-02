@@ -36,7 +36,6 @@ $css-prefix-tree: $css-prefix + 'tree';
   transition: all .2s ease-in-out;
 }
 
-
 .#{$css-prefix-tree}-name-selected {
   background-color: transparentize($Primary, 0.9);
   color: $Primary;
@@ -75,4 +74,5 @@ $css-prefix-tree: $css-prefix + 'tree';
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg)
   }
+
 }

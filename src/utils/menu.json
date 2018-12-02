@@ -98,6 +98,21 @@
           "title": "Progress 进度条",
           "path": "/progress",
           "name": "progress"
+        },
+        {
+          "title": "DatePicker 日期选择器",
+          "path": "/datepicker",
+          "name": "datepicker"
+        },
+        {
+          "title": "TimePicker 时间选择器",
+          "path": "/timepicker",
+          "name": "timepicker"
+        },
+        {
+          "title": "DateTimePicker选择器",
+          "path": "/datetimepicker",
+          "name": "datetimepicker"
         }
       ]
     },
@@ -109,6 +124,11 @@
           "title": "Card 卡片",
           "path": "/card",
           "name": "card"
+        },
+        {
+          "title": "Grid 栅格",
+          "path": "/grid",
+          "name": "grid"
         }
       ]
     },
@@ -126,6 +146,7 @@
           "path": "/tree",
           "name": "tree"
         },
+
         {
           "title": "Notice 通知",
           "path": "/notice",
@@ -140,6 +161,11 @@
           "title": "Tooltip 文字提示",
           "path": "/tooltip",
           "name": "tooltip"
+        },
+        {
+          "title": "Tabs 标签页",
+          "path": "/tabs",
+          "name": "tabs"
         }
       ]
     },

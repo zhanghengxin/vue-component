@@ -7,7 +7,7 @@
     <div :class="prefixCls">
         <svg :xmlns='xmlns' :height='getHw' :width='getHw'>
             <circle :class="prefixCls + '-' + strokeccl" :style="strokecValsty" :cx='getCxy' :cy='getCxy' :r='radiusVal' fill='none' :stroke-width='strokewVal' stroke-linecap='round'></circle>
-            <circle :class="prefixCls + '-' + probarccl"  :style='bruStro' ref='probar' :cx='getCxy' :cy='getCxy' :r='radiusVal' fill='none'  :stroke-width='strokewVal' stroke-dasharray='0,10000' stroke-linecap='round'></circle>
+            <circle :class="prefixCls + '-' + probarccl"  :style='bruStro' ref='probar' :cx='getCxy' :cy='getCxy' :r='radiusVal' fill='none'  :stroke-width='strokewVal' :stroke-dasharray='strokedash' stroke-linecap='round'></circle>
             <foreignObject :width='getHw' :height='getHw' >
                 <html :xmlns='textxmlns'>
                     <div :height='getHw' :width='getHw' :style="textcsty" :class="[prefixCls + '-foreigntext',prefixCls + '-' + textccl]">
@@ -41,7 +41,8 @@ export default {
             probarcVal: this.probarc,
             textcVal: this.textc,
             percentVal: this.percent,
-            textxmlns: 'http://www.w3.org/1999/xhtml'
+            textxmlns: 'http://www.w3.org/1999/xhtml',
+            strokedash: '0, 10000'
         }
     },
     props: {
@@ -154,7 +155,7 @@ export default {
             var probar = this.$refs.probar
             percent = Math.max(0, percent)
             percent = Math.min(100, percent)
-            probar.setAttribute('stroke-dasharray', '' + circleLength * percent / 100 + ',' + circleLength)
+            setTimeout(function () { probar.setAttribute('stroke-dasharray', '' + circleLength * percent / 100 + ',' + circleLength) }, 60)
         },
         circleSize: function (standard) {
             if (standard === 'normal') {

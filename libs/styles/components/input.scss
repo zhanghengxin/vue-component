@@ -45,8 +45,6 @@ $input-large-font:16px;
     box-shadow: $shadowColor;
   }
 
-
-
   .#{$css-prefix-input}:focus {
     box-shadow: none;
     outline: none;
@@ -114,6 +112,18 @@ $input-large-font:16px;
     vertical-align: middle;
     @include borderTrans();
     @include inputMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
+
+    &-small {
+      @include inputSize($input-small-size, 4px 8px, $input-small-font);
+    }
+  
+    &-normal {
+      @include inputSize($input-normal-size, 8px, $input-normal-font);
+    }
+  
+    &-large {
+      @include inputSize($input-large-size, 12px 8px, $input-large-font);
+    }
   }
 
   // error input样式
@@ -131,17 +141,7 @@ $input-large-font:16px;
     vertical-align: bottom;
   }
 
-  .#{$css-prefix-input}-small {
-    @include inputSize($input-small-size, 4px 8px, $input-small-font);
-  }
-
-  .#{$css-prefix-input}-normal {
-    @include inputSize($input-normal-size, 8px, $input-normal-font);
-  }
-
-  .#{$css-prefix-input}-large {
-    @include inputSize($input-large-size, 12px 8px, $input-large-font);
-  }
+  
 
   //icon样式
   .#{$css-prefix-input-icon} {
@@ -150,35 +150,36 @@ $input-large-font:16px;
     z-index: 3;
     text-align: center;
     height: 100%;
+    &-prefix {
+      left: 0;
+    }
+  
+    &-suffix {
+      right: 0;
+    }
+  
+    &-clear {
+      display: none;
+      z-index: 3;
+      color: #666;
+      opacity: .7;
+    }
+  
+    &-small {
+      @include inputIconSize($input-small-size, $input-small-font);
+    }
+  
+    &-normal {
+      @include inputIconSize($input-normal-size, $input-normal-font);
+    }
+  
+    &-large {
+      @include inputIconSize($input-large-size, $input-large-font);
+    }
+  
   }
 
-  .#{$css-prefix-input-icon}-prefix {
-    left: 0;
-  }
-
-  .#{$css-prefix-input-icon}-suffix {
-    right: 0;
-  }
-
-  .#{$css-prefix-input-icon}-clear {
-    display: none;
-    z-index: 3;
-    color: #666;
-    opacity: .7;
-  }
-
-  .#{$css-prefix-input-icon}-small {
-    @include inputIconSize($input-small-size, $input-small-font);
-  }
-
-  .#{$css-prefix-input-icon}-normal {
-    @include inputIconSize($input-normal-size, $input-normal-font);
-  }
-
-  .#{$css-prefix-input-icon}-large {
-    @include inputIconSize($input-large-size, $input-large-font);
-  }
-
+  
   //input label样式
   .#{$css-prefix-input}-label {
     line-height: 1;
@@ -197,6 +198,10 @@ $input-large-font:16px;
 
     @include labelMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
 
+    &.#{$css-prefix-input}-error {
+      @include labelMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
+    }
+
     .#{$css-prefix-input} {
       border: 0;
       width: 100%;
@@ -204,10 +209,6 @@ $input-large-font:16px;
       border-top-left-radius: 0;
       float: left;
     }
-  }
-
-  &.#{$css-prefix-input}-error {
-    @include labelMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
   }
 
   .#{$css-prefix-input}-label-box {
