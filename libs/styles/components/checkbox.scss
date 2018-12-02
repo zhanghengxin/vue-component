@@ -10,7 +10,7 @@ $css-prefix-checkbox: $css-prefix + 'checkbox';
         box-sizing: border-box;
         display:inline-block;
         vertical-align: middle;
-        margin-right:8px;
+        //margin-right:8px;
         width:14px;
         height:14px;
         border: 1px solid $Border;
@@ -23,7 +23,7 @@ $css-prefix-checkbox: $css-prefix + 'checkbox';
         display: inline-block;
         vertical-align: middle;
     }
-    &-checked{
+    &-checked, &-indeterminate{
         background: $LinkContent;
         border: 1px solid $LinkContent;
     }
@@ -33,7 +33,7 @@ $css-prefix-checkbox: $css-prefix + 'checkbox';
         width: 3px;
         height: 8px;
         position: absolute;
-        top: 1px;
+        top: 0px;
         left: 4px;
         border: 2px solid $white;
         border-top: 0;
@@ -45,13 +45,26 @@ $css-prefix-checkbox: $css-prefix + 'checkbox';
         background: $Disabled;
         border: 1px solid $Border;
     }
+    &-indeterminate::after{
+        position: absolute;
+        display: table;
+        content: "";
+        width: 8px;
+        height: 0px;
+        transform: scale(1);
+        left: 1px;
+        top: 5px;
+        border: 2px solid #fff;
+        border-top: 0;
+        border-left: 0;
+    }
     .#{$css-prefix-checkbox}-disabled.#{$css-prefix-checkbox}-checked::after{
         content: '';
         display: table;
         width: 3px;
         height: 8px;
         position: absolute;
-        top: 1px;
+        top: 0px;
         left: 4px;
         border: 2px solid $DisContent;
         border-top: 0;
