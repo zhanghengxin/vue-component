@@ -5,7 +5,6 @@ let findComponentUpward = function (context, componentName, componentNames) {
     } else {
         componentNames = componentName
     }
-
     let parent = context.$parent
     let name = parent.$options.name
     while (parent && (!name || componentNames.indexOf(name) < 0)) {
@@ -14,6 +13,30 @@ let findComponentUpward = function (context, componentName, componentNames) {
     }
     return parent
 }
+
+let findComponentUpwards = function (context, componentName) {
+    let parent = context.$parent
+    let name = parent.$options.name
+    let parents = []
+    while (parent && (!name || componentName !== name)) {
+        parents.push(parent)
+        parent = parent.$parent
+        if (parent) name = parent.$options.name
+    }
+    return parents
+}
+
+let findNearestComponent = (element, componentName) => {
+    let target = element
+    while (target && target.tagName !== 'BODY') {
+        if (target.__vue__ && target.__vue__.$options.name === componentName) {
+            return target.__vue__
+        }
+        target = target.parentNode
+    }
+    return null
+}
+
 function typeOf (obj) {
     const toString = Object.prototype.toString
     const map = {
@@ -35,7 +58,6 @@ function typeOf (obj) {
 function deepCopy (data) {
     const t = typeOf(data)
     let o
-
     if (t === 'array') {
         o = []
     } else if (t === 'object') {
@@ -43,7 +65,6 @@ function deepCopy (data) {
     } else {
         return data
     }
-
     if (t === 'array') {
         for (let i = 0; i < data.length; i++) {
             o.push(deepCopy(data[i]))
@@ -55,4 +76,5 @@ function deepCopy (data) {
     }
     return o
 }
-export {findComponentUpward, deepCopy}
+
+export { findComponentUpward, deepCopy, findComponentUpwards, findNearestComponent }
