@@ -4,19 +4,19 @@
  * @Author: yanghao
  * @Date: 2018-09-14 15:17:37
  * @Last Modified by: yanghao
- * @Last Modified time: 2018-12-03 10:47:13
+ * @Last Modified time: 2018-12-03 16:43:19
  *
  * --------------------------------------------------------------------------- *
  */
 
 <template>
     <div :class="classtype" >
-        <div class="b-collapse-item-header" @click="handleChange">
+        <div :class="header" @click="handleChange">
             <b-icon type="xia" size=12 :class="arrow" ></b-icon>
             <slot name="title"></slot>
         </div>
         <CollapseTransition>
-            <div class="b-collapse-item-content" v-show="show">
+            <div :class="content" v-show="show">
                 <slot name="content"></slot>
             </div>
         </CollapseTransition>
@@ -47,6 +47,12 @@ export default {
     computed: {
         classtype () {
             return [`${prefix}collapse-item` + (this.show ? ` ${prefix}collapse-item-header-active` : '')]
+        },
+        header () {
+            return `${prefix}collapse-item-header`
+        },
+        content () {
+            return `${prefix}collapse-item-content`
         },
         arrow () {
             let Cls

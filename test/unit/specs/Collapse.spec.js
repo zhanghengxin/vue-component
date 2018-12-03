@@ -1,7 +1,8 @@
 import { createVue, destroyVM } from '../utils'
 import { prefix } from '&/utils/common'
 const prefixCls = `.${prefix}collapse`
-
+const Collapse = `${prefix}collapse`
+const CollapseItem = `${prefix}collapse-item`
 describe('Collapse', () => {
     let vm
     // 在本区块的每个测试用例之后执行
@@ -14,14 +15,14 @@ describe('Collapse', () => {
         vm = createVue({
             template: `
                 <div>
-                    <b-collapse v-model="showList">
-                        <b-collapse-item name='show'>
+                    <${Collapse} v-model="showList">
+                        <${CollapseItem} name='show'>
                             <span slot="title">This is Title</span>
                             <div slot="content">
                                 <div>This is Content</div>
                             </div>
-                        </b-collapse-item>
-                    </b-collapse>
+                        </${CollapseItem}>
+                    </${Collapse} >
                 </div>
                 `,
             data () {
@@ -31,21 +32,21 @@ describe('Collapse', () => {
             }
         }, true)
         it('name', () => {
-            expect(vm.$children[0].$el.querySelector(`${prefixCls}-item`).classList.contains('b-collapse-item-header-active')).to.be.true
+            expect(vm.$children[0].$el.querySelector(`${prefixCls}-item`).classList.contains(CollapseItem + '-header-active')).to.be.true
         })
 
         const getCollapseVm = (props, options) => {
             return createVue(Object.assign({
                 template: `
                 <div>
-                    <b-collapse ${props}  v-model="showList1">
-                        <b-collapse-item name='one'>
+                    <${Collapse} ${props}  v-model="showList1">
+                        <${CollapseItem} name='one'>
                             <span slot="title">This is Title1</span>
                             <div slot="content">
                                 <div>This is Content1</div>
                             </div>
-                        </b-collapse-item>
-                    </b-collapse>    
+                        </${CollapseItem}>
+                    </${Collapse}>    
                 </div>
                 `,
                 data () {
@@ -63,44 +64,43 @@ describe('Collapse', () => {
 
         it('positionArrow', () => {
             vm = getCollapseVm('positionArrow = "left"')
-            expect(vm.$children[0].$children[0].$el.querySelector(`${prefixCls}-arrow`).classList.contains('b-collapse-arrow-left')).to.be.true
+            expect(vm.$children[0].$children[0].$el.querySelector(`${prefixCls}-arrow`).classList.contains(Collapse + '-arrow-left')).to.be.true
         })
         it('simple', () => {
             vm = getCollapseVm('simple')
             const collapseEl = vm.$el.querySelector(`${prefixCls}box`)
-            expect(collapseEl.classList.contains('b-collapsebox-simple')).to.be.true
+            expect(collapseEl.classList.contains(Collapse + 'box-simple')).to.be.true
         })
 
         // event
         it('event:change', done => {
-            let result
             vm = createVue({
                 template: `
                 <div>
-                    <b-collapse  @change="handle" v-model="showList1" ref="collapse">
-                        <b-collapse-item name='one' ref="item1">
+                    <${Collapse}  @change="handle" v-model="showList1" ref="collapse">
+                        <${CollapseItem} name='one' ref="item1">
                             <span slot="title">This is Title1</span>
                             <div slot="content">
                                 <div>This is Content1</div>
                             </div>
-                        </b-collapse-item>
-                    </b-collapse>    
+                        </${CollapseItem}>
+                    </${Collapse}>    
                 </div>
                 `,
                 data () {
                     return {
-                        showList1: ['one']
+                        showList1: ['']
                     }
                 },
                 methods: {
                     handle (val) {
-                        result = val
+                        console.log(val)
                     }
                 }
             }, true)
             const spy = sinon.spy()
             vm.$refs.collapse.$on('change', spy)
-            vm.$refs.item1.$el.querySelector('.b-collapse-item-header').click()
+            vm.$refs.item1.$el.querySelector(`${prefixCls}-item-header`).click()
             vm.$nextTick(_ => {
                 expect(spy.withArgs().calledOnce).to.be.true
                 done()
