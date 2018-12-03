@@ -87,17 +87,17 @@
                 信息
             </b-button>
             <b-button
-                type='tysuccess'
+                type='success'
                 @on-click="handleClick('success')">
                 成功
             </b-button>
             <b-button
-                type='tyerror'
+                type='error'
                 @on-click="handleClick('error')">
                 错误
             </b-button>
             <b-button
-                type='tywarning'
+                type='warning'
                 @on-click="handleClick('warning')">
                 警告
             </b-button>

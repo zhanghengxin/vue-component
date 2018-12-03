@@ -586,5 +586,9 @@
   {
     "name": "用户中心",
     "className": "yonghuzhongxin"
+  },
+  {
+    "name": "更多",
+    "className": "gengduo"
   }
 ]

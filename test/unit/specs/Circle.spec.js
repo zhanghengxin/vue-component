@@ -4,12 +4,12 @@ import { createTest, createVue, destroyVM } from '../utils'
 import {prefix} from '&/utils/common'
 const prefixCls = `${prefix}circle`
 
-describe('Circle.vue',()=>{
+describe('Circle.vue', () => {
     let vm
     afterEach(() => {
         destroyVM(vm)
     })
-    it('percent radius strokew',() => {
+    it('percent radius strokew', () => {
         vm = createTest(Circle, {
             percent: 30,
             radius: 48,
@@ -20,7 +20,7 @@ describe('Circle.vue',()=>{
         expect(CircleEle.getElementsByTagName('circle')[0].getAttribute('r')).to.equal('48')
         expect(CircleEle.getElementsByTagName('foreignObject')[0].getElementsByTagName('div')[0].innerHTML).to.equal('30%')
     })
-    it('strokec probarc textc',() => {
+    it('strokec probarc textc', () => {
         vm = createTest(Circle, {
             strokec: '#0079CC',
             probarc: '#ff8092',
@@ -31,7 +31,7 @@ describe('Circle.vue',()=>{
         expect(CircleEle.getElementsByTagName('circle')[1].style.stroke).to.equal('#ff8092')
         expect(CircleEle.getElementsByTagName('foreignObject')[0].getElementsByTagName('div')[0].style.color).to.equal('rgb(128, 210, 255)')
     })
-    it('size',() => {
+    it('size', () => {
         vm = createTest(Circle, {
             size: 'small'
         }, true)

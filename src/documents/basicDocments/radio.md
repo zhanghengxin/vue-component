@@ -7,12 +7,18 @@
     <div class="example-box">
         <div>
              <!-- 未选中 -->
-            <b-radio :disabled='false' label="未选中"></b-radio>
-            <!-- 选中 -->
+            <b-radio :disabled='true' label="未选中"></b-radio>
+        </div>
+        <div>
+        <!-- 选中 -->
             <b-radio label="未选失效项"></b-radio>
-            <!-- 禁止选中 -->
-            <b-radio label='已选失效项' v-model="flagChecked" disabled></b-radio>
-            <!-- 未选失效项 -->
+        </div>
+        <div>
+        <!-- 禁止选中 -->
+            <b-radio label='已选失效项' v-model="flagChecked" :disabled='true'></b-radio>
+        </div>
+        <div>
+        <!-- 未选失效项 -->
             <b-radio label='选中项' v-model="flagChecked"></b-radio>
         </div>
 </div>

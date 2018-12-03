@@ -4,7 +4,7 @@
  * @Author: yanghao
  * @Date: 2018-09-14 15:17:51
  * @Last Modified by: yanghao
- * @Last Modified time: 2018-09-27 16:20:01
+ * @Last Modified time: 2018-12-03 10:21:24
  *
  * --------------------------------------------------------------------------- *
  */
@@ -16,9 +16,10 @@
 </template>
 
 <script>
-const Cls = 'bw-collapsebox'
+import { prefix } from '../../utils/common'
+const Cls = `${prefix}collapsebox`
 export default {
-    name: 'bw-collapse',
+    name: `${prefix}collapse`,
     props: {
         accordion: {
             type: Boolean,

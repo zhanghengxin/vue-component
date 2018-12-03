@@ -37,5 +37,42 @@ $css-prefix-tree: $css-prefix + 'tree';
 }
 
 .#{$css-prefix-tree}-name-selected {
-  background: $LightPrimary;
+  background-color: transparentize($Primary, 0.9);
+  color: $Primary;
+}
+
+.#{$css-prefix-tree}-loop {
+  -webkit-animation: ani-load-loop 1s linear infinite;
+  animation: load-loop 1s linear infinite
+}
+
+@-webkit-keyframes load-loop {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0)
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg)
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg)
+  }
+}
+
+@keyframes load-loop {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0)
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg)
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg)
+  }
+
 }

@@ -28,7 +28,7 @@
                     }
                  },
                  nextStep() {
-                    this.step == 3?(this.step = 1):(this.step += 1)
+                    this.step == 2?(this.step = 0):(this.step += 1)
                  }
              },
              data:function(){
@@ -149,7 +149,13 @@
 <div class="example">
     <div class="example-box">
         <div>
-            这里会放置一个带自定义图标的steps组件
+            <div>
+               <b-steps >
+                   <b-step title='发送' :content='content' icon="fasong"></b-step>
+                   <b-step title='导出' :content='content' icon="dayin"></b-step>
+                   <b-step title='查看' :content='content' icon="chakan"></b-step>
+               </b-steps>
+           </div>
         </div>
     </div>
 
@@ -217,16 +223,22 @@
 <div class="example">
     <div class="example-box">
         <div>
-            这里会放置一个垂直方向的steps组件
+            <b-steps current="2" status="error" direction='vertical' >
+                <b-step title='步骤1' :content='content'></b-step>
+                <b-step title='步骤2' :content='content'></b-step>
+                <b-step title='步骤3' :content='content'></b-step>
+            </b-steps>
         </div>
     </div>
 
 ::: code
 ```html
     <div class="example-box">
-        <div>
-            这里会放置一个垂直方向的steps组件
-        </div>
+         <b-steps current="2" status="error" direction='vertical' >
+             <b-step title='步骤1' :content='content'></b-step>
+             <b-step title='步骤2' :content='content'></b-step>
+             <b-step title='步骤3' :content='content'></b-step>
+          </b-steps>
     </div>
 ```
 :::
@@ -330,6 +342,7 @@
 | lineType     | 线条类型   | String    |  ```line```、 ```zonal```(带状的)   |     ```line```  |
 | shapeType     | 布局的形状   | String    |  ```line```、 ```circle``` 、 ```curve```（弯曲的）  |     ```line```  |
 | current     | 当前步骤，从 0 开始计数   | Number    |  0～n  |     0  |
+| length     | steps组件的总长度   | Number    |    |     |
 | status     | 当前步骤的状态   | String    |  可选值为```wait```、```process```、```finish```、```error```、```single```[孤立值]  |   ```process```  |
 | direction     | 步骤条的方向   | String    |  可选值为```horizontal```或者```vertical```  |   ```horizontal```  |
 
@@ -340,7 +353,6 @@
 | title     | 标题   | String    |    |   -  |
 | content     | 详细介绍   | String    |    |   -  |
 | icon     | 图标   | String    |    |   -  |
-| length     | 距上一个节点的长度   | Number    |    |   1/n  |
 | angle     | 距上一个节点的角度   | Number    |    |   0  |
 | value     | 当前节点的value值   | String    |    |   -  |
 

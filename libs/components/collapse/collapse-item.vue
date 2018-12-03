@@ -4,19 +4,19 @@
  * @Author: yanghao
  * @Date: 2018-09-14 15:17:37
  * @Last Modified by: yanghao
- * @Last Modified time: 2018-09-28 17:03:03
+ * @Last Modified time: 2018-12-03 16:43:19
  *
  * --------------------------------------------------------------------------- *
  */
 
 <template>
     <div :class="classtype" >
-        <div class="bw-collapse-item-header" @click="handleChange">
+        <div :class="header" @click="handleChange">
             <b-icon type="xia" size=12 :class="arrow" ></b-icon>
             <slot name="title"></slot>
         </div>
         <CollapseTransition>
-            <div class="bw-collapse-item-content" v-show="show">
+            <div :class="content" v-show="show">
                 <slot name="content"></slot>
             </div>
         </CollapseTransition>
@@ -25,9 +25,9 @@
 
 <script>
 import CollapseTransition from './collapse-transition'
-
+import { prefix } from '../../utils/common'
 export default {
-    name: 'bw-collapse-item',
+    name: `${prefix}collapse-item`,
     components: {CollapseTransition},
     props: {
         name: {
@@ -46,14 +46,20 @@ export default {
     inject: ['collapse'],
     computed: {
         classtype () {
-            return ['bw-collapse-item' + (this.show ? ' bw-collapse-item-header-active' : '')]
+            return [`${prefix}collapse-item` + (this.show ? ` ${prefix}collapse-item-header-active` : '')]
+        },
+        header () {
+            return `${prefix}collapse-item-header`
+        },
+        content () {
+            return `${prefix}collapse-item-content`
         },
         arrow () {
             let Cls
             if (this.show) {
-                Cls = `bw-collapse-arrow  bw-collapse-arrow-${this.positionArrow}  bw-collapse-arrow-active-${this.positionArrow}`
+                Cls = `${prefix}collapse-arrow  ${prefix}collapse-arrow-${this.positionArrow}  ${prefix}collapse-arrow-active-${this.positionArrow}`
             } else {
-                Cls = `bw-collapse-arrow  bw-collapse-arrow-${this.positionArrow}`
+                Cls = `${prefix}collapse-arrow  ${prefix}collapse-arrow-${this.positionArrow}`
             }
             return Cls
         }
