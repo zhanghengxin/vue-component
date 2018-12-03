@@ -1,0 +1,323 @@
+$css-prefix-picker: $css-prefix + 'datepicker';
+$css-prefix-picker-input: $css-prefix + 'input';
+$css-prefix-calendar: $css-prefix + 'calendar';
+$css-prefix-panel: $css-prefix + 'panel';
+$css-prefix-date: $css-prefix + 'date';
+$css-prefix-time: $css-prefix + 'time';
+$css-prefix-shortcuts: $css-prefix + 'shortcuts';
+$css-prefix-range: $css-prefix + 'range';
+$css-prefix-icon: $css-prefix + 'icon';
+
+$inrange: #DCF1FE;
+$bgFont: #ccc;
+
+.#{$css-prefix-picker} {
+  position: relative;
+  display: inline-block;
+  color: $Sub;
+  * {
+    box-sizing: border-box;
+  }
+  &.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.#{$css-prefix-picker}-range {
+  width: 320px;
+}
+
+.#{$css-prefix-picker}-popup {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  background-color: $white;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.#{$css-prefix-picker-input}-wrapper {
+  position: relative;
+  .b-clear-wrapper {
+    display: none;
+  }
+  &:hover {
+    .b-clear-wrapper {
+      display: block;
+    }
+  }
+}
+
+.#{$css-prefix-picker-input}-append {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 100%;
+  padding: 6px;
+  background-color: $white;
+  background-clip: content-box;
+}
+
+.#{$css-prefix-picker-input}-icon {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  font-style: normal;
+  color: $Content;
+  text-align: center;
+  cursor: pointer;
+}
+
+.#{$css-prefix-calendar}-icon {
+  width: 100%;
+  height: 100%;
+  color: $Content;
+  stroke-width: 8px;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.b-clear-icon {
+  &::before {
+    display: inline-block;
+    content: '\2716';
+    vertical-align: middle;
+  }
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+  }
+}
+
+.#{$css-prefix-range}-wrapper {
+  width: 248px * 2;
+  overflow: hidden;
+}
+
+.#{$css-prefix-shortcuts}-wrapper {
+  padding-top: 10px;
+  width: 93px;
+  text-align: left;
+  background-color: $Background;
+  font-size: 18px;
+  .#{$css-prefix-shortcuts} {
+    display: block;
+    line-height: 24px;
+    background: none;
+    outline: none;
+    border: 0;
+    color: inherit;
+    margin: 0;
+    margin-left: 10px;
+    padding: 0;
+    white-space: nowrap;
+    cursor: pointer;
+    &:hover {
+      color: mix(#fff, $Primary, 20%);
+    }
+  }
+}
+
+.#{$css-prefix-picker}-footer {
+  padding: 4px;
+  clear: both;
+  text-align: right;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+.#{$css-prefix-picker}-btn {
+  font-size: 12px;
+  line-height: 1;
+  padding: 7px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+}
+.#{$css-prefix-picker}-btn-confirm {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #73879c;
+  &:hover {
+    color: $Primary;
+    border-color: $Primary;
+  }
+}
+
+.#{$css-prefix-calendar} {
+  float: left;
+  color: $Sub;
+  padding: 6px 12px;
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.#{$css-prefix-calendar}-header {
+  padding: 0 4px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  overflow: hidden;
+  > a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      color: mix(#fff, $Primary, 20%);
+    }
+  }
+  @at-root {
+    .#{$css-prefix-icon}-last-month,
+    .#{$css-prefix-icon}-next-month {
+      padding: 0 6px;
+      font-size: 20px;
+      line-height: 30px;
+      color: $bgFont !important;
+    }
+    .#{$css-prefix-icon}-last-month {
+      float: left;
+    }
+    .#{$css-prefix-icon}-next-month {
+      float: right;
+    }
+    .#{$css-prefix-icon}-last-year {
+      @extend .#{$css-prefix-icon}-last-month
+    }
+    .#{$css-prefix-icon}-next-year {
+      @extend .#{$css-prefix-icon}-next-month
+    }
+  }
+}
+
+.#{$css-prefix-calendar}-content {
+  width: 32px * 7;
+  height: 32px * 7;
+  .cell {
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 4px;
+    &:hover {
+      background-color: $inrange;
+    }
+    &.actived {
+      color: $white !important;
+      background-color: $Primary;
+    }
+    &.inrange {
+      background-color: $inrange;
+      border-radius: 0;
+    }
+    &.disabled {
+      cursor: not-allowed;
+      color: $bgFont;
+      background-color: $Background;
+      border-radius: 0;
+    }  
+  }
+}
+
+.#{$css-prefix-panel} {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.#{$css-prefix-panel}-date {
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  .#{$css-prefix-date}-header, .#{$css-prefix-date}-body {
+    font-size: 12px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    border: none;
+  }
+  .#{$css-prefix-date}-header {
+    color: $DisContent;
+  }
+  .#{$css-prefix-date}-body {
+    border: 0;
+    color: $Content;
+    &.today {
+      color: mix($white, $Primary, 10%);
+    }
+    &.last-month,
+    &.next-month {
+      color: #ddd;
+    }
+  }
+}
+
+.#{$css-prefix-panel}-year {
+  padding: 7px 0;
+  .cell {
+    display: inline-block;
+    width: 40%;
+    margin: 1px 5%;
+    line-height: 40px;
+  }
+}
+
+.#{$css-prefix-panel}-month {
+  .cell {
+    display: inline-block;
+    width: 30%;
+    line-height: 40px;
+    margin: 8px 1.5%;
+  }
+}
+
+.#{$css-prefix-time}-list {
+  position: relative; // 定位 offsetParent
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid rgba(0,0,0,.05);
+  border-left: 1px solid rgba(0,0,0,.05);
+  overflow-y: auto;
+  .#{$css-prefix-time}-picker-item {
+    display: block;
+    text-align: left;
+    padding-left: 10px;
+  }
+  &:first-child {
+    border-left: 0;
+  }
+  .cell {
+    width: 100%;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+  }
+  /* 滚动条滑块 */
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}

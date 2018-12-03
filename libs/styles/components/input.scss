@@ -1,0 +1,241 @@
+/**
+ * input scss
+ * author ganbowen
+ * created 2018/10/14 17:35:46
+ */
+@import "../common/color";
+
+@import "../common/prefix";
+
+$css-prefix-input: $css-prefix+'input';
+$css-prefix-input-icon: $css-prefix-input+'-icon';
+$input-small-size:24px;
+$input-normal-size:32px;
+$input-large-size:40px;
+$input-small-font:12px;
+$input-normal-font:14px;
+$input-large-font:16px;
+
+//input 的hover focus 等效果
+@mixin inputMockClass($color, $shadowColor) {
+  &:hover {
+    border-color: $color;
+  }
+
+  &:focus {
+    border-color: $color;
+    box-shadow: $shadowColor;
+  }
+
+  &:disabled {
+    background-color: $Disabled;
+  }
+
+  // &:disabled:hover {
+  //   border-color: $Border;
+  // }
+}
+
+@mixin labelMockClass($color, $shadowColor) {
+  &:hover {
+    border-color: $color;
+  }
+
+  &.focus {
+    border-color: $color;
+    box-shadow: $shadowColor;
+  }
+
+  .#{$css-prefix-input}:focus {
+    box-shadow: none;
+    outline: none;
+    border-color: $Border;
+  }
+}
+
+// input 的icon配合时的padding
+@mixin inputSize($input-size, $input-padding, $input-font-size) {
+  height: $input-size;
+  padding: $input-padding;
+  font-size: $input-font-size;
+
+  &.#{$css-prefix-input}-prefix {
+    padding-left: $input-size;
+  }
+
+  &.#{$css-prefix-input}-suffix {
+    padding-right: $input-size;
+  }
+}
+
+// icon 的大小
+@mixin inputIconSize($icon-size, $fontSize) {
+  font-size: $fontSize;
+  width: $icon-size;
+  line-height: $icon-size;
+}
+
+@mixin borderTrans() {
+  border: 1px solid $Border;
+  border-radius: 4px;
+  transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+//input 组件
+//input基础样式
+.#{$css-prefix-input}-box {
+  display: inline-block;
+  position: relative;
+
+  //b-input-box：hover 显示clear-icon
+  &:hover {
+    .#{$css-prefix-input-icon}-clear {
+      display: inline-block;
+    }
+  }
+
+  .#{$css-prefix-input} {
+    display: inline-block;
+    width: 100%;
+    line-height: 1.5;
+    font-size: 12px;
+
+    color: $Content;
+    background-color: #fff;
+    background-image: none;
+    cursor: text;
+    outline: none;
+
+    margin: 0;
+    box-sizing: border-box;
+
+    vertical-align: middle;
+    @include borderTrans();
+    @include inputMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
+
+    &-small {
+      @include inputSize($input-small-size, 4px 8px, $input-small-font);
+    }
+  
+    &-normal {
+      @include inputSize($input-normal-size, 8px, $input-normal-font);
+    }
+  
+    &-large {
+      @include inputSize($input-large-size, 12px 8px, $input-large-font);
+    }
+  }
+
+  // error input样式
+  &.#{$css-prefix-input}-error {
+    .#{$css-prefix-input} {
+      @include inputMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
+    }
+  }
+
+  //Reset height for textarea
+  textarea.#{$css-prefix-input} {
+    max-width: 100%;
+    height: auto;
+    min-height: $input-normal-size;
+    vertical-align: bottom;
+  }
+
+  
+
+  //icon样式
+  .#{$css-prefix-input-icon} {
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    text-align: center;
+    height: 100%;
+    &-prefix {
+      left: 0;
+    }
+  
+    &-suffix {
+      right: 0;
+    }
+  
+    &-clear {
+      display: none;
+      z-index: 3;
+      color: #666;
+      opacity: .7;
+    }
+  
+    &-small {
+      @include inputIconSize($input-small-size, $input-small-font);
+    }
+  
+    &-normal {
+      @include inputIconSize($input-normal-size, $input-normal-font);
+    }
+  
+    &-large {
+      @include inputIconSize($input-large-size, $input-large-font);
+    }
+  
+  }
+
+  
+  //input label样式
+  .#{$css-prefix-input}-label {
+    line-height: 1;
+    font-weight: normal;
+    font-size: inherit;
+    padding: 4px 7px;
+    color: $Content;
+    display: inline-block;
+  }
+
+  // input label组合 固定长度label input的宽度自适应
+  &.#{$css-prefix-input}-group {
+    width: 280px;
+    display: table;
+    @include borderTrans();
+
+    @include labelMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
+
+    &.#{$css-prefix-input}-error {
+      @include labelMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
+    }
+
+    .#{$css-prefix-input} {
+      border: 0;
+      width: 100%;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      float: left;
+    }
+  }
+
+  .#{$css-prefix-input}-label-box {
+    display: table-cell;
+    text-align: center;
+    background-color: $Background;
+    border-right: 1px solid $Border;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  .#{$css-prefix-input}-nobox {
+    width: 220px;
+  }
+
+  .#{$css-prefix-input}-label-small {
+    font-size: $input-small-font;
+  }
+
+  .#{$css-prefix-input}-label-normal {
+    font-size: $input-normal-font;
+  }
+
+  .#{$css-prefix-input}-label-large {
+    font-size: $input-large-font;
+  }
+}
