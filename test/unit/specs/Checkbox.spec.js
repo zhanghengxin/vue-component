@@ -37,10 +37,10 @@ describe('Checkbox.vue', () => {
                     result = evt
                 }
             },
-            data(){
+            data () {
                 return {
-                    test:false
-                } 
+                    test: false
+                }
             }
         }, true)
         vm.$el.click()
