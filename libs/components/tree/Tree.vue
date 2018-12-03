@@ -129,8 +129,6 @@ export default {
         this.$on('on-expand-change', this.handleExpand)
         this.$on('on-check-change', this.handleCheck)
         this.$on('on-drag-start', this.handleDragStart)
-        this.$on('on-drag-over', this.handleDragOver)
-        this.$on('on-drag-end', this.handleDragEnd)
         this.$on('on-drag-drop', this.handleDrop)
     },
     computed: {
