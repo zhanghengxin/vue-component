@@ -8,6 +8,9 @@
           childList: ['1']
         }
       },
+      created(){
+        console.log(this)
+      },
       methods: {
         handle (val) {
           console.log(val)
@@ -24,26 +27,26 @@
 
 <template>
   <div>
-    <bw-collapse @change="handle" v-model="showList1">
-      <bw-collapse-item name='one'>
+    <b-collapse @change="handle" v-model="showList1">
+      <b-collapse-item name='one'>
         <span slot="title">This is Title1</span>
         <div slot="content">
           <div>This is Content1</div>
         </div>
-      </bw-collapse-item>
-      <bw-collapse-item >
+      </b-collapse-item>
+      <b-collapse-item >
         <span slot="title">This Title2</span>
         <div slot="content">This is Content2</div>
-      </bw-collapse-item>
-      <bw-collapse-item>
+      </b-collapse-item>
+      <b-collapse-item>
         <span slot="title">This Title3</span>
         <div slot="content">This is Content3</div>
-      </bw-collapse-item>
-      <bw-collapse-item>
+      </b-collapse-item>
+      <b-collapse-item>
         <span slot="title">This Title4</span>
         <div slot="content">This is Content4</div>
-      </bw-collapse-item>
-    </bw-collapse>
+      </b-collapse-item>
+    </b-collapse>
   </div>
 </template>
 
@@ -51,24 +54,24 @@
 ```html
     <template>
         <div>
-            <bw-collapse @change="handle" v-model="showList1">
-                <bw-collapse-item name='one'>
+            <b-collapse @change="handle" v-model="showList1">
+                <b-collapse-item name='one'>
                     <span slot="title">This is Title1</span>
                     <div slot="content">This is Content1</div>
-                </bw-collapse-item>
-                <bw-collapse-item>
+                </b-collapse-item>
+                <b-collapse-item>
                     <span slot="title">This Title2</span>
                     <div slot="content">This is Content2</div>
-                </bw-collapse-item>
-                <bw-collapse-item>
+                </b-collapse-item>
+                <b-collapse-item>
                     <span slot="title">This Title3</span>
                     <div slot="content">This is Content3</div>
-                </bw-collapse-item>
-                <bw-collapse-item>
+                </b-collapse-item>
+                <b-collapse-item>
                     <span slot="title">This Title4</span>
                     <div slot="content">This is Content4</div>
-                </bw-collapse-item>
-             </bw-collapse>
+                </b-collapse-item>
+             </b-collapse>
         </div>
     </template>
 
@@ -96,24 +99,24 @@
 
 <template>
   <div>
-    <bw-collapse @change="handle" v-model="showList2" accordion >
-      <bw-collapse-item name='one'>
+    <b-collapse @change="handle" v-model="showList2" accordion >
+      <b-collapse-item name='one'>
         <span slot="title">This is Title1</span>
         <div slot="content">This is Content1</div>
-      </bw-collapse-item>
-      <bw-collapse-item name='two'>
+      </b-collapse-item>
+      <b-collapse-item name='two'>
         <span slot="title">This Title2</span>
         <div slot="content">This is Content2</div>
-      </bw-collapse-item>
-       <bw-collapse-item name='three'>
+      </b-collapse-item>
+       <b-collapse-item name='three'>
         <span slot="title">This Title3</span>
         <div slot="content">This is Content3</div>
-      </bw-collapse-item>
-      <bw-collapse-item>
+      </b-collapse-item>
+      <b-collapse-item>
         <span slot="title">This Title4</span>
         <div slot="content">This is Content4</div>
-      </bw-collapse-item>
-    </bw-collapse>
+      </b-collapse-item>
+    </b-collapse>
   </div>
 </template>
 
@@ -121,24 +124,24 @@
 ```html
     <template>
         <div>
-            <bw-collapse @change="handle" v-model="showList2" accordion >
-                <bw-collapse-item name='one' >
+            <b-collapse @change="handle" v-model="showList2" accordion >
+                <b-collapse-item name='one' >
                     <span slot="title">This is Title1</span>
                     <div slot="content">This is Content1</div>
-                </bw-collapse-item>
-                <bw-collapse-item name='two'>
+                </b-collapse-item>
+                <b-collapse-item name='two'>
                     <span slot="title">This Title2</span>
                     <div slot="content">This is Content2</div>
-                </bw-collapse-item>
-                <bw-collapse-item name='three'>
+                </b-collapse-item>
+                <b-collapse-item name='three'>
                     <span slot="title">This Title3</span>
                     <div slot="content">This is Content3</div>
-                </bw-collapse-item>
-                <bw-collapse-item>
+                </b-collapse-item>
+                <b-collapse-item>
                     <span slot="title">This Title4</span>
                     <div slot="content">This is Content4</div>
-                </bw-collapse-item>
-             </bw-collapse>
+                </b-collapse-item>
+             </b-collapse>
         </div>
     </template>
 
@@ -166,27 +169,27 @@
 
 <template>
   <div>
-    <bw-collapse v-model="nestingList" >
-        <bw-collapse-item>
+    <b-collapse v-model="nestingList" >
+        <b-collapse-item>
           <span slot="title">This is Title1</span>
           <div slot="content">
-            <bw-collapse v-model="childList">
-              <bw-collapse-item>
+            <b-collapse v-model="childList">
+              <b-collapse-item>
                 <span slot="title">1-----</span>
                 <div slot="content">1-----</div>
-              </bw-collapse-item>
-              <bw-collapse-item>
+              </b-collapse-item>
+              <b-collapse-item>
                 <span slot="title">2-----</span>
                 <div slot="content">2-----</div>
-              </bw-collapse-item>
-            </bw-collapse>
+              </b-collapse-item>
+            </b-collapse>
           </div>
-        </bw-collapse-item>
-        <bw-collapse-item>
+        </b-collapse-item>
+        <b-collapse-item>
           <span slot="title">This Title2</span>
           <div slot="content">This is Content2</div>
-        </bw-collapse-item>
-    </bw-collapse>
+        </b-collapse-item>
+    </b-collapse>
   </div>
 </template>
 
@@ -196,27 +199,27 @@
 ```html
   <template>
     <div>
-      <bw-collapse v-model="nestingList">
-          <bw-collapse-item>
+      <b-collapse v-model="nestingList">
+          <b-collapse-item>
             <span slot="title">This is Title1</span>
             <div slot="content">
-              <bw-collapse v-model="childList">
-                <bw-collapse-item>
+              <b-collapse v-model="childList">
+                <b-collapse-item>
                   <span slot="title">1-----</span>
                   <div slot="content">1-----</div>
-                </bw-collapse-item>
-                <bw-collapse-item>
+                </b-collapse-item>
+                <b-collapse-item>
                   <span slot="title">2-----</span>
                   <div slot="content">2-----</div>
-                </bw-collapse-item>
-              </bw-collapse>
+                </b-collapse-item>
+              </b-collapse>
             </p>
-          </bw-collapse-item>
-          <bw-collapse-item>
+          </b-collapse-item>
+          <b-collapse-item>
             <span slot="title">This Title2</span>
             <div slot="content">This is Content2</div>
-          </bw-collapse-item>
-      </bw-collapse>
+          </b-collapse-item>
+      </b-collapse>
     </div>
   </template>
 
@@ -240,24 +243,24 @@
 
 <template>
   <div>
-    <bw-collapse @change="handle" simple>
-      <bw-collapse-item name='one' >
+    <b-collapse @change="handle" simple>
+      <b-collapse-item name='one' >
         <span slot="title">This is Title1</span>
         <div slot="content">This is Content1</div>
-      </bw-collapse-item>
-      <bw-collapse-item name='two'>
+      </b-collapse-item>
+      <b-collapse-item name='two'>
         <span slot="title">This Title2</span>
         <div slot="content">This is Content2</div>
-      </bw-collapse-item>
-       <bw-collapse-item name='three'>
+      </b-collapse-item>
+       <b-collapse-item name='three'>
         <span slot="title">This Title3</span>
         <div slot="content">This is Content3</div>
-      </bw-collapse-item>
-      <bw-collapse-item>
+      </b-collapse-item>
+      <b-collapse-item>
         <span slot="title">This Title4</span>
         <div slot="content">This is Content4</div>
-      </bw-collapse-item>
-    </bw-collapse>
+      </b-collapse-item>
+    </b-collapse>
   </div>
 </template>
 
@@ -265,24 +268,24 @@
 ```html
     <template>
         <div>
-            <bw-collapse @change="handle"  simple>
-                <bw-collapse-item name='one'>
+            <b-collapse @change="handle"  simple>
+                <b-collapse-item name='one'>
                     <span slot="title">This is Title1</span>
                     <div slot="content">This is Content1</div>
-                </bw-collapse-item>
-                <bw-collapse-item name='two'>
+                </b-collapse-item>
+                <b-collapse-item name='two'>
                     <span slot="title">This Title2</span>
                     <div slot="content">This is Content2</div>
-                </bw-collapse-item>
-                <bw-collapse-item name='three'>
+                </b-collapse-item>
+                <b-collapse-item name='three'>
                     <span slot="title">This Title3</span>
                     <div slot="content">This is Content3</div>
-                </bw-collapse-item>
-                <bw-collapse-item>
+                </b-collapse-item>
+                <b-collapse-item>
                     <span slot="title">This Title4</span>
                      <div slot="content">This is Content4</div>
-                </bw-collapse-item>
-             </bw-collapse>
+                </b-collapse-item>
+             </b-collapse>
         </div>
     </template>
 
@@ -305,24 +308,24 @@ positionArrow:```left``` ```right``` ```hidden```  确定箭头位置，默认�
 
 <template>
   <div>
-    <bw-collapse positionArrow="left">
-      <bw-collapse-item>
+    <b-collapse positionArrow="left">
+      <b-collapse-item>
         <span slot="title">This is Title1</span>
         <div slot="content">This is Content1</div>
-      </bw-collapse-item>
-    </bw-collapse>
-    <bw-collapse positionArrow='right' style="margin-top:10px">
-      <bw-collapse-item>
+      </b-collapse-item>
+    </b-collapse>
+    <b-collapse positionArrow='right' style="margin-top:10px">
+      <b-collapse-item>
         <span slot="title">This is Title1</span>
         <div slot="content">This is Content1</div>
-      </bw-collapse-item>
-    </bw-collapse>
-    <bw-collapse positionArrow='hidden' style="margin-top:10px">
-      <bw-collapse-item>
+      </b-collapse-item>
+    </b-collapse>
+    <b-collapse positionArrow='hidden' style="margin-top:10px">
+      <b-collapse-item>
         <span slot="title">This is Title1</span>
         <div slot="content">This is Content1</div>
-      </bw-collapse-item>
-    </bw-collapse>
+      </b-collapse-item>
+    </b-collapse>
   </div>
 </template>
 
@@ -330,24 +333,24 @@ positionArrow:```left``` ```right``` ```hidden```  确定箭头位置，默认�
 ```html
   <template>
     <div>
-      <bw-collapse  positionArrow="left">
-        <bw-collapse-item>
+      <b-collapse  positionArrow="left">
+        <b-collapse-item>
           <span slot="title">This is Title1</span>
           <div slot="content">This is Content1</div>
-        </bw-collapse-item>
-      </bw-collapse>
-      <bw-collapse positionArrow='right'>
-        <bw-collapse-item>
+        </b-collapse-item>
+      </b-collapse>
+      <b-collapse positionArrow='right'>
+        <b-collapse-item>
           <span slot="title">This is Title1</span>
           <div slot="content">This is Content1</div>
-        </bw-collapse-item>
-      </bw-collapse>
-      <bw-collapse positionArrow='hidden'>
-        <bw-collapse-item>
+        </b-collapse-item>
+      </b-collapse>
+      <b-collapse positionArrow='hidden'>
+        <b-collapse-item>
           <span slot="title">This is Title1</span>
           <div slot="content">This is Content1</div>
-        </bw-collapse-item>
-      </bw-collapse>
+        </b-collapse-item>
+      </b-collapse>
     </div>
   </template>
 ```

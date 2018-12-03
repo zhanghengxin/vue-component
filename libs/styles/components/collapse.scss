@@ -1,13 +1,14 @@
-.bw-collapsebox{
+@import "../common/prefix";
+.#{$css-prefix}collapsebox{
     border-radius: 3px;
     border: 1px solid #dcdee2;
-    .bw-collapse-item{
+    .#{$css-prefix}collapse-item{
         border-top: 1px solid #dcdee2;
     }
-    .bw-collapse-item:first-child{
+    .#{$css-prefix}collapse-item:first-child{
         border-top:0
     }
-    .bw-collapse-item-header{
+    .#{$css-prefix}collapse-item-header{
         cursor: pointer;
         height: 45px;
         line-height: 45px;
@@ -15,55 +16,55 @@
         background: #f7f7f7;
     }
     /* 展开 */
-    .bw-collapse-item-header-active .bw-collapse-item-header{
+    .#{$css-prefix}collapse-item-header-active .#{$css-prefix}collapse-item-header{
         border-bottom: 1px solid #dcdee2;
     }
-    .bw-collapse-item-content{
+    .#{$css-prefix}collapse-item-content{
         color: #515a6e;
         padding:16px; 
         background-color: #fff;
     }
     
     // item
-    .bw-collapse-arrow{
+    .#{$css-prefix}collapse-arrow{
         margin-top: 15px;
         margin-right: 5px;
     }
-    .bw-collapse-arrow-right{
+    .#{$css-prefix}collapse-arrow-right{
         float: right;
         margin-right:10px; 
         transform: rotate(90deg);
         transition: transform 0.24s,
     }
     
-    .bw-collapse-arrow-active-right{
+    .#{$css-prefix}collapse-arrow-active-right{
         display:inline-block;  
         transform: rotate(0deg);
     }
     
-    .bw-collapse-arrow-left{
+    .#{$css-prefix}collapse-arrow-left{
         float: left;
         transform: rotate(-90deg);
         transition: transform 0.24s,
     }
     
-    .bw-collapse-arrow-active-left{
+    .#{$css-prefix}collapse-arrow-active-left{
         display:inline-block;
         transform: rotate(0deg)
     }
 
-    .bw-collapse-arrow-hidden{
+    .#{$css-prefix}collapse-arrow-hidden{
         display: none
     }
 }
 
-.bw-collapsebox-simple{
+.#{$css-prefix}collapsebox-simple{
     border-left:none;
     border-right:none;  
-    .bw-collapse-item-header{
+    .#{$css-prefix}collapse-item-header{
         background: #fff;
     }
-    .bw-collapse-item-header-active .bw-collapse-item-header{
+    .#{$css-prefix}collapse-item-header-active .#{$css-prefix}collapse-item-header{
         border-bottom:none;
     }
 }

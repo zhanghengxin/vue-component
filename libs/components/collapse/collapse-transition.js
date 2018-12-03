@@ -4,7 +4,7 @@
  * @Author: yanghao
  * @Date: 2018-09-27 14:40:39
  * @Last Modified by: yanghao
- * @Last Modified time: 2018-09-28 17:07:26
+ * @Last Modified time: 2018-12-03 10:41:56
  *
  * --------------------------------------------------------------------------- *
  */
@@ -66,7 +66,7 @@ const transition = {
 }
 
 export default {
-    name: 'bwCollapseTransition',
+    name: 'bCollapseTransition',
     functional: true,
     render (h, {children}) {
         const data = {

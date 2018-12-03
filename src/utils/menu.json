@@ -50,11 +50,6 @@
           "name": "input"
         },
         {
-          "title": "Collapse 折叠面板",
-          "path": "/collapse",
-          "name": "collapse"
-        },
-        {
           "title": "Button 按钮",
           "path": "/button",
           "name": "button"
@@ -124,6 +119,11 @@
           "title": "Card 卡片",
           "path": "/card",
           "name": "card"
+        },
+        {
+          "title": "Collapse 折叠面板",
+          "path": "/collapse",
+          "name": "collapse"
         }
       ]
     },
