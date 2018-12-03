@@ -162,9 +162,15 @@
 ::: code
 ```html
     <div class="example-box">
-        <div>
-            这里会放置一个带自定义图标的steps组件
-        </div>
+       <div>
+           <div>
+              <b-steps >
+                  <b-step title='发送' :content='content' icon="fasong"></b-step>
+                  <b-step title='导出' :content='content' icon="dayin"></b-step>
+                  <b-step title='查看' :content='content' icon="chakan"></b-step>
+              </b-steps>
+          </div>
+       </div>
     </div>
 ```
 :::
@@ -268,6 +274,37 @@
                 <b-step title='在等待' :content='content'></b-step>
             </b-steps>
         </div>
+    </div>
+```
+:::
+</div>
+
+> 单点（新增功能，只能是第一个点为单点，根据供应链模块中"已打回"状态的实际需求，添加的此功能）：
+设置Steps的属性```status```为```single```指定第一个点为单点。
+
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-steps current='2' >
+                <b-step title='单点（已打回）' :content='content' status="single"></b-step>
+                <b-step title='已完成' :content='content'></b-step>
+                <b-step title='中断' :content='errorContent'></b-step>
+                <b-step title='在等待' :content='content'></b-step>
+            </b-steps>
+        </div>
+    </div>
+
+::: code
+```html
+    <div class="example-box">
+       <div>
+           <b-steps current='2' >
+               <b-step title='单点（已打回）' :content='content' status="single"></b-step>
+               <b-step title='已完成' :content='content'></b-step>
+               <b-step title='中断' :content='errorContent'></b-step>
+               <b-step title='在等待' :content='content'></b-step>
+           </b-steps>
+       </div>
     </div>
 ```
 :::

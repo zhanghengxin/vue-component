@@ -1,17 +1,18 @@
 
  <div class="example-box" style="width:1150px">
-        <b-steps current='2' :size='size' >
+        <b-steps current='2' :size='size' status="error">
             <b-step title='单点' :content='content' icon="chaxun" status='single'></b-step>
             <b-step title='已完成' :content='content'></b-step>
             <b-step title='正进行' :content='content'></b-step>
             <b-step title='在等待' :content='content'></b-step>
         </b-steps>
-        <b-steps current='2' >
-            <b-step title='单点' :content='content' icon="chaxun" status='single'></b-step>
-            <b-step title='已完成' :content='content'></b-step>
-            <b-step title='正进行' :content='content'></b-step>
-            <b-step title='在等待' :content='content'></b-step>
-        </b-steps>
+       <div>
+          <b-steps  current='1' status="finish">
+              <b-step title='发送' :content='content' icon="fasong"></b-step>
+              <b-step title='导出' :content='content' icon="dayin"></b-step>
+              <b-step title='查看' :content='content' icon="chakan"></b-step>
+          </b-steps>
+      </div>
        <b-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</b-button>
          <script>
              export default {
