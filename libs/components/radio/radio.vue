@@ -48,7 +48,6 @@ export default {
         },
         radioClasses () {
             return [
-                `prefixCls`,
                 {
                     [` ${prefixCls}-disabled`]: this.disabled,
                     [` ${prefixCls}-checked`]: this.checkedValue
