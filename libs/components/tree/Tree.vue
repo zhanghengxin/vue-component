@@ -118,6 +118,9 @@ export default {
         },
         filterMethod: {
             type: Function
+        },
+        render: {
+            type: Function
         }
     },
     created () {
@@ -224,7 +227,6 @@ export default {
             }
         },
         // 单选
-
         handleSelect (nodeKey) {
             const selectedKey = this.defaultOpt.selectedKey
             const node = this.dataList[nodeKey].node

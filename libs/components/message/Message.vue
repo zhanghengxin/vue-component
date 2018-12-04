@@ -4,25 +4,24 @@
  */
 
 <template>
-    <transition name="b-message-fade" mode="in-out">
+    <transition :name="prefixCls+'-fade'" mode="in-out">
         <div
             v-show="show"
-            class="b-message-wrapper"
+            :class="[prefixCls+'-wrapper']"
             :style="{ zIndex: zIndex }">
             <div
-                class="b-message"
+                :class="[prefixCls]"
                 @mouseenter="enter"
                 @mouseleave="leave">
                 <b-icon
                     v-if="imgSrc"
-                    class="b-message-img"
-                    :color="fsColor"
+                    :class="[prefixCls+'-img',fsColor]"
                     :type="imgSrc">
-                 </b-icon>
-                {{message}}
+                </b-icon>
+                <span :class="[prefixCls+'-content']">{{message}}</span>
                 <button
                     v-if="showClose"
-                    class="b-message-close"
+                    :class="[prefixCls+'-close']"
                     @click="close">
                     ×
                 </button>
@@ -32,9 +31,10 @@
 </template>
 
 <script>
-
+import { prefix } from '../../utils/common'
+const prefixCls = prefix + 'message'
 export default {
-    name: 'b-message',
+    name: prefixCls,
     data () {
         return {
             show: false,
@@ -46,7 +46,8 @@ export default {
             message: '',
             type: 'info',
             duration: 3000,
-            showClose: false
+            showClose: false,
+            prefixCls
         }
     },
     computed: {
@@ -61,10 +62,10 @@ export default {
         },
         fsColor () {
             let colors = {
-                info: '#0079CC',
-                error: '#f44336',
-                success: '#1fca74',
-                warning: '#ff8f00'
+                info: prefixCls + '-info',
+                error: prefixCls + '-error',
+                success: prefixCls + '-success',
+                warning: prefixCls + '-warning'
             }
             return colors[this.type]
         }

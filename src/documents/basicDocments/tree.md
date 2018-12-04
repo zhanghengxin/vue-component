@@ -8,7 +8,7 @@
 - 支持节点搜索，模糊查询
 - 支持手风琴效果，一个节点展开，同级其他节点收起
 - 支持节点拖拽进行树节点编辑
-
+- 支持自定义节点内容
 
 ### 基础用法
 给节点设置 `selected`可以将节点设置为选中,`on-select`触发选中事件。
@@ -32,6 +32,7 @@
                        {
                            name: 'parent 1',
                            expand: true,
+                           selected:true,
                            children: [
                                {
                                    name: 'parent 1-1',
@@ -166,14 +167,14 @@
         <div>
            <b-checkbox v-model="checkboxOptions.parent">是否级联父级数据</b-checkbox>
            <b-checkbox v-model="checkboxOptions.children">是否级联子级数据</b-checkbox>
-           <b-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
+           <b-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions' @on-check='handleChecked'></b-tree>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
+        <b-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions' @on-check='handleChecked'></b-tree>
     </div>
     <script>
         export default {
@@ -239,7 +240,13 @@
                         children: true
                     }
                 }
+            },
+            methods:{
+                handleChecked (options){
+                    console.log(`选中获取的数据:`,options)
+                }
             }
+
         }
     </script>
 ```
@@ -439,6 +446,117 @@
 </div>
 
 
+### 自定义节点内容
+使用 Render 函数可以自定义节点显示内容【考虑到要兼容以前用iview的项目,固render函数对比iview无使用改动】
+
+Render 函数的第二个参数，包含三个字段：
+- root ：树的根节点
+- node ：当前节点
+- data ：当前节点的数据
+
+通过合理地使用 root、node 和 data 可以实现各种效果，每个节点都有一个 nodeKey 字段，用来标识节点的 id。
+
+- Render 函数分两种，一种是给当前树的每个节点都设置同样的渲染内容，此 render 通过 Tree 组件的属性 render 传递；
+- 另一种是单独给某个节点设置，在该节点的 render 字段内设置；同时设置时，会优先使用当前节点的 Render 函数。
+
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-tree :data='data7' :render='renderContent'></b-tree>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+         <b-tree :data='data7' :render='renderContent'></b-tree>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                   data6:[
+                      {
+                          name: 'parent 1',
+                          expand: true,
+                          children: [
+                              {
+                                  name: 'parent 1-1',
+                                  expand: true,
+                                  children: [
+                                      {
+                                          name: 'leaf 1-1-1'
+                                      },
+                                      {
+                                          name: 'leaf 1-1-2'
+                                      }
+                                  ]
+                              },
+                              {
+                                  name: 'parent 1-2',
+                                  expand: true,
+                                  children: [
+                                      {
+                                          name: 'leaf 1-2-1'
+                                      },
+                                      {
+                                          name: 'leaf 1-2-1'
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
+                   ],
+                }
+            },
+            methods: {
+                remove (root, node, data) {
+                    const parentKey = root.find(el => el === node).parent;
+                    if(parentKey === undefined) return;
+                    const parent = root.find(el => el.nodeKey === parentKey).node;
+                    const index = parent.children.indexOf(data);
+                    parent.children.splice(index, 1);
+                },
+                renderContent (h, { root, node, data }) {
+                    return h('span', {
+                        style: {
+                            display: 'inline-block',
+                            width: '100%'
+                        }
+                    }, [
+                        h('span', [
+                            h('span', data.name)
+                        ]),
+                        h('span', {
+                            style: {
+                                display: 'inline-block',
+                                float: 'right',
+                                marginRight: '32px'
+                            }
+                        }, [
+                            h('b-icon', {
+                                props: {type:'tianjia-chuangjian'},
+                                style: {
+                                    marginRight: '8px'
+                                },
+                                on: {
+                                    'on-click': () => { this.append(data) }
+                                }
+                            }),
+                            h('b-icon', {
+                                props: {type:'quxiao-guanbi-shanchu'},
+                                on: {
+                                    'on-click': () => { this.remove(root, node, data) }
+                                }
+                            })
+                        ])
+                    ]);
+                }
+        }
+    </script>
+```
+:::
+</div>
 
 
 
@@ -678,6 +796,38 @@ export default {
                    ]
                }
             ],
+            data7:[
+               {
+                   name: 'parent 1',
+                   expand: true,
+                   children: [
+                       {
+                           name: 'parent 1-1',
+                           expand: true,
+                           children: [
+                               {
+                                   name: 'leaf 1-1-1'
+                               },
+                               {
+                                   name: 'leaf 1-1-2'
+                               }
+                           ]
+                       },
+                       {
+                           name: 'parent 1-2',
+                           expand: true,
+                           children: [
+                               {
+                                   name: 'leaf 1-2-1'
+                               },
+                               {
+                                   name: 'leaf 1-2-1'
+                               }
+                           ]
+                       }
+                   ]
+               }
+            ],
             accordionOptions: {
                 isCache: true // 是否缓存其他同级节点的展开状态
             },
@@ -692,6 +842,9 @@ export default {
         handleselect (data){
             console.log(`当前选中的数据为:`,data)
         },
+        handleChecked (options){
+            console.log(`选中获取的数据:`,options)
+        },
         filterMethod(value, data){
              return data.name.indexOf(value) !== -1
         },
@@ -705,7 +858,57 @@ export default {
                 ];
                 callback(data);
             }, 1000);
-        }
+        },
+        append (data) {
+            const children = data.children || [];
+            children.push({
+                name: '添加数据',
+                expand: true
+            });
+            this.$set(data, 'children', children);
+        },
+        remove (root, node, data) {
+            const parentKey = root.find(el => el === node).parent;
+            if(parentKey === undefined) return;
+            const parent = root.find(el => el.nodeKey === parentKey).node;
+            const index = parent.children.indexOf(data);
+            parent.children.splice(index, 1);
+        },
+        renderContent (h, { root, node, data }) {
+            return h('span', {
+                style: {
+                    display: 'inline-block',
+                    width: '100%'
+                }
+            }, [
+                h('span', [
+                    h('span', data.name)
+                ]),
+                h('span', {
+                    style: {
+                        display: 'inline-block',
+                        float: 'right',
+                        marginRight: '32px'
+                    }
+                }, [
+                    h('b-icon', {
+                        props: {type:'tianjia-chuangjian'},
+                        style: {
+                            marginRight: '8px'
+                        },
+                        on: {
+                            'on-click': () => { this.append(data) }
+                        }
+                    }),
+                    h('b-icon', {
+                        props: {type:'quxiao-guanbi-shanchu'},
+                        on: {
+                            'on-click': () => { this.remove(root, node, data) }
+                        }
+                    })
+                ])
+            ]);
+        },
     }
 }
 </script>
@@ -724,6 +927,7 @@ export default {
 | filter-method     |  自定义上一页的文本   | 	string    |   -  |     -  |
 | defaultOpt     | 各种选中效果的配置项，具体配置见下文   | 	Object    |  -  |   -    |
 | draggable     |  是否开启节点拖拽编辑 | 	Boolean    |  -  |    fasle    |
+| render     |  自定义渲染内容，见示例	 | 	Function    |  -  |    -    |
 
 ### children
 | 属性      | 说明    | 类型      | 默认值       |
@@ -734,6 +938,7 @@ export default {
 | checked    |  勾选状态  |  Boolean  |  -    |
 | expand     |  展开状态  |  Boolean  |  -   |
 | draggable     |  是否开拖拽状态  |  Boolean  |  -   |
+| render     |  自定义渲染内容	 | 	Function    |  -  |
 
 ### defaultOpt
 | 属性      | 说明    | 类型      | 默认值       |
