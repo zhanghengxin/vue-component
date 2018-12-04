@@ -19,7 +19,9 @@
                 :disabled="data[defaultOpt.disabledKey]"
                 @click.native.prevent="handleCheck">
             </Checkbox>
-            <span :class="nameCls" @click="selectData">{{ data[defaultOpt.nameKey] }}</span>
+            <Render v-if="data.render" :render="data.render" :data="data" :node="node"></Render>
+            <Render v-else-if="isParentRender" :render="parentRender" :data="data" :node="node"></Render>
+            <span v-else :class="nameCls" @click="selectData">{{ data[defaultOpt.nameKey] }}</span>
             <tree-node
                 v-for="(item, key) in children"
                 v-if="data[defaultOpt.expandKey]"
@@ -34,7 +36,7 @@
 </template>
 <script>
 import { findComponentUpwards, findComponentUpward } from '../../utils/assist'
-
+import Render from './render'
 import Checkbox from '../checkbox/Checkbox.vue'
 import Icon from '../icon/Icon.vue'
 import { prefix } from '../../utils/common'
@@ -44,7 +46,7 @@ const prefixCls = prefix + 'tree'
 
 export default {
     name: 'tree-node',
-    components: {Checkbox, Icon},
+    components: {Checkbox, Icon, Render},
     mixins: [Emitter],
     props: {
         data: {
@@ -113,6 +115,27 @@ export default {
         },
         showLoading () {
             return 'loading' in this.data && this.data.loading
+        },
+        node () {
+            const Tree = findComponentUpward(this, prefix + 'tree')
+            if (Tree) {
+                // 将所有的 node（即flatState）和当前 node 都传递
+                return [Tree.dataList, Tree.dataList.find(item => item.nodeKey === this.data.nodeKey)]
+            } else {
+                return []
+            }
+        },
+        isParentRender () {
+            const Tree = findComponentUpward(this, prefix + 'tree')
+            return Tree && Tree.render
+        },
+        parentRender () {
+            const Tree = findComponentUpward(this, prefix + 'tree')
+            if (Tree && Tree.render) {
+                return Tree.render
+            } else {
+                return null
+            }
         }
     },
     methods: {

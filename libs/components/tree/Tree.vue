@@ -118,6 +118,9 @@ export default {
         },
         filterMethod: {
             type: Function
+        },
+        render: {
+            type: Function
         }
     },
     created () {
@@ -129,8 +132,6 @@ export default {
         this.$on('on-expand-change', this.handleExpand)
         this.$on('on-check-change', this.handleCheck)
         this.$on('on-drag-start', this.handleDragStart)
-        this.$on('on-drag-over', this.handleDragOver)
-        this.$on('on-drag-end', this.handleDragEnd)
         this.$on('on-drag-drop', this.handleDrop)
     },
     computed: {
@@ -226,7 +227,6 @@ export default {
             }
         },
         // 单选
-
         handleSelect (nodeKey) {
             const selectedKey = this.defaultOpt.selectedKey
             const node = this.dataList[nodeKey].node
