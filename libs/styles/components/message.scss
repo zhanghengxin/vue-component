@@ -1,10 +1,11 @@
-.b-message-fade-enter-active {
-    animation: b-message-fade-in 0.3s;
+$css-prefix-message: $css-prefix + 'message';
+.#{$css-prefix-message}-fade-enter-active {
+    animation: #{$css-prefix-message}-fade-in 0.3s;
 }
-.b-message-fade-leave-active {
+.#{$css-prefix-message}-fade-leave-active {
     animation: b-message-fade-out 0.3s;
 }
-@keyframes b-message-fade-in {
+@keyframes #{$css-prefix-message}-fade-in {
     0% {
         opacity: 0;
         transform: translateY(-20px);
@@ -14,7 +15,7 @@
         transform: translateY(0px);
     }
 }
-@keyframes b-message-fade-out {
+@keyframes #{$css-prefix-message}-fade-out {
     0% {
         opacity: 1;
         transform: translateY(0px);
@@ -25,8 +26,8 @@
     }
 }
 
-.b-message-wrapper {
-    .b-message {
+.#{$css-prefix-message}-wrapper {
+    .#{$css-prefix-message} {
         display: inline-block;
         margin-top: 15px;
         padding: 8px 16px;
@@ -38,14 +39,26 @@
         color: rgba(0, 0, 0, 0.65);
         background: rgba(255, 255, 255, 0.95);
         pointer-events: all;
-        .b-message-img {
+        .#{$css-prefix-message}-img {
             width: 20px;
             height: 20px;
             vertical-align: middle;
             margin-right: 5px;
             line-height: 18px;
         }
-        .b-message-close {
+        .#{$css-prefix-message}-info {
+            color:$Primary;
+        }
+        .#{$css-prefix-message}-error {
+            color:$Error;
+        }
+        .#{$css-prefix-message}-success {
+            color:$Success;
+        }
+        .#{$css-prefix-message}-warning {
+            color:$Warning;
+        }
+        .#{$css-prefix-message}-close {
             border: none;
             outline: none;
             background: none;

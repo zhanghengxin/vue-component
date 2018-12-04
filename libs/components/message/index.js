@@ -12,7 +12,6 @@ let count = 1
 let msgCon = null
 
 function Message (options) {
-    console.log(options)
     let close = options.onClose
 
     if (!msgCon) {
@@ -74,5 +73,13 @@ types.forEach(type => {
         return Message({...options, type})
     }
 })
+
+// Message.install = function (Vue, options) {
+//     if (options && options.name) {
+//         Vue.prototype[`$${options.name}`] = Message
+//     } else {
+//         Vue.prototype.$message = Message
+//     }
+// }
 
 export default Message
