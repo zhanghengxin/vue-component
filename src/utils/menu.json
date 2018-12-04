@@ -176,11 +176,6 @@
           "title": "Steps 步骤条",
           "path": "/steps",
           "name": "steps"
-      },
-      {
-        "title": "Steps 测试页面",
-        "path": "/stepsTest",
-        "name": "stepsTest"
       }
       ]
         },
