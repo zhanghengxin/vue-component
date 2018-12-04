@@ -1,11 +1,17 @@
 <template>
-    <div :class="[stepItem, statusClass]"  :style="setStyle">
+    <div :class="[stepItem, statusClass]" :style="setStyle">
         <div :class="[tailClass]" v-if="ifShowTail"></div>
-        <div :class="[stepMain]" >
-            <div :class="[stepPoint]" v-if="icon" @click="stepClick" >
-                <b-icon :type="icon"></b-icon>
+        <div :class="[stepMain]">
+            <div :class="[stepPoint,stepPointAsIcon]" v-if="icon" @click="stepClick">
+                <b-icon :type="icon" :size="size==='small' ? 14 : 16"></b-icon>
             </div>
-            <div :class="[stepPoint]" v-else @click="stepClick" >
+            <div :class="[stepPoint]" v-else-if="(status || stepsStatus) === 'finish'" @click="stepClick">
+                <b-icon type="queding" :size="size==='small' ? 14 : 16"></b-icon>
+            </div>
+            <div :class="[stepPoint]" v-else-if="(status || stepsStatus) === 'error'" @click="stepClick">
+                <b-icon type="quxiao-guanbi-shanchu" :size="size==='small' ? 14 : 16"></b-icon>
+            </div>
+            <div :class="[stepPoint]" v-else @click="stepClick">
                 {{label}}
             </div>
             <div :class="[steptitle]">{{title}}</div>
@@ -17,6 +23,7 @@
 <script>
 import Common from './common'
 import { prefix } from '../../utils/common'
+
 const prefixCls = prefix + 'step'
 export default {
     name: prefixCls,
@@ -51,6 +58,7 @@ export default {
         return {
             index: 1, // step所属序号
             length: '',
+            size: 'normal',
             direction: '', // step的方向
             stepsStatus: 'process', // 来自外层steps的状态status
             theLast: false, // 是否显示tail线
@@ -85,9 +93,9 @@ export default {
         },
         // 对单击事件处理并且向外抛出属性
         stepClick () {
-            let {value, content, title, index, click, stepsClick, status, stepsStatus, size} = this
+            let {value, content, title, index, click, stepsClick, status, stepsStatus, size, icon} = this
             let options = {
-                value, content, title, index, status: status || stepsStatus, size
+                value, content, title, index, status: status || stepsStatus, size, icon
             }
             switch (true) {
             case typeof click === 'function':
@@ -107,6 +115,9 @@ export default {
         // step节点的class
         stepPoint () {
             return `${prefixCls}-point`
+        },
+        stepPointAsIcon () {
+            return `${prefixCls}-point-icon-area`
         },
         // step状态的class
         statusClass () {
@@ -138,6 +149,16 @@ export default {
             let params = this.direction === 'vertical' ? 'height' : 'width'
             return {[params]: length}
         },
+        // icon的大小
+        setIconSize () {
+            if (this.size === 'small') {
+                console.log('small12')
+                return 12
+            } else {
+                console.log('normal16')
+                return 16
+            }
+        },
         // 是否展示tail
         ifShowTail () {
             return (this.status || this.stepsStatus) !== 'single' && !this.theLast
@@ -151,6 +172,7 @@ export default {
             }
             return str
         }
+
     }
 }
 </script>
