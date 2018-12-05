@@ -7,7 +7,10 @@
 
 /*  前者一个测试套执行一次, 后者每个测试用例执行一次。 */
 import {destroyVM, createTest, createVue} from '../utils'
-// import Breadcrumb from '&/components/breadcrumb'
+// import ${Breadcrumb} from '&/components/breadcrumb'
+import { prefix } from '&/utils/common'
+const Breadcrumb = `${prefix}breadcrumb`
+const prefixCls = `.${prefix}breadcrumb`
 
 describe('breadcrumb.vue', () => { // describe相当于一个测试套，可以嵌套。
     let vm
@@ -16,17 +19,17 @@ describe('breadcrumb.vue', () => { // describe相当于一个测试套，可以�
     })
     it('create', done => { // it('tc name',() => {})是一个测试用例。
         vm = createVue(`
-            <Breadcrumb separator="<b class='demo-breadcrumb-separator'>=></b>">
-                <Breadcrumb-item href="/">Home4</Breadcrumb-item>
-                <Breadcrumb-item href="&/components/breadcrumb">Components</Breadcrumb-item>
-                <Breadcrumb-item>Breadcrumb</Breadcrumb-item>
-            </Breadcrumb>
+            <${Breadcrumb} separator="<b class='demo-breadcrumb-separator'>=></b>">
+                <${Breadcrumb}-item href="/">Home4</${Breadcrumb}-item>
+                <${Breadcrumb}-item href="&/components/breadcrumb">Components</${Breadcrumb}-item>
+                <${Breadcrumb}-item>${Breadcrumb}</${Breadcrumb}-item>
+            </${Breadcrumb}>
         `);
-        expect(vm.$el.querySelectorAll('.bw-breadcrumb-item-link').length).to.equal(3);
+        expect(vm.$el.querySelectorAll(`${prefixCls}-item-link`).length).to.equal(3);
     
         vm.$nextTick(_ => {
             // console.log(vm.$el.querySelector('.ivu-breadcrumb-item-separator').innerHTML);
-            expect(vm.$el.querySelector('.bw-breadcrumb-item-separator').innerHTML).to.equal('<b class="demo-breadcrumb-separator">=&gt;</b>');
+            expect(vm.$el.querySelector(`${prefixCls}-item-separator`).innerHTML).to.equal('<b class="demo-breadcrumb-separator">=&gt;</b>');
             done();
         });
     });

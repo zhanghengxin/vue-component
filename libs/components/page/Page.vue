@@ -45,7 +45,7 @@
             @click="fastPrev"
             :class="[prefixCls + '-item-jump-prev']">
             <a :class="[prefixCls + '-arrow']">
-                <b-icon type="yidongduan_navmore"></b-icon>
+                <b-icon type="gengduo"></b-icon>
             </a>
         </li>
         <li
@@ -101,7 +101,7 @@
             @click="fastNext"
             :class="[prefixCls + '-item-jump-next']">
             <a :class="[prefixCls + '-arrow']">
-                <b-icon type="yidongduan_navmore"></b-icon>
+                <b-icon type="gengduo"></b-icon>
             </a>
         </li>
         <li

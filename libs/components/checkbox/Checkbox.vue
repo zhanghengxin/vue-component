@@ -43,6 +43,10 @@ export default {
         label: {
             type: String,
             default: ''
+        },
+        indeterminate: {
+            type: Boolean,
+            default: false
         }
     },
     watch: {
@@ -56,7 +60,8 @@ export default {
                 `${prefixCls}-left`,
                 {
                     [`${prefixCls}-checked`]: this.checked,
-                    [`${prefixCls}-disabled`]: this.disabled
+                    [`${prefixCls}-disabled`]: this.disabled,
+                    [`${prefixCls}-indeterminate`]: this.indeterminate
                 }
             ]
         }

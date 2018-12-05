@@ -1,37 +1,66 @@
 <template>
-    <div :class="[stepsArea,stepsSize(),haveContentClass]">
+    <div :class="[stepsArea,stepsSize(),haveContentClass,setDirection]" :style="setStyle" ref="stepArea">
         <slot></slot>
+        <!--<div style="width:100%;height:0px;font-size:1px;line-height: 0px;clear:both;"></div>-->
     </div>
 </template>
 
 <script>
 import Common from './common'
-
+import { prefix } from '../../utils/common'
+const prefixCls = prefix + 'step-area'
 export default {
-    name: 'b-steps',
+    name: prefix + 'steps',
     props: {
         current: {// 当前步数
-            default: 1
+            type: [Number, String],
+            default: 0
         },
         status: {// step的状态
+            type: String,
             default: 'process'
         },
         size: {// 组件的型号
+            type: String,
             default: 'normal'
         },
+        length: {// 组件的宽度
+            type: [Number, String],
+            default: '100%'
+        },
+        direction: { // step组件布局的方向
+            type: String,
+            default: ''
+        },
         click: {// 单击事件的方法，没有规定类型为function，因为需要做非空判断
+            type: [Function, String],
             default: ''
         }
     },
     data () {
         return {
             ifHaveContent: false, // 是否含有content
+            ifHaveSingle: false,
             haveContentClass: ' '// 若有content时的class
         }
     },
     computed: {
         stepsArea: () => { // 返回stepsArea的class
-            return 'b-steps-area'
+            return `${prefixCls}`
+        },
+        setDirection () {
+            if (this.direction === 'vertical') {
+                return `${prefixCls}-vertical`
+            }
+            return `${prefixCls}-horizontal`
+        },
+        setStyle () {
+            let length = this.length
+            if (+length) {
+                length = length + 'px'
+            }
+            let params = this.direction === 'vertical' ? 'height' : 'width'
+            return { [params]: length }
         }
     },
     mounted () { // 初次加载时触发属性设置方法
@@ -43,7 +72,10 @@ export default {
     methods: {
         // 若子组件有content，则操作class
         haveContent () {
-            this.haveContentClass = 'b-steps-area-haveContent'
+            this.haveContentClass = `${prefixCls}-haveContent`
+        },
+        haveSingle () {
+            this.ifHaveSingle = true
         },
         // 获取steps组件的size属性
         stepsSize () {
@@ -51,7 +83,7 @@ export default {
             let className = ' '
             switch (size) {
             case 'small':
-                className = 'b-steps-area-small'
+                className = `${prefixCls}-small`
                 break
             default :
                 className = ' '
@@ -61,14 +93,26 @@ export default {
         // 设置子元素的属性
         setChildrenAttr () {
             let that = this
+            let childrenLength = that.$children.length
             // 设置子组件（Step）的默认值，比如index，showLine。
             that.$children.map((seg, idx) => {
-                let index = idx + 1
-                index === that.$children.length && (seg['showTail'] = false)
-                that.setStepStatus(seg, index)
+                console.log('that.size', that.size)
+                seg['size'] = that.size
+                seg['direction'] = that.direction
+                if (that.ifHaveSingle) {
+                    seg['index'] = idx
+                } else {
+                    seg['index'] = idx + 1
+                }
+                idx === (childrenLength - 1) && (seg['theLast'] = true)
+                that.setStepStatus(seg, idx)
                 that.setClick(seg)
-                seg['index'] = index
+                that.setChildrenLength(seg, childrenLength)
             })
+        },
+        // 设置子组件的length
+        setChildrenLength (seg, length) {
+            seg['length'] = ~~(95 / length) + '%'
         },
         // 设置单击事件
         setClick (seg) {
@@ -80,21 +124,22 @@ export default {
         // 设置step的status
         setStepStatus (seg, index) {
             let {status, current} = this
+            let childrenStatus = 'stepsStatus'
             let statusList = Common.statusList
             switch (true) {
             case +current === index :
                 if (status) {
-                    seg['status'] = status
+                    seg[childrenStatus] = status
                 } else {
-                    seg['status'] = statusList[1]
+                    seg[childrenStatus] = statusList[1]
                 }
                 break
             case +current > index:
-                seg['status'] = statusList[2]
+                seg[childrenStatus] = statusList[2]
                 break
             case +current < index:
             default :
-                seg['status'] = statusList[0]
+                seg[childrenStatus] = statusList[0]
                 break
             }
         }

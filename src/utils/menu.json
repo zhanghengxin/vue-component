@@ -1,5 +1,5 @@
 {
-  "使用指南": [
+  "食用指南": [
     {
       "name": "guide",
       "path": "/guide",
@@ -50,11 +50,6 @@
           "name": "input"
         },
         {
-          "title": "Collapse 折叠面板",
-          "path": "/collapse",
-          "name": "collapse"
-        },
-        {
           "title": "Button 按钮",
           "path": "/button",
           "name": "button"
@@ -78,11 +73,6 @@
           "title": "Message 消息",
           "path": "/message",
           "name": "message"
-        },
-        {
-          "title": "Steps 步骤条",
-          "path": "/steps",
-          "name": "steps"
         },
         {
           "title": "Dropdown下拉",
@@ -124,6 +114,16 @@
           "title": "Card 卡片",
           "path": "/card",
           "name": "card"
+        },
+        {
+          "title": "Collapse 折叠面板",
+          "path": "/collapse",
+          "name": "collapse"
+        },
+        {
+          "title": "Grid 栅格",
+          "path": "/grid",
+          "name": "grid"
         }
       ]
     },
@@ -136,6 +136,12 @@
           "path": "/page",
           "name": "page"
         },
+        {
+          "title": "Tree 树形控件",
+          "path": "/tree",
+          "name": "tree"
+        },
+
         {
           "title": "Notice 通知",
           "path": "/notice",
@@ -150,20 +156,29 @@
           "title": "Tooltip 文字提示",
           "path": "/tooltip",
           "name": "tooltip"
+        },
+        {
+          "title": "Tabs 标签页",
+          "path": "/tabs",
+          "name": "tabs"
         }
       ]
     },
     {
       "title": "导航",
       "path": "/",
-      "items": [
-        {
-          "title": "Breadcrumb 面包屑",
-          "path": "/breadcrumb",
-          "name": "breadcrumb"
-        }
+      "items": [{
+        "title": "Breadcrumb 面包屑",
+        "path": "/breadcrumb",
+        "name": "breadcrumb"
+      },
+      {
+          "title": "Steps 步骤条",
+          "path": "/steps",
+          "name": "steps"
+      }
       ]
-    },
+        },
     {
       "title": "表单",
       "path": "/",
@@ -178,8 +193,7 @@
     {
       "title": "其他",
       "path": "/",
-      "items": [
-        {
+      "items": [{
           "title": "BackTop 返回顶部",
           "path": "/backTop",
           "name": "backTop"

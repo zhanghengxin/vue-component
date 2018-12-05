@@ -4,7 +4,7 @@
  * @Description: steps的公共信息
  */
 
-// steps 的状态表
+// steps 的状态表 顺序不能随便动
 const statusList = ['wait', 'process', 'finish', 'error', 'single']
 
 // steps状态对应的class
