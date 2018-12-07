@@ -3,7 +3,7 @@
  * author ganbowen
  * created 2018/10/14 17:35:46
  */
- 
+
 $css-prefix-input: $css-prefix+'input';
 $css-prefix-input-icon: $css-prefix-input+'-icon';
 $input-small-size:24px;
@@ -26,6 +26,7 @@ $input-large-font:16px;
 
   &:disabled {
     background-color: $Disabled;
+    cursor: not-allowed;
   }
 
   // &:disabled:hover {
