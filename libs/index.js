@@ -35,6 +35,7 @@ import Form from './components/form'
 import Tag from './components/Tag'
 import Tree from './components/tree'
 import Progress from './components/Progress'
+import Select from './components/select'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
 import DateTimePicker from './components/datetime-picker'
@@ -76,6 +77,7 @@ const components = [
     Progress,
     Tabs,
     TabPanel,
+    Select,
     DatePicker,
     TimePicker,
     DateTimePicker

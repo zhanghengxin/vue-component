@@ -1,5 +1,5 @@
 $css-prefix-card: $css-prefix + 'card';
-.#{css-prefix-card}-wrapper {
+.#{$css-prefix-card}-wrapper {
     background: $white;
     border-radius: 4px;
     font-size: 14px;
@@ -8,14 +8,14 @@ $css-prefix-card: $css-prefix + 'card';
         box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
         border-color: $Border;
     }
-    &.#{css-prefix-card}-dis-hover {
+    &.#{$css-prefix-card}-dis-hover {
         box-shadow: none;
     }
-    .#{css-prefix-card}-header {
+    .#{$css-prefix-card}-header {
         border-bottom: 1px solid $Border;
         padding: 14px 16px;
 
-        .#{css-prefix-card}-header-inner {
+        .#{$css-prefix-card}-header-inner {
             width: 100%;
             height: 20px;
             line-height: 20px;
@@ -31,21 +31,21 @@ $css-prefix-card: $css-prefix + 'card';
         }
     }
 
-    .#{css-prefix-card}-body {
+    .#{$css-prefix-card}-body {
         padding: 16px;
     }
 
-    .#{css-prefix-card}-extra {
+    .#{$css-prefix-card}-extra {
         position: absolute;
         right: 16px;
         top: 14px;
     }
 }
 
-.#{css-prefix-card}-border {
+.#{$css-prefix-card}-border {
     border: 1px solid $Border;
 }
 
-.#{css-prefix-card}-shadow {
+.#{$css-prefix-card}-shadow {
     box-shadow: 0 1px 6px rgba(0,0,0,.2);
 }
