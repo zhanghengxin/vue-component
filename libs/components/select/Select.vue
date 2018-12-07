@@ -15,7 +15,8 @@
             <slot name="input">
                 <input type="hidden" :name="name" :value="publicValue">
                 <div style='position:relative'>
-                    <span v-if='!multiple && !filterabled' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
+                    <span v-if='!multiple && !filterabled'
+                          :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
                     <span v-if='multiple && !filterabled && !values.length' :class="showSelectedCls">{{localePlaceholder}}</span>
                     <div v-if='multiple' v-for="item in values" :key='item.code' :class="[prefixCls+`-tag`]">
                         <span>{{item.name}}</span>
@@ -34,7 +35,7 @@
                         @keydown="slideDropAndSetInput"
                         @focus="onInputFocus"
                         @keydown.delete="handleInputDelete"
-                        />
+                    />
                 </div>
                 <b-icon
                     type='xia'
@@ -51,9 +52,9 @@
         </div>
         <transition name='fade'>
             <Drop
-            v-show='show'>
+                v-show='show'>
                 <ul v-show='notFoundData'>
-                   <li :class='[prefix+`option`]'>{{notFoundText}}</li>
+                    <li :class='[prefix+`option`]'>{{notFoundText}}</li>
                 </ul>
                 <ul v-if='dropList.length > 0'>
                     <Option
@@ -66,8 +67,8 @@
                         :publicValue='publicValue'>
                     </Option>
                 </ul>
-                 <ul v-show='loading'>
-                   <li :class='[prefix+`option`]'>{{loadingText}}</li>
+                <ul v-show='loading'>
+                    <li :class='[prefix+`option`]'>{{loadingText}}</li>
                 </ul>
             </Drop>
         </transition>
@@ -85,9 +86,9 @@ const prefixCls = prefix + 'select'
 
 export default {
     name: prefixCls,
-    mixins: [ Emitter ],
+    mixins: [Emitter],
     directives: {clickOutside},
-    components: { Drop, Option },
+    components: {Drop, Option},
     data () {
         return {
             prefix,
@@ -144,7 +145,7 @@ export default {
             default: false
         },
         width: {
-            type: Number
+            type: [String, Number]
         },
         filterabled: {
             type: Boolean,
@@ -196,7 +197,9 @@ export default {
             ]
         },
         widthStyle () {
-            return this.width ? `${this.width}px` : ''
+            return {
+                width: this.width ? `${this.width}px` : ''
+            }
         },
         inputStyle () {
             let style = {}
@@ -370,8 +373,9 @@ export default {
     watch: {
         value (val) {
             let {publicValue, getInitValue, getOptionData} = this
-            if (val === '') this.values = []
-            else if (JSON.stringify(val) !== JSON.stringify(publicValue)) {
+            if (val === '') {
+                this.values = []
+            } else if (JSON.stringify(val) !== JSON.stringify(publicValue)) {
                 this.$nextTick(() => {
                     this.values = getInitValue().map(getOptionData).filter(Boolean)
                 })

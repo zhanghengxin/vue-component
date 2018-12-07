@@ -26,6 +26,24 @@
 :::
 </div>
 
+### 切换页数
+切换每页显示的数量。
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-page total=200 page=2 show-sizer @on-size-change='sizeChange'></b-page>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+         <b-page total=200 page=2 show-sizer></b-page>
+    </div>
+```
+:::
+</div>
+
 ### 电梯
 当 ```show-elevator``` 为 ```true``` 时，显示快速跳转到某一页功能。
 <div class="example">
@@ -128,23 +146,14 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-page total=100 @on-change='handleChange' show-elevator></b-page>
+            <b-page total=100 @on-page-change='handleChange' show-elevator></b-page>
         </div>
     </div>
-<script>
-    export default {
-        methods: {
-            handleChange(page) {
-                alert('当前选中页数为'+ page)
-            }
-        }
-    }
-</script>
 
 ::: code
 ```html
     <div>
-        <b-page total=100 @on-change='handleChange' show-elevator></b-page>
+        <b-page total=100 @on-page-change='handleChange' show-elevator></b-page>
     </div>
     <script>
         export default {
@@ -159,6 +168,18 @@
 :::
 </div>
 
+ <script>
+        export default {
+            methods: {
+                handleChange(page) {
+                    alert('当前选中页数为'+ page)
+                },
+                sizeChange(size){
+                    alert('当前选中页数为'+ size)
+                }
+            }
+        }
+</script>
 
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
@@ -170,13 +191,15 @@
 | mini     |  是否选用mini 版 | boolean    |  -  |     false  |
 | show-elevator     |  是否显示电梯功能 | boolean    |  -  |     false  |
 | show-total     |  是否显示总数 | boolean    |  -  |     false  |
+| show-sizer     |  是否显示切换页数 | boolean    |  -  |     false  |
 | prev-text     |  自定义上一页的文本   | 	string    |   -  |     -  |
 | next-text     | 自定义下一页的文本   | 	string    |  -  |   -    |
 
 ### events
 | 事件名	      | 说明	    | 返回值 |
 |---------- |-------- |---------- |
-| on-change     |  当页数改变时触发   |  page  |
+| on-page-change     |  当页数改变时触发   |  page  |
+| on-size-change     |  当切换每页条数时触发  |  size  |
 
 ### slot
 | 名称	      | 说明	    |
