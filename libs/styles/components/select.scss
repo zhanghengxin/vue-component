@@ -1,0 +1,192 @@
+/**
+ * select scss
+ * author ganbowen
+ * created 2018/11/26 17:35:46
+ */
+@import "../common/color";
+@import "../common/prefix";
+
+$css-prefix-select: $css-prefix+'select';
+$css-prefix-option: $css-prefix+'option';
+$css-prefix-drop: $css-prefix+'drop';
+$css-prefix-tag: $css-prefix+'tag';
+
+//select
+.#{$css-prefix-select} {
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  vertical-align: middle;
+  color: $Content;
+  font-size: 14px;
+  line-height: normal;
+
+  &-arrow {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    line-height: 1;
+    margin-top: -6px;
+    font-size: 12px;
+    color: $Sub;
+    transition: all .2s ease-in-out;
+  }
+
+  &-show {
+    .#{$css-prefix-select}-arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  &-multiple {
+    .#{$css-prefix-select}-selection {
+      padding: 0 24px 0 4px;
+
+      &-disabled {
+        background: $Disabled;
+        cursor: not-allowed;
+      }
+
+      .#{$css-prefix-select}-input{
+        border:0;
+        height: 30px;
+        width: 100%;
+        padding: 0 0 0 4px;
+      }
+    }
+  }
+
+  &-selection {
+    display: block;
+    box-sizing: border-box;
+    outline: 0;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+    background-color: $white;
+    border-radius: 4px;
+    border: 1px solid $Border;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+      border-color: $LightPrimary;
+    }
+
+    &-content {
+      display: block;
+      height: 30px;
+      line-height: 30px;
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-left: 8px;
+      padding-right: 24px;
+    }
+
+    &-focused {
+      border-color: $LightPrimary;
+      box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
+    }
+
+    &-placeholder {
+      color: $SubContent;
+    }
+
+    &-disabled {
+      background: $Disabled;
+      cursor: not-allowed;
+      .#{$css-prefix-select}-input{
+        background: $Disabled;
+      }
+    }
+
+    &-autowarp {
+      max-height: 32px;
+      overflow: hidden;
+    }
+  }
+
+  &-tag {
+    display: inline-block;
+    height: 24px;
+    line-height: 22px;
+    margin: 3px 4px 3px 0;
+    padding: 0 8px;
+    border: 1px solid $Divider;
+    border-radius: 3px;
+    background: $Background;
+    font-size: 12px;
+    vertical-align: middle;
+    opacity: 1;
+    overflow: hidden;
+    cursor: pointer;
+
+    .icon {
+      width: 22px;
+      height: 22px;
+      line-height: 22px;
+      text-align: center;
+    }
+  }
+  &-input{
+    border:0;
+    height: 30px;
+    width: 100%;
+    padding: 0 24px 0 8px;
+  }
+}
+
+//drop
+.#{$css-prefix-drop} {
+  width: inherit;
+  max-height: 200px;
+  overflow: auto;
+  margin: 5px 0;
+  padding: 5px 0;
+  background-color: $white;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+  position: absolute;
+  z-index: 900;
+}
+
+//option
+.#{$css-prefix-option} {
+  margin: 0;
+  line-height: normal;
+  padding: 7px 16px;
+  clear: both;
+  color: $Content;
+  font-size: 12px !important;
+  white-space: nowrap;
+  list-style: none;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  background: $white;
+
+  &:hover {
+    background: $Divider;
+  }
+
+  &-selected,
+  &-selected:hover {
+    background: $Info;
+    color: $white;
+  }
+
+  &-selected-multiple {
+    color: $Info;
+  }
+
+  .icon {
+    color: $Success;
+    float: right;
+  }
+
+  &-disabled {
+    color: $DisContent;
+    cursor: not-allowed;
+  }
+}

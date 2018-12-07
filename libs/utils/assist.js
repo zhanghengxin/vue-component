@@ -66,4 +66,4 @@ function deepCopy (data) {
     return o
 }
 
-export { findComponentUpward, deepCopy, findComponentUpwards }
+export { findComponentUpward, deepCopy, findComponentUpwards, typeOf }

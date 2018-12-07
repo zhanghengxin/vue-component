@@ -3,9 +3,6 @@
  * author ganbowen
  * created 2018/10/14 17:35:46
  */
-@import "../common/color";
-
-@import "../common/prefix";
 
 $css-prefix-input: $css-prefix+'input';
 $css-prefix-input-icon: $css-prefix-input+'-icon';
@@ -29,6 +26,7 @@ $input-large-font:16px;
 
   &:disabled {
     background-color: $Disabled;
+    cursor: not-allowed;
   }
 
   // &:disabled:hover {
