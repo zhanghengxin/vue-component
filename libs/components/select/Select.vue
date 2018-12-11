@@ -3,6 +3,7 @@
         v-click-outside="clickOutside"
         :style='widthStyle'
         :class="selectClasses">
+        <div v-if='label' :class='[prefixCls+`-label`]'>{{label}}</div>
         <div
             ref="reference"
             :class="classes"
@@ -14,7 +15,7 @@
             @mouseleave="clearShow =  clearabled && false">
             <slot name="input">
                 <input type="hidden" :name="name" :value="publicValue">
-                <div style='position:relative'>
+                <div>
                     <span v-if='!multiple && !filterabled'
                           :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
                     <span v-if='multiple && !filterabled && !values.length' :class="showSelectedCls">{{localePlaceholder}}</span>
@@ -50,7 +51,7 @@
                 </b-icon>
             </slot>
         </div>
-        <transition name='fade'>
+        <transition name='slide'>
             <Drop
                 v-show='show'>
                 <ul v-show='notFoundData'>
@@ -144,6 +145,12 @@ export default {
             type: Boolean,
             default: false
         },
+        size: {
+            default: 'normal',
+            validator: function (value) {
+                return ['large', 'small', 'normal'].indexOf(value) !== -1
+            }
+        },
         width: {
             type: [String, Number]
         },
@@ -165,6 +172,10 @@ export default {
         },
         filterFn: {
             type: Function
+        },
+        label: {
+            type: [String, Number],
+            default: ''
         }
     },
     computed: {
@@ -173,6 +184,8 @@ export default {
                 `${prefixCls}`,
                 {
                     [`${prefixCls}-multiple`]: this.multiple,
+                    [`${prefixCls}-group`]: this.label,
+                    [`${prefixCls}-${this.size}`]: this.size,
                     [`${this.className}`]: this.className
                 }
             ]
@@ -184,7 +197,7 @@ export default {
                     [`${prefixCls}-show`]: this.show, // 旋转小icon
                     [`${prefixCls}-selection-focused`]: this.isFocused && this.show,
                     [`${prefixCls}-selection-disabled`]: this.disabled,
-                    [`${prefixCls}-selection-autowarp`]: !this.autowarp
+                    [`${prefixCls}-selection-autowarp`]: this.multiple && !this.autowarp
                 }
             ]
         },
@@ -384,11 +397,10 @@ export default {
         values (now, before) {
             const newValue = JSON.stringify(now)
             const oldValue = JSON.stringify(before)
-            console.log('oldValue,newValue', oldValue, newValue)
-            const vModelValue = this.values.length > 0 ? (this.multiple ? this.values.map(({code}) => code) : this.values[0].code) : (this.multiple ? [] : '')
-            const shouldEmitInput = newValue !== oldValue && vModelValue !== this.value
-            if (shouldEmitInput) {
-                this.$emit('input', vModelValue) // to update v-model
+            const modelValue = this.values.length > 0 ? (this.multiple ? this.values.map(({code}) => code) : this.values[0].code) : (this.multiple ? [] : '')
+            const emitInput = newValue !== oldValue && modelValue !== this.value
+            if (emitInput) {
+                this.$emit('input', modelValue) // to update v-model
                 this.dispatch('FormItem', 'on-form-change', this.publicValue)
             }
         },

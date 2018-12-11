@@ -3,8 +3,6 @@
  * author ganbowen
  * created 2018/11/26 17:35:46
  */
-@import "../common/color";
-@import "../common/prefix";
 
 $css-prefix-select: $css-prefix+'select';
 $css-prefix-option: $css-prefix+'option';
@@ -29,7 +27,7 @@ $css-prefix-tag: $css-prefix+'tag';
     margin-top: -6px;
     font-size: 12px;
     color: $Sub;
-    transition: all .2s ease-in-out;
+    transition: all $transition-time $ease-in-out;
   }
 
   &-show {
@@ -47,13 +45,82 @@ $css-prefix-tag: $css-prefix+'tag';
         cursor: not-allowed;
       }
 
-      .#{$css-prefix-select}-input{
-        border:0;
-        height: 30px;
-        width: 100%;
+      .#{$css-prefix-select}-input {
         padding: 0 0 0 4px;
       }
     }
+  }
+
+  &-large {
+    .#{$css-prefix-select}-selection {
+      &-content {
+        height: 34px;
+        line-height: 34px;
+        font-size: 14px;
+      }
+
+      &-autowarp {
+        max-height: 36px;
+      }
+    }
+
+    .#{$css-prefix-select}-tag {
+      height: 28px;
+      line-height: 26px;
+    }
+
+    .#{$css-prefix-select}-input {
+      height: 34px;
+    }
+  }
+
+  &-small {
+    .#{$css-prefix-select}-selection {
+      &-content {
+        height: 24px;
+        line-height: 24px;
+      }
+    }
+
+    .#{$css-prefix-select}-tag {
+      height: 18px;
+      line-height: 18px;
+
+      .icon {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+      }
+    }
+
+    .#{$css-prefix-select}-input {
+      height: 24px;
+    }
+  }
+
+  &-normal {
+    .#{$css-prefix-select}-selection {
+      &-content {
+        height: 30px;
+        line-height: 30px;
+      }
+    }
+  }
+
+  &-label {
+    line-height: 1;
+    font-weight: normal;
+    font-size: inherit;
+    padding: 4px 7px;
+    color: $Content;
+    display: inline-block;
+    text-align: center;
+    background-color: #f8f8f9;
+    border-right: 1px solid #dddee1;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    white-space: nowrap;
+    vertical-align: middle;
   }
 
   &-selection {
@@ -67,6 +134,7 @@ $css-prefix-tag: $css-prefix+'tag';
     border-radius: 4px;
     border: 1px solid $Border;
     transition: all .2s ease-in-out;
+    width: 100%;
 
     &:hover {
       border-color: $LightPrimary;
@@ -74,14 +142,14 @@ $css-prefix-tag: $css-prefix+'tag';
 
     &-content {
       display: block;
-      height: 30px;
-      line-height: 30px;
-      font-size: 12px;
+      line-height: 1;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      vertical-align: middle;
       padding-left: 8px;
       padding-right: 24px;
+      font-size: 12px;
     }
 
     &-focused {
@@ -96,7 +164,8 @@ $css-prefix-tag: $css-prefix+'tag';
     &-disabled {
       background: $Disabled;
       cursor: not-allowed;
-      .#{$css-prefix-select}-input{
+
+      .#{$css-prefix-select}-input {
         background: $Disabled;
       }
     }
@@ -129,11 +198,25 @@ $css-prefix-tag: $css-prefix+'tag';
       text-align: center;
     }
   }
-  &-input{
-    border:0;
+
+  &-input {
+    border: 0;
     height: 30px;
     width: 100%;
     padding: 0 24px 0 8px;
+  }
+
+  &-group {
+    border: 1px solid $Border;
+    box-sizing: border-box;
+    border-radius: 4px;
+    transition: all .2s ease-in-out;
+    .#{$css-prefix-select} {
+      display: table;
+      &-selection,&-label{
+        display: table-cell;
+      }
+    }
   }
 }
 
