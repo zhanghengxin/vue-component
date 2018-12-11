@@ -65,11 +65,14 @@ export default {
     methods: {
         change (event) {
             let arr = this.$parent.$children
-            for (let index = 0; index < arr.length; index++) {
-                arr[index].checkedValue = false
-            }
+            arr.map((item) => {
+                item.checkedValue = false
+            })
             let checked = event.target.checked
             this.checkedValue = checked
+            if (this.checkedValue) {
+                this.$parent.change(this.label)
+            }
             this.$emit('input', this.checkedValue)
             this.$emit('on-change', this.checkedValue)
         }
