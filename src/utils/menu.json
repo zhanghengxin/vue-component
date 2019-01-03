@@ -212,6 +212,11 @@
           "title": "Circle 进度环",
           "path": "/circle",
           "name": "circle"
+        },
+        {
+          "title": "Transfer 穿梭框",
+          "path": "/transfer",
+          "name": "transfer"
         }
       ]
     }

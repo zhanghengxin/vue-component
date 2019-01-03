@@ -39,6 +39,7 @@ import Select from './components/select'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
 import DateTimePicker from './components/datetime-picker'
+import Transfer from './components/transfer/'
 
 const components = [
     Input,
@@ -80,7 +81,8 @@ const components = [
     Select,
     DatePicker,
     TimePicker,
-    DateTimePicker
+    DateTimePicker,
+    Transfer
 ]
 
 const install = function (Vue) {
