@@ -10,15 +10,20 @@
                 value3: '',
                 value4: '',
                 value5: '',
-                value6: '',
-                value7: [],
+                value6: '004',
+                value7: ['004','007'],
                 value8: '',
+                value9: '',
+                value10: '',
                 value00: '',
                 value01: '',
                 value02: '',
+                value03: '',
+                value04: '',
                 clearabled:true,
                 disabled:true,
                 autowarp:true,
+                fixed:true,
                 options:[{
                     name:'增专',
                     code:'004'
@@ -59,15 +64,40 @@
                     label:'电子票',
                     value:'025'
                 }],
+                options3:[],
+                options4:[],
                 nameKey:'label',
                 codeKey:'value',
                 multiple:true,
-                filterabled:true
+                filterabled:true,
+                loading:false
             }
         },
         methods:{
             filterFn(query,item){
                 return (item.name + item.code).indexOf(query) > -1
+            },
+            remoteFn(query){
+                if (query !== '') {
+                    this.loading = true
+                    setTimeout(() => {
+                        this.loading = false
+                        this.options3 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                    }, 2000)
+                } else {
+                    this.options3 = []
+                }
+            },
+            remoteFnMultiple(query){
+                if (query !== '') {
+                    this.loading = true
+                    setTimeout(() => {
+                        this.loading = false
+                        this.options4 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                    }, 2000)
+                } else {
+                    this.options4 = []
+                }
             }
         }
     }
@@ -267,6 +297,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 v-model="value3"
                 :multiple='multiple' 
                 :options='options' 
+                size='large'
                 style="width:200px" />
             </b-select>
             <b-select 
@@ -578,6 +609,180 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 ```
 :::
 
+
+### label样式
+可设置 ```label```，```fixed```设置label的两种样式。<br/>
+fixed为false 的时候可设置labelWidth的值 默认72px<br/>
+fixed为true  默认280px false 默认220px<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+             <b-select 
+                v-model="value9"  
+                label='姓名'
+                :fixed='fixed'
+                :options='options' />
+            </b-select>
+            <br/>
+            <br/>
+            <b-select 
+                v-model="value10" 
+                label='姓名' 
+                :options='options' />
+            </b-select>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+        <div>
+            <b-select 
+                v-model="value9"  
+                label='姓名'
+                :fixed='fixed'
+                :options='options' />
+            </b-select>
+            <b-select 
+                v-model="value10" 
+                label='姓名' 
+                :options='options' />
+            </b-select>
+        </div>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    value9: '',
+                    value10: '',
+                    fixed: true,
+                    options:[{
+                        name:'增专',
+                        code:'004'
+                    },{
+                        name:'增普',
+                        code:'007'
+                    },{
+                        name:'机动车',
+                        code:'005'
+                    },{
+                        name:'电子票',
+                        code:'025'
+                    }]
+                }
+            }
+        }
+    </script>
+```
+:::
+
+
+### 远程搜索
+设置 ```filterabled```，```remoteFn```，```loading```可以设置远程搜索<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-select 
+                v-model="value03"  
+                :filterabled='filterabled'
+                :remoteFn='remoteFn'
+                :loading='loading'
+                :options='options3'
+                width='200' />
+            </b-select>
+            <b-select 
+                v-model="value04" 
+                :filterabled='filterabled'
+                :multiple='multiple'
+                :remoteFn='remoteFnMultiple'
+                :loading='loading'
+                :options='options4'
+                width='200' />
+            </b-select>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+        <div>
+           <b-select 
+                v-model="value03"  
+                :filterabled='filterabled'
+                :remoteFn='remoteFn'
+                :loading='loading'
+                :options='options3'
+                width='200' />
+            </b-select>
+            <b-select 
+                v-model="value04" 
+                :filterabled='filterabled'
+                :multiple='multiple'
+                :remoteFn='remoteFnMultiple'
+                :loading='loading'
+                :options='options4'
+                width='200' />
+        </div>
+    </template>
+    <script>
+        export default {
+           data () {
+            return {
+                value03: '',
+                value04: '',
+                options:[{
+                    name:'增专',
+                    code:'004'
+                },{
+                    name:'增普',
+                    code:'007'
+                },{
+                    name:'机动车',
+                    code:'005'
+                },{
+                    name:'电子票',
+                    code:'025'
+                }],
+                options3:[],
+                options4:[],
+                multiple:true,
+                filterabled:true,
+                loading:false
+            }
+        },
+        methods:{
+            remoteFn(query){
+                if (query !== '') {
+                    this.loading = true
+                    setTimeout(() => {
+                        this.loading = false
+                        this.options3 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                    }, 2000)
+                } else {
+                    this.options3 = []
+                }
+            },
+            remoteFnMultiple(query){
+                if (query !== '') {
+                    this.loading = true
+                    setTimeout(() => {
+                        this.loading = false
+                        this.options4 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                    }, 2000)
+                } else {
+                    this.options4 = []
+                }
+            }
+        }
+        }
+    </script>
+```
+:::
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |----------|--------|---------- |-------------  |-------- |
@@ -599,6 +804,11 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 | filterabled      | 是否支持筛选	| Boolean | `true`、`false` |   false  |
 | notFoundText      | 没有数据的提示	| String | - |   '无匹配数据'  |
 | filterFn      | 筛选函数，filterabled为true时可用	| Function | - |  -  |
+| label      | 设置说明文字 	| String，Number | - |  -  |
+| fixed      | 搭配文字的两种样式类型	| Boolean | `true`、`false` |   false  |
+| labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   72  |
+| loading  | 远程加载时的加载状态   | Boolean  |  `true`、`false`  |   false  |
+| remoteFn  | 远程加载时搜索的方法   | Function  |  -  |   -  |
 
 ### events
 | 事件名	      | 说明	    | 返回值 |
