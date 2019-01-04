@@ -3,14 +3,14 @@
 </template>
 <script>
 
-import Popper from '&/utils/vue-popper.js'
 import { prefix } from '&/utils/common'
-
+import Vue from 'vue'
+const isServer = Vue.prototype.$isServer
+const Popper = isServer ? function () {} : require('popper.js/dist/umd/popper.js')
 const prefixCls = prefix + 'drop'
 
 export default {
     name: prefixCls,
-    mixins: [ Popper ],
     props: {
         placement: {
             type: String,
@@ -48,7 +48,6 @@ export default {
                     this.popperStatus = true
                 })
             } else {
-                console.log('this.$parent.$refs', this.$parent.$refs)
                 this.$nextTick(() => {
                     this.popper = new Popper(this.$parent.$refs.reference, this.$el, {
                         placement: this.placement,
@@ -70,10 +69,9 @@ export default {
                     })
                 })
             }
-            // set a height for parent is Modal and Select's width is 100%
-            // if (this.$parent.$options.name === `${prefix}select`) {
-            //     this.width = parseInt(getStyle(this.$parent.$el, 'width'))
-            // }
+            if (this.$parent.$options.name === `${prefix}select`) {
+                this.width = this.$parent.$el.querySelector('.b-select-selection').clientWidth
+            }
         },
         destroy () {
             if (this.popper) {
@@ -87,9 +85,7 @@ export default {
             }
         },
         resetTransformOrigin () {
-            // 不判断，Select 会报错，不知道为什么
             if (!this.popper) return
-
             let xPlacement = this.popper.popper.getAttribute('x-placement')
             let placementStart = xPlacement.split('-')[0]
             let placementEnd = xPlacement.split('-')[1]
@@ -100,13 +96,13 @@ export default {
         }
     },
     created () {
-        // this.$on('on-update-popper', this.update)
-        // this.$on('on-destroy-popper', this.destroy)
+        this.$on('on-update-popper', this.update)
+        this.$on('on-destroy-popper', this.destroy)
     },
     beforeDestroy () {
-        // if (this.popper) {
-        //     this.popper.destroy()
-        // }
+        if (this.popper) {
+            this.popper.destroy()
+        }
     }
 }
 </script>
