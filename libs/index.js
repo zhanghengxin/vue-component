@@ -39,6 +39,7 @@ import Select from './components/select'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
 import DateTimePicker from './components/datetime-picker'
+import Transfer from './components/transfer/'
 import Notice from './components/notice'
 
 const components = [
@@ -82,6 +83,7 @@ const components = [
     DatePicker,
     TimePicker,
     DateTimePicker,
+    Transfer,
     Notice
 ]
 
