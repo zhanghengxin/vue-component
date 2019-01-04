@@ -86,10 +86,10 @@
 <script>
 import Drop from './Dropdown'
 import Option from './Option'
-import Emitter from '&/mixins/emitter'
-import clickOutside from '&/utils/directives/clickOutside'
-import { typeOf } from '&/utils/assist'
-import { prefix } from '&/utils/common'
+import Emitter from '../../mixins/emitter'
+import clickOutside from '../../utils/directives/clickOutside'
+import { typeOf } from '../../utils/assist'
+import { prefix } from '../../utils/common'
 
 const prefixCls = prefix + 'select'
 
