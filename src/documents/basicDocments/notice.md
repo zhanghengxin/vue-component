@@ -8,36 +8,36 @@
 <div class="example">
   <div class="example-box">
       <div>
-          <b-button type="tynormal" @on-click="tynormal">默认通知</b-button>
-          <b-button type="tysuccess" @on-click="tysuccess">成功通知</b-button>
-          <b-button type="tywarning"
-          @on-click="tywarning">警告警告</b-button>
-          <b-button type="tyerror"
-          @on-click="tyerror">失败通知</b-button>
+          <b-button type="normal" @on-click="normal">默认通知</b-button>
+          <b-button type="success" @on-click="success">成功通知</b-button>
+          <b-button type="warning"
+          @on-click="warning">警告警告</b-button>
+          <b-button type="error"
+          @on-click="error">失败通知</b-button>
       </div>
   </div>
   <script>
     export default {
         methods: {
-          tynormal(){
-            this.$notice({
+          normal(){
+            this.$Notice({
               content: "默认通知，样式有点丑"
             });
           },
-          tysuccess(){
-            this.$notice({
+          success(){
+            this.$Notice({
               content: "通过修改border-left来控制样式",
               type: "success"
             });
           },
-          tywarning(){
-            this.$notice({
+          warning(){
+            this.$Notice({
               content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试",
               type: "warning"
             });
           },
-          tyerror(){
-            this.$notice({
+          error(){
+            this.$Notice({
               content: "我是纯粹凑数的",
               type: "error"
             });
@@ -49,33 +49,33 @@
 ::: code
 ```html
     <div>
-      <b-button type="tynormal" @on-click="tynormal">默认通知</b-button>
-      <b-button type="tysuccess" @on-click="tysuccess">成功通知</b-button>
-      <b-button type="tywarning" @on-click="tywarning">警告警告</b-button>
-      <b-button type="tyerror" @on-click="tyerror">失败通知</b-button>
+      <b-button type="normal" @on-click="normal">默认通知</b-button>
+      <b-button type="success" @on-click="success">成功通知</b-button>
+      <b-button type="warning" @on-click="warning">警告警告</b-button>
+      <b-button type="error" @on-click="error">失败通知</b-button>
    </div>
    <script>
       export default {
         methods: {
-          tynormal(){
-            this.$notice({
+          normal(){
+            this.$Notice({
               content: "默认通知，样式有点丑"
             });
           },
-          tysuccess(){
-            this.$notice({
+          success(){
+            this.$Notice({
               content: "通过修改border-left来控制样式",
               type: "success"
             });
           },
-          tywarning(){
-            this.$notice({
+          warning(){
+            this.$Notice({
               content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试",
               type: "warning"
             });
           },
-          tyerror(){
-            this.$notice({
+          error(){
+            this.$Notice({
               content: "我是纯粹凑数的",
               type: "error"
             });

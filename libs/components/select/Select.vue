@@ -1,4 +1,9 @@
 <template>
+    <div :class='selectGroupClasses'>
+    <div v-if='label'
+        :class='[prefixCls+`-label`]'
+        :style='labelStyles'
+        >{{label}}</div>
     <div
         v-click-outside="clickOutside"
         :style='widthStyle'
@@ -12,9 +17,8 @@
             @click="toggleMenu"
             @mouseenter="clearShow = clearabled && true"
             @mouseleave="clearShow =  clearabled && false">
-            <slot name="input">
                 <input type="hidden" :name="name" :value="publicValue">
-                <div style='position:relative'>
+                <div :class='[`${prefixCls}-show-selection`]'>
                     <span v-if='!multiple && !filterabled'
                           :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
                     <span v-if='multiple && !filterabled && !values.length' :class="showSelectedCls">{{localePlaceholder}}</span>
@@ -25,6 +29,7 @@
                     <input
                         type="text"
                         v-if="filterabled"
+                        v-show='inputShow'
                         v-model="query"
                         :disabled="disabled"
                         :class="[prefixCls + '-input']"
@@ -39,24 +44,27 @@
                 </div>
                 <b-icon
                     type='xia'
-                    v-if='iconShow'
+                    v-if='!disabled'
+                    v-show='iconShow'
                     :class="[prefixCls+`-arrow`]">
                 </b-icon>
                 <b-icon
                     type='shibai-mian'
-                    v-if='closeIcon'
+                    v-if='clearabled'
+                    v-show='closeIcon'
                     :class="[prefixCls+`-arrow`]"
                     @click.native.stop='clearValues'>
                 </b-icon>
-            </slot>
         </div>
-        <transition name='fade'>
+        <transition name='slide'>
             <Drop
-                v-show='show'>
-                <ul v-show='notFoundData'>
+                :style='dropStyles'
+                v-show='show'
+                >
+                <ul v-if='notFoundData'>
                     <li :class='[prefix+`option`]'>{{notFoundText}}</li>
                 </ul>
-                <ul v-if='dropList.length > 0'>
+                <ul v-if='(dropList.length > 0) && !loading'>
                     <Option
                         v-for='item in dropList'
                         :key='item.code'
@@ -67,37 +75,40 @@
                         :publicValue='publicValue'>
                     </Option>
                 </ul>
-                <ul v-show='loading'>
+                <ul v-if='loading'>
                     <li :class='[prefix+`option`]'>{{loadingText}}</li>
                 </ul>
             </Drop>
         </transition>
     </div>
+    </div>
 </template>
 <script>
 import Drop from './Dropdown'
 import Option from './Option'
-import Emitter from '&/mixins/emitter'
-import clickOutside from '&/utils/directives/clickOutside'
-import { typeOf } from '&/utils/assist'
-import { prefix } from '&/utils/common'
+import Emitter from '../../mixins/emitter'
+import clickOutside from '../../utils/directives/clickOutside'
+import { typeOf } from '../../utils/assist'
+import { prefix } from '../../utils/common'
 
 const prefixCls = prefix + 'select'
 
 export default {
     name: prefixCls,
-    mixins: [Emitter],
-    directives: {clickOutside},
-    components: {Drop, Option},
+    mixins: [ Emitter ],
+    directives: { clickOutside },
+    components: { Drop, Option },
     data () {
         return {
             prefix,
-            prefixCls: prefixCls,
+            prefixCls,
             show: false,
             clearShow: false,
             values: [],
+            isFocused: false,
+            dropStyles: {},
             query: '',
-            dropList: []
+            lastRemoteQuery: ''
         }
     },
     props: {
@@ -144,6 +155,12 @@ export default {
             type: Boolean,
             default: false
         },
+        size: {
+            default: 'normal',
+            validator: function (value) {
+                return ['large', 'small', 'normal'].indexOf(value) !== -1
+            }
+        },
         width: {
             type: [String, Number]
         },
@@ -165,14 +182,40 @@ export default {
         },
         filterFn: {
             type: Function
+        },
+        remoteFn: {
+            type: Function
+        },
+        label: {
+            type: [String, Number],
+            default: ''
+        },
+        labelWidth: {
+            type: [String, Number],
+            default: '72'
+        },
+        fixed: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
+        selectGroupClasses () {
+            return [
+                `${prefixCls}-container`,
+                {
+                    [`${prefixCls}-group`]: this.label && !this.fixed,
+                    [`${prefixCls}-group-fixed`]: this.label && this.fixed,
+                    [`${prefixCls}-group-fixed-focused`]: this.isFocused && this.show && !!this.label && !!this.fixed
+                }
+            ]
+        },
         selectClasses () {
             return [
                 `${prefixCls}`,
                 {
                     [`${prefixCls}-multiple`]: this.multiple,
+                    [`${prefixCls}-${this.size}`]: this.size,
                     [`${this.className}`]: this.className
                 }
             ]
@@ -182,9 +225,9 @@ export default {
                 `${prefixCls}-selection`,
                 {
                     [`${prefixCls}-show`]: this.show, // 旋转小icon
-                    [`${prefixCls}-selection-focused`]: this.isFocused && this.show,
+                    [`${prefixCls}-selection-focused`]: this.isFocused && this.show && (!this.label || !this.fixed),
                     [`${prefixCls}-selection-disabled`]: this.disabled,
-                    [`${prefixCls}-selection-autowarp`]: !this.autowarp
+                    [`${prefixCls}-selection-autowarp`]: this.multiple && !this.autowarp
                 }
             ]
         },
@@ -198,7 +241,12 @@ export default {
         },
         widthStyle () {
             return {
-                width: this.width ? `${this.width}px` : ''
+                width: this.width && `${this.width}px`
+            }
+        },
+        labelStyles () {
+            return {
+                width: this.labelWidth && `${this.labelWidth}px`
             }
         },
         inputStyle () {
@@ -214,39 +262,43 @@ export default {
             return style
         },
         inputLength () {
-            const {query} = this
-            let width = this.$el && this.$el.clientWidth
+            const {query, $el} = this
+            let width = $el && $el.clientWidth
             let inputWidth = query.length * 12 + 20
             if (width && inputWidth >= width) { // 如果当前的input的宽度大于select整体宽度 则input的宽度为select宽度减去padding
                 return width - 24
             } else {
+                this.broadcastPopperUpdate()
                 return inputWidth
             }
         },
+        inputShow () {
+            const {multiple, show, values} = this
+            return !multiple || ((show && multiple) || !values.length)
+        },
         iconShow () {
-            const {clearabled, clearShow, disabled, values} = this
-            if (clearabled && clearShow) {
-                return !disabled && !values.length
-            } else {
-                return !disabled
-            }
+            const {clearabled, clearShow, values, disabled} = this
+            return clearabled && clearShow ? !values.length : !disabled
         },
         closeIcon () {
-            if (this.clearabled) {
-                return !this.disabled && this.clearShow && this.values.length
-            } else {
-                return false
-            }
+            const {disabled, clearShow, values} = this
+            return !disabled && clearShow && values.length
         },
         showValue () {
-            return this.values[0] ? this.values[0].name : ''
+            const {multiple, values} = this
+            if (multiple) {
+                return ''
+            } else {
+                return values[0] ? values[0].name : ''
+            }
         },
         localePlaceholder () {
             const {values, placeholder} = this
             return (values && values.length > 0) ? '' : placeholder
         },
         publicValue () {
-            return this.multiple ? this.values.map(option => option.code) : (this.values[0] || {}).code
+            const {multiple, values} = this
+            return multiple ? values.map(option => option.code) : (values[0] || {}).code
         },
         notFoundData () {
             const {filterabled, dropList, loading} = this
@@ -254,25 +306,38 @@ export default {
         },
         tabindex () {
             return this.disabled || 0
+        },
+        dropList () {
+            const {options, filterabled, filterFn, query, remoteFn} = this
+            let dropList = options.map(item => {
+                return typeOf(item) === 'object' && {
+                    code: item[this.codeKey],
+                    name: item[this.nameKey],
+                    disabled: item.disabled || false
+                }
+            })
+            if (filterabled && !remoteFn) {
+                if (filterFn) {
+                    dropList = dropList.filter(item => this.filterFn(query, item))
+                } else {
+                    dropList = dropList.filter(({name}) => name.indexOf(query) > -1)
+                }
+            }
+            return dropList || []
         }
-    },
-    created () {
-        this.optionsInit()
     },
     mounted () {
         this.$on('on-select-selected', this.onOptionClick)
-
         if (this.options && this.options.length > 0) {
             this.values = this.getInitValue().map(value => {
                 if (typeof value !== 'number' && !value) return null
                 return this.getOptionData(value)
             }).filter(Boolean)
         }
+
+        this.dropStyles = this.fixedInitDrop()
     },
     methods: {
-        isArray (arr) {
-            return typeOf(arr) === 'array'
-        },
         clickOutside () {
             if (this.filterabled) {
                 if (this.multiple && this.values.length > 0) {
@@ -281,80 +346,64 @@ export default {
                     this.query = this.showValue
                 }
             }
+            this.broadcastPopperUpdate()
             this.show = false
         },
-        optionsInit () {
-            let dropList = this.options.map(item => {
-                return typeOf(item) === 'object' && {
-                    code: item[this.codeKey],
-                    name: item[this.nameKey],
-                    disabled: item.disabled || false
-                }
-            })
-            if (this.filterabled && this.query) {
-                if (this.filterFn) {
-                    dropList = dropList.filter(item => this.filterFn(this.query, item))
-                } else {
-                    dropList = dropList.filter(({name}) => name.indexOf(this.query) > -1)
-                }
-            }
-            this.dropList = dropList
-        },
         onOptionClick (option) {
-            if (this.multiple) {
-                if (this.filterabled) {
+            const {multiple, filterabled, values} = this
+            if (multiple) {
+                if (filterabled) {
                     this.query = ''
                 }
-                let isLive = this.values.filter(({code}) => code === option.code) || []
+                let isLive = values.filter(({code}) => code === option.code) || []
                 if (isLive.length) { // 如果点击的已存在values中 则过滤
-                    this.values = this.values.filter(({code}) => code !== option.code)
+                    this.values = values.filter(({code}) => code !== option.code)
                 } else {
-                    this.values = this.values.concat(option)
+                    this.values = values.concat(option)
                 }
             } else {
-                if (this.filterabled) {
-                    this.query = option.name
-                }
                 this.values = [option]
                 this.toggleMenu()
             }
+            this.broadcastPopperUpdate()
             this.$emit('on-change', this.values)
         },
         getInitValue () { // []
             const {multiple, value} = this
-            let initValue = this.isArray(value) ? value : [value]
+            let initValue = typeOf(value) === 'array' ? value : [value]
             if (!multiple && (typeOf(initValue[0]) === 'undefined' || String(initValue[0]).trim() === '')) { initValue = [] }
             return initValue
         },
         getOptionData (value) {
-            if (this.multiple) {
-                let items = this.dropList.filter(({code}) => value && value.indexOf(code) > -1)
+            const {multiple, dropList} = this
+            if (multiple) {
+                let items = dropList.filter(({code}) => value && value.indexOf(code) > -1)
                 return items && items[0]
             } else {
-                let item = this.dropList.filter(({code}) => code === value)
+                let item = dropList.filter(({code}) => code === value)
                 return item && item[0]
             }
         },
         toggleHeaderFocus ({type}) {
             if (this.disabled) return
             this.isFocused = type === 'focus'
-            const {isFocused, multiple, filterabled, $el} = this
-            if (isFocused && multiple && filterabled) {
-                $el.querySelector(`[type='text']`).focus()
-            }
         },
-        toggleMenu (e) {
+        toggleMenu () {
             if (this.disabled) {
                 return false
             }
             this.show = !this.show
+            if (this.show) { this.broadcastPopperUpdate() }
         },
         removeTag (e) {
-            if (!this.disabled) { this.values = this.values.filter(({code}) => code !== e.code) }
+            const {disabled, values} = this
+            if (!disabled) {
+                this.values = values.filter(({code}) => code !== e.code)
+                this.broadcastPopperUpdate()
+            }
         },
         clearValues () {
             this.values = []
-            this.query = ''
             this.$emit('on-clear')
         },
         slideDropAndSetInput () {
@@ -364,10 +413,25 @@ export default {
             this.isFocused = true
         },
         handleInputDelete () {
-            const {query, values} = this
-            if (!query) {
+            const {query, values, multiple} = this
+            if (!query && multiple) {
                 this.values = values.slice(0, values.length - 1)
             }
+        },
+        fixedInitDrop () {
+            // cmoputed frop width
+            const {disabled, fixed, label, $el} = this
+            if (!disabled && !fixed && label && $el) {
+                let clientWidth = $el.clientWidth
+                let labelWidth = +this.labelWidth || $el.querySelector(`.${prefixCls}-label`).clientWidth
+                return {
+                    width: `${clientWidth - labelWidth}px`
+                }
+            }
+            return {}
+        },
+        broadcastPopperUpdate () {
+            this.broadcast(`${prefix}drop`, 'on-update-popper')
         }
     },
     watch: {
@@ -382,18 +446,35 @@ export default {
             }
         },
         values (now, before) {
+            const {values, multiple, value, publicValue} = this
             const newValue = JSON.stringify(now)
             const oldValue = JSON.stringify(before)
-            console.log('oldValue,newValue', oldValue, newValue)
-            const vModelValue = this.values.length > 0 ? (this.multiple ? this.values.map(({code}) => code) : this.values[0].code) : (this.multiple ? [] : '')
-            const shouldEmitInput = newValue !== oldValue && vModelValue !== this.value
-            if (shouldEmitInput) {
-                this.$emit('input', vModelValue) // to update v-model
-                this.dispatch('FormItem', 'on-form-change', this.publicValue)
+            const modelValue = values.length > 0 ? (multiple ? values.map(({code}) => code) : values[0].code) : (multiple ? [] : '')
+            const emitInput = newValue !== oldValue && modelValue !== value
+            this.query = values.length > 0 ? (multiple ? '' : values[0].name) : ''
+            if (emitInput) {
+                this.$emit('input', modelValue) // to update v-model
+                this.dispatch('FormItem', 'on-form-change', publicValue)
             }
         },
-        query (val) {
-            this.optionsInit()
+        isFocused (val) {
+            if (!val) {
+                this.show = false
+            }
+        },
+        show (val) {
+            if (val && this.multiple && this.filterabled) {
+                this.$nextTick(() => {
+                    this.$el.querySelector(`[type='text']`).focus()
+                })
+            }
+            this.broadcast(`${prefix}drop`, this.show ? 'on-update-popper' : 'on-destroy-popper')
+        },
+        query () {
+            const {filterabled, remoteFn, query} = this
+            if (filterabled && remoteFn && query !== '') {
+                this.remoteFn(query)
+            }
         }
     }
 }

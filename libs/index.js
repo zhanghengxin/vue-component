@@ -40,6 +40,7 @@ import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
 import DateTimePicker from './components/datetime-picker'
 import Transfer from './components/transfer/'
+import Notice from './components/notice'
 
 const components = [
     Input,
@@ -82,7 +83,8 @@ const components = [
     DatePicker,
     TimePicker,
     DateTimePicker,
-    Transfer
+    Transfer,
+    Notice
 ]
 
 const install = function (Vue) {
@@ -90,6 +92,7 @@ const install = function (Vue) {
     components.forEach(component => Vue.component(component.name, component))
     Vue.prototype.$Message = Message
     Vue.prototype.$Modal = Modal
+    Vue.prototype.$Notice = Notice
 }
 
 export default {

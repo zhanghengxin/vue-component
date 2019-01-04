@@ -26,7 +26,7 @@ let findComponentUpwards = function (context, componentName) {
     return parents
 }
 
-function typeOf (obj) {
+export function typeOf (obj) {
     const toString = Object.prototype.toString
     const map = {
         '[object Boolean]': 'boolean',
@@ -66,4 +66,4 @@ function deepCopy (data) {
     return o
 }
 
-export { findComponentUpward, deepCopy, findComponentUpwards, typeOf }
+export { findComponentUpward, deepCopy, findComponentUpwards }

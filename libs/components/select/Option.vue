@@ -86,12 +86,6 @@ export default {
                 name: this.optionLabel
             })
         }
-    },
-    created () {
-        // this.$on('on-selected', this.selectedFn)
-    },
-    mounted () {
-
     }
 }
 </script>
