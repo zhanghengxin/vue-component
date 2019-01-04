@@ -1,0 +1,55 @@
+$css-prefix-notice: $css-prefix + 'notice';
+.#{$css-prefix-notice}-notice{
+  position: fixed;
+  width: 280px;
+  background-color: white;
+  color: black;
+  align-items: center;
+  padding: 20px;
+  padding-right: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s;
+  display: flex;
+}
+.#{$css-prefix-notice}-content{
+  padding: 0;
+  word-wrap:break-word;
+}
+.#{$css-prefix-notice}-close{
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.#{$css-prefix-notice}-fade{
+  position: absolute;
+  left:0;
+  right: 0;
+}
+.#{$css-prefix-notice}-fade-enter-active{
+  transition: all 1.2s ease;
+}
+.#{$css-prefix-notice}-fade-leave-active{
+  transition: all .1s cubic-bezier(2.0, 0.5, 0.8, 1.0);
+}
+.#{$css-prefix-notice}-fade-enter, .slide-#{$css-prefix-notice}-fade-leave-to{
+  left:0;
+  right: 0;
+  transform: translateX(50px);
+  opacity: 0;
+}
+.#{$css-prefix-notice}-normal{
+  border-left: none;
+}
+.#{$css-prefix-notice}-success{
+  border-left: solid 8px $Success;
+}
+.#{$css-prefix-notice}-warning{
+  border-left: solid 8px $Warning;
+}
+.#{$css-prefix-notice}-error{
+  border-left: solid 8px $Error;
+}
