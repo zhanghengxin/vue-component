@@ -6,11 +6,11 @@
 <div class="example">
     <div class="example-box">
         <template>
-            <Breadcrumb>
-                <BreadcrumbItem to="/">Home</BreadcrumbItem>
-                <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
-                <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
-            </Breadcrumb>
+            <b-breadcrumb>
+                <b-breadcrumb-item to="/">Home</b-breadcrumb-item>
+                <b-breadcrumb-item to="/breadcrumb">Libs</b-breadcrumb-item>
+                <b-breadcrumb-item>Breadcrumb</b-breadcrumb-item>
+            </b-breadcrumb>
         </template>
         <script>
             export default {
@@ -21,11 +21,11 @@
 ::: code
 ```html
     <template>
-        <bw-breadcrumb>
-            <bw-breadcrumbItem to="/">Home</bw-breadcrumbItem>
-            <bw-breadcrumbItem to="/libs/breadcrumb">libs</bw-breadcrumbItem>
-            <bw-breadcrumbItem>Breadcrumb</bw-breadcrumbItem>
-        </bw-breadcrumb>
+        <b-breadcrumb>
+            <b-breadcrumb-item to="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item to="/breadcrumb">Libs</b-breadcrumb-item>
+            <b-breadcrumb-item>Breadcrumb</b-breadcrumb-item>
+        </b-breadcrumb>
     </template>
     <script>
         export default {
@@ -48,16 +48,16 @@
             }
         </style>
         <template>
-            <Breadcrumb separator=">">
-                <BreadcrumbItem to="/">Home</BreadcrumbItem>
-                <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
-                <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
-            </Breadcrumb>
-            <Breadcrumb separator="<b class='demo-breadcrumb-separator'>\</b>">
-                <BreadcrumbItem to="/">Home</BreadcrumbItem>
-                <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
-                <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
-            </Breadcrumb>
+            <b-breadcrumb separator=">">
+                <b-breadcrumb-item to="/">Home</b-breadcrumb-item>
+                <b-breadcrumb-item to="/breadcrumb">Libs</b-breadcrumb-item>
+                <b-breadcrumb-item>Breadcrumb</b-breadcrumb-item>
+            </b-breadcrumb>
+            <b-breadcrumb separator="<b class='demo-breadcrumb-separator'>\</b>">
+                <b-breadcrumb-item to="/">Home</b-breadcrumb-item>
+                <b-breadcrumb-item to="/breadcrumb">Libs</b-breadcrumb-item>
+                <b-breadcrumb-item>Breadcrumb</b-breadcrumb-item>
+            </b-breadcrumb>
         </template>
         <script>
             export default {
@@ -74,16 +74,16 @@
     }
     </style>
     <template>
-        <Breadcrumb separator=">">
-            <BreadcrumbItem to="/">Home</BreadcrumbItem>
-            <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
-            <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
-        </Breadcrumb>
-        <Breadcrumb separator="<b class='demo-breadcrumb-separator'>\</b>">
-            <BreadcrumbItem to="/">Home</BreadcrumbItem>
-            <BreadcrumbItem to="/libs/breadcrumb">Libs</BreadcrumbItem>
-            <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
-        </Breadcrumb>
+        <b-breadcrumb separator=">">
+            <b-breadcrumbItem to="/">Home</b-breadcrumbItem>
+            <b-breadcrumbItem to="/breadcrumb">Libs</b-breadcrumbItem>
+            <b-breadcrumbItem>Breadcrumb</b-breadcrumbItem>
+        </b-breadcrumb>
+        <b-breadcrumb separator="<b class='demo-breadcrumb-separator'>\</b>">
+            <b-breadcrumbItem to="/">Home</b-breadcrumbItem>
+            <b-breadcrumbItem to="/breadcrumb">Libs</b-breadcrumbItem>
+            <b-breadcrumbItem>Breadcrumb</b-breadcrumbItem>
+        </b-breadcrumb>
     </template>
     <script>
         export default {

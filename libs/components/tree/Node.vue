@@ -73,7 +73,6 @@ export default {
             default: false
         },
         draggable: {
-
             type: Boolean,
             default: false
         }

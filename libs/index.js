@@ -34,6 +34,7 @@ import RadioGroup from './components/radioGroup'
 import Form from './components/form'
 import Tag from './components/Tag'
 import Tree from './components/tree'
+import Table from './components/table'
 import Progress from './components/Progress'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
@@ -46,6 +47,7 @@ const components = [
     Drawer,
     Tag,
     Tree,
+    Table,
     Icon,
     Message,
     Collapse,

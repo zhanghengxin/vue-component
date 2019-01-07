@@ -1,23 +1,29 @@
 <template>
-  <div :class="classes">
-    <slot></slot>
-  </div>
+    <div :class="prefixCls">
+        <slot></slot>
+    </div>
 </template>
 <script>
-const prefixCls = 'breadcrumb'
+import { prefix } from '../../utils/common'
+const prefixCls = prefix + 'breadcrumb'
 export default {
-    name: 'Breadcrumb',
+    name: prefixCls,
     props: {
         separator: {
             type: String,
             default: '/'
         }
     },
-    computed: {
-        classes () {
-            return `${prefixCls}`
+    data () {
+        return {
+            prefixCls: prefixCls
         }
     },
+    // computed: {
+    //     classes () {
+    //         return `${prefixCls}`
+    //     }
+    // },
     mounted () {
         this.updateChildren()
     },
@@ -28,8 +34,8 @@ export default {
     },
     methods: {
         updateChildren () {
-            this.$children.forEach((child) => {
-                child.separator = this.separator
+            this.$children.forEach((child, index) => {
+                if (index !== this.$children.length - 1) child.separator = this.separator
             })
         }
     },

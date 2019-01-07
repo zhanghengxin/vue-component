@@ -20,7 +20,8 @@
     </span>
 </template>
 <script>
-const prefixCls = 'breadcrumb-item'
+import { prefix } from '../../utils/common'
+const prefixCls = prefix + 'breadcrumb-item'
 export function oneOf (value, validList) {
     for (let i = 0; i < validList.length; i++) {
         if (value === validList[i]) {
@@ -30,7 +31,7 @@ export function oneOf (value, validList) {
     return false
 }
 export default {
-    name: 'BreadcrumbItem',
+    name: prefixCls,
     props: {
         to: {
             type: [Object, String]
@@ -50,7 +51,8 @@ export default {
     data () {
         return {
             separator: '',
-            showSeparator: false
+            showSeparator: false,
+            prefixCls: prefixCls
         }
     },
     computed: {

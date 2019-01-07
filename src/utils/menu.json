@@ -132,6 +132,11 @@
       "path": "/",
       "items": [
         {
+          "title": "Table 表格",
+          "path": "/table",
+          "name": "table"
+        },
+        {
           "title": "Page 分页",
           "path": "/page",
           "name": "page"
