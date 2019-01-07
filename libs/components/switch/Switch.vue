@@ -1,9 +1,8 @@
 <template>
     <span
-            :class="switchClass"
-            @click="toggle"
-            @keydown.space="toggle"
-    >
+        :class="switchClass"
+        @click="toggle"
+        @keydown.space="toggle">
         <input type="hidden" :value="currentValue">
         <span :class="innerClasses">
             <slot name="open" v-if="currentValue === trueValue"></slot>
@@ -13,10 +12,11 @@
 </template>
 
 <script>
-import {oneOf} from '../../utils/common.js'
-const prefixCls = 'b-switch'
+import { oneOf, prefix } from '../../utils/common.js'
+const prefixCls = `${prefix}switch`
+
 export default {
-    name: 'BSwitch',
+    name: prefixCls,
     data () {
         return {
             currentValue: this.value
@@ -68,6 +68,7 @@ export default {
             }
             const checked = this.currentValue === this.trueValue ? this.falseValue : this.trueValue
             this.currentValue = checked
+            this.$emit('input', checked)
             this.$emit('on-change', checked)
         }
     },

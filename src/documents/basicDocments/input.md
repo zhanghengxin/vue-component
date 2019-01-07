@@ -350,6 +350,7 @@ label文字大小可根据input的size变化<br/>
 | disabled | 设置输入框为禁用状态   | Boolean  | `true`、`false` |   false  |
 | readonly | 设置输入框为只读   | Boolean  | `true`、`false` |   false  |
 | error | 设置输入框为error状态   | Boolean  | `true`、`false` |   false  |
+| size | 设置输入框的尺寸   | String  | `small`、`normal`、`large` |   normal  |
 | name | 设置输入框name   | String  | - |   -  |
 | maxlength | 最大输入长度   | Number  | - |   -  |
 | minlength | 最大输入长度   | Number  | - |   -  |

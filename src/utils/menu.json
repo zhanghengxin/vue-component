@@ -88,6 +88,11 @@
           "title": "Progress 进度条",
           "path": "/progress",
           "name": "progress"
+        }, 
+        {
+          "title": "Select 选择器",
+          "path": "/select",
+          "name": "select"
         },
         {
           "title": "DatePicker 日期选择器",
@@ -212,6 +217,11 @@
           "title": "Circle 进度环",
           "path": "/circle",
           "name": "circle"
+        },
+        {
+          "title": "Transfer 穿梭框",
+          "path": "/transfer",
+          "name": "transfer"
         }
       ]
     }

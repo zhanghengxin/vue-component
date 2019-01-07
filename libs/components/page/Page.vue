@@ -132,17 +132,32 @@
             >
             页
         </div>
+        <select-drop
+            v-if="showSizer"
+            v-model="currentSize"
+            @on-change="sizeChange"
+            width="95"
+            :options="options">
+        </select-drop>
     </ul>
 </template>
 <script>
 import Icon from '../icon'
 import { prefix } from '../../utils/common'
+import SelectDrop from '../select'
 
 const prefixCls = prefix + 'page'
 
 export default {
     name: prefixCls,
-    components: {Icon},
+    components: {Icon, SelectDrop},
+    data () {
+        return {
+            prefixCls: prefixCls,
+            currentPage: Number(this.page),
+            currentSize: Number(this.size)
+        }
+    },
     props: {
         page: {
             type: [Number, String],
@@ -180,19 +195,30 @@ export default {
         mini: {
             type: Boolean,
             default: false
-        }
-    },
-    data () {
-        return {
-            prefixCls: prefixCls,
-            currentPage: Number(this.page),
-            currentSize: Number(this.size)
+        },
+        showSizer: {
+            type: Boolean,
+            default: false
+        },
+        sizeOptions: {
+            type: Array,
+            default () {
+                return [10, 20, 50, 100]
+            }
         }
     },
     computed: {
         pageCount () {
             const totalPage = Math.ceil(this.total / this.currentSize)
             return (totalPage === 0) ? 1 : totalPage
+        },
+        options () {
+            return this.sizeOptions.map(function (item) {
+                return {
+                    name: `${item}条/每页`,
+                    code: item
+                }
+            })
         },
         simpleWrapCls () {
             return [
@@ -255,8 +281,12 @@ export default {
         changePage (page) {
             if (this.currentPage !== page) {
                 this.currentPage = page
-                this.$emit('on-change', page)
+                this.$emit('on-page-change', page)
             }
+        },
+        sizeChange (data) {
+            this.currentPage = 1
+            this.$emit('on-size-change', data[0].code)
         },
         prev () {
             const current = this.currentPage

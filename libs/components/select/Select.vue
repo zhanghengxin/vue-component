@@ -1,0 +1,481 @@
+<template>
+    <div :class='selectGroupClasses'>
+    <div v-if='label'
+        :class='[prefixCls+`-label`]'
+        :style='labelStyles'
+        >{{label}}</div>
+    <div
+        v-click-outside="clickOutside"
+        :style='widthStyle'
+        :class="selectClasses">
+        <div
+            ref="reference"
+            :class="classes"
+            :tabindex="tabindex"
+            @blur="toggleHeaderFocus"
+            @focus="toggleHeaderFocus"
+            @click="toggleMenu"
+            @mouseenter="clearShow = clearabled && true"
+            @mouseleave="clearShow =  clearabled && false">
+                <input type="hidden" :name="name" :value="publicValue">
+                <div :class='[`${prefixCls}-show-selection`]'>
+                    <span v-if='!multiple && !filterabled'
+                          :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
+                    <span v-if='multiple && !filterabled && !values.length' :class="showSelectedCls">{{localePlaceholder}}</span>
+                    <div v-if='multiple' v-for="item in values" :key='item.code' :class="[prefixCls+`-tag`]">
+                        <span>{{item.name}}</span>
+                        <b-icon type='quxiao-guanbi-shanchu' @click.native.stop='removeTag(item)'></b-icon>
+                    </div>
+                    <input
+                        type="text"
+                        v-if="filterabled"
+                        v-show='inputShow'
+                        v-model="query"
+                        :disabled="disabled"
+                        :class="[prefixCls + '-input']"
+                        :placeholder="localePlaceholder"
+                        :style="inputStyle"
+                        autocomplete="off"
+                        spellcheck="false"
+                        @keydown="slideDropAndSetInput"
+                        @focus="onInputFocus"
+                        @keydown.delete="handleInputDelete"
+                    />
+                </div>
+                <b-icon
+                    type='xia'
+                    v-if='!disabled'
+                    v-show='iconShow'
+                    :class="[prefixCls+`-arrow`]">
+                </b-icon>
+                <b-icon
+                    type='shibai-mian'
+                    v-if='clearabled'
+                    v-show='closeIcon'
+                    :class="[prefixCls+`-arrow`]"
+                    @click.native.stop='clearValues'>
+                </b-icon>
+        </div>
+        <transition name='slide'>
+            <Drop
+                :style='dropStyles'
+                v-show='show'
+                >
+                <ul v-if='notFoundData'>
+                    <li :class='[prefix+`option`]'>{{notFoundText}}</li>
+                </ul>
+                <ul v-if='(dropList.length > 0) && !loading'>
+                    <Option
+                        v-for='item in dropList'
+                        :key='item.code'
+                        :code='item.code'
+                        :name='item.name'
+                        :disabled='item.disabled'
+                        :multiple='multiple'
+                        :publicValue='publicValue'>
+                    </Option>
+                </ul>
+                <ul v-if='loading'>
+                    <li :class='[prefix+`option`]'>{{loadingText}}</li>
+                </ul>
+            </Drop>
+        </transition>
+    </div>
+    </div>
+</template>
+<script>
+import Drop from './Dropdown'
+import Option from './Option'
+import Emitter from '../../mixins/emitter'
+import clickOutside from '../../utils/directives/clickOutside'
+import { typeOf } from '../../utils/assist'
+import { prefix } from '../../utils/common'
+
+const prefixCls = prefix + 'select'
+
+export default {
+    name: prefixCls,
+    mixins: [ Emitter ],
+    directives: { clickOutside },
+    components: { Drop, Option },
+    data () {
+        return {
+            prefix,
+            prefixCls,
+            show: false,
+            clearShow: false,
+            values: [],
+            isFocused: false,
+            dropStyles: {},
+            query: '',
+            lastRemoteQuery: ''
+        }
+    },
+    props: {
+        // 双向绑定
+        value: {
+            type: [String, Number, Array],
+            default: ''
+        },
+        name: {
+            type: String
+        },
+        options: {
+            type: Array
+        },
+        nameKey: {
+            type: String,
+            default: 'name'
+        },
+        codeKey: {
+            type: String,
+            default: 'code'
+        },
+        multiple: {
+            type: Boolean,
+            default: false
+        },
+        clearabled: {
+            type: Boolean,
+            default: false
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+        placeholder: {
+            type: String,
+            default: '请选择'
+        },
+        className: {
+            type: String,
+            default: ''
+        },
+        autowarp: { // 多选的时候是否仅单行显示
+            type: Boolean,
+            default: false
+        },
+        size: {
+            default: 'normal',
+            validator: function (value) {
+                return ['large', 'small', 'normal'].indexOf(value) !== -1
+            }
+        },
+        width: {
+            type: [String, Number]
+        },
+        filterabled: {
+            type: Boolean,
+            default: false
+        },
+        notFoundText: {
+            type: String,
+            default: '无匹配数据'
+        },
+        loadingText: {
+            type: String,
+            default: '加载中..'
+        },
+        loading: {
+            type: Boolean,
+            default: false
+        },
+        filterFn: {
+            type: Function
+        },
+        remoteFn: {
+            type: Function
+        },
+        label: {
+            type: [String, Number],
+            default: ''
+        },
+        labelWidth: {
+            type: [String, Number],
+            default: '72'
+        },
+        fixed: {
+            type: Boolean,
+            default: false
+        }
+    },
+    computed: {
+        selectGroupClasses () {
+            return [
+                `${prefixCls}-container`,
+                {
+                    [`${prefixCls}-group`]: this.label && !this.fixed,
+                    [`${prefixCls}-group-fixed`]: this.label && this.fixed,
+                    [`${prefixCls}-group-fixed-focused`]: this.isFocused && this.show && !!this.label && !!this.fixed
+                }
+            ]
+        },
+        selectClasses () {
+            return [
+                `${prefixCls}`,
+                {
+                    [`${prefixCls}-multiple`]: this.multiple,
+                    [`${prefixCls}-${this.size}`]: this.size,
+                    [`${this.className}`]: this.className
+                }
+            ]
+        },
+        classes () {
+            return [
+                `${prefixCls}-selection`,
+                {
+                    [`${prefixCls}-show`]: this.show, // 旋转小icon
+                    [`${prefixCls}-selection-focused`]: this.isFocused && this.show && (!this.label || !this.fixed),
+                    [`${prefixCls}-selection-disabled`]: this.disabled,
+                    [`${prefixCls}-selection-autowarp`]: this.multiple && !this.autowarp
+                }
+            ]
+        },
+        showSelectedCls () {
+            return [
+                `${prefixCls}-selection-content`,
+                {
+                    [`${prefixCls}-selection-placeholder`]: this.localePlaceholder && (!this.showValue || this.multiple)
+                }
+            ]
+        },
+        widthStyle () {
+            return {
+                width: this.width && `${this.width}px`
+            }
+        },
+        labelStyles () {
+            return {
+                width: this.labelWidth && `${this.labelWidth}px`
+            }
+        },
+        inputStyle () {
+            let style = {}
+            const {multiple, values, inputLength} = this
+            if (multiple) {
+                if (!values.length) {
+                    style.width = '100%'
+                } else {
+                    style.width = `${inputLength}px`
+                }
+            }
+            return style
+        },
+        inputLength () {
+            const {query, $el} = this
+            let width = $el && $el.clientWidth
+            let inputWidth = query.length * 12 + 20
+            if (width && inputWidth >= width) { // 如果当前的input的宽度大于select整体宽度 则input的宽度为select宽度减去padding
+                return width - 24
+            } else {
+                this.broadcastPopperUpdate()
+                return inputWidth
+            }
+        },
+        inputShow () {
+            const {multiple, show, values} = this
+            return !multiple || ((show && multiple) || !values.length)
+        },
+        iconShow () {
+            const {clearabled, clearShow, values, disabled} = this
+            return clearabled && clearShow ? !values.length : !disabled
+        },
+        closeIcon () {
+            const {disabled, clearShow, values} = this
+            return !disabled && clearShow && values.length
+        },
+        showValue () {
+            const {multiple, values} = this
+            if (multiple) {
+                return ''
+            } else {
+                return values[0] ? values[0].name : ''
+            }
+        },
+        localePlaceholder () {
+            const {values, placeholder} = this
+            return (values && values.length > 0) ? '' : placeholder
+        },
+        publicValue () {
+            const {multiple, values} = this
+            return multiple ? values.map(option => option.code) : (values[0] || {}).code
+        },
+        notFoundData () {
+            const {filterabled, dropList, loading} = this
+            return dropList && dropList.length === 0 && filterabled && !loading
+        },
+        tabindex () {
+            return this.disabled || 0
+        },
+        dropList () {
+            const {options, filterabled, filterFn, query, remoteFn} = this
+            let dropList = options.map(item => {
+                return typeOf(item) === 'object' && {
+                    code: item[this.codeKey],
+                    name: item[this.nameKey],
+                    disabled: item.disabled || false
+                }
+            })
+            if (filterabled && !remoteFn) {
+                if (filterFn) {
+                    dropList = dropList.filter(item => this.filterFn(query, item))
+                } else {
+                    dropList = dropList.filter(({name}) => name.indexOf(query) > -1)
+                }
+            }
+            return dropList || []
+        }
+    },
+    mounted () {
+        this.$on('on-select-selected', this.onOptionClick)
+        if (this.options && this.options.length > 0) {
+            this.values = this.getInitValue().map(value => {
+                if (typeof value !== 'number' && !value) return null
+                return this.getOptionData(value)
+            }).filter(Boolean)
+        }
+
+        this.dropStyles = this.fixedInitDrop()
+    },
+    methods: {
+        clickOutside () {
+            if (this.filterabled) {
+                if (this.multiple && this.values.length > 0) {
+                    this.query = ''
+                } else if (this.values.length > 0) {
+                    this.query = this.showValue
+                }
+            }
+            this.broadcastPopperUpdate()
+            this.show = false
+        },
+        onOptionClick (option) {
+            const {multiple, filterabled, values} = this
+            if (multiple) {
+                if (filterabled) {
+                    this.query = ''
+                }
+                let isLive = values.filter(({code}) => code === option.code) || []
+                if (isLive.length) { // 如果点击的已存在values中 则过滤
+                    this.values = values.filter(({code}) => code !== option.code)
+                } else {
+                    this.values = values.concat(option)
+                }
+            } else {
+                this.values = [option]
+                this.toggleMenu()
+            }
+            this.broadcastPopperUpdate()
+            this.$emit('on-change', this.values)
+        },
+        getInitValue () { // []
+            const {multiple, value} = this
+            let initValue = typeOf(value) === 'array' ? value : [value]
+            if (!multiple && (typeOf(initValue[0]) === 'undefined' || String(initValue[0]).trim() === '')) { initValue = [] }
+            return initValue
+        },
+        getOptionData (value) {
+            const {multiple, dropList} = this
+            if (multiple) {
+                let items = dropList.filter(({code}) => value && value.indexOf(code) > -1)
+                return items && items[0]
+            } else {
+                let item = dropList.filter(({code}) => code === value)
+                return item && item[0]
+            }
+        },
+        toggleHeaderFocus ({type}) {
+            if (this.disabled) return
+            this.isFocused = type === 'focus'
+        },
+        toggleMenu () {
+            if (this.disabled) {
+                return false
+            }
+            this.show = !this.show
+            if (this.show) { this.broadcastPopperUpdate() }
+        },
+        removeTag (e) {
+            const {disabled, values} = this
+            if (!disabled) {
+                this.values = values.filter(({code}) => code !== e.code)
+                this.broadcastPopperUpdate()
+            }
+        },
+        clearValues () {
+            this.values = []
+            this.$emit('on-clear')
+        },
+        slideDropAndSetInput () {
+            this.show = true
+        },
+        onInputFocus () {
+            this.isFocused = true
+        },
+        handleInputDelete () {
+            const {query, values, multiple} = this
+            if (!query && multiple) {
+                this.values = values.slice(0, values.length - 1)
+            }
+        },
+        fixedInitDrop () {
+            // cmoputed frop width
+            const {disabled, fixed, label, $el} = this
+            if (!disabled && !fixed && label && $el) {
+                let clientWidth = $el.clientWidth
+                let labelWidth = +this.labelWidth || $el.querySelector(`.${prefixCls}-label`).clientWidth
+                return {
+                    width: `${clientWidth - labelWidth}px`
+                }
+            }
+            return {}
+        },
+        broadcastPopperUpdate () {
+            this.broadcast(`${prefix}drop`, 'on-update-popper')
+        }
+    },
+    watch: {
+        value (val) {
+            let {publicValue, getInitValue, getOptionData} = this
+            if (val === '') {
+                this.values = []
+            } else if (JSON.stringify(val) !== JSON.stringify(publicValue)) {
+                this.$nextTick(() => {
+                    this.values = getInitValue().map(getOptionData).filter(Boolean)
+                })
+            }
+        },
+        values (now, before) {
+            const {values, multiple, value, publicValue} = this
+            const newValue = JSON.stringify(now)
+            const oldValue = JSON.stringify(before)
+            const modelValue = values.length > 0 ? (multiple ? values.map(({code}) => code) : values[0].code) : (multiple ? [] : '')
+            const emitInput = newValue !== oldValue && modelValue !== value
+            this.query = values.length > 0 ? (multiple ? '' : values[0].name) : ''
+            if (emitInput) {
+                this.$emit('input', modelValue) // to update v-model
+                this.dispatch('FormItem', 'on-form-change', publicValue)
+            }
+        },
+        isFocused (val) {
+            if (!val) {
+                this.show = false
+            }
+        },
+        show (val) {
+            if (val && this.multiple && this.filterabled) {
+                this.$nextTick(() => {
+                    this.$el.querySelector(`[type='text']`).focus()
+                })
+            }
+            this.broadcast(`${prefix}drop`, this.show ? 'on-update-popper' : 'on-destroy-popper')
+        },
+        query () {
+            const {filterabled, remoteFn, query} = this
+            if (filterabled && remoteFn && query !== '') {
+                this.remoteFn(query)
+            }
+        }
+    }
+}
+</script>

@@ -3,9 +3,6 @@
  * author ganbowen
  * created 2018/10/14 17:35:46
  */
-@import "../common/color";
-
-@import "../common/prefix";
 
 $css-prefix-input: $css-prefix+'input';
 $css-prefix-input-icon: $css-prefix-input+'-icon';
@@ -13,8 +10,8 @@ $input-small-size:24px;
 $input-normal-size:32px;
 $input-large-size:40px;
 $input-small-font:12px;
-$input-normal-font:14px;
-$input-large-font:16px;
+$input-normal-font:12px;
+$input-large-font:14px;
 
 //input 的hover focus 等效果
 @mixin inputMockClass($color, $shadowColor) {
@@ -29,6 +26,7 @@ $input-large-font:16px;
 
   &:disabled {
     background-color: $Disabled;
+    cursor: not-allowed;
   }
 
   // &:disabled:hover {
@@ -102,7 +100,7 @@ $input-large-font:16px;
     font-size: 12px;
 
     color: $Content;
-    background-color: #fff;
+    background-color: $white;
     background-image: none;
     cursor: text;
     outline: none;
