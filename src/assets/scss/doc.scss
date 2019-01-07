@@ -100,7 +100,7 @@
       .b-col {
         background: white;
         padding: 0;
-        div{
+        div {
           padding: 10px 0;
         }
       }
@@ -138,5 +138,13 @@
   .b-col:nth-child(even) {
     background: $LightPrimary;
   }
-
+  td.test-table-columns {
+    background: cornflowerblue;
+  }
+  .test-table-cell{
+    background: red;
+  }
+  .test-table-row td{
+    background: greenyellow;
+  }
 }

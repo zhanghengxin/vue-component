@@ -34,7 +34,8 @@
                     invoiceTotalPriceTaxCn: '金额大写', //金额大写
                     taxReceiptNo: '完税凭证号码',
                     tonnage: '吨位',
-                    maxCapacity: '限乘人数'
+                    maxCapacity: '限乘人数',
+                    checkCode:'1123312'
                 },
 
                 invoiceNormalData1: {
@@ -44,6 +45,7 @@
                     invoiceDate: '2018-10-01',
                     machineCode: '123312331311',
                     buyerName: '购方名称',
+                    checkCode:'1123312',
                     buyerTaxNo: '购方纳税人识别号',
                     buyerAddressPhone:'北京市海淀区马连洼竹园住宅小区综合楼7层713 010-84782665',
                     buyerBankAccount:'中国建设银行北京苏州桥支行11001079800053014887',
@@ -888,9 +890,8 @@
 | taxReceiptNo     |  完税凭证号码  |  String |
 | tonnage     |  吨位  |  String |
 | maxCapacity     |  限乘人数  |  String |
-| checkCode     |  校验码`卷票`  |  String |
+| checkCode     |  校验码  |  String |
 | receivingClerk     |  收货员`卷票`  |  String |
-| invoiceCheckCode     |  校验码  |  String |
 
 ### invoiceData - 专/普/电/通行费/卷
 | 参数      | 说明    | 类型      |

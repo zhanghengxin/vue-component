@@ -44,6 +44,10 @@ $css-prefix-checkbox: $css-prefix + 'checkbox';
     &-disabled{
         background: $Disabled;
         border: 1px solid $Border;
+        cursor: not-allowed;
+        input{
+          cursor: not-allowed;
+        }
     }
     &-indeterminate::after{
         position: absolute;
