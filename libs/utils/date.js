@@ -12,7 +12,7 @@ export const isValidDate = function (date) {
     if (date === null || date === undefined || !date) {
         return false
     }
-    return !isNaN(new Date().getTime())
+    return !isNaN(new Date(date).getTime())
 }
 
 export const isValidRange = function (date) {
