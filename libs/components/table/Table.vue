@@ -25,7 +25,7 @@
             <div
                 :class="[preCls + '-tip']" :style="bodyWrapStyle" @scroll="handleScroll"
                 v-show="(((!data || data.length === 0)) || ((!formatData || formatData.length === 0)))">
-                <table cellspacing="0" cellpadding="0" border="0">
+                <table :style="bodyStyle" cellspacing="0" cellpadding="0" border="0">
                     <tbody>
                     <tr>
                         <td :style="{'width':bodyStyle.width}">
@@ -106,6 +106,10 @@ export default {
                 return []
             }
         },
+        highlightRow: {
+            type: Boolean,
+            default: false
+        },
         border: {
             type: Boolean,
             default: false
@@ -128,6 +132,8 @@ export default {
         this.$on('sort-change', this.handleSort)
         this.$on('mouse-in', this.handleMouseIn)
         this.$on('mouse-out', this.handleMouseOut)
+        this.$on('row-click', this.handleClick)
+        this.$on('row-dbclick', this.handleDbclick)
     },
     mounted () {
         this.handleResize()
@@ -393,6 +399,22 @@ export default {
             if (this.disHover) return
             if (!this.formatData[_index]._isHover) return
             this.$set(this.formatData[_index], '_isHover', false)
+        },
+        handleCurrentRow (_index) {
+            this.formatData.forEach((item, index) => {
+                this.$set(this.formatData[index], '_isHighlight', false)
+            })
+            this.$set(this.formatData[_index], '_isHighlight', true)
+        },
+        handleClick (_index) {
+            this.$emit('on-row-click', deepCopy(this.data[_index]))
+            if (!this.highlightRow) return
+            this.handleCurrentRow(_index)
+        },
+        handleDbclick (_index) {
+            this.$emit('on-row-dbclick', deepCopy(this.data[_index]))
+            if (!this.highlightRow) return
+            this.handleCurrentRow(_index)
         }
     }
 }

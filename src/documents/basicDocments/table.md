@@ -3,6 +3,7 @@
 
 基础功能
 - 斑马纹切换、边框切换效果、hover 效果
+- 单选、单击、双击效果
 - 固定表头 + 最大宽度
 - 固定列
 - 单选 多选
@@ -80,6 +81,9 @@
 ```
 :::
 </div>
+
+
+
 
 ### 边框
 通过设置`border`来设置携带边框的表格
@@ -1024,6 +1028,131 @@
 :::
 </div>
 
+### 单选、单击、双击效果
+设置属性`highlightRow`来给表格开启单选效果
+
+也提供了单击`on-row-click`和双击`on-row-dbclick`事件回调，返回值为当前点击列的数据。
+
+<div class="example">
+    <div class="example-box">
+        <div>
+           <b-table
+               @on-row-click='handleClick'
+               @on-row-dbclick='handleDbclick'
+               border
+               highlightRow
+               width=1000
+               :columns='columns7'
+               :data='data6'>
+           </b-table>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+         <b-table
+             @on-row-click='handleClick'
+             @on-row-dbclick='handleDbclick'
+             border
+             highlightRow
+             width=1000
+             :columns='columns7'
+             :data='data6'>
+         </b-table>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    columns7: [
+                       {
+                           title: 'Name',
+                           key: 'name',
+                           width:200
+                       },
+                       {
+                           title: 'Age',
+                           key: 'age',
+                           sortable:true,
+                           width:300
+                       },
+                       {
+                           title: 'Sex',
+                           key: 'sex',
+                           width:300
+                       },
+                       {
+                           title: 'hobby',
+                           key: 'hobby',
+                           width:200
+                       },
+                       {
+                           title: 'Pets',
+                           key: 'pets',
+                           width:200,
+                           sortable:true,
+                           fixed:'right'
+                       }
+                   ],
+                   data6: [
+                       {
+                           name: '欧阳',
+                           age: 12,
+                           sex: '男',
+                           hobby:'Swimming',
+                           pets:'dog',
+                           occupation:'Doctor'
+                       },
+                       {
+                           name: '青蛙',
+                           sex: '男',
+                           age: 22,
+                           pets:'cat',
+                           hobby:'Swimming',
+                           occupation:'Doctor'
+                       },
+                       {
+                           name: '警长',
+                           age: 18,
+                           sex: '男',
+                           pets:'rhizomys',
+                           hobby:'Swimming',
+                           occupation:'Doctor'
+                       },
+                       {
+                           name: '球形闪电',
+                           age: 6,
+                           sex: '男',
+                           pets:'cat',
+                           hobby:'Swimming',
+                           occupation:'Bodyguard'
+                       },
+                       {
+                           name: '会长',
+                           age: 38,
+                           sex: '男',
+                           pets:'rhizomys',
+                           hobby:'Thousand-hand Bodhisattva',
+                           occupation:'President'
+                       }
+                   ]
+                }
+            },
+            methods:{
+                 handleClick(row){
+                     console.log('单击事件,当前选中的数据为：',row)
+                 },
+                 handleDbclick(row){
+                     console.log('双击事件,当前选中的数据为：',row)
+                 }
+            }
+    </script>
+```
+:::
+</div>
+
+
 <script>
     export default {
         data () {
@@ -1614,6 +1743,12 @@
         methods:{
             remove(index){
                 this.data5.splice(index,1)
+            },
+            handleClick(row){
+                console.log('单击事件,当前选中的数据为：',row)
+            },
+            handleDbclick(row){
+                console.log('双击事件,当前选中的数据为：',row)
             }
         }
     }

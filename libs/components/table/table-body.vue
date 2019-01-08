@@ -10,6 +10,8 @@
                 :pre-cls="preCls"
                 @mouseenter.native.stop="handleMouseIn(row._index)"
                 @mouseleave.native.stop="handleMouseOut(row._index)"
+                @click.native="clickCurrentRow(row._index)"
+                @dblclick.native.stop="dblclickCurrentRow(row._index)"
                 :key="index">
                 <td
                     v-for="(column,_index) in cellColumns(columns,row,index)"
@@ -100,6 +102,12 @@ export default {
         },
         handleMouseOut (_index) {
             this.dispatch(this.preCls, 'mouse-out', _index)
+        },
+        clickCurrentRow (_index) {
+            this.dispatch(this.preCls, 'row-click', _index)
+        },
+        dblclickCurrentRow (_index) {
+            this.dispatch(this.preCls, 'row-dbclick', _index)
         }
     }
 }
