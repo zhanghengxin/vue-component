@@ -42,6 +42,10 @@ import TimePicker from './components/time-picker'
 import DateTimePicker from './components/datetime-picker'
 import Transfer from './components/transfer/'
 import Notice from './components/notice'
+import Menu from './components/menu'
+import MenuItem from './components/menu/menu-item'
+import Submenu from './components/menu/submenu'
+import MenuGroup from './components/menu/menu-item-group'
 
 const components = [
     Input,
@@ -86,7 +90,11 @@ const components = [
     TimePicker,
     DateTimePicker,
     Transfer,
-    Notice
+    Notice,
+    Menu,
+    MenuItem,
+    Submenu,
+    MenuGroup
 ]
 
 const install = function (Vue) {
