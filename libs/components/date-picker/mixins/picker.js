@@ -172,21 +172,13 @@ export default {
         },
         text () {
             if (this.userInput !== null) return this.userInput
-            if (!this.range) return isValidDate(this.value) ? this.stringify(this.value) : ''
+            if (!this.range) return isValidDate(this.value) ? this.stringify(this.value) : this.value
             return isValidRange(this.value)
                 ? `${this.stringify(this.value[0])} ${this.rangeSeparator} ${this.stringify(this.value[1])}`
-                : ''
+                : (this.value && this.value[0] && this.value[1]) ? `${this.value[0]} ${this.rangeSeparator} ${this.value[1]}` : ''
         },
-        // wrapperStyle () {
-        //     if (typeof this.width === 'number' || (typeof this.width === 'string' && /^\d+$/.test(this.width))) {
-        //         return this.width + 'px'
-        //     }
-        //     return {
-        //         width: this.width
-        //     }
-        // },
         showClearIcon () {
-            return !this.disabled && this.clearable && (this.range ? isValidRange(this.value) : isValidDate(this.value))
+            return !this.disabled && this.clearable && this.value
         },
         innerType () {
             return String(this.type).toLowerCase()
@@ -277,6 +269,26 @@ export default {
                 ...this.popupStyle,
                 left
             }
+        },
+        date () {
+            if (!this.range && this.curVal === null) return null
+            if (this.range && this.curVal[0] === null && this.curVal[1] === null) return null
+
+            if (this.dateType === 'formatdate') {
+                if (!this.range) {
+                    return this.stringify(this.curVal)
+                } else {
+                    return [this.stringify(this.curVal[0]), this.stringify(this.curVal[1])]
+                }
+            } else if (this.dateType === 'timestamp') {
+                if (!this.range) {
+                    return this.curVal.getTime()
+                } else {
+                    return [this.curVal[0].getTime(), this.curVal[1].getTime()]
+                }
+            } else if (this.dateType === 'date') {
+                return this.curVal
+            }
         }
     },
     watch: {
@@ -316,12 +328,14 @@ export default {
     },
     methods: {
         handleValChange (value) {
+            if (!this.range && this.curVal === null) return null
+            if (this.range && this.curVal[0] === null && this.curVal[1] === null) return null
+
             if (!this.range) {
-                this.curVal = isValidDate(value) ? new Date(value) : null
+                this.curVal = isValidDate(value) ? new Date(value) : new Date(this.parseDate(value))
             } else {
                 let [start, end] = value
-                this.curVal = isValidRange(value) ? [new Date(start), new Date(end)] : [null, null]
-                // console.log('curVal', this.curVal)
+                this.curVal = isValidRange(value) ? [new Date(start), new Date(end)] : [new Date(this.parseDate(start)), new Date(this.parseDate(end))]
             }
         },
         init () {
@@ -361,34 +375,15 @@ export default {
             if (valid) {
                 this.updateDate(true)
             }
-            this.$emit('confirm', this.curVal)
+            this.$emit('on-confirm', this.curVal)
             this.closePopup()
-        },
-        getVal () {
-            let curVal = null
-            if (this.dateType === 'formatdate') {
-                if (!this.range) {
-                    curVal = this.stringify(this.curVal)
-                } else {
-                    curVal = [this.stringify(this.curVal[0]), this.stringify(this.curVal[1])]
-                }
-            } else if (this.dateType === 'timestamp') {
-                if (!this.range) {
-                    curVal = this.curVal.getTime()
-                } else {
-                    curVal = [this.curVal[0].getTime(), this.curVal[1].getTime()]
-                }
-            } else if (this.dateType === 'date') {
-                curVal = this.curVal
-            }
-            return curVal
         },
         updateDate (confirm = false) {
             if ((this.confirm && !confirm) || this.disabled) return false
             let equal = this.range ? this.rangeEqual(this.value, this.curVal) : this.dateEqual(this.value, this.curVal)
             if (equal) return false
-            this.$emit('input', this.curVal)
-            this.$emit('change', this.curVal)
+            this.$emit('input', this.date)
+            this.$emit('on-change', this.date)
             return true
         },
         selectDate (date) {
@@ -397,14 +392,12 @@ export default {
         },
         selectStartDate (date) {
             this.$set(this.curVal, 0, date)
-            // console.log('start', this.curVal)
             if (this.curVal[1]) {
                 this.updateDate()
             }
         },
         selectEndDate (date) {
             this.$set(this.curVal, 1, date)
-            // console.log('end', this.curVal)
             if (this.curVal[0]) {
                 this.updateDate()
             }

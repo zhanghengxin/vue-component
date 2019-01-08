@@ -12,7 +12,7 @@
         <b-datepicker 
             v-model='date' 
             :shortcuts='short'
-            @change='handleChangeDate'>
+            @on-change='handleChangeDate'>
         <b-datepicker>
     </div>
 
@@ -416,6 +416,6 @@
 ### events
 | 事件名 | 说明	| 返回值 |
 | ---- | ---- | ---- |
-| change | 日期改变的时候触发 | 选择的日期 |
+| on-change | 日期改变的时候触发 | 选择的日期 |
 | input | 日期改变的时候触发 | 选择的日期 |
-| confirm | 点击确认按钮触发，配合 confirm 属性使用 | 选择的日期 |
+| on-confirm | 点击确认按钮触发，配合 confirm 属性使用 | 选择的日期 |
