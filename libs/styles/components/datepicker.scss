@@ -29,16 +29,13 @@ $bgFont: #ccc;
 }
 
 .#{$css-prefix-picker}-popup {
-  position: absolute;
   display: flex;
   flex-direction: row;
-  overflow: hidden;
-  margin-top: 1px;
-  margin-bottom: 1px;
   background-color: $white;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   z-index: 1000;
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .#{$css-prefix-picker-input}-wrapper {
@@ -157,167 +154,168 @@ $bgFont: #ccc;
   float: left;
   color: $Sub;
   padding: 6px 12px;
+  background-color: $white;
   * {
     box-sizing: border-box;
   }
-}
 
-.#{$css-prefix-calendar}-header {
-  padding: 0 4px;
-  height: 34px;
-  line-height: 34px;
-  text-align: center;
-  overflow: hidden;
-  > a {
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
-    &:hover {
-      color: mix(#fff, $Primary, 20%);
-    }
-  }
-  @at-root {
-    .#{$css-prefix-icon}-last-month,
-    .#{$css-prefix-icon}-next-month {
-      padding: 0 6px;
-      font-size: 20px;
-      line-height: 30px;
-      color: $bgFont !important;
-    }
-    .#{$css-prefix-icon}-last-month {
-      float: left;
-    }
-    .#{$css-prefix-icon}-next-month {
-      float: right;
-    }
-    .#{$css-prefix-icon}-last-year {
-      @extend .#{$css-prefix-icon}-last-month
-    }
-    .#{$css-prefix-icon}-next-year {
-      @extend .#{$css-prefix-icon}-next-month
-    }
-  }
-}
-
-.#{$css-prefix-calendar}-content {
-  width: 32px * 7;
-  height: 32px * 7;
-  .cell {
-    vertical-align: middle;
-    cursor: pointer;
-    border-radius: 4px;
-    &:hover {
-      background-color: $inrange;
-    }
-    &.actived {
-      color: $white !important;
-      background-color: $Primary;
-    }
-    &.inrange {
-      background-color: $inrange;
-      border-radius: 0;
-    }
-    &.disabled {
-      cursor: not-allowed;
-      color: $bgFont;
-      background-color: $Background;
-      border-radius: 0;
-    }  
-  }
-}
-
-.#{$css-prefix-panel} {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-}
-
-.#{$css-prefix-panel}-date {
-  table-layout: fixed;
-  border-collapse: collapse;
-  border-spacing: 0;
-  .#{$css-prefix-date}-header, .#{$css-prefix-date}-body {
-    font-size: 12px;
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    padding: 0;
-    overflow: hidden;
+  .#{$css-prefix-calendar}-header {
+    padding: 0 4px;
+    height: 34px;
+    line-height: 34px;
     text-align: center;
-    border: none;
-  }
-  .#{$css-prefix-date}-header {
-    color: $DisContent;
-  }
-  .#{$css-prefix-date}-body {
-    border: 0;
-    color: $Content;
-    &.today {
-      color: mix($white, $Primary, 10%);
+    overflow: hidden;
+    > a {
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      &:hover {
+        color: mix(#fff, $Primary, 20%);
+      }
     }
-    &.last-month,
-    &.next-month {
-      color: #ddd;
+    @at-root {
+      .#{$css-prefix-icon}-last-month,
+      .#{$css-prefix-icon}-next-month {
+        padding: 0 6px;
+        font-size: 20px;
+        line-height: 30px;
+        color: $bgFont !important;
+      }
+      .#{$css-prefix-icon}-last-month {
+        float: left;
+      }
+      .#{$css-prefix-icon}-next-month {
+        float: right;
+      }
+      .#{$css-prefix-icon}-last-year {
+        @extend .#{$css-prefix-icon}-last-month
+      }
+      .#{$css-prefix-icon}-next-year {
+        @extend .#{$css-prefix-icon}-next-month
+      }
     }
   }
-}
 
-.#{$css-prefix-panel}-year {
-  padding: 7px 0;
-  .cell {
-    display: inline-block;
-    width: 40%;
-    margin: 1px 5%;
-    line-height: 40px;
+  .#{$css-prefix-calendar}-content {
+    width: 32px * 7;
+    height: 32px * 7;
+    .cell {
+      vertical-align: middle;
+      cursor: pointer;
+      border-radius: 4px;
+      &:hover {
+        background-color: $inrange;
+      }
+      &.actived {
+        color: $white !important;
+        background-color: $Primary;
+      }
+      &.inrange {
+        background-color: $inrange;
+        border-radius: 0;
+      }
+      &.disabled {
+        cursor: not-allowed;
+        color: $bgFont;
+        background-color: $Background;
+        border-radius: 0;
+      }  
+    }
   }
-}
 
-.#{$css-prefix-panel}-month {
-  .cell {
-    display: inline-block;
-    width: 30%;
-    line-height: 40px;
-    margin: 8px 1.5%;
-  }
-}
-
-.#{$css-prefix-time}-list {
-  position: relative; // 定位 offsetParent
-  float: left;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  width: 100%;
-  height: 100%;
-  border-top: 1px solid rgba(0,0,0,.05);
-  border-left: 1px solid rgba(0,0,0,.05);
-  overflow-y: auto;
-  .#{$css-prefix-time}-picker-item {
-    display: block;
-    text-align: left;
-    padding-left: 10px;
-  }
-  &:first-child {
-    border-left: 0;
-  }
-  .cell {
+  .#{$css-prefix-panel} {
     width: 100%;
-    font-size: 12px;
-    height: 30px;
-    line-height: 30px;
-  }
-  /* 滚动条滑块 */
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
+    height: 100%;
+    text-align: center;
   }
 
-  &:hover::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
+  .#{$css-prefix-panel}-date {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
+    .#{$css-prefix-date}-header, .#{$css-prefix-date}-body {
+      font-size: 12px;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      padding: 0;
+      overflow: hidden;
+      text-align: center;
+      border: none;
+    }
+    .#{$css-prefix-date}-header {
+      color: $DisContent;
+    }
+    .#{$css-prefix-date}-body {
+      border: 0;
+      color: $Content;
+      &.today {
+        color: mix($white, $Primary, 10%);
+      }
+      &.last-month,
+      &.next-month {
+        color: #ddd;
+      }
+    }
+  }
+
+  .#{$css-prefix-panel}-year {
+    padding: 7px 0;
+    .cell {
+      display: inline-block;
+      width: 40%;
+      margin: 1px 5%;
+      line-height: 40px;
+    }
+  }
+
+  .#{$css-prefix-panel}-month {
+    .cell {
+      display: inline-block;
+      width: 30%;
+      line-height: 40px;
+      margin: 8px 1.5%;
+    }
+  }
+
+  .#{$css-prefix-time}-list {
+    position: relative; // 定位 offsetParent
+    float: left;
+    margin: 0;
+    padding: 0 0 224px;
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    border-top: 1px solid rgba(0,0,0,.05);
+    border-left: 1px solid rgba(0,0,0,.05);
+    overflow-y: auto;
+    .#{$css-prefix-time}-picker-item {
+      display: block;
+      text-align: left;
+      padding-left: 10px;
+    }
+    &:first-child {
+      border-left: 0;
+    }
+    .cell {
+      width: 100%;
+      font-size: 12px;
+      height: 30px;
+      line-height: 30px;
+    }
+    /* 滚动条滑块 */
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
   }
 }

@@ -1,7 +1,5 @@
 <template>
-    <div
-        :class="wrapperCls"
-        v-clickoutside="closePopup">
+    <div ref="picker" :class="wrapperCls" v-clickoutside="closePopup">
         <div
             :class="inputWrapper"
             @click="showPopup">
@@ -51,53 +49,54 @@
                 </slot>
             </span>
         </div>
-        <div
-            v-show="popupVisible"
-            :class="popupCls"
-            :style="innerPopupStyle"
-            ref="calendar">
-            <panel
-                v-if="!range"
-                :type="innerType"
-                :date-format="innnerDateFormat"
-                :value="curVal"
-                :visible="popupVisible"
-                @select-time="selectTime">
-            </panel>
-            <div v-else :class="rangeWrapper">
+        <transition name='slide'>
+            <div
+                v-show="popupVisible"
+                :class="popupCls"
+                ref="calendar">
                 <panel
-                    style="box-shadow: 1px 0 rgba(0, 0, 0, .1)"
-                    v-bind="$attrs"
+                    v-if="!range"
                     :type="innerType"
                     :date-format="innnerDateFormat"
-                    :value="curVal[0]"
-                    :start-at="null"
-                    :end-at="curVal[1]"
+                    :value="curVal"
                     :visible="popupVisible"
-                    @select-time="selectStartTime">
+                    @select-time="selectTime">
                 </panel>
-                <panel
-                    v-bind="$attrs"
-                    :type="innerType"
-                    :date-format="innnerDateFormat"
-                    :value="curVal[1]"
-                    :start-at="curVal[0]"
-                    :end-at="null"
-                    :visible="popupVisible"
-                    @select-time="selectEndTime">
-                </panel>
-            </div>
-            <slot name="footer" :confirm="confirmDate">
-                <div v-if="confirm" :class="footerCls">
-                    <button
-                        type="button"
-                        :class="confirmCls"
-                        @click="confirmDate">
-                        {{ confirmText }}
-                    </button>
+                <div v-else :class="rangeWrapper">
+                    <panel
+                        style="box-shadow: 1px 0 rgba(0, 0, 0, .1)"
+                        v-bind="$attrs"
+                        :type="innerType"
+                        :date-format="innnerDateFormat"
+                        :value="curVal[0]"
+                        :start-at="null"
+                        :end-at="curVal[1]"
+                        :visible="popupVisible"
+                        @select-time="selectStartTime">
+                    </panel>
+                    <panel
+                        v-bind="$attrs"
+                        :type="innerType"
+                        :date-format="innnerDateFormat"
+                        :value="curVal[1]"
+                        :start-at="curVal[0]"
+                        :end-at="null"
+                        :visible="popupVisible"
+                        @select-time="selectEndTime">
+                    </panel>
                 </div>
-            </slot>
-        </div>
+                <slot name="footer" :confirm="confirmDate">
+                    <div v-if="confirm" :class="footerCls">
+                        <button
+                            type="button"
+                            :class="confirmCls"
+                            @click="confirmDate">
+                            {{ confirmText }}
+                        </button>
+                    </div>
+                </slot>
+            </div>
+        </transition>
     </div>
 </template>
 

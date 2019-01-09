@@ -1,10 +1,6 @@
 <template>
-    <div
-        :class="wrapperCls"
-        v-clickoutside="closePopup">
-        <div
-            :class="inputWrapper"
-            @click="showPopup">
+    <div ref="picker" :class="wrapperCls" v-clickoutside="closePopup">
+        <div :class="inputWrapper" @click="showPopup">
             <b-input
                 ref="input"
                 :label="innerLabel"
@@ -51,89 +47,91 @@
                 </slot>
             </span>
         </div>
-        <div
-            v-show="popupVisible"
-            :class="popupCls"
-            :style="innerPopupStyle"
-            ref="calendar">
-            <slot name="header">
-                <div
-                    v-if="range && innerShortcuts.length"
-                    :class="shortcutsWrapper">
-                    <button
-                        type="button"
-                        :class="shortcutsCls"
-                        v-for="(range, index) in innerShortcuts"
-                        :key="index"
-                        @click="selectRange(range)">
-                        {{range.text}}
-                    </button>
-                </div>
-                <div
-                    v-if="!range && innerShortcuts.length"
-                    :class="shortcutsWrapper">
-                    <button
-                        type="button"
-                        :class="shortcutsCls"
-                        v-for="(range, index) in innerShortcutsTwo"
-                        :key="index"
-                        @click="selectRange(range)">
-                        {{range.text}}
-                    </button>
-                </div>
-            </slot>
-            <panel
-                v-if="!range"
-                :type="innerType"
-                :date-format="innnerDateFormat"
-                :value="curVal"
-                :visible="popupVisible"
-                @select-date="selectDate">
-            </panel>
-            <div v-else :class="rangeWrapper">
+        <transition name='slide'>
+            <div
+                v-show="popupVisible"
+                :class="popupCls"
+                ref="calendar">
+                <slot name="header">
+                    <div
+                        v-if="range && innerShortcuts.length"
+                        :class="shortcutsWrapper">
+                        <button
+                            type="button"
+                            :class="shortcutsCls"
+                            v-for="(range, index) in innerShortcuts"
+                            :key="index"
+                            @click="selectRange(range)">
+                            {{range.text}}
+                        </button>
+                    </div>
+                    <div
+                        v-if="!range && innerShortcuts.length"
+                        :class="shortcutsWrapper">
+                        <button
+                            type="button"
+                            :class="shortcutsCls"
+                            v-for="(range, index) in innerRangeShortcuts"
+                            :key="index"
+                            @click="selectRange(range)">
+                            {{range.text}}
+                        </button>
+                    </div>
+                </slot>
                 <panel
-                    style="box-shadow: 1px 0 rgba(0, 0, 0, .1)"
-                    v-bind="$attrs"
+                    v-if="!range"
                     :type="innerType"
                     :date-format="innnerDateFormat"
-                    :value="curVal[0]"
-                    :start-at="null"
-                    :end-at="curVal[1]"
+                    :value="curVal"
                     :visible="popupVisible"
-                    @select-date="selectStartDate">
+                    @select-date="selectDate">
                 </panel>
-                <panel
-                    v-bind="$attrs"
-                    :type="innerType"
-                    :date-format="innnerDateFormat"
-                    :value="curVal[1]"
-                    :start-at="curVal[0]"
-                    :end-at="null"
-                    :visible="popupVisible"
-                    @select-date="selectEndDate">
-                </panel>
+                <div v-else :class="rangeWrapper">
+                    <panel
+                        style="box-shadow: 1px 0 rgba(0, 0, 0, .1)"
+                        v-bind="$attrs"
+                        :type="innerType"
+                        :date-format="innnerDateFormat"
+                        :value="curVal[0]"
+                        :start-at="null"
+                        :end-at="curVal[1]"
+                        :visible="popupVisible"
+                        @select-date="selectStartDate">
+                    </panel>
+                    <panel
+                        v-bind="$attrs"
+                        :type="innerType"
+                        :date-format="innnerDateFormat"
+                        :value="curVal[1]"
+                        :start-at="curVal[0]"
+                        :end-at="null"
+                        :visible="popupVisible"
+                        @select-date="selectEndDate">
+                    </panel>
+                </div>
+                <slot name="footer" :confirm="confirmDate">
+                    <div v-if="confirm" :class="footerCls">
+                        <button
+                            type="button"
+                            :class="confirmCls"
+                            @click="confirmDate">
+                            {{ confirmText }}
+                        </button>
+                    </div>
+                </slot>
             </div>
-            <slot name="footer" :confirm="confirmDate">
-                <div v-if="confirm" :class="footerCls">
-                    <button
-                        type="button"
-                        :class="confirmCls"
-                        @click="confirmDate">
-                        {{ confirmText }}
-                    </button>
-                </div>
-            </slot>
-        </div>
+        </transition>
     </div>
 </template>
 
 <script>
 import picker from '../mixins/picker'
+import Emitter from '../../../mixins/emitter'
 import { prefix } from '../../../utils/common'
 
 export default {
     name: `${prefix}datepicker`,
-    mixins: [ picker ],
+    mixins: [ picker, Emitter ],
     props: {
         format: {
             type: String,
