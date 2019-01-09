@@ -2,6 +2,8 @@
 /*  前者一个测试套执行一次, 后者每个测试用例执行一次。 */
 import {destroyVM, createTest, createVue} from '../utils'
 import Backtop from '&/components/backTop'
+import { prefix } from '&/utils/common'
+const backtopCls = `${prefix}back-top`
 
 describe('Backtop.vue', () => { // describe相当于一个测试套，可以嵌套。
     let vm
@@ -55,7 +57,7 @@ describe('Backtop.vue', () => { // describe相当于一个测试套，可以嵌�
     it('click', done => {
         vm = createVue({
             template: `
-              <backtop :show='true' @on-click="back"></backtop>
+              <${backtopCls} :show='true' @on-click="back"></${backtopCls}>
             `,
             methods: {
                 back () {
