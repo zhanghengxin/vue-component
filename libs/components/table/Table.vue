@@ -284,7 +284,7 @@ export default {
                 this.$nextTick(() => {
                     const headerHeight = parseInt(getStyle(this.$refs.header, 'height')) || 0
                     this.bodyHeight = this.height - headerHeight
-                    this.$nextTick(() => this.bodyScrollReckon())
+                    this.bodyScrollReckon()
                 })
             } else {
                 this.bodyHeight = 0
