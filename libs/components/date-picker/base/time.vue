@@ -1,20 +1,7 @@
 <template>
-        <!-- <div
-            s-if="Array.isArray(pickers) && pickers.length"
-            :class="timeCls" >
-            <ul
-                :class="timeListCls"
-                :key="index"
-                v-for="(picker, index) in pickers">
-                <li
-                    :class="timeItemCls(picker)"
-                    @click="pickerTime(picker)">
-                    {{ picker.label }}
-                </li>
-            </ul>
-        </div> -->
     <div :class="wrapperCls">
         <ul
+            ref="hours"
             :class="timeListCls"
             :style="timeListStyle">
             <!-- 时 -->
@@ -22,11 +9,12 @@
                 :key="i + 'hour'"
                 :class="hourCls(i)"
                 v-for="(_, i) in 24"
-                @click="selectTime(new Date(date).setHours(i))">
+                @click="selectTime(new Date(date).setHours(i), 'hours', i)">
                 {{ stringifyText(i) }}
             </li>
         </ul>
         <ul
+            ref="minutes"
             :class="timeListCls"
             :style="timeListStyle">
             <!-- 分 -->
@@ -34,11 +22,12 @@
                 :key="i + 'minute'"
                 :class="minuteCls(i)"
                 v-for="(_, i) in stepLength"
-                @click="selectTime(new Date(date).setMinutes(i * step))">
+                @click="selectTime(new Date(date).setMinutes(i * step), 'minutes', i)">
                 {{ stringifyText(i * step) }}
             </li>
         </ul>
         <ul
+            ref="seconds"
             :class="timeListCls"
             :style="timeListStyle">
             <!-- 秒 -->
@@ -47,7 +36,7 @@
                 :key="i + 'seconde'"
                 :class="secondCls(i)"
                 v-for="(_, i) in 60"
-                @click="selectTime(new Date(date).setSeconds(i))">
+                @click="selectTime(new Date(date).setSeconds(i), 'seconds', i)">
                 {{ stringifyText(i) }}
             </li>
         </ul>
@@ -55,7 +44,10 @@
 </template>
 <script>
 import { formatTime, parseTime } from '../../../utils/date'
+import { scrollTop, firstUpperCase } from '../../../utils/assist'
 import { prefix } from '../../../utils/common'
+const timeParts = ['hours', 'minutes', 'seconds']
+const itemHeight = 30
 
 export default {
     name: `${prefix}table-time`,
@@ -178,8 +170,9 @@ export default {
         stringifyText (value) {
             return ('00' + value).slice(String(value).length)
         },
-        selectTime (time) {
+        selectTime (time, type, i) {
             if (!this.disabledTime(time)) {
+                this.scroll(type, i)
                 this.$emit('select', new Date(time))
             }
         },
@@ -224,7 +217,19 @@ export default {
                 }
             }
             return result
+        },
+        scroll (type, index) {
+            const from = this.$refs[type].scrollTop
+            const to = itemHeight * index
+            scrollTop(this.$refs[type], from, to, 500)
         }
+    },
+    mounted () {
+        timeParts.forEach(type => {
+            const Type = firstUpperCase(type)
+            const index = this[`cur${Type}`]
+            this.$refs[type].scrollTop = itemHeight * index
+        })
     }
 }
 </script>

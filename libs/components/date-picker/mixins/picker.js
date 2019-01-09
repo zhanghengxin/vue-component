@@ -1,12 +1,15 @@
 import Panel from '../panel/panel'
 import { oneOf, prefix } from '../../../utils/common'
 import clickoutside from '../../../utils/directives/clickOutside'
-import { isValidDate, isValidRange, isDateObject, formatDate, parseDate, throttle } from '../../../utils/date'
-let inputCls = `${prefix}input`
-let pickerCls = `${prefix}datepicker`
-let shortcutsCls = `${prefix}shortcuts`
-let rangeCls = `${prefix}range`
-let calendarCls = `${prefix}calendar`
+import { isValidDate, isValidRange, isDateObject, formatDate, parseDate } from '../../../utils/date'
+import Vue from 'vue'
+const isServer = Vue.prototype.$isServer
+const Popper = isServer ? function () {} : require('popper.js/dist/umd/popper.js')
+const inputCls = `${prefix}input`
+const pickerCls = `${prefix}datepicker`
+const shortcutsCls = `${prefix}shortcuts`
+const rangeCls = `${prefix}range`
+const calendarCls = `${prefix}calendar`
 
 export default {
     components: { Panel },
@@ -75,10 +78,6 @@ export default {
             type: Boolean,
             default: true
         },
-        popup: {
-            type: Boolean,
-            default: false
-        },
         shortcuts: {
             type: [Boolean, Array],
             default: false
@@ -91,11 +90,6 @@ export default {
             type: [ String, Array ],
             default: 'b-input'
         },
-        appendToBody: {
-            type: Boolean,
-            default: false
-        },
-        popupStyle: Object,
         dateType: {
             type: String,
             default: 'formatdate',
@@ -183,7 +177,7 @@ export default {
         innerType () {
             return String(this.type).toLowerCase()
         },
-        innerShortcutsTwo () {
+        innerRangeShortcuts () {
             if (Array.isArray(this.shortcuts)) return this.shortcuts
             if (this.shortcuts === false) return []
             let pickers = ['今天', '昨天', '一周前']
@@ -261,15 +255,6 @@ export default {
             if (this.innerType === 'date') return this.format
             return this.format.replace(/[Hh]+.*[msSaAZ]|\[.*?\]/g, '').trim() || 'YYYY-MM-DD'
         },
-        innerPopupStyle () {
-            let left = '0px'
-            if (this.label && !this.fixed) left = `${this.labelWidth + 4}px`
-            return {
-                ...this.position,
-                ...this.popupStyle,
-                left
-            }
-        },
         date () {
             if (!this.range && this.curVal === null) return null
             if (this.range && this.curVal[0] === null && this.curVal[1] === null) return null
@@ -305,26 +290,8 @@ export default {
         }
     },
     mounted () {
-        if (this.appendToBody) {
-            this.popupElm = this.$refs.calendar
-            document.body.appendChild(this.popupElm)
-        }
-        this._displayPopup = throttle(() => {
-            if (this.popupVisible) {
-                if (this.popup) {
-                    this.displayPopup()
-                }
-            }
-        }, 200)
-        window.addEventListener('resize', this._displayPopup)
-        window.addEventListener('scroll', this._displayPopup)
-
         let inputBox = this.$refs.input
         this.labelWidth = inputBox.$el.children.length && inputBox.$el.children[0].offsetWidth
-    },
-    beforeDestroy () {
-        window.removeEventListener('resize', this._displayPopup)
-        window.removeEventListener('scroll', this._displayPopup)
     },
     methods: {
         handleValChange (value) {
@@ -340,9 +307,7 @@ export default {
         },
         init () {
             this.handleValChange(this.value)
-            if (this.popup) {
-                this.displayPopup()
-            }
+            this.update()
         },
         stringify (date, format) {
             return formatDate(date, format || this.format)
@@ -418,6 +383,7 @@ export default {
         },
         closePopup () {
             this.popupVisible = false
+            this.destroy()
         },
         handleInput (e) {
             this.userInput = e.target.value
@@ -451,47 +417,59 @@ export default {
                 this.$emit('input-error', value)
             }
         },
-        getPopupSize (element) {
-            let originalDisplay = element.style.display
-            let originalVisibility = element.style.visibility
-            element.style.display = 'block'
-            element.style.visibility = 'hidden'
-            let styles = window.getComputedStyle(element)
-            let width = element.offsetWidth + parseInt(styles.marginLeft) + parseInt(styles.marginRight)
-            let height = element.offsetHeight + parseInt(styles.marginTop) + parseInt(styles.marginBottom)
-            let result = { width, height }
-            element.style.display = originalDisplay
-            element.style.visibility = originalVisibility
-            return result
+        update () {
+            if (this.popper) {
+                this.$nextTick(() => {
+                    this.popper.update()
+                    this.popperStatus = true
+                })
+            } else {
+                this.$nextTick(() => {
+                    this.popper = new Popper(this.$refs.picker, this.$refs.calendar, {
+                        placement: 'bottom-start',
+                        modifiers: {
+                            computeStyle: {
+                                gpuAcceleration: false
+                            },
+                            preventOverflow: {
+                                boundariesElement: 'window'
+                            }
+                        },
+                        onCreate: () => {
+                            this.resetTransformOrigin()
+                            this.$nextTick(this.popper.update())
+                        },
+                        onUpdate: () => {
+                            this.resetTransformOrigin()
+                        }
+                    })
+                })
+            }
         },
-        displayPopup () {
-            let dw = document.documentElement.clientWidth
-            let dh = document.documentElement.clientHeight
-            let InputRect = this.$el.getBoundingClientRect()
-            let PopupRect = this._popupRect || (this._popupRect = this.getPopupSize(this.$refs.calendar))
-            let position = {}
-            let offsetRelativeToInputX = 0
-            let offsetRelativeToInputY = 0
-            if (this.appendToBody) {
-                offsetRelativeToInputX = window.pageXOffset + InputRect.left
-                offsetRelativeToInputY = window.pageYOffset + InputRect.top
+        destroy () {
+            if (this.popper) {
+                setTimeout(() => {
+                    if (this.popper && !this.popperStatus) {
+                        this.popper.destroy()
+                        this.popper = null
+                    }
+                    this.popperStatus = false
+                }, 1000)
             }
-            if (dw - InputRect.left < PopupRect.width && InputRect.right < PopupRect.width) {
-                position.left = offsetRelativeToInputX - InputRect.left + 1 + 'px'
-            } else if (InputRect.left + InputRect.width / 2 <= dw / 2) {
-                position.left = offsetRelativeToInputX + 'px'
-            } else {
-                position.left = offsetRelativeToInputX + InputRect.width - PopupRect.width + 'px'
+        },
+        resetTransformOrigin () {
+            if (!this.popper) return
+            let xPlacement = this.popper.popper.getAttribute('x-placement')
+            let placementStart = xPlacement.split('-')[0]
+            let placementEnd = xPlacement.split('-')[1]
+            const leftOrRight = xPlacement === 'left' || xPlacement === 'right'
+            if (!leftOrRight) {
+                this.popper.popper.style.transformOrigin = placementStart === 'bottom' || (placementStart !== 'top' && placementEnd === 'start') ? 'center top' : 'center bottom'
             }
-            if (InputRect.top <= PopupRect.height && dh - InputRect.bottom <= PopupRect.height) {
-                position.top = offsetRelativeToInputY + dh - InputRect.top - PopupRect.height + 'px'
-            } else if (InputRect.top + InputRect.height / 2 <= dh / 2) {
-                position.top = offsetRelativeToInputY + InputRect.height + 'px'
-            } else {
-                position.top = offsetRelativeToInputY - PopupRect.height + 'px'
-            }
-            if (position.top !== this.position.top || position.left !== this.position.left) {
-                this.position = position
+        },
+        beforeDestroy () {
+            if (this.popper) {
+                this.popper.destroy()
             }
         }
     }
