@@ -7,7 +7,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-button type="normal">默认按钮</b-button>
+            <b-button>默认按钮</b-button>
             <b-button type="primary">主要按钮</b-button>
             <b-button type="success">成功按钮</b-button>
             <b-button type="warning">警告按钮</b-button>
@@ -18,7 +18,7 @@
 :::code
 ```html
     <div>
-        <b-button type="normal">默认按钮</b-button>
+        <b-button>默认按钮</b-button>
         <b-button type="primary">主要按钮</b-button>
         <b-button type="success">成功按钮</b-button>
         <b-button type="warning">警告按钮</b-button>
@@ -60,7 +60,7 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <b-button type="normal" :round="true">默认按钮</b-button>
+            <b-button :round="true">默认按钮</b-button>
             <b-button type="primary" :round="true">主要按钮</b-button>
             <b-button type="success" :round="true">成功按钮</b-button>
             <b-button type="warning" :round="true">警告按钮</b-button>
@@ -71,7 +71,7 @@ Button 组件可以在不同场景下选择是否可以点击。
 ::: code
 ```html
     <div>
-        <b-button type="normal" :round="true">默认按钮</b-button>
+        <b-button :round="true">默认按钮</b-button>
         <b-button type="primary" :round="true">主要按钮</b-button>
         <b-button type="success" :round="true">成功按钮</b-button>
         <b-button type="warning" :round="true">警告按钮</b-button>
@@ -88,7 +88,7 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <b-button type="normal" :plain="true">默认按钮</b-button>
+            <b-button :plain="true">默认按钮</b-button>
             <b-button type="primary" :plain="true">主要按钮</b-button>
             <b-button type="success" :plain="true">成功按钮</b-button>
             <b-button type="warning" :plain="true">警告按钮</b-button>
@@ -99,7 +99,7 @@ Button 组件可以在不同场景下选择是否可以点击。
 ::: code
 ```html
     <div>
-        <b-button type="normal" :plain="true">默认按钮</b-button>
+        <b-button :plain="true">默认按钮</b-button>
         <b-button type="primary" :plain="true">主要按钮</b-button>
         <b-button type="success" :plain="true">成功按钮</b-button>
         <b-button type="warning" :plain="true">警告按钮</b-button>
@@ -118,7 +118,7 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <b-button type="normal"  disabled="disabled">默认按钮</b-button>
+            <b-button  disabled="disabled">默认按钮</b-button>
             <b-button type="primary" disabled="disabled">主要按钮</b-button>
             <b-button type="success" disabled="disabled">成功按钮</b-button>
             <b-button type="warning" disabled="disabled">警告按钮</b-button>
@@ -129,7 +129,7 @@ Button 组件可以在不同场景下选择是否可以点击。
 ::: code
 ```html
     <div>
-        <b-button type="normal"  disabled="disabled">默认按钮</b-button>
+        <b-button  disabled="disabled">默认按钮</b-button>
         <b-button type="primary"  disabled="disabled">主要按钮</b-button>
         <b-button type="success"  disabled="disabled">成功按钮</b-button>
         <b-button type="warning" disabled="disabled">警告按钮</b-button>
@@ -147,7 +147,7 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <b-button type="normal"  :circle="true"></b-button>
+            <b-button  :circle="true"></b-button>
             <b-button type="primary" :circle="true"></b-button>
             <b-button type="success" :circle="true"></b-button>
             <b-button type="warning" :circle="true"></b-button>
@@ -158,7 +158,7 @@ Button 组件可以在不同场景下选择是否可以点击。
 ::: code
 ```html
     <div>
-        <b-button type="normal"  :circle="true"></b-button>
+        <b-button :circle="true"></b-button>
         <b-button type="primary" :circle="true"></b-button>
         <b-button type="success" :circle="true"></b-button>
         <b-button type="warning" :circle="true"></b-button>
@@ -178,7 +178,7 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <b-button type="normal"  icon="daochukehuxinxi"></b-button>
+            <b-button icon="daochukehuxinxi"></b-button>
             <b-button type="primary" icon="fapiaoshengcheng"></b-button>
             <b-button type="success" icon="pipeixinxi"></b-button>
             <b-button type="warning" icon="qianshouxinxi"></b-button>
@@ -187,14 +187,14 @@ Button 组件可以在不同场景下选择是否可以点击。
             <b-button type="warning" icon="daochuduanxinjilu"></b-button>
             <b-button type="success" icon="dayin"></b-button>
             <b-button type="primary" icon="daochuwordwendang"></b-button>
-            <b-button type="normal"  icon="wangshangbaoshui"></b-button> 
+            <b-button   icon="wangshangbaoshui"></b-button> 
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-button type="normal"  icon="daochukehuxinxi"></b-button>
+        <b-button icon="daochukehuxinxi"></b-button>
         <b-button type="primary" icon="fapiaoshengcheng"></b-button>
         <b-button type="success" icon="pipeixinxi"></b-button>
         <b-button type="warning" icon="qianshouxinxi"></b-button>
@@ -203,7 +203,7 @@ Button 组件可以在不同场景下选择是否可以点击。
         <b-button type="warning" icon="daochuduanxinjilu"></b-button>
         <b-button type="success" icon="dayin"></b-button>
         <b-button type="primary" icon="daochuwordwendang"></b-button>
-        <b-button type="normal"  icon="wangshangbaoshui"></b-button> 
+        <b-button   icon="wangshangbaoshui"></b-button> 
     </div>
 ```
 :::
@@ -271,7 +271,7 @@ Button 支持click 事件
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | 尺寸   | string  |  `normal`、`small`  、`big`       |    normal   |
+| size     | 尺寸   | string  |  `default`、`small`  、`big`       |    normal   |
 | type     | 类型   | string    |   `normal` 、`primary`、`success`  、`warning` 、`error`|     primary  |
 | loading     | 是否圆角按钮   | boolean    |    |     false  |
 | round     | 是否加载中状态   | boolean    |    |     false  |
