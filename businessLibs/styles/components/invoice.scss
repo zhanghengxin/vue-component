@@ -1,5 +1,9 @@
 $css-prefix-invoice: $css-prefix + 'invoice';
 .#{$css-prefix-invoice}-box {
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
   position: relative;
   width: 900px;
   box-sizing: border-box;

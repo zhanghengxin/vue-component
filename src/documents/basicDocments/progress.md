@@ -155,8 +155,8 @@ Progress 组件可通过 ```strokeWidth``` 设置线条宽度
     <div class="example-box">
         <div style="width:500px;">
             <b-progress :percentage='percent'></b-progress>
-            <b-button type="tynormal" size="small" @on-click='add'>增加</b-button>
-            <b-button type="tynormal" size="small" @on-click='reduce'>减小</b-button>
+            <b-button size="small" @on-click='add'>增加</b-button>
+            <b-button size="small" @on-click='reduce'>减小</b-button>
         </div>
         <script>
             export default {
@@ -191,8 +191,8 @@ Progress 组件可通过 ```strokeWidth``` 设置线条宽度
 ```html
     <div style="width:500px;">
         <b-progress :percentage='percent'></b-progress>
-        <b-button type="typrimary" size="small" @on-click='add'>增加</b-button>
-        <b-button type="typrimary" size="small" @on-click='reduce'>减小</b-button>
+        <b-button type="primary" size="small" @on-click='add'>增加</b-button>
+        <b-button type="primary" size="small" @on-click='reduce'>减小</b-button>
     </div>
     <script>
         export default {

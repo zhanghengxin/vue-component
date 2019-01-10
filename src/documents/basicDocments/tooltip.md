@@ -12,48 +12,48 @@
         <div>
             <div class="top">
                 <b-tooltip content="Top Left 文字提示" placement="top-start">
-                    <b-button size="small" type="tynormal">上左</b-button>
+                    <b-button size="small">上左</b-button>
                 </b-tooltip>
                 <b-tooltip content="Top Center 文字提示" placement="top">
-                    <b-button size="small" type="tynormal">上边</b-button>
+                    <b-button size="small">上边</b-button>
                 </b-tooltip>
                 <b-tooltip content="Top Right 文字提示" placement="top-end">
-                    <b-button size="small" type="tynormal">上右</b-button>
+                    <b-button size="small">上右</b-button>
                 </b-tooltip>
             </div>
             <div class="center">
                 <div class="center-left">
                     <b-tooltip content="Left Top 文字提示" placement="left-start">
-                        <b-button size="small" type="tynormal">左上</b-button>
+                        <b-button size="small" >左上</b-button>
                     </b-tooltip><br /><br />
                     <b-tooltip content="Left Center 文字提示" placement="left">
-                        <b-button size="small" type="tynormal">左边</b-button>
+                        <b-button size="small">左边</b-button>
                     </b-tooltip><br /><br />
                     <b-tooltip content="Left Bottom 文字提示" placement="left-end">
-                        <b-button size="small" type="tynormal">左下</b-button>
+                        <b-button size="small">左下</b-button>
                     </b-tooltip>
                 </div>
                 <div class="center-right">
                     <b-tooltip content="Right Top 文字提示" placement="right-start">
-                        <b-button size="small" type="tynormal">右上</b-button>
+                        <b-button size="small" >右上</b-button>
                     </b-tooltip><br /><br />
                     <b-tooltip content="Right Center 文字提示" placement="right">
-                        <b-button size="small" type="tynormal">右边</b-button>
+                        <b-button size="small" >右边</b-button>
                     </b-tooltip><br /><br />
                     <b-tooltip content="Right Bottom 文字提示" placement="right-end">
-                        <b-button size="small" type="tynormal">右下</b-button>
+                        <b-button size="small" >右下</b-button>
                     </b-tooltip>
                 </div>
             </div>
             <div class="bottom">
                 <b-tooltip content="Bottom Left 文字提示" placement="bottom-start">
-                    <b-button size="small" type="tynormal">下左</b-button>
+                    <b-button size="small" >下左</b-button>
                 </b-tooltip>
                 <b-tooltip content="Bottom Center 文字提示" placement="bottom">
-                    <b-button size="small" type="tynormal">下边</b-button>
+                    <b-button size="small" >下边</b-button>
                 </b-tooltip>
                 <b-tooltip content="Bottom Right 文字提示" placement="bottom-end">
-                    <b-button size="small" type="tynormal">下右</b-button>
+                    <b-button size="small" >下右</b-button>
                 </b-tooltip>
             </div>
         </div>
@@ -64,48 +64,48 @@
     <div>
         <div class="top">
             <b-tooltip content="Top Left 文字提示" placement="top-start">
-                <b-button size="small" type="tynormal">上左</b-button>
+                <b-button size="small" >上左</b-button>
             </b-tooltip>
             <b-tooltip content="Top Center 文字提示" placement="top">
-                <b-button size="small" type="tynormal">上边</b-button>
+                <b-button size="small" >上边</b-button>
             </b-tooltip>
             <b-tooltip content="Top Right 文字提示" placement="top-end">
-                <b-button size="small" type="tynormal">上右</b-button>
+                <b-button size="small" >上右</b-button>
             </b-tooltip>
         </div>
         <div class="center">
             <div class="center-left">
                 <b-tooltip content="Left Top 文字提示" placement="left-start">
-                    <b-button size="small" type="tynormal">左上</b-button>
+                    <b-button size="small" >左上</b-button>
                 </b-tooltip><br /><br />
                 <b-tooltip content="Left Center 文字提示" placement="left">
-                    <b-button size="small" type="tynormal">左边</b-button>
+                    <b-button size="small" >左边</b-button>
                 </b-tooltip><br /><br />
                 <b-tooltip content="Left Bottom 文字提示" placement="left-end">
-                    <b-button size="small" type="tynormal">左下</b-button>
+                    <b-button size="small" >左下</b-button>
                 </b-tooltip>
             </div>
             <div class="center-right">
                 <b-tooltip content="Right Top 文字提示" placement="right-start">
-                    <b-button size="small" type="tynormal">右上</b-button>
+                    <b-button size="small" >右上</b-button>
                 </b-tooltip><br /><br />
                 <b-tooltip content="Right Center 文字提示" placement="right">
-                    <b-button size="small" type="tynormal">右边</b-button>
+                    <b-button size="small" >右边</b-button>
                 </b-tooltip><br /><br />
                 <b-tooltip content="Right Bottom 文字提示" placement="right-end">
-                    <b-button size="small" type="tynormal">右下</b-button>
+                    <b-button size="small" >右下</b-button>
                 </b-tooltip>
             </div>
         </div>
         <div class="bottom">
             <b-tooltip content="Bottom Left 文字提示" placement="bottom-start">
-                <b-button size="small" type="tynormal">下左</b-button>
+                <b-button size="small" >下左</b-button>
             </b-tooltip>
             <b-tooltip content="Bottom Center 文字提示" placement="bottom">
-                <b-button size="small" type="tynormal">下边</b-button>
+                <b-button size="small" >下边</b-button>
             </b-tooltip>
             <b-tooltip content="Bottom Right 文字提示" placement="bottom-end">
-                <b-button size="small" type="tynormal">下右</b-button>
+                <b-button size="small" >下右</b-button>
             </b-tooltip>
         </div>
     </div>
@@ -133,7 +133,7 @@
     <div class="example-box">
         <div>
             <b-tooltip placement="top" theme="light">
-                <b-button size="small" type="tynormal">多行</b-button>
+                <b-button size="small" >多行</b-button>
                 <div slot="content">
                     <p>Display multiple lines of information</p>
                     <p><i>Can customize the style</i></p>
@@ -146,7 +146,7 @@
 ```html
     <div>
         <b-tooltip placement="top" theme="light">
-            <b-button size="small" type="tynormal">多行</b-button>
+            <b-button size="small" >多行</b-button>
             <div slot="content">
                 <p>Display multiple lines of information</p>
                 <p><i>Can customize the style</i></p>
@@ -161,7 +161,7 @@
     <div class="example-box">
         <div>
             <b-tooltip placement="top" max-width="200" content="我是长文本，我是长文本，我是长文本，我是长文本，我是长文本">
-                <b-button size="small" type="tynormal">我是长文本</b-button>
+                <b-button size="small" >我是长文本</b-button>
             </b-tooltip>
         </div>
     </div>
@@ -170,7 +170,7 @@
 ```html
     <div>
         <b-tooltip placement="top" max-width="200" content="我是长文本，我是长文本，我是长文本，我是长文本，我是长文本">
-            <b-button size="small" type="tynormal">我是长文本</b-button>
+            <b-button size="small" >我是长文本</b-button>
         </b-tooltip>
     </div>
 ```
@@ -181,7 +181,7 @@
     <div class="example-box">
         <div>
             <b-tooltip placement="top" content="禁用提示框" :disabled="disabled">
-                <b-button size="small" type="tynormal" @on-click="disabled = true">点击禁用提示框</b-button>
+                <b-button size="small"  @on-click="disabled = true">点击禁用提示框</b-button>
             </b-tooltip>
         </div>
     </div>
@@ -190,7 +190,7 @@
 ```html
     <div>
         <b-tooltip placement="top" content="禁用提示框" :disabled="disabled">
-            <b-button size="small" type="tynormal" @on-click="disabled = true">点击禁用提示框</b-button>
+            <b-button size="small"  @on-click="disabled = true">点击禁用提示框</b-button>
         </b-tooltip>
     </div>
     <script>
@@ -210,7 +210,7 @@
     <div class="example-box">
         <div>
             <b-tooltip placement="top" content="延时1秒显示" :delay="1000">
-                <b-button size="small" type="tynormal">点击延时1秒显示</b-button>
+                <b-button size="small" >点击延时1秒显示</b-button>
             </b-tooltip>
         </div>
     </div>
@@ -219,7 +219,7 @@
 ```html
     <div>
         <b-tooltip placement="top" content="延时1秒显示" :delay="1000">
-            <b-button size="small" type="tynormal">点击延时1秒显示</b-button>
+            <b-button size="small" >点击延时1秒显示</b-button>
         </b-tooltip>
     </div>
 ```
@@ -230,10 +230,10 @@
     <div class="example-box">
         <div>
             <b-tooltip placement="top" content="Default(dark) 深色">
-                <b-button size="small" type="tynormal">默认(深色)</b-button>
+                <b-button size="small" >默认(深色)</b-button>
             </b-tooltip>
             <b-tooltip placement="right" content="light 白色 白色" theme="light">
-                <b-button size="small" type="tynormal">白色</b-button>
+                <b-button size="small" >白色</b-button>
             </b-tooltip>
         </div>
     </div>
@@ -242,10 +242,10 @@
 ```html
     <div>
         <b-tooltip placement="top" content="Default(dark)">
-            <b-button size="small" type="tynormal">默认（深色）</b-button>
+            <b-button size="small" >默认（深色）</b-button>
         </b-tooltip>
         <b-tooltip placement="top" content="light" theme="light">
-            <b-button size="small" type="tynormal">白色</b-button>
+            <b-button size="small" >白色</b-button>
         </b-tooltip>
     </div>
 ```

@@ -27,7 +27,7 @@ Modal提供了两种用法，普通组件使用和封装好的简洁实例调用
 ::: code
 ```html
     <div>
-        <b-button type="tynormal" @on-click="modal1 = true">基本弹框</b-button>
+        <b-button @on-click="modal1 = true">基本弹框</b-button>
         <b-modal
             v-model="modal1"
             title="普通对话框"
