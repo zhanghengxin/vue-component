@@ -8,8 +8,8 @@
     ><slot>{{ label }} <b-icon type='queding' v-if='showSelected'/></slot></li>
 </template>
 <script>
-import Emitter from '&/mixins/emitter'
-import { prefix } from '&/utils/common'
+import Emitter from '../../mixins/emitter'
+import { prefix } from '../../utils/common'
 
 const prefixCls = prefix + 'option'
 

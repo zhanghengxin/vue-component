@@ -70,7 +70,7 @@ export default {
             })
             let checked = event.target.checked
             this.checkedValue = checked
-            if (this.checkedValue) {
+            if (this.checkedValue && this.label) {
                 this.$parent.change(this.label)
             }
             this.$emit('input', this.checkedValue)

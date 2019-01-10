@@ -1,5 +1,5 @@
 // Find components upward
-let findComponentUpward = function (context, componentName, componentNames) {
+export function findComponentUpward (context, componentName, componentNames) {
     if (typeof componentName === 'string') {
         componentNames = [componentName]
     } else {
@@ -14,7 +14,7 @@ let findComponentUpward = function (context, componentName, componentNames) {
     return parent
 }
 
-let findComponentUpwards = function (context, componentName) {
+export function findComponentUpwards (context, componentName) {
     let parent = context.$parent
     let name = parent.$options.name
     let parents = []
@@ -26,7 +26,7 @@ let findComponentUpwards = function (context, componentName) {
     return parents
 }
 
-function typeOf (obj) {
+export function typeOf (obj) {
     const toString = Object.prototype.toString
     const map = {
         '[object Boolean]': 'boolean',
@@ -44,7 +44,7 @@ function typeOf (obj) {
 }
 
 // deepCopy
-function deepCopy (data) {
+export function deepCopy (data) {
     const t = typeOf(data)
     let o
     if (t === 'array') {
@@ -66,4 +66,41 @@ function deepCopy (data) {
     return o
 }
 
-export { findComponentUpward, deepCopy, findComponentUpwards, typeOf }
+export function firstUpperCase (str) {
+    return str.toString()[0].toUpperCase() + str.toString().slice(1)
+}
+
+export function scrollTop (el, from = 0, to, duration = 500, endCallback) {
+    if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = (
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function (callback) {
+                return window.setTimeout(callback, 1000 / 60)
+            }
+        )
+    }
+    const difference = Math.abs(from - to)
+    const step = Math.ceil(difference / duration * 50)
+
+    function scroll (start, end, step) {
+        if (start === end) {
+            endCallback && endCallback()
+            return
+        }
+
+        let d = (start + step > end) ? end : start + step
+        if (start > end) {
+            d = (start - step < end) ? end : start - step
+        }
+
+        if (el === window) {
+            window.scrollTo(d, d)
+        } else {
+            el.scrollTop = d
+        }
+        window.requestAnimationFrame(() => scroll(d, end, step))
+    }
+    scroll(from, to, step)
+}

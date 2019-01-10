@@ -1,6 +1,7 @@
 /* istanbul ignore next */
 
 import Vue from 'vue'
+
 const isServer = Vue.prototype.$isServer
 const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.)) /g // eslint-disable-line
 const MOZ_HACK_REGEXP = /^moz([A-Z])/
@@ -13,6 +14,7 @@ const camelCase = function (name) {
         return offset ? letter.toUpperCase() : letter
     }).replace(MOZ_HACK_REGEXP, 'Moz$1')
 }
+
 export function hasClass (el, cls) {
     if (!el || !cls) {
         return false
@@ -26,6 +28,7 @@ export function hasClass (el, cls) {
         return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1
     }
 }
+
 export function addClass (el, cls) {
     if (!el) return
     var curClass = el.className
@@ -42,7 +45,8 @@ export function addClass (el, cls) {
     if (!el.classList) {
         el.className = curClass
     }
-};
+}
+
 export function removeClass (el, cls) {
     if (!el || !cls) return
     var classes = cls.split(' ')
@@ -59,42 +63,22 @@ export function removeClass (el, cls) {
     if (!el.classList) {
         el.className = trim(curClass)
     }
-};
-export const getStyle = ieVersion < 9 ? function (element, styleName) {
-    if (isServer) return
-    if (!element || !styleName) return null
-    styleName = camelCase(styleName)
-    if (styleName === 'float') {
-        styleName = 'styleFloat'
-    }
-    try {
-        switch (styleName) {
-        case 'opacity':
-            try {
-                return element.filters.item('alpha').opacity / 100
-            } catch (e) {
-                return 1.0
-            }
-        default:
-            return (element.style[styleName] || element.currentStyle ? element.currentStyle[styleName] : null)
-        }
-    } catch (e) {
-        return element.style[styleName]
-    }
-} : function (element, styleName) {
-    if (isServer) return
+}
+
+export function getStyle (element, styleName) {
     if (!element || !styleName) return null
     styleName = camelCase(styleName)
     if (styleName === 'float') {
         styleName = 'cssFloat'
     }
     try {
-        var computed = document.defaultView.getComputedStyle(element, '')
+        const computed = document.defaultView.getComputedStyle(element, '')
         return element.style[styleName] || computed ? computed[styleName] : null
     } catch (e) {
         return element.style[styleName]
     }
 }
+
 export function setStyle (element, styleName, value) {
     if (!element || !styleName) return
     if (typeof styleName === 'object') {
@@ -112,6 +96,7 @@ export function setStyle (element, styleName, value) {
         }
     }
 }
+
 export const on = (() => {
     if (!isServer && document.addEventListener) {
         return function (element, event, handler) {
@@ -127,6 +112,37 @@ export const on = (() => {
         }
     }
 })()
+
+export function getScrollBarSize (fresh) {
+    let cached
+    if (isServer) return 0
+    if (fresh || cached === undefined) {
+        const inner = document.createElement('div')
+        inner.style.width = '100%'
+        inner.style.height = '200px'
+        const outer = document.createElement('div')
+        const outerStyle = outer.style
+        outerStyle.position = 'absolute'
+        outerStyle.top = 0
+        outerStyle.left = 0
+        outerStyle.pointerEvents = 'none'
+        outerStyle.visibility = 'hidden'
+        outerStyle.width = '200px'
+        outerStyle.height = '150px'
+        outerStyle.overflow = 'hidden'
+        outer.appendChild(inner)
+        document.body.appendChild(outer)
+        const widthContained = inner.offsetWidth
+        outer.style.overflow = 'scroll'
+        let widthScroll = inner.offsetWidth
+        if (widthContained === widthScroll) {
+            widthScroll = outer.clientWidth
+        }
+        document.body.removeChild(outer)
+        cached = widthContained - widthScroll
+    }
+    return cached
+}
 
 /* istanbul ignore next */
 export const off = (() => {

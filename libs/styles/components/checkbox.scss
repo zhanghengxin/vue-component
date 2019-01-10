@@ -44,6 +44,10 @@ $css-prefix-checkbox: $css-prefix + 'checkbox';
     &-disabled{
         background: $Disabled;
         border: 1px solid $Border;
+        cursor: not-allowed;
+        input{
+          cursor: not-allowed;
+        }
     }
     &-indeterminate::after{
         position: absolute;
@@ -57,6 +61,7 @@ $css-prefix-checkbox: $css-prefix + 'checkbox';
         border: 2px solid #fff;
         border-top: 0;
         border-left: 0;
+        box-sizing: content-box;
     }
     .#{$css-prefix-checkbox}-disabled.#{$css-prefix-checkbox}-checked::after{
         content: '';
@@ -71,6 +76,7 @@ $css-prefix-checkbox: $css-prefix + 'checkbox';
         border-left: 0;
         transform: rotate(45deg) scale(1);
         transition: all .2s ease-in-out;
+        box-sizing: content-box;
     }
     &-left:hover{
         border: 1px solid $DisContent;

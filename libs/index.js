@@ -34,11 +34,18 @@ import RadioGroup from './components/radioGroup'
 import Form from './components/form'
 import Tag from './components/Tag'
 import Tree from './components/tree'
+import Table from './components/table'
 import Progress from './components/Progress'
 import Select from './components/select'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
 import DateTimePicker from './components/datetime-picker'
+import Transfer from './components/transfer/'
+import Notice from './components/notice'
+import Menu from './components/menu'
+import MenuItem from './components/menu/menu-item'
+import Submenu from './components/menu/submenu'
+import MenuGroup from './components/menu/menu-item-group'
 
 const components = [
     Input,
@@ -47,6 +54,7 @@ const components = [
     Drawer,
     Tag,
     Tree,
+    Table,
     Icon,
     Message,
     Collapse,
@@ -80,7 +88,13 @@ const components = [
     Select,
     DatePicker,
     TimePicker,
-    DateTimePicker
+    DateTimePicker,
+    Transfer,
+    Notice,
+    Menu,
+    MenuItem,
+    Submenu,
+    MenuGroup
 ]
 
 const install = function (Vue) {
@@ -88,6 +102,7 @@ const install = function (Vue) {
     components.forEach(component => Vue.component(component.name, component))
     Vue.prototype.$Message = Message
     Vue.prototype.$Modal = Modal
+    Vue.prototype.$Notice = Notice
 }
 
 export default {

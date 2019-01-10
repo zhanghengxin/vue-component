@@ -137,6 +137,11 @@
       "path": "/",
       "items": [
         {
+          "title": "Table 表格",
+          "path": "/table",
+          "name": "table"
+        },
+        {
           "title": "Page 分页",
           "path": "/page",
           "name": "page"
@@ -181,7 +186,11 @@
           "title": "Steps 步骤条",
           "path": "/steps",
           "name": "steps"
-      }
+      },{
+          "title": "Menu 导航菜单",
+          "path": "/menu",
+          "name": "menu"
+        }
       ]
         },
     {
@@ -212,6 +221,11 @@
           "title": "Circle 进度环",
           "path": "/circle",
           "name": "circle"
+        },
+        {
+          "title": "Transfer 穿梭框",
+          "path": "/transfer",
+          "name": "transfer"
         }
       ]
     }

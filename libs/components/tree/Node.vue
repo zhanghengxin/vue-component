@@ -1,38 +1,40 @@
 <template>
-    <ul
-        :class="wrapCls"
-        v-show="!data.invisible"
-        @dragstart.stop="handleDragStart"
-        @dragover.stop="handleDragOver"
-        @drop.stop="handleDrop"
-        :nodeKey="data.nodeKey"
-        :draggable="draggable">
-        <li>
+    <transition name="fade">
+        <ul
+            :class="wrapCls"
+            v-show="!data.invisible"
+            @dragstart.stop="handleDragStart"
+            @dragover.stop="handleDragOver"
+            @drop.stop="handleDrop"
+            :nodeKey="data.nodeKey"
+            :draggable="draggable">
+            <li>
             <span :class="arrowsCls">
                 <Icon v-if="showArrow" :type="arrowType" @on-click="expanded"></Icon>
                 <Icon v-if="showLoading" type="chushihua" :class="[prefixCls +'-loop']"></Icon>
             </span>
-            <Checkbox
-                v-if="showCheckbox"
-                :value="data[defaultOpt.checkedKey]"
-                :indeterminate="data[defaultOpt.indeterminateKey]"
-                :disabled="data[defaultOpt.disabledKey]"
-                @click.native.prevent="handleCheck">
-            </Checkbox>
-            <Render v-if="data.render" :render="data.render" :data="data" :node="node"></Render>
-            <Render v-else-if="isParentRender" :render="parentRender" :data="data" :node="node"></Render>
-            <span v-else :class="nameCls" @click="selectData">{{ data[defaultOpt.nameKey] }}</span>
-            <tree-node
-                v-for="(item, key) in children"
-                v-if="data[defaultOpt.expandKey]"
-                :key="key"
-                :draggable="draggable"
-                :data="item"
-                :show-checkbox="showCheckbox"
-                :default-opt="defaultOpt">
-            </tree-node>
-        </li>
-    </ul>
+                <Checkbox
+                    v-if="showCheckbox"
+                    :value="data[defaultOpt.checkedKey]"
+                    :indeterminate="data[defaultOpt.indeterminateKey]"
+                    :disabled="data[defaultOpt.disabledKey]"
+                    @click.native.prevent="handleCheck">
+                </Checkbox>
+                <Render v-if="data.render" :render="data.render" :data="data" :node="node"></Render>
+                <Render v-else-if="isParentRender" :render="parentRender" :data="data" :node="node"></Render>
+                <span v-else :class="nameCls" @click="selectData">{{ data[defaultOpt.nameKey] }}</span>
+                <tree-node
+                    v-for="(item, key) in children"
+                    v-if="data[defaultOpt.expandKey]"
+                    :key="key"
+                    :draggable="draggable"
+                    :data="item"
+                    :show-checkbox="showCheckbox"
+                    :default-opt="defaultOpt">
+                </tree-node>
+            </li>
+        </ul>
+    </transition>
 </template>
 <script>
 import { findComponentUpwards, findComponentUpward } from '../../utils/assist'

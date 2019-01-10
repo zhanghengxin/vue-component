@@ -3,7 +3,7 @@
 </template>
 <script>
 
-import { prefix } from '&/utils/common'
+import { prefix } from '../../utils/common'
 import Vue from 'vue'
 const isServer = Vue.prototype.$isServer
 const Popper = isServer ? function () {} : require('popper.js/dist/umd/popper.js')

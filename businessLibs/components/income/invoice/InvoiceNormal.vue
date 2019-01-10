@@ -4,9 +4,9 @@
             <span><i>{{invoiceNormalData.title}}</i></span>
         </div>
         <ul :class="[prefixCls+'-ul']">
-            <li :style="{ opacity: invoiceNormalData.invoiceCheckCode ? 1:0 }">校验码：
+            <li :style="{ opacity: invoiceNormalData.checkCode ? 1:0 }">校验码：
                 <i :class="[prefixCls+'-ul-content']">
-                    {{invoiceNormalData.invoiceCheckCode}}
+                    {{invoiceNormalData.checkCode}}
                 </i>
             </li>
             <li :style="{ opacity: invoiceNormalData.machineCode ? 1:0  }">机器编号：
