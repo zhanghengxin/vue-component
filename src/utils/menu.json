@@ -186,7 +186,11 @@
           "title": "Steps 步骤条",
           "path": "/steps",
           "name": "steps"
-      }
+      },{
+          "title": "Menu 导航菜单",
+          "path": "/menu",
+          "name": "menu"
+        }
       ]
         },
     {
