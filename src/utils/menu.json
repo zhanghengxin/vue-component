@@ -190,10 +190,6 @@
           "title": "Menu 导航菜单",
           "path": "/menu",
           "name": "menu"
-        },{
-          "title": "menuTest",
-          "path": "/menuTest",
-          "name": "menuTest"
         }
       ]
         },
