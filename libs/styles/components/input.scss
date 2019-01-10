@@ -87,9 +87,14 @@ $input-large-font:14px;
   position: relative;
 
   //b-input-box：hover 显示clear-icon
-  &:hover {
-    .#{$css-prefix-input-icon}-clear {
-      display: inline-block;
+  &-clear{
+    &:hover {
+      .#{$css-prefix-input-icon}-clear {
+        display: inline-block;
+      }
+      .#{$css-prefix-input}-noclear {
+        display: none;
+      }
     }
   }
 
@@ -115,11 +120,11 @@ $input-large-font:14px;
     &-small {
       @include inputSize($input-small-size, 4px 8px, $input-small-font);
     }
-  
+
     &-normal {
       @include inputSize($input-normal-size, 8px, $input-normal-font);
     }
-  
+
     &-large {
       @include inputSize($input-large-size, 12px 8px, $input-large-font);
     }
@@ -140,8 +145,6 @@ $input-large-font:14px;
     vertical-align: bottom;
   }
 
-  
-
   //icon样式
   .#{$css-prefix-input-icon} {
     position: absolute;
@@ -149,36 +152,37 @@ $input-large-font:14px;
     z-index: 3;
     text-align: center;
     height: 100%;
+
     &-prefix {
       left: 0;
     }
-  
+
     &-suffix {
       right: 0;
     }
-  
+
     &-clear {
       display: none;
       z-index: 3;
       color: #666;
       opacity: .7;
     }
-  
+
     &-small {
       @include inputIconSize($input-small-size, $input-small-font);
     }
-  
+
     &-normal {
       @include inputIconSize($input-normal-size, $input-normal-font);
     }
-  
+
     &-large {
       @include inputIconSize($input-large-size, $input-large-font);
     }
-  
+
   }
 
-  
+
   //input label样式
   .#{$css-prefix-input}-label {
     line-height: 1;

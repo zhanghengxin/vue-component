@@ -3,8 +3,8 @@
  *
  */
 import Progress from '&/components/Progress'
-import { createTest, createVue, destroyVM } from '../utils'
-import {prefix} from '&/utils/common'
+import { createTest, destroyVM } from '../utils'
+// import {prefix} from '&/utils/common'
 
 describe('Progress.vue', () => {
     let vm
@@ -13,7 +13,7 @@ describe('Progress.vue', () => {
     })
     it('color', () => {
         vm = createTest(Progress, {
-            percentage:40,
+            percentage: 40,
             color: 'yellow'
         }, true)
         let Elm = vm.$el
@@ -21,9 +21,9 @@ describe('Progress.vue', () => {
     })
     it('vertical', () => {
         vm = createTest(Progress, {
-            percentage:40,
+            percentage: 40,
             vertical: true,
-            strokeWidth:20
+            strokeWidth: 20
         }, true)
         let Elm = vm.$el
         expect(Elm.children[0].children[0].children[0].style.width).to.equal('20px')
@@ -31,7 +31,7 @@ describe('Progress.vue', () => {
     })
     it('status', () => {
         vm = createTest(Progress, {
-            percentage:40,
+            percentage: 40,
             status: 'Success'
         }, true)
         let Elm = vm.$el
@@ -39,7 +39,7 @@ describe('Progress.vue', () => {
     })
     it('showText', () => {
         vm = createTest(Progress, {
-            percentage:40,
+            percentage: 40,
             showText: false
         }, true)
         let Elm = vm.$el

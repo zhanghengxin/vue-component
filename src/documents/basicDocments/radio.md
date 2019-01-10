@@ -37,19 +37,19 @@
 
 ::: code
 ```html
-  <template>
-      <b-radio label='banana' v-model='test' @on-change="change"></b-radio>
-      <p>{{test}}</p>
-  </template>
-  <script>
-      export default {
-          data () {
-              return {
-                  test: ''
-              }
-          }
-      }
-  </script>
+    <template>
+        <b-radio label='banana' v-model='test' @on-change="change"></b-radio>
+        <p>{{test}}</p>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    test: ''
+                }
+            }
+        }
+    </script>
 ```
 :::
 
@@ -58,37 +58,37 @@
 <div class="example">
     <div class="example-box">
         <div>
-          <b-radio label='已选失效项' v-model="flagChecked" disabled></b-radio>
-          <b-radio-group v-model="fruit">
-            <b-radio label='apple' disabled></b-radio>
-            <b-radio label='banana'></b-radio>
-            <b-radio label='orange'></b-radio>
-          </b-radio-group>
-          <p>{{fruit}}</p>
+            <b-radio label='已选失效项' v-model="flagChecked" disabled></b-radio>
+            <b-radio-group v-model="fruit">
+                <b-radio label='apple' disabled></b-radio>
+                <b-radio label='banana'></b-radio>
+                <b-radio label='orange'></b-radio>
+            </b-radio-group>
+            <p>{{fruit}}</p>
         </div>
     </div>
 </div>
 
 ::: code
 ```html
-  <template>
-      <b-radio label='已选失效项' v-model="flagChecked" disabled></b-radio>
-      <b-radio-group v-model="fruit">
-        <b-radio label='apple' disabled></b-radio>
-        <b-radio label='banana'></b-radio>
-        <b-radio label='orange'></b-radio>
-      </b-radio-group>
-      <p>{{fruit}}</p>
-  </template>
-  <script>
-      export default {
-          data () {
-              return {
-                  fruit: 'orange'
-              }
-          }
-      }
-  </script>
+    <template>
+        <b-radio label='已选失效项' v-model="flagChecked" disabled></b-radio>
+        <b-radio-group v-model="fruit">
+            <b-radio label='apple' disabled></b-radio>
+            <b-radio label='banana'></b-radio>
+            <b-radio label='orange'></b-radio>
+        </b-radio-group>
+        <p>{{fruit}}</p>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    fruit: 'orange'
+                }
+            }
+        }
+    </script>
 ```
 :::
 
@@ -99,65 +99,65 @@
 <div class="example">
     <div class="example-box">
         <div>
-          <b-radio-group v-model="button1" type="button1" @on-change="changeGroup">
-            <b-radio label='兔子'></b-radio>
-            <b-radio label='猴子'></b-radio>
-            <b-radio label='泰迪'></b-radio>
-          </b-radio-group>
-          <p>{{button1}}</p>
-          <br>
-          <b-radio-group v-model="button2" type="button2" @on-change="changeGroup">
-            <b-radio label='兔子'></b-radio>
-            <b-radio label='猴子' disabled></b-radio>
-            <b-radio label='泰迪'></b-radio>
-          </b-radio-group>
-          <p>{{button2}}</p>
-          <br>
-          <b-radio-group v-model="button3" type="button3" @on-change="changeGroup">
-            <b-radio label='兔子' disabled></b-radio>
-            <b-radio label='猴子' disabled></b-radio>
-            <b-radio label='泰迪' disabled></b-radio>
-          </b-radio-group>
-          <p>{{button3}}</p>
+            <b-radio-group v-model="button1" type="button1" @on-change="changeGroup">
+                <b-radio label='兔子'></b-radio>
+                <b-radio label='猴子'></b-radio>
+                <b-radio label='泰迪'></b-radio>
+            </b-radio-group>
+            <p>{{button1}}</p>
+            <br>
+            <b-radio-group v-model="button2" type="button2" @on-change="changeGroup">
+                <b-radio label='兔子'></b-radio>
+                <b-radio label='猴子' disabled></b-radio>
+                <b-radio label='泰迪'></b-radio>
+            </b-radio-group>
+            <p>{{button2}}</p>
+            <br>
+            <b-radio-group v-model="button3" type="button3" @on-change="changeGroup">
+                <b-radio label='兔子' disabled></b-radio>
+                <b-radio label='猴子' disabled></b-radio>
+                <b-radio label='泰迪' disabled></b-radio>
+            </b-radio-group>
+            <p>{{button3}}</p>
         </div>
     </div>
 </div>
 
 ::: code
 ```html
-  <template>
-      <b-radio-group v-model="button1" type="button1" @on-change="changeGroup">
-        <b-radio label='兔子'></b-radio>
-        <b-radio label='猴子'></b-radio>
-        <b-radio label='泰迪'></b-radio>
-      </b-radio-group>
-      <p>{{button1}}</p>
-      <br>
-      <b-radio-group v-model="button2" type="button2" @on-change="changeGroup">
-        <b-radio label='兔子'></b-radio>
-        <b-radio label='猴子' disabled></b-radio>
-        <b-radio label='泰迪'></b-radio>
-      </b-radio-group>
-      <p>{{button2}}</p>
-      <br>
-      <b-radio-group v-model="button3" type="button3" @on-change="changeGroup">
-        <b-radio label='兔子' disabled></b-radio>
-        <b-radio label='猴子' disabled></b-radio>
-        <b-radio label='泰迪' disabled></b-radio>
-      </b-radio-group>
-      <p>{{button3}}</p>
-  </template>
-  <script>
-      export default {
-          data () {
-              return {
-                  button1: '兔子',
-                  button2: '猴子',
-                  button3: '泰迪'
-              }
-          }
-      }
-  </script>
+    <template>
+        <b-radio-group v-model="button1" type="button1" @on-change="changeGroup">
+            <b-radio label='兔子'></b-radio>
+            <b-radio label='猴子'></b-radio>
+            <b-radio label='泰迪'></b-radio>
+        </b-radio-group>
+        <p>{{button1}}</p>
+        <br>
+        <b-radio-group v-model="button2" type="button2" @on-change="changeGroup">
+            <b-radio label='兔子'></b-radio>
+            <b-radio label='猴子' disabled></b-radio>
+            <b-radio label='泰迪'></b-radio>
+        </b-radio-group>
+        <p>{{button2}}</p>
+        <br>
+        <b-radio-group v-model="button3" type="button3" @on-change="changeGroup">
+            <b-radio label='兔子' disabled></b-radio>
+            <b-radio label='猴子' disabled></b-radio>
+            <b-radio label='泰迪' disabled></b-radio>
+        </b-radio-group>
+        <p>{{button3}}</p>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    button1: '兔子',
+                    button2: '猴子',
+                    button3: '泰迪'
+                }
+            }
+        }
+    </script>
 ```
 :::
 
@@ -167,23 +167,23 @@
     <div class="example-box">
         <div>
             <b-radio-group v-model="button1" type="button" size="large" @on-change="changeGroup">
-              <b-radio label='兔子'></b-radio>
-              <b-radio label='猴子'></b-radio>
-              <b-radio label='泰迪'></b-radio>
+                <b-radio label='兔子'></b-radio>
+                <b-radio label='猴子'></b-radio>
+                <b-radio label='泰迪'></b-radio>
             </b-radio-group>
             <p>{{button1}}</p>
             <br>
             <b-radio-group v-model="button2" type="button" @on-change="changeGroup">
-              <b-radio label='兔子'></b-radio>
-              <b-radio label='猴子'></b-radio>
-              <b-radio label='泰迪'></b-radio>
+                <b-radio label='兔子'></b-radio>
+                <b-radio label='猴子'></b-radio>
+                <b-radio label='泰迪'></b-radio>
             </b-radio-group>
             <p>{{button2}}</p>
             <br>
             <b-radio-group v-model="button3"  size="small" type="button" @on-change="changeGroup">
-              <b-radio label='兔子'></b-radio>
-              <b-radio label='猴子'></b-radio>
-              <b-radio label='泰迪'></b-radio>
+                <b-radio label='兔子'></b-radio>
+                <b-radio label='猴子'></b-radio>
+                <b-radio label='泰迪'></b-radio>
             </b-radio-group>
             <p>{{button3}}</p>
         </div>
@@ -192,39 +192,39 @@
 
 ::: code
 ```html
-  <template>
-     <b-radio-group v-model="button1" type="button" size="large" @on-change="changeGroup">
-        <b-radio label='兔子'></b-radio>
-        <b-radio label='猴子'></b-radio>
-        <b-radio label='泰迪'></b-radio>
-      </b-radio-group>
-      <p>{{button1}}</p>
-      <br>
-      <b-radio-group v-model="button2" type="button" @on-change="changeGroup">
-        <b-radio label='兔子'></b-radio>
-        <b-radio label='猴子'></b-radio>
-        <b-radio label='泰迪'></b-radio>
-      </b-radio-group>
-      <p>{{button2}}</p>
-      <br>
-      <b-radio-group v-model="button3"  size="small" type="button" @on-change="changeGroup">
-        <b-radio label='兔子'></b-radio>
-        <b-radio label='猴子'></b-radio>
-        <b-radio label='泰迪'></b-radio>
-      </b-radio-group>
-      <p>{{button3}}</p>
-  </template>
-  <script>
-      export default {
-          data () {
-              return {
-                  button1: '兔子',
-                  button2: '猴子',
-                  button3: '泰迪'
-              }
-          }
-      }
-  </script>
+    <template>
+        <b-radio-group v-model="button1" type="button" size="large" @on-change="changeGroup">
+            <b-radio label='兔子'></b-radio>
+            <b-radio label='猴子'></b-radio>
+            <b-radio label='泰迪'></b-radio>
+        </b-radio-group>
+        <p>{{button1}}</p>
+        <br>
+        <b-radio-group v-model="button2" type="button" @on-change="changeGroup">
+            <b-radio label='兔子'></b-radio>
+            <b-radio label='猴子'></b-radio>
+            <b-radio label='泰迪'></b-radio>
+        </b-radio-group>
+        <p>{{button2}}</p>
+        <br>
+        <b-radio-group v-model="button3"  size="small" type="button" @on-change="changeGroup">
+            <b-radio label='兔子'></b-radio>
+            <b-radio label='猴子'></b-radio>
+            <b-radio label='泰迪'></b-radio>
+        </b-radio-group>
+        <p>{{button3}}</p>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    button1: '兔子',
+                    button2: '猴子',
+                    button3: '泰迪'
+                }
+            }
+        }
+    </script>
 ```
 :::
 

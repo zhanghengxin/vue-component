@@ -22,6 +22,7 @@
                 :type="icon"
                 :class="[
                 prefixCls+`-icon`,
+                prefixCls+`-noclear`,
                 prefixCls+`-icon-`+size,
                 prefixCls+`-icon-suffix`]"
                 @on-click="handleIconClick">
@@ -150,9 +151,12 @@ export default {
         },
         // 样式属性
         size: {
-            default: 'normal',
+            // default: 'normal',
             validator: function (value) {
                 return ['large', 'small', 'normal'].indexOf(value) !== -1
+            },
+            default () {
+                return !this.size || this.size === '' ? 'normal' : this.size
             }
         },
         error: {
@@ -220,6 +224,7 @@ export default {
                 `${prefixCls}-box`,
                 {
                     [`${prefixCls}-error`]: this.error,
+                    [`${prefixCls}-box-clear`]: this.clearable && this.currentValue,
                     [`${prefixCls}-group`]: this.label && this.fixed,
                     'focus': this.label && this.labelFocus && this.fixed
                 }

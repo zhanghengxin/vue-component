@@ -36,7 +36,6 @@ describe('Select', () => {
     afterEach(() => {
         destroyVM(vm)
     })
-
     it('create && clearabled && v-model', done => {
         vm = createVue({
             template: `
@@ -54,20 +53,21 @@ describe('Select', () => {
                 }
             }
         }, true)
-        setTimeout(_ => {
+        vm.$nextTick(_ => {
             expect(vm.$el.className).to.equal(`${Select}-container`)
             expect(vm.$el.querySelector(`${prefixCls}-selection-content`).textContent).to.equal('增专')
             expect(vm.$el.querySelector(`[type='hidden']`).value).to.equal('004')
             expect(vm.$el.querySelector(`.bw-shibai-mian`)).to.exist
             expect(vm.$el.querySelector(`.b-drop`)).to.exist
             vm.$el.querySelector(`.bw-shibai-mian`).click()
-            setTimeout(_ => {
+            vm.$nextTick(_ => {
                 expect(vm.$el.querySelector(`${prefixCls}-selection-content`).textContent).to.equal('请选择')
+                console.log('vm.$el.querySelector(`[type=]`).value', vm.$el.querySelector(`[type='hidden']`).value)
                 expect(vm.$el.querySelector(`[type='hidden']`).value).to.equal('')
                 expect(vm.value).to.equal('')
                 done()
-            }, 100)
-        }, 100)
+            })
+        })
     })
 
     it('single select', done => {
@@ -92,23 +92,23 @@ describe('Select', () => {
                 }
             }
         }, true)
-        setTimeout(_ => {
+        vm.$nextTick(_ => {
             const options = vm.$el.querySelectorAll('.b-drop .b-option')
             expect(vm.value).to.equal('')
             triggerEvent(options[2], 'mouseenter')
             options[2].click()
-            setTimeout(_ => {
+            vm.$nextTick(_ => {
                 expect(vm.value).to.equal('005')
                 expect(vm.count).to.equal(1)
                 triggerEvent(options[3], 'mouseenter')
                 options[3].click()
-                setTimeout(_ => {
+                vm.$nextTick(_ => {
                     expect(vm.value).to.equal('025')
                     expect(vm.count).to.equal(2)
                     done()
-                }, 100)
-            }, 100)
-        }, 100)
+                })
+            })
+        })
     })
 
     it('disabled option', done => {
@@ -132,15 +132,15 @@ describe('Select', () => {
                 }
             }
         }, true)
-        setTimeout(_ => {
+        vm.$nextTick(_ => {
             const options = vm.$el.querySelectorAll('.b-drop .b-option')
             expect(options[1].classList.contains('b-option-disabled')).to.true
             options[1].click()
-            setTimeout(_ => {
+            vm.$nextTick(_ => {
                 expect(vm.value).to.equal('')
                 done()
-            }, 100)
-        }, 100)
+            })
+        })
     })
 
     it('disabled select', done => {
@@ -160,10 +160,10 @@ describe('Select', () => {
                 }
             }
         }, true)
-        setTimeout(_ => {
+        vm.$nextTick(_ => {
             expect(vm.$el.querySelector('.b-select-selection-disabled')).to.exist
             done()
-        }, 100)
+        })
     })
 
     it('namekey codeKey', done => {
@@ -183,11 +183,11 @@ describe('Select', () => {
                 }
             }
         }, true)
-        setTimeout(_ => {
+        vm.$nextTick(_ => {
             const options = vm.$el.querySelectorAll('.b-drop .b-option')
             expect(options.length).to.equal(4)
             done()
-        }, 100)
+        })
     })
 
     it('multiple select', done => {
@@ -214,17 +214,17 @@ describe('Select', () => {
                 }
             }
         }, true)
-        setTimeout(_ => {
+        vm.$nextTick(_ => {
             const options = vm.$el.querySelectorAll('.b-drop .b-option')
             expect(vm.value).to.equal('')
             options[2].click()
             options[3].click()
-            setTimeout(_ => {
+            vm.$nextTick(_ => {
                 expect(vm.value.join(',')).to.equal('005,025')
                 expect(vm.count).to.equal(2)
                 done()
-            }, 100)
-        }, 100)
+            })
+        })
     })
 
     it('multiple remove-tag', done => {
@@ -244,14 +244,14 @@ describe('Select', () => {
                 }
             }
         }, true)
-        setTimeout(_ => {
+        vm.$nextTick(_ => {
             const tagCloseIcons = vm.$el.querySelectorAll('.bw-quxiao-guanbi-shanchu')
             expect(vm.value.join(',')).to.equal('005,025')
             tagCloseIcons[1].click()
-            setTimeout(_ => {
+            vm.$nextTick(_ => {
                 expect(vm.value.join(',')).to.equal('005')
                 done()
-            }, 100)
-        }, 100)
+            })
+        })
     })
 })

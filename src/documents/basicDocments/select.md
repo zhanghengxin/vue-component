@@ -74,6 +74,9 @@
             }
         },
         methods:{
+            changeConsole(e){
+                console.log('e',e)
+            },
             filterFn(query,item){
                 return (item.name + item.code).indexOf(query) > -1
             },
@@ -112,7 +115,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value"  style="width:200px" :options='options' /></b-select>
+            <b-select v-model="value" @on-change='changeConsole'  style="width:200px" :options='options' /></b-select>
             <span>{{value}}</span>
         </div>
     </div>
@@ -298,6 +301,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 :multiple='multiple' 
                 :options='options' 
                 size='large'
+                @on-change='changeConsole'
                 style="width:200px" />
             </b-select>
             <b-select 
@@ -619,7 +623,7 @@ fixed为true  默认280px false 默认220px<br/>
         <div>
              <b-select 
                 v-model="value9"  
-                label='姓名'
+                label='姓名姓名姓名姓名'
                 :fixed='fixed'
                 :options='options' />
             </b-select>
@@ -787,6 +791,7 @@ fixed为true  默认280px false 默认220px<br/>
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |----------|--------|---------- |-------------  |-------- |
 | value    | 指定选中项的 code 值，可以使用 v-model 双向绑定数据。<br/>单选时只接受 String 或 Number，多选时只接受 Array   | String,Number,Array |	-   |     -    |
+| nameInCode | change返回值得类型 <br/>默认false返回单选返回string 多选返回array <br/>true返回[{code:'',name:''}]	|Boolean | `true`、`false` |   false  |
 | multiple | 是否支持多选	|Boolean | `true`、`false` |   false  |
 | disabled | 是否禁用	|Boolean | `true`、`false` |   false  |
 | disabled | 是否禁用	|Boolean | `true`、`false` |   false  |

@@ -1,27 +1,21 @@
 <template>
-    <li
-        :class="{
-            'b-dropdown-item-disabled': disabled,
-            'b-dropdown-item-divided': divided,
-            'b-dropdown-item': true
-        }"
-        @click="handleClick">
-        <slot></slot>
-    </li>
+    <li :class="classes" @click="handleClick"><slot></slot></li>
 </template>
-
 <script>
-import Emitter from '../../mixins/emitter'
-import { findComponentUpward } from '../../utils/utils'
+import { findComponentUpward } from '../../utils/assist'
+import { prefix } from '../../utils/common'
+const prefixCls = prefix + 'dropdown-item'
 export default {
-    name: 'BDropdownItem',
-    mixins: [Emitter],
+    name: prefixCls,
     props: {
-        command: {
-            type: [String, Object, Number],
-            default: ''
+        name: {
+            type: [String, Number]
         },
         disabled: {
+            type: Boolean,
+            default: false
+        },
+        selected: {
             type: Boolean,
             default: false
         },
@@ -30,23 +24,36 @@ export default {
             default: false
         }
     },
+    computed: {
+        classes () {
+            return [
+                `${prefixCls}`,
+                {
+                    [`${prefixCls}-disabled`]: this.disabled,
+                    [`${prefixCls}-selected`]: this.selected,
+                    [`${prefixCls}-divided`]: this.divided
+                }
+            ]
+        }
+    },
     methods: {
-        handleClick (e) {
-            const $parent = findComponentUpward(this, 'b-dropdown')
-            const hasChildren = this.$parent && this.$parent.$options._componentTag === 'b-dropdown'
-            if (hasChildren) {
+        handleClick () {
+            const $parent = findComponentUpward(this, `${prefix}dropdown`)
+            const hasChildren = this.$parent && this.$parent.$options.name === `${prefix}dropdown`
+
+            if (this.disabled) {
+                this.$nextTick(() => {
+                    $parent.currentShow = true
+                })
+            } else if (hasChildren) {
                 this.$parent.$emit('on-haschild-click')
             } else {
-                if ($parent && $parent.$options._componentTag === 'b-dropdown') {
+                if ($parent && $parent.$options.name === `${prefix}dropdown`) {
                     $parent.$emit('on-hover-click')
                 }
             }
-            this.dispatch('b-dropdown', 'menu-item-click', [this.command, this])
+            $parent.$emit('on-click', this.name)
         }
     }
 }
 </script>
-
-<style>
-
-</style>
