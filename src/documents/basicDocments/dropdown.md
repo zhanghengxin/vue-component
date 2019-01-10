@@ -32,7 +32,6 @@ export default {
 	</div>
 </div>
 
-
 ::: code
 ```html
 	<b-dropdown>
@@ -48,12 +47,12 @@ export default {
 :::
 
 
-### 触发方式（click，hover）
+### 触发方式
 通过设置属性 trigger 可以更改触发方式，可选项为 click 、 hover(默认) 或 custom(自定义)。
 <div class="example">
     <div class="example-box">
 		<b-dropdown>
-			<b-button type="normal" >hover触发</b-button>
+			<b-button >hover触发</b-button>
 			<b-dropdown-menu slot="list">
 				<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
 				<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
@@ -64,7 +63,7 @@ export default {
 			</b-dropdown-menu>
 		</b-dropdown>
 		<b-dropdown trigger="click" style='margin-left:20px;'>
-			<b-button type="normal" >click触发</b-button>
+			<b-button >click触发</b-button>
 			<b-dropdown-menu slot="list">
 				<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
 				<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
@@ -75,10 +74,10 @@ export default {
 			</b-dropdown-menu>
 		</b-dropdown>
 		<b-dropdown trigger="custom" :show='show' style='margin-left:20px;'>
-			<b-button type="normal"  @on-click='handClick'>custom触发</b-button>
+			<b-button  @on-click='handClick'>custom触发</b-button>
 			<b-dropdown-menu slot="list">
 				<div style='padding:10px;'>
-					<p>大诗人？</p>
+					<p style='padding:20px 0'>大诗人？</p>
 					<b-button type="primary" size="small" style='float:right;' @on-click='handClick'>不是</b-button>
 				</div>
 			</b-dropdown-menu>
@@ -89,7 +88,7 @@ export default {
 ::: code
 ```html
 	<b-dropdown>
-		<b-button type="normal" >hover触发</b-button>
+		<b-button>hover触发</b-button>
 		<b-dropdown-menu slot="list">
 			<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
 			<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
@@ -100,7 +99,7 @@ export default {
 		</b-dropdown-menu>
 	</b-dropdown>
 	<b-dropdown trigger="click" style='margin-left:20px;'>
-		<b-button type="normal">click触发</b-button>
+		<b-button >click触发</b-button>
 		<b-dropdown-menu slot="list">
 			<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
 			<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
@@ -111,10 +110,10 @@ export default {
 		</b-dropdown-menu>
 	</b-dropdown>
 	<b-dropdown trigger="custom" :show='show' style='margin-left:20px;'>
-		<b-button type="normal"  @on-click='handClick'>custom触发</b-button>
+		<b-button   @on-click='handClick'>custom触发</b-button>
 		<b-dropdown-menu slot="list">
 			<div style='padding:10px;'>
-				<p>大诗人？</p>
+				<p style='padding:20px 0'>大诗人？</p>
 				<b-button type="primary" size="small" style='float:right;' @on-click='handClick'>不是</b-button>
 			</div>
 		</b-dropdown-menu>
@@ -128,7 +127,7 @@ export default {
 <div class="example">
     <div class="example-box">
 		<b-dropdown>
-			<b-button type="normal">一剪梅</b-button>
+			<b-button >一剪梅</b-button>
 			<b-dropdown-menu slot="list">
 				<b-dropdown-item>红藕香残玉簟秋</b-dropdown-item>
 				<b-dropdown-item>轻解罗裳，独上兰舟</b-dropdown-item>
@@ -154,7 +153,7 @@ export default {
 ::: code
 ```html
 	<b-dropdown>
-		<b-button type="normal">一剪梅</b-button>
+		<b-button >一剪梅</b-button>
 		<b-dropdown-menu slot="list">
 			<b-dropdown-item>红藕香残玉簟秋</b-dropdown-item>
 			<b-dropdown-item>轻解罗裳，独上兰舟</b-dropdown-item>

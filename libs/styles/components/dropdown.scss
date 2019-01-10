@@ -35,8 +35,13 @@ $css-prefix-drop: $css-prefix+'drop';
       border-top: 1px solid $Border;
     }
 
+    &-selected {
+      background-color: #ecf5ff;
+      color: #66b1ff
+    }
+
     &:focus,
-    &:not(.is-disabled):hover {
+    &:not(&-disabled):hover {
       background-color: #ecf5ff;
       color: #66b1ff
     }
