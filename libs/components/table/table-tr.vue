@@ -14,7 +14,8 @@ export default {
             return [
                 {
                     [`${this.row._className}`]: this.row._className,
-                    [`${this.preCls}-row-hover`]: this.row._isHover
+                    [`${this.preCls}-row-hover`]: this.row._isHover,
+                    [`${this.preCls}-row-highlight`]: this.row._isHighlight
                 }
             ]
         }

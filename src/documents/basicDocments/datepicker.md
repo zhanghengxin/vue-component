@@ -12,7 +12,7 @@
         <b-datepicker 
             v-model='date' 
             :shortcuts='short'
-            @change='handleChangeDate'>
+            @on-change='handleChangeDate'>
         <b-datepicker>
     </div>
 
@@ -253,33 +253,6 @@
 :::
 </div>
 
-### 自适应位置
-
-设置属性 `popup` 为 true 来自适应垂直方向位置
-
-<div class='example'>
-    <div class='example-box'>
-        <b-datepicker v-model='popup' popup><b-datepicker>
-    </div>
-    
-::: code
-```html
-    <div>
-        <b-datepicker v-model='date' popup><b-datepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    date: '',
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
 ### 定义输入框格式
 
 设置属性 `labelText` 来显示 label 的内容
@@ -399,7 +372,6 @@
 | clearable | 是否显示清除按钮 | Boolean  | `true` `false` | true |
 | editable | 输入框内是否可编辑 | Boolean  | `true` `false` | true |
 | disabled | 是否可用 | Boolean | `true` `false` | false |
-| popup | 是否自适应位置 | Boolean | `true` `false` | false |
 | confirm | 若为 true 则显示确认按钮且需要确认才更新时间 | Boolean | `true` `false` | false |
 | confirm-text | 确认按钮的名称 | Boolean | | 确认 |
 | placeholder | 默认提示性文字 | String |  | 请选择日期 |
@@ -416,6 +388,6 @@
 ### events
 | 事件名 | 说明	| 返回值 |
 | ---- | ---- | ---- |
-| change | 日期改变的时候触发 | 选择的日期 |
+| on-change | 日期改变的时候触发 | 选择的日期 |
 | input | 日期改变的时候触发 | 选择的日期 |
-| confirm | 点击确认按钮触发，配合 confirm 属性使用 | 选择的日期 |
+| on-confirm | 点击确认按钮触发，配合 confirm 属性使用 | 选择的日期 |

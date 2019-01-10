@@ -96,7 +96,6 @@ export default {
             let childrenLength = that.$children.length
             // 设置子组件（Step）的默认值，比如index，showLine。
             that.$children.map((seg, idx) => {
-                console.log('that.size', that.size)
                 seg['size'] = that.size
                 seg['direction'] = that.direction
                 if (that.ifHaveSingle) {

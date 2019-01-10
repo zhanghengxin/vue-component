@@ -1,15 +1,4 @@
-
-$css-prefix-button: $css-prefix + 'btn';
-
-// input,
-// button,
-// select,
-// textarea {
-//   outline: none;
-// }
-button{
-    cursor: pointer;
-}
+$css-prefix-button: $css-prefix + 'button';
 
 @keyframes rotating {
   0% {
@@ -26,141 +15,104 @@ button{
   display: inline-block;
 }
 
-.#{$css-prefix-button}-normal {
-  min-width: 90px;
-  height: 36px;
-  border-radius: 10px;
-  color: $Sub;
-}
-
-.#{$css-prefix-button}-small {
-  min-width: 80px;
-  height: 30px;
-  border-radius: 10px;
+.#{$css-prefix-button} {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  user-select: none;
+  padding: 5px 15px 6px;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 4px;
+  transition: color .2s linear, background-color .2s linear, border .2s linear, box-shadow .2s linear;
+  background-color: #fff;
   box-sizing: border-box;
-}
-.#{$css-prefix-button}-big {
-  min-width: 100px;
-  height: 40px;
-  border-radius: 10px;
-  box-sizing: border-box;
-}
-
-/* 正常水波纹 */
-.#{$css-prefix-button}-normal {
-  border-color: $Sub;
-  color: $Sub;
-  background-color: $white;
   position: relative;
+  & span {
+    vertical-align: middle;
+  }
+  &-normal {
+    height: 32px;
+  }
+  &-small {
+    height: 24px;
+  }
+  &-big {
+    height: 40px;
+  }
+  &-default {
+    color: $Content;
+    border-color: $Border;
+    background: white;
+    &:hover {
+      color: $LightPrimary;
+      border-color: $LightPrimary;
+    }
+    &:focus {
+      color: $Primary;
+      border-color: $Primary;
+    }
+  }
+  &-primary {
+    color: white;
+    border-color: $Primary;
+    background-color: $Primary;
+    &:hover {
+      background-color: $LightPrimary;
+      border-color: $LightPrimary;
+    }
+    &:focus {
+      background-color: $DarkPrimary;
+      border-color: $DarkPrimary;
+    }
+  }
+  &-success {
+    color: white;
+    border-color: $Success;
+    background-color: $Success;
+    &:hover {
+      background-color: lighten($Success, 10%);
+      border-color: lighten($Success, 10%);
+    }
+    &:focus {
+      background-color: darken($Success, 10%);
+      border-color: darken($Success, 10%);
+    }
+  }
+  &-warning {
+    color: white;
+    border-color: $Warning;
+    background-color: $Warning;
+    &:hover {
+      background-color: lighten($Warning, 10%);
+      border-color: lighten($Warning, 10%);
+    }
+    &:focus {
+      background-color: darken($Warning, 10%);
+      border-color: darken($Warning, 10%);
+    }
+  }
+  &-error {
+    color: white;
+    border-color: $Error;
+    background-color: $Error;
+    &:hover {
+      background-color: lighten($Error, 10%);
+      border-color: lighten($Error, 10%);
+    }
+    &:focus {
+      background-color: darken($Error, 10%);
+      border-color: darken($Error, 10%);
+    }
+  }
 }
-.#{$css-prefix-button}-normal:hover{
-   box-shadow: 0px 0px  3px $Sub;
 
-}
-.#{$css-prefix-button}-normal:after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    pointer-events: none;
-    background-color: $Sub;
-    border-radius: 10px;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    opacity: 0;
-    transition: all .3s;
-}
-.#{$css-prefix-button}-normal:focus{
-    outline: none;
-}
-.#{$css-prefix-button}-normal:active:after {
-    opacity: .3;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transition: 0s;
-}
-
-/* 蓝色水波纹 */
-.#{$css-prefix-button}-primary {
-  border-color: $Info;
-  color: $white;
-  background-color: $Info;
-  position: relative;
-}
-.#{$css-prefix-button}-primary:hover {
-  box-shadow: 0px 0px 4px $Info;
-}
-.#{$css-prefix-button}-primary:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Info;
-  border-radius: 10px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-.#{$css-prefix-button}-primary:focus {
-  outline: none;
-}
-.#{$css-prefix-button}-primary:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
-
-/* 绿色水波纹 */
-.#{$css-prefix-button}-success {
-  background-color: $Success;
-  border-color: $Success;
-  color: $white;
-  position: relative;
-}
-
-.#{$css-prefix-button}-success:hover {
-  box-shadow: 0px 0px 5px $Success;
-}
-.#{$css-prefix-button}-success:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Success;
-  border-radius: 10px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-.#{$css-prefix-button}-success:focus {
-  outline: none;
-}
-.#{$css-prefix-button}-success:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
 /* 黄色水波纹 */
 .#{$css-prefix-button}-warning {
   background-color: $Warning;
@@ -168,37 +120,15 @@ button{
   color: $white;
   position: relative;
 }
+
 .#{$css-prefix-button}-warning:hover {
   box-shadow: 0px 0px 5px $Warning;
 }
 
-.#{$css-prefix-button}-warning:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Warning;
-  border-radius: 10px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
 .#{$css-prefix-button}-warning:focus {
   outline: none;
 }
-.#{$css-prefix-button}-warning:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
+
 /* 红色水波纹 */
 .#{$css-prefix-button}-error {
   background-color: $Error;
@@ -210,42 +140,21 @@ button{
 .#{$css-prefix-button}-error:hover {
   box-shadow: 0px 0px 5px $Error;
 }
-.#{$css-prefix-button}-error:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color:  $Error;
-  border-radius: 10px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
+
 .#{$css-prefix-button}-error:focus {
   outline: none;
 }
-.#{$css-prefix-button}-error:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
 
 //圆角按钮
-.#{$css-prefix-button}-round{
-    border-radius: 20px;
+.#{$css-prefix-button}-round {
+  border-radius: 20px;
 }
+
 //圆角红色
 .#{$css-prefix-button}-error.#{$css-prefix-button}-round:hover {
   box-shadow: 0px 0px 5px $Error;
 }
+
 .#{$css-prefix-button}-error.#{$css-prefix-button}-round:after {
   content: "";
   display: block;
@@ -255,16 +164,18 @@ button{
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color:  $Error;
+  background-color: $Error;
   border-radius: 20px;
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
+
 .#{$css-prefix-button}-error.#{$css-prefix-button}-round:focus {
   outline: none;
 }
+
 .#{$css-prefix-button}-error.#{$css-prefix-button}-round:active:after {
   opacity: 0.3;
   top: 0;
@@ -273,10 +184,12 @@ button{
   bottom: 0;
   transition: 0s;
 }
+
 //圆角绿色
 .#{$css-prefix-button}-success.#{$css-prefix-button}-round:hover {
   box-shadow: 0px 0px 5px $Success;
 }
+
 .#{$css-prefix-button}-success.#{$css-prefix-button}-round:after {
   content: "";
   display: block;
@@ -286,16 +199,18 @@ button{
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color:  $Success;
+  background-color: $Success;
   border-radius: 20px;
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
+
 .#{$css-prefix-button}-success.#{$css-prefix-button}-round:focus {
   outline: none;
 }
+
 .#{$css-prefix-button}-success.#{$css-prefix-button}-round:active:after {
   opacity: 0.3;
   top: 0;
@@ -304,11 +219,13 @@ button{
   bottom: 0;
   transition: 0s;
 }
+
 //圆角黄色
 
 .#{$css-prefix-button}-warning.#{$css-prefix-button}-round:hover {
   box-shadow: 0px 0px 5px $Warning;
 }
+
 .#{$css-prefix-button}-warning.#{$css-prefix-button}-round:after {
   content: "";
   display: block;
@@ -318,16 +235,18 @@ button{
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color:  $Warning;
+  background-color: $Warning;
   border-radius: 20px;
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
+
 .#{$css-prefix-button}-warning.#{$css-prefix-button}-round:focus {
   outline: none;
 }
+
 .#{$css-prefix-button}-warning.#{$css-prefix-button}-round:active:after {
   opacity: 0.3;
   top: 0;
@@ -341,6 +260,7 @@ button{
 .#{$css-prefix-button}-primary.#{$css-prefix-button}-round:hover {
   box-shadow: 0px 0px 5px $Info;
 }
+
 .#{$css-prefix-button}-primary.#{$css-prefix-button}-round:after {
   content: "";
   display: block;
@@ -350,16 +270,18 @@ button{
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color:  $Info;
+  background-color: $Info;
   border-radius: 20px;
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
+
 .#{$css-prefix-button}-primary.#{$css-prefix-button}-round:focus {
   outline: none;
 }
+
 .#{$css-prefix-button}-primary.#{$css-prefix-button}-round:active:after {
   opacity: 0.3;
   top: 0;
@@ -374,6 +296,7 @@ button{
 .#{$css-prefix-button}-normal.#{$css-prefix-button}-round:hover {
   box-shadow: 0px 0px 5px $Sub;
 }
+
 .#{$css-prefix-button}-normal.#{$css-prefix-button}-round:after {
   content: "";
   display: block;
@@ -383,16 +306,18 @@ button{
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color:  $Sub;
+  background-color: $Sub;
   border-radius: 20px;
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
+
 .#{$css-prefix-button}-normal.#{$css-prefix-button}-round:focus {
   outline: none;
 }
+
 .#{$css-prefix-button}-normal.#{$css-prefix-button}-round:active:after {
   opacity: 0.3;
   top: 0;
@@ -402,15 +327,17 @@ button{
   transition: 0s;
 }
 
-.#{$css-prefix-button}-circle{
-    min-width: 50px;
-    min-height: 50px;
-    border-radius: 25px;
+.#{$css-prefix-button}-circle {
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 25px;
 }
+
 //圆角红色
 .#{$css-prefix-button}-error.#{$css-prefix-button}-circle:hover {
   box-shadow: 0px 0px 5px $Error;
 }
+
 .#{$css-prefix-button}-error.#{$css-prefix-button}-circle:after {
   content: "";
   display: block;
@@ -420,16 +347,18 @@ button{
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color:  $Error;
+  background-color: $Error;
   border-radius: 50px;
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
+
 .#{$css-prefix-button}-error.#{$css-prefix-button}-circle:focus {
   outline: none;
 }
+
 .#{$css-prefix-button}-error.#{$css-prefix-button}-circle:active:after {
   opacity: 0.3;
   top: 0;
@@ -438,10 +367,12 @@ button{
   bottom: 0;
   transition: 0s;
 }
+
 //圆角绿色
 .#{$css-prefix-button}-success.#{$css-prefix-button}-circle:hover {
   box-shadow: 0px 0px 5px $Success;
 }
+
 .#{$css-prefix-button}-success.#{$css-prefix-button}-circle:after {
   content: "";
   display: block;
@@ -451,16 +382,18 @@ button{
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color:  $Success;
+  background-color: $Success;
   border-radius: 50px;
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
+
 .#{$css-prefix-button}-success.#{$css-prefix-button}-circle:focus {
   outline: none;
 }
+
 .#{$css-prefix-button}-success.#{$css-prefix-button}-circle:active:after {
   opacity: 0.3;
   top: 0;
@@ -469,11 +402,13 @@ button{
   bottom: 0;
   transition: 0s;
 }
+
 //圆角黄色
 
 .#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:hover {
   box-shadow: 0px 0px 5px $Warning;
 }
+
 .#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:after {
   content: "";
   display: block;
@@ -483,16 +418,18 @@ button{
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color:  $Warning;
+  background-color: $Warning;
   border-radius: 50px;
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
+
 .#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:focus {
   outline: none;
 }
+
 .#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:active:after {
   opacity: 0.3;
   top: 0;
@@ -506,6 +443,7 @@ button{
 .#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:hover {
   box-shadow: 0px 0px 5px $Info;
 }
+
 .#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:after {
   content: "";
   display: block;
@@ -515,16 +453,18 @@ button{
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color:  $Info;
+  background-color: $Info;
   border-radius: 50px;
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
+
 .#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:focus {
   outline: none;
 }
+
 .#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:active:after {
   opacity: 0.3;
   top: 0;
@@ -539,6 +479,7 @@ button{
 .#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:hover {
   box-shadow: 0px 0px 5px $Sub;
 }
+
 .#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:after {
   content: "";
   display: block;
@@ -548,16 +489,18 @@ button{
   right: -10px;
   bottom: -10px;
   pointer-events: none;
-  background-color:  $Sub;
+  background-color: $Sub;
   border-radius: 50px;
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
+
 .#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:focus {
   outline: none;
 }
+
 .#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:active:after {
   opacity: 0.3;
   top: 0;
@@ -567,10 +510,11 @@ button{
   transition: 0s;
 }
 
-.#{$css-prefix-button}-plain{
-    opacity: 0.7;
+.#{$css-prefix-button}-plain {
+  opacity: 0.7;
 }
-.#{$css-prefix-button}-disabled{
-    cursor:not-allowed;
-    opacity: 0.3;
+
+.#{$css-prefix-button}-disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
 }

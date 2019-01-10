@@ -18,8 +18,12 @@ $prefix-table: $css-prefix + 'table';
       text-align: center;
     }
   }
-  &-tip table td {
-    text-align: center;
+  &-tip {
+    overflow-x: auto;
+    overflow-y: hidden;
+    table td {
+      text-align: center;
+    }
   }
   &-header {
     overflow: hidden;
@@ -75,17 +79,21 @@ $prefix-table: $css-prefix + 'table';
     word-break: break-all;
     box-sizing: border-box;
   }
-  &-row-hover {
+  &-stripe tr:nth-child(2n) td{
+    background-color: $Background;
+  }
+  &-stripe &-body  &-row-hover, &-stripe &-body &-row-highlight {
     td {
-      background: $Background;
+      background: lighten($LightPrimary, 30%);
+    }
+  }
+  &-row-hover, &-row-highlight {
+    td {
+      background: lighten($LightPrimary, 30%);
     }
   }
   &-border td, &-border th {
     border-right: 1px solid $Border;
-  }
-
-  &-stripe &-body tr:nth-child(2n) td, &-stripe &-fixed-body tr:nth-child(2n) td {
-    background-color: $Background;
   }
   &-overflowY {
     overflow-y: scroll;
