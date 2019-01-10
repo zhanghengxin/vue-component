@@ -55,6 +55,11 @@
                 :fixed-columns="rightFixedColumns"
             >
             </table-fixed>
+            <div
+                :class="[preCls + '-fixed-right-header']"
+                :style="fixedRightHeaderStyle"
+                v-if="rightFixedColumns.length">
+            </div>
         </div>
     </div>
 </template>
@@ -62,7 +67,7 @@
 <script>
 import { prefix } from '../../utils/common'
 import { deepCopy } from '../../utils/assist'
-import { getStyle, getScrollBarSize } from '../../utils/dom'
+import { getStyle, getScrollBarSize, on } from '../../utils/dom'
 import tableHead from './table-head'
 import tableBody from './table-body'
 import tableFixed from './table-fixed'
@@ -82,6 +87,7 @@ export default {
             cloneColumns: [],
             tableWidth: 0,
             bodyHeight: 0,
+            headerHeight: 0,
             horizontalScroll: false,
             verticalScroll: false,
             scrollBarWidth: getScrollBarSize()
@@ -137,6 +143,7 @@ export default {
     },
     mounted () {
         this.handleResize()
+        on(window, 'resize', this.handleResize)
     },
     watch: {
         data: {
@@ -145,9 +152,6 @@ export default {
                 this.formatData = this.buildData()
             },
             deep: true
-        },
-        horizontalScroll () {
-            this.handleResize()
         },
         columns: {
             handler () {
@@ -199,7 +203,7 @@ export default {
         bodyStyle () {
             let style = {}
             if (this.tableWidth !== 0) {
-                let width = this.tableWidth - (this.horizontalScroll ? this.scrollBarWidth : 0)
+                let width = this.tableWidth - (this.verticalScroll ? this.scrollBarWidth : 0)
                 style.width = `${width}px`
             }
             return style
@@ -224,6 +228,17 @@ export default {
                 let height = this.bodyHeight - (this.horizontalScroll ? this.scrollBarWidth : 0)
                 style.height = `${height}px`
             }
+            return style
+        },
+        fixedRightHeaderStyle () {
+            let style = {}
+            let width = 0
+            let height = this.headerHeight + 1
+            if (this.verticalScroll) {
+                width = this.scrollBarWidth
+            }
+            style.width = `${width}px`
+            style.height = `${height}px`
             return style
         }
     },
@@ -261,7 +276,7 @@ export default {
             let columnWidth = 0
             // 固定宽度
             let fixedWidth = hasWidthList.map(cell => cell.width).reduce((a, b) => a + b, 0)
-            let adaptiveWidth = tableWidth - fixedWidth - (this.horizontalScroll ? this.scrollBarWidth : 0)
+            let adaptiveWidth = tableWidth - fixedWidth - (this.verticalScroll ? this.scrollBarWidth : 0) - 1
             let adaptiveLength = noWidthList.length
             // 可用宽度
             if (adaptiveWidth > 0 && adaptiveLength > 0) {
@@ -270,19 +285,20 @@ export default {
             for (let i = 0; i < this.cloneColumns.length; i++) {
                 let column = this.cloneColumns[i]
                 if (column.width) {
-                    column._width = column.width
+                    this.$set(column, '_width', column.width)
                 } else {
-                    column._width = columnWidth
+                    this.$set(column, '_width', columnWidth)
                 }
             }
             // 总宽度
-            this.tableWidth = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0) + (this.horizontalScroll ? this.scrollBarWidth : 0)
+            this.tableWidth = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0) + (this.verticalScroll ? this.scrollBarWidth : 0)
             this.scrollReckon()
         },
         scrollReckon () {
             if (this.height) {
                 this.$nextTick(() => {
                     const headerHeight = parseInt(getStyle(this.$refs.header, 'height')) || 0
+                    this.headerHeight = headerHeight
                     this.bodyHeight = this.height - headerHeight
                     this.bodyScrollReckon()
                 })
@@ -299,7 +315,7 @@ export default {
                 let bodyContentEl = this.$refs.body.$el
                 let bodyEl = bodyContentEl.parentElement
                 let bodyContentHeight = bodyContentEl.offsetHeight
-                this.horizontalScroll = bodyEl.offsetWidth < bodyContentEl.offsetWidth
+                this.horizontalScroll = bodyEl.offsetWidth < bodyContentEl.offsetWidth + (this.verticalScroll ? this.scrollBarWidth : 0)
                 this.verticalScroll = this.bodyHeight ? bodyContentHeight > this.bodyHeight : false
                 if (this.verticalScroll) {
                     bodyEl.classList.add(this.preCls + '-overflowY')
