@@ -38,9 +38,6 @@ export default {
     components: {
         tableHead, tableBody
     },
-    mounted () {
-        // console.log(this.$children[0].$options.name, 'fixed')
-    },
     computed: {
         wrapCls () {
             return [
@@ -53,7 +50,7 @@ export default {
             let width = 0
             this.fixedColumns.forEach((col) => {
                 if (col.fixed && col.fixed === this.fixed) {
-                    width += col.width
+                    width += col._width
                 }
             })
             if (this.fixed === 'right') {

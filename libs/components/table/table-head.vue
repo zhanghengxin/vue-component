@@ -2,7 +2,7 @@
     <table cellspacing="0" cellpadding="0" border="0" :style="styles">
         <colgroup>
             <col v-for="(column, index) in columns" :key="index" :width="setCellWidth(column)">
-            <col v-if="$parent.horizontalScroll" :width="$parent.scrollBarWidth"/>
+            <col v-if="$parent.verticalScroll" :width="$parent.scrollBarWidth"/>
         </colgroup>
         <thead>
         <tr>
@@ -38,7 +38,7 @@
                     </template>
                 </div>
             </th>
-            <th v-if="$parent.horizontalScroll" rowspan=1></th>
+            <th v-if="$parent.verticalScroll" rowspan=1></th>
         </tr>
         </thead>
     </table>

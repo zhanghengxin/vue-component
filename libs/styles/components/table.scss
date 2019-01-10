@@ -13,7 +13,7 @@ $prefix-table: $css-prefix + 'table';
     color: $Content;
     font-size: 12px;
     background-color: $Background;
-    box-sizing: border-box;
+    box-sizing: content-box;
     .#{$prefix-table}-column-center {
       text-align: center;
     }
@@ -79,10 +79,10 @@ $prefix-table: $css-prefix + 'table';
     word-break: break-all;
     box-sizing: border-box;
   }
-  &-stripe tr:nth-child(2n) td{
+  &-stripe tr:nth-child(2n) td {
     background-color: $Background;
   }
-  &-stripe &-body  &-row-hover, &-stripe &-body &-row-highlight {
+  &-stripe &-body &-row-hover, &-stripe &-body &-row-highlight {
     td {
       background: lighten($LightPrimary, 30%);
     }
@@ -118,6 +118,14 @@ $prefix-table: $css-prefix + 'table';
     left: auto;
     right: 0;
     box-shadow: -2px 0 6px -2px rgba(0, 0, 0, .2);
+    &-header {
+      position: absolute;
+      top: -1px;
+      right: 0;
+      background-color: $Background;
+      border-top: 1px solid $Border;
+      border-bottom: 1px solid $Border;
+    }
   }
   &-sort {
     display: inline-block;
