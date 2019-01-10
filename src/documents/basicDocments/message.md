@@ -9,7 +9,6 @@
     <div class="example-box">
         <div style='margin-bottom: 10px;'>
             <b-button
-                type='white'
                 @on-click="handleClick">
                 信息
             </b-button>
@@ -50,7 +49,6 @@
 ```html
     <div>
         <b-button
-            type='white'
             @on-click="handleClick">
             信息
         </b-button>
@@ -82,7 +80,6 @@
     <div class="example-box">
         <div style='margin-bottom: 10px;'>
             <b-button
-                type='white'
                 @on-click="handleClick('info')">
                 信息
             </b-button>
@@ -125,22 +122,18 @@
 ```html
     <div>
         <b-button
-            type='white'
             @on-click="handleClick('info')">
             信息
         </b-button>
         <b-button
-            type='white'
             @on-click="handleClick('success')">
             成功
         </b-button>
         <b-button
-            type='white'
             @on-click="handleClick('error')">
             错误
         </b-button>
         <b-button
-            type='white'
             @on-click="handleClick('warning')">
             警告
         </b-button>
@@ -173,7 +166,6 @@
     <div class="example-box">
         <div style='margin-bottom: 10px;'>
             <b-button
-                type='white'
                 @on-click="handleClickDruation">
                 信息
             </b-button>
@@ -217,7 +209,6 @@
     <div class="example-box">
         <div style='margin-bottom: 10px'>
             <b-button
-                type='white'
                 @on-click="handleClickShowClose">
                 信息
             </b-button>
@@ -228,7 +219,6 @@
 ```html
     <div>
         <b-button
-            type='white'
             @on-click="handleClick">
             信息
         </b-button>

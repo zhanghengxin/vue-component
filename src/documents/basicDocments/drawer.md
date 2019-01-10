@@ -47,7 +47,7 @@
 
 <div class="example-box">
         <div>
-            <b-button type="typrimary"  @on-click="change" >默认抽屉</b-button>
+            <b-button type="primary"  @on-click="change" >默认抽屉</b-button>
                <b-drawer :isshow="isShow" @drawerchange='change1'>
                  <p>产品研发中心</p>
                  <p>移动前端技术部</p>
@@ -60,7 +60,7 @@
 ::: code
 ```html
     <div>
-        <b-button type="tynormal"  @on-click="change" >默认抽屉</b-button>
+        <b-button  @on-click="change" >默认抽屉</b-button>
         <b-drawer :isshow="isShow" @drawerchange='close'>
             <p>产品研发中心</p>
             <p>移动前端技术部</p>
@@ -88,7 +88,7 @@
 :::
 
 <div>
-<b-button type="tysuccess"  @on-click="changetwo" >底部抽屉</b-button>
+<b-button type="success"  @on-click="changetwo" >底部抽屉</b-button>
 <b-drawer :local='local1' :isshow="isShowtwo" @drawerchange='changetwo'>
     <p>产品研发中心</p>
     <p>移动前端技术部</p>
@@ -100,7 +100,7 @@
 ::: code
 ```html
     <div>
-        <b-button type="tynormal" @on-click="change">默认抽屉</b-button>
+        <b-button type="normal" @on-click="change">默认抽屉</b-button>
         <b-drawer :local='local' :isshow="isShow" @drawerchange='close'>
             <p>产品研发中心</p>
             <p>移动前端技术部</p>
@@ -128,7 +128,7 @@
     </script>
 :::
 <div>
-<b-button type="tywarning"  @on-click="changew" >左边抽屉</b-button>
+<b-button type="warning"  @on-click="changew" >左边抽屉</b-button>
 <b-drawer :local='localw' :isshow="isShoww" @drawerchange='changebw'>
     <p>产品研发中心</p>
     <p>移动前端技术部</p>
@@ -140,7 +140,7 @@
 ::: code
 ```html
     <div>
-        <b-button type="tywarning" @on-click="change">左边抽屉</b-button>
+        <b-button type="warning" @on-click="change">左边抽屉</b-button>
         <b-drawer :local='local' :isshow="isShow" @drawerchange='close'>
             <p>产品研发中心</p>
             <p>移动前端技术部</p>
@@ -169,7 +169,7 @@
 
 :::
 <div>
-    <b-button type="tyerror"  @on-click="changet" >上边抽屉</b-button>
+    <b-button type="error"  @on-click="changet" >上边抽屉</b-button>
     <b-drawer :local='localt' :isshow="isShowt" @drawerchange='changebt'>
         <p>产品研发中心</p>
         <p>移动前端技术部</p>
@@ -181,7 +181,7 @@
 ::: code
 ```html
     <div>
-        <b-button type="tywarning" @on-click="change">左边抽屉</b-button>
+        <b-button type="warning" @on-click="change">左边抽屉</b-button>
         <b-drawer :local='local' :isshow="isShow" @drawerchange='close'>
             <p>产品研发中心</p>
             <p>移动前端技术部</p>

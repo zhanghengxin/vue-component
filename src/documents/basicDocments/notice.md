@@ -8,7 +8,7 @@
 <div class="example">
   <div class="example-box">
       <div>
-          <b-button type="normal" @on-click="normal">默认通知</b-button>
+          <b-button @on-click="normal">默认通知</b-button>
           <b-button type="success" @on-click="success">成功通知</b-button>
           <b-button type="warning"
           @on-click="warning">警告警告</b-button>
@@ -49,7 +49,7 @@
 ::: code
 ```html
     <div>
-      <b-button type="normal" @on-click="normal">默认通知</b-button>
+      <b-button @on-click="normal">默认通知</b-button>
       <b-button type="success" @on-click="success">成功通知</b-button>
       <b-button type="warning" @on-click="warning">警告警告</b-button>
       <b-button type="error" @on-click="error">失败通知</b-button>
