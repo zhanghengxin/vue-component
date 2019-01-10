@@ -44,6 +44,7 @@
         <div style="width:400px;height:800px">
             <b-menu
                 theme="light"
+                width="300px"
                 ref="menu"
                 :activeName="activeName"
                 :openNames="openName"
@@ -89,6 +90,7 @@
             <b-menu
                 theme="light"
                 ref="menu"
+                width="500px"
                 mode="horizontal"
                 :router="true"
                 trigger="hover"

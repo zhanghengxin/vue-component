@@ -242,7 +242,7 @@
 | active-name  | 激活菜单的 name 值   | String / Number  |          |      |
 | open-names   | 展开的 Submenu 的 name 集合 | Array  |          |   []   |
 | accordion     | 是否开启手风琴模式，开启后每次至多展开一个子菜单 | Boolean  |    ```true```、```false```      |   false   |
-| width    | 导航菜单的宽度 | String / Number  |          |   -   |
+| width    | 导航菜单的宽度,垂直方向时可以使用 | String / Number  |          |   -   |
 | router    | 是否使用 | Boolean  |          |   -   |
 | trigger   | 子菜单打开的触发方式 | String |     ```hover``` / ```click```     |   click   |
 

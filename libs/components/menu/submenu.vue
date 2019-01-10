@@ -100,11 +100,10 @@ export default {
         handleMouseenter () {
             if (this.disabled) return
             if (this.trigger === 'click') return
-
             clearTimeout(this.timeout)
             this.timeout = setTimeout(() => {
                 this.rootMenu.openMenu(this.name, this.namePath)
-            }, 250)
+            }, 100)
         },
         handleMouseleave () {
             if (this.disabled) return

@@ -118,7 +118,6 @@ export default {
             delete this.submenus[item.name]
         },
         openMenu (name, namePath) {
-            console.log('openMenu')
             let openedMenus = this.openedMenus
             if (openedMenus.indexOf(name) !== -1) return
             // 将不在该菜单路径下的其余菜单收起
@@ -131,7 +130,6 @@ export default {
             this.openedMenus.push(name)
         },
         closeMenu (name) {
-            console.log('closeMenu')
             const i = this.openedMenus.indexOf(name)
             if (i !== -1) {
                 this.openedMenus.splice(i, 1)
@@ -139,7 +137,7 @@ export default {
         },
         handleSubmenuClick (submenu) {
             const { name, namePath } = submenu
-            let isOpened = this.openedMenus.includes(name)
+            let isOpened = ~this.openedMenus.indexOf(name)
             if (isOpened) {
                 this.closeMenu(name)
             } else {
@@ -158,7 +156,6 @@ export default {
             if (this.mode === 'horizontal' || this.collapse) {
                 this.openedMenus = []
             }
-            console.log('item', item)
             if (this.router) {
                 this.routeToItem(item, (error) => {
                     this.currentActiveName = oldActiveName

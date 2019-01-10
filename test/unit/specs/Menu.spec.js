@@ -5,10 +5,19 @@
  */
 // import Steps from '&/components/steps'
 // import Step from '&/components/step'
-import { createTest, createVue, destroyVM } from '../utils'
+import { createTest, createVue, destroyVM, triggerEvent } from '../utils'
 import {prefix} from '&/utils/common'
 const menu = `${prefix}menu`
 const menuItem = `${prefix}menu-item`
+const submenu = `${prefix}submenu`
+
+const menuCss = `.${prefix}menu`
+const menuHorizontalCss = `${prefix}menu-horizontal`
+const menuOpenCss = `.${prefix}menu-opened`
+const menuItemCss = `.${prefix}menu-item`
+const subMenuCss = `.${prefix}menu-submenu`
+const subMenuTitleCss = `.${prefix}menu-submenu-title`
+const iconCss = `.${prefix}icon`
 
 describe('Menu组件', () => {
     let vm
@@ -22,7 +31,7 @@ describe('Menu组件', () => {
             template: `
                 <div>
                     <${menu} >
-                        <${menuItem} name="1">1</${menuItem}>
+                        <${menuItem} name="1" iconType="caiji">1</${menuItem}>
                         <${menuItem} name="2">2</${menuItem}>
                         <${menuItem} name="3">3</${menuItem}>
                     </${menu}>
@@ -35,89 +44,147 @@ describe('Menu组件', () => {
             }
         }, true)
         const Elm = vm.$el
-        setTimeout(() => {
+        vm.$nextTick(() => {
             expect(Elm).to.exist
             done()
         }, 100)
     })
 
-    // // 测试是否创建成功
-    // it('ifExist', done => {
-    //     vm = createVue({
-    //         template: `
-    //             <div>
-    //                 <${Steps} current="1">
-    //                     <${Step} ></${Step}>
-    //                     <${Step} ></${Step}>
-    //                     <${Step} ></${Step}>
-    //                     <${Step} ></${Step}>
-    //                 </${Steps}>
-    //             </div>
-    //         `,
-    //         data () {
-    //             return {
-    //
-    //             }
-    //         }
-    //     }, true)
-    //     const Elm = vm.$el
-    //     setTimeout(() => {
-    //         expect(Elm).to.exist
-    //         done()
-    //     }, 100)
-    // })
+    // 测试size 和 current的属性和status
+    it('iconType', done => {
+        vm = createVue({
+            template: `
+                <div>
+                    <${menu} >
+                        <${menuItem} name="1" iconType="caiji">1</${menuItem}>
+                        <${menuItem} name="2">2</${menuItem}>
+                        <${menuItem} name="3">3</${menuItem}>
+                    </${menu}>
+                </div>
+            `,
+            data () {
+                return {
 
-    // // 测试size 和 current的属性和status
-    // it('size current', done => {
-    //     vm = createVue({
-    //         template: `
-    //             <div>
-    //                 <${Steps} current='2' size='small'>
-    //                     <${Step} title='已完成' content='content'></${Step}>
-    //                     <${Step} title='正进行' content='content'></${Step}>
-    //                     <${Step} title='在等待' content='content'></${Step}>
-    //                 </${Steps}>
-    //             </div>
-    //         `,
-    //         data () {
-    //             return {
-    //
-    //             }
-    //         }
-    //     }, true)
-    //     const Elm = vm.$el
-    //     setTimeout(() => {
-    //         expect(Elm.querySelector(`.${prefixCls}-area`).classList.contains(`${prefixCls}-area-small`)).to.be.true
-    //         expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item`)[2].classList.contains(`${prefixCls}-status-process`)).to.be.true
-    //         done()
-    //     }, 100)
-    // })
-    //
-    // // 测试size 和 current的属性和status
-    // it('status content title icon', done => {
-    //     vm = createVue({
-    //         template: `
-    //             <div>
-    //                 <${Steps} current='2' size='small'>
-    //                     <${Step} title='已完成' icon="fasong" content='content1' status="wait"></${Step}>
-    //                     <${Step} title='正进行' icon="dayin" content='content2' status="process"></${Step}>
-    //                     <${Step} title='在等待' icon="chakan" content='content3' status="error"></${Step}>
-    //                 </${Steps}>
-    //             </div>
-    //         `,
-    //         data () {
-    //             return {
-    //
-    //             }
-    //         }
-    //     }, true)
-    //     const Elm = vm.$el
-    //     setTimeout(() => {
-    //         expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item`)[0].classList.contains(`${prefixCls}-status-wait`)).to.be.true
-    //         expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item .${prefixCls}-content`)[1].textContent).to.equal('content2')
-    //         expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item .${prefixCls}-title`)[2].textContent).to.equal('在等待')
-    //         expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item .${prefixCls}-point`)[0].querySelector('i').classList.contains(`bw-fasong`)).to.be.true
-    //         done()
-    //     }, 100)
-    // })
+                }
+            }
+        }, true)
+        const Elm = vm.$el
+        vm.$nextTick(() => {
+            expect(Elm.querySelectorAll(`${menuCss} ${menuItemCss} ${iconCss}`)[0].classList.contains(`bw-caiji`)).to.be.true
+            done()
+        }, 100)
+    })
+
+    // 测试size 和 current的属性和status
+    it('accordion:false open trigger:click', done => {
+        vm = createVue({
+            template: `
+                <div>
+                    <${menu} :accordion="false">
+                        <${submenu} name="1" >
+                            <template slot="title">
+                                处理中心1
+                            </template>
+                            <${menuItem} name="1-1" iconType="caiji">1</${menuItem}>
+                            <${menuItem} name="1-2">2</${menuItem}>
+                            <${menuItem} name="1-3">3</${menuItem}>
+                        </${submenu}>
+                        <${submenu} name="2" >
+                            <template slot="title">
+                                处理中心2
+                            </template>
+                            <${menuItem} name="2-1" iconType="caiji">1</${menuItem}>
+                            <${menuItem} name="2-2">2</${menuItem}>
+                            <${menuItem} name="2-3">3</${menuItem}>
+                        </${submenu}>
+                    </${menu}>
+                </div>
+            `,
+            data () {
+                return {
+
+                }
+            }
+        }, true)
+        const Elm = vm.$el
+        vm.$nextTick(() => {
+            let submenuList = Elm.querySelectorAll(`${menuCss} ${subMenuTitleCss}`)
+            submenuList[0].click()
+            submenuList[1].click()
+            vm.$nextTick(function () {
+                let submenuList2 = Elm.querySelectorAll(`${menuCss} ${menuOpenCss}`)
+                expect(submenuList2.length).to.equal(2)
+                done()
+            }, 200)
+        }, 100)
+    })
+
+    // 测试size 和 current的属性和status
+    it('accordion:true open trigger:hover', done => {
+        vm = createVue({
+            template: `
+                <div>
+                    <${menu} :accordion="true" trigger="hover">
+                        <${submenu} name="1" >
+                            <template slot="title">
+                                处理中心1
+                            </template>
+                            <${menuItem} name="1-1" iconType="caiji">1</${menuItem}>
+                            <${menuItem} name="1-2">2</${menuItem}>
+                            <${menuItem} name="1-3">3</${menuItem}>
+                        </${submenu}>
+                        <${submenu} name="2" >
+                            <template slot="title">
+                                处理中心2
+                            </template>
+                            <${menuItem} name="2-1" iconType="caiji">1</${menuItem}>
+                            <${menuItem} name="2-2">2</${menuItem}>
+                            <${menuItem} name="2-3">3</${menuItem}>
+                        </${submenu}>
+                    </${menu}>
+                </div>
+            `,
+            data () {
+                return {
+
+                }
+            }
+        }, true)
+        const Elm = vm.$el
+        vm.$nextTick(() => {
+            let submenuList = Elm.querySelectorAll(`${menuCss} ${subMenuCss}`)
+            triggerEvent(submenuList[0], 'mouseenter')
+            triggerEvent(submenuList[1], 'mouseenter')
+            setTimeout(function () {
+                let submenuList2 = Elm.querySelectorAll(`${menuCss} ${menuOpenCss}`)
+                expect(submenuList2.length).to.equal(1)
+                done()
+            }, 300)
+        })
+    })
+
+    // 测试mode
+    it('mode  horizontal', done => {
+        vm = createVue({
+            template: `
+                <div>
+                    <${menu} mode="horizontal">
+                        <${menuItem} name="1" iconType="caiji">1</${menuItem}>
+                        <${menuItem} name="2">2</${menuItem}>
+                        <${menuItem} name="3">3</${menuItem}>
+                    </${menu}>
+                </div>
+            `,
+            data () {
+                return {
+
+                }
+            }
+        }, true)
+        const Elm = vm.$el
+        vm.$nextTick(() => {
+            expect(Elm.querySelector(`${menuCss}`).classList.contains(`${menuHorizontalCss}`)).to.be.true
+            done()
+        }, 100)
+    })
 })
