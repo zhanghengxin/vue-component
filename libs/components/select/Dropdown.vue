@@ -70,7 +70,7 @@ export default {
                 })
             }
             if (this.$parent.$options.name === `${prefix}select`) {
-                this.width = this.$parent.$el.querySelector('.b-select-selection').clientWidth
+                this.width = this.$parent.$el.querySelector(`.${prefix}select-selection`).clientWidth
             }
         },
         destroy () {

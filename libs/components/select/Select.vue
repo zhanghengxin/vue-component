@@ -127,6 +127,10 @@ export default {
             type: String,
             default: 'name'
         },
+        nameInCode: {
+            type: Boolean,
+            default: false
+        },
         codeKey: {
             type: String,
             default: 'code'
@@ -335,7 +339,7 @@ export default {
             }).filter(Boolean)
         }
 
-        this.dropStyles = this.fixedInitDrop()
+        // this.dropStyles = this.fixedInitDrop()
     },
     methods: {
         clickOutside () {
@@ -366,7 +370,6 @@ export default {
                 this.toggleMenu()
             }
             this.broadcastPopperUpdate()
-            this.$emit('on-change', this.values)
         },
         getInitValue () { // []
             const {multiple, value} = this
@@ -446,15 +449,15 @@ export default {
             }
         },
         values (now, before) {
-            const {values, multiple, value, publicValue} = this
+            const {values, multiple, value, publicValue, nameInCode} = this
             const newValue = JSON.stringify(now)
             const oldValue = JSON.stringify(before)
-            const modelValue = values.length > 0 ? (multiple ? values.map(({code}) => code) : values[0].code) : (multiple ? [] : '')
-            const emitInput = newValue !== oldValue && modelValue !== value
+            const emitInput = newValue !== oldValue && publicValue !== value
             this.query = values.length > 0 ? (multiple ? '' : values[0].name) : ''
             if (emitInput) {
-                this.$emit('input', modelValue) // to update v-model
-                this.dispatch('FormItem', 'on-form-change', publicValue)
+                this.$emit('input', publicValue) // to update v-model
+                this.$emit('on-change', nameInCode ? values : publicValue)
+                this.dispatch('FormItem', 'on-form-change', nameInCode ? values : publicValue)
             }
         },
         isFocused (val) {

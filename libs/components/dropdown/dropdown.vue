@@ -1,126 +1,172 @@
 <template>
-  <div
-      :class="[prefixCls]"
-      v-click-outside="hide">
-      <div>
-          <slot></slot>
-      </div>
-      <slot name="list"></slot>
-  </div>
+    <div
+        :class="[prefixCls]"
+        v-click-outside="onClickoutside"
+        @mouseenter='handleMouseenter'
+        @mouseleave='handleMouseleave'
+        >
+        <div
+            ref='reference'
+            @click='handleClick'
+            @contextmenu.prevent="handleRightClick">
+            <slot></slot>
+        </div>
+        <transition name="slide">
+            <Drop
+                ref='drop'
+                v-show='currentShow'
+                :placement='placement'
+                @mouseenter.native='handleMouseenter'
+                @mouseleave.native='handleMouseleave'>
+                <slot name="list"></slot>
+            </Drop>
+        </transition>
+    </div>
 </template>
 
 <script>
+import Drop from '../select/Dropdown'
 import clickOutside from '../../utils/directives/clickOutside'
 import Emitter from '../../mixins/emitter'
 import { findComponentUpward } from '../../utils/utils'
-const prefixCls = 'b-dropdown'
+import { prefix } from '../../utils/common'
+const prefixCls = prefix + 'dropdown'
+
 export default {
-    name: 'BDropdown',
-    directives: {clickOutside},
-    mixins: [Emitter],
+    name: prefixCls,
+    directives: { clickOutside },
+    mixins: [ Emitter ],
+    components: { Drop },
     data () {
         return {
-            prefixCls: prefixCls,
-            show: false,
-            visible: false,
-            triggerElm: null,
-            dropdownElm: null
-        }
-    },
-    provide () {
-        return {
-            dropdown: this
+            prefixCls,
+            currentShow: this.show
         }
     },
     props: {
         trigger: {
-            type: String,
+            validator (value) {
+                return ['click', 'hover', 'custom', 'contextMenu'].indexOf(value) !== -1
+            },
             default: 'hover'
         },
         placement: {
-            type: String,
-            default: 'bottom-end'
+            validator (value) {
+                return ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end'].indexOf(value) !== -1
+            },
+            default: 'bottom-start'
         },
-        showTimeout: {
-            type: Number,
-            default: 300
-        },
-        hideTimeout: {
-            type: Number,
-            default: 200
+        show: {
+            type: Boolean,
+            default: false
         }
     },
-    mounted () {
-        this.$on('menu-item-click', this.handleMenuItemClick)
-        this.initEvent()
-        this.$on('on-haschild-click', () => {
-            this.$nextTick(() => {
-                this.visible = true
-            })
-        })
-        this.$on('on-hover-click', () => {
-            this.$nextTick(() => {
-                this.visible = false
-            })
-        })
-    },
     watch: {
-        visible (val) {
-            this.broadcast('b-dropdown-menu', 'visible', val)
-            this.$emit('visible-change', val)
+        show (val) {
+            this.currentShow = val
+        },
+        currentShow (val) {
+            if (val) {
+                this.$refs.drop.update()
+            } else {
+                this.$refs.drop.destroy()
+            }
+            this.$emit('on-visible-change', val)
         }
     },
     methods: {
+        handleClick () {
+            if (this.trigger === 'custom') return false
+            if (this.trigger !== 'click') {
+                return false
+            }
+            this.currentShow = !this.currentShow
+        },
+        handleRightClick () {
+            if (this.trigger === 'custom') return false
+            if (this.trigger !== 'contextMenu') {
+                return false
+            }
+            this.currentShow = !this.currentShow
+        },
+        handleMouseenter () {
+            if (this.trigger === 'custom') return false
+            if (this.trigger !== 'hover') {
+                return false
+            }
+            if (this.timeout) clearTimeout(this.timeout)
+            this.timeout = setTimeout(() => {
+                this.currentShow = true
+            }, 250)
+        },
+        handleMouseleave () {
+            if (this.trigger === 'custom') return false
+            if (this.trigger !== 'hover') {
+                return false
+            }
+            if (this.timeout) {
+                clearTimeout(this.timeout)
+                this.timeout = setTimeout(() => {
+                    this.currentShow = false
+                }, 150)
+            }
+        },
+        onClickoutside (e) {
+            this.handleClose()
+            this.handleRightClose()
+            if (this.currentShow) this.$emit('on-clickoutside', e)
+        },
+        handleClose () {
+            if (this.trigger === 'custom') return false
+            if (this.trigger !== 'click') {
+                return false
+            }
+            this.currentShow = false
+        },
+        handleRightClose () {
+            if (this.trigger === 'custom') return false
+            if (this.trigger !== 'contextMenu') {
+                return false
+            }
+            this.currentShow = false
+        },
         hasParent () {
-            const $parent = findComponentUpward(this, 'b-dropdown')
+            const $parent = findComponentUpward(this, prefixCls)
             if ($parent) {
                 return $parent
             } else {
                 return false
             }
-        },
-        showItem () {
-            if (this.triggerElm.disabled) {
-                return
-            }
-            this.visible = true
-            clearTimeout(this.timeout)
-            this.timeout = setTimeout(() => {
-                this.visible = true
-            }, this.showTimeout)
-        },
-        hide () {
-            if (this.triggerElm.disabled) {
-                return
-            }
-            clearTimeout(this.timeout)
-            this.timeout = setTimeout(() => {
-                this.visible = false
-            }, this.hideTimeout)
-        },
-        handleClick () {
-            if (this.visible) {
-                this.hide()
-            } else {
-                this.showItem()
-            }
-        },
-        handleMenuItemClick (command) {
-            this.$emit('command', command)
-        },
-        initEvent () {
-            let { trigger, showItem, hide, handleClick } = this
-            this.triggerElm = this.$slots.default[0].elm
-            let dropdownElm = this.dropdownElm = this.$slots.list[0].elm
-            if (trigger === 'hover') {
-                this.triggerElm.addEventListener('mouseenter', showItem)
-                this.triggerElm.addEventListener('mouseleave', hide)
-                dropdownElm.addEventListener('mouseenter', showItem)
-                dropdownElm.addEventListener('mouseleave', hide)
-            } else if (trigger === 'click') {
-                this.triggerElm.addEventListener('click', handleClick)
-            }
         }
+    },
+    mounted () {
+        this.$on('on-click', (key) => {
+            const $parent = this.hasParent()
+            if ($parent) $parent.$emit('on-click', key)
+        })
+        this.$on('on-hover-click', () => {
+            const $parent = this.hasParent()
+            if ($parent) {
+                this.$nextTick(() => {
+                    if (this.trigger === 'custom') return false
+                    this.currentShow = false
+                })
+                $parent.$emit('on-hover-click')
+            } else {
+                this.$nextTick(() => {
+                    if (this.trigger === 'custom') return false
+                    this.currentShow = false
+                })
+            }
+        })
+        this.$on('on-haschild-click', () => {
+            this.$nextTick(() => {
+                if (this.trigger === 'custom') return false
+                this.currentShow = true
+            })
+            const $parent = this.hasParent()
+            if ($parent) $parent.$emit('on-haschild-click')
+        })
     }
 }
 </script>

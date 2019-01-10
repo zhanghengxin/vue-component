@@ -6,8 +6,6 @@
 
 $css-prefix-select: $css-prefix+'select';
 $css-prefix-option: $css-prefix+'option';
-$css-prefix-drop: $css-prefix+'drop';
-$css-prefix-tag: $css-prefix+'tag';
 
 @mixin selectGroup() {
   display: table;
@@ -83,7 +81,6 @@ $css-prefix-tag: $css-prefix+'tag';
     display: table-cell;
     font-weight: normal;
     font-size: inherit;
-    padding: 4px 7px;
     color: $Content;
     text-align: center;
     white-space: nowrap;
@@ -101,6 +98,7 @@ $css-prefix-tag: $css-prefix+'tag';
     @include selectMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
 
     .#{$css-prefix-select}-label {
+      padding: 4px 7px;
       background-color: $Background;
       border-right: 1px solid $Border;
       border-bottom-left-radius: 4px;
@@ -235,21 +233,6 @@ $css-prefix-tag: $css-prefix+'tag';
   .#{$css-prefix-drop} {
     width: auto;
   }
-}
-
-//drop
-.#{$css-prefix-drop} {
-  width: inherit;
-  max-height: 200px;
-  overflow: auto;
-  margin: 5px 0;
-  padding: 5px 0;
-  background-color: $white;
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
-  position: absolute;
-  z-index: 900;
 }
 
 //option

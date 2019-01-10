@@ -47,8 +47,8 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value" placeholder="请输入..." /></b-input>
-            <b-input v-model="value0" placeholder="请输入..." :error='error'/></b-input>
+            <b-input v-model="value" placeholder="请输入..." style='width:200px' /></b-input>
+            <b-input v-model="value0" placeholder="请输入..." style='width:200px' :error='error'/></b-input>
         </div>
     </div>
 </div>
@@ -57,8 +57,8 @@
 ```html
 
     <template>
-        <b-input v-model="value" placeholder="请输入..." style='width:200px' /></b-input>
-        <b-input v-model="value0" placeholder="请输入..." style='width:200px' :error='error' /></b-input>
+        <b-input v-model="value" placeholder="请输入..." /></b-input>
+        <b-input v-model="value0" placeholder="请输入..." :error='error' /></b-input>
         <span>{{value}}</div>
     </template>
     <script>
@@ -173,8 +173,8 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" :icon='icon' :prefix='prefix' ></b-input>
-            <b-input v-model="value7" :icon='icon' :suffix='suffix' ></b-input>
+            <b-input v-model="value6" :icon='icon' :prefix='prefix'></b-input>
+            <b-input v-model="value7" :icon='icon' :suffix='suffix' :clearable='clearable'></b-input>
         </div>
     </div>
 </div>
