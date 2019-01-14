@@ -45,7 +45,7 @@
 
 ### 默认日期显示
 
-设置 v-model 绑定值 `date: new Date('2018-11-24')` 默认展示时间
+设置 v-model 绑定值 `date: 2018-11-24` 默认展示时间
 
 <div class='example'>
     <div class='example-box'>
@@ -61,7 +61,7 @@
         export default {
             data () {
                 return {
-                    date: new Date('2018-11-24')
+                    date: '2018-11-24'
                 }
             }
         }
@@ -265,12 +265,16 @@
         <div style='margin-bottom: 10px'>
             切换快捷方式：<b-switch @on-change="handleChangeLabelCuts"></b-switch>
         </div>
+        <div style='margin-bottom: 10px'>
+            切换确认按钮：<b-switch @on-change="handleChangeButton"></b-switch>
+        </div>
         <b-datepicker 
             v-model='label'
             :fixed='fixed'
             :width='400'
             :shortcuts='labelShorcuts'
             :labelText='labelText'
+            :confirm='confirmed'
             label>
         <b-datepicker>
     </div>
@@ -281,12 +285,19 @@
         <div style='margin-bottom: 10px'>
             切换Label属性：<b-switch @on-change="handleChange"></b-switch>
         </div>
+        <div style='margin-bottom: 10px'>
+            切换快捷方式：<b-switch @on-change="handleChangeLabelCuts"></b-switch>
+        </div>
+        <div style='margin-bottom: 10px'>
+            切换确认按钮：<b-switch @on-change="handleChangeButton"></b-switch>
+        </div>
         <b-datepicker 
             v-model='date'
             :labelText='labelText'
             :shortcuts='shortcuts'
             :fixed='fixed'
-            :width='400'
+            :width='1000'
+            :confirm='confirm'
             label>
         <b-datepicker>
     </div>
@@ -296,13 +307,20 @@
                 return {
                     date: '',
                     fixed: false,
-                    shortcuts: false
+                    shortcuts: false,
+                    confirm: false,
                     labelText: '发布日期'
                 }
             },
             methods: {
                 handleChange(val) {
                     this.fixed = val
+                },
+                handleChangeLabelCuts(val) {
+                    this.shortcuts = val
+                },
+                handleChangeButton(val) {
+                    this.confirm = val
                 }
             }
         }
@@ -317,7 +335,7 @@
             return {
                 date: '',
                 short: false,
-                date1: new Date('2018-11-24'),
+                date1: '2018-11-24',
                 year: '',
                 yearRange: '',
                 month: '',
@@ -331,6 +349,7 @@
                 fixed: false,
                 labelText: '发布日期',
                 labelShorcuts: false,
+                confirmed: false
             }
         },
         methods: {
@@ -351,6 +370,9 @@
             },
             handleChangeLabelCuts(val) {
                 this.labelShorcuts = val
+            },
+            handleChangeButton(val) {
+                this.confirmed = val
             }
         }
     }

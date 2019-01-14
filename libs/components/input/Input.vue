@@ -58,6 +58,7 @@
                 :readonly="readonly"
                 :autofocus="autofocus"
                 :type="type"
+                :autocomplete="autocomplete"
                 @change="handleChange"
                 @input="handleInput"
                 @focus="handleFocus"
@@ -97,7 +98,7 @@
 <script>
 import calcTextareaHeight from './calcTeatareaHeight.js'
 import { findComponentUpward } from '../../utils/assist'
-import { prefix } from '../../utils/common'
+import { prefix, oneOf } from '../../utils/common'
 import Emitter from '../../mixins/emitter'
 
 const prefixCls = prefix + 'input' // b-input
@@ -116,7 +117,7 @@ export default {
         },
         type: {
             validator (value) {
-                return ['text', 'textarea', 'password', 'url', 'email'].indexOf(value) !== -1
+                return oneOf(value, ['text', 'textarea', 'password', 'url', 'email'])
             },
             default: 'text'
         },
@@ -148,6 +149,13 @@ export default {
         spellcheck: {
             type: Boolean,
             default: false
+        },
+        autocomplete: {
+            type: String,
+            default: 'off',
+            validator (value) {
+                return oneOf(value, ['off', 'on'])
+            }
         },
         // 样式属性
         size: {

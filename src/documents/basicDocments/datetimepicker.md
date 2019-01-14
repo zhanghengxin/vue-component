@@ -47,7 +47,7 @@
 
 ### 默认日期显示
 
-设置 v-model 绑定值 `date: new Date('2018-11-24 18:00:01')` 默认展示时间
+设置 v-model 绑定值 `date: 2018-11-24 18:00:01` 默认展示时间
 
 <div class='example'>
     <div class='example-box'>
@@ -63,7 +63,7 @@
         export default {
             data () {
                 return {
-                    date: new Date('2018-11-24 18:00:01')
+                    date: '2018-11-24 18:00:01'
                 }
             }
         }
@@ -125,7 +125,7 @@
             return {
                 date: '',
                 short: false,
-                date1: new Date('2018-11-24 18:00:01'),
+                date1: '2018-11-24 18:00:01',
                 daterange: '',
                 shortcutsdate: '',
                 shortcuts: false,

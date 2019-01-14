@@ -1,18 +1,17 @@
 import Panel from '../panel/panel'
+import bButton from '../../button/Button'
 import { oneOf, prefix } from '../../../utils/common'
 import clickoutside from '../../../utils/directives/clickOutside'
-import { isValidDate, isValidRange, isDateObject, formatDate, parseDate } from '../../../utils/date'
+import { isValidDate, isValidRange, formatDate, parseDate, dateEqual, rangeEqual, transformDate, transformRange, isPlainObject } from '../../../utils/date'
 import Vue from 'vue'
 const isServer = Vue.prototype.$isServer
 const Popper = isServer ? function () {} : require('popper.js/dist/umd/popper.js')
-const inputCls = `${prefix}input`
 const pickerCls = `${prefix}datepicker`
 const shortcutsCls = `${prefix}shortcuts`
 const rangeCls = `${prefix}range`
-const calendarCls = `${prefix}calendar`
 
 export default {
-    components: { Panel },
+    components: { Panel, bButton },
     directives: { clickoutside },
     props: {
         value: null,
@@ -21,7 +20,10 @@ export default {
             type: Boolean,
             default: false
         },
-        labelText: String,
+        labelText: {
+            type: String,
+            default: () => this.label ? '日期' : ''
+        },
         fixed: {
             type: Boolean,
             default: false
@@ -37,8 +39,15 @@ export default {
             type: String,
             default: null
         },
+        inputClass: {
+            type: [String, Array]
+        },
         inputStyle: {
             type: Object
+        },
+        inputName: {
+            type: String,
+            default: 'date'
         },
         // input 组件 -- end
         dateFormat: String,
@@ -82,19 +91,10 @@ export default {
             type: [Boolean, Array],
             default: false
         },
-        inputName: {
-            type: String,
-            default: 'date'
-        },
-        inputClass: {
-            type: [ String, Array ],
-            default: 'b-input'
-        },
         dateType: {
-            type: String,
             default: 'formatdate',
             validator (value) {
-                return oneOf(value, ['formatdate', 'timestamp', 'date'])
+                return oneOf(value, ['formatdate', 'timestamp', 'date']) || isPlainObject(value)
             }
         }
     },
@@ -104,23 +104,18 @@ export default {
             prefix,
             curVal: this.range ? [null, null] : null,
             userInput: null,
-            popupVisible: false,
-            position: {},
-            labelWidth: 36
+            popupVisible: false
         }
     },
     computed: {
         wrapperCls () {
             return pickerCls
         },
-        inputWrapper () {
-            return `${inputCls}-wrapper`
-        },
-        inputAppend () {
-            return `${inputCls}-append`
-        },
         popupCls () {
             return `${pickerCls}-popup`
+        },
+        popupTopCls () {
+            return `${pickerCls}-popup-top`
         },
         shortcutsWrapper () {
             return `${shortcutsCls}-wrapper`
@@ -131,24 +126,9 @@ export default {
         footerCls () {
             return `${pickerCls}-footer`
         },
-        confirmCls () {
-            return [`${pickerCls}-btn`, `${pickerCls}-btn-confirm`]
-        },
-        calendarIcon () {
-            return `${calendarCls}-icon`
-        },
-        clearWrapper () {
-            return [`${prefix}clear-wrapper`, `${inputCls}-append`]
-        },
-        clearInner () {
-            return [`${inputCls}-icon`, `${prefix}clear-icon`]
-        },
-        innerLabel () {
-            if (this.label) {
-                if (!this.labelText) return '日期'
-                return this.labelText
-            }
-            return ''
+        transform () {
+            const obj = this.range ? transformRange : transformDate
+            return isPlainObject(this.dateType) ? { ...obj.date, ...this.dateType } : obj[this.dateType] || obj.date
         },
         innerPlaceholder () {
             if (typeof this.placeholder === 'string') return this.placeholder
@@ -166,13 +146,13 @@ export default {
         },
         text () {
             if (this.userInput !== null) return this.userInput
-            if (!this.range) return isValidDate(this.value) ? this.stringify(this.value) : this.value
-            return isValidRange(this.value)
-                ? `${this.stringify(this.value[0])} ${this.rangeSeparator} ${this.stringify(this.value[1])}`
-                : (this.value && this.value[0] && this.value[1]) ? `${this.value[0]} ${this.rangeSeparator} ${this.value[1]}` : ''
+            const date = this.transform.value2date(this.value, this.format)
+            if (!this.range) return date ? this.stringify(date) : ''
+            return Array.isArray(date) && date.length === 2 && date[0] && date[1]
+                ? `${this.stringify(date[0])} ${this.rangeSeparator} ${this.stringify(date[1])}` : ''
         },
         showClearIcon () {
-            return !this.disabled && this.clearable && this.value
+            return !this.disabled && this.clearable && (this.range ? isValidRange(this.value) : isValidDate(this.value))
         },
         innerType () {
             return String(this.type).toLowerCase()
@@ -255,25 +235,12 @@ export default {
             if (this.innerType === 'date') return this.format
             return this.format.replace(/[Hh]+.*[msSaAZ]|\[.*?\]/g, '').trim() || 'YYYY-MM-DD'
         },
-        date () {
-            if (!this.range && this.curVal === null) return null
-            if (this.range && this.curVal[0] === null && this.curVal[1] === null) return null
-
-            if (this.dateType === 'formatdate') {
-                if (!this.range) {
-                    return this.stringify(this.curVal)
-                } else {
-                    return [this.stringify(this.curVal[0]), this.stringify(this.curVal[1])]
-                }
-            } else if (this.dateType === 'timestamp') {
-                if (!this.range) {
-                    return this.curVal.getTime()
-                } else {
-                    return [this.curVal[0].getTime(), this.curVal[1].getTime()]
-                }
-            } else if (this.dateType === 'date') {
-                return this.curVal
-            }
+        labelWidth () {
+            const inputBox = this.$refs.input
+            if (inputBox.$el.children.length < 2) return 0
+            const offsetWidth = inputBox.$el.children[1].offsetWidth
+            if (this.label && this.fixed) return offsetWidth
+            if (this.label) return offsetWidth + 4
         }
     },
     watch: {
@@ -289,21 +256,9 @@ export default {
             }
         }
     },
-    mounted () {
-        let inputBox = this.$refs.input
-        this.labelWidth = inputBox.$el.children.length && inputBox.$el.children[0].offsetWidth
-    },
     methods: {
         handleValChange (value) {
-            if (!this.range && this.curVal === null) return null
-            if (this.range && this.curVal[0] === null && this.curVal[1] === null) return null
-
-            if (!this.range) {
-                this.curVal = isValidDate(value) ? new Date(value) : new Date(this.parseDate(value))
-            } else {
-                let [start, end] = value
-                this.curVal = isValidRange(value) ? [new Date(start), new Date(end)] : [new Date(this.parseDate(start)), new Date(this.parseDate(end))]
-            }
+            this.curVal = this.transform.value2date(value, this.format)
         },
         init () {
             this.handleValChange(this.value)
@@ -314,12 +269,6 @@ export default {
         },
         parseDate (value, format) {
             return parseDate(value, format || this.format)
-        },
-        dateEqual (a, b) {
-            return isDateObject(a) && isDateObject(b) && a.getTime() === b.getTime()
-        },
-        rangeEqual (a, b) {
-            return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((item, index) => this.dateEqual(item, b[index]))
         },
         selectRange (range) {
             if (typeof range.onClick === 'function') {
@@ -340,15 +289,15 @@ export default {
             if (valid) {
                 this.updateDate(true)
             }
-            this.$emit('on-confirm', this.curVal)
+            this.$emit('on-confirm', this.transform.date2value(this.curVal, this.format))
             this.closePopup()
         },
         updateDate (confirm = false) {
             if ((this.confirm && !confirm) || this.disabled) return false
-            let equal = this.range ? this.rangeEqual(this.value, this.curVal) : this.dateEqual(this.value, this.curVal)
+            const equal = this.range ? rangeEqual(this.value, this.curVal) : dateEqual(this.value, this.curVal)
             if (equal) return false
-            this.$emit('input', this.date)
-            this.$emit('on-change', this.date)
+            this.$emit('input', this.transform.date2value(this.curVal, this.format))
+            this.$emit('on-change', this.transform.date2value(this.curVal, this.format))
             return true
         },
         selectDate (date) {
@@ -386,7 +335,11 @@ export default {
             this.destroy()
         },
         handleInput (e) {
-            this.userInput = e.target.value
+            if (e) {
+                this.userInput = e.target.value
+            } else {
+                this.clearDate()
+            }
         },
         handleChange (e) {
             let value = e.target.value
@@ -433,6 +386,9 @@ export default {
                             },
                             preventOverflow: {
                                 boundariesElement: 'window'
+                            },
+                            offset: {
+                                offset: this.labelWidth
                             }
                         },
                         onCreate: () => {

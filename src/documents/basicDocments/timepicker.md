@@ -30,7 +30,7 @@
 
 ### 默认时间显示
 
-设置 v-model 绑定值 `date: new Date('2018-11-24 18:00:01')` 默认展示时间
+设置 v-model 绑定值 `date: 18:00:01` 默认展示时间
 
 <div class='example'>
     <div class='example-box'>
@@ -46,7 +46,7 @@
         export default {
             data () {
                 return {
-                    time: new Date('2018-11-24 18:00:01')
+                    time: '18:00:01'
                 }
             }
         }
@@ -87,7 +87,7 @@
         data () {
             return {
                 time: '',
-                time1: new Date('2018-11-24 18:00:01'),
+                time1: '18:00:01',
                 daterange: '',
                 popup: ''
             }
