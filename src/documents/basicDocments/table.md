@@ -1418,7 +1418,7 @@
                         title: 'selection',
                         type:'selection',
                         fixed:'left',
-                        width:80,
+                        width:35,
                         align:'center'
                     },
                     {

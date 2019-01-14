@@ -1,18 +1,24 @@
 <template>
-    <label :class="prefixCls">
+    <label :class="warpCls">
         <span :class="checkbboxLeftClass">
+            <span :class="innerCls"></span>
             <input
                 :class="prefixCls + '-input'"
                 type="checkbox"
                 :value="value"
                 :checked="checked"
+                :disabled="disabled"
                 @change="change"/>
         </span>
-        <span :class="prefixCls + '-right'">
-            <slot>
-                <span v-if="!showSlot">{{label}}</span>
-            </slot>
-        </span>
+
+        <!--<span :class="prefixCls + '-right'" :style="contentSty">-->
+        <!--<slot>-->
+        <!--<span v-if="!showSlot">{{label}}</span>-->
+        <!--</slot>-->
+        <!--</span>-->
+        <slot>
+            {{label}}
+        </slot>
     </label>
 </template>
 
@@ -55,14 +61,24 @@ export default {
         }
     },
     computed: {
-        checkbboxLeftClass: function () {
+        checkbboxLeftClass () {
             return [
-                `${prefixCls}-left`,
+                `${prefixCls}`,
                 {
                     [`${prefixCls}-checked`]: this.checked,
                     [`${prefixCls}-disabled`]: this.disabled,
                     [`${prefixCls}-indeterminate`]: this.indeterminate
                 }
+            ]
+        },
+        innerCls () {
+            return [
+                `${prefixCls}-inner`
+            ]
+        },
+        warpCls () {
+            return [
+                `${prefixCls}-warpper`
             ]
         }
     },
