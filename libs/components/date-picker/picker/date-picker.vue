@@ -1,122 +1,96 @@
 <template>
     <div ref="picker" :class="wrapperCls" v-clickoutside="closePopup">
-        <div :class="inputWrapper" @click="showPopup">
-            <b-input
-                ref="input"
-                :label="innerLabel"
-                :fixed="fixed"
-                type="text"
-                autocomplete="off"
-                :class="inputClass"
-                :name="inputName"
-                :disabled="disabled"
-                :readonly="!editable"
-                :value="text"
-                :labelWidth="width"
-                :size="size"
-                :style="inputStyle"
-                :placeholder="innerPlaceholder"
-                @input="handleInput"
-                @change="handleChange">
-            </b-input>
-            <span :class="inputAppend">
-                <slot name="calendar-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200" :class="calendarIcon">
-                        <rect x="13" y="29" rx="14" ry="14" width="174" height="158" fill="transparent" />
-                        <line x1="46" x2="46" y1="8" y2="50" />
-                        <line x1="154" x2="154" y1="8" y2="50" />
-                        <line x1="13" x2="187" y1="70" y2="70" />
-                        <text
-                            x="50%"
-                            y="135"
-                            font-size="90"
-                            stroke-width="1"
-                            text-anchor="middle"
-                            dominant-baseline="middle">
-                            {{ new Date().getDate() }}
-                        </text>
-                    </svg>
-                </slot>
-            </span>
-            <span
-                v-if="showClearIcon"
-                :class="clearWrapper"
-                @click.stop="clearDate">
-                <slot name="b-clear-icon">
-                    <i :class="clearInner"></i>
-                </slot>
-            </span>
-        </div>
+        <b-input
+            ref="input"
+            :label="labelText"
+            :fixed="fixed"
+            type="text"
+            :class="inputClass"
+            :style="inputStyle"
+            :name="inputName"
+            :disabled="disabled"
+            :readonly="!editable"
+            :value="text"
+            :labelWidth="width"
+            :size="size"
+            suffix
+            clearable
+            icon="rili"
+            :placeholder="innerPlaceholder"
+            @input="handleInput"
+            @on-change="handleChange"
+            @on-focus="showPopup">
+        </b-input>
         <transition name='slide'>
             <div
                 v-show="popupVisible"
                 :class="popupCls"
                 ref="calendar">
-                <slot name="header">
-                    <div
-                        v-if="range && innerShortcuts.length"
-                        :class="shortcutsWrapper">
-                        <button
-                            type="button"
-                            :class="shortcutsCls"
-                            v-for="(range, index) in innerShortcuts"
-                            :key="index"
-                            @click="selectRange(range)">
-                            {{range.text}}
-                        </button>
-                    </div>
-                    <div
-                        v-if="!range && innerShortcuts.length"
-                        :class="shortcutsWrapper">
-                        <button
-                            type="button"
-                            :class="shortcutsCls"
-                            v-for="(range, index) in innerRangeShortcuts"
-                            :key="index"
-                            @click="selectRange(range)">
-                            {{range.text}}
-                        </button>
-                    </div>
-                </slot>
-                <panel
-                    v-if="!range"
-                    :type="innerType"
-                    :date-format="innnerDateFormat"
-                    :value="curVal"
-                    :visible="popupVisible"
-                    @select-date="selectDate">
-                </panel>
-                <div v-else :class="rangeWrapper">
+                <div :class="popupTopCls">
+                    <slot name="header">
+                        <div
+                            v-if="range && innerShortcuts.length"
+                            :class="shortcutsWrapper">
+                            <button
+                                type="button"
+                                :class="shortcutsCls"
+                                v-for="(range, index) in innerShortcuts"
+                                :key="index"
+                                @click="selectRange(range)">
+                                {{range.text}}
+                            </button>
+                        </div>
+                        <div
+                            v-if="!range && innerShortcuts.length"
+                            :class="shortcutsWrapper">
+                            <button
+                                type="button"
+                                :class="shortcutsCls"
+                                v-for="(range, index) in innerRangeShortcuts"
+                                :key="index"
+                                @click="selectRange(range)">
+                                {{range.text}}
+                            </button>
+                        </div>
+                    </slot>
                     <panel
-                        style="box-shadow: 1px 0 rgba(0, 0, 0, .1)"
-                        v-bind="$attrs"
+                        v-if="!range"
                         :type="innerType"
                         :date-format="innnerDateFormat"
-                        :value="curVal[0]"
-                        :start-at="null"
-                        :end-at="curVal[1]"
+                        :value="curVal"
                         :visible="popupVisible"
-                        @select-date="selectStartDate">
+                        @select-date="selectDate">
                     </panel>
-                    <panel
-                        v-bind="$attrs"
-                        :type="innerType"
-                        :date-format="innnerDateFormat"
-                        :value="curVal[1]"
-                        :start-at="curVal[0]"
-                        :end-at="null"
-                        :visible="popupVisible"
-                        @select-date="selectEndDate">
-                    </panel>
+                    <div v-else :class="rangeWrapper">
+                        <panel
+                            style="box-shadow: 1px 0 rgba(0, 0, 0, .1)"
+                            v-bind="$attrs"
+                            :type="innerType"
+                            :date-format="innnerDateFormat"
+                            :value="curVal[0]"
+                            :start-at="null"
+                            :end-at="curVal[1]"
+                            :visible="popupVisible"
+                            @select-date="selectStartDate">
+                        </panel>
+                        <panel
+                            v-bind="$attrs"
+                            :type="innerType"
+                            :date-format="innnerDateFormat"
+                            :value="curVal[1]"
+                            :start-at="curVal[0]"
+                            :end-at="null"
+                            :visible="popupVisible"
+                            @select-date="selectEndDate">
+                        </panel>
+                    </div>
                 </div>
                 <slot name="footer" :confirm="confirmDate">
                     <div v-if="confirm" :class="footerCls">
-                        <button
-                            type="button"
-                            :class="confirmCls"
-                            @click="confirmDate">
+                        <b-button
+                            @on-click="confirmDate">
                             {{ confirmText }}
-                        </button>
+                        </b-button>
                     </div>
                 </slot>
             </div>

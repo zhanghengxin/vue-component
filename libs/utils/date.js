@@ -9,7 +9,7 @@ export const isDateObject = function (value) {
 }
 
 export const isValidDate = function (date) {
-    if (date === null || date === undefined || !date) {
+    if (date === null || date === undefined) {
         return false
     }
     return !isNaN(new Date(date).getTime())
@@ -52,7 +52,11 @@ export const formatTime = function (time, type = '24', a = 'a') {
 }
 
 export const parseDate = function (str, format) {
-    return fecha.parse(str, format)
+    try {
+        return fecha.parse(str, format)
+    } catch (e) {
+        return null
+    }
 }
 
 export const formatDate = function (date, format) {
@@ -63,23 +67,49 @@ export const formatDate = function (date, format) {
     }
 }
 
-export const throttle = function (action, delay) {
-    let lastRun = 0
-    let timeout = null
+export const dateEqual = function (a, b) {
+    return isDateObject(a) && isDateObject(b) && a.getTime() === b.getTime()
+}
 
-    return function () {
-        if (timeout) return
-        let elapsed = Date.now() - lastRun
+export const rangeEqual = function (a, b) {
+    return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((item, index) => dateEqual(item, b[index]))
+}
 
-        let callBack = () => {
-            lastRun = Date.now()
-            timeout = null
-            action.apply(this, arguments)
-        }
-        if (elapsed >= delay) {
-            callBack()
-        } else {
-            timeout = setTimeout(callBack, delay)
-        }
+export const transformDate = {
+    date: {
+        value2date: val => isValidDate(val) ? new Date(val) : null,
+        date2value: date => date
+    },
+    timestamp: {
+        value2date: val => isValidDate(val) ? new Date(val) : null,
+        date2value: date => isValidDate(date) ? new Date(date).getTime() : null
+    },
+    formatdate: {
+        value2date: parseDate,
+        date2value: (date, format) => isValidDate(date) ? formatDate(date, format) : null
+    }
+}
+
+export const transformRange = {
+    date: {
+        value2date: val => isValidRange(val) ? [new Date(val[0]), new Date(val[1])] : [null, null],
+        date2value: date => date
+    },
+    timestamp: {
+        value2date: val => isValidRange(val) ? [new Date(val[0]), new Date(val[1])] : [null, null],
+        date2value: date => date.map(transformDate.timestamp.date2value)
+    },
+    formatdate: {
+        value2date: (val, format) => {
+            if (Array.isArray(val) && val.length === 2) {
+                const start = parseDate(val[0], format)
+                const end = parseDate(val[1], format)
+                if (start && end && end >= start) {
+                    return [start, end]
+                }
+            }
+            return [null, null]
+        },
+        date2value: (date, format) => date.map(val => transformDate.formatdate.date2value(val, format))
     }
 }
