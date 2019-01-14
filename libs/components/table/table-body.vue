@@ -92,11 +92,6 @@ export default {
             })
             return columnData
         },
-        cellCls () {
-            return [
-                `${this.preCls}-cell`
-            ]
-        },
         handleMouseIn (_index) {
             this.dispatch(this.preCls, 'mouse-in', _index)
         },
