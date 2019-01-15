@@ -1,5 +1,5 @@
 import { createTest, createVue, destroyVM } from '../utils'
-import Tag from '&/components/tag'
+import Tag from '&/components/Tag'
 import { prefix } from '&/utils/common'
 const bTag = prefix + 'tag'
 

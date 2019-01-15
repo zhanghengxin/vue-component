@@ -28,11 +28,11 @@
         </ul>
         <ul
             ref="seconds"
+            v-if="minuteStep === 0"
             :class="timeListCls"
             :style="timeListStyle">
             <!-- 秒 -->
             <li
-                v-if="minuteStep === 0"
                 :key="i + 'seconde'"
                 :class="secondCls(i)"
                 v-for="(_, i) in 60"
@@ -225,7 +225,10 @@ export default {
         }
     },
     mounted () {
-        timeParts.forEach(type => {
+        const parts = timeParts.slice()
+        if (this.minuteStep !== 0) parts.pop()
+
+        parts.forEach(type => {
             const Type = firstUpperCase(type)
             const index = this[`cur${Type}`]
             this.$refs[type].scrollTop = itemHeight * index

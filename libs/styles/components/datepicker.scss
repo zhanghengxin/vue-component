@@ -33,7 +33,7 @@ $bgFont: #ccc;
   z-index: 1000;
   border-radius: 4px;
   overflow: hidden;
-  .#{$css-prefix-picker}-popup-top {
+  .#{$css-prefix-picker}-popup-content {
     display: flex;
     flex-direction: row;
   }
@@ -73,25 +73,6 @@ $bgFont: #ccc;
   clear: both;
   text-align: right;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-.#{$css-prefix-picker}-btn {
-  font-size: 12px;
-  line-height: 1;
-  padding: 7px 15px;
-  margin: 0 5px;
-  cursor: pointer;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  border-radius: 3px;
-}
-.#{$css-prefix-picker}-btn-confirm {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  color: #73879c;
-  &:hover {
-    color: $Primary;
-    border-color: $Primary;
-  }
 }
 
 .#{$css-prefix-calendar} {
