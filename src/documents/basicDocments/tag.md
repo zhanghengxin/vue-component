@@ -3,7 +3,7 @@
 <div class="example">
    <div class="example-box">
 <div>
-    <b-tag backcolor="blue" >标签</b-tag>
+    <b-tag backcolor="blue" @on-click='handleClick'>标签</b-tag>
     <b-tag backcolor="green" >标签</b-tag>
     <b-tag backcolor="orange" >标签</b-tag>
     <b-tag backcolor="red" >标签</b-tag>
@@ -80,7 +80,7 @@
  <div class="example" style="width:1000px">
    <div class="example-box">
 <div>
-    <b-tag v-for="item in list" :key="item.name" :backcolor="item.color"  closeable @on-close="close">{{item.name}}</b-tag>
+    <b-tag v-for="(item, index) in list" :key="index" :backcolor="item.color"  closeable @on-close="close">{{item.name}}</b-tag>
     <b-button size="small" @on-click="click"><b-icon type="tianjia-chuangjian"></b-icon> 标签添加</b-button>
 </div>
 </div>
@@ -88,7 +88,7 @@
 ::: code
 ```html
 <div>
-    <b-tag v-for="item in list" :key="item.name" :backcolor="item.color" closeable @on-close="close">{{item.name}}</b-tag>
+    <b-tag v-for="(item, index) in list" :key="index" :backcolor="item.color" closeable @on-close="close">{{item.name}}</b-tag>
     <b-button size="small" @on-click="click"><b-icon type="tianjia-chuangjian"></b-icon> 标签添加</b-button>
       <script>
     export default {
@@ -135,6 +135,9 @@
             },
             close(e){
                 console.log(e)
+            },
+            handleClick(e) {
+                console.log('e', e)
             }
         }
     }
@@ -153,3 +156,4 @@
 | 事件名	      | 说明	    | 返回值 |
 |---------- |-------- |---------- |
 | on-close     | 关闭时触发   |event
+| on-click | 点击标签触发 | event
