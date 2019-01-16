@@ -5,8 +5,8 @@
 <div class='example'>
     <div class='example-box'>
         <b-timepicker 
-            v-model='time' 
-            @change='handleChangeTime'>
+            v-model='time'
+            @on-change='handleChangeTime'>
         <b-timepicker>
     </div>
     
@@ -28,9 +28,39 @@
 :::
 </div>
 
+### 定义分钟步频
+
+<div class='example'>
+    <div class='example-box'>
+        <b-timepicker 
+            v-model='timestemp'
+            :minuteStep='5'>
+        <b-timepicker>
+    </div>
+    
+::: code
+```html
+    <div>
+        <b-timepicker 
+            v-model='time'
+            :minute-step='5'><b-timepicker>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    time: '',
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
 ### 默认时间显示
 
-设置 v-model 绑定值 `date: new Date('2018-11-24 18:00:01')` 默认展示时间
+设置 v-model 绑定值 `date: 18:00:01` 默认展示时间
 
 <div class='example'>
     <div class='example-box'>
@@ -46,7 +76,7 @@
         export default {
             data () {
                 return {
-                    time: new Date('2018-11-24 18:00:01')
+                    time: '18:00:01'
                 }
             }
         }
@@ -82,41 +112,15 @@
 :::
 </div>
 
-### 自适应位置
-
-设置属性 `popup` 为 true 来自适应垂直方向位置
-
-<div class='example'>
-    <div class='example-box'>
-        <b-timepicker v-model='popup' popup><b-timepicker>
-    </div>
-    
-::: code
-```html
-    <div>
-        <b-timepicker v-model='time' popup><b-timepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    time: '',
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
 <script>
     export default {
         data () {
             return {
                 time: '',
-                time1: new Date('2018-11-24 18:00:01'),
+                time1: '18:00:01',
                 daterange: '',
-                popup: ''
+                popup: '',
+                timestemp: 5
             }
         },
         methods: {
@@ -137,6 +141,7 @@
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
 | size | input组件的尺寸。 | Boolean  | `small` `normal` `large` | normal |
 | format | 日期格式化 | String  | | YYYY-MM-DD |
+| dateType | 返回日期格式 | String | `formatdate` `timestamp` `date` | formatdate |
 | clearable | 是否显示清除按钮 | Boolean  | `true` `false` | true |
 | editable | 输入框内是否可编辑 | Boolean  | `true` `false` | true |
 | disabled | 是否可用 | Boolean | `true` `false` | false |
@@ -155,6 +160,6 @@
 ### events
 | 事件名 | 说明	| 返回值 |
 | ---- | ---- | ---- |
-| change | 日期改变的时候触发 | 选择的日期 |
+| on-change | 日期改变的时候触发 | 选择的日期 |
 | input | 日期改变的时候触发 | 选择的日期 |
-| confirm | 点击确认按钮触发，配合 confirm 属性使用 | 选择的日期 |
+| on-confirm | 点击确认按钮触发，配合 confirm 属性使用 | 选择的日期 |

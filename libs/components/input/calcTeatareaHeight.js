@@ -145,12 +145,6 @@ export default function calcTextareaHeight (uiTextNode, minRows = null, maxRows 
         overflowY = 'hidden'
     }
 
-    console.log({
-        height: `${height}px`,
-        minHeight: `${minHeight}px`,
-        maxHeight: `${maxHeight}px`,
-        overflowY
-    })
     return {
         height: `${height}px`,
         minHeight: `${minHeight}px`,

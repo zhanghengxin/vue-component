@@ -73,11 +73,11 @@ describe('Page', () => {
         expect(elm.classList.contains(`${prefixCls}-simple`)).to.exist
     })
     
-    it('on-change', done => {
+    it('on-page-change', done => {
         let result
         vm = createVue({
             template: `
-        <${Page} @on-change="handleClick" total=100></${Page}>
+        <${Page} @on-page-change="handleClick" total=100></${Page}>
       `,
             methods: {
                 handleClick (page) {

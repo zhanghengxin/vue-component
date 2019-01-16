@@ -3,39 +3,39 @@
 *
 */
 /*
- * @Author: lijiahang
- * @Date: 2018-11-14 15:32:43
- * @Last Modified by:   lijiahang
- * @Last Modified time: 2018-11-14 15:32:43
- */
+* @Author: lijiahang
+* @Date: 2018-11-14 15:32:43
+* @Last Modified by:   lijiahang
+* @Last Modified time: 2018-11-14 15:32:43
+*/
 <template>
     <button ref="button"
-    :disabled="disabled"
-    @click='handleClick($event)'
-    :class="bclass"
+            :disabled="disabled"
+            @click='handleClick($event)'
+            :class="bodyCls"
     >
-      <i v-if='loading' class="iconfont icon-loading">
-      </i>
-      <b-icon v-if="icon" :type="iclass">
-      </b-icon>
-      <span>
-      <slot></slot>
-      </span>
+        <i v-if='loading' class="iconfont icon-loading"></i>
+        <b-icon v-if="icon" :type="iconcls"></b-icon>
+        <span>
+            <slot></slot>
+        </span>
     </button>
 </template>
 
 <script>
-import { prefix } from '../../utils/common'
+import { prefix, oneOf } from '../../utils/common'
 
-const prefixCls = prefix + 'btn'
+const prefixCls = prefix + 'button'
 export default {
-    name: 'bButton',
+    name: prefixCls,
     computed: {
-        iclass () {
+        iconcls () {
             return `${this.icon}`
         },
-        bclass () {
-            return [ `${prefixCls}-${this.size}`,
+        bodyCls () {
+            return [
+                `${prefixCls}`,
+                `${prefixCls}-${this.size}`,
                 `${prefixCls}-${this.type} `,
                 this.round ? `${prefixCls}-round` : '',
                 (this.circle || this.icon) ? `${prefixCls}-circle` : '',
@@ -50,12 +50,16 @@ export default {
             default: false
         },
         size: {
-            type: String,
+            validator (value) {
+                return oneOf(value, ['normal', 'small', 'big'])
+            },
             default: 'normal'
         },
         type: {
-            type: String,
-            default: 'typrimary'
+            validator (value) {
+                return oneOf(value, ['default', 'primary', 'error', 'warning', 'success'])
+            },
+            default: 'default'
         },
         round: {
             type: Boolean,
@@ -79,8 +83,7 @@ export default {
         }
     },
     data () {
-        return {
-        }
+        return {}
     },
     mounted () {
         // 是否需要不可点击？

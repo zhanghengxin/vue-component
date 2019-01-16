@@ -48,7 +48,6 @@ export default {
             .hljs-string {
                 color: $Success;
             }
-
         }
     }
 

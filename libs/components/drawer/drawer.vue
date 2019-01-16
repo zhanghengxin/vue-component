@@ -1,8 +1,8 @@
 /*
  * @Author: lijiahang
  * @Date: 2018-11-12 10:51:51
- * @Last Modified by: lijiahang
- * @Last Modified time: 2018-11-29 19:45:45
+ * @Last Modified by: hanshuai@baiwang.com
+ * @Last Modified time: 2019-01-09 17:22:26
  */
 <template>
     <div :class="[prefixCls+'-root']" ref='mask'>
@@ -58,7 +58,7 @@ export default {
         }
     },
     mounted () {
-        document.getElementById('app').appendChild(this.$refs.mask)
+        document.body.appendChild(this.$refs.mask)
     }
 }
 </script>

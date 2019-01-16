@@ -47,8 +47,8 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value" placeholder="请输入..." /></b-input>
-            <b-input v-model="value0" placeholder="请输入..." :error='error'/></b-input>
+            <b-input v-model="value" placeholder="请输入..." style='width:200px' /></b-input>
+            <b-input v-model="value0" placeholder="请输入..." style='width:200px' :error='error'/></b-input>
         </div>
     </div>
 </div>
@@ -57,8 +57,8 @@
 ```html
 
     <template>
-        <b-input v-model="value" placeholder="请输入..." style='width:200px' /></b-input>
-        <b-input v-model="value0" placeholder="请输入..." style='width:200px' :error='error' /></b-input>
+        <b-input v-model="value" placeholder="请输入..." /></b-input>
+        <b-input v-model="value0" placeholder="请输入..." :error='error' /></b-input>
         <span>{{value}}</div>
     </template>
     <script>
@@ -173,8 +173,8 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" :icon='icon' :prefix='prefix' ></b-input>
-            <b-input v-model="value7" :icon='icon' :suffix='suffix' ></b-input>
+            <b-input v-model="value6" :icon='icon' :prefix='prefix'></b-input>
+            <b-input v-model="value7" :icon='icon' :suffix='suffix' :clearable='clearable'></b-input>
         </div>
     </div>
 </div>
@@ -350,6 +350,7 @@ label文字大小可根据input的size变化<br/>
 | disabled | 设置输入框为禁用状态   | Boolean  | `true`、`false` |   false  |
 | readonly | 设置输入框为只读   | Boolean  | `true`、`false` |   false  |
 | error | 设置输入框为error状态   | Boolean  | `true`、`false` |   false  |
+| size | 设置输入框的尺寸   | String  | `small`、`normal`、`large` |   normal  |
 | name | 设置输入框name   | String  | - |   -  |
 | maxlength | 最大输入长度   | Number  | - |   -  |
 | minlength | 最大输入长度   | Number  | - |   -  |

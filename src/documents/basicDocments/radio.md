@@ -1,129 +1,232 @@
-# Radio 单选
-在一组备选项中进行单选
------
-### 基础用法
-单独使用时有未选中 未选失效项 已选失效项 选中项四种使用方式。
-<div class="example">
-    <div class="example-box">
-        <div>
-             <!-- 未选中 -->
-            <b-radio :disabled='true' label="未选中"></b-radio>
-        </div>
-        <div>
-        <!-- 选中 -->
-            <b-radio label="未选失效项"></b-radio>
-        </div>
-        <div>
-        <!-- 禁止选中 -->
-            <b-radio label='已选失效项' v-model="flagChecked" :disabled='true'></b-radio>
-        </div>
-        <div>
-        <!-- 未选失效项 -->
-            <b-radio label='选中项' v-model="flagChecked"></b-radio>
-        </div>
-</div>
 <script>
-export default {
-  data () {
-    return {
-      flagChecked: true,
-      fruit: 'orange',
-      button1: '兔子',
-      button2: '兔子',
-      button3: '兔子'
-    }
+  export default {
+      data () {
+        return {
+          test: false,
+          flagChecked: true,
+          fruit: 'orange',
+          button1: '兔子',
+          button2: '猴子',
+          button3: '泰迪'
+        }
+      },
+      methods: {
+          change(data){
+              console.log('change',data)
+          },
+          changeGroup(data){
+          console.log('changegroup',data)
+          }
+      }
   }
-}
 </script>
 
+# Radio 单选
+基本表单组件，并在原生控件基础上进行了功能扩展，可以组合使用。
+-----
+### 基础用法
+可使用 v-model 实现数据的双向绑定。<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-radio label='banana' v-model='test' @on-change="change"></b-radio>
+            <p>{{test}}</p>
+        </div>
+    </div>
+</div>
 
 ::: code
 ```html
-    <div>
-        <!-- 未选中 -->
-        <b-radio disabled label="未选中"></b-radio>
-        <!-- 选中 -->
-        <b-radio label="未选失效项"></b-radio>
-        <!-- 禁止选中 -->
+    <template>
+        <b-radio label='banana' v-model='test' @on-change="change"></b-radio>
+        <p>{{test}}</p>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    test: ''
+                }
+            }
+        }
+    </script>
+```
+:::
+
+### 组合使用
+使用RadioGroup实现一组互斥的选项组。在组合使用时，Radio 使用 label 来自动判断。每个 Radio 的内容可以自定义，如不填写则默认使用 label 的值。<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-radio label='已选失效项' v-model="flagChecked" disabled></b-radio>
+            <b-radio-group v-model="fruit">
+                <b-radio label='apple' disabled></b-radio>
+                <b-radio label='banana'></b-radio>
+                <b-radio label='orange'></b-radio>
+            </b-radio-group>
+            <p>{{fruit}}</p>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+    <template>
         <b-radio label='已选失效项' v-model="flagChecked" disabled></b-radio>
-        <!-- 未选失效项 -->
-        <b-radio label='选中项' v-model="flagChecked"></b-radio>
-    </div>
+        <b-radio-group v-model="fruit">
+            <b-radio label='apple' disabled></b-radio>
+            <b-radio label='banana'></b-radio>
+            <b-radio label='orange'></b-radio>
+        </b-radio-group>
+        <p>{{fruit}}</p>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    fruit: 'orange'
+                }
+            }
+        }
+    </script>
 ```
 :::
-</div>
 
-组合使用 使用RadioGroup实现一组互斥的选项组。在组合使用时，Radio 使用 label 来自动判断。每个 Radio 的内容可以自定义，如不填写则默认使用 label 的值。
-<div class="example">
-    <div class="example-box">
-      <b-radio-group v-model="fruit">
-        <b-radio label='apple' v-model="flagChecked"></b-radio>
-        <b-radio label='banana'></b-radio>
-        <b-radio label='orange'></b-radio>
-      </b-radio-group>
-</div>
-
-
-::: code
-```html
-    <div>
-      <b-radio-group v-model="fruit">
-        <b-radio label='apple' v-model="flagChecked"></b-radio>
-        <b-radio label='banana'></b-radio>
-        <b-radio label='orange'></b-radio>
-      </b-radio-group>
-    </div>
-```
-:::
-</div>
-
+<br/>
 组合使用时可以设置属性type为 button 来应用按钮的样式。
+<br/>
+<br/>
 <div class="example">
     <div class="example-box">
-      <b-radio-group v-model="button1" type="button1">
-        <b-radio label='兔子' v-model="flagChecked"></b-radio>
-        <b-radio label='猴子'></b-radio>
-        <b-radio label='泰迪'></b-radio>
-      </b-radio-group>
-      <br>
-      <b-radio-group v-model="button1" type="button2">
-        <b-radio label='兔子' v-model="flagChecked"></b-radio>
-        <b-radio label='猴子' disabled></b-radio>
-        <b-radio label='泰迪'></b-radio>
-      </b-radio-group>
-      <br>
-      <b-radio-group v-model="button1" type="button3">
-        <b-radio label='兔子' disabled v-model="flagChecked"></b-radio>
-        <b-radio label='猴子' disabled></b-radio>
-        <b-radio label='泰迪' disabled></b-radio>
-      </b-radio-group>
+        <div>
+            <b-radio-group v-model="button1" type="button1" @on-change="changeGroup">
+                <b-radio label='兔子'></b-radio>
+                <b-radio label='猴子'></b-radio>
+                <b-radio label='泰迪'></b-radio>
+            </b-radio-group>
+            <p>{{button1}}</p>
+            <br>
+            <b-radio-group v-model="button2" type="button2" @on-change="changeGroup">
+                <b-radio label='兔子'></b-radio>
+                <b-radio label='猴子' disabled></b-radio>
+                <b-radio label='泰迪'></b-radio>
+            </b-radio-group>
+            <p>{{button2}}</p>
+            <br>
+            <b-radio-group v-model="button3" type="button3" @on-change="changeGroup">
+                <b-radio label='兔子' disabled></b-radio>
+                <b-radio label='猴子' disabled></b-radio>
+                <b-radio label='泰迪' disabled></b-radio>
+            </b-radio-group>
+            <p>{{button3}}</p>
+        </div>
+    </div>
 </div>
-
 
 ::: code
 ```html
-    <div>
-      <b-radio-group v-model="button1" type="button1">
-        <b-radio label='兔子' v-model="flagChecked"></b-radio>
-        <b-radio label='猴子'></b-radio>
-        <b-radio label='泰迪'></b-radio>
-      </b-radio-group>
-      <br>
-      <b-radio-group v-model="button1" type="button2">
-        <b-radio label='兔子' v-model="flagChecked"></b-radio>
-        <b-radio label='猴子' disabled></b-radio>
-        <b-radio label='泰迪'></b-radio>
-      </b-radio-group>
-      <br>
-      <b-radio-group v-model="button1" type="button3">
-        <b-radio label='兔子' disabled v-model="flagChecked"></b-radio>
-        <b-radio label='猴子' disabled></b-radio>
-        <b-radio label='泰迪' disabled></b-radio>
-      </b-radio-group>
-    </div>
+    <template>
+        <b-radio-group v-model="button1" type="button1" @on-change="changeGroup">
+            <b-radio label='兔子'></b-radio>
+            <b-radio label='猴子'></b-radio>
+            <b-radio label='泰迪'></b-radio>
+        </b-radio-group>
+        <p>{{button1}}</p>
+        <br>
+        <b-radio-group v-model="button2" type="button2" @on-change="changeGroup">
+            <b-radio label='兔子'></b-radio>
+            <b-radio label='猴子' disabled></b-radio>
+            <b-radio label='泰迪'></b-radio>
+        </b-radio-group>
+        <p>{{button2}}</p>
+        <br>
+        <b-radio-group v-model="button3" type="button3" @on-change="changeGroup">
+            <b-radio label='兔子' disabled></b-radio>
+            <b-radio label='猴子' disabled></b-radio>
+            <b-radio label='泰迪' disabled></b-radio>
+        </b-radio-group>
+        <p>{{button3}}</p>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    button1: '兔子',
+                    button2: '猴子',
+                    button3: '泰迪'
+                }
+            }
+        }
+    </script>
 ```
 :::
+
+### 尺寸
+通过设置属性size为large或small将按钮样式设置为大和小尺寸，不设置为默认(中)尺寸。<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-radio-group v-model="button1" type="button" size="large" @on-change="changeGroup">
+                <b-radio label='兔子'></b-radio>
+                <b-radio label='猴子'></b-radio>
+                <b-radio label='泰迪'></b-radio>
+            </b-radio-group>
+            <p>{{button1}}</p>
+            <br>
+            <b-radio-group v-model="button2" type="button" @on-change="changeGroup">
+                <b-radio label='兔子'></b-radio>
+                <b-radio label='猴子'></b-radio>
+                <b-radio label='泰迪'></b-radio>
+            </b-radio-group>
+            <p>{{button2}}</p>
+            <br>
+            <b-radio-group v-model="button3"  size="small" type="button" @on-change="changeGroup">
+                <b-radio label='兔子'></b-radio>
+                <b-radio label='猴子'></b-radio>
+                <b-radio label='泰迪'></b-radio>
+            </b-radio-group>
+            <p>{{button3}}</p>
+        </div>
+    </div>
 </div>
+
+::: code
+```html
+    <template>
+        <b-radio-group v-model="button1" type="button" size="large" @on-change="changeGroup">
+            <b-radio label='兔子'></b-radio>
+            <b-radio label='猴子'></b-radio>
+            <b-radio label='泰迪'></b-radio>
+        </b-radio-group>
+        <p>{{button1}}</p>
+        <br>
+        <b-radio-group v-model="button2" type="button" @on-change="changeGroup">
+            <b-radio label='兔子'></b-radio>
+            <b-radio label='猴子'></b-radio>
+            <b-radio label='泰迪'></b-radio>
+        </b-radio-group>
+        <p>{{button2}}</p>
+        <br>
+        <b-radio-group v-model="button3"  size="small" type="button" @on-change="changeGroup">
+            <b-radio label='兔子'></b-radio>
+            <b-radio label='猴子'></b-radio>
+            <b-radio label='泰迪'></b-radio>
+        </b-radio-group>
+        <p>{{button3}}</p>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    button1: '兔子',
+                    button2: '猴子',
+                    button3: '泰迪'
+                }
+            }
+        }
+    </script>
+```
+:::
 
 ### Radio props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |

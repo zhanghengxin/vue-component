@@ -3,23 +3,124 @@
  * author ganbowen
  * created 2018/11/26 17:35:46
  */
-@import "../common/color";
-@import "../common/prefix";
 
 $css-prefix-select: $css-prefix+'select';
 $css-prefix-option: $css-prefix+'option';
-$css-prefix-drop: $css-prefix+'drop';
-$css-prefix-tag: $css-prefix+'tag';
+
+@mixin selectGroup() {
+  display: table;
+  vertical-align: middle;
+  width: 280px;
+}
+
+@mixin transitionAll() {
+  transition: all $transition-time $ease-in-out;
+}
+
+@mixin selectWidth($width) {
+  .#{$css-prefix-select} {
+    width: $width;
+  }
+}
+
+@mixin selectMockClass($color, $shadow) {
+  &-focused {
+    border-color: $color;
+    box-shadow: $shadow;
+    .#{$css-prefix-select}-arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  &:hover {
+    border-color: $color;
+  }
+}
+
+@mixin size($height, $tagHeight) {
+  &-content {
+    height: $height;
+    line-height: $height;
+  }
+
+  &-autowarp {
+    max-height: $height + 2px;
+    overflow: hidden;
+  }
+
+  .#{$css-prefix-select}-input {
+    height: $height;
+  }
+
+  .#{$css-prefix-select}-tag {
+    height: $tagHeight;
+    line-height: $tagHeight - 2px;
+
+    .icon {
+      width: $tagHeight - 2px;
+      height: $tagHeight - 2px;
+      line-height: $tagHeight - 2px;
+    }
+  }
+}
+
+@mixin borderInit($borderColor, $radius) {
+  border: 1px solid $borderColor;
+  border-radius: $radius;
+  box-sizing: border-box;
+}
+
+//最外层的盒子
+.#{$css-prefix-select}-container {
+  display: inline-block;
+  font-size: 12px;
+
+  //label
+  .#{$css-prefix-select}-label {
+    line-height: 1;
+    display: table-cell;
+    font-weight: normal;
+    font-size: inherit;
+    color: $Content;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &.#{$css-prefix-select}-group {
+    @include selectGroup();
+    @include selectWidth(100%);
+  }
+
+  &.#{$css-prefix-select}-group-fixed {
+    @include borderInit($Border, 4px);
+    @include selectGroup();
+    @include transitionAll();
+    @include selectMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
+
+    .#{$css-prefix-select}-label {
+      padding: 4px 7px;
+      background-color: $Background;
+      border-right: 1px solid $Border;
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
+    }
+
+    .#{$css-prefix-select}-selection {
+      border: 0;
+    }
+
+    @include selectWidth(100%);
+  }
+}
 
 //select
 .#{$css-prefix-select} {
   display: inline-block;
-  width: 100%;
   box-sizing: border-box;
   vertical-align: middle;
   color: $Content;
-  font-size: 14px;
   line-height: normal;
+  width: 100%;
 
   &-arrow {
     position: absolute;
@@ -29,64 +130,68 @@ $css-prefix-tag: $css-prefix+'tag';
     margin-top: -6px;
     font-size: 12px;
     color: $Sub;
-    transition: all .2s ease-in-out;
+    @include transitionAll();
   }
 
-  &-show {
-    .#{$css-prefix-select}-arrow {
-      transform: rotate(180deg);
-    }
+  &-show-selection {
+    display: flex;
+    flex-wrap: wrap;
   }
 
   &-multiple {
     .#{$css-prefix-select}-selection {
       padding: 0 24px 0 4px;
 
-      &-disabled {
-        background: $Disabled;
-        cursor: not-allowed;
-      }
-
-      .#{$css-prefix-select}-input{
-        border:0;
-        height: 30px;
-        width: 100%;
+      .#{$css-prefix-select}-input {
         padding: 0 0 0 4px;
       }
     }
   }
 
+  &-large {
+    .#{$css-prefix-select}-selection {
+      @include size(34px, 28px);
+    }
+
+    &-content {
+      font-size: 14px;
+    }
+  }
+
+  &-normal {
+    .#{$css-prefix-select}-selection {
+      @include size(30px, 24px);
+    }
+  }
+
+  &-small {
+    .#{$css-prefix-select}-selection {
+      @include size(24px, 18px);
+    }
+  }
+
+
   &-selection {
     display: block;
-    box-sizing: border-box;
     outline: 0;
     user-select: none;
     cursor: pointer;
     position: relative;
     background-color: $white;
-    border-radius: 4px;
-    border: 1px solid $Border;
-    transition: all .2s ease-in-out;
-
-    &:hover {
-      border-color: $LightPrimary;
-    }
+    width: 100%;
+    @include borderInit($Border, 4px);
+    @include transitionAll();
+    @include selectMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
 
     &-content {
       display: block;
-      height: 30px;
-      line-height: 30px;
-      font-size: 12px;
+      line-height: 1;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      vertical-align: middle;
       padding-left: 8px;
       padding-right: 24px;
-    }
-
-    &-focused {
-      border-color: $LightPrimary;
-      box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
     }
 
     &-placeholder {
@@ -96,60 +201,38 @@ $css-prefix-tag: $css-prefix+'tag';
     &-disabled {
       background: $Disabled;
       cursor: not-allowed;
-      .#{$css-prefix-select}-input{
+
+      .#{$css-prefix-select}-input {
         background: $Disabled;
       }
-    }
-
-    &-autowarp {
-      max-height: 32px;
-      overflow: hidden;
     }
   }
 
   &-tag {
+    @include borderInit($Divider, 3px);
     display: inline-block;
-    height: 24px;
-    line-height: 22px;
     margin: 3px 4px 3px 0;
     padding: 0 8px;
-    border: 1px solid $Divider;
-    border-radius: 3px;
-    background: $Background;
-    font-size: 12px;
+    background-color: $Background;
     vertical-align: middle;
-    opacity: 1;
     overflow: hidden;
     cursor: pointer;
 
     .icon {
-      width: 22px;
-      height: 22px;
-      line-height: 22px;
       text-align: center;
     }
   }
-  &-input{
-    border:0;
-    height: 30px;
+
+  &-input {
+    border: 0;
     width: 100%;
+    border-radius: 4px;
     padding: 0 24px 0 8px;
   }
-}
 
-//drop
-.#{$css-prefix-drop} {
-  width: inherit;
-  max-height: 200px;
-  overflow: auto;
-  margin: 5px 0;
-  padding: 5px 0;
-  background-color: $white;
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
-  position: absolute;
-  z-index: 900;
+  .#{$css-prefix-drop} {
+    width: auto;
+  }
 }
 
 //option
@@ -163,7 +246,7 @@ $css-prefix-tag: $css-prefix+'tag';
   white-space: nowrap;
   list-style: none;
   cursor: pointer;
-  transition: all .2s ease-in-out;
+  @include transitionAll();
   background: $white;
 
   &:hover {

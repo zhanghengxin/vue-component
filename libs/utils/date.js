@@ -9,10 +9,10 @@ export const isDateObject = function (value) {
 }
 
 export const isValidDate = function (date) {
-    if (date === null || date === undefined || !date) {
+    if (date === null || date === undefined) {
         return false
     }
-    return !isNaN(new Date().getTime())
+    return !isNaN(new Date(date).getTime())
 }
 
 export const isValidRange = function (date) {
@@ -52,7 +52,11 @@ export const formatTime = function (time, type = '24', a = 'a') {
 }
 
 export const parseDate = function (str, format) {
-    return fecha.parse(str, format)
+    try {
+        return fecha.parse(str, format)
+    } catch (e) {
+        return null
+    }
 }
 
 export const formatDate = function (date, format) {
@@ -63,23 +67,121 @@ export const formatDate = function (date, format) {
     }
 }
 
-export const throttle = function (action, delay) {
-    let lastRun = 0
-    let timeout = null
+export const dateEqual = function (a, b) {
+    return isDateObject(a) && isDateObject(b) && a.getTime() === b.getTime()
+}
 
-    return function () {
-        if (timeout) return
-        let elapsed = Date.now() - lastRun
+export const rangeEqual = function (a, b) {
+    return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((item, index) => dateEqual(item, b[index]))
+}
 
-        let callBack = () => {
-            lastRun = Date.now()
-            timeout = null
-            action.apply(this, arguments)
+export const transformDate = {
+    date: {
+        value2date: val => isValidDate(val) ? new Date(val) : null,
+        date2value: date => date
+    },
+    timestamp: {
+        value2date: val => isValidDate(val) ? new Date(val) : null,
+        date2value: date => isValidDate(date) ? new Date(date).getTime() : null
+    },
+    formatdate: {
+        value2date: parseDate,
+        date2value: (date, format) => isValidDate(date) ? formatDate(date, format) : null
+    }
+}
+
+export const transformRange = {
+    date: {
+        value2date: val => isValidRange(val) ? [new Date(val[0]), new Date(val[1])] : [null, null],
+        date2value: date => date
+    },
+    timestamp: {
+        value2date: val => isValidRange(val) ? [new Date(val[0]), new Date(val[1])] : [null, null],
+        date2value: date => date.map(transformDate.timestamp.date2value)
+    },
+    formatdate: {
+        value2date: (val, format) => {
+            if (Array.isArray(val) && val.length === 2) {
+                const start = parseDate(val[0], format)
+                const end = parseDate(val[1], format)
+                if (start && end && end >= start) {
+                    return [start, end]
+                }
+            }
+            return [null, null]
+        },
+        date2value: (date, format) => date.map(val => transformDate.formatdate.date2value(val, format))
+    }
+}
+
+const pickers = ['今天', '昨天', '一周前']
+export const shortcuts = [
+    {
+        text: pickers[0],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            self.curVal = new Date(_date)
+            self.updateDate(true)
         }
-        if (elapsed >= delay) {
-            callBack()
-        } else {
-            timeout = setTimeout(callBack, delay)
+    },
+    {
+        text: pickers[1],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            let preDate = _date - (3600 * 1000 * 24)
+            self.curVal = new Date(preDate)
+            self.updateDate(true)
+        }
+    },
+    {
+        text: pickers[2],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            let preDate = _date - 3600 * 1000 * 24 * 7
+            self.curVal = new Date(preDate)
+            self.updateDate(true)
         }
     }
+]
+
+const rangePickers = ['最近一周', '最近一个月', '最近三个月']
+export const rangeShortcuts = [
+    {
+        text: rangePickers[0],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            self.curVal = [ new Date(_date - 3600 * 1000 * 24 * 6), new Date(_date) ]
+            self.updateDate(true)
+        }
+    },
+    {
+        text: rangePickers[1],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            self.curVal = [ new Date(_date - 3600 * 1000 * 24 * 30), new Date(_date) ]
+            self.updateDate(true)
+        }
+    },
+    {
+        text: rangePickers[2],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            self.curVal = [ new Date(_date - 3600 * 1000 * 24 * 90), new Date(_date) ]
+            self.updateDate(true)
+        }
+    }
+]
+
+export const placeholder = {
+    time: ['请选择时间', '请选择时间范围'],
+    datetime: ['请选择日期时间', '请选择日期时间范围'],
+    year: ['请选择年份', '请选择年份范围'],
+    month: ['请选择月份', '请选择月份范围'],
+    date: ['请选择日期', '请选择日期范围']
 }

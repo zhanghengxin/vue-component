@@ -1,5 +1,5 @@
 <template>
-    <div :class="radioGroupClass" :value='value'>
+    <div :class="radioGroupClass">
         <slot></slot>
     </div>
 </template>
@@ -17,6 +17,10 @@ export default {
         type: {
             type: String,
             default: ''
+        },
+        size: {
+            type: String,
+            default: ''
         }
     },
     data () {
@@ -25,10 +29,30 @@ export default {
     },
     computed: {
         radioGroupClass () {
-            return [`${prefixCls}-button`]
+            return [
+                {
+                    [`${prefixCls}-button`]: this.type,
+                    [`${prefixCls}-${this.size}`]: this.size
+                }
+            ]
         }
     },
+    mounted () {
+        this.defaultChange()
+    },
     methods: {
+        defaultChange () {
+            let arr = this.$children
+            arr.map((item) => {
+                if (this.value === item.label) {
+                    item.checkedValue = true
+                }
+            })
+        },
+        change (label) {
+            this.$emit('input', label)
+            this.$emit('on-change', label)
+        }
     }
 }
 </script>

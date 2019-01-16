@@ -27,12 +27,12 @@
 <script>
 import Popper from './popper'
 import TransferDom from '../modal/directive/transfer-dom'
-import { oneOf } from '../../utils/common'
+import { oneOf, prefix } from '../../utils/common'
 
-const prefixCls = 'b-tooltip'
+const prefixCls = `${prefix}tooltip`
 
 export default {
-    name: 'BTooltip',
+    name: prefixCls,
     directives: { TransferDom },
     mixins: [Popper],
     props: {

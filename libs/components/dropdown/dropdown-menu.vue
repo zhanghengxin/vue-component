@@ -1,51 +1,15 @@
 <template>
-    <transition :name="transitionNames[0]">
-        <ul :class="[prefixCls + '-menu']" class="b-popper" v-show="showPopper">
-            <slot></slot>
-        </ul>
-    </transition>
+    <ul :class='[prefixCls]'><slot></slot></ul>
 </template>
-
 <script>
-import Popper from '../../utils/vue-popper.js'
-const prefixCls = 'b-dropdown'
+import { prefix } from '../../utils/common'
+const prefixCls = prefix + 'dropdown-menu'
 export default {
-    name: 'BDropdownMenu',
-    mixins: [Popper],
+    name: prefixCls,
     data () {
         return {
-            prefixCls: prefixCls
-        }
-    },
-    props: {
-        transitionNames: {
-            type: Array,
-            default () {
-                return ['zoomIn', 'ease', 'fade']
-            }
-        }
-    },
-    inject: ['dropdown'],
-    created () {
-        this.$on('visible', val => {
-            this.showPopper = val
-        })
-    },
-    mounted () {
-        this.$parent.popperElm = this.popperElm = this.$el
-        this.referenceElm = this.$parent.$el
-    },
-    watch: {
-        'dropdown.placement': {
-            immediate: true,
-            handler (val) {
-                this.currentPlacement = val
-            }
+            prefixCls
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>
