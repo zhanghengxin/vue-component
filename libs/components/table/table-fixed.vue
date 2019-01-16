@@ -7,6 +7,8 @@
                 :header-style="fixedTableStyle"
                 :pre-cls="preCls"
                 :data="data"
+                :draggable="draggable"
+                :resizeable="resizeable"
                 :fixed="fixed">
             </table-head>
         </div>
@@ -32,6 +34,8 @@ export default {
         preCls: String,
         bodyStyle: Object,
         fixedColumns: Array,
+        resizeable: Boolean,
+        draggable: Boolean,
         data: Array,
         fixed: String
     },

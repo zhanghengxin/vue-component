@@ -9,6 +9,8 @@
                     :header-style="headerStyle"
                     :pre-cls="preCls"
                     :data="formatData"
+                    :resizeable="resizeable"
+                    :draggable="draggable"
                 >
                 </table-head>
             </div>
@@ -42,6 +44,8 @@
                 fixed="left"
                 ref="leftTable"
                 :data="formatData"
+                :resizeable="resizeable"
+                :draggable="draggable"
                 :fixed-columns="leftFixedColumns"
             >
             </table-fixed>
@@ -52,6 +56,8 @@
                 ref="rightTable"
                 fixed="right"
                 :data="formatData"
+                :draggable="draggable"
+                :resizeable="resizeable"
                 :fixed-columns="rightFixedColumns"
             >
             </table-fixed>
@@ -60,6 +66,12 @@
                 :style="fixedRightHeaderStyle"
                 v-if="rightFixedColumns.length">
             </div>
+        </div>
+        <div
+            :class="[preCls + '-resize-border']"
+            v-show="showResizeBorder"
+            :style="dragBorderHeight"
+            ref="resizeBorder">
         </div>
     </div>
 </template>
@@ -87,9 +99,14 @@ export default {
             cloneColumns: [],
             tableWidth: 0,
             bodyHeight: 0,
+            dragStartIndex: '',
             headerHeight: 0,
+            dragBorderHeight: {
+                height: '100%'
+            },
             horizontalScroll: false,
             verticalScroll: false,
+            showResizeBorder: false,
             scrollBarWidth: getScrollBarSize()
         }
     },
@@ -113,6 +130,14 @@ export default {
             }
         },
         highlightRow: {
+            type: Boolean,
+            default: false
+        },
+        resizeable: {
+            type: Boolean,
+            default: false
+        },
+        draggable: {
             type: Boolean,
             default: false
         },
@@ -140,22 +165,32 @@ export default {
         this.$on('mouse-out', this.handleMouseOut)
         this.$on('row-click', this.handleClick)
         this.$on('row-dbclick', this.handleDbclick)
+        this.$on('mouse-drag', this.handleMouse)
+        this.$on('drag-start', this.handleDragStart)
+        this.$on('drag-over', this.handleDragOver)
+        this.$on('drag-drop', this.handleDragDrop)
+        this.$on('drag-end', this.handleDragEnd)
     },
     mounted () {
         this.handleResize()
+        this.dragBorderHeight = this.getDragBorderHeight()
         on(window, 'resize', this.handleResize)
     },
     watch: {
         data: {
             handler () {
-                this.handleResize()
                 this.formatData = this.buildData()
+                this.handleResize()
             },
             deep: true
+        },
+        horizontalScroll () {
+            this.dragBorderHeight = this.getDragBorderHeight()
         },
         columns: {
             handler () {
                 this.cloneColumns = this.buildColumns()
+                this.handleResize()
             },
             deep: true
         }
@@ -173,7 +208,8 @@ export default {
                 `${preCls}`,
                 {
                     [`${preCls}-border`]: this.border,
-                    [`${preCls}-stripe`]: this.stripe
+                    [`${preCls}-stripe`]: this.stripe,
+                    [`${preCls}-draggable`]: this.draggable && !this.resizeable
                 }
             ]
         },
@@ -193,19 +229,20 @@ export default {
         },
         headerStyle () {
             let style = {}
-            if (this.tableWidth !== 0) {
-                let width = ''
-                width = this.tableWidth
-                style.width = `${width}px`
-            }
+            // if (this.tableWidth !== 0) {
+            let width = ''
+            width = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0) + (this.verticalScroll ? this.scrollBarWidth : 0)
+            style.width = `${width}px`
+            // }
             return style
         },
         bodyStyle () {
             let style = {}
-            if (this.tableWidth !== 0) {
-                let width = this.tableWidth - (this.verticalScroll ? this.scrollBarWidth : 0)
-                style.width = `${width}px`
-            }
+            // if (this.tableWidth !== 0) {
+            // let width = this.tableWidth - (this.verticalScroll ? this.scrollBarWidth : 0)
+            let width = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0)
+            style.width = `${width}px`
+            // }
             return style
         },
         bodyWrapStyle () {
@@ -290,8 +327,8 @@ export default {
                     this.$set(column, '_width', columnWidth)
                 }
             }
-            // 总宽度
-            this.tableWidth = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0) + (this.verticalScroll ? this.scrollBarWidth : 0)
+            // // 总宽度
+            // this.tableWidth = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0) + (this.verticalScroll ? this.scrollBarWidth : 0)
             this.scrollReckon()
         },
         scrollReckon () {
@@ -431,6 +468,52 @@ export default {
             this.$emit('on-row-dbclick', deepCopy(this.data[_index]))
             if (!this.highlightRow) return
             this.handleCurrentRow(_index)
+        },
+        handleMouse (options) {
+            if (options.isMouseUp) {
+                this.showResizeBorder = false
+                this.$set(this.cloneColumns[options.index], 'width', this.cloneColumns[options.index]._width + options.deltaX)
+                this.handleResize()
+            } else {
+                console.log(options.borderLeft, 'borderLeft')
+                this.showResizeBorder = true
+                this.$refs.resizeBorder.style.left = options.borderLeft + 'px'
+            }
+        },
+        handleDragStart (index) {
+            this.showResizeBorder = false
+            this.dragStartIndex = index
+        },
+        handleDragEnd () {
+            this.showResizeBorder = false
+            this.dragStartIndex = ''
+        },
+        handleDragOver (borderLeft) {
+            this.showResizeBorder = true
+            this.$refs.resizeBorder.style.left = borderLeft + 'px'
+        },
+        attrChange (beforeIndex, afterIndex) {
+            let cloneColumns = this.cloneColumns
+            let cacheObj = deepCopy(cloneColumns[beforeIndex])
+            cloneColumns[beforeIndex].fixed = cloneColumns[afterIndex].fixed
+            cloneColumns[beforeIndex]._index = cloneColumns[afterIndex]._index
+            cloneColumns[afterIndex].fixed = cacheObj.fixed
+            cloneColumns[afterIndex]._index = cacheObj._index
+            cloneColumns[beforeIndex] = cloneColumns.splice(afterIndex, 1, cloneColumns[beforeIndex])[0]
+        },
+        handleDragDrop (index) {
+            if (this.dragStartIndex === '') return
+            this.attrChange(this.dragStartIndex, index)
+        },
+        getDragBorderHeight () {
+            let style = {}
+            let height = this.$el.getBoundingClientRect().height - getStyle(this.$refs.header, 'height').replace(/px/, '')
+            if (this.horizontalScroll) {
+                height = height - (this.horizontalScroll ? this.scrollBarWidth : 0)
+            }
+            style.height = `${height}px`
+            style.top = getStyle(this.$refs.header, 'height')
+            return style
         }
     }
 }
