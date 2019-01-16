@@ -1,9 +1,128 @@
-import Panel from '../panel/panel'
-import bButton from '../../button/Button'
-import { oneOf, prefix } from '../../../utils/common'
-import clickoutside from '../../../utils/directives/clickOutside'
-import { isValidDate, isValidRange, formatDate, parseDate, dateEqual, rangeEqual, transformDate, transformRange, isPlainObject } from '../../../utils/date'
+<template>
+    <div ref="picker" :class="wrapperCls" v-clickoutside="closePopup">
+        <b-input
+            ref="input"
+            :label="innerLabelText"
+            :fixed="fixed"
+            type="text"
+            :class="inputClass"
+            :name="inputName"
+            :disabled="disabled"
+            :readonly="!editable"
+            :value="text"
+            :labelWidth="width"
+            :size="size"
+            suffix
+            clearable
+            icon="rili"
+            :style="inputStyle"
+            :placeholder="innerPlaceholder"
+            @input="handleInput"
+            @on-change="handleChange"
+            @on-focus="showPopup">
+        </b-input>
+        <transition name="slide">
+            <div
+                v-show="popupVisible"
+                :class="popupCls"
+                ref="calendar">
+                <div :class="popupContentCls">
+                    <slot name="shortcuts">
+                        <div
+                            v-if="shortcuts && innerShortcuts.length"
+                            :class="shortcutsWrapper">
+                            <button
+                                type="button"
+                                :class="shortcutsCls"
+                                v-for="(range, index) in innerShortcuts"
+                                :key="index"
+                                @click="selectRange(range)">
+                                {{range.text}}
+                            </button>
+                        </div>
+                    </slot>
+                    <panel
+                        v-if="!range"
+                        :type="innerType"
+                        :date-format="innnerDateFormat"
+                        :value="curVal"
+                        :visible="popupVisible"
+                        :not-before="notBefore"
+                        :not-after="notAfter"
+                        :minute-step="minuteStep"
+                        :disabled-days="disabledDays"
+                        :first-day-of-week="firstDayOfWeek"
+                        @select-date="selectDate"
+                        @select-time="selectTime">
+                    </panel>
+                    <div v-else :class="rangeWrapper">
+                        <panel
+                            style="box-shadow: 1px 0 rgba(0, 0, 0, .1)"
+                            v-bind="$attrs"
+                            :type="innerType"
+                            :date-format="innnerDateFormat"
+                            :value="curVal[0]"
+                            :start-at="null"
+                            :end-at="curVal[1]"
+                            :visible="popupVisible"
+                            :not-before="notBefore"
+                            :not-after="notAfter"
+                            :minute-step="minuteStep"
+                            :disabled-days="disabledDays"
+                            :first-day-of-week="firstDayOfWeek"
+                            @select-date="selectStartDate"
+                            @select-time="selectStartTime">
+                        </panel>
+                        <panel
+                            v-bind="$attrs"
+                            :type="innerType"
+                            :date-format="innnerDateFormat"
+                            :value="curVal[1]"
+                            :start-at="curVal[0]"
+                            :end-at="null"
+                            :not-before="notBefore"
+                            :not-after="notAfter"
+                            :minute-step="minuteStep"
+                            :visible="popupVisible"
+                            :disabled-days="disabledDays"
+                            :first-day-of-week="firstDayOfWeek"
+                            @select-date="selectEndDate"
+                            @select-time="selectEndTime">
+                        </panel>
+                    </div>
+                </div>
+                <slot name="footer" :confirm="confirmDate">
+                    <div v-if="confirm" :class="footerCls">
+                        <b-button @on-click="confirmDate">
+                            {{ confirmText }}
+                        </b-button>
+                    </div>
+                </slot>
+            </div>
+        </transition>
+    </div>
+</template>
+
+<script>
 import Vue from 'vue'
+import Panel from './panel/panel'
+import bButton from '../button/Button'
+import { oneOf, prefix } from '../../utils/common'
+import clickoutside from '../../utils/directives/clickOutside'
+import {
+    isValidDate,
+    isValidRange,
+    formatDate,
+    parseDate,
+    dateEqual,
+    rangeEqual,
+    transformDate,
+    transformRange,
+    isPlainObject,
+    shortcuts,
+    rangeShortcuts,
+    placeholder
+} from '../../utils/date'
 const isServer = Vue.prototype.$isServer
 const Popper = isServer ? function () {} : require('popper.js/dist/umd/popper.js')
 const pickerCls = `${prefix}datepicker`
@@ -20,10 +139,7 @@ export default {
             type: Boolean,
             default: false
         },
-        labelText: {
-            type: String,
-            default: () => this.label ? '日期' : ''
-        },
+        labelText: String,
         fixed: {
             type: Boolean,
             default: false
@@ -96,6 +212,34 @@ export default {
             validator (value) {
                 return oneOf(value, ['formatdate', 'timestamp', 'date']) || isPlainObject(value)
             }
+        },
+        notBefore: {
+            default: null,
+            validator: function (val) {
+                return !val || isValidDate(val)
+            }
+        },
+        notAfter: {
+            default: null,
+            validator: function (val) {
+                return !val || isValidDate(val)
+            }
+        },
+        minuteStep: {
+            type: Number,
+            default: 0,
+            validator: val => val >= 0 && val <= 60
+        },
+        disabledDays: {
+            type: [Array, Function],
+            default: function () {
+                return []
+            }
+        },
+        firstDayOfWeek: {
+            type: Number,
+            default: 7,
+            validator: val => val >= 1 && val <= 7
         }
     },
     data () {
@@ -114,8 +258,8 @@ export default {
         popupCls () {
             return `${pickerCls}-popup`
         },
-        popupTopCls () {
-            return `${pickerCls}-popup-top`
+        popupContentCls () {
+            return `${pickerCls}-popup-content`
         },
         shortcutsWrapper () {
             return `${shortcutsCls}-wrapper`
@@ -126,109 +270,37 @@ export default {
         footerCls () {
             return `${pickerCls}-footer`
         },
-        transform () {
-            const obj = this.range ? transformRange : transformDate
-            return isPlainObject(this.dateType) ? { ...obj.date, ...this.dateType } : obj[this.dateType] || obj.date
-        },
-        innerPlaceholder () {
-            if (typeof this.placeholder === 'string') return this.placeholder
-            if (this.innerType === 'time') {
-                return this.range ? '请选择时间范围' : '请选择时间'
-            } else if (this.innerType === 'datetime') {
-                return this.range ? '请选择日期时间范围' : '请选择日期时间'
-            } else if (this.innerType === 'year') {
-                return '请选择年份'
-            } else if (this.innerType === 'month') {
-                return '请选择月份'
-            } else {
-                return this.range ? '请选择日期范围' : '请选择日期'
-            }
-        },
         text () {
             if (this.userInput !== null) return this.userInput
             const date = this.transform.value2date(this.value, this.format)
             if (!this.range) return date ? this.stringify(date) : ''
             return Array.isArray(date) && date.length === 2 && date[0] && date[1]
-                ? `${this.stringify(date[0])} ${this.rangeSeparator} ${this.stringify(date[1])}` : ''
+                ? `${this.stringify(date[0])} ${this.rangeSeparator} ${this.stringify(date[1])}`
+                : ''
+        },
+        transform () {
+            const obj = this.range ? transformRange : transformDate
+            return isPlainObject(this.dateType) ? { ...obj.date, ...this.dateType } : obj[this.dateType] || obj.date
         },
         showClearIcon () {
             return !this.disabled && this.clearable && (this.range ? isValidRange(this.value) : isValidDate(this.value))
         },
+        innerPlaceholder () {
+            if (typeof this.placeholder === 'string') return this.placeholder
+
+            const p = placeholder[this.innerType]
+            return this.range ? p[1] : p[0]
+        },
+        innerLabelText () {
+            return this.label ? '日期' : ''
+        },
         innerType () {
             return String(this.type).toLowerCase()
-        },
-        innerRangeShortcuts () {
-            if (Array.isArray(this.shortcuts)) return this.shortcuts
-            if (this.shortcuts === false) return []
-            let pickers = ['今天', '昨天', '一周前']
-            // TODO
-            const arr = [
-                {
-                    text: pickers[0],
-                    onClick (self) {
-                        let _date = new Date()
-                        _date.setHours(0, 0, 0, 0)
-                        self.curVal = new Date(_date)
-                        self.updateDate(true)
-                    }
-                },
-                {
-                    text: pickers[1],
-                    onClick (self) {
-                        let _date = new Date()
-                        _date.setHours(0, 0, 0, 0)
-                        let preDate = _date - (3600 * 1000 * 24)
-                        self.curVal = new Date(preDate)
-                        self.updateDate(true)
-                    }
-                },
-                {
-                    text: pickers[2],
-                    onClick (self) {
-                        let _date = new Date()
-                        _date.setHours(0, 0, 0, 0)
-                        let preDate = _date - 3600 * 1000 * 24 * 7
-                        self.curVal = new Date(preDate)
-                        self.updateDate(true)
-                    }
-                }
-            ]
-            return arr
         },
         innerShortcuts () {
             if (Array.isArray(this.shortcuts)) return this.shortcuts
             if (this.shortcuts === false) return []
-            let pickers = ['最近一周', '最近一个月', '最近三个月']
-            const arr = [
-                {
-                    text: pickers[0],
-                    onClick (self) {
-                        let _date = new Date()
-                        _date.setHours(0, 0, 0, 0)
-                        self.curVal = [ new Date(_date - 3600 * 1000 * 24 * 6), new Date(_date) ]
-                        self.updateDate(true)
-                    }
-                },
-                {
-                    text: pickers[1],
-                    onClick (self) {
-                        let _date = new Date()
-                        _date.setHours(0, 0, 0, 0)
-                        self.curVal = [ new Date(_date - 3600 * 1000 * 24 * 30), new Date(_date) ]
-                        self.updateDate(true)
-                    }
-                },
-                {
-                    text: pickers[2],
-                    onClick (self) {
-                        let _date = new Date()
-                        _date.setHours(0, 0, 0, 0)
-                        self.curVal = [ new Date(_date - 3600 * 1000 * 24 * 90), new Date(_date) ]
-                        self.updateDate(true)
-                    }
-                }
-            ]
-            return arr
+            return this.range ? rangeShortcuts : shortcuts
         },
         innnerDateFormat () {
             if (this.dateFormat) return this.dateFormat
@@ -241,6 +313,7 @@ export default {
             const offsetWidth = inputBox.$el.children[1].offsetWidth
             if (this.label && this.fixed) return offsetWidth
             if (this.label) return offsetWidth + 4
+            return 0
         }
     },
     watch: {
@@ -274,21 +347,25 @@ export default {
             if (typeof range.onClick === 'function') {
                 return range.onClick(this)
             }
-            let { start, end } = range
-            this.curVal = [new Date(start), new Date(end)]
-            this.updateDate(true)
-        },
-        clearDate () {
-            let date = this.range ? [null, null] : null
-            this.curVal = date
-            this.updateDate(true)
-            this.$emit('clear')
-        },
-        confirmDate () {
-            let valid = this.range ? isValidRange(this.curVal) : isValidDate(this.curVal)
-            if (valid) {
+            if (this.range) {
+                const [ start, end ] = range.date
+                this.curVal = [new Date(start), new Date(end)]
+                this.updateDate(true)
+            } else {
+                this.curVal = range.date
                 this.updateDate(true)
             }
+        },
+        clearDate () {
+            const date = this.range ? [null, null] : null
+            this.curVal = date
+            this.updateDate(true)
+            if (this.popupVisible) this.closePopup()
+            this.$emit('on-clear')
+        },
+        confirmDate () {
+            const valid = this.range ? isValidRange(this.curVal) : isValidDate(this.curVal)
+            if (valid) this.updateDate(true)
             this.$emit('on-confirm', this.transform.date2value(this.curVal, this.format))
             this.closePopup()
         },
@@ -306,15 +383,11 @@ export default {
         },
         selectStartDate (date) {
             this.$set(this.curVal, 0, date)
-            if (this.curVal[1]) {
-                this.updateDate()
-            }
+            if (this.curVal[1]) this.updateDate()
         },
         selectEndDate (date) {
             this.$set(this.curVal, 1, date)
-            if (this.curVal[0]) {
-                this.updateDate()
-            }
+            if (this.curVal[0]) this.updateDate()
         },
         selectTime (time, close) {
             this.curVal = time
@@ -334,18 +407,18 @@ export default {
             this.popupVisible = false
             this.destroy()
         },
-        handleInput (e) {
-            if (e) {
-                this.userInput = e.target.value
+        handleInput (val) {
+            if (val) {
+                this.userInput = val
             } else {
                 this.clearDate()
             }
         },
         handleChange (e) {
-            let value = e.target.value
+            const { value } = e.target
             if (this.editable && this.userInput !== null) {
-                let calendar = this.$children[0]
-                let checkDate = calendar.isDisabledTime
+                const calendar = this.$children[1]
+                const checkDate = calendar.isDisabledTime
                 if (this.range) {
                     let range = value.split(` ${this.rangeSeparator} `)
                     if (range.length === 2) {
@@ -355,7 +428,6 @@ export default {
                             this.curVal = [ start, end ]
                             this.updateDate(true)
                             this.closePopup()
-                            return
                         }
                     }
                 } else {
@@ -364,10 +436,9 @@ export default {
                         this.curVal = date
                         this.updateDate(true)
                         this.closePopup()
-                        return
                     }
                 }
-                this.$emit('input-error', value)
+                this.$emit('on-input-error', value)
             }
         },
         update () {
@@ -424,9 +495,8 @@ export default {
             }
         },
         beforeDestroy () {
-            if (this.popper) {
-                this.popper.destroy()
-            }
+            if (this.popper) this.popper.destroy()
         }
     }
 }
+</script>

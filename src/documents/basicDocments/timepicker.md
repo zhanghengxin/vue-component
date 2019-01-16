@@ -5,7 +5,7 @@
 <div class='example'>
     <div class='example-box'>
         <b-timepicker 
-            v-model='time' 
+            v-model='time'
             @on-change='handleChangeTime'>
         <b-timepicker>
     </div>
@@ -14,6 +14,36 @@
 ```html
     <div>
         <b-timepicker v-model='time'><b-timepicker>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    time: '',
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
+### 定义分钟步频
+
+<div class='example'>
+    <div class='example-box'>
+        <b-timepicker 
+            v-model='timestemp'
+            :minuteStep='5'>
+        <b-timepicker>
+    </div>
+    
+::: code
+```html
+    <div>
+        <b-timepicker 
+            v-model='time'
+            :minute-step='5'><b-timepicker>
     </div>
     <script>
         export default {
@@ -89,7 +119,8 @@
                 time: '',
                 time1: '18:00:01',
                 daterange: '',
-                popup: ''
+                popup: '',
+                timestemp: 5
             }
         },
         methods: {

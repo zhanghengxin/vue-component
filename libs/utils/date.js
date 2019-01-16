@@ -113,3 +113,75 @@ export const transformRange = {
         date2value: (date, format) => date.map(val => transformDate.formatdate.date2value(val, format))
     }
 }
+
+const pickers = ['今天', '昨天', '一周前']
+export const shortcuts = [
+    {
+        text: pickers[0],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            self.curVal = new Date(_date)
+            self.updateDate(true)
+        }
+    },
+    {
+        text: pickers[1],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            let preDate = _date - (3600 * 1000 * 24)
+            self.curVal = new Date(preDate)
+            self.updateDate(true)
+        }
+    },
+    {
+        text: pickers[2],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            let preDate = _date - 3600 * 1000 * 24 * 7
+            self.curVal = new Date(preDate)
+            self.updateDate(true)
+        }
+    }
+]
+
+const rangePickers = ['最近一周', '最近一个月', '最近三个月']
+export const rangeShortcuts = [
+    {
+        text: rangePickers[0],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            self.curVal = [ new Date(_date - 3600 * 1000 * 24 * 6), new Date(_date) ]
+            self.updateDate(true)
+        }
+    },
+    {
+        text: rangePickers[1],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            self.curVal = [ new Date(_date - 3600 * 1000 * 24 * 30), new Date(_date) ]
+            self.updateDate(true)
+        }
+    },
+    {
+        text: rangePickers[2],
+        onClick (self) {
+            let _date = new Date()
+            _date.setHours(0, 0, 0, 0)
+            self.curVal = [ new Date(_date - 3600 * 1000 * 24 * 90), new Date(_date) ]
+            self.updateDate(true)
+        }
+    }
+]
+
+export const placeholder = {
+    time: ['请选择时间', '请选择时间范围'],
+    datetime: ['请选择日期时间', '请选择日期时间范围'],
+    year: ['请选择年份', '请选择年份范围'],
+    month: ['请选择月份', '请选择月份范围'],
+    date: ['请选择日期', '请选择日期范围']
+}
