@@ -1,19 +1,25 @@
 /*
  * @Author: lijiahang
  * @Date: 2018-11-15 17:52:20
- * @Last Modified by: lijiahang
- * @Last Modified time: 2018-11-19 16:09:32
+ * @Last Modified by: hanshuai@baiwang.com
+ * @Last Modified time: 2019-01-16 15:21:06
  */
 
 <template>
-  <div :class="btagoutclass" v-if="show">
-    <span v-if="type" :class="btagdotclass"></span>
-    <span>
-         <slot></slot>
-    </span>
-     <b-icon  v-if="closeable" type="quxiao-guanbi-shanchu" @click.native='close'>
-    </b-icon>
-  </div>
+    <div :class="btagoutclass" v-if="show" @click="handleClick">
+        <span
+            v-if="type"
+            :class="btagdotclass">
+        </span>
+        <span>
+            <slot></slot>
+        </span>
+        <b-icon
+            v-if="closeable"
+            type="quxiao-guanbi-shanchu"
+            @click.native='close'>
+        </b-icon>
+    </div>
 </template>
 
 <script>
@@ -57,6 +63,9 @@ export default {
         close (event) {
             this.show = false
             this.$emit('on-close', event)
+        },
+        handleClick (e) {
+            this.$emit('on-click', e)
         }
     }
 }
