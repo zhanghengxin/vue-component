@@ -9,6 +9,7 @@
                 :data="data"
                 :draggable="draggable"
                 :resizeable="resizeable"
+                :dynamicable="dynamicable"
                 :fixed="fixed">
             </table-head>
         </div>
@@ -34,6 +35,7 @@ export default {
         preCls: String,
         bodyStyle: Object,
         fixedColumns: Array,
+        dynamicable: Boolean,
         resizeable: Boolean,
         draggable: Boolean,
         data: Array,

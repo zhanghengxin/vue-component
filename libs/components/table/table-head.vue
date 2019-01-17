@@ -1,13 +1,13 @@
 <template>
     <table cellspacing="0" cellpadding="0" border="0" :style="styles">
         <colgroup>
-            <col v-for="(column, index) in columns" :key="index" :width="setCellWidth(column)">
+            <col v-for="(column, index) in visibleColumns" :key="index" :width="setCellWidth(column)">
             <col v-if="$parent.verticalScroll" :width="$parent.scrollBarWidth"/>
         </colgroup>
         <thead>
         <tr>
             <th
-                v-for="(item,index) in columns"
+                v-for="(item,index) in visibleColumns"
                 :key="index"
                 :class="alignCls(item)"
                 :colspan="item.colSpan"
@@ -75,6 +75,7 @@ export default {
         headerStyle: Object,
         data: Array,
         resizeable: Boolean,
+        dynamicable: Boolean,
         draggable: Boolean
     },
     computed: {
@@ -95,6 +96,9 @@ export default {
                 }
             }
             return status
+        },
+        visibleColumns () {
+            return this.columns.filter((item) => item._visible)
         }
     },
     methods: {
@@ -156,9 +160,11 @@ export default {
             document.body.style.cursor = ''
         },
         mousedownHandler (e, index) {
+            if (this.dynamicable) this.rightClick(e)
             if (!this.isResizing) return
             this.isResizing = true
             const table = findComponentUpward(this, this.preCls).$el
+            const cellMinWidth = 80
             // document.onselectstart = function () { return false }
             document.ondragstart = () => { return false }
             let target = e.target
@@ -172,16 +178,21 @@ export default {
             let tableWidth = table.getBoundingClientRect().width
             const handleMouseMove = (event) => {
                 let borderLeft
-                if (event.pageX + columnsWidth - 40 < startX) {
-                    borderLeft = startX - columnsWidth + 40 - x
+                if (event.pageX + columnsWidth - cellMinWidth < startX) {
+                    borderLeft = startX - columnsWidth + cellMinWidth - x
                 } else if (event.pageX > tableWidth + x) {
-                    borderLeft = tableWidth - 20
+                    borderLeft = tableWidth - 1
                 } else {
                     borderLeft = event.pageX - x
+                }
+                let deltaX = event.pageX - startX
+                if (deltaX < 0 && -deltaX > columnsWidth - cellMinWidth) {
+                    deltaX = -(columnsWidth - cellMinWidth)
                 }
                 document.body.style.cursor = 'col-resize'
                 this.dispatch(this.preCls, 'mouse-drag', {
                     borderLeft: borderLeft,
+                    deltaX: deltaX,
                     isMouseUp: false
                 })
             }
@@ -190,8 +201,8 @@ export default {
             }
             const handleMouseUp = (event) => {
                 let deltaX = event.pageX - startX
-                if (deltaX < 0 && -deltaX > columnsWidth - 40) {
-                    deltaX = -(columnsWidth - 40)
+                if (deltaX < 0 && -deltaX > columnsWidth - cellMinWidth) {
+                    deltaX = -(columnsWidth - cellMinWidth)
                 }
                 document.body.style.cursor = ''
                 this.dispatch(this.preCls, 'mouse-drag', {
@@ -239,6 +250,14 @@ export default {
         handleDrop (event, index) {
             if (!this.draggable) return false
             this.dispatch(this.preCls, 'drag-drop', this.columns[index]._index)
+        },
+        rightClick (event) {
+            if (event.button === 2) {
+                document.oncontextmenu = (e) => {
+                    e.preventDefault()
+                }
+                this.dispatch(this.preCls, 'context-menu', event)
+            }
         }
     }
 }

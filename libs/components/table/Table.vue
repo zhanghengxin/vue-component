@@ -10,6 +10,7 @@
                     :pre-cls="preCls"
                     :data="formatData"
                     :resizeable="resizeable"
+                    :dynamicable="dynamicable"
                     :draggable="draggable"
                 >
                 </table-head>
@@ -43,6 +44,7 @@
                 :pre-cls="preCls"
                 fixed="left"
                 ref="leftTable"
+                :dynamicable="dynamicable"
                 :data="formatData"
                 :resizeable="resizeable"
                 :draggable="draggable"
@@ -54,6 +56,7 @@
                 :bodyStyle="fixedBodyStyle"
                 :pre-cls="preCls"
                 ref="rightTable"
+                :dynamicable="dynamicable"
                 fixed="right"
                 :data="formatData"
                 :draggable="draggable"
@@ -73,16 +76,23 @@
             :style="dragBorderHeight"
             ref="resizeBorder">
         </div>
+        <dynamic-column
+            :pre-cls="preCls"
+            v-show="dynamicColumnBoxShow"
+            :columns="cloneColumns"
+            ref="dynamic">
+        </dynamic-column>
     </div>
 </template>
 
 <script>
 import { prefix } from '../../utils/common'
 import { deepCopy } from '../../utils/assist'
-import { getStyle, getScrollBarSize, on } from '../../utils/dom'
+import { getStyle, getScrollBarSize, on, containsElement } from '../../utils/dom'
 import tableHead from './table-head'
 import tableBody from './table-body'
 import tableFixed from './table-fixed'
+import dynamicColumn from './dynamic-column'
 import Emitter from '../../mixins/emitter'
 
 const preCls = prefix + 'table'
@@ -90,13 +100,14 @@ export default {
     name: preCls,
     mixins: [Emitter],
     components: {
-        tableHead, tableBody, tableFixed
+        tableHead, tableBody, tableFixed, dynamicColumn
     },
     data () {
         return {
             preCls: preCls,
             formatData: [],
             cloneColumns: [],
+            cloneWidth: 0,
             tableWidth: 0,
             bodyHeight: 0,
             dragStartIndex: '',
@@ -104,6 +115,7 @@ export default {
             dragBorderHeight: {
                 height: '100%'
             },
+            dynamicColumnBoxShow: false,
             horizontalScroll: false,
             verticalScroll: false,
             showResizeBorder: false,
@@ -150,6 +162,10 @@ export default {
             type: Boolean,
             default: false
         },
+        dynamicable: {
+            type: Boolean,
+            default: false
+        },
         stripe: {
             type: Boolean,
             default: false
@@ -170,11 +186,22 @@ export default {
         this.$on('drag-over', this.handleDragOver)
         this.$on('drag-drop', this.handleDragDrop)
         this.$on('drag-end', this.handleDragEnd)
+        this.$on('context-menu', this.handleContextMenu)
     },
     mounted () {
+        this.cloneWidth = this.width
         this.handleResize()
         this.dragBorderHeight = this.getDragBorderHeight()
         on(window, 'resize', this.handleResize)
+        // If you don't click on the dynamicColumn, hide it.
+        const handleClick = (event) => {
+            if (this.dynamicColumnBoxShow) {
+                if (!containsElement(this.$refs.dynamic.$el, event.target)) {
+                    this.dynamicColumnBoxShow = false
+                }
+            }
+        }
+        document.addEventListener('click', handleClick)
     },
     watch: {
         data: {
@@ -231,7 +258,7 @@ export default {
             let style = {}
             // if (this.tableWidth !== 0) {
             let width = ''
-            width = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0) + (this.verticalScroll ? this.scrollBarWidth : 0)
+            width = this.getColumnsWidth() + (this.verticalScroll ? this.scrollBarWidth : 0)
             style.width = `${width}px`
             // }
             return style
@@ -240,7 +267,8 @@ export default {
             let style = {}
             // if (this.tableWidth !== 0) {
             // let width = this.tableWidth - (this.verticalScroll ? this.scrollBarWidth : 0)
-            let width = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0)
+            // let width = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0)
+            let width = this.getColumnsWidth()
             style.width = `${width}px`
             // }
             return style
@@ -254,10 +282,10 @@ export default {
             return style
         },
         leftFixedColumns () {
-            return this.cloneColumns.filter((item) => item.fixed === 'left')
+            return this.cloneColumns.filter((item) => (item.fixed === 'left' && item._visible))
         },
         rightFixedColumns () {
-            return this.cloneColumns.filter((item) => item.fixed === 'right')
+            return this.cloneColumns.filter((item) => (item.fixed === 'right' && item._visible))
         },
         fixedBodyStyle () {
             let style = {}
@@ -294,20 +322,37 @@ export default {
         },
         buildColumns () {
             let columns = deepCopy(this.columns)
-            columns.forEach((row, index) => {
+            // Clumns in disorder
+            let fixLeftArr = columns.filter((item) => (item.fixed === 'left'))
+            let fixRightArr = columns.filter((item) => (item.fixed === 'right'))
+            let normalArr = columns.filter((item) => (!item.fixed))
+            let result = fixLeftArr.concat(normalArr, fixRightArr)
+            result.forEach((row, index) => {
                 row._index = index
+                row._visible = true
             })
-            return columns
+            return result
+        },
+        getColumnsWidth () {
+            return this.cloneColumns.map(cell => {
+                if (cell._visible) {
+                    return cell._width
+                } else {
+                    return 0
+                }
+            }).reduce((a, b) => a + b, 0)
         },
         handleResize () {
             let noWidthList = []
             let hasWidthList = []
             let tableWidth = this.$el.offsetWidth
             this.cloneColumns.forEach((item) => {
-                if (item.width) {
-                    hasWidthList.push(item)
-                } else {
-                    noWidthList.push(item)
+                if (item._visible) {
+                    if (item.width) {
+                        hasWidthList.push(item)
+                    } else {
+                        noWidthList.push(item)
+                    }
                 }
             })
             let columnWidth = 0
@@ -323,7 +368,7 @@ export default {
                 let column = this.cloneColumns[i]
                 if (column.width) {
                     this.$set(column, '_width', column.width)
-                } else {
+                } else if (column._visible) {
                     this.$set(column, '_width', columnWidth)
                 }
             }
@@ -377,6 +422,9 @@ export default {
                 if (this.formatData[i]._checked) selectionIndexes.push(this.data[i])
             }
             return deepCopy(selectionIndexes)
+        },
+        getVisibleNum () {
+            return this.cloneColumns.filter((item) => (item._visible)).length
         },
         selectAll (status) {
             this.formatData.forEach((item, index) => {
@@ -470,14 +518,25 @@ export default {
             this.handleCurrentRow(_index)
         },
         handleMouse (options) {
+            let tableWidth = this.$el.offsetWidth
+            let bodyWidth = this.$refs.body.$el.offsetWidth
+            let scrollWidth = this.verticalScroll ? this.scrollBarWidth : 0
             if (options.isMouseUp) {
+                let deltaX
                 this.showResizeBorder = false
-                this.$set(this.cloneColumns[options.index], 'width', this.cloneColumns[options.index]._width + options.deltaX)
+                // 拖拽后的宽度总宽度不能比表格的固定宽度小
+                if (options.deltaX + bodyWidth + scrollWidth > tableWidth) {
+                    deltaX = options.deltaX
+                } else {
+                    deltaX = tableWidth - bodyWidth - scrollWidth - 1
+                }
+                this.$set(this.cloneColumns[options.index], 'width', this.cloneColumns[options.index]._width + deltaX)
                 this.handleResize()
             } else {
-                console.log(options.borderLeft, 'borderLeft')
                 this.showResizeBorder = true
-                this.$refs.resizeBorder.style.left = options.borderLeft + 'px'
+                if (options.deltaX + bodyWidth + scrollWidth > tableWidth) {
+                    this.$refs.resizeBorder.style.left = options.borderLeft + 'px'
+                }
             }
         },
         handleDragStart (index) {
@@ -514,6 +573,17 @@ export default {
             style.height = `${height}px`
             style.top = getStyle(this.$refs.header, 'height')
             return style
+        },
+        handleContextMenu (event) {
+            let tablePosition = this.$el.getBoundingClientRect()
+            this.dynamicColumnBoxShow = true
+            this.$refs.dynamic.$el.style.left = event.clientX - tablePosition.left + 'px'
+            this.$refs.dynamic.$el.style.top = event.clientY - tablePosition.top + 'px'
+        },
+        dynamicOrder (index, status) {
+            if (this.getVisibleNum() < 2 && status) return
+            this.cloneColumns[index]._visible = !status
+            this.handleResize()
         }
     }
 }
