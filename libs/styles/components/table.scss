@@ -172,4 +172,15 @@ $prefix-table: $css-prefix + 'table';
     border-left: 1px dashed $Border;
     top: 0;
   }
+  &-dynamic-column {
+    position: absolute;
+    z-index: 5;
+    border-left: 1px dashed $Border;
+    top: 0;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 6px;
+    &-item {
+      padding: 3px 10px;
+    }
+  }
 }
