@@ -2,39 +2,23 @@
 
 ### 基本用法
 
-设置属性 `type` 为 date 显示选择单日 设置属性 `shortcuts` 为 true 显示选择单日快捷方式
+设置属性 `type` 为 date 显示选择单日
 
 <div class='example'>
     <div class='example-box'>
-        <div style='margin-bottom: 10px'>
-            切换显示快捷方式：<b-switch @on-change="handleChange"></b-switch>
-        </div>
-        <b-datepicker 
-            v-model='date' 
-            :shortcuts='short'
-            @on-change='handleChangeDate'>
-        <b-datepicker>
+        <b-datepicker v-model='date'><b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <div style='margin-bottom: 10px'>
-            切换显示快捷方式：<b-switch @on-change="handleChange"></b-switch>
-        </div>
-        <b-datepicker v-model='date' :shortcuts='shortcuts'><b-datepicker>
+        <b-datepicker v-model='date' ><b-datepicker>
     </div>
     <script>
         export default {
             data () {
                 return {
                     date: '',
-                    shortcuts: false
-                }
-            },
-            methods: {
-                handleChange(val) {
-                    this.short = val
                 }
             }
         }
@@ -70,37 +54,96 @@
 :::
 </div>
 
+### 不可选日期
+
+设置属性 `not-before`、`not-after`、`disabled-days` 设定不可选日期
+
+<div class='example'>
+    <div class='example-box'>
+        <b-datepicker 
+            v-model='notSelect' 
+            :not-before="new Date()" 
+            :not-after="new Date(new Date().getTime() + 3600 * 24 * 1000)">
+        <b-datepicker>
+    </div>
+    <div class='example-box'>
+        <b-datepicker 
+            v-model='notSelectRange' 
+            range
+            :not-before="new Date()" 
+            :not-after="new Date(new Date().getTime() + 3600 * 24 * 1000 * 30)">
+        <b-datepicker>
+    </div>
+    <div class='example-box'>
+        <b-datepicker 
+            v-model='disabledDaysTime' 
+            :disabled-days='disabledDays'>
+        <b-datepicker>
+    </div>
+    
+::: code
+```html
+    <div>
+        <b-datepicker 
+            v-model='notSelect' 
+            :not-before="notBefore" 
+            :not-after="notAfter">
+        <b-datepicker>
+            <b-datepicker 
+            v-model='notSelectRange' 
+            range
+            :not-before="notBeforeRange" 
+            :not-after="notAfterRange">
+        <b-datepicker>
+        <b-datepicker 
+            v-model='disabledDaysTime' 
+            :disabled-days='disabledDays'>
+        <b-datepicker>
+    </div>
+    <script>
+        const _date = new Date().getTime()
+        const nextDate = new Date(_date + (3600 * 1000 * 24))
+        const preDate = new Date(_date - (3600 * 1000 * 24))
+        const nextMonth = new Date(_date + (3600 * 1000 * 24 * 30))
+
+        export default {
+            data () {
+                return {
+                    notSelect: '',
+                    notSelectRange: '',
+                    disabledDaysTime: '',
+                    notBefore: new Date(),
+                    notAfter: nextDate,
+                    notBefore: new Date(),
+                    notAfter: nextMonth,
+                    disabledDays: [preDate, new Date(), nextDate]
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
 ### 选择日期范围
 
 设置属性 `range` 为 true 可在一个选择器中选择一个日期范围
 
 <div class='example'>
     <div class='example-box'>
-        <div style='margin-bottom: 10px'>
-            切换显示快捷方式：<b-switch @on-change="handleChangeShortcuts"></b-switch>
-        </div>
-        <b-datepicker v-model='daterange' range :shortcuts='shortcuts'><b-datepicker>
+        <b-datepicker v-model='daterange' range><b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <div style='margin-bottom: 10px'>
-            切换显示快捷方式：<b-switch @on-change="handleChange"></b-switch>
-        </div>
-        <b-datepicker v-model='daterange' range :shortcuts='shortcuts'><b-datepicker>
+        <b-datepicker v-model='daterange' range><b-datepicker>
     </div>
     <script>
         export default {
             data () {
                 return {
                     daterange: '',
-                    shortcuts: false
-                }
-            },
-            methods: {
-                handleChange(val) {
-                    this.shortcuts = val
                 }
             }
         }
@@ -253,6 +296,82 @@
 :::
 </div>
 
+### 快捷方式
+
+设置属性 `shortcuts` 显示快捷方式
+
+<div class='example'>
+    <div class='example-box'>
+        <b-datepicker 
+            v-model='shortcutsTime'
+            shortcuts>
+        <b-datepicker>
+    </div>
+    <div class='example-box'>
+        <b-datepicker 
+            v-model='customShortcutsTime'
+            :shortcuts='customShortcuts'>
+        <b-datepicker>
+    </div>
+    <div class='example-box'>
+        <b-datepicker 
+            range
+            v-model='customRangeShortcutsTime'
+            :shortcuts='customRangeShortcuts'>
+        <b-datepicker>
+    </div>
+    
+::: code
+```html
+    <div>
+        <b-datepicker 
+            v-model='shortcutsTime' 
+            shortcuts>
+        <b-datepicker>
+        <b-datepicker 
+            v-model='customShortcutsTime'
+            :shortcuts='customShortcuts'>
+        <b-datepicker>
+        <b-datepicker 
+            range
+            v-model='customRangeShortcutsTime'
+            :shortcuts='customRangeShortcuts'>
+        <b-datepicker>
+    </div>
+    <script>
+        const _date = new Date().getTime()
+        const nextDate = new Date(_date + (3600 * 1000 * 24))
+        export default {
+            data () {
+                return {
+                    shortcutsTime: '',
+                    customShortcutsTime: '',
+                    customRangeShortcutsTime: '',
+                    customRangeShortcuts: [
+                        {
+                            text: '最近两天',
+                            start: new Date(),
+                            end: nextDate
+                        }
+                    ],
+                    customShortcuts: [
+                        {
+                            text: '今天',
+                            date: new Date()
+                        },
+                        {
+                            text: '明天',
+                            date: nextDate
+                        }
+                    ]
+                }
+            },
+        }
+    </script>
+```
+:::
+</div>
+
 ### 定义输入框格式
 
 设置属性 `labelText` 来显示 label 的内容
@@ -330,6 +449,9 @@
 </div>
 
 <script>
+    const _date = new Date().getTime()
+    const nextDate = new Date(_date + (3600 * 1000 * 24))
+    const preDate = new Date(_date - (3600 * 24 * 1000))
     export default {
         data () {
             return {
@@ -341,7 +463,25 @@
                 month: '',
                 monthRange: '',
                 daterange: '',
-                shortcutsdate: '',
+                shortcutsTime: '',
+                customShortcutsTime: '',
+                customShortcuts: [
+                    {
+                        text: '今天',
+                        date: new Date()
+                    },
+                    {
+                        text: '明天',
+                        date: nextDate
+                    }
+                ],
+                customRangeShortcutsTime: '',
+                customRangeShortcuts: [
+                    {
+                        text: '最近两天',
+                        date: [new Date(), nextDate]
+                    }
+                ],
                 shortcuts: false,
                 popup: '',
                 time: '',
@@ -349,22 +489,14 @@
                 fixed: false,
                 labelText: '发布日期',
                 labelShorcuts: false,
-                confirmed: false
+                confirmed: false,
+                notSelect: '',
+                notSelectRange: '',
+                disabledDaysTime: '',
+                disabledDays: [preDate, new Date(), nextDate]
             }
         },
         methods: {
-            confirm(value) {
-                console.log('v', value)
-            },
-            handleChange(val) {
-                this.short = val
-            },
-            handleChangeShortcuts(val) {
-                this.shortcuts = val
-            },
-            handleChangeDate(val) {
-                console.log('val', val)
-            },
             handleChangeLabel(val) {
                 this.fixed = val
             },
@@ -397,13 +529,17 @@
 | confirm | 若为 true 则显示确认按钮且需要确认才更新时间 | Boolean | `true` `false` | false |
 | confirm-text | 确认按钮的名称 | Boolean | | 确认 |
 | placeholder | 默认提示性文字 | String |  | 请选择日期 |
-| shortcuts | 今天、昨天、一周前，最近一周、最近一个月、最近三个月 | Boolean |  | false |
+| shortcuts | 今天、昨天、一周前，最近一周、最近一个月、最近三个月 | Boolean/Array |  | false |
+| not-before | 禁止选择这个时间之前的时间 | String/Date | | false |
+| not-after |禁止选择这个时间之后的时间 | String/Date | | false |
+| disabled-days | 自定义禁止的日期 | Array/function |  | [] |
+| first-day-of-week | 日历星期几开头 | Number |  | 7 |
+
 
 ### Slots
 | 事件名 | 说明	| 返回值 |
 | ---- | ---- | ---- |
-| calendar-icon | 图标 | - |
-| header |  |  |
+| shortcuts |  |  |
 | footer |  |  |
 
 

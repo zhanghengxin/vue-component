@@ -84,6 +84,9 @@ $prefix-table: $css-prefix + 'table';
   &-stripe tr:nth-child(2n) td {
     background-color: $Background;
   }
+  &-draggable th {
+    cursor: pointer;
+  }
   &-stripe &-body &-row-hover, &-stripe &-body &-row-highlight {
     td {
       background: lighten($LightPrimary, 30%);
@@ -159,6 +162,25 @@ $prefix-table: $css-prefix + 'table';
     }
     .#{$prefix-table}-sort-active {
       color: $Primary;
+    }
+  }
+  &-resize-border {
+    position: absolute;
+    z-index: 5;
+    width: 1px;
+    height: 100%;
+    border-left: 1px dashed $Border;
+    top: 0;
+  }
+  &-dynamic-column {
+    position: absolute;
+    z-index: 5;
+    border-left: 1px dashed $Border;
+    top: 0;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 6px;
+    &-item {
+      padding: 3px 10px;
     }
   }
 }

@@ -200,6 +200,7 @@ export default {
         },
         timeHeader () {
             if (this.type === 'time') {
+                if (this.minuteStep !== 0) return this.$parent.format.slice(0, 5)
                 return this.$parent.format
             }
             return this.value && formatDate(this.value, this.dateFormat)

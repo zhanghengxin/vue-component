@@ -1,7 +1,7 @@
 <template>
     <table cellspacing="0" cellpadding="0" border="0" :style="styles">
         <colgroup>
-            <col v-for="(column, index) in columns" :key="index" :width="setCellWidth(column)">
+            <col v-for="(column, index) in visibleColumns" :key="index" :width="setCellWidth(column)">
         </colgroup>
         <tbody :class="[preCls + '-tbody']">
         <template v-for="(row, index) in data">
@@ -14,7 +14,7 @@
                 @dblclick.native.stop="dblclickCurrentRow(row._index)"
                 :key="index">
                 <td
-                    v-for="(column,_index) in cellColumns(columns,row,index)"
+                    v-for="(column,_index) in cellColumns(visibleColumns,row,index)"
                     :key="_index"
                     :colspan="cellColspan(row,column)"
                     :rowspan="cellRowspan(row,column)"
@@ -56,6 +56,9 @@ export default {
             const width = parseInt(this.bodyStyle.width)
             style.width = `${width}px`
             return style
+        },
+        visibleColumns () {
+            return this.columns.filter((item) => item._visible)
         }
     },
     methods: {

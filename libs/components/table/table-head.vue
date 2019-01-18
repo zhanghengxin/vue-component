@@ -1,17 +1,26 @@
 <template>
     <table cellspacing="0" cellpadding="0" border="0" :style="styles">
         <colgroup>
-            <col v-for="(column, index) in columns" :key="index" :width="setCellWidth(column)">
+            <col v-for="(column, index) in visibleColumns" :key="index" :width="setCellWidth(column)">
             <col v-if="$parent.verticalScroll" :width="$parent.scrollBarWidth"/>
         </colgroup>
         <thead>
         <tr>
             <th
-                v-for="(item,index) in columns"
+                v-for="(item,index) in visibleColumns"
                 :key="index"
                 :class="alignCls(item)"
                 :colspan="item.colSpan"
-                :rowspan="item.rowSpan">
+                :draggable="draggable"
+                :rowspan="item.rowSpan"
+                @dragstart.stop="handleDragStart($event,index)"
+                @dragover.stop="handleDragOver($event)"
+                @dragend.stop="handleEndDrop($event)"
+                @drop.stop="handleDrop($event,index)"
+                @mousemove="mousemoveHandler($event)"
+                @mousedown="mousedownHandler($event,index)"
+                @mouseleave="mouseleaveHandler"
+            >
                 <div :class="cellCls(item)">
                     <template v-if="item.type === 'selection'">
                         <Checkbox
@@ -48,16 +57,26 @@ import tableMixin from './tableMixin'
 import Checkbox from '../checkbox/Checkbox.vue'
 import Icon from '../icon/Icon'
 import Emitter from '../../mixins/emitter'
+import { findComponentUpward } from '../../utils/assist'
 
 export default {
     name: 'TableHead',
     mixins: [tableMixin, Emitter],
     components: {Checkbox, Icon},
+    data () {
+        return {
+            isResizing: false
+        }
+    },
     props: {
         columns: Array,
+        cloneColumns: Array,
         preCls: String,
         headerStyle: Object,
-        data: Array
+        data: Array,
+        resizeable: Boolean,
+        dynamicable: Boolean,
+        draggable: Boolean
     },
     computed: {
         styles () {
@@ -77,6 +96,9 @@ export default {
                 }
             }
             return status
+        },
+        visibleColumns () {
+            return this.columns.filter((item) => item._visible)
         }
     },
     methods: {
@@ -103,6 +125,139 @@ export default {
                 index: index,
                 type: type
             })
+        },
+        mousemoveHandler (e) {
+            if (!this.resizeable) {
+                this.isResizing = false
+                return false
+            }
+            const bodyStyle = document.body.style
+            bodyStyle.cursor = ''
+            let target = e.target
+            while (target && target.tagName !== 'TH') {
+                target = target.parentNode
+            }
+            if (target) {
+                let rect = target.getBoundingClientRect()
+                if (rect.width > 12 && rect.right - e.pageX < 10) {
+                    bodyStyle.cursor = 'col-resize'
+                    this.isResizing = true
+                    event.preventDefault()
+                } else {
+                    if (this.draggable) {
+                        bodyStyle.cursor = 'pointer'
+                    } else {
+                        bodyStyle.cursor = ''
+                    }
+                    this.isResizing = false
+                }
+            } else {
+                bodyStyle.cursor = ''
+                this.isResizing = false
+            }
+        },
+        mouseleaveHandler () {
+            document.body.style.cursor = ''
+        },
+        mousedownHandler (e, index) {
+            if (this.dynamicable) this.rightClick(e)
+            if (!this.isResizing) return
+            this.isResizing = true
+            const table = findComponentUpward(this, this.preCls).$el
+            const cellMinWidth = 80
+            // document.onselectstart = function () { return false }
+            document.ondragstart = () => { return false }
+            let target = e.target
+            while (target && target.tagName !== 'TH') {
+                target = target.parentNode
+            }
+            let startX = e.pageX
+            let columns = this.columns
+            let columnsWidth = columns[index]._width
+            let x = table.getBoundingClientRect().left
+            let tableWidth = table.getBoundingClientRect().width
+            const handleMouseMove = (event) => {
+                let borderLeft
+                if (event.pageX + columnsWidth - cellMinWidth < startX) {
+                    borderLeft = startX - columnsWidth + cellMinWidth - x
+                } else if (event.pageX > tableWidth + x) {
+                    borderLeft = tableWidth - 1
+                } else {
+                    borderLeft = event.pageX - x
+                }
+                let deltaX = event.pageX - startX
+                if (deltaX < 0 && -deltaX > columnsWidth - cellMinWidth) {
+                    deltaX = -(columnsWidth - cellMinWidth)
+                }
+                document.body.style.cursor = 'col-resize'
+                this.dispatch(this.preCls, 'mouse-drag', {
+                    borderLeft: borderLeft,
+                    deltaX: deltaX,
+                    isMouseUp: false
+                })
+            }
+            const handleMouseDown = (event) => {
+                event.preventDefault()
+            }
+            const handleMouseUp = (event) => {
+                let deltaX = event.pageX - startX
+                if (deltaX < 0 && -deltaX > columnsWidth - cellMinWidth) {
+                    deltaX = -(columnsWidth - cellMinWidth)
+                }
+                document.body.style.cursor = ''
+                this.dispatch(this.preCls, 'mouse-drag', {
+                    isMouseUp: true,
+                    deltaX: deltaX,
+                    index: columns[index]._index
+                })
+                document.removeEventListener('mousemove', handleMouseMove)
+                document.removeEventListener('mouseup', handleMouseUp)
+                document.removeEventListener('mousedown', handleMouseDown)
+            }
+            document.addEventListener('mousedown', handleMouseDown)
+            document.addEventListener('mousemove', handleMouseMove)
+            document.addEventListener('mouseup', handleMouseUp)
+        },
+        handleDragStart (event, index) {
+            if (!this.draggable || this.isResizing) event.preventDefault()
+            try {
+                // setData is required for draggable to work in FireFox
+                // the content has to be '' so dragging a node out of the tree won't open a new tab in FireFox
+                event.dataTransfer.setData('text/plain', '')
+            } catch (e) {}
+            this.dispatch(this.preCls, 'drag-start', this.columns[index]._index)
+        },
+        handleDragOver (event) {
+            if (!this.draggable) return false
+            const table = findComponentUpward(this, this.preCls).$el
+            const tableLeft = table.getBoundingClientRect().left
+            const tableWidth = table.getBoundingClientRect().width
+            let borderLeft
+            if (event.pageX < tableLeft) {
+                borderLeft = 0
+            } else if (event.pageX - tableLeft > tableWidth) {
+                borderLeft = tableWidth
+            } else {
+                borderLeft = event.pageX - tableLeft
+            }
+            this.dispatch(this.preCls, 'drag-over', borderLeft)
+            event.preventDefault()
+        },
+        handleEndDrop () {
+            if (!this.draggable) return false
+            this.dispatch(this.preCls, 'drag-end', '')
+        },
+        handleDrop (event, index) {
+            if (!this.draggable) return false
+            this.dispatch(this.preCls, 'drag-drop', this.columns[index]._index)
+        },
+        rightClick (event) {
+            if (event.button === 2) {
+                document.oncontextmenu = (e) => {
+                    e.preventDefault()
+                }
+                this.dispatch(this.preCls, 'context-menu', event)
+            }
         }
     }
 }
