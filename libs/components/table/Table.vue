@@ -169,6 +169,20 @@ export default {
         stripe: {
             type: Boolean,
             default: false
+        },
+        showIndex: {
+            type: Boolean,
+            default: false
+        },
+        indexInfo: {
+            type: Object,
+            default () {
+                return {
+                    page: 1,
+                    size: 10,
+                    width: 50
+                }
+            }
         }
     },
     created () {
@@ -335,6 +349,11 @@ export default {
         },
         getColumnsWidth () {
             return this.cloneColumns.map(cell => {
+                return cell._width
+            }).reduce((a, b) => a + b, 0)
+        },
+        getVisibleColumnsWidth () {
+            return this.cloneColumns.map(cell => {
                 if (cell._visible) {
                     return cell._width
                 } else {
@@ -372,6 +391,8 @@ export default {
                     this.$set(column, '_width', columnWidth)
                 }
             }
+            // console.log(this.getVisibleColumnsWidth(), 'width')
+            // console.log(tableWidth, 'tableWidth')
             // // 总宽度
             // this.tableWidth = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0) + (this.verticalScroll ? this.scrollBarWidth : 0)
             this.scrollReckon()
@@ -397,7 +418,7 @@ export default {
                 let bodyContentEl = this.$refs.body.$el
                 let bodyEl = bodyContentEl.parentElement
                 let bodyContentHeight = bodyContentEl.offsetHeight
-                this.horizontalScroll = bodyEl.offsetWidth < bodyContentEl.offsetWidth + (this.verticalScroll ? this.scrollBarWidth : 0)
+                this.horizontalScroll = bodyEl.offsetWidth < bodyContentEl.offsetWidth + (this.verticalScroll ? this.scrollBarWidth : 0) - 1
                 this.verticalScroll = this.bodyHeight ? bodyContentHeight > this.bodyHeight : false
                 if (this.verticalScroll) {
                     bodyEl.classList.add(this.preCls + '-overflowY')

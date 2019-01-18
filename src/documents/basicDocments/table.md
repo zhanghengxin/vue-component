@@ -1340,7 +1340,7 @@
                            pets:'cat',
                            hobby:'Swimming',
                            id:'2',
-                           book:'《霸皇记》',
+                           book:'《霸皇纪》',
                            occupation:'Doctor'
                        },
                        {
@@ -1387,14 +1387,14 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table dynamicable border width=1000 height=200 :columns='columns11' :data='data11'></b-table>
+           <b-table dynamicable border width=1000 :columns='columns11' :data='data11'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-       <b-table dynamicable border width=1000 height=200 :columns='columns11' :data='data11'></b-table>
+       <b-table dynamicable border width=1000 :columns='columns11' :data='data11'></b-table>
     </div>
     <script>
         export default {
@@ -1432,65 +1432,184 @@
                              width:200
                          }
                     ],
-                   data10: [
-                       {
-                           name: '欧阳',
-                           age: 12,
-                           sex: '男',
-                           hobby:'Swimming',
-                           pets:'dog',
-                           occupation:'Doctor',
-                           like:'red',
-                           id:'1',
-                           book:'《贩罪》'
-                       },
-                       {
-                           name: '青蛙',
-                           sex: '男',
-                           age: 22,
-                           pets:'cat',
-                           hobby:'Swimming',
-                           id:'2',
-                           book:'《霸皇记》',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '警长',
-                           age: 18,
-                           sex: '男',
-                           pets:'rhizomys',
-                           hobby:'Swimming',
-                           id:'3',
-                           book:'《龙族》',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '球形闪电',
-                           age: 6,
-                           sex: '男',
-                           pets:'cat',
-                           hobby:'Swimming',
-                           book:'《卡徒》',
-                           id:'4',
-                           occupation:'Bodyguard'
-                       },
-                       {
-                           name: '会长',
-                           age: 38,
-                           sex: '男',
-                           book:'《无限道武者路》',
-                           id:'5',
-                           pets:'rhizomys',
-                           hobby:'Thousand-hand Bodhisattva',
-                           occupation:'President'
-                       }
-                   ]
+                    data10: [
+                         {
+                             name: '欧阳',
+                             age: 12,
+                             sex: '男',
+                             hobby:'Swimming',
+                             pets:'dog',
+                             occupation:'Doctor',
+                             like:'red',
+                             id:'1',
+                             book:'《贩罪》'
+                         },
+                         {
+                             name: '青蛙',
+                             sex: '男',
+                             age: 22,
+                             pets:'cat',
+                             like:'green',
+                             hobby:'Swimming',
+                             id:'2',
+                             book:'《霸皇纪》',
+                             occupation:'Doctor'
+                         },
+                         {
+                             name: '警长',
+                             age: 18,
+                             sex: '男',
+                             pets:'rhizomys',
+                             hobby:'Swimming',
+                             like:'orange',
+                             id:'3',
+                             book:'《龙族》',
+                             occupation:'Doctor'
+                         },
+                         {
+                             name: '球形闪电',
+                             age: 6,
+                             sex: '男',
+                             pets:'cat',
+                             hobby:'Swimming',
+                             like:'pink',
+                             book:'《卡徒》',
+                             id:'4',
+                             occupation:'Bodyguard'
+                         },
+                         {
+                             name: '会长',
+                             age: 38,
+                             sex: '男',
+                             book:'《无限道武者路》',
+                             id:'5',
+                             like:'blue',
+                             pets:'rhizomys',
+                             hobby:'Thousand-hand Bodhisattva',
+                             occupation:'President'
+                         }
+                    ]
                 }
             }
     </script>
 ```
 :::
 </div>
+
+### 表格序号
+通过给组件设置 dynamicable 属性可以开启显示隐藏列功能
+<div class="example">
+    <div class="example-box">
+        <div>
+           <b-table border width=1000 :columns='columns11' :data='data11'></b-table>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+       <b-table dynamicable border width=1000 :columns='columns11' :data='data11'></b-table>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    columns11: [
+                         {
+                             title: 'Name',
+                             key: 'name',
+                             width:100
+                         },
+                         {
+                             title: 'Age',
+                             key: 'age',
+                             width:100
+                         },
+                         {
+                             title: 'Pets',
+                             key: 'pets',
+                             width:200
+                         },
+                         {
+                             title: 'Like',
+                             key: 'like',
+                             width:200
+                         },
+                         {
+                             title: 'ID',
+                             key: 'id',
+                             width:200
+                         },
+                         {
+                             title: 'Book',
+                             key: 'book',
+                             width:200
+                         }
+                    ],
+                    data10: [
+                         {
+                             name: '欧阳',
+                             age: 12,
+                             sex: '男',
+                             hobby:'Swimming',
+                             pets:'dog',
+                             occupation:'Doctor',
+                             like:'red',
+                             id:'1',
+                             book:'《贩罪》'
+                         },
+                         {
+                             name: '青蛙',
+                             sex: '男',
+                             age: 22,
+                             pets:'cat',
+                             like:'green',
+                             hobby:'Swimming',
+                             id:'2',
+                             book:'《霸皇纪》',
+                             occupation:'Doctor'
+                         },
+                         {
+                             name: '警长',
+                             age: 18,
+                             sex: '男',
+                             pets:'rhizomys',
+                             hobby:'Swimming',
+                             like:'orange',
+                             id:'3',
+                             book:'《龙族》',
+                             occupation:'Doctor'
+                         },
+                         {
+                             name: '球形闪电',
+                             age: 6,
+                             sex: '男',
+                             pets:'cat',
+                             hobby:'Swimming',
+                             like:'pink',
+                             book:'《卡徒》',
+                             id:'4',
+                             occupation:'Bodyguard'
+                         },
+                         {
+                             name: '会长',
+                             age: 38,
+                             sex: '男',
+                             book:'《无限道武者路》',
+                             id:'5',
+                             like:'blue',
+                             pets:'rhizomys',
+                             hobby:'Thousand-hand Bodhisattva',
+                             occupation:'President'
+                         }
+                    ]
+                }
+            }
+    </script>
+```
+:::
+</div>
+
 
 <script>
     export default {
@@ -2139,9 +2258,10 @@
                         sex: '男',
                         age: 22,
                         pets:'cat',
+                        like:'green',
                         hobby:'Swimming',
                         id:'2',
-                        book:'《霸皇记》',
+                        book:'《霸皇纪》',
                         occupation:'Doctor'
                     },
                     {
@@ -2150,6 +2270,7 @@
                         sex: '男',
                         pets:'rhizomys',
                         hobby:'Swimming',
+                        like:'orange',
                         id:'3',
                         book:'《龙族》',
                         occupation:'Doctor'
@@ -2160,6 +2281,7 @@
                         sex: '男',
                         pets:'cat',
                         hobby:'Swimming',
+                        like:'pink',
                         book:'《卡徒》',
                         id:'4',
                         occupation:'Bodyguard'
@@ -2170,6 +2292,7 @@
                         sex: '男',
                         book:'《无限道武者路》',
                         id:'5',
+                        like:'blue',
                         pets:'rhizomys',
                         hobby:'Thousand-hand Bodhisattva',
                         occupation:'President'
@@ -2226,7 +2349,7 @@
                         pets:'cat',
                         hobby:'Swimming',
                         id:'2',
-                        book:'《霸皇记》',
+                        book:'《霸皇纪》',
                         occupation:'Doctor'
                     },
                     {
