@@ -387,7 +387,7 @@
 | label | input前的说明文字 | String | | |
 | labelText | 自定义 label 模式的内容 | String  | | 日期 |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
-| size | input组件的尺寸 | Boolean  | `small` `normal` `large` | normal |
+| size | input组件的尺寸 | Boolean  | `small` `default` `large` | default |
 | range | 日期选择中选择一个时间范围 | Boolean  | `true` `false` | false |
 | format | 日期格式化 | String  | | YYYY-MM-DD |
 | dateType | 返回日期格式 | String | `formatdate` `timestamp` `date` | formatdate |

@@ -108,7 +108,7 @@
 | label | input前的说明文字 | String | | |
 | labelText | 自定义 label 模式的内容 | String  | | 日期 |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
-| size | input组件的尺寸。 | Boolean  | `small` `normal` `large` | normal |
+| size | input组件的尺寸。 | Boolean  | `small` `default` `large` | default |
 | format | 日期格式化 | String  | | YYYY-MM-DD |
 | dateType | 返回日期格式 | String | `formatdate` `timestamp` `date` | formatdate |
 | clearable | 是否显示清除按钮 | Boolean  | `true` `false` | true |

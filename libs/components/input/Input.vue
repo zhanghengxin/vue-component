@@ -159,12 +159,12 @@ export default {
         },
         // 样式属性
         size: {
-            // default: 'normal',
+            // default: 'default',
             validator: function (value) {
-                return ['large', 'small', 'normal'].indexOf(value) !== -1
+                return ['large', 'small', 'default'].indexOf(value) !== -1
             },
             default () {
-                return !this.size || this.size === '' ? 'normal' : this.size
+                return !this.size || this.size === '' ? 'default' : this.size
             }
         },
         error: {

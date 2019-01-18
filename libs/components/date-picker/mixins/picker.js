@@ -30,9 +30,9 @@ export default {
         },
         size: {
             type: String,
-            default: 'normal',
+            default: 'default',
             validator (value) {
-                return oneOf(value, ['large', 'normal', 'small'])
+                return oneOf(value, ['large', 'default', 'small'])
             }
         },
         placeholder: {

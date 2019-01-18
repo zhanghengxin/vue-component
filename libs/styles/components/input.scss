@@ -7,10 +7,10 @@
 $css-prefix-input: $css-prefix+'input';
 $css-prefix-input-icon: $css-prefix-input+'-icon';
 $input-small-size:24px;
-$input-normal-size:32px;
+$input-default-size:32px;
 $input-large-size:40px;
 $input-small-font:12px;
-$input-normal-font:12px;
+$input-default-font:12px;
 $input-large-font:14px;
 
 //input 的hover focus 等效果
@@ -121,8 +121,8 @@ $input-large-font:14px;
       @include inputSize($input-small-size, 4px 8px, $input-small-font);
     }
 
-    &-normal {
-      @include inputSize($input-normal-size, 8px, $input-normal-font);
+    &-default {
+      @include inputSize($input-default-size, 8px, $input-default-font);
     }
 
     &-large {
@@ -141,7 +141,7 @@ $input-large-font:14px;
   textarea.#{$css-prefix-input} {
     max-width: 100%;
     height: auto;
-    min-height: $input-normal-size;
+    min-height: $input-default-size;
     vertical-align: bottom;
   }
 
@@ -172,8 +172,8 @@ $input-large-font:14px;
       @include inputIconSize($input-small-size, $input-small-font);
     }
 
-    &-normal {
-      @include inputIconSize($input-normal-size, $input-normal-font);
+    &-default {
+      @include inputIconSize($input-default-size, $input-default-font);
     }
 
     &-large {
@@ -186,7 +186,7 @@ $input-large-font:14px;
   //input label样式
   .#{$css-prefix-input}-label {
     line-height: 1;
-    font-weight: normal;
+    font-weight: default;
     font-size: inherit;
     padding: 4px 7px;
     color: $Content;
@@ -233,8 +233,8 @@ $input-large-font:14px;
     font-size: $input-small-font;
   }
 
-  .#{$css-prefix-input}-label-normal {
-    font-size: $input-normal-font;
+  .#{$css-prefix-input}-label-default {
+    font-size: $input-default-font;
   }
 
   .#{$css-prefix-input}-label-large {

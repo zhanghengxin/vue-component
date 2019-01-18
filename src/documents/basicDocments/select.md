@@ -161,12 +161,12 @@
 
 ### 尺寸
 Select 组件可以在不同场景下选择合适的尺寸。<br/>
-尺寸选项：```large```、```normal```、```small```，通过设置```size```属性来配置它们。
+尺寸选项：```large```、```default```、```small```，通过设置```size```属性来配置它们。
 <div class="example">
     <div class="example-box">
         <div>
             <b-select v-model="value00"  style="width:200px" size='small' :options='options' /></b-select>
-            <b-select v-model="value01"  style="width:200px" size='normal' :options='options' /></b-select>
+            <b-select v-model="value01"  style="width:200px" size='default' :options='options' /></b-select>
             <b-select v-model="value02"  style="width:200px" size='large' :options='options' /></b-select>
         </div>
     </div>
@@ -178,7 +178,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
     <template>
         <div>
             <b-select v-model="value00"  style="width:200px" size='small' :options='options' /></b-select>
-            <b-select v-model="value01"  style="width:200px" size='normal' :options='options' /></b-select>
+            <b-select v-model="value01"  style="width:200px" size='default' :options='options' /></b-select>
             <b-select v-model="value02"  style="width:200px" size='large' :options='options' /></b-select>
         </div>
     </template>
@@ -300,7 +300,6 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 v-model="value3"
                 :multiple='multiple' 
                 :options='options' 
-                size='large'
                 @on-change='changeConsole'
                 style="width:200px" />
             </b-select>
@@ -623,7 +622,7 @@ fixed为true  默认280px false 默认220px<br/>
         <div>
              <b-select 
                 v-model="value9"  
-                label='姓名姓名姓名姓名'
+                label='姓名'
                 :fixed='fixed'
                 :options='options' />
             </b-select>
@@ -798,7 +797,7 @@ fixed为true  默认280px false 默认220px<br/>
 | clearable | 是否可以清空选项	|Boolean | `true`、`false` |   false  |
 | autowarp | 多选的时候是否自动换行	| Boolean | `true`、`false` |   false  |
 | width | 自定义宽度	| Number |	-   |     -   |
-| size | 设置选择器的尺寸 | String  | `small`、`normal`、`large` | `normal`|
+| size | 设置选择器的尺寸 | String  | `small`、`default`、`large` | `default`|
 | placeholder | 选择框默认文字	|String |	-   |     -    |
 | name      | 原生name	| String |	-   |     -    |
 | nameKey      | 要展示的字段的key值	| String |	-   |     name    |

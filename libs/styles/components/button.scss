@@ -1,18 +1,91 @@
-$css-prefix-button: $css-prefix + 'button';
+$css-prefix-button: $css-prefix+'button';
 
 @keyframes rotating {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
-.icon-loading:before {
-  vertical-align: middle;
-  animation: rotating 5s linear infinite;
-  display: inline-block;
+@mixin textBorderColor($color) {
+  color: $color;
+  border-color: $Border;
+}
+
+@mixin baseColor($color, $Border, $bg) {
+  @include textBorderColor($color);
+  background: $bg;
+}
+
+@mixin size($size, $height) {
+  &-size-#{$size} {
+    height: $height;
+    &.#{$css-prefix-button}-round{
+      border-radius: $height/2;
+    }
+  }
+}
+
+@mixin waterColor($bg) {
+  &.#{$css-prefix-button}-round:after {
+    background-color: $bg;
+  }
+
+  &.#{$css-prefix-button}-circle:after {
+    background-color: $bg;
+  }
+}
+
+@mixin type($type, $color, $borderColor, $bg, $hover, $focus) {
+  &-type-#{$type} {
+    @include baseColor($color, $borderColor, $bg);
+
+    &:hover {
+      background-color: $hover;
+      border-color: $hover;
+    }
+
+    &:focus {
+      background-color: $focus;
+      border-color: $focus;
+    }
+
+    @include waterColor($bg);
+  }
+}
+
+@mixin waterShadow($radius) {
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    pointer-events: none;
+    border-radius: $radius;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    opacity: 0;
+    transition: all 0.3s;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active:after {
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0s;
+  }
 }
 
 .#{$css-prefix-button} {
@@ -34,487 +107,60 @@ $css-prefix-button: $css-prefix + 'button';
   background-color: #fff;
   box-sizing: border-box;
   position: relative;
+
   & span {
     vertical-align: middle;
   }
-  &-normal {
-    height: 32px;
+
+  //禁用
+  &-disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
   }
-  &-small {
-    height: 24px;
+
+  &-plain {
+    opacity: 0.7;
   }
-  &-big {
-    height: 40px;
+
+  //圆角
+  &-round {
+    @include waterShadow(20px);
   }
-  &-default {
-    color: $Content;
-    border-color: $Border;
-    background: white;
+
+  //圆形 
+  &-circle {
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 55%;
+    @include waterShadow(55%);
+  }
+
+  &-type-default {
+    @include baseColor($Content, $Border, $white);
+
     &:hover {
-      color: $LightPrimary;
-      border-color: $LightPrimary;
+      @include textBorderColor($LightPrimary);
     }
+
     &:focus {
-      color: $Primary;
-      border-color: $Primary;
+      @include textBorderColor($Primary);
     }
+
+    @include waterColor($Sub);
   }
-  &-primary {
-    color: white;
-    border-color: $Primary;
-    background-color: $Primary;
-    &:hover {
-      background-color: $LightPrimary;
-      border-color: $LightPrimary;
-    }
-    &:focus {
-      background-color: $DarkPrimary;
-      border-color: $DarkPrimary;
-    }
+
+  .icon-loading:before {
+    vertical-align: middle;
+    animation: rotating 5s linear infinite;
+    display: inline-block;
   }
-  &-success {
-    color: white;
-    border-color: $Success;
-    background-color: $Success;
-    &:hover {
-      background-color: lighten($Success, 10%);
-      border-color: lighten($Success, 10%);
-    }
-    &:focus {
-      background-color: darken($Success, 10%);
-      border-color: darken($Success, 10%);
-    }
-  }
-  &-warning {
-    color: white;
-    border-color: $Warning;
-    background-color: $Warning;
-    &:hover {
-      background-color: lighten($Warning, 10%);
-      border-color: lighten($Warning, 10%);
-    }
-    &:focus {
-      background-color: darken($Warning, 10%);
-      border-color: darken($Warning, 10%);
-    }
-  }
-  &-error {
-    color: white;
-    border-color: $Error;
-    background-color: $Error;
-    &:hover {
-      background-color: lighten($Error, 10%);
-      border-color: lighten($Error, 10%);
-    }
-    &:focus {
-      background-color: darken($Error, 10%);
-      border-color: darken($Error, 10%);
-    }
-  }
-}
 
-/* 黄色水波纹 */
-.#{$css-prefix-button}-warning {
-  background-color: $Warning;
-  border-color: $Warning;
-  color: $white;
-  position: relative;
-}
+  @include size(default, 32px);
+  @include size(small, 24px);
+  @include size(large, 40px);
 
-.#{$css-prefix-button}-warning:hover {
-  box-shadow: 0px 0px 5px $Warning;
-}
-
-.#{$css-prefix-button}-warning:focus {
-  outline: none;
-}
-
-/* 红色水波纹 */
-.#{$css-prefix-button}-error {
-  background-color: $Error;
-  border-color: $Error;
-  color: $white;
-  position: relative;
-}
-
-.#{$css-prefix-button}-error:hover {
-  box-shadow: 0px 0px 5px $Error;
-}
-
-.#{$css-prefix-button}-error:focus {
-  outline: none;
-}
-
-//圆角按钮
-.#{$css-prefix-button}-round {
-  border-radius: 20px;
-}
-
-//圆角红色
-.#{$css-prefix-button}-error.#{$css-prefix-button}-round:hover {
-  box-shadow: 0px 0px 5px $Error;
-}
-
-.#{$css-prefix-button}-error.#{$css-prefix-button}-round:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Error;
-  border-radius: 20px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.#{$css-prefix-button}-error.#{$css-prefix-button}-round:focus {
-  outline: none;
-}
-
-.#{$css-prefix-button}-error.#{$css-prefix-button}-round:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
-
-//圆角绿色
-.#{$css-prefix-button}-success.#{$css-prefix-button}-round:hover {
-  box-shadow: 0px 0px 5px $Success;
-}
-
-.#{$css-prefix-button}-success.#{$css-prefix-button}-round:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Success;
-  border-radius: 20px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.#{$css-prefix-button}-success.#{$css-prefix-button}-round:focus {
-  outline: none;
-}
-
-.#{$css-prefix-button}-success.#{$css-prefix-button}-round:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
-
-//圆角黄色
-
-.#{$css-prefix-button}-warning.#{$css-prefix-button}-round:hover {
-  box-shadow: 0px 0px 5px $Warning;
-}
-
-.#{$css-prefix-button}-warning.#{$css-prefix-button}-round:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Warning;
-  border-radius: 20px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.#{$css-prefix-button}-warning.#{$css-prefix-button}-round:focus {
-  outline: none;
-}
-
-.#{$css-prefix-button}-warning.#{$css-prefix-button}-round:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
-
-//圆角蓝色
-.#{$css-prefix-button}-primary.#{$css-prefix-button}-round:hover {
-  box-shadow: 0px 0px 5px $Info;
-}
-
-.#{$css-prefix-button}-primary.#{$css-prefix-button}-round:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Info;
-  border-radius: 20px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.#{$css-prefix-button}-primary.#{$css-prefix-button}-round:focus {
-  outline: none;
-}
-
-.#{$css-prefix-button}-primary.#{$css-prefix-button}-round:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
-
-//圆角普通
-
-.#{$css-prefix-button}-normal.#{$css-prefix-button}-round:hover {
-  box-shadow: 0px 0px 5px $Sub;
-}
-
-.#{$css-prefix-button}-normal.#{$css-prefix-button}-round:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Sub;
-  border-radius: 20px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.#{$css-prefix-button}-normal.#{$css-prefix-button}-round:focus {
-  outline: none;
-}
-
-.#{$css-prefix-button}-normal.#{$css-prefix-button}-round:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
-
-.#{$css-prefix-button}-circle {
-  min-width: 50px;
-  min-height: 50px;
-  border-radius: 25px;
-}
-
-//圆角红色
-.#{$css-prefix-button}-error.#{$css-prefix-button}-circle:hover {
-  box-shadow: 0px 0px 5px $Error;
-}
-
-.#{$css-prefix-button}-error.#{$css-prefix-button}-circle:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Error;
-  border-radius: 50px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.#{$css-prefix-button}-error.#{$css-prefix-button}-circle:focus {
-  outline: none;
-}
-
-.#{$css-prefix-button}-error.#{$css-prefix-button}-circle:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
-
-//圆角绿色
-.#{$css-prefix-button}-success.#{$css-prefix-button}-circle:hover {
-  box-shadow: 0px 0px 5px $Success;
-}
-
-.#{$css-prefix-button}-success.#{$css-prefix-button}-circle:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Success;
-  border-radius: 50px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.#{$css-prefix-button}-success.#{$css-prefix-button}-circle:focus {
-  outline: none;
-}
-
-.#{$css-prefix-button}-success.#{$css-prefix-button}-circle:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
-
-//圆角黄色
-
-.#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:hover {
-  box-shadow: 0px 0px 5px $Warning;
-}
-
-.#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Warning;
-  border-radius: 50px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:focus {
-  outline: none;
-}
-
-.#{$css-prefix-button}-warning.#{$css-prefix-button}-circle:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
-
-//圆角蓝色
-.#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:hover {
-  box-shadow: 0px 0px 5px $Info;
-}
-
-.#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Info;
-  border-radius: 50px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:focus {
-  outline: none;
-}
-
-.#{$css-prefix-button}-primary.#{$css-prefix-button}-circle:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
-
-//圆角普通
-
-.#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:hover {
-  box-shadow: 0px 0px 5px $Sub;
-}
-
-.#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  pointer-events: none;
-  background-color: $Sub;
-  border-radius: 50px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:focus {
-  outline: none;
-}
-
-.#{$css-prefix-button}-normal.#{$css-prefix-button}-circle:active:after {
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0s;
-}
-
-.#{$css-prefix-button}-plain {
-  opacity: 0.7;
-}
-
-.#{$css-prefix-button}-disabled {
-  cursor: not-allowed;
-  opacity: 0.3;
+  @include type('primary', $white, $Primary, $Primary, $LightPrimary, $DarkPrimary);
+  @include type('success', $white, $Success, $Success, lighten($Success, 10%), darken($Success, 10%));
+  @include type('warning', $white, $Warning, $Warning, lighten($Warning, 10%), darken($Warning, 10%));
+  @include type('error', $white, $Error, $Error, lighten($Error, 10%), darken($Error, 10%));
 }

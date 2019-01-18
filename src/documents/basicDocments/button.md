@@ -31,14 +31,14 @@
 
 ### 不同尺寸
 Button 组件可以在不同场景下选择合适的按钮尺寸。
-尺寸选项：```normal```、```small```，通过设置```size```属性来配置它们。
+尺寸选项：```default```、```small```，通过设置```size```属性来配置它们。
 
 <div class="example">
     <div class="example-box">
         <div>
          <b-button size="small">主要按钮</b-button>
-         <b-button size="normal">主要按钮</b-button>
-         <b-button size="big">主要按钮</b-button>
+         <b-button size="default">主要按钮</b-button>
+         <b-button size="large">主要按钮</b-button>
         </div>
     </div>
 
@@ -46,8 +46,8 @@ Button 组件可以在不同场景下选择合适的按钮尺寸。
 ```html
     <div>
         <b-button size="small">危险按钮</b-button>
-        <b-button size="normal">危险按钮</b-button>
-        <b-button size="big">危险按钮</b-button>
+        <b-button size="default">危险按钮</b-button>
+        <b-button size="large">危险按钮</b-button>
     </div>
 ```
 :::
@@ -271,8 +271,8 @@ Button 支持click 事件
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | 尺寸   | string  |  `default`、`small`  、`big`       |    normal   |
-| type     | 类型   | string    |   `normal` 、`primary`、`success`  、`warning` 、`error`|     primary  |
+| size     | 尺寸   | string  |  `default`、`small`  、`large`       |    default   |
+| type     | 类型   | string    |   `default` 、`primary`、`success`  、`warning` 、`error`|     primary  |
 | loading     | 是否圆角按钮   | boolean    |    |     false  |
 | round     | 是否加载中状态   | boolean    |    |     false  |
 | plain     | 是否朴素按钮   | boolean    |    |     false  |
