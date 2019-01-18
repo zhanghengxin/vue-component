@@ -175,7 +175,6 @@ $prefix-table: $css-prefix + 'table';
   &-dynamic-column {
     position: absolute;
     z-index: 5;
-    border-left: 1px dashed $Border;
     top: 0;
     background: white;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 6px;
