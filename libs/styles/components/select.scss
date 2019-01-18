@@ -27,6 +27,7 @@ $css-prefix-option: $css-prefix+'option';
   &-focused {
     border-color: $color;
     box-shadow: $shadow;
+
     .#{$css-prefix-select}-arrow {
       transform: rotate(180deg);
     }
@@ -38,28 +39,30 @@ $css-prefix-option: $css-prefix+'option';
 }
 
 @mixin size($height, $tagHeight) {
-  &-content {
-    height: $height;
-    line-height: $height;
-  }
+  .#{$css-prefix-select}-selection {
+    &-content {
+      height: $height;
+      line-height: $height;
+    }
 
-  &-autowarp {
-    max-height: $height + 2px;
-    overflow: hidden;
-  }
+    &-autowarp {
+      max-height: $height + 2px;
+      overflow: hidden;
+    }
 
-  .#{$css-prefix-select}-input {
-    height: $height;
-  }
+    .#{$css-prefix-select}-input {
+      height: $height;
+    }
 
-  .#{$css-prefix-select}-tag {
-    height: $tagHeight;
-    line-height: $tagHeight - 2px;
-
-    .icon {
-      width: $tagHeight - 2px;
-      height: $tagHeight - 2px;
+    .#{$css-prefix-select}-tag {
+      height: $tagHeight;
       line-height: $tagHeight - 2px;
+
+      .icon {
+        width: $tagHeight - 2px;
+        height: $tagHeight - 2px;
+        line-height: $tagHeight - 2px;
+      }
     }
   }
 }
@@ -149,25 +152,19 @@ $css-prefix-option: $css-prefix+'option';
   }
 
   &-large {
-    .#{$css-prefix-select}-selection {
-      @include size(34px, 28px);
-    }
+    @include size(34px, 28px);
 
     &-content {
       font-size: 14px;
     }
   }
 
-  &-normal {
-    .#{$css-prefix-select}-selection {
-      @include size(30px, 24px);
-    }
+  &-default {
+    @include size(30px, 24px);
   }
 
   &-small {
-    .#{$css-prefix-select}-selection {
-      @include size(24px, 18px);
-    }
+    @include size(24px, 18px);
   }
 
 

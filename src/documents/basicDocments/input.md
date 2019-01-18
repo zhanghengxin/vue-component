@@ -78,12 +78,12 @@
 
 ### 尺寸
 Input 组件可以在不同场景下选择合适的尺寸。<br/>
-尺寸选项：```large```、```normal```、```small```，通过设置```size```属性来配置它们。
+尺寸选项：```large```、```default```、```small```，通过设置```size```属性来配置它们。
 <div class="example">
     <div class="example-box">
         <div>
             <b-input v-model="value1" size="large" @on-change='changemal' placeholder="large" ></b-input>
-            <b-input v-model="value2" size="normal" placeholder="normal" ></b-input>
+            <b-input v-model="value2" size="default" placeholder="default" ></b-input>
             <b-input v-model="value3" size="small" placeholder="small" ></b-input>
         </div>
     </div>
@@ -94,7 +94,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 
     <template>
         <b-input v-model="value1" size="large" placeholder="large" ></b-input>
-        <b-input v-model="value2" size="normal" placeholder="normal" ></b-input>
+        <b-input v-model="value2" size="default" placeholder="default" ></b-input>
         <b-input v-model="value3" size="small" placeholder="small" ></b-input>
     </template>
     <script>
@@ -350,7 +350,7 @@ label文字大小可根据input的size变化<br/>
 | disabled | 设置输入框为禁用状态   | Boolean  | `true`、`false` |   false  |
 | readonly | 设置输入框为只读   | Boolean  | `true`、`false` |   false  |
 | error | 设置输入框为error状态   | Boolean  | `true`、`false` |   false  |
-| size | 设置输入框的尺寸   | String  | `small`、`normal`、`large` |   normal  |
+| size | 设置输入框的尺寸   | String  | `small`、`default`、`large` |   default  |
 | name | 设置输入框name   | String  | - |   -  |
 | maxlength | 最大输入长度   | Number  | - |   -  |
 | minlength | 最大输入长度   | Number  | - |   -  |

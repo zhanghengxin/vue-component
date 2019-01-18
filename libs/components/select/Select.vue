@@ -160,9 +160,9 @@ export default {
             default: false
         },
         size: {
-            default: 'normal',
+            default: 'default',
             validator: function (value) {
-                return ['large', 'small', 'normal'].indexOf(value) !== -1
+                return ['large', 'small', 'default'].indexOf(value) !== -1
             }
         },
         width: {

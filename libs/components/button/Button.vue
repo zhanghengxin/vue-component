@@ -35,12 +35,14 @@ export default {
         bodyCls () {
             return [
                 `${prefixCls}`,
-                `${prefixCls}-${this.size}`,
-                `${prefixCls}-${this.type} `,
-                this.round ? `${prefixCls}-round` : '',
-                (this.circle || this.icon) ? `${prefixCls}-circle` : '',
-                this.disabled ? `${prefixCls}-disabled` : '',
-                this.plain ? `${prefixCls}-plain` : ''
+                `${prefixCls}-size-${this.size}`,
+                `${prefixCls}-type-${this.type} `,
+                {
+                    [`${prefixCls}-round`]: this.round,
+                    [`${prefixCls}-circle`]: this.circle || this.icon,
+                    [`${prefixCls}-disabled`]: this.disabled,
+                    [`${prefixCls}-plain`]: this.plain
+                }
             ]
         }
     },
@@ -51,9 +53,9 @@ export default {
         },
         size: {
             validator (value) {
-                return oneOf(value, ['normal', 'small', 'big'])
+                return oneOf(value, ['default', 'small', 'large'])
             },
-            default: 'normal'
+            default: 'default'
         },
         type: {
             validator (value) {
