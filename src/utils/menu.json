@@ -226,6 +226,11 @@
           "title": "Transfer 穿梭框",
           "path": "/transfer",
           "name": "transfer"
+        },
+        {
+          "title": "Timeline 时间轴",
+          "path": "/timeline",
+          "name": "timeline"
         }
       ]
     }

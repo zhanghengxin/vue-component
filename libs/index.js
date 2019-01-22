@@ -46,6 +46,8 @@ import Menu from './components/menu'
 import MenuItem from './components/menu/menu-item'
 import Submenu from './components/menu/submenu'
 import MenuGroup from './components/menu/menu-item-group'
+import Timeline from './components/timeline'
+import TimelineItem from './components/timeline-item/'
 
 const components = [
     Input,
@@ -94,7 +96,9 @@ const components = [
     Menu,
     MenuItem,
     Submenu,
-    MenuGroup
+    MenuGroup,
+    Timeline,
+    TimelineItem
 ]
 
 const install = function (Vue) {
