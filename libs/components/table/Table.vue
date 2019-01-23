@@ -154,7 +154,7 @@ export default {
         },
         border: {
             type: Boolean,
-            default: true
+            default: false
         },
         noDataText: String,
         disHover: {
