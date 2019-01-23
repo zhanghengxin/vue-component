@@ -19,9 +19,7 @@
             @mouseleave="clearShow =  clearabled && false">
                 <input type="hidden" :name="name" :value="publicValue">
                 <div :class='[`${prefixCls}-show-selection`]'>
-                    <span v-if='!multiple && !filterabled'
-                          :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
-                    <span v-if='multiple && !filterabled && !values.length' :class="showSelectedCls">{{localePlaceholder}}</span>
+                    <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
                     <div v-if='multiple' v-for="item in values" :key='item.code' :class="[prefixCls+`-tag`]">
                         <span>{{item.name}}</span>
                         <b-icon type='quxiao-guanbi-shanchu' @click.native.stop='removeTag(item)'></b-icon>
@@ -295,6 +293,11 @@ export default {
             } else {
                 return values[0] ? values[0].name : ''
             }
+        },
+        showContent () {
+            // 非筛选时  单选   多选切未选中
+            const {multiple, values, filterabled} = this
+            return !filterabled && (!multiple || (multiple && !values.length))
         },
         localePlaceholder () {
             const {values, placeholder} = this

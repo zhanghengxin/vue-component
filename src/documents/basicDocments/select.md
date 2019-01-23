@@ -115,7 +115,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value" @on-change='changeConsole'  style="width:200px" :options='options' /></b-select>
+            <b-select v-model="value" @on-change='changeConsole'  style="width:200px" :options='options'></b-select>
             <span>{{value}}</span>
         </div>
     </div>
@@ -129,7 +129,7 @@
             <b-select 
                 v-model="value"  
                 style="width:200px" 
-                :options='options' />
+                :options='options' >
             </b-select>
             <span>{{value}}</span>
         </div>
@@ -165,9 +165,9 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value00"  style="width:200px" size='small' :options='options' /></b-select>
-            <b-select v-model="value01"  style="width:200px" size='default' :options='options' /></b-select>
-            <b-select v-model="value02"  style="width:200px" size='large' :options='options' /></b-select>
+            <b-select v-model="value00"  style="width:200px" size='small' :options='options' ></b-select>
+            <b-select v-model="value01"  style="width:200px" size='default' :options='options' ></b-select>
+            <b-select v-model="value02"  style="width:200px" size='large' :options='options' ></b-select>
         </div>
     </div>
 </div>
@@ -177,9 +177,9 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 
     <template>
         <div>
-            <b-select v-model="value00"  style="width:200px" size='small' :options='options' /></b-select>
-            <b-select v-model="value01"  style="width:200px" size='default' :options='options' /></b-select>
-            <b-select v-model="value02"  style="width:200px" size='large' :options='options' /></b-select>
+            <b-select v-model="value00"  style="width:200px" size='small' :options='options' ></b-select>
+            <b-select v-model="value01"  style="width:200px" size='default' :options='options' ></b-select>
+            <b-select v-model="value02"  style="width:200px" size='large' :options='options' ></b-select>
         </div>
     </template>
     <script>
@@ -218,13 +218,13 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
             <b-select 
                 v-model="value1"  
                 style="width:200px" 
-                :options='options1' />
+                :options='options1' >
             </b-select>
             <b-select 
                 v-model="value2"  
                 style="width:200px" 
                 :disabled='disabled' 
-                :options='options' />
+                :options='options' >
             </b-select>
         </div>
     </div>
@@ -238,13 +238,13 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
             <b-select 
                 v-model="value1"  
                 style="width:200px" 
-                :options='options1' />
+                :options='options1' >
             </b-select>
             <b-select 
                 v-model="value2"  
                 style="width:200px" 
                 :disabled='disabled' 
-                :options='options' />
+                :options='options' >
             </b-select>
         </div>
     </template>
@@ -301,14 +301,14 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 :multiple='multiple' 
                 :options='options' 
                 @on-change='changeConsole'
-                style="width:200px" />
+                style="width:200px" >
             </b-select>
             <b-select 
                 v-model="value4" 
                 style="width:200px"
                 :multiple='multiple' 
                 :options='options' 
-                :autowarp='autowarp'/>
+                :autowarp='autowarp'>
             </b-select>
             <span>{{value4}}</span>
         </div>
@@ -324,14 +324,14 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 v-model="value3" 
                 :multiple='multiple' 
                 :options='options' 
-                style="width:200px" />
+                style="width:200px" >
             </b-select>
             <b-select 
                 v-model="value4" 
                 style="width:200px"
                 :multiple='multiple' 
                 :options='options' 
-                :autowarp='autowarp'/>
+                :autowarp='autowarp'>
             </b-select>
             <span>{{value4}}</span>
         </div>
@@ -374,7 +374,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 :options='options2' 
                 :nameKey='nameKey'
                 :codeKey='codeKey'
-                />
+                >
             </b-select>
             <span>{{value5}}</span>
         </div>
@@ -392,7 +392,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 :options='options2' 
                 :nameKey='nameKey'
                 :codeKey='codeKey'
-                />
+                >
             </b-select>
             <span>{{value5}}</span>
         </div>
@@ -427,7 +427,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value0"  style="width:200px" :clearabled='clearabled' :options='options' /></b-select>
+            <b-select v-model="value0"  style="width:200px" :clearabled='clearabled' :options='options' ></b-select></b-select>
             <span>{{value0}}</span>
         </div>
     </div>
@@ -442,7 +442,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 v-model="value0"  
                 style="width:200px" 
                 :clearabled='clearabled' 
-                :options='options' />
+                :options='options' >
             </b-select>
             <span>{{value0}}</span>
         </div>
@@ -485,7 +485,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
             style="width:200px"
             :options='options' 
             :filterabled='filterabled'
-            />
+            >
             </b-select>
             <b-select 
                 v-model="value7" 
@@ -493,7 +493,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 :multiple='multiple' 
                 :options='options' 
                 :filterabled='filterabled'
-                :autowarp='autowarp'/>
+                :autowarp='autowarp'>
             </b-select>
         </div>
     </div>
@@ -509,7 +509,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 style="width:200px"
                 :options='options' 
                 :filterabled='filterabled'
-                />
+                >
             </b-select>
             <b-select 
                 v-model="value7" 
@@ -517,7 +517,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 :multiple='multiple' 
                 :options='options' 
                 :filterabled='filterabled'
-                :autowarp='autowarp'/>
+                :autowarp='autowarp'>
             </b-select>
         </div>
     </template>
@@ -560,7 +560,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 :options='options' 
                 :filterabled='filterabled'
                 :filterFn='filterFn'
-                />
+                >
             </b-select>
         </div>
     </div>
@@ -577,7 +577,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 :options='options' 
                 :filterabled='filterabled'
                 :filterFn='filterFn'
-                />
+                >
             </b-select>
         </div>
     </template>
@@ -624,14 +624,14 @@ fixed为true  默认280px false 默认220px<br/>
                 v-model="value9"  
                 label='姓名'
                 :fixed='fixed'
-                :options='options' />
+                :options='options' >
             </b-select>
             <br/>
             <br/>
             <b-select 
                 v-model="value10" 
                 label='姓名' 
-                :options='options' />
+                :options='options' >
             </b-select>
         </div>
     </div>
@@ -646,12 +646,12 @@ fixed为true  默认280px false 默认220px<br/>
                 v-model="value9"  
                 label='姓名'
                 :fixed='fixed'
-                :options='options' />
+                :options='options' >
             </b-select>
             <b-select 
                 v-model="value10" 
                 label='姓名' 
-                :options='options' />
+                :options='options' >
             </b-select>
         </div>
     </template>
@@ -694,7 +694,7 @@ fixed为true  默认280px false 默认220px<br/>
                 :remoteFn='remoteFn'
                 :loading='loading'
                 :options='options3'
-                width='200' />
+                width='200' >
             </b-select>
             <b-select 
                 v-model="value04" 
@@ -703,7 +703,7 @@ fixed为true  默认280px false 默认220px<br/>
                 :remoteFn='remoteFnMultiple'
                 :loading='loading'
                 :options='options4'
-                width='200' />
+                width='200' >
             </b-select>
         </div>
     </div>
@@ -720,7 +720,7 @@ fixed为true  默认280px false 默认220px<br/>
                 :remoteFn='remoteFn'
                 :loading='loading'
                 :options='options3'
-                width='200' />
+                width='200' >
             </b-select>
             <b-select 
                 v-model="value04" 
@@ -729,7 +729,7 @@ fixed为true  默认280px false 默认220px<br/>
                 :remoteFn='remoteFnMultiple'
                 :loading='loading'
                 :options='options4'
-                width='200' />
+                width='200' >
         </div>
     </template>
     <script>
@@ -823,14 +823,13 @@ fixed为true  默认280px false 默认220px<br/>
 ### options
 | 数据	      | 说明	    |
 |-------------|---------|
-| name   | 默认为name为key值 可用nameKey修改 |
-| code   | 默认为为code为key值 可用codeKey修改 |
 | disabled   | 默认为false  |
+| code   | 默认为为code为key值 可用codeKey修改 |
+| name   | 默认为name为key值 可用nameKey修改 |
 
 ### filterFn
-
 | 数据	      | 说明	    |
 |-------------|---------|
-| query  | 输入的查询条件 |
 | item   | 当前的每一项 |
+| query  | 输入的查询条件 |
 | 返回值   | `true`、`false` |

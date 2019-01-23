@@ -22,17 +22,9 @@ const removeInstance = (instance) => {
 
 const notice = (options) => {
     if (Vue.prototype.$isServer) return
-
-    const {
-        autoClose,
-        ...rest
-    } = options
     const instance = new NoticeConstructor({
         propsData: {
-            ...rest
-        },
-        data: {
-            autoClose: autoClose === undefined ? 3000 : autoClose
+            ...options
         }
     })
 
