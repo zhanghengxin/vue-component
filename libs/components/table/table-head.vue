@@ -132,7 +132,6 @@ export default {
                 return false
             }
             const bodyStyle = document.body.style
-            bodyStyle.cursor = ''
             let target = e.target
             while (target && target.tagName !== 'TH') {
                 target = target.parentNode
@@ -253,9 +252,11 @@ export default {
         },
         rightClick (event) {
             if (event.button === 2) {
-                document.oncontextmenu = (e) => {
-                    e.preventDefault()
+                const oncontextmenu = (event) => {
+                    event.preventDefault()
+                    document.removeEventListener('contextmenu', oncontextmenu)
                 }
+                document.addEventListener('contextmenu', oncontextmenu)
                 this.dispatch(this.preCls, 'context-menu', event)
             }
         }

@@ -383,11 +383,11 @@ export default {
         },
         selectStartDate (date) {
             this.$set(this.curVal, 0, date)
-            if (this.curVal[1]) this.updateDate()
+            if (this.curVal[1]) this.updateDate() && this.closePopup()
         },
         selectEndDate (date) {
             this.$set(this.curVal, 1, date)
-            if (this.curVal[0]) this.updateDate()
+            if (this.curVal[0]) this.updateDate() && this.closePopup()
         },
         selectTime (time, close) {
             this.curVal = time
