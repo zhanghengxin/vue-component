@@ -79,7 +79,7 @@
         <dynamic-column
             :pre-cls="preCls"
             v-show="dynamicColumnBoxShow"
-            :columns="cloneColumns"
+            :columns="normalColumns"
             ref="dynamic">
         </dynamic-column>
     </div>
@@ -107,7 +107,6 @@ export default {
             preCls: preCls,
             formatData: [],
             cloneColumns: [],
-            cloneWidth: 0,
             tableWidth: 0,
             bodyHeight: 0,
             dragStartIndex: '',
@@ -180,7 +179,10 @@ export default {
                 return {
                     page: 1,
                     size: 10,
-                    width: 50
+                    width: 50,
+                    align: 'center',
+                    fixed: '',
+                    title: '序号'
                 }
             }
         }
@@ -203,7 +205,6 @@ export default {
         this.$on('context-menu', this.handleContextMenu)
     },
     mounted () {
-        this.cloneWidth = this.width
         this.handleResize()
         this.dragBorderHeight = this.getDragBorderHeight()
         on(window, 'resize', this.handleResize)
@@ -270,21 +271,32 @@ export default {
         },
         headerStyle () {
             let style = {}
-            // if (this.tableWidth !== 0) {
-            let width = ''
-            width = this.getColumnsWidth() + (this.verticalScroll ? this.scrollBarWidth : 0)
-            style.width = `${width}px`
-            // }
+            let boxWidth = this.$el ? this.$el.offsetWidth : 0
+            let tableWidth = this.getVisibleColumnsWidth()
+            if (tableWidth !== 0) {
+                let width = ''
+                width = tableWidth
+                if (boxWidth && width - 1 < boxWidth) {
+                    width = boxWidth - 1
+                } else {
+                    width += (this.verticalScroll ? this.scrollBarWidth : 0)
+                }
+                style.width = `${width}px`
+            }
             return style
         },
         bodyStyle () {
             let style = {}
-            // if (this.tableWidth !== 0) {
-            // let width = this.tableWidth - (this.verticalScroll ? this.scrollBarWidth : 0)
-            // let width = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0)
-            let width = this.getColumnsWidth()
-            style.width = `${width}px`
-            // }
+            let boxWidth = this.$el ? this.$el.offsetWidth : 0
+            let tableWidth = this.getVisibleColumnsWidth()
+            if (tableWidth !== 0) {
+                let width = ''
+                width = tableWidth
+                if (boxWidth && width - 1 < boxWidth) {
+                    width = boxWidth - 1 - (this.verticalScroll ? this.scrollBarWidth : 0)
+                }
+                style.width = `${width}px`
+            }
             return style
         },
         bodyWrapStyle () {
@@ -296,10 +308,10 @@ export default {
             return style
         },
         leftFixedColumns () {
-            return this.cloneColumns.filter((item) => (item.fixed === 'left' && item._visible))
+            return this.cloneColumns.filter((item) => (item.fixed && item.fixed === 'left' && item._visible))
         },
         rightFixedColumns () {
-            return this.cloneColumns.filter((item) => (item.fixed === 'right' && item._visible))
+            return this.cloneColumns.filter((item) => (item.fixed && item.fixed === 'right' && item._visible))
         },
         fixedBodyStyle () {
             let style = {}
@@ -319,13 +331,18 @@ export default {
             style.width = `${width}px`
             style.height = `${height}px`
             return style
+        },
+        normalColumns () {
+            return this.cloneColumns.filter((cell) => (!cell.fixed))
         }
     },
     methods: {
         buildData () {
             let data = deepCopy(this.data)
+            let pageStart = this.indexInfo.size * (this.indexInfo.page - 1)
             data.forEach((row, index) => {
                 row._index = index
+                row._indexNo = pageStart + index + 1
                 if (data._checked) {
                     data._checked = data._checked
                 } else {
@@ -337,10 +354,20 @@ export default {
         buildColumns () {
             let columns = deepCopy(this.columns)
             // Clumns in disorder
+            let indexArr = []
+            if (this.showIndex) {
+                indexArr.push({
+                    title: this.indexInfo.title,
+                    key: '_indexNo',
+                    width: this.indexInfo.width,
+                    align: this.indexInfo.align,
+                    fixed: this.indexInfo.fixed
+                })
+            }
             let fixLeftArr = columns.filter((item) => (item.fixed === 'left'))
             let fixRightArr = columns.filter((item) => (item.fixed === 'right'))
             let normalArr = columns.filter((item) => (!item.fixed))
-            let result = fixLeftArr.concat(normalArr, fixRightArr)
+            let result = indexArr.concat(fixLeftArr, normalArr, fixRightArr)
             result.forEach((row, index) => {
                 row._index = index
                 row._visible = true
@@ -364,6 +391,7 @@ export default {
         handleResize () {
             let noWidthList = []
             let hasWidthList = []
+            let sumMinWidth = 0
             let tableWidth = this.$el.offsetWidth
             this.cloneColumns.forEach((item) => {
                 if (item._visible) {
@@ -372,12 +400,15 @@ export default {
                     } else {
                         noWidthList.push(item)
                     }
+                    if (item.minWidth) {
+                        sumMinWidth += item.minWidth
+                    }
                 }
             })
             let columnWidth = 0
             // 固定宽度
             let fixedWidth = hasWidthList.map(cell => cell.width).reduce((a, b) => a + b, 0)
-            let adaptiveWidth = tableWidth - fixedWidth - (this.verticalScroll ? this.scrollBarWidth : 0) - 1
+            let adaptiveWidth = tableWidth - fixedWidth - sumMinWidth - (this.verticalScroll ? this.scrollBarWidth : 0)
             let adaptiveLength = noWidthList.length
             // 可用宽度
             if (adaptiveWidth > 0 && adaptiveLength > 0) {
@@ -385,16 +416,30 @@ export default {
             }
             for (let i = 0; i < this.cloneColumns.length; i++) {
                 let column = this.cloneColumns[i]
+                let width = columnWidth
                 if (column.width) {
-                    this.$set(column, '_width', column.width)
+                    width = column.width
                 } else if (column._visible) {
-                    this.$set(column, '_width', columnWidth)
+                    if (column.minWidth > width) {
+                        width = column.minWidth
+                    }
+                    if (column.maxWidth < width) {
+                        width = column.maxWidth
+                    }
+                    if (adaptiveWidth > 0) {
+                        adaptiveWidth -= width
+                        adaptiveLength--
+                        if (adaptiveLength > 0) {
+                            columnWidth = parseInt(adaptiveWidth / adaptiveLength)
+                        } else {
+                            columnWidth = 0
+                        }
+                    } else {
+                        columnWidth = 0
+                    }
                 }
+                this.$set(column, '_width', width)
             }
-            // console.log(this.getVisibleColumnsWidth(), 'width')
-            // console.log(tableWidth, 'tableWidth')
-            // // 总宽度
-            // this.tableWidth = this.cloneColumns.map(cell => cell._width).reduce((a, b) => a + b, 0) + (this.verticalScroll ? this.scrollBarWidth : 0)
             this.scrollReckon()
         },
         scrollReckon () {
@@ -603,7 +648,17 @@ export default {
         },
         dynamicOrder (index, status) {
             if (this.getVisibleNum() < 2 && status) return
+            let isExistFixColumns = this.cloneColumns.filter((item) => (item.fixed)).length > 0
             this.cloneColumns[index]._visible = !status
+            if (isExistFixColumns) {
+                let boxWidth = this.$el ? this.$el.offsetWidth : 0
+                let tableWidth = this.getVisibleColumnsWidth()
+                let width = tableWidth
+                if (boxWidth && width - 1 < boxWidth) {
+                    this.cloneColumns[index]._visible = status
+                    return
+                }
+            }
             this.handleResize()
         }
     }
