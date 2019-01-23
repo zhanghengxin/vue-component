@@ -7,12 +7,6 @@
 $css-prefix-select: $css-prefix+'select';
 $css-prefix-option: $css-prefix+'option';
 
-@mixin selectGroup() {
-  display: table;
-  vertical-align: middle;
-  width: 280px;
-}
-
 @mixin transitionAll() {
   transition: all $transition-time $ease-in-out;
 }
@@ -38,33 +32,36 @@ $css-prefix-option: $css-prefix+'option';
   }
 }
 
-@mixin size($height, $tagHeight) {
-  .#{$css-prefix-select}-selection {
-    &-content {
-      height: $height;
-      line-height: $height;
-    }
+@mixin size($type, $height, $tagHeight) {
+  &-#{$type} {
+    .#{$css-prefix-select}-selection {
+      &-content {
+        height: $height;
+        line-height: $height;
+      }
 
-    &-autowarp {
-      max-height: $height + 2px;
-      overflow: hidden;
-    }
+      &-autowarp {
+        max-height: $height + 2px;
+        overflow: hidden;
+      }
 
-    .#{$css-prefix-select}-input {
-      height: $height;
-    }
+      .#{$css-prefix-select}-input {
+        height: $height;
+      }
 
-    .#{$css-prefix-select}-tag {
-      height: $tagHeight;
-      line-height: $tagHeight - 2px;
-
-      .icon {
-        width: $tagHeight - 2px;
-        height: $tagHeight - 2px;
+      .#{$css-prefix-select}-tag {
+        height: $tagHeight;
         line-height: $tagHeight - 2px;
+
+        .icon {
+          width: $tagHeight - 2px;
+          height: $tagHeight - 2px;
+          line-height: $tagHeight - 2px;
+        }
       }
     }
   }
+
 }
 
 @mixin borderInit($borderColor, $radius) {
@@ -73,15 +70,18 @@ $css-prefix-option: $css-prefix+'option';
   box-sizing: border-box;
 }
 
+
 //最外层的盒子
 .#{$css-prefix-select}-container {
-  display: inline-block;
   font-size: 12px;
+  display: inline-block;
+  vertical-align: middle;
 
   //label
   .#{$css-prefix-select}-label {
-    line-height: 1;
-    display: table-cell;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     font-weight: normal;
     font-size: inherit;
     color: $Content;
@@ -90,13 +90,21 @@ $css-prefix-option: $css-prefix+'option';
   }
 
   &.#{$css-prefix-select}-group {
-    @include selectGroup();
+    display: table;
+    width: 280px;
     @include selectWidth(100%);
+    .#{$css-prefix-select}-label {
+      display: table-cell;
+    }
+    .#{$css-prefix-select}{
+      display: inline-block;
+    }
   }
 
   &.#{$css-prefix-select}-group-fixed {
+    display: flex;
+    width: 280px;
     @include borderInit($Border, 4px);
-    @include selectGroup();
     @include transitionAll();
     @include selectMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
 
@@ -118,20 +126,15 @@ $css-prefix-option: $css-prefix+'option';
 
 //select
 .#{$css-prefix-select} {
-  display: inline-block;
   box-sizing: border-box;
-  vertical-align: middle;
   color: $Content;
-  line-height: normal;
   width: 100%;
 
   &-arrow {
     position: absolute;
     top: 50%;
     right: 8px;
-    line-height: 1;
     margin-top: -6px;
-    font-size: 12px;
     color: $Sub;
     @include transitionAll();
   }
@@ -151,21 +154,11 @@ $css-prefix-option: $css-prefix+'option';
     }
   }
 
-  &-large {
-    @include size(34px, 28px);
+  @include size(large, 34px, 28px);
 
-    &-content {
-      font-size: 14px;
-    }
-  }
+  @include size(default, 30px, 24px);
 
-  &-default {
-    @include size(30px, 24px);
-  }
-
-  &-small {
-    @include size(24px, 18px);
-  }
+  @include size(small, 24px, 18px);
 
 
   &-selection {
@@ -181,8 +174,6 @@ $css-prefix-option: $css-prefix+'option';
     @include selectMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
 
     &-content {
-      display: block;
-      line-height: 1;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;

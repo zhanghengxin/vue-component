@@ -1,59 +1,77 @@
 <template>
-  <transition :name="fadeCls" @after-leave="afterLeave" @after-enter="afterEnter">
-    <div :class="[noticeCls, prefixType]"
+  <transition :name="prefixCls+'-fade'" @after-leave="afterLeave" @after-enter="afterEnter">
+    <div :class="noticeCls"
       :style="style"
       v-show="visible"
       @mouseenter="clearTimer"
       @mouseleave="createTimer"
     >
-      <span :class="contentCls">{{content}}</span>
-      <img :class="closeCls" src="./close.png" @click="handleClose" />
+        <div :class="[noticeCls[1]+'-icon']">
+            <Icon v-if="iconVisible" :size="size === 'large' ? 32 : 16" :type='iconType'></Icon>
+        </div>
+        <div>
+            <h5>{{title}}</h5>
+            <span :class="[prefixCls+'-content']">{{content}}</span>
+        </div>
+        <Icon :class="[prefixCls+'-close']" size='18' type='quxiao-guanbi-shanchu' @on-click="handleClose"></Icon>
     </div>
   </transition>
 </template>
 <script>
-import { prefix } from '../../utils/common'
+import Icon from '../icon'
+import { prefix, oneOf } from '../../utils/common'
 const prefixCls = prefix + 'notice'
 export default {
     name: prefixCls,
+    components: {Icon},
     props: {
         content: {
-            type: String,
-            required: true
+            type: [String, Number]
         },
-        btn: {
-            type: String,
-            default: '关闭'
+        title: {
+            type: [String, Number]
         },
         type: {
             type: String,
-            default: 'normal'
+            default: 'normal',
+            validator: function (value) {
+                return oneOf(value, ['error', 'normal', 'warning', 'success'])
+            }
+        },
+        autoClose: {
+            type: Boolean,
+            default: true
+        },
+        duration: {
+            type: [String, Number],
+            default: 3000
+        },
+        size: {
+            type: String,
+            default: 'large',
+            validator: function (value) {
+                return oneOf(value, ['large', 'small'])
+            }
+        },
+        iconVisible: {
+            type: Boolean,
+            default: true
         }
     },
     data () {
         return {
             prefixCls: prefixCls,
             verticalOffset: 0,
-            autoClose: 300000,
             height: 0,
             visible: false
         }
     },
     computed: {
-        prefixType () {
-            return this.prefixCls + '-' + this.type
-        },
-        fadeCls () {
-            return `${prefixCls}-fade`
-        },
         noticeCls () {
-            return `${prefixCls}-notice`
-        },
-        contentCls () {
-            return `${prefixCls}-content`
-        },
-        closeCls () {
-            return `${prefixCls}-close`
+            return [
+                `${prefixCls}-notice`,
+                `${this.prefixCls}-${this.type}`
+            ]
         },
         style () {
             return {
@@ -61,6 +79,15 @@ export default {
                 right: '20px',
                 top: `${this.verticalOffset}px`
             }
+        },
+        iconType () {
+            const iconType = {
+                warning: 'yichang-mian',
+                normal: 'xinxi-yiban-mian',
+                error: 'shibai-mian',
+                success: 'chenggong-mian'
+            }
+            return iconType[this.type]
         }
     },
     mounted () {
@@ -75,10 +102,10 @@ export default {
             this.$emit('closed')
         },
         createTimer () {
-            if (this.autoClose) {
+            if (this.duration && this.autoClose) {
                 this.timer = setTimeout(() => {
                     this.visible = false
-                }, this.autoClose)
+                }, this.duration)
             }
         },
         clearTimer () {

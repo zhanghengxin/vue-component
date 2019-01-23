@@ -286,7 +286,7 @@ export default {
         },
         sizeChange (data) {
             this.currentPage = 1
-            this.$emit('on-size-change', data[0].code)
+            this.$emit('on-size-change', data)
         },
         prev () {
             const current = this.currentPage

@@ -230,6 +230,7 @@ export default {
         boxClasses () {
             return [
                 `${prefixCls}-box`,
+                `${prefixCls}-box-${this.size}`,
                 {
                     [`${prefixCls}-error`]: this.error,
                     [`${prefixCls}-box-clear`]: this.clearable && this.currentValue,
@@ -241,7 +242,6 @@ export default {
         inputClasses () {
             return [
                 `${prefixCls}`,
-                `${prefixCls}-${this.size}`,
                 {
                     [`${prefixCls}-prefix`]: this.prefix,
                     [`${prefixCls}-suffix`]: this.suffix,
@@ -252,7 +252,6 @@ export default {
         labelClasses () {
             return [
                 prefixCls + `-label`,
-                prefixCls + `-label-` + this.size,
                 {
                     [prefixCls + `-label-box`]: this.fixed
                 }

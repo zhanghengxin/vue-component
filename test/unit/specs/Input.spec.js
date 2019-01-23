@@ -103,7 +103,7 @@ describe('Input', () => {
 
         it('size', () => {
             vm = geInputVm(`size='large'`)
-            expect(vm.$el.querySelector(`input`).getAttribute('class')).include(`${prefix}input-large`)
+            expect(vm.$el.querySelector(`${prefixCls}-box-large`)).to.exist
         })
 
         it('type', () => {

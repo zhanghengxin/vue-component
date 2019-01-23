@@ -16,11 +16,30 @@ describe('Notice', () => {
         expect(document.querySelector(`.${bNotice}-notice`)).to.exist
     })
 
-    describe('content', () => {
+    it('size', () => {
+        vm = Notice({
+            content: '你好',
+            size: 'small'
+        })
+        expect(document.querySelector(`.${bNotice}-normal-icon .icon`).style.fontSize).to.equal('16px')
+    })
+
+    it('iconVisible', () => {
+        vm = Notice({
+            content: '你好',
+            iconVisible: false
+        })
+        const iconBox = document.querySelector(`.${bNotice}-normal-icon`)
+        expect(iconBox.querySelector(`.icon`)).to.not.exist
+    })
+
+    describe('content && title', () => {
         it('content', () => {
             vm = Notice({
+                title: '我是title',
                 content: '我是通知组件'
             })
+            expect(vm.$el.querySelector(`h5`).textContent).to.equal('我是title')
             expect(vm.$el.querySelector(`.${bNotice}-content`).textContent).to.equal('我是通知组件')
         })
     })

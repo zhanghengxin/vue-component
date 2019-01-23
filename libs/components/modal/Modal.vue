@@ -21,8 +21,8 @@
                         <div :class="[prefixCls + '-body']"><slot></slot></div>
                         <div :class="[prefixCls + '-footer']" v-if="!footerHide">
                             <slot name="footer">
-                                <b-button size="big" @click.native="cancel">{{ localeCancelText }}</b-button>
-                                <b-button type="primary" size="big" :loading="buttonLoading" @click.native="ok">{{ localeOkText }}</b-button>
+                                <b-button @click.native="cancel">{{ localeCancelText }}</b-button>
+                                <b-button type="primary" :loading="buttonLoading" @click.native="ok">{{ localeOkText }}</b-button>
                             </slot>
                         </div>
                     </div>
