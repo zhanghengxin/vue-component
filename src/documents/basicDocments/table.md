@@ -50,11 +50,13 @@
                           },
                           {
                               title: 'Age',
-                              key: 'age'
+                              key: 'age',
+                              width:400
                           },
                           {
                               title: 'Sex',
                               key: 'sex',
+                              width:400
                           }
                       ],
                       data1: [
@@ -1170,6 +1172,8 @@
 ```html
     <div>
          <b-table resizeable border width=1000 height=200 :columns='columns3' :data='data3'></b-table>
+         <br/>
+         <b-table resizeable border width=1000 :columns='columns2' :data='data2'></b-table>
     </div>
     <script>
         export default {
@@ -1387,14 +1391,18 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table dynamicable border width=1000 :columns='columns11' :data='data11'></b-table>
+           <b-table dynamicable border width=1000 :columns='columns3' :data='data3'></b-table>
+           <br/>
+           <b-table dynamicable border width=1000 :columns='columns2' :data='data2'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-       <b-table dynamicable border width=1000 :columns='columns11' :data='data11'></b-table>
+        <b-table dynamicable border width=1000 :columns='columns3' :data='data3'></b-table>
+        <br/>
+        <b-table dynamicable border width=1000 :columns='columns2' :data='data2'></b-table>
     </div>
     <script>
         export default {
@@ -1488,6 +1496,51 @@
                              hobby:'Thousand-hand Bodhisattva',
                              occupation:'President'
                          }
+                    ],
+                    columns10: [
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width:100,
+                            fixed:'left'
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width:100
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width:150
+                        },
+                        {
+                            title: 'Hobby',
+                            key: 'hobby',
+                            width:100
+                        },
+                        {
+                            title: 'Pets',
+                            key: 'pets',
+                            width:200
+                        },
+                        {
+                            title: 'Like',
+                            key: 'like',
+                            width:200
+                        },
+                        {
+                            title: 'ID',
+                            key: 'id',
+                            width:200,
+                            fixed:'right'
+                        },
+                        {
+                            title: 'Book',
+                            key: 'book',
+                            width:200,
+                            fixed:'right'
+                        }
                     ]
                 }
             }
@@ -1497,18 +1550,18 @@
 </div>
 
 ### 表格序号
-通过给组件设置 dynamicable 属性可以开启显示隐藏列功能
+通过给组件设置 showIndex 属性可以开启序号,可以通过配置`indexInfo`来支持分页以及其他属性，详见文档
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border width=1000 :columns='columns11' :data='data11'></b-table>
+           <b-table show-index border width=1000 :columns='columns11' :data='data11'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-       <b-table dynamicable border width=1000 :columns='columns11' :data='data11'></b-table>
+       <b-table show-index border width=1000 :columns='columns11' :data='data11'></b-table>
     </div>
     <script>
         export default {
@@ -1546,62 +1599,169 @@
                              width:200
                          }
                     ],
-                    data10: [
-                         {
-                             name: '欧阳',
-                             age: 12,
-                             sex: '男',
-                             hobby:'Swimming',
-                             pets:'dog',
-                             occupation:'Doctor',
-                             like:'red',
-                             id:'1',
-                             book:'《贩罪》'
-                         },
-                         {
-                             name: '青蛙',
-                             sex: '男',
-                             age: 22,
-                             pets:'cat',
-                             like:'green',
-                             hobby:'Swimming',
-                             id:'2',
-                             book:'《霸皇纪》',
-                             occupation:'Doctor'
-                         },
-                         {
-                             name: '警长',
-                             age: 18,
-                             sex: '男',
-                             pets:'rhizomys',
-                             hobby:'Swimming',
-                             like:'orange',
-                             id:'3',
-                             book:'《龙族》',
-                             occupation:'Doctor'
-                         },
-                         {
-                             name: '球形闪电',
-                             age: 6,
-                             sex: '男',
-                             pets:'cat',
-                             hobby:'Swimming',
-                             like:'pink',
-                             book:'《卡徒》',
-                             id:'4',
-                             occupation:'Bodyguard'
-                         },
-                         {
-                             name: '会长',
-                             age: 38,
-                             sex: '男',
-                             book:'《无限道武者路》',
-                             id:'5',
-                             like:'blue',
-                             pets:'rhizomys',
-                             hobby:'Thousand-hand Bodhisattva',
-                             occupation:'President'
-                         }
+                    data11: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby:'Swimming',
+                            pets:'dog',
+                            occupation:'Doctor',
+                            like:'red',
+                            id:'1',
+                            book:'《贩罪》'
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets:'cat',
+                            hobby:'Swimming',
+                            id:'2',
+                            book:'《霸皇纪》',
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets:'rhizomys',
+                            hobby:'Swimming',
+                            id:'3',
+                            book:'《龙族》',
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            sex: '男',
+                            pets:'cat',
+                            hobby:'Swimming',
+                            book:'《卡徒》',
+                            id:'4',
+                            occupation:'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            sex: '男',
+                            book:'《无限道武者路》',
+                            id:'5',
+                            pets:'rhizomys',
+                            hobby:'Thousand-hand Bodhisattva',
+                            occupation:'President'
+                        }
+                    ]
+                }
+            }
+    </script>
+```
+:::
+</div>
+
+### 最小和最大宽度
+通过给数据 `columns` 设置字段 `minWidth` 可以给某一列的数据设置最小宽度
+
+设置字段 `maxWidth` 可以给某一列的数据字段设置最大宽度。
+
+<div class="example">
+    <div class="example-box">
+        <div>
+           <b-table border width=1000 :columns='columns12' :data='data11'></b-table>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+       <b-table border width=1000 :columns='columns12' :data='data11'></b-table>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    columns12: [
+                        {
+                           title: 'Name',
+                           key: 'name',
+                           width:100
+                        },
+                        {
+                           title: 'Age',
+                           key: 'age',
+                           width:100
+                        },
+                        {
+                           title: 'Pets',
+                           key: 'pets',
+                           minWidth:100
+                        },
+                        {
+                           title: 'Like',
+                           key: 'like',
+                           maxWidth:100
+                        },
+                        {
+                           title: 'ID',
+                           key: 'id',
+                        },
+                        {
+                           title: 'Book',
+                           key: 'book'
+                        }
+                    ],
+                    data11: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby:'Swimming',
+                            pets:'dog',
+                            occupation:'Doctor',
+                            like:'red',
+                            id:'1',
+                            book:'《贩罪》'
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets:'cat',
+                            hobby:'Swimming',
+                            id:'2',
+                            book:'《霸皇纪》',
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets:'rhizomys',
+                            hobby:'Swimming',
+                            id:'3',
+                            book:'《龙族》',
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            sex: '男',
+                            pets:'cat',
+                            hobby:'Swimming',
+                            book:'《卡徒》',
+                            id:'4',
+                            occupation:'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            sex: '男',
+                            book:'《无限道武者路》',
+                            id:'5',
+                            pets:'rhizomys',
+                            hobby:'Thousand-hand Bodhisattva',
+                            occupation:'President'
+                        }
                     ]
                 }
             }
@@ -1627,7 +1787,7 @@
                     },
                     {
                         title: 'Sex',
-                        key: 'sex',
+                        key: 'sex'
                     }
                 ],
                 data1: [
@@ -2381,6 +2541,36 @@
                         pets:'rhizomys',
                         hobby:'Thousand-hand Bodhisattva',
                         occupation:'President'
+                    }
+                ],
+                columns12: [
+                    {
+                        title: 'Name',
+                        key: 'name',
+                        width:100
+                    },
+                    {
+                        title: 'Age',
+                        key: 'age',
+                        width:100
+                    },
+                    {
+                        title: 'Pets',
+                        key: 'pets',
+                        minWidth:100
+                    },
+                    {
+                        title: 'Like',
+                        key: 'like',
+                        maxWidth:100
+                    },
+                    {
+                        title: 'ID',
+                        key: 'id',
+                    },
+                    {
+                        title: 'Book',
+                        key: 'book'
                     }
                 ]
             }
