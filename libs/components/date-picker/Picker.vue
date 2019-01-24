@@ -2,7 +2,7 @@
     <div ref="picker" :class="wrapperCls" v-clickoutside="closePopup">
         <b-input
             ref="input"
-            :label="innerLabelText"
+            :label="label"
             :fixed="fixed"
             type="text"
             :class="inputClass"
@@ -135,11 +135,7 @@ export default {
     props: {
         value: null,
         // input 组件 -- start
-        label: {
-            type: Boolean,
-            default: false
-        },
-        labelText: String,
+        label: String,
         fixed: {
             type: Boolean,
             default: false
@@ -290,9 +286,6 @@ export default {
 
             const p = placeholder[this.innerType]
             return this.range ? p[1] : p[0]
-        },
-        innerLabelText () {
-            return this.label ? '日期' : ''
         },
         innerType () {
             return String(this.type).toLowerCase()
