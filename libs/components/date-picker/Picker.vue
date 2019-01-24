@@ -96,7 +96,7 @@
                 </div>
                 <slot name="footer" :confirm="confirmDate">
                     <div v-if="confirm || innerType === 'datetime'" :class="footerCls">
-                        <span :class="datetimeCls" @click="pickTime">选择时间</span>
+                        <span v-if="innerType === 'datetime'" :class="datetimeCls" @click="pickTime">选择时间</span>
                         <b-button @on-click="confirmDate" size="small">
                             {{ confirmText }}
                         </b-button>
