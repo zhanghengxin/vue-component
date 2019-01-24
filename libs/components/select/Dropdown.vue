@@ -1,10 +1,13 @@
 <template>
-    <div :class="classes" :style="styles"><slot></slot></div>
+    <div :class="classes" :style="styles">
+        <slot></slot>
+    </div>
 </template>
 <script>
 
 import { prefix } from '../../utils/common'
 import Vue from 'vue'
+
 const isServer = Vue.prototype.$isServer
 const Popper = isServer ? function () {} : require('popper.js/dist/umd/popper.js')
 const prefixCls = prefix + 'drop'
@@ -16,13 +19,16 @@ export default {
             type: String,
             default: 'bottom-start'
         },
+        labelWidth: {
+            type: [String, Number],
+            default: 0
+        },
+        width: {
+            type: [String, Number],
+            default: 0
+        },
         className: {
             type: String
-        }
-    },
-    data () {
-        return {
-            width: ''
         }
     },
     computed: {
@@ -57,6 +63,9 @@ export default {
                             },
                             preventOverflow: {
                                 boundariesElement: 'window'
+                            },
+                            offset: {
+                                offset: this.labelWidth
                             }
                         },
                         onCreate: () => {
