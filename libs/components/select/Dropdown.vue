@@ -1,10 +1,13 @@
 <template>
-    <div :class="classes" :style="styles"><slot></slot></div>
+    <div :class="classes" :style="styles">
+        <slot></slot>
+    </div>
 </template>
 <script>
 
 import { prefix } from '../../utils/common'
 import Vue from 'vue'
+
 const isServer = Vue.prototype.$isServer
 const Popper = isServer ? function () {} : require('popper.js/dist/umd/popper.js')
 const prefixCls = prefix + 'drop'
@@ -16,19 +19,25 @@ export default {
             type: String,
             default: 'bottom-start'
         },
+        labelWidth: {
+            type: [String, Number],
+            default: 0
+        },
+        width: {
+            type: [String, Number],
+            default: 0
+        },
         className: {
             type: String
-        }
-    },
-    data () {
-        return {
-            width: ''
         }
     },
     computed: {
         styles () {
             let style = {}
-            if (this.width) style.minWidth = `${this.width}px`
+            if (this.width) {
+                style.minWidth = `${this.width}px`
+                style.maxWidth = `${this.width + 100}px`
+            }
             return style
         },
         classes () {
@@ -57,6 +66,9 @@ export default {
                             },
                             preventOverflow: {
                                 boundariesElement: 'window'
+                            },
+                            offset: {
+                                offset: this.labelWidth
                             }
                         },
                         onCreate: () => {
@@ -69,9 +81,9 @@ export default {
                     })
                 })
             }
-            if (this.$parent.$options.name === `${prefix}select`) {
-                this.width = this.$parent.$el.querySelector(`.${prefix}select-selection`).clientWidth
-            }
+            // if (this.$parent.$options.name === `${prefix}select`) {
+            //     this.width = this.$parent.$el.querySelector(`.${prefix}select-selection`).clientWidth
+            // }
         },
         destroy () {
             if (this.popper) {

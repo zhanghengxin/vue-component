@@ -198,6 +198,7 @@ $bgFont: #ccc;
   }
 
   .#{$css-prefix-time}-list {
+    box-sizing: border-box;
     position: relative; // 定位 offsetParent
     float: left;
     margin: 0;

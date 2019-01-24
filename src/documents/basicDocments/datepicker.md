@@ -392,9 +392,8 @@
             :fixed='fixed'
             :width='400'
             :shortcuts='labelShorcuts'
-            :labelText='labelText'
-            :confirm='confirmed'
-            label>
+            :label='labelText'
+            :confirm='confirmed'>
         <b-datepicker>
     </div>
     
@@ -412,12 +411,11 @@
         </div>
         <b-datepicker 
             v-model='date'
-            :labelText='labelText'
+            :label='labelText'
             :shortcuts='shortcuts'
             :fixed='fixed'
             :width='1000'
-            :confirm='confirm'
-            label>
+            :confirm='confirm'>
         <b-datepicker>
     </div>
     <script>
@@ -517,7 +515,6 @@
 | value | 日期选择器中的值，使用 v-model 双向绑定数据 | String |
 | type | 类型 | String  | `date` `year` `month` | date |
 | label | input前的说明文字 | String | | |
-| labelText | 自定义 label 模式的内容 | String  | | 日期 |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
 | size | input组件的尺寸 | Boolean  | `small` `default` `large` | default |
 | range | 日期选择中选择一个时间范围 | Boolean  | `true` `false` | false |
