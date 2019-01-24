@@ -1,191 +1,140 @@
-$css-prefix-drawer: $css-prefix + 'drawer';
+$css-prefix-drawer: $css-prefix+'drawer';
 @import "../common/color";
 
-.#{$css-prefix-drawer}-root{
-    position:fixed;top:0;overflow:auto
-  
+@mixin base-drawer() {
+  position: fixed;
+  border-radius: 4px;
+  background-color: $white;
+  z-index: 100;
+}
+
+@mixin base-animation($direction) {
+  &-enter-active {
+    animation-name: $direction + '-in';
+    animation-duration: 0.3s;
   }
-  .#{$css-prefix-drawer}-drawerTop {
+
+  &-leave-active {
+    animation-name: $direction + '-out';
+    animation-duration: 0.3s;
+  }
+}
+
+@mixin xy-animation($direction, $positionFrom, $positionTo) {
+  @keyframes #{$direction}-in {
+    0% {
+      transform: $positionFrom;
+    }
+
+    100% {
+      transform: $positionTo;
+    }
+  }
+
+  @keyframes #{$direction}-out {
+    0% {
+      transform: $positionTo;
+    }
+
+    100% {
+      transform: $positionFrom;
+    }
+  }
+}
+
+@mixin y-animation($direction, $position) {
+  @keyframes #{$direction}-in {
+    0% {
+      transform: translateY($position);
+    }
+
+    100% {
+      transform: translateY(0%);
+    }
+  }
+
+  @keyframes #{$direction}-out {
+    0% {
+      transform: translateY(0%);
+    }
+
+    100% {
+      transform: translateY($position);
+    }
+  }
+}
+
+
+
+.#{$css-prefix-drawer} {
+  padding: 16px 24px;
+  border-radius: 4px 4px 0 0;
+  background: $white;
+  color: $Sub;
+  border-bottom: 1px solid $white;
+
+  &-root {
+    position: fixed;
+    top: 0;
+    overflow: auto
+  }
+  
+  &-title {
     padding: 16px 24px;
     border-radius: 4px 4px 0 0;
-    color:$Title;
+    color: $Title;
     border-bottom: 1px solid #e8e8e8;
   }
-  .#{$css-prefix-drawer}-drawerTop p{
-   font-size: 20px;
-   font-weight: 600;
-  }
-  .#{$css-prefix-drawer}-drawerbody {
+  
+  &-body {
     padding: 24px;
     font-size: 14px;
     line-height: 1.5;
     word-wrap: break-word;
   }
   
-  .#{$css-prefix-drawer}-maskshow {
-      height: 100%;
-      width: 100%;
-      position: fixed;
-      background-color:$Sub;
-      opacity: 0.3;
-  }
-  .#{$css-prefix-drawer}-maskhid {
-    height: 0;
+  &-mask {
+    height: 100%;
     width: 100%;
+    position: fixed;
+    background-color: $Sub;
+    opacity: 0.3;
   }
-  .#{$css-prefix-drawer} {
-    padding: 16px 24px;
-    border-radius: 4px 4px 0 0;
-    background: $white;
-    color:$Sub;
-    border-bottom: 1px solid $white;
-  }
-  .#{$css-prefix-drawer}-top {
+
+  &-top {
     min-height: 256px;
     width: 100%;
-    position: fixed;
     top: 0;
-    border-radius: 4px;
-    background-color: $white;
-    z-index: 100;
+    @include base-drawer();
+    @include base-animation(top);
   }
-  .#{$css-prefix-drawer}-left {
+
+  &-left {
     min-width: 256px;
     height: 100%;
-    position: fixed;
     left: 0;
-    border-radius: 4px;
-    background-color: $white;
-    z-index: 100;
+    @include base-drawer();
+    @include base-animation(left);
   }
-  .#{$css-prefix-drawer}-bottom {
+
+  &-bottom {
     min-height: 256px;
     width: 100%;
-    position: fixed;
     bottom: 0;
-    border-radius: 4px;
-    background-color: $white;
-    z-index: 100;
+    @include base-drawer();
+    @include base-animation(bottom);
   }
-  .#{$css-prefix-drawer}-right {
+
+  &-right {
     min-width: 256px;
     height: 100%;
-    position: fixed;
     right: 0;
-    top: 0;
-    border-radius: 4px;
-    background-color: $white;
-    // box-shadow: -2px 0 8px $Sub;
-    z-index: 100;
+    @include base-drawer();
+    @include base-animation(right);
   }
-  .#{$css-prefix-drawer}-top-enter-active {
-    animation-name: foldt-in;
-    animation-duration: 0.3s;
-  }
-  
-  .#{$css-prefix-drawer}-top-leave-active {
-    animation-name: foldt-out;
-    animation-duration: 0.3s;
-  }
-  
-  .#{$css-prefix-drawer}-bottom-enter-active {
-    animation-name: foldb-in;
-    animation-duration: 0.3s;
-  }
-  
-  .#{$css-prefix-drawer}-bottom-leave-active {
-    animation-name: foldb-out;
-    animation-duration: 0.3s;
-  }
-  
-  .#{$css-prefix-drawer}-left-enter-active {
-    animation-name: foldl-in;
-    animation-duration: 0.3s;
-  }
-  
-  .#{$css-prefix-drawer}-left-leave-active {
-    animation-name: foldl-out;
-    animation-duration: 0.3s;
-  }
-  
-  .#{$css-prefix-drawer}-right-enter-active {
-    animation-name: foldr-in;
-    animation-duration: 0.3s;
-  }
-  
-  .b-drawer-right-leave-active {
-    animation-name: foldr-out;
-    animation-duration: 0.3s;
-  }
-  @keyframes foldr-in {
-    0% {
-      transform: translateX(100%);
-    }
-  
-    100% {
-      transform: translateX(0%);
-    }
-  }
-  @keyframes foldr-out {
-    0% {
-      transform: translateX(0%);
-    }
-  
-    100% {
-      transform: translateX(100%);
-    }
-  }
-  
-  @keyframes foldl-in {
-    0% {
-      transform: translateX(-100%);
-    }
-  
-    100% {
-      transform: translateX(0%);
-    }
-  }
-  @keyframes foldl-out {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-  
-  @keyframes foldt-in {
-    0% {
-      transform: translateY(-100%);
-    }
-  
-    100% {
-      transform: translateY(0%);
-    }
-  }
-  @keyframes foldt-out {
-    0% {
-      transform: translateY(0%);
-    }
-    100% {
-      transform: translateY(-100%);
-    }
-  }
-  
-  @keyframes foldb-in {
-    0% {
-      transform: translateY(100%);
-    }
-  
-    100% {
-      transform: translateY(0%);
-    }
-  }
-  @keyframes foldb-out {
-    0% {
-      transform: translateY(0%);
-    }
-    100% {
-      transform: translateY(100%);
-    }
-  }
+}
+
+@include xy-animation(right, translateX(100%),translateX(0%));
+@include xy-animation(left, translateX(-100%),translateX(0%));
+@include xy-animation(top, translateY(-100%),translateY(0%));
+@include xy-animation(bottom, translateY(100%),translateY(0%));
