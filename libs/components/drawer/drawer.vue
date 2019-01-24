@@ -6,15 +6,17 @@
  */
 <template>
     <div :class="[prefixCls+'-root']" ref='mask'>
-        <div :class="mask" @click="maskclick"></div>
+        <div :class="mask" v-show="isshow" @click="maskclick"></div>
         <transition :name="drawer">
             <div v-show="isshow" :class="drawer">
-                <div :class="[prefixCls+'-drawerTop']">
-                    <p>{{title}}</p>
-                </div>
-                <div :class="[prefixCls+'-drawerbody']">
-                    <slot/>
-                </div>
+                <slot name='drawer'>
+                    <div :class="[prefixCls+'-title']">
+                        <p>{{title}}</p>
+                    </div>
+                    <div :class="[prefixCls+'-body']">
+                        <slot/>
+                    </div>
+                </slot>
             </div>
         </transition>
     </div>
@@ -49,7 +51,7 @@ export default {
             return `${prefixCls}-${this.local}`
         },
         mask () {
-            return [this.isshow ? `${prefixCls}-maskshow` : `${prefixCls}-maskshid`]
+            return [`${prefixCls}-mask`]
         }
     },
     methods: {

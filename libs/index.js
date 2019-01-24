@@ -47,8 +47,9 @@ import MenuItem from './components/menu/menu-item'
 import Submenu from './components/menu/submenu'
 import MenuGroup from './components/menu/menu-item-group'
 import Timeline from './components/timeline'
-import TimelineItem from './components/timeline-item/'
+import TimelineItem from './components/timeline-item'
 import Split from './components/split'
+import Loading from './components/loading'
 
 const components = [
     Input,
@@ -109,6 +110,8 @@ const install = function (Vue) {
     Vue.prototype.$Message = Message
     Vue.prototype.$Modal = Modal
     Vue.prototype.$Notice = Notice
+    Vue.use(Loading.directive)
+    Vue.prototype.$Loading = Loading.service
 }
 
 export default {

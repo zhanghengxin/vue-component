@@ -34,7 +34,10 @@ export default {
     computed: {
         styles () {
             let style = {}
-            if (this.width) style.minWidth = `${this.width}px`
+            if (this.width) {
+                style.minWidth = `${this.width}px`
+                style.maxWidth = `${this.width + 100}px`
+            }
             return style
         },
         classes () {
@@ -78,9 +81,9 @@ export default {
                     })
                 })
             }
-            if (this.$parent.$options.name === `${prefix}select`) {
-                this.width = this.$parent.$el.querySelector(`.${prefix}select-selection`).clientWidth
-            }
+            // if (this.$parent.$options.name === `${prefix}select`) {
+            //     this.width = this.$parent.$el.querySelector(`.${prefix}select-selection`).clientWidth
+            // }
         },
         destroy () {
             if (this.popper) {

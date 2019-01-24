@@ -236,6 +236,11 @@
           "title": "Timeline 时间轴",
           "path": "/timeline",
           "name": "timeline"
+        },
+        {
+          "title": "Loading...",
+          "path": "/loading",
+          "name": "loading"
         }
       ]
     }

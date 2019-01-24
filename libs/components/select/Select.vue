@@ -58,6 +58,7 @@
             <Drop
                 :style='dropStyles'
                 v-show='show'
+                :width='dropWidth'
                 >
                 <ul v-if='notFoundData'>
                     <li :class='[prefix+`option`]'>{{notFoundText}}</li>
@@ -106,7 +107,8 @@ export default {
             isFocused: false,
             dropStyles: {},
             query: '',
-            lastRemoteQuery: ''
+            lastRemoteQuery: '',
+            dropWidth: null
         }
     },
     props: {
@@ -342,7 +344,7 @@ export default {
             }).filter(Boolean)
         }
 
-        // this.dropStyles = this.fixedInitDrop()
+        this.fixedInitDrop()
     },
     methods: {
         clickOutside () {
@@ -399,7 +401,7 @@ export default {
                 return false
             }
             this.show = !this.show
-            if (this.show) { this.broadcastPopperUpdate() }
+            // if (this.show) { this.broadcastPopperUpdate() }
         },
         removeTag (e) {
             const {disabled, values} = this
@@ -426,15 +428,14 @@ export default {
         },
         fixedInitDrop () {
             // cmoputed frop width
-            const {disabled, fixed, label, $el} = this
-            if (!disabled && !fixed && label && $el) {
+            const {disabled, label, $el} = this
+            if (!disabled && label && $el) {
                 let clientWidth = $el.clientWidth
-                let labelWidth = +this.labelWidth || $el.querySelector(`.${prefixCls}-label`).clientWidth
-                return {
-                    width: `${clientWidth - labelWidth}px`
-                }
+                let labelWidth = +$el.querySelector(`.${prefixCls}-label`).clientWidth
+                this.dropWidth = clientWidth - labelWidth
+            } else {
+                this.dropWidth = $el.clientWidth
             }
-            return {}
         },
         broadcastPopperUpdate () {
             this.broadcast(`${prefix}drop`, 'on-update-popper')
