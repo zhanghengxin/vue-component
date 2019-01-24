@@ -1,9 +1,43 @@
 <template>
 
     <div
-        :class="wrapCls"
+        :class="wrapCls" v-click-outside="clickOutside" ref="reference"
     >
+        <b-input
+            :width="width"
+            ref="input"
+            v-if="label"
+            :label="label"
+            :fixed="fixed"
+            type="text"
+            :class="inputClass"
+            :disabled="disabled"
+            :readonly="!filterable"
+            :value="currentValue"
+            :size="size"
+            suffix
+            :clearable="iconClearShow"
+            :icon="inputIcon"
+            :placeholder="placeholder"
+            @on-change="handleChange"
+            @on-clear="handleClear"
+            @on-click="handleClick">
+        </b-input>
+        <transition name='slide'>
+            <BDropdown :width="width" v-if="label" :label-width="labelWidth" v-show="treeShow">
+                <tree-node
+                    v-for="(item, index) in rootData"
+                    :key="index"
+                    :data="item"
+                    :draggable="draggable"
+                    :show-checkbox="showCheckbox"
+                    :default-opt="defaultOpt"
+                >
+                </tree-node>
+            </BDropdown>
+        </transition>
         <tree-node
+            v-if="!label"
             v-for="(item, index) in rootData"
             :key="index"
             :data="item"
@@ -18,22 +52,28 @@
 <script>
 import { prefix } from '../../utils/common'
 import TreeNode from './Node.vue'
+import BInput from '../input'
+import BDropdown from '../select/Dropdown'
 import Emitter from '../../mixins/emitter'
+import clickOutside from '../../utils/directives/clickOutside'
 
 const prefixCls = prefix + 'tree'
 export default {
     name: prefixCls,
     mixins: [Emitter],
+    directives: {clickOutside},
     components: {
-        TreeNode
+        TreeNode, BInput, BDropdown
     },
     data () {
         return {
             prefixCls: prefixCls,
             rootData: this.data,
+            labelWidth: 0,
             dataList: [],
+            treeShow: false,
+            currentValue: '',
             dargState: {}
-
         }
     },
     watch: {
@@ -47,8 +87,18 @@ export default {
                 this.formatTreeData()
             }
         },
-        filterText (value) {
-            this.filterTreeData(value)
+        // dataList: {
+        //     deep: true,
+        //     handler (value) {
+        //         if (this.label && this.showCheckbox) {
+        //             console.log(value, 'value')
+        //         }
+        //     }
+        // },
+        treeShow () {
+            this.$nextTick(() => {
+                this.broadcast(`${prefix}drop`, this.treeShow ? 'on-update-popper' : 'on-destroy-popper')
+            })
         }
     },
     props: {
@@ -67,7 +117,6 @@ export default {
         },
         defaultOpt: {
             type: Object,
-
             default () {
                 return {
                     childrenKey: 'children',
@@ -109,18 +158,52 @@ export default {
             type: Boolean,
             default: false
         },
-        filterText: {
-            type: String,
-            default: ''
+        clearable: {
+            type: Boolean,
+            default: false
         },
         loadMethod: {
             type: Function
         },
         filterMethod: {
-            type: Function
+            type: Function,
+            default (value, data) {
+                return data.name.indexOf(value) !== -1
+            }
         },
         render: {
             type: Function
+        },
+        inputClass: {
+            type: [String, Array]
+        },
+        label: {
+            type: [String, Number],
+            default: ''
+        },
+        placeholder: {
+            type: String,
+            default: ''
+        },
+        size: {
+            type: String,
+            default: 'default'
+        },
+        width: {
+            type: [String, Number],
+            default: 240
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+        fixed: {
+            type: Boolean,
+            default: false
+        },
+        filterable: {
+            type: Boolean,
+            default: false
         }
     },
     created () {
@@ -133,6 +216,8 @@ export default {
         this.$on('on-check-change', this.handleCheck)
         this.$on('on-drag-start', this.handleDragStart)
         this.$on('on-drag-drop', this.handleDrop)
+        if (this.label) this.treeShow = false
+        this.labelWidth = this.getLabelWidth()
     },
     computed: {
         wrapCls () {
@@ -142,9 +227,40 @@ export default {
                     [`${this.className}`]: !!this.className
                 }
             ]
+        },
+        inputIcon () {
+            if (this.filterable) {
+                return 'chaxun'
+            } else {
+                return ''
+            }
+        },
+        iconClearShow () {
+            if (this.label && this.showCheckbox) {
+                return false
+            }
+            return this.clearable
         }
     },
     methods: {
+        getLabelWidth () {
+            const inputBox = this.$refs.input
+            let offsetWidth = 0
+            if (inputBox) {
+                if (inputBox.$el.children.length < 2) {
+                    offsetWidth = 0
+                } else {
+                    offsetWidth = inputBox.$el.children[1].offsetWidth
+                }
+                if (this.label) {
+                    offsetWidth += 4
+                }
+                if (this.fixed) {
+                    offsetWidth -= 4
+                }
+            }
+            return offsetWidth
+        },
         getCheckedNodes () {
             const checkedKey = this.defaultOpt.checkedKey
             return this.dataList.filter(obj => obj.node[checkedKey]).map(obj => obj.node)
@@ -233,7 +349,12 @@ export default {
             const selectedIndex = this.dataList.findIndex(obj => obj.node.selected)
             if (selectedIndex >= 0 && selectedIndex !== nodeKey) this.$set(this.dataList[selectedIndex].node, selectedKey, false)
             this.$set(node, selectedKey, !node.selected)
+            this.currentValue = node[this.defaultOpt.nameKey]
+            console.log(node)
             this.$emit('on-select', {data: node})
+            if (this.label && !this.showCheckbox) {
+                this.treeShow = false
+            }
         },
         // 选中
         handleCheck ({checked, nodeKey}) {
@@ -254,6 +375,11 @@ export default {
                 currentNode: node
             }
             options.checkedAndIndeterminateNodes = options.checkedNodes.concat(options.indeterminateNodes)
+            if (this.label && !this.filterable) {
+                this.currentValue = options.checkedNodes.map(item => {
+                    return item[defaultOpt.nameKey]
+                }).join(',')
+            }
             this.$emit('on-check', options)
         },
         // 展开/关闭
@@ -288,6 +414,7 @@ export default {
             this.$emit('on-expand', {data: node})
         },
         filterTreeData (value) {
+            if (!this.filterable) return
             const defaultOpt = this.defaultOpt
             const _this = this
             const cascadeParent = function (data) {
@@ -362,6 +489,20 @@ export default {
             if (childrenIndex !== undefined) {
                 dataList[parentKey].node.children.splice(childrenIndex, 1)
             }
+        },
+        handleChange (event) {
+            this.filterTreeData(event.target.value)
+        },
+        handleClick () {
+            if (this.disabled) return
+            this.treeShow = !this.treeShow
+        },
+        clickOutside () {
+            if (!this.label) return
+            this.treeShow = false
+        },
+        handleClear () {
+            this.currentValue = ''
         }
     }
 }

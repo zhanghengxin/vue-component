@@ -253,94 +253,6 @@
 :::
 </div>
 
-### 模糊检索
-在需要对节点进行过滤时，传入`filterText`关键字进行过滤，同时也需要设置`filter-method`作为过滤函数。
-<div class="example">
-    <div class="example-box">
-        <div>
-            <b-input v-model='filterText'></b-input>
-            <b-tree :data='data4' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
-        </div>
-    </div>
-
-::: code
-```html
-    <div>
-        <b-input v-model='filterText'></b-input>
-        <b-tree :data='data4' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    data4:[
-                       {
-                           name: 'parent 1',
-                           expand: true,
-                           children: [
-                               {
-                                   name: 'parent 1-1',
-                                   children: [
-                                       {
-                                           name: 'leaf 1-1-1'
-                                       },
-                                       {
-                                           name: 'leaf 1-1-2'
-                                       }
-                                   ]
-                               },
-                               {
-                                   name: 'parent 1-2',
-                                   children: [
-                                       {
-                                           name: 'leaf 1-2-1'
-                                       },
-                                       {
-                                           name: 'leaf 1-2-2',
-                                           children: [
-                                              {
-                                                  name: 'parent 1-2-2-1',
-                                                  children: [
-                                                      {
-                                                          name: 'leaf 1-2-2-1-1'
-                                                      },
-                                                      {
-                                                          name: 'leaf 1-2-2-1-2'
-                                                      }
-                                                  ]
-                                              },
-                                              {
-                                                  name: 'parent 1-2-2-1',
-                                                  children: [
-                                                      {
-                                                          name: 'leaf 1-2-2-1-1'
-                                                      },
-                                                      {
-                                                          name: 'leaf 1-2-2-1-2'
-                                                      }
-                                                  ]
-                                              }
-                                          ]
-                                       }
-                                   ]
-                               }
-                           ]
-                       }
-                    ]
-                }
-            },
-            methods: {
-                filterMethod(value, data){
-                     return data.name.indexOf(value) !== -1
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-
 ### 异步加载
 需要使用懒加载进行数据展示时，传入`loading`为 true 开启功能，同时也需要设置`load-method`作为异步获取数据函数。
 <div class="example">
@@ -559,6 +471,103 @@ Render 函数的第二个参数，包含三个字段：
 </div>
 
 
+### 自定义样式
+使用 `label`属性开启文本模式，在此基础添加`fixed`属性开启 label 模式
+
+再添加`filterable`，开启模糊检索模式
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-tree clearable label='单选' :data='data3'></b-tree>
+            <br/>
+            <b-tree label='多选' show-checkbox :data='data3'></b-tree>
+            <br/>
+            <b-tree label='fixed模式' fixed :data='data3'></b-tree>
+            <br/>
+            <b-tree label='模糊检索' show-checkbox filterable :data='data3'></b-tree>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+         <b-tree clearable label='单选' :data='data3'></b-tree>
+         <br/>
+         <b-tree label='多选' show-checkbox :data='data3'></b-tree>
+         <br/>
+         <b-tree label='fixed模式' fixed :data='data3'></b-tree>
+         <br/>
+         <b-tree label='模糊检索' show-checkbox filterable :data='data3'></b-tree>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    data3:[
+                         {
+                             name: 'parent 1',
+                             expand: true,
+                             children: [
+                                 {
+                                     name: 'parent 1-1',
+                                     checked:true,
+                                     children: [
+                                         {
+                                             name: 'leaf 1-1-1'
+                                         },
+                                         {
+                                             name: 'leaf 1-1-2'
+                                         }
+                                     ]
+                                 },
+                                 {
+                                     name: 'parent 1-2',
+                                     children: [
+                                         {
+                                             name: 'leaf 1-2-1'
+                                         },
+                                         {
+                                             name: 'leaf 1-2-2',
+                                             children: [
+                                                {
+                                                    name: 'parent 1-2-2-1',
+                                                    children: [
+                                                        {
+                                                            name: 'leaf 1-2-2-1-1'
+                                                        },
+                                                        {
+                                                            name: 'leaf 1-2-2-1-2'
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    name: 'parent 1-2-2-1',
+                                                    children: [
+                                                        {
+                                                            name: 'leaf 1-2-2-1-1'
+                                                        },
+                                                        {
+                                                            name: 'leaf 1-2-2-1-2'
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                         }
+                                     ]
+                                 }
+                             ]
+                         }
+                    ]
+                }
+            },
+            methods: {
+
+            }
+        }
+    </script>
+```
+:::
+</div>
 
 <script>
 export default {
@@ -835,7 +844,7 @@ export default {
                 parent: true, // 是否影响父级节点
                 children: true // 是否影响子级节点
             },
-            filterText:''
+            filterText:'1-1'
         }
     },
     methods: {
