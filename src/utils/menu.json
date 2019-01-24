@@ -129,6 +129,11 @@
           "title": "Grid 栅格",
           "path": "/grid",
           "name": "grid"
+        },
+        {
+          "title": "Split 面板分割",
+          "path": "/split",
+          "name": "split"
         }
       ]
     },
