@@ -42,6 +42,7 @@
                         </div>
                     </slot>
                     <panel
+                        ref="panel"
                         v-if="!range"
                         :type="innerType"
                         :date-format="innnerDateFormat"
@@ -57,6 +58,7 @@
                     </panel>
                     <div v-else :class="rangeWrapper">
                         <panel
+                            ref="startPanel"
                             style="box-shadow: 1px 0 rgba(0, 0, 0, .1)"
                             v-bind="$attrs"
                             :type="innerType"
@@ -74,6 +76,7 @@
                             @select-time="selectStartTime">
                         </panel>
                         <panel
+                            ref="endPanel"
                             v-bind="$attrs"
                             :type="innerType"
                             :date-format="innnerDateFormat"
@@ -92,8 +95,9 @@
                     </div>
                 </div>
                 <slot name="footer" :confirm="confirmDate">
-                    <div v-if="confirm" :class="footerCls">
-                        <b-button @on-click="confirmDate">
+                    <div v-if="confirm || innerType === 'datetime'" :class="footerCls">
+                        <span v-if="innerType === 'datetime'" :class="datetimeCls" @click="pickTime">选择时间</span>
+                        <b-button @on-click="confirmDate" size="small">
                             {{ confirmText }}
                         </b-button>
                     </div>
@@ -266,6 +270,9 @@ export default {
         footerCls () {
             return `${pickerCls}-footer`
         },
+        datetimeCls () {
+            return `${pickerCls}-datetime`
+        },
         text () {
             if (this.userInput !== null) return this.userInput
             const date = this.transform.value2date(this.value, this.format)
@@ -376,11 +383,11 @@ export default {
         },
         selectStartDate (date) {
             this.$set(this.curVal, 0, date)
-            if (this.curVal[1]) this.updateDate() && this.closePopup()
+            if (this.curVal[1]) this.updateDate() && this.innerType !== 'datetime' && this.closePopup()
         },
         selectEndDate (date) {
             this.$set(this.curVal, 1, date)
-            if (this.curVal[0]) this.updateDate() && this.closePopup()
+            if (this.curVal[0]) this.updateDate() && this.innerType !== 'datetime' && this.closePopup()
         },
         selectTime (time, close) {
             this.curVal = time
@@ -432,6 +439,14 @@ export default {
                     }
                 }
                 this.$emit('on-input-error', value)
+            }
+        },
+        pickTime () {
+            if (this.range) {
+                this.$refs.startPanel.panel = 'TIME'
+                this.$refs.endPanel.panel = 'TIME'
+            } else {
+                this.$refs.panel.panel = 'TIME'
             }
         },
         update () {
