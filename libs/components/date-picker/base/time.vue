@@ -126,7 +126,7 @@ export default {
             return this.value ? new Date(this.value).getSeconds() : 0
         },
         date () {
-            return new Date(this.value)
+            return this.value ? new Date(this.value) : new Date().setHours(0, 0, 0, 0) // 如果没有值则设置为当天零点，否则会以1970年8点开始计算
         },
         times () {
             return this.minuteStep === 0 ? 3 : 2

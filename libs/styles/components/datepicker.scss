@@ -70,6 +70,13 @@ $bgFont: #ccc;
   clear: both;
   text-align: right;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
+  .#{$css-prefix-picker}-datetime {
+    color: $Primary;
+    line-height: 24px;
+    font-size: 12px;
+    float: left;
+    margin-left: 12px;
+  }
 }
 
 .#{$css-prefix-calendar} {
@@ -162,9 +169,11 @@ $bgFont: #ccc;
       text-align: center;
       border: none;
     }
+
     .#{$css-prefix-date}-header {
       color: $DisContent;
     }
+
     .#{$css-prefix-date}-body {
       border: 0;
       color: $Content;

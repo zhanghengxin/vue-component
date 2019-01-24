@@ -94,10 +94,12 @@ import { isValidDate, isDateObject, formatDate } from '../../../utils/date'
 import scrollIntoView from '../../../utils/scroll-into-view'
 import { TableYear, TableMonth, TableDate, TableTime } from '../base'
 import { prefix } from '../../../utils/common'
+import bButton from '../../button/'
 const icon = `${prefix}icon`
+
 export default {
     name: `${prefix}panel`,
-    components: { TableYear, TableMonth, TableDate, TableTime },
+    components: { TableYear, TableMonth, TableDate, TableTime, bButton },
     props: {
         value: {
             default: null,
@@ -287,7 +289,8 @@ export default {
                     }
                 }
                 this.selectTime(time)
-                this.panel = 'TIME'
+
+                // this.panel = 'TIME'
                 return
             }
             this.$emit('select-date', date)
