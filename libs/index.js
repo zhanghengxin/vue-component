@@ -48,6 +48,7 @@ import Submenu from './components/menu/submenu'
 import MenuGroup from './components/menu/menu-item-group'
 import Timeline from './components/timeline'
 import TimelineItem from './components/timeline-item/'
+import Split from './components/split'
 
 const components = [
     Input,
@@ -98,7 +99,8 @@ const components = [
     Submenu,
     MenuGroup,
     Timeline,
-    TimelineItem
+    TimelineItem,
+    Split
 ]
 
 const install = function (Vue) {
