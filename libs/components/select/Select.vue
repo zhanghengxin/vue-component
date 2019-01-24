@@ -428,8 +428,8 @@ export default {
         },
         fixedInitDrop () {
             // cmoputed frop width
-            const {disabled, label, $el} = this
-            if (!disabled && label && $el) {
+            const {label, $el} = this
+            if (label && $el) {
                 let clientWidth = $el.clientWidth
                 let labelWidth = +$el.querySelector(`.${prefixCls}-label`).clientWidth
                 this.dropWidth = clientWidth - labelWidth
