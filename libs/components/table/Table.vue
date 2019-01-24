@@ -367,7 +367,7 @@ export default {
             let fixLeftArr = columns.filter((item) => (item.fixed === 'left'))
             let fixRightArr = columns.filter((item) => (item.fixed === 'right'))
             let normalArr = columns.filter((item) => (!item.fixed))
-            let result = indexArr.concat(fixLeftArr, normalArr, fixRightArr)
+            let result = fixLeftArr.concat(indexArr, normalArr, fixRightArr)
             result.forEach((row, index) => {
                 row._index = index
                 row._visible = true

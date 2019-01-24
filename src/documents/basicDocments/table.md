@@ -1667,7 +1667,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border width=1000 :columns='columns12' :data='data11'></b-table>
+           <b-table show-index border width=1000 :columns='columns12' :data='data11'></b-table>
         </div>
     </div>
 
@@ -2544,35 +2544,28 @@
                     }
                 ],
                 columns12: [
-                    {
-                        title: 'Name',
-                        key: 'name',
-                        width:100
-                    },
-                    {
-                        title: 'Age',
-                        key: 'age',
-                        width:100
-                    },
-                    {
-                        title: 'Pets',
-                        key: 'pets',
-                        minWidth:100
-                    },
-                    {
-                        title: 'Like',
-                        key: 'like',
-                        maxWidth:100
-                    },
-                    {
-                        title: 'ID',
-                        key: 'id',
-                    },
-                    {
-                        title: 'Book',
-                        key: 'book'
-                    }
-                ]
+                                           {
+                                               type: 'selection',
+                                               width: 35,
+                                               align: 'center',
+                                               fixed: 'left',
+                                               key: 'id'
+                                           },
+                                           {
+                                               title: '数据模型名称',
+                                               width: 200,
+                                               key: 'modelName'
+                                           },
+                                           {
+                                               title: '主表',
+                                               width: 200,
+                                               key: 'tableName'
+                                           },
+                                           {
+                                               title: '关联表',
+                                               key: 'refTabModelNames'
+                                           }
+                                       ]
             }
         },
         methods:{
