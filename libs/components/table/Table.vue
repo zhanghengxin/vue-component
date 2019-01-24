@@ -391,6 +391,7 @@ export default {
         handleResize () {
             let noWidthList = []
             let hasWidthList = []
+            let noMaxWidthColumns = []
             let sumMinWidth = 0
             let tableWidth = this.$el.offsetWidth
             this.cloneColumns.forEach((item) => {
@@ -402,6 +403,8 @@ export default {
                     }
                     if (item.minWidth) {
                         sumMinWidth += item.minWidth
+                    } else if (!item.width && !item.maxWidth) {
+                        noMaxWidthColumns.push(item)
                     }
                 }
             })
@@ -416,7 +419,7 @@ export default {
             }
             for (let i = 0; i < this.cloneColumns.length; i++) {
                 let column = this.cloneColumns[i]
-                let width = columnWidth
+                let width = columnWidth + (column.minWidth ? column.minWidth : 0)
                 if (column.width) {
                     width = column.width
                 } else if (column._visible) {
@@ -427,7 +430,7 @@ export default {
                         width = column.maxWidth
                     }
                     if (adaptiveWidth > 0) {
-                        adaptiveWidth -= width
+                        adaptiveWidth -= width - (column.minWidth ? column.minWidth : 0)
                         adaptiveLength--
                         if (adaptiveLength > 0) {
                             columnWidth = parseInt(adaptiveWidth / adaptiveLength)
@@ -439,6 +442,23 @@ export default {
                     }
                 }
                 this.$set(column, '_width', width)
+            }
+
+            if (adaptiveWidth > 0) {
+                adaptiveLength = noMaxWidthColumns.length
+                columnWidth = parseInt(adaptiveWidth / adaptiveLength)
+                for (let i = 0; i < noMaxWidthColumns.length; i++) {
+                    const column = noMaxWidthColumns[i]
+                    let width = column._width + columnWidth
+                    if (adaptiveLength > 1) {
+                        adaptiveLength--
+                        adaptiveWidth -= columnWidth
+                        columnWidth = parseInt(adaptiveWidth / adaptiveLength)
+                    } else {
+                        columnWidth = 0
+                    }
+                    column._width = width
+                }
             }
             this.scrollReckon()
         },

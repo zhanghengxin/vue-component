@@ -593,7 +593,7 @@
                         {
                             title: 'Name',
                             key: 'name',
-                            width:200
+                            width:200,
                         },
                         {
                             title: 'Age',
@@ -2042,7 +2042,19 @@
                     {
                         title: 'Name',
                         key: 'name',
-                        width:200
+                        width:200,
+                        render: (h, params) => {
+                            return h('div', [
+                                h('b-input', {
+                                    on: {
+                                        'on-change': (data) => {
+                                            this.asdda(data,params.index)
+                                        }
+                                    },
+                                    value:params
+                                })
+                            ])
+                        }
                     },
                     {
                         title: 'Age',
@@ -2544,28 +2556,35 @@
                     }
                 ],
                 columns12: [
-                                           {
-                                               type: 'selection',
-                                               width: 35,
-                                               align: 'center',
-                                               fixed: 'left',
-                                               key: 'id'
-                                           },
-                                           {
-                                               title: '数据模型名称',
-                                               width: 200,
-                                               key: 'modelName'
-                                           },
-                                           {
-                                               title: '主表',
-                                               width: 200,
-                                               key: 'tableName'
-                                           },
-                                           {
-                                               title: '关联表',
-                                               key: 'refTabModelNames'
-                                           }
-                                       ]
+                    {
+                       title: 'Name',
+                       key: 'name',
+                       width:100
+                    },
+                    {
+                       title: 'Age',
+                       key: 'age',
+                       width:100
+                    },
+                    {
+                       title: 'Pets',
+                       key: 'pets',
+                       minWidth:100
+                    },
+                    {
+                       title: 'Like',
+                       key: 'like',
+                       maxWidth:100
+                    },
+                    {
+                       title: 'ID',
+                       key: 'id',
+                    },
+                    {
+                       title: 'Book',
+                       key: 'book'
+                    }
+                ]
             }
         },
         methods:{
@@ -2577,6 +2596,11 @@
             },
             handleDbclick(row){
                 console.log('双击事件,当前选中的数据为：',row)
+            },
+            asdda (data,index) {
+                this.data5[index].age = new Date()
+                this.data5[index].name = data
+                console.log(this.data5)
             }
         }
     }
