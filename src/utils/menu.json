@@ -241,6 +241,11 @@
           "title": "Loading...",
           "path": "/loading",
           "name": "loading"
+        },
+        {
+          "title": "Affix 图钉",
+          "path": "/affix",
+          "name": "affix"
         }
       ]
     }
