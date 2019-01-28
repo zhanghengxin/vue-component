@@ -241,6 +241,11 @@
           "title": "Loading...",
           "path": "/loading",
           "name": "loading"
+        },
+        {
+          "title": "Anchor 锚点",
+          "path": "/anchor",
+          "name": "anchor"
         }
       ]
     }
