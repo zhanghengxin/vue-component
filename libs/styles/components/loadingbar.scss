@@ -1,0 +1,22 @@
+$css-prefix-loading-bar: $css-prefix + 'loading-bar';
+
+.#{$css-prefix-loading-bar} {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+
+    &-inner {
+        transition: width 0.2 linear;
+
+        &-color-primary {
+            background-color: $Primary;
+        }
+
+        &-failed-color-error {
+            background-color: $Error;
+        }
+    }
+}
