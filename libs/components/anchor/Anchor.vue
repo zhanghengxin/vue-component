@@ -34,7 +34,7 @@ export default {
     props: {
         affix: {
             type: Boolean,
-            default: true
+            default: false
         },
         offsetTop: {
             type: Number,
@@ -72,7 +72,7 @@ export default {
     },
     computed: {
         wrapperComponent () {
-            return this.affix ? `Affix` : 'div'
+            return this.affix ? `${prefix}affix` : 'div'
         },
         wrapperCls () {
             return `${prefixCls}-wrapper`
