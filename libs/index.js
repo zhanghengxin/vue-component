@@ -52,6 +52,7 @@ import Split from './components/split'
 import Loading from './components/loading'
 import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
+import Affix from './components/affix'
 
 const components = [
     Input,
@@ -105,7 +106,8 @@ const components = [
     TimelineItem,
     Split,
     Anchor,
-    AnchorLink
+    AnchorLink,
+    Affix
 ]
 
 const install = function (Vue) {

@@ -72,7 +72,7 @@ export default {
     },
     computed: {
         wrapperComponent () {
-            return this.affix ? `div` : 'div'
+            return this.affix ? `Affix` : 'div'
         },
         wrapperCls () {
             return `${prefixCls}-wrapper`
