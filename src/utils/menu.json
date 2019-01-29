@@ -243,6 +243,11 @@
           "name": "loading"
         },
         {
+          "title": "Anchor 锚点",
+          "path": "/anchor",
+          "name": "anchor"
+        },
+        {
           "title": "Affix 图钉",
           "path": "/affix",
           "name": "affix"

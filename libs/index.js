@@ -50,6 +50,8 @@ import Timeline from './components/timeline'
 import TimelineItem from './components/timeline-item'
 import Split from './components/split'
 import Loading from './components/loading'
+import Anchor from './components/anchor'
+import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
 
 const components = [
@@ -103,6 +105,8 @@ const components = [
     Timeline,
     TimelineItem,
     Split,
+    Anchor,
+    AnchorLink,
     Affix
 ]
 
