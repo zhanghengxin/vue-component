@@ -70,6 +70,11 @@ $css-prefix-option: $css-prefix+'option';
   box-sizing: border-box;
 }
 
+@mixin border-left-radius($bg, $radius) {
+  background-color: $bg;
+  border-bottom-left-radius: $radius;
+  border-top-left-radius: $radius;
+}
 
 //最外层的盒子
 .#{$css-prefix-select}-container {
@@ -93,10 +98,12 @@ $css-prefix-option: $css-prefix+'option';
     display: table;
     width: 280px;
     @include selectWidth(100%);
+
     .#{$css-prefix-select}-label {
       display: table-cell;
     }
-    .#{$css-prefix-select}{
+
+    .#{$css-prefix-select} {
       display: inline-block;
     }
   }
@@ -110,10 +117,8 @@ $css-prefix-option: $css-prefix+'option';
 
     .#{$css-prefix-select}-label {
       padding: 4px 7px;
-      background-color: $Background;
       border-right: 1px solid $Border;
-      border-bottom-left-radius: 4px;
-      border-top-left-radius: 4px;
+      @include border-left-radius($Background, 4px)
     }
 
     .#{$css-prefix-select}-selection {
@@ -155,9 +160,7 @@ $css-prefix-option: $css-prefix+'option';
   }
 
   @include size(large, 34px, 28px);
-
   @include size(default, 30px, 24px);
-
   @include size(small, 24px, 18px);
 
 
@@ -171,7 +174,7 @@ $css-prefix-option: $css-prefix+'option';
     width: 100%;
     @include borderInit($Border, 4px);
     @include transitionAll();
-    @include selectMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
+    @include selectMockClass($LightPrimary, 0 0 0 2px rgba($LightPrimary, 0.2));
 
     &-content {
       overflow: hidden;
@@ -187,11 +190,11 @@ $css-prefix-option: $css-prefix+'option';
     }
 
     &-disabled {
-      background: $Disabled;
+      @include border-left-radius($Disabled, 0);
       cursor: not-allowed;
 
       .#{$css-prefix-select}-input {
-        background: $Disabled;
+        @include border-left-radius($Disabled, 0)
       }
     }
   }

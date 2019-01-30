@@ -10,20 +10,21 @@ $css-prefix-button: $css-prefix+'button';
   }
 }
 
-@mixin textBorderColor($color) {
+@mixin textBorderColor($color, $border) {
   color: $color;
-  border-color: $Border;
+  border-color: $border;
 }
 
-@mixin baseColor($color, $Border, $bg) {
-  @include textBorderColor($color);
+@mixin baseColor($color, $border, $bg) {
+  @include textBorderColor($color, $border);
   background: $bg;
 }
 
 @mixin size($size, $height) {
   &-size-#{$size} {
     height: $height;
-    &.#{$css-prefix-button}-round{
+
+    &.#{$css-prefix-button}-round {
       border-radius: $height/2;
     }
   }
@@ -45,12 +46,10 @@ $css-prefix-button: $css-prefix+'button';
 
     &:hover {
       background-color: $hover;
-      border-color: $hover;
     }
 
     &:focus {
       background-color: $focus;
-      border-color: $focus;
     }
 
     @include waterColor($bg);
@@ -104,7 +103,7 @@ $css-prefix-button: $css-prefix+'button';
   line-height: 1;
   border-radius: 4px;
   transition: color .2s linear, background-color .2s linear, border .2s linear, box-shadow .2s linear;
-  background-color: #fff;
+  background-color: $white;
   box-sizing: border-box;
   position: relative;
 
@@ -139,11 +138,11 @@ $css-prefix-button: $css-prefix+'button';
     @include baseColor($Content, $Border, $white);
 
     &:hover {
-      @include textBorderColor($LightPrimary);
+      @include textBorderColor($LightPrimary, $LightPrimary);
     }
 
     &:focus {
-      @include textBorderColor($Primary);
+      @include textBorderColor($Primary, $Primary);
     }
 
     @include waterColor($Sub);

@@ -4,6 +4,7 @@
  */
 
 import Input from './components/input'
+import InputNumber from './components/input-number'
 import Button from './components/button'
 import Drawer from './components/drawer'
 import Carousel from './components/carousel'
@@ -53,6 +54,7 @@ import Loading from './components/loading'
 
 const components = [
     Input,
+    InputNumber,
     Page,
     Button,
     Drawer,
