@@ -1,6 +1,6 @@
 <script>
     var iconList = require('../../utils/icon.json')
-
+    require('./affix.md')
     export default {
         data () {
             return {
@@ -9,6 +9,7 @@
         }
     }
 </script>
+
 
 # Icon 图标
 bwUI使用的所有图标均来自公司内部[icon库](http://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.11&manage_type=myprojects&projectId=402308&keyword=)

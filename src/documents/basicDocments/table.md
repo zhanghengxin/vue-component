@@ -105,7 +105,7 @@
         export default {
             data () {
                 return {
-                      columns1: [
+                     columns1: [
                           {
                               title: 'Name',
                               key: 'name',
@@ -119,8 +119,8 @@
                               title: 'Sex',
                               key: 'sex',
                           }
-                      ],
-                      data1: [
+                     ],
+                     data1: [
                           {
                               name: '欧阳',
                               age: 12,
@@ -136,8 +136,8 @@
                               age: 28,
                               sex: '男'
                           }
-                      ]
-                    }
+                     ]
+                }
             }
         }
     </script>
@@ -1388,12 +1388,18 @@
 
 ### 显示隐藏列
 通过给组件设置 dynamicable 属性可以开启显示隐藏列功能
+通过给组件设置 dynamicallocation 属性可以开启显示隐藏列功能【弹层版本】
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table dynamicable border width=1000 :columns='columns3' :data='data3'></b-table>
-           <br/>
-           <b-table dynamicable border width=1000 :columns='columns2' :data='data2'></b-table>
+            <b-table dynamicable border width=1000 :columns='columns3' :data='data3'></b-table>
+            <br/>
+            <b-table dynamicable border width=1000 :columns='columns2' :data='data2'></b-table>
+            <br/>
+            <p>弹层版本</p>
+            <b-table style="margin-top:10px" dynamicallocation border width=1000 :columns='columns3' :data='data3'></b-table>
+            <br/>
+            <b-table style="margin-top:20px" dynamicallocation border width=1000 :columns='columns2' :data='data2'></b-table>
         </div>
     </div>
 
@@ -1401,8 +1407,9 @@
 ```html
     <div>
         <b-table dynamicable border width=1000 :columns='columns3' :data='data3'></b-table>
-        <br/>
         <b-table dynamicable border width=1000 :columns='columns2' :data='data2'></b-table>
+        <b-table dynamicallocation border width=1000 :columns='columns3' :data='data3'></b-table>
+        <b-table dynamicallocation border width=1000 :columns='columns2' :data='data2'></b-table>
     </div>
     <script>
         export default {

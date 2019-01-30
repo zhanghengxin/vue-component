@@ -24,7 +24,8 @@ module.exports = {
         overlay: { //Show eslink error information on Browser
             warnings: true,
             errors: true
-        }
+        },
+        open: true
     },
     productionSourceMap: false,
     css: {
