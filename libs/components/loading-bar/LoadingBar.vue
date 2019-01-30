@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div :class="wrapperCls" style="wrapperStyle" v-show="show">
+        <div :class="wrapperCls" :style="wrapperStyle" v-show="show">
             <div :class="innerCls" :style="innerStyle"></div>
         </div>
     </transition>
@@ -27,7 +27,7 @@ export default {
     },
     data () {
         return {
-            precent: 0,
+            percent: 0,
             status: 'success',
             show: false
         }
@@ -35,6 +35,11 @@ export default {
     computed: {
         wrapperCls () {
             return `${prefixCls}`
+        },
+        wrapperStyle () {
+            return {
+                height: `${this.height}px`
+            }
         },
         innerCls () {
             return [
@@ -44,11 +49,6 @@ export default {
                     [`${prefixCls}-inner-failed-color-error`]: this.failedColor === 'error' && this.status === 'error'
                 }
             ]
-        },
-        wrapperStyle () {
-            return {
-                height: `${this.height}px`
-            }
         },
         innerStyle () {
             let style = {

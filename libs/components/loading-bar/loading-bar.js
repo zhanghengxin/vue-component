@@ -22,7 +22,7 @@ LoadingBar.newInstance = properties => {
     return {
         update (options) {
             if ('percent' in options) {
-                loadingBar.precent = options.precent
+                loadingBar.percent = options.percent
             }
             if (options.status) {
                 loadingBar.status = options.status

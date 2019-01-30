@@ -56,7 +56,7 @@ export default {
 
         timer = setInterval(() => {
             percent += Math.floor(Math.random() * 3 + 1)
-            if (percent > 95) {
+            if (percent > 96) {
                 clearTimer()
             }
             update({
