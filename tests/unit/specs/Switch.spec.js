@@ -21,7 +21,7 @@ describe('Switch', () => {
                 }
             }
         })
-        expect(vm.$el.querySelector('input').getAttribute('value')).to.equal('true')
+        expect(vm.$el.querySelector('input').getAttribute('value')).toBe('true')
     })
 
     it('disabled', () => {
@@ -31,7 +31,7 @@ describe('Switch', () => {
             </div>
         `)
 
-        expect(vm.$el.querySelector(`.${bSwitch}-disabled`)).to.exist
+        expect(vm.$el.querySelector(`.${bSwitch}-disabled`)).toBeTruthy()
     })
 
     describe('size', () => {
@@ -42,7 +42,7 @@ describe('Switch', () => {
                     <${bSwitch} size=${sizes[i]}></${bSwitch}>
                 </div>
             `)
-            expect(vm.$el.querySelector(`.${bSwitch}-${sizes[i]}`)).to.exist
+            expect(vm.$el.querySelector(`.${bSwitch}-${sizes[i]}`)).toBeTruthy()
         })
 
         for (let key in sizes) {
@@ -59,7 +59,7 @@ describe('Switch', () => {
                     </${bSwitch}>
                 </div>
             `)
-        expect(vm.$el.querySelector(`.${bSwitch}-inner`).textContent).to.include('关')
+        expect(vm.$el.querySelector(`.${bSwitch}-inner`).querySelector('span').innerHTML).toBe('关')
     })
 
     it('on-change', done => {
@@ -76,7 +76,7 @@ describe('Switch', () => {
         })
         vm.$el.click()
         setTimeout(() => {
-            expect(result).to.exist && expect(result).to.equal(true)
+            expect(result).toBeTruthy() && expect(result).toBe(true)
             done()
         }, 20)
     })

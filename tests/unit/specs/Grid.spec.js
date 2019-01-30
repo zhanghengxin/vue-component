@@ -2,11 +2,10 @@
  * Created by gaoguoqing on 2018/11/30.
  *
  */
-import { createTest, createVue, destroyVM } from '../utils'
+import { createVue, destroyVM } from '../utils'
 import { prefix } from '&/utils/common'
 
 const colCls = `.${prefix}col`
-const rowCls = `.${prefix}row`
 const Col = `${prefix}col`
 const Row = `${prefix}row`
 
@@ -15,7 +14,7 @@ describe('Col&Row', () => {
     afterEach(() => {
         destroyVM(vm)
     })
-    
+
     // it('interval', () => {
     //     vm = createVue({
     //         template: `
@@ -39,7 +38,7 @@ describe('Col&Row', () => {
     //     expect(elm.querySelector(`${colCls}-span-6`).style.paddingLeft).to.equal('10px')
     //     expect(elm.querySelector(`${colCls}-span-6`).style.paddingRight).to.equal('10px')
     // })
-    
+
     // it('offset', () => {
     //     vm = createVue({
     //         template: `
@@ -52,7 +51,7 @@ describe('Col&Row', () => {
     //     let elm = vm.$el
     //     expect(elm.querySelector(`${colCls}-offset-6`).style.marginLeft).to.equal('25%')
     // })
-    
+
     it('flex-justify-start', () => {
         vm = createVue({
             template: `
@@ -65,9 +64,9 @@ describe('Col&Row', () => {
             `
         }, true)
         let elm = vm.$el
-        expect(elm.classList.contains(`${rowCls}-flex-start`)).to.exist
+        expect(elm.classList).toContain(`${Row}-flex-flex-start`)
     })
-    
+
     it('flex-justify-end', () => {
         vm = createVue({
             template: `
@@ -80,9 +79,9 @@ describe('Col&Row', () => {
             `
         }, true)
         let elm = vm.$el
-        expect(elm.classList.contains(`${rowCls}-flex-end`)).to.exist
+        expect(elm.classList).toContain(`${Row}-flex-end`)
     })
-    
+
     it('flex-justify-center', () => {
         vm = createVue({
             template: `
@@ -95,9 +94,9 @@ describe('Col&Row', () => {
             `
         }, true)
         let elm = vm.$el
-        expect(elm.classList.contains(`${rowCls}-flex-center`)).to.exist
+        expect(elm.classList).toContain(`${Row}-flex-center`)
     })
-    
+
     it('flex-justify-space-between', () => {
         vm = createVue({
             template: `
@@ -110,9 +109,9 @@ describe('Col&Row', () => {
             `
         }, true)
         let elm = vm.$el
-        expect(elm.classList.contains(`${rowCls}-flex-space-between`)).to.exist
+        expect(elm.classList).toContain(`${Row}-flex-space-between`)
     })
-    
+
     it('flex-justify-space-around', () => {
         vm = createVue({
             template: `
@@ -125,9 +124,9 @@ describe('Col&Row', () => {
             `
         }, true)
         let elm = vm.$el
-        expect(elm.classList.contains(`${rowCls}-flex-space-around`)).to.exist
+        expect(elm.classList).toContain(`${Row}-flex-space-around`)
     })
-    
+
     it('flex-align-top', () => {
         vm = createVue({
             template: `
@@ -140,9 +139,9 @@ describe('Col&Row', () => {
             `
         }, true)
         let elm = vm.$el
-        expect(elm.classList.contains(`${rowCls}-flex-top`)).to.exist
+        expect(elm.classList).toContain(`${Row}-flex-top`)
     })
-    
+
     it('flex-align-bottom', () => {
         vm = createVue({
             template: `
@@ -155,9 +154,9 @@ describe('Col&Row', () => {
             `
         }, true)
         let elm = vm.$el
-        expect(elm.classList.contains(`${rowCls}-flex-bottom`)).to.exist
+        expect(elm.classList).toContain(`${Row}-flex-bottom`)
     })
-    
+
     it('flex-align-middle', () => {
         vm = createVue({
             template: `
@@ -170,9 +169,9 @@ describe('Col&Row', () => {
             `
         }, true)
         let elm = vm.$el
-        expect(elm.classList.contains(`${rowCls}-flex-middle`)).to.exist
+        expect(elm.classList).toContain(`${Row}-flex-middle`)
     })
-    
+
     it('flex-order', () => {
         vm = createVue({
             template: `
@@ -185,6 +184,6 @@ describe('Col&Row', () => {
             `
         }, true)
         let elm = vm.$el
-        expect(elm.querySelector(`${colCls}-order-1`)).to.exist
+        expect(elm.querySelector(`${colCls}-order-1`)).toBeTruthy()
     })
 })

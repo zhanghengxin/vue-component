@@ -27,10 +27,10 @@ describe('Modal', () => {
         }, true)
         const modal = vm.$children[0]
         setTimeout(() => {
-            expect(document.querySelector(`${prefixCls}`)).to.exist
-            expect(modal.$el.querySelector(`${prefixCls}-header-inner`).textContent).to.equal('modal test')
-            expect(modal.$el.parentNode).to.equal(document.body)
-            expect(modal.$el.style.display).to.not.equal('none')
+            expect(document.querySelector(`${prefixCls}`)).toBeTruthy()
+            expect(modal.$el.querySelector(`${prefixCls}-header-inner`).textContent).toBe('modal test')
+            expect(modal.$el.parentNode).toBe(document.body)
+            expect(modal.$el.style.display).not.toBe('none')
             done()
         }, 100)
     })
@@ -59,11 +59,11 @@ describe('Modal', () => {
         }, true)
         const modal = vm.$children[0]
         setTimeout(() => {
-            expect(modal.$el.querySelector(`${prefixCls}-body span`).textContent).to.equal('Content of modal')
+            expect(modal.$el.querySelector(`${prefixCls}-body span`).textContent).toBe('Content of modal')
             const footerBtns = modal.$el.querySelectorAll(`${prefixCls}-footer button`)
-            expect(footerBtns.length).to.equal(2)
-            expect(footerBtns[0].querySelector('span').textContent).to.equal('cancel')
-            expect(footerBtns[1].querySelector('span').textContent).to.equal('ok')
+            expect(footerBtns.length).toBe(2)
+            expect(footerBtns[0].querySelector('span').textContent).toBe('cancel')
+            expect(footerBtns[1].querySelector('span').textContent).toBe('ok')
             done()
         }, 100)
     })
@@ -87,13 +87,13 @@ describe('Modal', () => {
             }
         }, true)
         const modal = vm.$children[0].$el.querySelector(`${prefixCls}`)
-        expect(modal.style.display).to.equal('none')
+        expect(modal.style.display).toBe('none')
         vm.visible = true
         setTimeout(() => {
-            expect(modal.style.display).to.not.equal('none')
+            expect(modal.style.display).not.toBe('none')
             vm.visible = false
             setTimeout(() => {
-                expect(modal.style.display).to.equal('none')
+                expect(modal.style.display).toBe('none')
                 done()
             }, 400)
         }, 50)
@@ -122,35 +122,35 @@ describe('Modal', () => {
 
         it('width', () => {
             vm = getModalVm('width="360px"')
-            expect(vm.$children[0].$el.querySelector(`${prefixCls}`).style.width).to.equal('360px')
+            expect(vm.$children[0].$el.querySelector(`${prefixCls}`).style.width).toBe('360px')
         })
 
         it('fullscreen', () => {
             vm = getModalVm('fullscreen')
             const modalEl = vm.$children[0].$el.querySelector(`${prefixCls}`)
-            expect(modalEl.classList.contains('b-modal-fullscreen')).to.be.true
+            expect(modalEl.classList).toContain('b-modal-fullscreen')
         })
 
         it('z-index', () => {
             vm = getModalVm('z-index=1024')
-            expect(vm.$children[0].$el.querySelector(`${prefixCls}-wrap`).style.zIndex).to.equal('1024')
+            expect(vm.$children[0].$el.querySelector(`${prefixCls}-wrap`).style.zIndex).toBe('1024')
         })
 
         it('class-name', () => {
             vm = getModalVm('class-name="my-modal"')
-            expect(vm.$children[0].$el.querySelector(`${prefixCls}-wrap`).classList.contains('my-modal')).to.be.true
+            expect(vm.$children[0].$el.querySelector(`${prefixCls}-wrap`).classList).toContain('my-modal')
         })
 
         it('ok-text', () => {
             vm = getModalVm('ok-text="ok"')
             const footerBtns = vm.$children[0].$el.querySelectorAll(`${prefixCls}-footer button`)
-            expect(footerBtns[1].querySelector('span').textContent).to.equal('ok')
+            expect(footerBtns[1].querySelector('span').textContent).toBe('ok')
         })
 
         it('cancel-text', () => {
             vm = getModalVm('cancel-text="cancel"')
             const footerBtns = vm.$children[0].$el.querySelectorAll(`${prefixCls}-footer button`)
-            expect(footerBtns[0].querySelector('span').textContent).to.equal('cancel')
+            expect(footerBtns[0].querySelector('span').textContent).toBe('cancel')
         })
     })
 
@@ -198,12 +198,12 @@ describe('Modal', () => {
         }, true)
         vm.visible = true
         setTimeout(() => {
-            expect(vm.state).to.equal('open')
-            expect(vm.value).to.be.true
+            expect(vm.state).toBe('open')
+            expect(vm.value).toBeTruthy()
             vm.visible = false
             setTimeout(() => {
-                expect(vm.state).to.equal('closed')
-                expect(vm.value).to.be.false
+                expect(vm.state).toBe('closed')
+                expect(vm.value).not.toBeTruthy()
                 done()
             }, 50)
         }, 50)
@@ -231,7 +231,7 @@ describe('Modal', () => {
         setTimeout(() => {
             modal.$el.querySelector(`${prefixCls}-wrap`).click()
             setTimeout(() => {
-                expect(vm.visible).to.be.false
+                expect(vm.visible).not.toBeTruthy()
                 done()
             }, 400)
         }, 50)
@@ -259,7 +259,7 @@ describe('Modal', () => {
         setTimeout(() => {
             modal.$el.querySelector(`${prefixCls}-close`).click()
             setTimeout(() => {
-                expect(vm.visible).to.be.false
+                expect(vm.visible).not.toBeTruthy()
                 done()
             }, 500)
         }, 50)
@@ -290,7 +290,7 @@ describe('Modal', () => {
                 vm.visible = false
             }
             setTimeout(() => {
-                expect(vm.visible).to.be.false
+                expect(vm.visible).not.toBeTruthy()
                 done()
             }, 500)
         }, 10)

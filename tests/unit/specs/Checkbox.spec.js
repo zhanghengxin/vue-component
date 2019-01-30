@@ -17,14 +17,14 @@ describe('Checkbox.vue', () => {
             value: true
         }, true)
         let checkboxElm = vm.$el
-        expect(checkboxElm.children[0].classList.contains(`${prefixCls}-checked`)).to.be.true
+        expect(checkboxElm.children[0].classList).toContain(`${prefixCls}-checked`)
     })
     it('disabled', () => {
         vm = createTest(Checkbox, {
             disabled: true
         }, true)
         let checkboxElm = vm.$el
-        expect(checkboxElm.children[0].classList.contains(`${prefixCls}-disabled`)).to.be.true
+        expect(checkboxElm.children[0].classList).toContain(`${prefixCls}-disabled`)
     })
     it('change', done => {
         let result
@@ -45,8 +45,8 @@ describe('Checkbox.vue', () => {
         }, true)
         vm.$el.click()
         setTimeout(_ => {
-            expect(result).to.be.true
-            expect(vm.$el.children[0].classList.contains(`${prefixCls}-checked`)).to.be.true
+            expect(result).toBeTruthy()
+            expect(vm.$el.children[0].classList).toContain(`${prefixCls}-checked`)
             done()
         }, 20)
     })

@@ -2,7 +2,7 @@
  * @Author: hanshuai@baiwang.com
  * @Date: 2019-01-21 11:44:36
  * @Last Modified by: hanshuai@baiwang.com
- * @Last Modified time: 2019-01-21 14:44:36
+ * @Last Modified time: 2019-01-30 11:32:37
  */
 
 import { createVue, destroyVM } from '../utils'
@@ -25,8 +25,8 @@ describe('Timeline', () => {
                 </div>
             `
         })
-        expect(vm.$el.querySelector(`.${bTimeline}`)).to.exist
-        expect(vm.$el.querySelector(`.${bTimeline}-item`)).to.exist
+        expect(vm.$el.querySelector(`.${bTimeline}`)).toBeTruthy()
+        expect(vm.$el.querySelector(`.${bTimeline}-item`)).toBeTruthy()
     })
 
     it('pending', () => {
@@ -39,7 +39,7 @@ describe('Timeline', () => {
                 </div>
             `
         })
-        expect(vm.$el.querySelector(`.${bTimeline}-pending`)).to.exist
+        expect(vm.$el.querySelector(`.${bTimeline}-pending`)).toBeTruthy()
     })
 
     describe('color', () => {
@@ -54,7 +54,7 @@ describe('Timeline', () => {
                     </div>
                 `
             })
-            expect(vm.$el.querySelector(`.${bTimeline}-item-head-${colors[i]}`)).to.exist
+            expect(vm.$el.querySelector(`.${bTimeline}-item-head-${colors[i]}`)).toBeTruthy()
         })
 
         for (let key in colors) {

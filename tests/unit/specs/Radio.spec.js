@@ -17,14 +17,14 @@ describe('radio.vue', () => {
             value: true
         }, true)
         let radioElm = vm.$el
-        expect(radioElm.children[0].classList.contains(`${prefixCls}-radio`)).to.be.checkedValue
+        expect(radioElm.children[0].classList).toContain(`${prefixCls}-checked`)
     })
     it('disabled', () => {
         vm = createTest(radio, {
             disabled: false
         }, false)
         let radioElm = vm.$el
-        expect(radioElm.children[0].classList.contains(`${prefixCls}-disabled`)).to.be.false
+        expect(radioElm.children[0].classList).not.toContain(`${prefixCls}-disabled`)
     })
     it('change', done => {
         let result
@@ -45,8 +45,8 @@ describe('radio.vue', () => {
         }, true)
         vm.$el.click()
         vm.$nextTick(_ => {
-            expect(result).to.be.true
-            expect(vm.$el.children[0].classList.contains(`${prefixCls}-checked`)).to.be.true
+            expect(result).toBeTruthy()
+            expect(vm.$el.children[0].classList).toContain(`${prefixCls}-checked`)
             done()
         })
     })

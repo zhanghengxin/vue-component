@@ -15,7 +15,7 @@ describe('Tag', () => {
                 <${bTag}>标签</${bTag}>
             </div>
         `)
-        expect(vm.$el.querySelector(`.${bTag}`)).to.exist
+        expect(vm.$el.querySelector(`.${bTag}`)).toBeTruthy()
     })
 
     describe('backcolor', () => {
@@ -26,7 +26,7 @@ describe('Tag', () => {
                     <${bTag} backcolor=${colors[i]}>标签</${bTag}>
                 </div>
             `)
-            expect(vm.$el.querySelector(`.${bTag}-back-${colors[i]}`)).to.exist
+            expect(vm.$el.querySelector(`.${bTag}-back-${colors[i]}`)).toBeTruthy()
         })
 
         colors.forEach((item, i) => {
@@ -41,7 +41,7 @@ describe('Tag', () => {
                 type: 'dots',
                 color: colors[i]
             })
-            expect(vm.$el.querySelector(`.${bTag}-${colors[i]}`)).to.exist
+            expect(vm.$el.querySelector(`.${bTag}-${colors[i]}`)).toBeTruthy()
         })
 
         colors.forEach((item, i) => {
@@ -55,6 +55,6 @@ describe('Tag', () => {
                 <${bTag} closeable>标签</${bTag}>
             </div>
         `)
-        expect(vm.$el.querySelector(`.bw-quxiao-guanbi-shanchu`)).to.exist
+        expect(vm.$el.querySelector(`.bw-quxiao-guanbi-shanchu`)).toBeTruthy()
     })
 })

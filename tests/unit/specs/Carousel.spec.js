@@ -1,8 +1,8 @@
 /*
  * @Author: hanshuai
  * @Date: 2018-11-30 09:31:52
- * @Last Modified by: hanshuai
- * @Last Modified time: 2018-11-30 14:03:23
+ * @Last Modified by: hanshuai@baiwang.com
+ * @Last Modified time: 2019-01-30 11:22:54
  */
 
 import { createVue, destroyVM } from '../utils'
@@ -26,7 +26,7 @@ describe('Carousel', () => {
                 </div>
             `
         })
-        expect(vm.$el.querySelectorAll(`.${bCarousel}-fade`).length).to.equal(2)
+        expect(vm.$el.querySelectorAll(`.${bCarousel}-fade`).length).toBe(2)
     })
 
     it('height', () => {
@@ -40,7 +40,7 @@ describe('Carousel', () => {
             </div>
             `
         })
-        expect(vm.$el.querySelector(`.${bCarousel}-wrapper`).style.height).to.be.equal('720px')
+        expect(vm.$el.querySelector(`.${bCarousel}-wrapper`).style.height).toBe('720px')
     })
 
     it('animation', () => {
@@ -54,7 +54,7 @@ describe('Carousel', () => {
                 </div>
             `
         })
-        expect(vm.$el.querySelector(`.${bCarousel}-slide`)).to.exist
+        expect(vm.$el.querySelector(`.${bCarousel}-slide`)).toBeTruthy()
     })
     it('arrow', () => {
         vm = createVue({
@@ -67,8 +67,8 @@ describe('Carousel', () => {
             </div>
             `
         })
-        expect(vm.$el.querySelector(`.${bCarousel}-prev`)).to.exist
-        expect(vm.$el.querySelector(`.${bCarousel}-next`)).to.exist
+        expect(vm.$el.querySelector(`.${bCarousel}-prev`)).toBeTruthy()
+        expect(vm.$el.querySelector(`.${bCarousel}-next`)).toBeTruthy()
     })
     it('pointer', () => {
         vm = createVue({
@@ -81,7 +81,7 @@ describe('Carousel', () => {
             </div>
             `
         })
-        expect(vm.$el.querySelector(`.${bCarousel}-control`)).to.exist
+        expect(vm.$el.querySelector(`.${bCarousel}-control`)).toBeTruthy()
     })
     it('auto', done => {
         vm = createVue({
@@ -96,9 +96,9 @@ describe('Carousel', () => {
         })
         setTimeout(() => {
             let items = vm.$el.querySelectorAll(`.${bCarousel}-slide`)
-            expect(items[0].classList.contains('is-active')).to.true
+            expect(items[0].classList.contains('is-active')).toBeTruthy()
             setTimeout(() => {
-                expect(items[1].classList.contains('is-active')).to.true
+                expect(items[1].classList.contains('is-active')).toBeTruthy()
                 done()
             }, 60)
         }, 10)

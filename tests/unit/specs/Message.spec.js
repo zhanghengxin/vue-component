@@ -13,14 +13,14 @@ describe('Message', () => {
         vm = Message({
             message: '你好'
         })
-        expect(vm.$el.querySelector(`.${bMessage}`)).to.exist
+        expect(vm.$el.querySelector(`.${bMessage}`)).toBeTruthy()
     })
 
     it('message', () => {
         vm = Message({
             message: '你好'
         })
-        expect(vm.$el.querySelector(`.${bMessage}-content`)).to.property('textContent').to.include('你好')
+        expect(vm.$el.querySelector(`.${bMessage}-content`).innerHTML).toBe('你好')
     })
 
     it('showClose', () => {
@@ -28,7 +28,7 @@ describe('Message', () => {
             message: '你好',
             showClose: true
         })
-        expect(vm.$el.querySelector(`.${bMessage}-close`)).to.exist
+        expect(vm.$el.querySelector(`.${bMessage}-close`)).toBeTruthy()
     })
 
     describe('type', () => {
@@ -43,7 +43,7 @@ describe('Message', () => {
                 message: '你好',
                 type
             })
-            expect(vm.$el.querySelector(`.bw-${img[type]}`)).to.exist
+            expect(vm.$el.querySelector(`.bw-${img[type]}`)).toBeTruthy()
         })
 
         for (let key in img) {

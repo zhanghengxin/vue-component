@@ -2,7 +2,7 @@
  * @Author: hanshuai@baiwang.com
  * @Date: 2019-01-24 14:53:01
  * @Last Modified by: hanshuai@baiwang.com
- * @Last Modified time: 2019-01-24 15:53:26
+ * @Last Modified time: 2019-01-30 11:28:50
  */
 
 import { createVue, destroyVM } from '../utils'
@@ -23,7 +23,7 @@ describe('Split', () => {
                 </div>
             `
         })
-        expect(vm.$el.querySelector(`.${bSplit}`)).to.exist
+        expect(vm.$el.querySelector(`.${bSplit}`)).toBeTruthy()
     })
 
     it('mode:horizontal', () => {
@@ -41,7 +41,7 @@ describe('Split', () => {
                 </div>
             `
         })
-        expect(vm.$el.querySelector(`.${bSplit}-horizontal`)).to.exist
+        expect(vm.$el.querySelector(`.${bSplit}-horizontal`)).toBeTruthy()
     })
 
     it('mode:vertical', () => {
@@ -59,7 +59,7 @@ describe('Split', () => {
                 </div>
             `
         })
-        expect(vm.$el.querySelector(`.${bSplit}-vertical`)).to.exist
+        expect(vm.$el.querySelector(`.${bSplit}-vertical`)).toBeTruthy()
     })
 
     describe('slot', () => {
@@ -75,7 +75,7 @@ describe('Split', () => {
                     </div>
                 `
             })
-            expect(vm.$el.querySelector(`.${directions[i]}-pane`)).to.exist
+            expect(vm.$el.querySelector(`.${directions[i]}-pane`)).toBeTruthy()
         })
 
         for (let key in directions) {

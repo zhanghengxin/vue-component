@@ -4,7 +4,6 @@
  */
 import Icon from '&/components/icon'
 import { createTest, createVue, destroyVM } from '../utils'
-import {prefix} from '&/utils/common'
 
 describe('Icon.vue', () => {
     let vm
@@ -16,21 +15,21 @@ describe('Icon.vue', () => {
             type: 'zuosanjiao'
         }, true)
         let Elm = vm.$el
-        expect(Elm.classList.contains(`bw-zuosanjiao`)).to.be.true
+        expect(Elm.classList).toContain(`bw-zuosanjiao`)
     })
     it('size', () => {
         vm = createTest(Icon, {
             size: 22
         }, true)
         let Elm = vm.$el
-        expect(Elm.style.fontSize).to.equal('22px')
+        expect(Elm.style.fontSize).toBe('22px')
     })
     it('color', () => {
         vm = createTest(Icon, {
             color: 'red'
         }, true)
         let Elm = vm.$el
-        expect(Elm.style.color).to.equal('red')
+        expect(Elm.style.color).toBe('red')
     })
     it('click', done => {
         let result
@@ -46,7 +45,7 @@ describe('Icon.vue', () => {
         }, true)
         vm.$el.click()
         setTimeout(_ => {
-            expect(result).to.exist
+            expect(result).toBeTruthy()
             done()
         }, 20)
     })

@@ -17,7 +17,7 @@ describe('Progress.vue', () => {
             color: 'yellow'
         }, true)
         let Elm = vm.$el
-        expect(Elm.children[0].children[0].children[0].style.backgroundColor).to.equal('yellow')
+        expect(Elm.children[0].children[0].children[0].style.backgroundColor).toBe('yellow')
     })
     it('vertical', () => {
         vm = createTest(Progress, {
@@ -26,8 +26,8 @@ describe('Progress.vue', () => {
             strokeWidth: 20
         }, true)
         let Elm = vm.$el
-        expect(Elm.children[0].children[0].children[0].style.width).to.equal('20px')
-        expect(Elm.children[0].children[0].children[0].style.height).to.equal('40%')
+        expect(Elm.children[0].children[0].children[0].style.width).toBe('20px')
+        expect(Elm.children[0].children[0].children[0].style.height).toBe('40%')
     })
     it('status', () => {
         vm = createTest(Progress, {
@@ -35,7 +35,7 @@ describe('Progress.vue', () => {
             status: 'Success'
         }, true)
         let Elm = vm.$el
-        expect(Elm.children[0].children[0].children[0].style.width).to.equal('100%')
+        expect(Elm.children[0].children[0].children[0].style.width).toBe('100%')
     })
     it('showText', () => {
         vm = createTest(Progress, {
@@ -43,6 +43,6 @@ describe('Progress.vue', () => {
             showText: false
         }, true)
         let Elm = vm.$el
-        expect(Elm.children[0].children[1]).to.equal(undefined)
+        expect(Elm.children[0].children[1]).toBe(undefined)
     })
 })

@@ -13,7 +13,7 @@ describe('Notice', () => {
         vm = Notice({
             content: '我是通知组件'
         })
-        expect(document.querySelector(`.${bNotice}-notice`)).to.exist
+        expect(document.querySelector(`.${bNotice}-notice`)).toBeTruthy()
     })
 
     it('size', () => {
@@ -21,7 +21,7 @@ describe('Notice', () => {
             content: '你好',
             size: 'small'
         })
-        expect(document.querySelector(`.${bNotice}-normal-icon .icon`).style.fontSize).to.equal('16px')
+        expect(document.querySelector(`.${bNotice}-normal-icon .icon`).style.fontSize).toBe('16px')
     })
 
     it('iconVisible', () => {
@@ -30,7 +30,7 @@ describe('Notice', () => {
             iconVisible: false
         })
         const iconBox = document.querySelector(`.${bNotice}-normal-icon`)
-        expect(iconBox.querySelector(`.icon`)).to.not.exist
+        expect(iconBox.querySelector(`.icon`)).not.toBeTruthy()
     })
 
     describe('content && title', () => {
@@ -39,8 +39,8 @@ describe('Notice', () => {
                 title: '我是title',
                 content: '我是通知组件'
             })
-            expect(vm.$el.querySelector(`h5`).textContent).to.equal('我是title')
-            expect(vm.$el.querySelector(`.${bNotice}-content`).textContent).to.equal('我是通知组件')
+            expect(vm.$el.querySelector(`h5`).textContent).toBe('我是title')
+            expect(vm.$el.querySelector(`.${bNotice}-content`).textContent).toBe('我是通知组件')
         })
     })
 
@@ -56,7 +56,7 @@ describe('Notice', () => {
                 content: '你好',
                 type: arr[i]
             })
-            expect(document.querySelector(`.${bNotice}-${arr[i]}`)).to.exist
+            expect(document.querySelector(`.${bNotice}-${arr[i]}`)).toBeTruthy()
         })
 
         arr.forEach((item, i) => {

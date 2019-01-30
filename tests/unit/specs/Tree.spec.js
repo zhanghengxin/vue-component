@@ -38,12 +38,12 @@ describe('Tree', () => {
             ]
         })
         const elm = vm.$el
-        expect(elm.classList.contains(`${prefixCls}-tree`)).to.exist
-        expect(elm.querySelector(`${prefixCls}-children`)).to.exist
-        expect(elm.querySelector(`${prefixCls}-arrow`)).to.exist
-        expect(elm.querySelector(`${prefixCls}-name`)).to.exist
+        expect(elm.classList).toContain(`${prefix}tree`)
+        expect(elm.querySelector(`${prefixCls}-children`)).toBeTruthy()
+        expect(elm.querySelector(`${prefixCls}-arrow`)).toBeTruthy()
+        expect(elm.querySelector(`${prefixCls}-name`)).toBeTruthy()
     })
-    
+
     describe('defaultOptions', () => {
         it('selected', () => {
             vm = createTest(TreeComponent, {
@@ -69,7 +69,7 @@ describe('Tree', () => {
                 ]
             })
             const elm = vm.$el
-            expect(elm.querySelector(`${prefixCls}-name-selected`)).to.exist
+            expect(elm.querySelector(`${prefixCls}-name-selected`)).toBeTruthy()
         })
         it('expand', () => {
             vm = createTest(TreeComponent, {
@@ -94,7 +94,7 @@ describe('Tree', () => {
                 ]
             })
             const elm = vm.$el
-            expect(elm.querySelector(`.bw-xiasanjiao`)).to.exist
+            expect(elm.querySelector(`.bw-xiasanjiao`)).toBeTruthy()
         })
         it('disabled', () => {
             vm = createTest(TreeComponent, {
@@ -120,9 +120,9 @@ describe('Tree', () => {
                 showCheckbox: true
             })
             const elm = vm.$el
-            expect(elm.querySelector(`${checkboxCls}-disabled`)).to.exist
+            expect(elm.querySelector(`${checkboxCls}-disabled`)).toBeTruthy()
         })
-        
+
         it('checked', () => {
             vm = createTest(TreeComponent, {
                 data: [
@@ -147,10 +147,10 @@ describe('Tree', () => {
                 showCheckbox: true
             })
             const elm = vm.$el
-            expect(elm.querySelector(`${checkboxCls}-checked`)).to.exist
+            expect(elm.querySelector(`${checkboxCls}-checked`)).toBeTruthy()
         })
     })
-    
+
     describe('events', () => {
         // it('on-select', done => {
         //     let result
@@ -233,11 +233,11 @@ describe('Tree', () => {
             }, true)
             vm.$el.querySelectorAll(`.${prefix}icon`)[1].click()
             setTimeout(_ => {
-                expect(result).to.exist
+                expect(result).toBeTruthy()
                 done()
             }, 200)
         })
-        
+
         it('on-checked', done => {
             let result
             vm = createVue({
@@ -275,7 +275,7 @@ describe('Tree', () => {
             }, true)
             vm.$el.querySelectorAll(`${checkboxCls}`)[1].click()
             setTimeout(_ => {
-                expect(result).to.exist
+                expect(result).toBeTruthy()
                 done()
             }, 20)
         })
