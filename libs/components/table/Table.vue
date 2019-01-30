@@ -343,9 +343,7 @@ export default {
             data.forEach((row, index) => {
                 row._index = index
                 row._indexNo = pageStart + index + 1
-                if (data._checked) {
-                    data._checked = data._checked
-                } else {
+                if (!data._checked) {
                     data._checked = false
                 }
             })

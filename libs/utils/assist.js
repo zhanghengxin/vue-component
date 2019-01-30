@@ -26,6 +26,35 @@ export function findComponentUpwards (context, componentName) {
     return parents
 }
 
+// Find component downward
+export function findComponentDownward (context, componentName) {
+    const childrens = context.$children
+    let children = null
+
+    if (childrens.length) {
+        for (const child of childrens) {
+            const name = child.$options.name
+            if (name === componentName) {
+                children = child
+                break
+            } else {
+                children = findComponentDownward(child, componentName)
+                if (children) break
+            }
+        }
+    }
+    return children
+}
+
+// Find components downward
+export function findComponentsDownward (context, componentName) {
+    return context.$children.reduce((components, child) => {
+        if (child.$options.name === componentName) components.push(child)
+        const foundChilds = findComponentsDownward(child, componentName)
+        return components.concat(foundChilds)
+    }, [])
+}
+
 export function typeOf (obj) {
     const toString = Object.prototype.toString
     const map = {
@@ -104,3 +133,5 @@ export function scrollTop (el, from = 0, to, duration = 500, endCallback) {
     }
     scroll(from, to, step)
 }
+
+export const sharpMatcherRegx = /#([^#]+)$/
