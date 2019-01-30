@@ -23,15 +23,16 @@
                 <Render v-if="data.render" :render="data.render" :data="data" :node="node"></Render>
                 <Render v-else-if="isParentRender" :render="parentRender" :data="data" :node="node"></Render>
                 <span v-else :class="nameCls" @click="selectData">{{ data[defaultOpt.nameKey] }}</span>
-                <tree-node
-                    v-for="(item, key) in children"
-                    v-if="data[defaultOpt.expandKey]"
-                    :key="key"
-                    :draggable="draggable"
-                    :data="item"
-                    :show-checkbox="showCheckbox"
-                    :default-opt="defaultOpt">
-                </tree-node>
+                <template v-if="data[defaultOpt.expandKey]">
+                    <tree-node
+                        v-for="(item, key) in children"
+                        :key="key"
+                        :draggable="draggable"
+                        :data="item"
+                        :show-checkbox="showCheckbox"
+                        :default-opt="defaultOpt">
+                    </tree-node>
+                </template>
             </li>
         </ul>
     </transition>

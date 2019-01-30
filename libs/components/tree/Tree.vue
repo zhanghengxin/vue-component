@@ -36,16 +36,17 @@
                 </tree-node>
             </BDropdown>
         </transition>
-        <tree-node
-            v-if="!label"
-            v-for="(item, index) in rootData"
-            :key="index"
-            :data="item"
-            :draggable="draggable"
-            :show-checkbox="showCheckbox"
-            :default-opt="defaultOpt"
-        >
-        </tree-node>
+        <template v-if="!label">
+            <tree-node
+                v-for="(item, index) in rootData"
+                :key="index"
+                :data="item"
+                :draggable="draggable"
+                :show-checkbox="showCheckbox"
+                :default-opt="defaultOpt"
+            >
+            </tree-node>
+        </template>
     </div>
 </template>
 
