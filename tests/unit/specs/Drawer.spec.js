@@ -1,7 +1,6 @@
 import Drawer from '&/components/drawer'
 import {
     createTest,
-    createVue,
     destroyVM
 } from '../utils'
 
@@ -16,6 +15,6 @@ describe('Drawer.vue', () => {
         }, true)
         let Elm = vm.$el
         // expect(Elm.classList.contains('b-drawer-right')).to.be.true
-        expect(Elm.querySelector('.b-drawer-right')).to.exist
+        expect(Elm.querySelector('.b-drawer-right')).toBeTruthy()
     })
 })

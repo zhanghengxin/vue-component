@@ -2,8 +2,9 @@
  * @Author: hanshuai
  * @Date: 2018-11-26 20:32:08
  * @Last Modified by: hanshuai@baiwang.com
- * @Last Modified time: 2019-01-15 16:18:26
+ * @Last Modified time: 2019-01-30 14:46:26
  */
+import { mount } from '@vue/test-utils'
 import DatePicker from '&/components/date-picker'
 import { TableYear, TableMonth, TableDate, TableTime } from '&/components/date-picker/base'
 import { createTest, createVue, destroyVM } from '../utils'
@@ -24,14 +25,14 @@ describe('DatePicker', () => {
                 </div>
             `
         })
-        expect(vm.$el.querySelector(`.${prefix}datepicker`)).to.exist
+        expect(vm.$el.querySelector(`.${prefix}datepicker`)).toBeTruthy()
     })
 
     it('confirm', () => {
         vm = createTest(DatePicker, {
             confirm: true
         })
-        expect(vm.$el.querySelector(`.${prefix}button`)).to.exist
+        expect(vm.$el.querySelector(`.${prefix}button`)).toBeTruthy()
     })
 
     it('confirmText', () => {
@@ -39,7 +40,7 @@ describe('DatePicker', () => {
             confirm: true,
             confirmText: 'confirm'
         })
-        expect(vm.$el.querySelector(`.${prefix}button`)).to.property('textContent').to.include('confirm')
+        expect(vm.$el.querySelector(`.${prefix}button`).innerHTML).toContain('confirm')
     })
 
     it('disabled', () => {
@@ -49,9 +50,9 @@ describe('DatePicker', () => {
             clearable: true
         })
         // 不显示关闭按钮
-        expect(vm.showClearIcon).to.be.false
+        expect(vm.showClearIcon).not.toBeTruthy()
         vm.showPopup()
-        expect(vm.popupVisible).to.be.false
+        expect(vm.popupVisible).not.toBeTruthy()
     })
 
     it('placeholder', () => {
@@ -59,7 +60,7 @@ describe('DatePicker', () => {
             placeholder: '请选择时间啊'
         })
         let input = vm.$el.querySelector('input')
-        expect(input.getAttribute('placeholder')).to.include('请选择时间啊')
+        expect(input.getAttribute('placeholder')).toContain('请选择时间啊')
     })
 
     it('rangeSeparator', () => {
@@ -69,105 +70,115 @@ describe('DatePicker', () => {
             range: true
         })
         let input = vm.$el.querySelector('input')
-        expect(input.value).to.include('----')
+        expect(input.value).toContain('----')
     })
 
     it('shortcuts', () => {
         vm = createTest(DatePicker, {
             shortcuts: true
         })
-        expect(vm.$el.querySelector(`.${prefix}shortcuts-wrapper .${prefix}shortcuts`)).to.exist
+        expect(vm.$el.querySelector(`.${prefix}shortcuts-wrapper .${prefix}shortcuts`)).toBeTruthy()
     })
 
     describe('table', () => {
         it('TableYear', () => {
-            vm = createTest(TableYear, {
-                value: new Date(2018, 11, 27),
-                firstYear: 2010
+            vm = mount(TableYear, {
+                propsData: {
+                    value: new Date(2018, 11, 27),
+                    firstYear: 2010
+                }
             })
-            let cells = vm.$el.querySelectorAll('.cell')
+
+            const cells = vm.findAll('.cell')
             for (let i = 0; i < cells.length; i++) {
-                let cell = cells[i]
-                expect(cell.innerText).to.include(2010 + i)
+                const cell = cells.at(i)
+                expect(parseInt(cell.text(), 10)).toBe(2010 + i)
                 if (i === 8) {
-                    expect(cell.getAttribute('class')).to.include('actived')
+                    expect(cell.classes()).toContain('actived')
                 }
             }
         })
 
         it('TableTime', () => {
-            vm = createTest(TableTime, {
-                value: new Date(2018, 11, 27)
+            vm = mount(TableTime, {
+                propsData: {
+                    value: new Date(2018, 11, 27)
+                }
             })
-            let list = vm.$el.querySelectorAll(`.${prefix}time-list`)
-            expect(list).to.have.length(3)
-
-            let hours = list[0].querySelectorAll('.cell')
-            let minutes = list[1].querySelectorAll('.cell')
-            let seconds = list[2].querySelectorAll('.cell')
-
-            expect(hours).to.have.length(24)
-            expect(minutes).to.have.length(60)
-            expect(seconds).to.have.length(60)
+            // test list
+            const list = vm.findAll(`.${prefix}time-list`)
+            expect(list).toHaveLength(3)
+            // test every list
+            const hours = list.at(0).findAll('.cell')
+            const minutes = list.at(1).findAll('.cell')
+            const seconds = list.at(2).findAll('.cell')
+            expect(hours).toHaveLength(24)
+            expect(minutes).toHaveLength(60)
+            expect(seconds).toHaveLength(60)
+            // every list click
+            hours.at(1).trigger('click')
+            minutes.at(1).trigger('click')
+            seconds.at(1).trigger('click')
+            expect(vm.emitted()).toEqual({
+                select: [[new Date(2018, 11, 27, 1)], [new Date(2018, 11, 27, 0, 1)], [new Date(2018, 11, 27, 0, 0, 1)]]
+            })
         })
 
         it('TableMonth', () => {
-            vm = createTest(TableMonth, {
-                value: new Date(2018, 11)
+            vm = mount(TableMonth, {
+                propsData: {
+                    value: new Date(2018, 11)
+                }
             })
-            let cells = vm.$el.querySelectorAll(`.${prefix}panel-month .cell`)
-            expect(cells).to.have.length(12)
-            let month = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+
+            const cells = vm.findAll(`.${prefix}panel-month .cell`)
+            expect(cells).toHaveLength(12)
+
+            const month = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
             for (let i = 0; i < month.length; i++) {
-                let cell = cells[i]
-                expect(cell.innerText).to.include(month[i])
-                // if (i === 11) {
-                //     expect(cell.getAttribute('class')).to.include('actived')
-                // }
+                const cell = cells.at(i)
+                expect(cell.text()).toBe(month[i])
             }
         })
 
         describe('TableDate', () => {
-            let vm
-            afterEach(() => {
-                destroyVM(vm)
-            })
-
             const tableDate = (i) => it(`firstDayOfWeek: ${i}`, () => {
-                vm = createTest(TableDate, {
-                    value: new Date(2018, 4, 1),
-                    year: 2018,
-                    month: 4,
-                    firstDayOfWeek: i
+                vm = mount(TableDate, {
+                    propsData: {
+                        value: new Date(2018, 4, 1),
+                        year: 2018,
+                        month: 4,
+                        firstDayOfWeek: i
+                    }
                 })
-                let lastMonth = new Date(2018, 3, 30)
-                let lastMonthDay = 30
-                let lastMonthLength = (lastMonth.getDay() + 7 - i) % 7 + 1
-                let curMonthLength = 31
+                const lastMonth = new Date(2018, 3, 30)
+                const lastMonthDay = 30
+                const lastMonthLength = (lastMonth.getDay() + 7 - i) % 7 + 1
+                const curMonthLength = 31
 
-                let tds = vm.$el.querySelectorAll(`.${prefix}panel-date td`)
+                const tds = vm.findAll(`.${prefix}panel-date td`)
                 for (let i = 0; i < 42; i++) {
-                    let td = tds[i]
-                    let text = parseInt(td.innerText, 10)
-                    let classes = td.getAttribute('class')
+                    const td = tds.at(i)
+                    const text = parseInt(td.text(), 10)
+                    const classes = td.classes()
                     if (i < lastMonthLength) {
-                        expect(classes).to.include('last-month')
-                        expect(text).to.be.equal(lastMonthDay - lastMonthLength + 1 + i)
+                        expect(classes).toContain('last-month')
+                        expect(text).toBe(lastMonthDay - lastMonthLength + 1 + i)
                     } else if (i < lastMonthLength + curMonthLength) {
-                        expect(text).to.be.equal(i - lastMonthLength + 1)
-                        expect(classes).to.include('cur-month')
+                        expect(text).toBe(i - lastMonthLength + 1)
+                        expect(classes).toContain('cur-month')
                         if (text === 1) {
-                            expect(classes).to.include('actived')
+                            expect(classes).toContain('actived')
                         }
                     } else {
-                        expect(text).to.be.equal(i - lastMonthLength - curMonthLength + 1)
-                        expect(classes).to.include('next-month')
+                        expect(text).toBe(i - lastMonthLength - curMonthLength + 1)
+                        expect(classes).toContain('next-month')
                     }
                 }
-                let week = ['一', '二', '三', '四', '五', '六', '日']
-                let firstWeek = vm.$el.querySelector(`.${prefix}date-header`).innerText
+                const week = ['一', '二', '三', '四', '五', '六', '日']
+                const firstWeek = vm.find(`.${prefix}date-header`).text()
                 // console.log('first week', firstWeek)
-                expect(firstWeek).to.be.include(week[i - 1])
+                expect(firstWeek).toBe(week[i - 1])
             })
             for (let i = 1; i <= 7; i++) {
                 tableDate(i)

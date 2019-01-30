@@ -16,14 +16,14 @@ describe('Button.vue', () => {
             type: 'default'
         }, true)
         let buttonElm = vm.$el
-        expect(buttonElm.classList.contains(`${prefix}button-type-default`)).to.be.true
+        expect(buttonElm.classList.contains(`${prefix}button-type-default`)).toBeTruthy()
     })
     it('size', () => {
         vm = createTest(Button, {
             size: 'default'
         }, true)
         let buttonElm = vm.$el
-        expect(buttonElm.classList.contains(`${prefix}button-size-default`)).to.be.true
+        expect(buttonElm.classList.contains(`${prefix}button-size-default`)).toBeTruthy()
     })
     it('click', done => {
         let result
@@ -39,7 +39,7 @@ describe('Button.vue', () => {
         }, true)
         vm.$el.click()
         setTimeout(_ => {
-            expect(result).to.exist
+            expect(result).toBeTruthy()
             done()
         }, 20)
     })

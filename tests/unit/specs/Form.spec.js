@@ -26,8 +26,8 @@ describe('Form', () => {
                 }
             }
         }, true)
-        expect(vm.$el.querySelector('.b-form-item-label').style.width).to.equal('80px')
-        expect(vm.$el.querySelector('.b-form-item-content').style.marginLeft).to.equal('80px')
+        expect(vm.$el.querySelector('.b-form-item-label').style.width).toBe('80px')
+        expect(vm.$el.querySelector('.b-form-item-content').style.marginLeft).toBe('80px')
         done()
     })
     it('inline', done => {
@@ -51,7 +51,7 @@ describe('Form', () => {
                 }
             }
         }, true)
-        expect(vm.$el.classList.contains('b-form-inline')).to.be.true
+        expect(vm.$el.classList).toContain('b-form-inline')
         done()
     })
     it('show-message', done => {
@@ -81,9 +81,9 @@ describe('Form', () => {
             }
         }, true)
         vm.$refs.form.validate(valid => {
-            expect(valid).to.not.true
+            expect(valid).not.toBeTruthy()
             vm.$refs.form.$nextTick(_ => {
-                expect(vm.$el.querySelector('.b-form-item-error-tip')).to.not.exist
+                expect(vm.$el.querySelector('.b-form-item-error-tip')).not.toBeTruthy()
                 done()
             })
         })
@@ -139,9 +139,9 @@ describe('Form', () => {
         vm.setValue()
         vm.$refs.form.resetFields()
         vm.$refs.form.$nextTick(_ => {
-            expect(vm.form.name).to.equal('')
-            expect(vm.form.address).to.equal('')
-            expect(vm.form.type.length).to.equal(0)
+            expect(vm.form.name).toBe('')
+            expect(vm.form.address).toBe('')
+            expect(vm.form.type.length).toBe(0)
             done()
         })
     })
@@ -231,13 +231,13 @@ describe('Form', () => {
             }, true)
             vm.form.accept = false
             vm.$nextTick(_ => {
-                expect(vm.$refs.field.errorTipMessage).to.equal('您需要接受用户协议')
+                expect(vm.$refs.field.errorTipMessage).toBe('您需要接受用户协议')
             })
             vm.$refs.form.validate(valid => {
                 let field = vm.$refs.field
-                expect(valid).to.not.true
+                expect(valid).not.toBeTruthy()
                 vm.$nextTick(_ => {
-                    expect(field.errorTipMessage).to.equal('您需要接受用户协议')
+                    expect(field.errorTipMessage).toBe('您需要接受用户协议')
                     done()
                 })
             })
@@ -276,9 +276,9 @@ describe('Form', () => {
             }, true)
             vm.$refs.form.validate(valid => {
                 let field = vm.$refs.field
-                expect(valid).to.not.true
+                expect(valid).not.toBeTruthy()
                 vm.$refs.form.$nextTick(_ => {
-                    expect(field.errorTipMessage).to.equal('请选择活动类型')
+                    expect(field.errorTipMessage).toBe('请选择活动类型')
                     done()
                 })
             })
@@ -311,7 +311,7 @@ describe('Form', () => {
                 }
             }, true)
             vm.$refs.form.validateField('name', valid => {
-                expect(valid).to.not.true
+                expect(valid).toBeTruthy()
                 done()
             })
         })
@@ -393,12 +393,12 @@ describe('Form', () => {
             }, true)
             vm.$refs.form.validate(valid => {
                 let field = vm.$refs.field
-                expect(valid).to.true
+                expect(valid).toBeTruthy()
                 vm.error = '输入不合法'
 
                 vm.$refs.field.$nextTick(_ => {
-                    expect(field.validateState).to.equal('error')
-                    expect(field.errorTipMessage).to.equal('输入不合法')
+                    expect(field.validateState).toBe('error')
+                    expect(field.errorTipMessage).toBe('输入不合法')
                     done()
                 })
             })

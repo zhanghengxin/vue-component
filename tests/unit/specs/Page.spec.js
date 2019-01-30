@@ -18,21 +18,21 @@ describe('Page', () => {
         vm = createTest(PageComponent)
         const elm = vm.$el
         // prev
-        expect(elm.querySelector(`${prefixCls}-prev`)).to.exist
+        expect(elm.querySelector(`${prefixCls}-prev`)).toBeTruthy()
         // next
-        expect(elm.querySelector(`${prefixCls}-next`)).to.exist
+        expect(elm.querySelector(`${prefixCls}-next`)).toBeTruthy()
         // item
-        expect(elm.querySelector(`${prefixCls}-item`)).to.exist
+        expect(elm.querySelector(`${prefixCls}-item`)).toBeTruthy()
     })
-    
+
     it('elevator', () => {
         vm = createTest(PageComponent, {
             showElevator: true
         })
         const elm = vm.$el
-        expect(elm.querySelector(`${prefixCls}-elevator`)).to.exist
+        expect(elm.querySelector(`${prefixCls}-elevator`)).toBeTruthy()
     })
-    
+
     it('total', () => {
         vm = createVue({
             template: `
@@ -40,10 +40,10 @@ describe('Page', () => {
           `
         }, true)
         let elm = vm.$el
-        expect(elm.querySelector(`${prefixCls}-total`)).to.exist
-        expect(elm.querySelector(`${prefixCls}-total`).innerHTML).to.equal('共计 200 条')
+        expect(elm.querySelector(`${prefixCls}-total`)).toBeTruthy()
+        expect(elm.querySelector(`${prefixCls}-total`).innerHTML).toBe('共计 200 条')
     })
-    
+
     it('total-slot', () => {
         vm = createVue({
             template: `
@@ -53,26 +53,26 @@ describe('Page', () => {
           `
         }, true)
         let elm = vm.$el
-        expect(elm.querySelector(`${prefixCls}-total`)).to.exist
-        expect(elm.querySelector(`${prefixCls}-total`).innerHTML).to.equal(`<span>自定义 内容 </span>`)
+        expect(elm.querySelector(`${prefixCls}-total`)).toBeTruthy()
+        expect(elm.querySelector(`${prefixCls}-total`).innerHTML).toBe(`<span>自定义 内容 </span>`)
     })
-    
+
     it('mini', () => {
         vm = createTest(PageComponent, {
             mini: true
         })
         const elm = vm.$el
-        expect(elm.classList.contains(`${prefixCls}-mini`)).to.exist
+        expect(elm.classList).toContain(`${prefix}page-mini`)
     })
-    
+
     it('simple', () => {
         vm = createTest(PageComponent, {
             simple: true
         })
         const elm = vm.$el
-        expect(elm.classList.contains(`${prefixCls}-simple`)).to.exist
+        expect(elm.classList).toContain(`${prefix}page-simple`)
     })
-    
+
     it('on-page-change', done => {
         let result
         vm = createVue({
@@ -87,7 +87,7 @@ describe('Page', () => {
         }, true)
         vm.$el.querySelectorAll(`${prefixCls}-item`)[2].click()
         setTimeout(_ => {
-            expect(result).to.exist
+            expect(result).toBeTruthy()
             done()
         }, 20)
     })

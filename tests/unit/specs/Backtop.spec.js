@@ -15,14 +15,14 @@ describe('Backtop.vue', () => { // describe相当于一个测试套，可以嵌�
             right: 30
         }, true)
         let backTopEle = vm.$el
-        expect(backTopEle.style.right).to.equal('30px')
+        expect(backTopEle.style.right).toBe('30px')
     })
     it('bottom', () => { // it('tc name',() => {})是一个测试用例。
         vm = createTest(Backtop, {
             bottom: 30
         }, true)
         let backTopEle = vm.$el
-        expect(backTopEle.style.bottom).to.equal('30px')
+        expect(backTopEle.style.bottom).toBe('30px')
     })
     it('show', (done) => { // it('tc name',() => {})是一个测试用例。
         vm = createTest(Backtop, {
@@ -30,7 +30,7 @@ describe('Backtop.vue', () => { // describe相当于一个测试套，可以嵌�
         }, true)
         setTimeout(() => {
             let backTopEle = vm.$el
-            expect(backTopEle.style.display).to.equal('')
+            expect(backTopEle.style.display).toBe('')
             done()
         })
     })
@@ -39,7 +39,7 @@ describe('Backtop.vue', () => { // describe相当于一个测试套，可以嵌�
             duration: 1000
         }, true)
         setTimeout(() => {
-            expect(document.documentElement.scrollTop).to.equal(0)
+            expect(document.documentElement.scrollTop).toBe(0)
             done()
         }, 1000)
     })
@@ -50,7 +50,7 @@ describe('Backtop.vue', () => { // describe相当于一个测试套，可以嵌�
         setTimeout(() => {
             let backTopEle = vm.$el
             backTopEle.scrollTop = 700
-            expect(backTopEle.style.display).to.equal('none')
+            expect(backTopEle.style.display).toBe('none')
             done()
         })
     })
@@ -67,7 +67,7 @@ describe('Backtop.vue', () => { // describe相当于一个测试套，可以嵌�
         }, true)
         vm.$el.click()
         setTimeout(_ => {
-            expect(document.documentElement.scrollTop).to.equal(0)
+            expect(document.documentElement.scrollTop).toBe(0)
             done()
         }, 1000)
     })

@@ -5,7 +5,7 @@
  */
 // import Steps from '&/components/steps'
 // import Step from '&/components/step'
-import { createTest, createVue, destroyVM, triggerEvent } from '../utils'
+import { createVue, destroyVM, triggerEvent } from '../utils'
 import {prefix} from '&/utils/common'
 const menu = `${prefix}menu`
 const menuItem = `${prefix}menu-item`
@@ -45,7 +45,7 @@ describe('Menu组件', () => {
         }, true)
         const Elm = vm.$el
         vm.$nextTick(() => {
-            expect(Elm).to.exist
+            expect(Elm).toBeTruthy()
             done()
         }, 100)
     })
@@ -70,7 +70,7 @@ describe('Menu组件', () => {
         }, true)
         const Elm = vm.$el
         vm.$nextTick(() => {
-            expect(Elm.querySelectorAll(`${menuCss} ${menuItemCss} ${iconCss}`)[0].classList.contains(`bw-caiji`)).to.be.true
+            expect(Elm.querySelectorAll(`${menuCss} ${menuItemCss} ${iconCss}`)[0].classList).toContain(`bw-caiji`)
             done()
         }, 100)
     })
@@ -113,7 +113,7 @@ describe('Menu组件', () => {
             submenuList[1].click()
             vm.$nextTick(function () {
                 let submenuList2 = Elm.querySelectorAll(`${menuCss} ${menuOpenCss}`)
-                expect(submenuList2.length).to.equal(2)
+                expect(submenuList2.length).toBe(2)
                 done()
             }, 200)
         }, 100)
@@ -157,7 +157,7 @@ describe('Menu组件', () => {
             triggerEvent(submenuList[1], 'mouseenter')
             setTimeout(function () {
                 let submenuList2 = Elm.querySelectorAll(`${menuCss} ${menuOpenCss}`)
-                expect(submenuList2.length).to.equal(1)
+                expect(submenuList2.length).toBe(1)
                 done()
             }, 300)
         })
@@ -183,7 +183,7 @@ describe('Menu组件', () => {
         }, true)
         const Elm = vm.$el
         vm.$nextTick(() => {
-            expect(Elm.querySelector(`${menuCss}`).classList.contains(`${menuHorizontalCss}`)).to.be.true
+            expect(Elm.querySelector(`${menuCss}`).classList).toContain(`${menuHorizontalCss}`)
             done()
         }, 100)
     })

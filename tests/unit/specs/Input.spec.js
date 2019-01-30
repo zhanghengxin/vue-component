@@ -33,12 +33,12 @@ describe('Input', () => {
         }, true)
         let inputElm = vm.$el.querySelector('input')
         setTimeout(() => {
-            expect(inputElm.classList.contains(`${prefixCls}`)).to.exist
-            expect(inputElm.getAttribute('placeholder')).to.equal('请输入')
-            expect(inputElm.value).to.equal('input')
-            expect(inputElm.type).to.be.equal('text')
-            expect(inputElm.getAttribute('minlength')).to.equal('3')
-            expect(inputElm.getAttribute('maxlength')).to.equal('5')
+            expect(inputElm.classList).toContain(`${prefix}input`)
+            expect(inputElm.getAttribute('placeholder')).toBe('请输入')
+            expect(inputElm.value).toBe('input')
+            expect(inputElm.type).toBe('text')
+            expect(inputElm.getAttribute('minlength')).toBe('3')
+            expect(inputElm.getAttribute('maxlength')).toBe('5')
             done()
         }, 100)
     })
@@ -63,7 +63,7 @@ describe('Input', () => {
 
         it('type', () => {
             vm = geInputVm(`type='password'`)
-            expect(vm.$el.querySelector(`input`).type).to.be.equal('password')
+            expect(vm.$el.querySelector(`input`).type).toBe('password')
         })
 
         it('disabled', () => {
@@ -78,7 +78,7 @@ describe('Input', () => {
                     }
                 }
             }, true)
-            expect(vm.$el.querySelector(`input`).disabled).to.be.ok
+            expect(vm.$el.querySelector(`input`).disabled).toBeTruthy()
         })
 
         it('readonly', () => {
@@ -93,17 +93,17 @@ describe('Input', () => {
                     }
                 }
             }, true)
-            expect(vm.$el.querySelector(`input`).getAttribute('readonly')).to.be.ok
+            expect(vm.$el.querySelector(`input`).getAttribute('readonly')).toBeTruthy()
         })
 
         it('name', () => {
             vm = geInputVm(`name='userName'`)
-            expect(vm.$el.querySelector(`input`).getAttribute('name')).to.be.equal('userName')
+            expect(vm.$el.querySelector(`input`).getAttribute('name')).toBe('userName')
         })
 
         it('size', () => {
             vm = geInputVm(`size='large'`)
-            expect(vm.$el.querySelector(`${prefixCls}-box-large`)).to.exist
+            expect(vm.$el.querySelector(`${prefixCls}-box-large`)).toBeTruthy()
         })
 
         it('type', () => {
@@ -123,7 +123,7 @@ describe('Input', () => {
                     }
                 }
             }, true)
-            expect(vm.$el.querySelector('textarea')).to.exist
+            expect(vm.$el.querySelector('textarea')).toBeTruthy()
         })
 
         it('prefix', () => {
@@ -138,9 +138,9 @@ describe('Input', () => {
                     }
                 }
             }, true)
-            expect(vm.$el.querySelector(`.bw-chaxun`)).to.exist
-            expect(vm.$el.querySelector(`${prefixCls}-icon`)).to.exist
-            expect(vm.$el.querySelector(`${prefixCls}-icon-prefix`)).to.exist
+            expect(vm.$el.querySelector(`.bw-chaxun`)).toBeTruthy()
+            expect(vm.$el.querySelector(`${prefixCls}-icon`)).toBeTruthy()
+            expect(vm.$el.querySelector(`${prefixCls}-icon-prefix`)).toBeTruthy()
         })
 
         it('clear', done => {
@@ -158,13 +158,13 @@ describe('Input', () => {
             }, true)
             const InputEl = vm.$el.querySelector(`input`)
             const IconEl = vm.$el.querySelector(`.${prefix}icon`)
-            expect(vm.$el.querySelector(`.bw-shibai-mian`)).to.exist
-            expect(vm.$el.querySelector(`${prefixCls}-icon-suffix`)).to.exist
-            expect(vm.$el.querySelector(`${prefixCls}-icon-clear`)).to.exist
+            expect(vm.$el.querySelector(`.bw-shibai-mian`)).toBeTruthy()
+            expect(vm.$el.querySelector(`${prefixCls}-icon-suffix`)).toBeTruthy()
+            expect(vm.$el.querySelector(`${prefixCls}-icon-clear`)).toBeTruthy()
             setTimeout(() => {
                 IconEl.click()
                 setTimeout(() => {
-                    expect(InputEl.value).to.equal('')
+                    expect(InputEl.value).toBe('')
                     done()
                 }, 100)
             }, 100)
@@ -183,7 +183,7 @@ describe('Input', () => {
                 }
             }, true)
             const InputBoxEl = vm.$el.children[0]
-            expect(InputBoxEl.classList.contains(`${prefixCls}-error`)).to.exist
+            expect(InputBoxEl.classList).toContain(`${prefix}input-error`)
         })
     })
 

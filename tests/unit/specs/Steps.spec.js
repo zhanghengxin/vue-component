@@ -5,7 +5,7 @@
 */
 // import Steps from '&/components/steps'
 // import Step from '&/components/step'
-import { createTest, createVue, destroyVM } from '../utils'
+import { createVue, destroyVM } from '../utils'
 import {prefix} from '&/utils/common'
 const prefixCls = `${prefix}step`
 const Step = `${prefix}step`
@@ -38,7 +38,7 @@ describe('Steps.vue', () => {
         }, true)
         const Elm = vm.$el
         setTimeout(() => {
-            expect(Elm).to.exist
+            expect(Elm).toBeTruthy()
             done()
         }, 100)
     })
@@ -63,8 +63,8 @@ describe('Steps.vue', () => {
         }, true)
         const Elm = vm.$el
         setTimeout(() => {
-            expect(Elm.querySelector(`.${prefixCls}-area`).classList.contains(`${prefixCls}-area-small`)).to.be.true
-            expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item`)[2].classList.contains(`${prefixCls}-status-process`)).to.be.true
+            expect(Elm.querySelector(`.${prefixCls}-area`).classList).toContain(`${prefixCls}-area-small`)
+            expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item`)[2].classList).toContain(`${prefixCls}-status-process`)
             done()
         }, 100)
     })
@@ -89,10 +89,10 @@ describe('Steps.vue', () => {
         }, true)
         const Elm = vm.$el
         setTimeout(() => {
-            expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item`)[0].classList.contains(`${prefixCls}-status-wait`)).to.be.true
-            expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item .${prefixCls}-content`)[1].textContent).to.equal('content2')
-            expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item .${prefixCls}-title`)[2].textContent).to.equal('在等待')
-            expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item .${prefixCls}-point`)[0].querySelector('i').classList.contains(`bw-fasong`)).to.be.true
+            expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item`)[0].classList).toContain(`${prefixCls}-status-wait`)
+            expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item .${prefixCls}-content`)[1].textContent).toBe('content2')
+            expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item .${prefixCls}-title`)[2].textContent).toBe('在等待')
+            expect(Elm.querySelectorAll(`.${prefixCls}-area .${prefixCls}-item .${prefixCls}-point`)[0].querySelector('i').classList).toContain(`bw-fasong`)
             done()
         }, 100)
     })
