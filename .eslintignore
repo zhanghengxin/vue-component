@@ -3,7 +3,8 @@
 /dist/
 /*.js
 /test/unit/coverage/
-/src/docments/
+/src/documents/
+/businessLibs/
 /src/assets/
 /node_modules/
 /libs/node_modules/
