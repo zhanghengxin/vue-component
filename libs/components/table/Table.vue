@@ -82,6 +82,28 @@
             :columns="normalColumns"
             ref="dynamic">
         </dynamic-column>
+        <Icon
+            v-if="dynamicallocation"
+            :class="[preCls + '-dynamic-icon']"
+            @click.native="showDynamicModal"
+            type="shezhi"/>
+        <Modal
+            v-model="modalShow"
+            title="自定义列表"
+            @on-ok="dynamicSave"
+        >
+            <ul :class="[preCls + '-dynamic-modal-column']">
+                <li :class="[preCls + '-dynamic-modal-column-item']" v-for="(column,index) in normalColumns"
+                    :key="index">
+                    <Checkbox
+                        :value="column._visible"
+                        @click.native.prevent="dynamicOrder(column._index,column._visible)"
+                    >
+                    </Checkbox>
+                    <span>{{column.title}}</span>
+                </li>
+            </ul>
+        </Modal>
     </div>
 </template>
 
@@ -93,6 +115,9 @@ import tableHead from './table-head'
 import tableBody from './table-body'
 import tableFixed from './table-fixed'
 import dynamicColumn from './dynamic-column'
+import Icon from '../icon'
+import Modal from '../modal'
+import Checkbox from '../checkbox'
 import Emitter from '../../mixins/emitter'
 
 const preCls = prefix + 'table'
@@ -100,7 +125,7 @@ export default {
     name: preCls,
     mixins: [Emitter],
     components: {
-        tableHead, tableBody, tableFixed, dynamicColumn
+        tableHead, tableBody, tableFixed, dynamicColumn, Icon, Modal, Checkbox
     },
     data () {
         return {
@@ -118,6 +143,8 @@ export default {
             horizontalScroll: false,
             verticalScroll: false,
             showResizeBorder: false,
+            modalShow: false,
+            dynamicColumns: [],
             scrollBarWidth: getScrollBarSize()
         }
     },
@@ -162,6 +189,10 @@ export default {
             default: false
         },
         dynamicable: {
+            type: Boolean,
+            default: false
+        },
+        dynamicallocation: {
             type: Boolean,
             default: false
         },
@@ -233,6 +264,14 @@ export default {
             handler () {
                 this.cloneColumns = this.buildColumns()
                 this.handleResize()
+            },
+            deep: true
+        },
+        cloneColumns: {
+            handler () {
+                if (this.dynamicallocation) {
+                    this.dynamicColumns = deepCopy(this.cloneColumns)
+                }
             },
             deep: true
         }
@@ -333,7 +372,12 @@ export default {
             return style
         },
         normalColumns () {
-            return this.cloneColumns.filter((cell) => (!cell.fixed))
+            // return this.cloneColumns.filter((cell) => (!cell.fixed))
+            if (this.dynamicable) {
+                return this.cloneColumns.filter((cell) => (!cell.fixed))
+            } else {
+                return this.dynamicColumns.filter((cell) => (!cell.fixed))
+            }
         }
     },
     methods: {
@@ -377,8 +421,9 @@ export default {
                 return cell._width
             }).reduce((a, b) => a + b, 0)
         },
-        getVisibleColumnsWidth () {
-            return this.cloneColumns.map(cell => {
+        getVisibleColumnsWidth (isDynamicColumns = false) {
+            let cloneColumns = isDynamicColumns ? this.dynamicColumns : this.cloneColumns
+            return cloneColumns.map(cell => {
                 if (cell._visible) {
                     return cell._width
                 } else {
@@ -391,7 +436,7 @@ export default {
             let hasWidthList = []
             let noMaxWidthColumns = []
             let sumMinWidth = 0
-            let tableWidth = this.$el.offsetWidth
+            let tableWidth = this.$el.offsetWidth - 1
             this.cloneColumns.forEach((item) => {
                 if (item._visible) {
                     if (item.width) {
@@ -507,9 +552,7 @@ export default {
             }
             return deepCopy(selectionIndexes)
         },
-        getVisibleNum () {
-            return this.cloneColumns.filter((item) => (item._visible)).length
-        },
+
         selectAll (status) {
             this.formatData.forEach((item, index) => {
                 if (item._disabled) {
@@ -664,20 +707,50 @@ export default {
             this.$refs.dynamic.$el.style.left = event.clientX - tablePosition.left + 'px'
             this.$refs.dynamic.$el.style.top = event.clientY - tablePosition.top + 'px'
         },
+        showDynamicModal () {
+            this.modalShow = true
+        },
+        dynamicSave () {
+            this.cloneColumns = deepCopy(this.dynamicColumns)
+        },
+        getVisibleNum (isDynamicColumns = false) {
+            let cloneColumns = isDynamicColumns ? this.dynamicColumns : this.cloneColumns
+            return cloneColumns.filter((item) => (item._visible && !item.fixed)).length
+        },
+        // dynamicOrder (index, status) {
+        //     if (this.getVisibleNum() < 2 && status) return
+        //     let isExistFixColumns = this.cloneColumns.filter((item) => (item.fixed)).length > 0
+        //     this.cloneColumns[index]._visible = !status
+        //     if (isExistFixColumns) {
+        //         let boxWidth = this.$el ? this.$el.offsetWidth : 0
+        //         let tableWidth = this.getVisibleColumnsWidth(!this.dynamicable)
+        //         let width = tableWidth
+        //         if (boxWidth && width - 1 < boxWidth) {
+        //             this.cloneColumns[index]._visible = status
+        //             return
+        //         }
+        //     }
+        //     this.handleResize()
+        // },
         dynamicOrder (index, status) {
-            if (this.getVisibleNum() < 2 && status) return
-            let isExistFixColumns = this.cloneColumns.filter((item) => (item.fixed)).length > 0
-            this.cloneColumns[index]._visible = !status
+            if (this.getVisibleNum(!this.dynamicable) < 2 && status) return
+            let cloneColumns
+            if (this.dynamicable) {
+                cloneColumns = this.cloneColumns
+            } else {
+                cloneColumns = this.dynamicColumns
+            }
+            let isExistFixColumns = cloneColumns.filter((item) => (item.fixed)).length > 0
+            this.$set(cloneColumns[index], '_visible', !status)
             if (isExistFixColumns) {
                 let boxWidth = this.$el ? this.$el.offsetWidth : 0
-                let tableWidth = this.getVisibleColumnsWidth()
-                let width = tableWidth
+                let tableWidth = this.getVisibleColumnsWidth(!this.dynamicable)
+                let width = this.bodyHeight === 0 ? tableWidth : tableWidth - (this.showVerticalScrollBar ? this.scrollBarWidth : 0)
                 if (boxWidth && width - 1 < boxWidth) {
-                    this.cloneColumns[index]._visible = status
-                    return
+                    this.$set(cloneColumns[index], '_visible', status)
                 }
             }
-            this.handleResize()
+            // this.handleResize()
         }
     }
 }
