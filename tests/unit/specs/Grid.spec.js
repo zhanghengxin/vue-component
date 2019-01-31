@@ -55,7 +55,7 @@ describe('Col&Row', () => {
     it('flex-justify-start', () => {
         vm = createVue({
             template: `
-                <${Row} type="flex" justify="flex-start">
+                <${Row} type="flex" justify="start">
                    <${Col} span="4">col-4</${Col}>
                    <${Col} span="4">col-4</${Col}>
                    <${Col} span="4">col-4</${Col}>
@@ -64,7 +64,7 @@ describe('Col&Row', () => {
             `
         }, true)
         let elm = vm.$el
-        expect(elm.classList).toContain(`${Row}-flex-flex-start`)
+        expect(elm.classList).toContain(`${Row}-flex-start`)
     })
 
     it('flex-justify-end', () => {
