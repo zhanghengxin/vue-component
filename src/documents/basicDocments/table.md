@@ -593,7 +593,7 @@
                         {
                             title: 'Name',
                             key: 'name',
-                            width:200
+                            width:200,
                         },
                         {
                             title: 'Age',
@@ -1667,7 +1667,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border width=1000 :columns='columns12' :data='data11'></b-table>
+           <b-table show-index border width=1000 :columns='columns12' :data='data11'></b-table>
         </div>
     </div>
 
@@ -2042,7 +2042,19 @@
                     {
                         title: 'Name',
                         key: 'name',
-                        width:200
+                        width:200,
+                        render: (h, params) => {
+                            return h('div', [
+                                h('b-input', {
+                                    on: {
+                                        'on-change': (data) => {
+                                            this.asdda(data,params.index)
+                                        }
+                                    },
+                                    value:params
+                                })
+                            ])
+                        }
                     },
                     {
                         title: 'Age',
@@ -2545,32 +2557,32 @@
                 ],
                 columns12: [
                     {
-                        title: 'Name',
-                        key: 'name',
-                        width:100
+                       title: 'Name',
+                       key: 'name',
+                       width:100
                     },
                     {
-                        title: 'Age',
-                        key: 'age',
-                        width:100
+                       title: 'Age',
+                       key: 'age',
+                       width:100
                     },
                     {
-                        title: 'Pets',
-                        key: 'pets',
-                        minWidth:100
+                       title: 'Pets',
+                       key: 'pets',
+                       minWidth:100
                     },
                     {
-                        title: 'Like',
-                        key: 'like',
-                        maxWidth:100
+                       title: 'Like',
+                       key: 'like',
+                       maxWidth:100
                     },
                     {
-                        title: 'ID',
-                        key: 'id',
+                       title: 'ID',
+                       key: 'id',
                     },
                     {
-                        title: 'Book',
-                        key: 'book'
+                       title: 'Book',
+                       key: 'book'
                     }
                 ]
             }
@@ -2584,6 +2596,11 @@
             },
             handleDbclick(row){
                 console.log('双击事件,当前选中的数据为：',row)
+            },
+            asdda (data,index) {
+                this.data5[index].age = new Date()
+                this.data5[index].name = data
+                console.log(this.data5)
             }
         }
     }

@@ -80,6 +80,10 @@ $prefix-table: $css-prefix + 'table';
     white-space: normal;
     word-break: break-all;
     box-sizing: border-box;
+    &-ellipsis {
+      white-space: nowrap;
+      overflow: hidden;
+    }
   }
   &-stripe tr:nth-child(2n) td {
     background-color: $Background;

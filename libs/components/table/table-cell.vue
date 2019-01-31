@@ -1,5 +1,5 @@
 <template>
-    <div :class="classes">
+    <div :class="classes" :style="styles">
         <template v-if="renderType === 'html'"><span v-html="row[column.key]"></span></template>
         <template v-if="renderType === 'selection'">
             <Checkbox :value="checked"
@@ -8,7 +8,7 @@
             </Checkbox>
         </template>
         <template v-if="renderType === 'normal'">
-            <span>{{row[column.key]}}</span>
+            <span :title="row[column.key]">{{row[column.key]}}</span>
         </template>
         <Render
             v-if="renderType === 'render'"
@@ -41,6 +41,7 @@ export default {
         classes () {
             return [
                 `${this.preCls}-cell`,
+                `${this.preCls}-cell-ellipsis`,
                 {
                     [`${this.preCls}-cell-with-selection`]: this.column.type === 'selection'
                 }
@@ -60,6 +61,12 @@ export default {
                 type = 'normal'
             }
             return type
+        },
+        styles () {
+            const style = {}
+            const width = parseInt(this.column._width - 1)
+            style.width = `${width}px`
+            return style
         }
     },
     methods: {

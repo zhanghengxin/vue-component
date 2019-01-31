@@ -94,12 +94,12 @@ import { isValidDate, isDateObject, formatDate } from '../../../utils/date'
 import scrollIntoView from '../../../utils/scroll-into-view'
 import { TableYear, TableMonth, TableDate, TableTime } from '../base'
 import { prefix } from '../../../utils/common'
-import bButton from '../../button/'
+
 const icon = `${prefix}icon`
 
 export default {
     name: `${prefix}panel`,
-    components: { TableYear, TableMonth, TableDate, TableTime, bButton },
+    components: {TableYear, TableMonth, TableDate, TableTime},
     props: {
         value: {
             default: null,
@@ -239,20 +239,20 @@ export default {
         init (val) {
             if (val) {
                 switch (this.type) {
-                case 'year':
-                    this.panel = 'YEAR'
-                    break
-                case 'month':
-                    this.panel = 'MONTH'
-                    break
-                case 'date':
-                    this.panel = 'DATE'
-                    break
-                case 'time':
-                    this.panel = 'TIME'
-                    break
-                default:
-                    this.panel = 'DATE'
+                    case 'year':
+                        this.panel = 'YEAR'
+                        break
+                    case 'month':
+                        this.panel = 'MONTH'
+                        break
+                    case 'date':
+                        this.panel = 'DATE'
+                        break
+                    case 'time':
+                        this.panel = 'TIME'
+                        break
+                    default:
+                        this.panel = 'DATE'
                 }
             } else {
                 this.panel = 'NONE'

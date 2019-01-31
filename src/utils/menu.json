@@ -246,6 +246,16 @@
           "title": "Loading 加载动画",
           "path": "/loading",
           "name": "loading"
+        },
+        {
+          "title": "Anchor 锚点",
+          "path": "/anchor",
+          "name": "anchor"
+        },
+        {
+          "title": "Affix 图钉",
+          "path": "/affix",
+          "name": "affix"
         }
       ]
     }

@@ -1,29 +1,35 @@
 <template>
     <div :class='selectGroupClasses'>
-    <div v-if='label'
-        :class='[prefixCls+`-label`]'
-        :style='labelStyles'
-        >{{label}}</div>
-    <div
-        v-click-outside="clickOutside"
-        :style='widthStyle'
-        :class="selectClasses">
+        <div v-if='label'
+             :class='[prefixCls+`-label`]'
+             :style='labelStyles'
+        >{{label}}
+        </div>
         <div
-            ref="reference"
-            :class="classes"
-            :tabindex="tabindex"
-            @blur="toggleHeaderFocus"
-            @focus="toggleHeaderFocus"
-            @click="toggleMenu"
-            @mouseenter="clearShow = clearabled && true"
-            @mouseleave="clearShow =  clearabled && false">
+            v-click-outside="clickOutside"
+            :style='widthStyle'
+            :class="selectClasses">
+            <div
+                ref="reference"
+                :class="classes"
+                :tabindex="tabindex"
+                @blur="toggleHeaderFocus"
+                @focus="toggleHeaderFocus"
+                @click="toggleMenu"
+                @mouseenter="clearShow = clearabled && true"
+                @mouseleave="clearShow =  clearabled && false">
                 <input type="hidden" :name="name" :value="publicValue">
                 <div :class='[`${prefixCls}-show-selection`]'>
                     <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
-                    <div v-if='multiple' v-for="item in values" :key='item.code' :class="[prefixCls+`-tag`]">
-                        <span>{{item.name}}</span>
-                        <b-icon type='quxiao-guanbi-shanchu' @click.native.stop='removeTag(item)'></b-icon>
-                    </div>
+                    <template v-if='multiple'>
+                        <div
+                            v-for="item in values"
+                            :key='item.code'
+                            :class="[prefixCls+`-tag`]">
+                            <span>{{item.name}}</span>
+                            <b-icon type='quxiao-guanbi-shanchu' @click.native.stop='removeTag(item)'></b-icon>
+                        </div>
+                    </template>
                     <input
                         type="text"
                         v-if="filterabled"
@@ -35,7 +41,7 @@
                         :style="inputStyle"
                         autocomplete="off"
                         spellcheck="false"
-                        @keydown="slideDropAndSetInput"
+                        @keydown.exact="slideDropAndSetInput"
                         @focus="onInputFocus"
                         @keydown.delete="handleInputDelete"
                     />
@@ -53,33 +59,33 @@
                     :class="[prefixCls+`-arrow`]"
                     @click.native.stop='clearValues'>
                 </b-icon>
-        </div>
-        <transition name='slide'>
-            <Drop
-                :style='dropStyles'
-                v-show='show'
-                :width='dropWidth'
+            </div>
+            <transition name='slide'>
+                <Drop
+                    :style='dropStyles'
+                    v-show='show'
+                    :width='dropWidth'
                 >
-                <ul v-if='notFoundData'>
-                    <li :class='[prefix+`option`]'>{{notFoundText}}</li>
-                </ul>
-                <ul v-if='(dropList.length > 0) && !loading'>
-                    <Option
-                        v-for='item in dropList'
-                        :key='item.code'
-                        :code='item.code'
-                        :name='item.name'
-                        :disabled='item.disabled'
-                        :multiple='multiple'
-                        :publicValue='publicValue'>
-                    </Option>
-                </ul>
-                <ul v-if='loading'>
-                    <li :class='[prefix+`option`]'>{{loadingText}}</li>
-                </ul>
-            </Drop>
-        </transition>
-    </div>
+                    <ul v-if='notFoundData'>
+                        <li :class='[prefix+`option`]'>{{notFoundText}}</li>
+                    </ul>
+                    <ul v-if='(dropList.length > 0) && !loading'>
+                        <Option
+                            v-for='item in dropList'
+                            :key='item.code'
+                            :code='item.code'
+                            :name='item.name'
+                            :disabled='item.disabled'
+                            :multiple='multiple'
+                            :publicValue='publicValue'>
+                        </Option>
+                    </ul>
+                    <ul v-if='loading'>
+                        <li :class='[prefix+`option`]'>{{loadingText}}</li>
+                    </ul>
+                </Drop>
+            </transition>
+        </div>
     </div>
 </template>
 <script>
@@ -94,9 +100,9 @@ const prefixCls = prefix + 'select'
 
 export default {
     name: prefixCls,
-    mixins: [ Emitter ],
-    directives: { clickOutside },
-    components: { Drop, Option },
+    mixins: [Emitter],
+    directives: {clickOutside},
+    components: {Drop, Option},
     data () {
         return {
             prefix,

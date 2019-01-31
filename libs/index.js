@@ -33,10 +33,10 @@ import CheckboxGroup from './components/checkboxGroup'
 import Radio from './components/radio'
 import RadioGroup from './components/radioGroup'
 import Form from './components/form'
-import Tag from './components/Tag'
+import Tag from './components/tag'
 import Tree from './components/tree'
 import Table from './components/table'
-import Progress from './components/Progress'
+import Progress from './components/progress'
 import Select from './components/select'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
@@ -51,6 +51,9 @@ import Timeline from './components/timeline'
 import TimelineItem from './components/timeline-item'
 import Split from './components/split'
 import Loading from './components/loading'
+import Anchor from './components/anchor'
+import AnchorLink from './components/anchor-link'
+import Affix from './components/affix'
 
 const components = [
     Input,
@@ -103,7 +106,10 @@ const components = [
     MenuGroup,
     Timeline,
     TimelineItem,
-    Split
+    Split,
+    Anchor,
+    AnchorLink,
+    Affix
 ]
 
 const install = function (Vue) {
