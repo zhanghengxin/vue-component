@@ -243,6 +243,11 @@
           "name": "loading"
         },
         {
+          "title": "LoadingBar 进度条",
+          "path": "/loadingbar",
+          "name": "loadingbar"
+        },
+        {
           "title": "Anchor 锚点",
           "path": "/anchor",
           "name": "anchor"

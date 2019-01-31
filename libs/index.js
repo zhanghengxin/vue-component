@@ -50,6 +50,7 @@ import Timeline from './components/timeline'
 import TimelineItem from './components/timeline-item'
 import Split from './components/split'
 import Loading from './components/loading'
+import LoadingBar from './components/loading-bar/'
 import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
@@ -118,9 +119,11 @@ const install = function (Vue) {
     Vue.prototype.$Notice = Notice
     Vue.use(Loading.directive)
     Vue.prototype.$Loading = Loading.service
+    Vue.prototype.$LoadingBar = LoadingBar
 }
 
 export default {
     install,
+    LoadingBar,
     ...components
 }
