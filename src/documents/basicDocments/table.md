@@ -583,61 +583,76 @@
                         }
                     ],
                     columns6: [
-                        {
-                            title: 'selection',
-                            type:'selection',
-                            fixed:'left',
-                            width:80,
-                            align:'center'
-                        },
-                        {
-                            title: 'Name',
-                            key: 'name',
-                            width:200,
-                        },
-                        {
-                            title: 'Age',
-                            key: 'age',
-                            width:300
-                        },
-                        {
-                            title: 'Sex',
-                            key: 'sex',
-                            width:300
-                        },
-                        {
-                            title: 'hobby',
-                            key: 'hobby',
-                            width:200
-                        },
-                        {
-                            title: 'occupation',
-                            key: 'occupation',
-                            width:120,
-                            fixed:'right',
-                            align:'center',
-                            render: (h, params) => {
-                                return h('div', [
-                                    h('b-button', {
-                                        props: {
-                                            type: 'error',
-                                            size: 'small'
-                                        },
-                                        on: {
-                                            'on-click': () => {
-                                                this.remove(params.index)
-                                            }
-                                        }
-                                    }, 'Delete')
-                                ])
-                            }
-                        }
+                       {
+                           title: 'selection',
+                           type:'selection',
+                           fixed:'left',
+                           width:35,
+                           align:'center'
+                       },
+                       {
+                           title: 'Name',
+                           key: 'name',
+                           width:200,
+                           render: (h, params) => {
+                               return h('div', [
+                                   h('b-input', {
+                                       on: {
+                                           'on-change': (data) => {
+                                               this.edit(data,params.index)
+                                           }
+                                       },
+                                       value:params
+                                   })
+                               ])
+                           }
+                       },
+                       {
+                           title: 'Age',
+                           key: 'age',
+                           width:300
+                       },
+                       {
+                           title: 'Sex',
+                           key: 'sex',
+                           width:300
+                       },
+                       {
+                           title: 'hobby',
+                           key: 'hobby',
+                           width:200
+                       },
+                       {
+                           title: 'occupation',
+                           key: 'occupation',
+                           width:120,
+                           fixed:'right',
+                           align:'center',
+                           render: (h, params) => {
+                               return h('div', [
+                                   h('b-button', {
+                                       props: {
+                                           type: 'error',
+                                           size: 'small'
+                                       },
+                                       on: {
+                                           'on-click': () => {
+                                               this.remove(params.index)
+                                           }
+                                       }
+                                   }, 'Delete')
+                               ])
+                           }
+                       }
                     ]
                 }
             },
             methods:{
                 remove(index){
                     this.data5.splice(index,1)
+                },
+                edit(data,index) {
+                    this.data5[index].age = new Date()
                 }
             }
     </script>
@@ -2055,7 +2070,7 @@
                                 h('b-input', {
                                     on: {
                                         'on-change': (data) => {
-                                            this.asdda(data,params.index)
+                                            this.edit(data,params.index)
                                         }
                                     },
                                     value:params
@@ -2604,11 +2619,37 @@
             handleDbclick(row){
                 console.log('双击事件,当前选中的数据为：',row)
             },
-            asdda (data,index) {
+            edit (data,index) {
                 this.data5[index].age = new Date()
-                this.data5[index].name = data
-                console.log(this.data5)
             }
         }
     }
 </script>
+
+### props
+| 参数      | 说明    | 类型      | 默认值   |
+|---------- |-------- |---------- |------------- |-------- |
+| data     |  显示的结构化数据，特殊配置项具体项见下文  | Array  |    [ ]   |
+| columns     |  表格列的配置描述，具体项见下文  | Array  |   [ ]   |
+| border     |  是否显示单元格边框  |  Boolean  |    false   |
+| stripe     |  是否显示间隔斑马纹  |  Boolean  |    false   |
+| resizeable     |  是否开启拖拽列宽  |  Boolean  |   false   |
+| draggable     |  是否开启拖拽排序  |  Boolean  |    false   |
+| dynamicable     |  是否开启显示隐藏列  |  Boolean  |  false   |
+| dynamicallocation     |  是否开启显示隐藏列【弹层模式】，dynamicable显示隐藏列和此模式二者只能开启一种  |  Boolean  |   false   |
+| show-index     |  是否开启表格序号，如果需要支持分页请见下文配置  |  Boolean  |  false   |
+| width     |  表格宽度	  |  Number / String  |   auto   |
+| height     |  表格高度，设置后，如果表格内容大于此值，会固定表头	  |  Number / String  |  -    |    auto   |
+| loading     |  	表格是否加载中	  |  Boolean  |    false   |
+| highlight-row     |  	是否支持高亮选中的行，即单选	  |  Boolean  |    false   |
+| no-data-text     |  	数据为空时显示的提示内容	  |  Number / String  |    暂无数据   |
+
+### columns
+| 属性      | 说明    | 类型      | 可选值       | 默认值       |
+| ---------- | -------- | ----------- | ------------- | -------- |
+| type     |  子节点属性  |  Array  |  -    | -    |
+
+### events
+| 方法名	      | 说明	    | 参数 |
+|---------- |-------- |---------- |
+| on-select     |  当选中节点时触发   |  options  |

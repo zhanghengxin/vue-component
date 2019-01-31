@@ -86,7 +86,8 @@
             v-if="dynamicallocation"
             :class="[preCls + '-dynamic-icon']"
             @click.native="showDynamicModal"
-            type="shezhi"/>
+            type="shezhi">
+        </Icon>
         <Modal
             v-model="modalShow"
             title="自定义列表"
