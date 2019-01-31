@@ -6,27 +6,35 @@
 <template>
     <div :class="boxClasses">
         <template v-if="type !== 'textarea'">
-            <b-icon
+            <div
                 v-if="prefix"
-                size
-                :type="icon"
-                :class="[
+                :class='[
                 prefixCls+`-icon`,
                 prefixCls+`-icon-`+size,
-                prefixCls+`-icon-prefix`]"
-                @on-click="handleIconClick">
-            </b-icon>
-            <b-icon
+                prefixCls+`-icon-prefix`]'>
+                <slot name='prefix'>
+                    <b-icon
+                        size
+                        :type="icon"
+                        @on-click="handleIconClick">
+                    </b-icon>
+                </slot>
+            </div>
+            <div
                 v-if="suffix"
-                size
-                :type="icon"
-                :class="[
+                :class='[
                 prefixCls+`-icon`,
-                prefixCls+`-noclear`,
                 prefixCls+`-icon-`+size,
-                prefixCls+`-icon-suffix`]"
-                @on-click="handleIconClick">
-            </b-icon>
+                prefixCls+`-icon-suffix`]'>
+                <slot name='suffix'>
+                    <b-icon
+                        size
+                        :type="icon"
+                        :class="[prefixCls+`-noclear`]"
+                        @on-click="handleIconClick">
+                    </b-icon>
+                </slot>
+            </div>
             <b-icon
                 v-if="clearable && currentValue"
                 size
@@ -292,6 +300,7 @@ export default {
             this.$emit('on-keydown', event)
         },
         handleInput (event) {
+            console.log('e', event)
             let value = event.target.value
             this.$emit('input', value)
             this.setCurrentValue(value)

@@ -1,4 +1,5 @@
 import {createVue, destroyVM} from '../utils'
+import { mount } from '@vue/test-utils'
 import { prefix } from '&/utils/common'
 const Dropdown = `${prefix}dropdown`
 
@@ -32,10 +33,10 @@ describe('Dropwdown', () => {
         })
     })
     // it('click', done => {
-    //     vm = createVue({
+    //     vm = mount({
     //         template: `
     //         <${Dropdown} trigger="click">
-    //             <span class=>别唐国顿 <b-icon type="xia" size="14" color="#52b7fc"></b-icon></span>
+    //             <span class='b-click'>别唐国顿 <b-icon type="xia" size="14" color="#52b7fc"></b-icon></span>
     //             <${Dropdown}-menu slot="list">
     //                 <${Dropdown}-item>海天龙战血玄黄</${Dropdown}-item>
     //                 <${Dropdown}-item>披发长歌览大荒</${Dropdown}-item>
@@ -45,12 +46,12 @@ describe('Dropwdown', () => {
     //         </${Dropdown}>
     //         `
     //     }, true)
-    //     vm.$nextTick(_ => {
-    //         vm.$el.children[0].click()
-    //         setTimeout(_ => {
-    //             expect(vm.$el.querySelector('.b-drop').style.position).toBe('absolute')
-    //             done()
-    //         }, 20)
-    //     })
+    //     vm.find('.b-dropdown>div:first-children').trigger('click')
+    //     setTimeout(_ => {
+    //         console.log(vm.find('b-drop'))
+    //         console.log(vm.find('b-drop').style)
+    //         expect(vm.find('b-drop').style).toBe('')
+    //         done()
+    //     }, 300)
     // })
 })

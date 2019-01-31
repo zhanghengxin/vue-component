@@ -4,10 +4,29 @@
         data () {
             return {
                 show:false,
+                show1:false,
                 loading2:true
             }
         },
         methods:{
+            showLoading(){
+                 const loading = this.$Loading()
+                setTimeout(() => {
+                    loading.close()
+                }, 1000)
+            },
+            openFullScreen() {
+                this.show = true
+                setTimeout(() => {
+                    this.show = false
+                }, 2000)
+            },
+            openFullScreen1() {
+                this.show1 = true
+                setTimeout(() => {
+                    this.show1 = false
+                }, 2000)
+            },
             showLoading(){
                  const loading = this.$Loading({
                     lock: true,
@@ -15,45 +34,126 @@
                     body: true,
                     spinner: 'chushihua',
                     background: 'rgba(0, 0, 0, 0.7)'
-                });
+                })
                 setTimeout(() => {
-                    loading.close();
+                    loading.close()
                 }, 1000);
             },
-            openFullScreen() {
-                this.show = true;
-                setTimeout(() => {
-                this.show = false;
-                }, 2000);
-            },
-            changemal(e){
-                
-            }
         }
     }
 </script>
 
-# Input\Textarea 输入框
-基本表单组件，支持 input 和 textarea，并在原生控件基础上进行了功能扩展，可以组合使用。
+# Loading 加载动画
+在请求的时候使用，加载数据时显示动画效果。
 -----
 ### 基础用法
-可使用 v-model 实现数据的双向绑定。<br/>
-可直接设置 style 来改变输入框的宽度，默认 100%。<br/>
-可直接设置 error 来改变输入框的hover focus样式
+可直接使用API调用方式或指令调用方式
 <div class="example">
     <div class="example-box">
         <div>
-            <b-button @on-click='showLoading'>loading</b-button>
-             <b-button
+            <b-button @on-click='showLoading'>函数调用</b-button>
+            <b-button
                 type="primary"
                 @on-click="openFullScreen"
-                v-loading.fullscreen.lock="show">
+                v-loading="show">
                 指令方式
             </b-button>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+    <template>
+        <b-button @on-click='showLoading'>函数调用</b-button>
+        <b-button
+            type="primary"
+            @on-click="openFullScreen"
+            v-loading="show">
+            指令方式
+        </b-button>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    show:false
+                }
+            },
+             methods:{
+                showLoading(){
+                    const loading = this.$Loading()
+                    setTimeout(() => {
+                        loading.close()
+                    }, 1000)
+                },
+                openFullScreen() {
+                    this.show = true
+                    setTimeout(() => {
+                        this.show = false
+                    }, 2000)
+                }
+            }
+        }
+    </script>
+```
+:::
+
+
+### 指令用法 在全屏显示加载动画
+设置```loading-background```、```loading-text```来自定义加载文字与加载的背景颜色
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-button
+                type="primary"
+                @on-click="openFullScreen1"
+                v-loading.fullscreen.lock="show1">
+                指令方式
+            </b-button>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+    <template>
+        <b-button
+            type="primary"
+            @on-click="openFullScreen1"
+            v-loading.fullscreen.lock="show1">
+            指令方式
+        </b-button>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    show:false
+                }
+            },
+             methods:{
+                openFullScreen1() {
+                    this.show1 = true
+                    setTimeout(() => {
+                        this.show1 = false
+                    }, 2000)
+                }
+            }
+        }
+    </script>
+```
+:::
+
+### 指令用法 在当前元素中显示加载动画
+设置```loading-background```、```loading-text```来自定义加载文字与加载的背景颜色
+<div class="example">
+    <div class="example-box">
+        <div>
             <div 
                 style='width:100%;height:200px;'
                 v-loading="loading2"
-                loading-text="拼命加载中"
+                loading-text="拼命加载中.."
                 loading-background="rgba(0, 0, 0, 0.8)">
             </div>
         </div>
@@ -62,58 +162,27 @@
 
 ::: code
 ```html
-
     <template>
-        <b-input v-model="value" placeholder="请输入..." /></b-input>
-        <b-input v-model="value0" placeholder="请输入..." :error='error' /></b-input>
-        <span>{{value}}</div>
+        <div 
+            style='width:100%;height:200px;'
+            v-loading="loading2"
+            loading-text="拼命加载中.."
+            loading-background="rgba(0, 0, 0, 0.8)">
+        </div>
     </template>
-    <script>
-        export default {
-            data () {
-                return {
-                    value: '',
-                    value0: '',
-                    error:true
-                }
-            }
-        }
-    </script>
 ```
 :::
+
+
 
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |----------|--------|---------- |-------------  |-------- |
-| value    | 绑定的值，可使用 v-model 双向绑定   | String,Number  | - |   -  |
-| type     | 输入框类型   | String  | `text`、`password`、`textarea`、`url`、`email` |   -  |
-| placeholder | 占位文本   | String  | - |   请输入..  |
-| disabled | 设置输入框为禁用状态   | Boolean  | `true`、`false` |   false  |
-| readonly | 设置输入框为只读   | Boolean  | `true`、`false` |   false  |
-| error | 设置输入框为error状态   | Boolean  | `true`、`false` |   false  |
-| size | 设置输入框的尺寸   | String  | `small`、`default`、`large` |   default  |
-| name | 设置输入框name   | String  | - |   -  |
-| maxlength | 最大输入长度   | Number  | - |   -  |
-| minlength | 最大输入长度   | Number  | - |   -  |
-| clearable | 是否显示清空按钮   | Boolean  | `true`、`false` | false  |
-| spellcheck | 是否拼写检查   | Boolean  | `true`、`false` | false  |
-| autofocus | 自动获取焦点   | Boolean  | `true`、`false` |   false  |
-| icon     | icon的名称class   | String  |  详见icon组件 |   -  |
-| prefix     | icon的在前面   | Boolean  |  `true`、`false` |  false   |
-| suffix     | icon的在后面   | Boolean  |  `true`、`false` |  false   |
-| rows     | 文本域默认行数，仅在 textarea 类型下有效   | Number  |  - |   2  |
-| autosize | 自适应内容高度，仅在 textarea 类型下有效，可传入对象，如 { minRows: 2, maxRows: 6 }   | Boolean,Object  |  - |   false  |
-| wrap     | 原生的 wrap 属性，仅在 textarea 下生效   | String  |  `soft`、`hard` |   soft  |
-| label     | input前的说明文字   | String  |  - |   -  |
-| labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   36  |
-| fixed     | input的搭配文字的两种样式类型   | Boolean  |  `true`、`false` |   false  |
-
-### events
-| 事件名	      | 说明	    | 返回值 |
-|-------------|---------|----------|
-| on-click    | 点击icon时触发    | -  |
-| on-change   | 数据改变时触发 | event |
-| on-focus   | 输入框聚焦时触发 | - |
-| on-blur   | 输入框失去聚焦时触发 | - |
-| on-keyup   | 原生的 keyup 事件 | event |
-| on-keydown   | 原生的 keydown 事件 | event |
+| target    | Loading 需要覆盖的 DOM 节点。可传入一个 DOM 对象或字符串；若传入字符串，<br/>则会将其作为参数传入 document.querySelector以获取到对应 DOM 节点   | Object/String  | - |   document.body  |
+| text     | 加载动画的文字   | String  | - |   -  |
+| background | 加载动画的背景的颜色   | String  | - |     |
+| spinner | 自定义加载图标类名   | String  | - |   -  |
+| body | 是否加载动画在body上   | Boolean  | `true`、`false` |   true  |
+| fullscreen | 是否全屏   | Boolean  | `true`、`false` |   true  |
+| lock | 锁定当前滚动条   | Boolean  | `true`、`false` |   false  |
+| customClass | Loading 的自定义类名   | String  | - |   -  |
