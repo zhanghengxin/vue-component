@@ -176,14 +176,34 @@ $prefix-table: $css-prefix + 'table';
     border-left: 1px dashed $Border;
     top: 0;
   }
-  &-dynamic-column {
-    position: absolute;
-    z-index: 5;
-    top: 0;
-    background: white;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 6px;
-    &-item {
-      padding: 3px 10px;
+  &-dynamic {
+    &-column {
+      position: absolute;
+      z-index: 5;
+      top: 0;
+      background: white;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 6px;
+      &-item {
+        padding: 3px 10px;
+      }
+    }
+    &-modal-column {
+      list-style: none;
+      & li {
+        display: inline-block;
+        padding: 10px 10px;
+        .#{$css-prefix}checkbox-warpper {
+          margin-right: 5px;
+        }
+      }
+    }
+    &-icon {
+      position: absolute;
+      top: -30px;
+      right: 0;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 100;
     }
   }
 }
