@@ -22,13 +22,12 @@ const defaults = {
 let fullscreenLoading
 
 LoadingConstructor.prototype.originalPosition = ''
-LoadingConstructor.prototype.originalOverflow = ''
 
 LoadingConstructor.prototype.close = function () {
     if (this.fullscreen) {
         fullscreenLoading = undefined
     }
-    this.$nextTick(_ => {
+    setTimeout(_ => {
         const target = this.fullscreen || this.body
             ? document.body
             : this.target
@@ -38,30 +37,23 @@ LoadingConstructor.prototype.close = function () {
             this.$el.parentNode.removeChild(this.$el)
         }
         this.$destroy()
-    })
+    }, 300)
     this.visible = false
 }
 
 const addStyle = (options, parent, instance) => {
     let maskStyle = {}
-    if (options.fullscreen) {
+    if (options.fullscreen || options.body) {
         instance.originalPosition = getStyle(document.body, 'position')
-        instance.originalOverflow = getStyle(document.body, 'overflow')
-    // maskStyle.zIndex = PopupManager.nextZIndex()
-    } else if (options.body) {
-        instance.originalPosition = getStyle(document.body, 'position');
-        ['top', 'left'].forEach(property => {
-            let scroll = property === 'top' ? 'scrollTop' : 'scrollLeft'
-            maskStyle[property] = options.target.getBoundingClientRect()[property] +
-        document.body[scroll] +
-        document.documentElement[scroll] +
-        'px'
-        });
-        ['height', 'width'].forEach(property => {
+        maskStyle.position = 'fixed'
+        maskStyle.top = '0'
+        maskStyle.left = '0'
+        ;['height', 'width'].forEach(property => {
             maskStyle[property] = options.target.getBoundingClientRect()[property] + 'px'
         })
     } else {
         instance.originalPosition = getStyle(parent, 'position')
+        maskStyle.borderRadius = getStyle(parent, 'borderRadius')
     }
     Object.keys(maskStyle).forEach(property => {
         instance.$el.style[property] = maskStyle[property]

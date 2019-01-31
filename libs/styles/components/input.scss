@@ -60,11 +60,11 @@ $input-large-font:14px;
       font-size: $input-font-size;
 
       &-prefix {
-        padding-left: $input-size;
+        padding-left: $input-size + 4px;
       }
 
       &-suffix {
-        padding-right: $input-size;
+        padding-right: $input-size + 4px;
       }
 
       &-label {
@@ -77,9 +77,11 @@ $input-large-font:14px;
 // icon 的大小
 @mixin inputIconSize($type, $icon-size, $fontSize) {
   &-#{$type} {
-    font-size: $fontSize;
+    .icon{
+      font-size: $fontSize;
+    }
     width: $icon-size;
-    line-height: $icon-size;
+    line-height: $icon-size - 2px;
   }
 }
 
@@ -157,17 +159,18 @@ $input-large-font:14px;
     //icon样式
     &-icon {
       position: absolute;
-      top: 0;
+      top: 1px;
       z-index: 3;
       text-align: center;
-      height: 100%;
+      height: calc(100% - 2px);
+     
 
       &-prefix {
-        left: 0;
+        left: 1px;
       }
 
       &-suffix {
-        right: 0;
+        right: 1px;
       }
 
       &-clear {

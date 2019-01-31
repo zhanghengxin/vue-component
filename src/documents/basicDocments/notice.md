@@ -78,38 +78,36 @@
       <b-button type="error" @on-click="error">失败通知</b-button>
    </div>
    <script>
-      export default {
-        methods: {
-			methods: {
-				normal(){
-					this.$Notice({
-						title: "我是大标题",
-						content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试"
-					});
-				},
-				success(){
-					this.$Notice({
-						title: "我是大标题",
-						content: "通过修改border-left来控制样式",
-						type: "success"
-					});
-				},
-				warning(){
-					this.$Notice({
-						title: "我是大标题",
-						content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试",
-						type: "warning"
-					});
-				},
-				error(){
-					this.$Notice({
-						title: "我是大标题",
-						content: "我是纯粹凑数的",
-						type: "error"
-					});
-				}
+    export default {
+		methods: {
+			normal(){
+				this.$Notice({
+					title: "我是大标题",
+					content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试"
+				});
+			},
+			success(){
+				this.$Notice({
+					title: "我是大标题",
+					content: "通过修改border-left来控制样式",
+					type: "success"
+				});
+			},
+			warning(){
+				this.$Notice({
+					title: "我是大标题",
+					content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试",
+					type: "warning"
+				});
+			},
+			error(){
+				this.$Notice({
+					title: "我是大标题",
+					content: "我是纯粹凑数的",
+					type: "error"
+				});
 			}
-        }
+		}
     }
    </script>
 ```
@@ -199,56 +197,56 @@
 
 ::: code
 ```html
-    <div>
-      	<b-button type='primary' @on-click="normal(iconVisible)">默认通知</b-button>
+	<div>
+		<b-button type='primary' @on-click="normal(iconVisible)">默认通知</b-button>
 		<b-button type="success" @on-click="success(iconVisible)">成功通知</b-button>
 		<b-button type="warning" @on-click="warning(iconVisible)">警告警告</b-button>
 		<b-button type="error" @on-click="error(iconVisible)">失败通知</b-button>
-   </div>
-   <script>
-		export default {
-			methods: {
-				normal(n){
-					this.$Notice({
-						...n,
-						title: "我是大标题",
-						content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试"
-					});
-				},
-				success(n){
-					this.$Notice({
-						...n,
-						title: "我是大标题",
-						content: "通过修改border-left来控制样式",
-						type: "success"
-					});
-				},
-				warning(n){
-					this.$Notice({
-						...n,
-						title: "我是大标题",
-						content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试",
-						type: "warning"
-					});
-				},
-				error(n){
-					this.$Notice({
-						...n,
-						title: "我是大标题",
-						content: "我是纯粹凑数的",
-						type: "error"
-					});
-				}
+	</div>
+	<script>
+	export default {
+		methods: {
+			normal(n){
+				this.$Notice({
+					...n,
+					title: "我是大标题",
+					content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试"
+				});
 			},
-			data(){
-				return {
-					iconVisible:{
-						iconVisible: false
-					}
+			success(n){
+				this.$Notice({
+					...n,
+					title: "我是大标题",
+					content: "通过修改border-left来控制样式",
+					type: "success"
+				});
+			},
+			warning(n){
+				this.$Notice({
+					...n,
+					title: "我是大标题",
+					content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试",
+					type: "warning"
+				});
+			},
+			error(n){
+				this.$Notice({
+					...n,
+					title: "我是大标题",
+					content: "我是纯粹凑数的",
+					type: "error"
+				});
+			}
+		},
+		data(){
+			return {
+				iconVisible:{
+					iconVisible: false
 				}
 			}
 		}
-   </script>
+	}
+	</script>
 ```
 :::
 

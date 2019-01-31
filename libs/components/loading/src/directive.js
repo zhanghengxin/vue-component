@@ -16,46 +16,36 @@ loadingDirective.install = Vue => {
         if (binding.value) {
             Vue.nextTick(() => {
                 if (binding.modifiers.fullscreen) {
-                    el.originalPosition = getStyle(document.body, 'position')
-                    el.originalOverflow = getStyle(document.body, 'overflow')
-
-                    addClass(el.mask, 'is-fullscreen')
+                    el.maskStyle.position = 'fixed'
                     insertDom(document.body, el, binding)
                 } else {
-                    removeClass(el.mask, 'is-fullscreen')
                     if (binding.modifiers.body) {
-                        el.originalPosition = getStyle(document.body, 'position');
-                        ['top', 'left'].forEach(property => {
-                            const scroll = property === 'top' ? 'scrollTop' : 'scrollLeft'
-                            el.maskStyle[property] = el.getBoundingClientRect()[property] +
-                            document.body[scroll] +
-                            document.documentElement[scroll] -
-                            parseInt(getStyle(document.body, `margin-${property}`), 10) + 'px'
-                        });
-                        ['height', 'width'].forEach(property => {
+                        el.maskStyle.top = '0'
+                        el.maskStyle.left = '0'
+                        ;['height', 'width'].forEach(property => {
                             el.maskStyle[property] = el.getBoundingClientRect()[property] + 'px'
                         })
 
                         insertDom(document.body, el, binding)
                     } else {
                         el.originalPosition = getStyle(el, 'position')
+                        el.maskStyle.borderRadius = getStyle(el, 'borderRadius')
                         insertDom(el, el, binding)
                     }
                 }
             })
         } else {
-            Vue.nextTick(_ => {
+            setTimeout(_ => {
                 el.domVisible = false
                 const target = binding.modifiers.fullscreen || binding.modifiers.body
                     ? document.body
                     : el
                 removeClass(target, `${prefixCls}-parent-relative`)
                 removeClass(target, `${prefixCls}-parent-hidden`)
-                el.instance.hiding = false
-            })
+                el.mask.parentNode && el.mask.parentNode.removeChild(el.mask)
+                el.domInserted = false
+            }, 300)
             el.instance.visible = false
-            el.instance.hiding = true
-            // el.instance.$destroy()
         }
     }
     const insertDom = (parent, el, binding) => {
@@ -63,7 +53,6 @@ loadingDirective.install = Vue => {
             Object.keys(el.maskStyle).forEach(property => {
                 el.mask.style[property] = el.maskStyle[property]
             })
-
             if (el.originalPosition !== 'absolute' && el.originalPosition !== 'fixed') {
                 addClass(parent, `${prefixCls}-parent-relative`)
             }
@@ -73,11 +62,7 @@ loadingDirective.install = Vue => {
             el.domVisible = true
             parent.appendChild(el.mask)
             Vue.nextTick(() => {
-                if (el.instance.hiding) {
-                    el.instance.$emit('after-leave')
-                } else {
-                    el.instance.visible = true
-                }
+                el.instance.visible = true
             })
             el.domInserted = true
         }
@@ -104,11 +89,11 @@ loadingDirective.install = Vue => {
             el.mask = mask.$el
             el.maskStyle = {}
 
-            binding.value && toggleLoading(el, binding, mask)
+            binding.value && toggleLoading(el, binding)
         },
 
         update: function (el, binding) {
-            el.instance.setText(el.getAttribute('b-loading-text'))
+            el.instance.setText(el.getAttribute('loading-text'))
             if (binding.oldValue !== binding.value) {
                 toggleLoading(el, binding)
             }
@@ -117,8 +102,8 @@ loadingDirective.install = Vue => {
         unbind: function (el, binding) {
             if (el.domInserted) {
                 el.mask &&
-          el.mask.parentNode &&
-          el.mask.parentNode.removeChild(el.mask)
+                el.mask.parentNode &&
+                el.mask.parentNode.removeChild(el.mask)
                 toggleLoading(el, {
                     value: false,
                     modifiers: binding.modifiers

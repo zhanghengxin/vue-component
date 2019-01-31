@@ -624,6 +624,7 @@ fixed为true  默认280px false 默认220px<br/>
                 v-model="value9"  
                 label='姓名'
                 :fixed='fixed'
+                :disabled='disabled'
                 :options='options' >
             </b-select>
             <br/>

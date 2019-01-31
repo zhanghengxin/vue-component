@@ -50,6 +50,11 @@
           "name": "input"
         },
         {
+          "title": "InputNumber 数字输入框",
+          "path": "/inputNumber",
+          "name": "inputNumber"
+        },
+        {
           "title": "Button 按钮",
           "path": "/button",
           "name": "button"
@@ -238,9 +243,14 @@
           "name": "timeline"
         },
         {
-          "title": "Loading...",
+          "title": "Loading 加载动画",
           "path": "/loading",
           "name": "loading"
+        },
+        {
+          "title": "LoadingBar 进度条",
+          "path": "/loadingbar",
+          "name": "loadingbar"
         },
         {
           "title": "Anchor 锚点",
