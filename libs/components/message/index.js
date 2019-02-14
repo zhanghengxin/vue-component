@@ -13,35 +13,29 @@ let msgCon = null
 
 function Message (options) {
     let close = options.onClose
-
     if (!msgCon) {
         msgCon = document.createElement('div')
         msgCon.className = 'b-message-container'
         document.body.appendChild(msgCon)
     }
-
     msgCon.style.zIndex = options.zIndex ? options.zIndex : 1010
     msgCon.style.position = 'fixed'
     msgCon.style.width = '100%'
     msgCon.style.top = 0
     msgCon.style.left = 0
     msgCon.style.textAlign = 'center'
-
     let id = count++
-    let { duration } = options
+    let {duration} = options
     options.onClose = function () {
         Message.close(id, duration, close)
     }
-
     let instance = new MessageConstructor({
         el: document.createElement('div'),
         data: options
     })
-
     instance.id = id
     msgCon.appendChild(instance.$el)
     instance.show = true
-
     instances.push(instance)
     return instance
 }
@@ -69,17 +63,9 @@ const types = ['info', 'success', 'error', 'warning']
 
 types.forEach(type => {
     Message[type] = function (options) {
-        options = typeof options === 'string' ? { message: options } : options
+        options = typeof options === 'string' ? {message: options} : options
         return Message({...options, type})
     }
 })
-
-// Message.install = function (Vue, options) {
-//     if (options && options.name) {
-//         Vue.prototype[`$${options.name}`] = Message
-//     } else {
-//         Vue.prototype.$message = Message
-//     }
-// }
 
 export default Message
