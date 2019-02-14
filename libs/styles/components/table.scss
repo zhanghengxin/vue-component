@@ -186,15 +186,18 @@ $prefix-table: $css-prefix + 'table';
       &-item {
         padding: 3px 10px;
       }
+      .#{$css-prefix}checkbox-warpper {
+        margin-right: 5px;
+      }
     }
     &-modal-column {
       list-style: none;
       & li {
         display: inline-block;
         padding: 10px 10px;
-        .#{$css-prefix}checkbox-warpper {
-          margin-right: 5px;
-        }
+      }
+      .#{$css-prefix}checkbox-warpper {
+        margin-right: 5px;
       }
     }
     &-icon {
