@@ -84,9 +84,6 @@
 :::
 </div>
 
-
-
-
 ### 边框
 通过设置`border`来设置携带边框的表格
 <div class="example">
@@ -665,7 +662,7 @@
 
 排序默认使用升序和降序，也可以通过设置属性 `sortMethod` 指定一个自定义排序函数，接收三个参数 a 、 b 和 type。
 
-通过给某一列设置 _sortType 可以在初始化时使用排序。
+通过给某一列设置 sortType 可以在初始化时使用排序。
 
 <div class="example">
     <div class="example-box">
@@ -933,9 +930,9 @@
 </div>
 
 ### 合并行、列
-行：通过给数据 data 设置字段 `colspan` 可以设置某一行的合并单元格
+行：通过给数据 data 设置字段 `_colspan` 可以设置某一行的合并单元格
 
-列：通过给数据 data 设置字段 `rowspan` 可以给某一列的合并单元格
+列：通过给数据 data 设置字段 `_rowspan` 可以给某一列的合并单元格
 
 <div class="example">
     <div class="example-box">
@@ -995,7 +992,7 @@
                               sex: '男',
                               age: 22,
                               pets:'cat',
-                              rowspan:{
+                              _rowspan:{
                                   name:3
                               },
                               hobby:'Swimming',
@@ -1007,7 +1004,7 @@
                               sex: '男',
                               pets:'rhizomys',
                               hobby:'Swimming',
-                              colspan:{
+                              _colspan:{
                                   age:2
                               },
                               occupation:'Doctor'
@@ -1792,6 +1789,117 @@
 :::
 </div>
 
+### 加载蒙层
+通过设置属性`loading`可以让表格处于加载中状态，在异步请求数据、分页时建议使用。
+
+<div class="example">
+    <div class="example-box">
+        <div>
+             <b-table :loading="loading" border width=1000 :columns='columns12' :data='data11'></b-table>
+             <span>切换loading 效果</span><b-switch v-model="loading"></b-switch>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+       <b-table :loading="loading" border width=1000 :columns='columns12' :data='data11'></b-table>
+       <span>切换loading 效果</span><b-switch v-model="loading"></b-switch>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    columns12: [
+                        {
+                           title: 'Name',
+                           key: 'name',
+                           width:100
+                        },
+                        {
+                           title: 'Age',
+                           key: 'age',
+                           width:100
+                        },
+                        {
+                           title: 'Pets',
+                           key: 'pets',
+                           minWidth:100
+                        },
+                        {
+                           title: 'Like',
+                           key: 'like',
+                           maxWidth:100
+                        },
+                        {
+                           title: 'ID',
+                           key: 'id',
+                        },
+                        {
+                           title: 'Book',
+                           key: 'book'
+                        }
+                    ],
+                    data11: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby:'Swimming',
+                            pets:'dog',
+                            occupation:'Doctor',
+                            like:'red',
+                            id:'1',
+                            book:'《贩罪》'
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets:'cat',
+                            hobby:'Swimming',
+                            id:'2',
+                            book:'《霸皇纪》',
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets:'rhizomys',
+                            hobby:'Swimming',
+                            id:'3',
+                            book:'《龙族》',
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            sex: '男',
+                            pets:'cat',
+                            hobby:'Swimming',
+                            book:'《卡徒》',
+                            id:'4',
+                            occupation:'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            sex: '男',
+                            book:'《无限道武者路》',
+                            id:'5',
+                            pets:'rhizomys',
+                            hobby:'Thousand-hand Bodhisattva',
+                            occupation:'President'
+                        }
+                    ],
+                    loading:true
+                }
+            }
+    </script>
+```
+:::
+</div>
 
 <script>
     export default {
@@ -2356,7 +2464,7 @@
                         sex: '男',
                         age: 22,
                         pets:'cat',
-                        rowspan:{
+                        _rowspan:{
                             name:3
                         },
                         hobby:'Swimming',
@@ -2368,7 +2476,7 @@
                         sex: '男',
                         pets:'rhizomys',
                         hobby:'Swimming',
-                        colspan:{
+                        _colspan:{
                             age:2
                         },
                         occupation:'Doctor'
@@ -2606,7 +2714,8 @@
                        title: 'Book',
                        key: 'book'
                     }
-                ]
+                ],
+                loading:true
             }
         },
         methods:{
@@ -2643,13 +2752,44 @@
 | loading     |  	表格是否加载中	  |  Boolean  |    false   |
 | highlight-row     |  	是否支持高亮选中的行，即单选	  |  Boolean  |    false   |
 | no-data-text     |  	数据为空时显示的提示内容	  |  Number / String  |    暂无数据   |
+| loading-text     |  	加载数据时显示的文本	  |  Number / String  |    -   |
+| show-index     |  	显示序号	  |  Boolean  |    false   |
 
 ### columns
 | 属性      | 说明    | 类型      | 可选值       | 默认值       |
 | ---------- | -------- | ----------- | ------------- | -------- |
-| type     |  子节点属性  |  Array  |  -    | -    |
+| type     |  列类型，可选值为   |  String  | `selection`、`html`   | html    |
+| title     |  列头显示文字  |  String  |  -    | '...'    |
+| key     |  对应列内容的字段名  |  String  |  -    | -    |
+| width     |  列宽	  |  Number  |  -    | -    |
+| minWidth     |  最小列宽	  |  Number  |  -    | -    |
+| maxWidth     |  最小列宽	  |  Number  |  -    | -    |
+| align     |  对齐方式	  |  String  |  `left`、`right`、`center`    | -    |
+| className     |  列的样式名称		  |  String  |  -    | -    |
+| fixed     |  列是否固定在左侧或者右侧	  |  String  |  `left`、`right`   | -    |
+| render     |  自定义渲染列，使用 Vue 的 Render 函数。详见示例	  |  Function  | -  | -    |
+| sortable     |  对应列是否可以排序	  |  Boolean  | -  | false   |
+| sortMethod     |  自定义排序使用的方法，当设置 sortable: true 时有效。详见示例	  |  Boolean  | -  | -   |
+| sortType     |  设置初始化排序	  |  Boolean  | `asc`、`desc`  | -   |
+
+### data
+| 属性      | 说明    | 类型      | 可选值       | 默认值       |
+| ---------- | -------- | ----------- | ------------- | -------- |
+| _checked     |  设定当前行默认选中状态  |  Boolean  | - | false |
+| _disabled     |  设定当前行默认禁止状态  |  Boolean  |  -    | false    |
+| _className     |  给某一行指定一个样式名称,详见特定样式  |  String  |  -    | -    |
+| _cellClass     |  给任意一个单元格指定样式,详见特定样式	  |  Object  |  -    | -    |
+| _colspan     |  某一行的合并单元格,详见合并行、列	  |  Object  |  -    | -    |
+| _rowspan     |  某一列的合并单元格,详见合并行、列  |  Object  |  -    | -    |
 
 ### events
 | 方法名	      | 说明	    | 参数 |
 |---------- |-------- |---------- |
-| on-select     |  当选中节点时触发   |  options  |
+| on-select     |  当选中节点时触发   |  `selection`: 已经选中的数据<br>`row`: 当前选中的数据  |
+| on-select-cancel     |  当取消选中节点时触发   |  `selection`: 已经选中的数据<br>`row`: 当前取消选中的数据  |
+| on-selection-change     |  当选中状态改变时触发   |  `selection`: 已经选中的数据  |
+| on-selection-all     |  当全选数据时触发   |  `selection`: 已经选中的数据  |
+| on-selection-all-cancel     |  当全部取消数据时触发   |  -  |
+| on-row-click     |  当选中节点时触发   |  `row`: 当前选中的数据  |
+| on-row-dbclick     |  当选中节点时触发   |  `row`: 当前选中的数据  |
+| on-sort-change     |  当选中节点时触发   |  `column`: 当前列数据 <br> `key`: 排序依据的指标 <br> `order`: 排序的顺序，值为 asc 或 desc|

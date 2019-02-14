@@ -2,6 +2,9 @@
 @import "color";
 
 .doc {
+  .b-table {
+    margin-bottom: 10px;
+  }
   img {
     max-width: 1000px;
   }
@@ -56,6 +59,9 @@
     td {
       padding: 8px;
       border: 1px solid $Border;
+    }
+    .code-show {
+      margin-bottom: 5px;
     }
   }
   //兼容 makedown
@@ -142,10 +148,10 @@
   td.test-table-columns {
     background: cornflowerblue;
   }
-  .test-table-cell{
+  .test-table-cell {
     background: red;
   }
-  .test-table-row td{
+  .test-table-row td {
     background: greenyellow;
   }
 }

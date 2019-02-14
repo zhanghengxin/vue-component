@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="wrapCls" :style="styles"
+        :class="wrapCls" :style="styles" v-loading="loading" :loading-text="loadingText"
     >
         <div :class="tableCls">
             <div :class="[preCls + '-header']" ref="header">
@@ -179,6 +179,14 @@ export default {
         draggable: {
             type: Boolean,
             default: false
+        },
+        loading: {
+            type: Boolean,
+            default: false
+        },
+        loadingText: {
+            type: [Number, String],
+            default: ''
         },
         border: {
             type: Boolean,
@@ -413,6 +421,7 @@ export default {
             let result = fixLeftArr.concat(indexArr, normalArr, fixRightArr)
             result.forEach((row, index) => {
                 row._index = index
+                row._sortType = row.sortType || ''
                 row._visible = true
             })
             return result
@@ -566,7 +575,7 @@ export default {
             if (status) {
                 this.$emit('on-select-all', selection)
             } else {
-                this.$emit('on-select-all-cancel', selection)
+                this.$emit('on-select-all-cancel')
             }
             this.$emit('on-selection-change', selection)
         },
@@ -718,21 +727,6 @@ export default {
             let cloneColumns = isDynamicColumns ? this.dynamicColumns : this.cloneColumns
             return cloneColumns.filter((item) => (item._visible && !item.fixed)).length
         },
-        // dynamicOrder (index, status) {
-        //     if (this.getVisibleNum() < 2 && status) return
-        //     let isExistFixColumns = this.cloneColumns.filter((item) => (item.fixed)).length > 0
-        //     this.cloneColumns[index]._visible = !status
-        //     if (isExistFixColumns) {
-        //         let boxWidth = this.$el ? this.$el.offsetWidth : 0
-        //         let tableWidth = this.getVisibleColumnsWidth(!this.dynamicable)
-        //         let width = tableWidth
-        //         if (boxWidth && width - 1 < boxWidth) {
-        //             this.cloneColumns[index]._visible = status
-        //             return
-        //         }
-        //     }
-        //     this.handleResize()
-        // },
         dynamicOrder (index, status) {
             if (this.getVisibleNum(!this.dynamicable) < 2 && status) return
             let cloneColumns
@@ -751,7 +745,6 @@ export default {
                     this.$set(cloneColumns[index], '_visible', status)
                 }
             }
-            // this.handleResize()
         }
     }
 }

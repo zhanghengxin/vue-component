@@ -6,9 +6,7 @@
                 @click.native.prevent="handleClick(column._index,column._visible)"
             >
             </Checkbox>
-            <span>
-                {{column.title}}
-            </span>
+            <span>{{column.title}}</span>
         </li>
     </ul>
 </template>
@@ -27,9 +25,6 @@ export default {
     props: {
         columns: Array,
         preCls: String
-    },
-    mounted () {
-
     },
     methods: {
         handleClick (index, status) {

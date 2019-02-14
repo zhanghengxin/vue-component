@@ -66,7 +66,7 @@ export default {
             let columnData = deepCopy(columns)
             let data = this.data
             for (let i in row) {
-                if (i === 'colspan') {
+                if (i === '_colspan') {
                     for (let j in row[i]) {
                         columnData.forEach((column, index) => {
                             if (column.key === j) {
@@ -79,7 +79,7 @@ export default {
             data.forEach(function (item, index) {
                 if (index < rowIndex) {
                     for (let i in item) {
-                        if (i === 'rowspan') {
+                        if (i === '_rowspan') {
                             for (let j in item[i]) {
                                 if (rowIndex < index + item[i][j]) {
                                     columnData.forEach((column, z) => {
