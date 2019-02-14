@@ -22,7 +22,7 @@ const getModalInstance = (render = undefined) => {
 
 // 创建 modal 弹框
 const confirmModal = options => {
-    const { render } = options
+    const {render} = options
     let instance = getModalInstance(render)
     options.onRemove = () => {
         modalInstance = null
@@ -48,9 +48,6 @@ Modal.warning = options => {
     confirmModal(options)
 }
 
-// warn 提示
-Modal.warning = Modal.warning
-
 // error 提示
 Modal.error = options => {
     options.icon = 'error'
@@ -67,9 +64,7 @@ Modal.remove = function () {
     if (!modalInstance) {
         return false
     }
-
     const instance = getModalInstance()
-
     instance.remove()
 }
 
