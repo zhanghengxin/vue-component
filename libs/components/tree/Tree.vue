@@ -88,14 +88,6 @@ export default {
                 this.formatTreeData()
             }
         },
-        // dataList: {
-        //     deep: true,
-        //     handler (value) {
-        //         if (this.label && this.showCheckbox) {
-        //             console.log(value, 'value')
-        //         }
-        //     }
-        // },
         treeShow () {
             this.$nextTick(() => {
                 this.broadcast(`${prefix}drop`, this.treeShow ? 'on-update-popper' : 'on-destroy-popper')

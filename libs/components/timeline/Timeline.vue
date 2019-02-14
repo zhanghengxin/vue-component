@@ -5,6 +5,7 @@
 </template>
 <script>
 import { prefix } from '../../utils/common'
+
 const prefixCls = `${prefix}timeline`
 
 export default {

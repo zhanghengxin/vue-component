@@ -1,20 +1,22 @@
 <template>
-  <div :class="[prefixCls,classes]" >
-    <div :class="prefixCls+'-bar'" ref="tabHeaderItem">
-          <div @click="handleChange(index)" v-for="(item,index) in navList" :key="index" :class="tabCls(item)" >
-            <Icon v-if="item.icon !== ''" :type="item.icon"></Icon>
-            <span>{{item.label}}</span>
-            <Icon v-if="showClose(item)" type="quxiao-guanbi-shanchu" @click.native.stop="handleRemove(index)" :class="prefixCls+'-icon'"></Icon>
-          </div>
+    <div :class="[prefixCls,classes]">
+        <div :class="prefixCls+'-bar'" ref="tabHeaderItem">
+            <div @click="handleChange(index)" v-for="(item,index) in navList" :key="index" :class="tabCls(item)">
+                <Icon v-if="item.icon !== ''" :type="item.icon"></Icon>
+                <span>{{item.label}}</span>
+                <Icon v-if="showClose(item)" type="quxiao-guanbi-shanchu" @click.native.stop="handleRemove(index)"
+                      :class="prefixCls+'-icon'"></Icon>
+            </div>
+        </div>
+        <div :class="prefixCls+'-content'">
+            <slot></slot>
+        </div>
     </div>
-    <div :class="prefixCls+'-content'">
-      <slot></slot>
-    </div>
-  </div>
 </template>
 <script>
 import { prefix } from '../../utils/common'
 import Icon from '../icon/Icon.vue'
+
 const prefixCls = prefix + 'tabs'
 export default {
     name: prefixCls,

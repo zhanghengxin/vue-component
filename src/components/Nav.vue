@@ -2,26 +2,27 @@
     <div class="nav">
         <div v-for="(title, index) in Object.keys(data)" :key="index" class="nav-container">
             <p class="nav-title">{{title}}</p>
-            <div
+            <template v-for="nav in data[title]">
+                <div
                     class="nav-items"
-                    v-for="nav in data[title]"
                     :key="nav.name"
                     v-if="nav.title">
-                <router-link
+                    <router-link
                         :to="{name: nav.name}"
                         v-if="nav.name"
                         :class="$route.name===nav.name ? 'active' : ''">
-                    {{nav.title}}
-                </router-link>
-                <p v-else class="nav-group">{{nav.title}}</p>
-                <div v-for="item in nav.items" :key="item.name">
-                    <router-link
+                        {{nav.title}}
+                    </router-link>
+                    <p v-else class="nav-group">{{nav.title}}</p>
+                    <div v-for="item in nav.items" :key="item.name">
+                        <router-link
                             :to="{name: item.name}"
                             :class="$route.name===item.name? 'active': ''"
                             class="nav-component">{{item.title}}
-                    </router-link>
+                        </router-link>
+                    </div>
                 </div>
-            </div>
+            </template>
         </div>
     </div>
 </template>

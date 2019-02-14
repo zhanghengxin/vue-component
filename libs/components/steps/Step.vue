@@ -98,12 +98,12 @@ export default {
                 value, content, title, index, status: status || stepsStatus, size, icon
             }
             switch (true) {
-            case typeof click === 'function':
-                click(options)
-                break
-            case typeof stepsClick === 'function':
-                stepsClick(options)
-                break
+                case typeof click === 'function':
+                    click(options)
+                    break
+                case typeof stepsClick === 'function':
+                    stepsClick(options)
+                    break
             }
         }
     },

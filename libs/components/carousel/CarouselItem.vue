@@ -13,6 +13,7 @@
 </template>
 <script>
 import { prefix } from '../../utils/common'
+
 const prefixCls = `${prefix}carousel`
 
 export default {
@@ -29,18 +30,20 @@ export default {
             return `${prefixCls}-fade`
         },
         style () {
-            let { animation, speed } = this.$parent
+            let {animation, speed} = this.$parent
+            let style
             if (animation === 'fade') {
-                return {
+                style = {
                     opacity: 0,
                     transition: `opacity ${speed / 500}s `
                 }
             } else if (animation === 'slide') {
-                return {
+                style = {
                     transform: `translateX(${this.translate}px)`,
                     transition: `transform ${speed / 1000}s ease`
                 }
             }
+            return style
         }
     }
 }

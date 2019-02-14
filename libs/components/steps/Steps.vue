@@ -8,6 +8,7 @@
 <script>
 import Common from './common'
 import { prefix } from '../../utils/common'
+
 const prefixCls = prefix + 'step-area'
 export default {
     name: prefix + 'steps',
@@ -60,7 +61,7 @@ export default {
                 length = length + 'px'
             }
             let params = this.direction === 'vertical' ? 'height' : 'width'
-            return { [params]: length }
+            return {[params]: length}
         }
     },
     mounted () { // 初次加载时触发属性设置方法
@@ -82,11 +83,11 @@ export default {
             let size = this.size
             let className = ' '
             switch (size) {
-            case 'small':
-                className = `${prefixCls}-small`
-                break
-            default :
-                className = ' '
+                case 'small':
+                    className = `${prefixCls}-small`
+                    break
+                default :
+                    className = ' '
             }
             return className
         },
@@ -126,20 +127,20 @@ export default {
             let childrenStatus = 'stepsStatus'
             let statusList = Common.statusList
             switch (true) {
-            case +current === index :
-                if (status) {
-                    seg[childrenStatus] = status
-                } else {
-                    seg[childrenStatus] = statusList[1]
-                }
-                break
-            case +current > index:
-                seg[childrenStatus] = statusList[2]
-                break
-            case +current < index:
-            default :
-                seg[childrenStatus] = statusList[0]
-                break
+                case +current === index :
+                    if (status) {
+                        seg[childrenStatus] = status
+                    } else {
+                        seg[childrenStatus] = statusList[1]
+                    }
+                    break
+                case +current > index:
+                    seg[childrenStatus] = statusList[2]
+                    break
+                case +current < index:
+                default :
+                    seg[childrenStatus] = statusList[0]
+                    break
             }
         }
     }

@@ -13,6 +13,7 @@
 
 <script>
 import { oneOf, prefix } from '../../utils/common.js'
+
 const prefixCls = `${prefix}switch`
 
 export default {

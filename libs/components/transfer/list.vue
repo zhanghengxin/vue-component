@@ -40,7 +40,7 @@
                 <li :class="prefixCls + '-content-not-found'">{{ notFoundText }}</li>
             </ul>
         </div>
-         <div v-if="showFooter" :class="footerCls">
+        <div v-if="showFooter" :class="footerCls">
             <slot/>
         </div>
     </div>
@@ -50,11 +50,12 @@
 import bCheckbox from '../checkbox/Checkbox'
 import bSearch from './search'
 import { prefix } from '../../utils/common'
+
 const prefixCls = `${prefix}transfer-list`
 
 export default {
     name: prefixCls,
-    components: { bSearch, bCheckbox },
+    components: {bSearch, bCheckbox},
     props: {
         data: Array,
         renderFormat: Function,

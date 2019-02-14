@@ -33,7 +33,7 @@ const prefixCls = `${prefix}tooltip`
 
 export default {
     name: prefixCls,
-    directives: { TransferDom },
+    directives: {TransferDom},
     mixins: [Popper],
     props: {
         placement: {

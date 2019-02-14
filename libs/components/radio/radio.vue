@@ -1,19 +1,20 @@
 <template>
-  <label :class="wrapClasses">
+    <label :class="wrapClasses">
             <span :class="radioClasses">
                 <span :class="innerClasses"></span>
                 <input
-                  type="radio"
-                  :disabled='disabled'
-                  :checked='checkedValue'
-                  :class="inputClasse"
-                  @change="change">
+                    type="radio"
+                    :disabled='disabled'
+                    :checked='checkedValue'
+                    :class="inputClasse"
+                    @change="change">
             </span>
-    <slot>{{ label }}</slot>
-  </label>
+        <slot>{{ label }}</slot>
+    </label>
 </template>
 <script>
 import { prefix } from '../../utils/common'
+
 const prefixCls = prefix + 'radio'
 export default {
     name: prefixCls,

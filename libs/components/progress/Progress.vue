@@ -1,20 +1,20 @@
 <template>
-<div :style="outbox">
-  <div :class='boxStyle'>
-    <div :class='leftStyle' :style='left'>
-        <div :class='[progressStyle,bgStyle]' :style="[progress,bgColor]">
+    <div :style="outbox">
+        <div :class='boxStyle'>
+            <div :class='leftStyle' :style='left'>
+                <div :class='[progressStyle,bgStyle]' :style="[progress,bgColor]">
+                </div>
+            </div>
+            <div :class='rightStyle' v-if='ishowText'>
+                <slot>
+                    <div v-if="percent">{{value}}%</div>
+                    <div v-else>
+                        <img :class='statusPicStyle' :src='imgSrc'>
+                    </div>
+                </slot>
+            </div>
         </div>
     </div>
-    <div :class='rightStyle' v-if='ishowText'>
-      <slot>
-        <div v-if="percent">{{value}}%</div>
-        <div v-else>
-          <img :class='statusPicStyle' :src='imgSrc'>
-        </div>
-      </slot>
-    </div>
-  </div>
-</div>
 </template>
 <script>
 import { prefix } from '../../utils/common'
@@ -66,11 +66,13 @@ export default {
             return this.showText
         },
         imgSrc () {
+            let src
             if (this.status === 'Success' || this.value === 100) {
-                return require('@/assets/image/gouM.png')
+                src = require('@/assets/image/gouM.png')
             } else if (this.status === 'Exception') {
-                return require('@/assets/image/cuoM.png')
+                src = require('@/assets/image/cuoM.png')
             }
+            return src
         },
         percent () {
             return this.status !== 'Success' && this.status !== 'Exception' && this.value !== 100

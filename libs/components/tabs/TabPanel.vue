@@ -1,12 +1,12 @@
-
 <template>
-    <div  v-show="show">
-      <slot></slot>
+    <div v-show="show">
+        <slot></slot>
     </div>
 </template>
 
 <script>
 import { prefix } from '../../utils/common'
+
 const prefixCls = prefix + 'tabsPanel'
 export default {
     name: prefixCls,
