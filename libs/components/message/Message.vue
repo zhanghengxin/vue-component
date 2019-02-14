@@ -1,7 +1,7 @@
 /**
- * Created by zhangliming on 2018/9/15.
- *
- */
+* Created by zhangliming on 2018/9/15.
+*
+*/
 
 <template>
     <transition :name="prefixCls+'-fade'" mode="in-out">
@@ -32,6 +32,7 @@
 
 <script>
 import { prefix } from '../../utils/common'
+
 const prefixCls = prefix + 'message'
 export default {
     name: prefixCls,

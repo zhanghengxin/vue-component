@@ -27,15 +27,15 @@ export default {
         },
         cellColspan (row, column) {
             let colspan = 1
-            if (row.colspan && column.key && row.colspan[column.key]) {
-                colspan = row.colspan[column.key]
+            if (row._colspan && column.key && row._colspan[column.key]) {
+                colspan = row._colspan[column.key]
             }
             return colspan
         },
         cellRowspan (row, column) {
             let rowspan = ''
-            if (row.rowspan && column.key && row.rowspan[column.key]) {
-                rowspan = row.rowspan[column.key]
+            if (row._rowspan && column.key && row._rowspan[column.key]) {
+                rowspan = row._rowspan[column.key]
             }
             return rowspan
         }
