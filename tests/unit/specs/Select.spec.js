@@ -1,7 +1,7 @@
-import {createVue, destroyVM, triggerEvent} from '../utils'
-// import select from '&/components/select'
+import {createVue, destroyVM} from '../utils'
+import select from '&/components/select'
 import { prefix } from '&/utils/common'
-// import { mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 const prefixCls = `.${prefix}select`
 const Select = `${prefix}select`
 const options = [{
@@ -72,55 +72,20 @@ describe('Select', () => {
     })
 
     it('single select', done => {
-        // vm = createVue({
-        //     template: `
-        //     <${Select}
-        //         v-model="value"
-        //         :options='options'
-        //         @on-change='handleChange'>
-        //     </${Select}>
-        //     `,
-        //     data () {
-        //         return {
-        //             options: options,
-        //             value: '',
-        //             count: 0
-        //         }
-        //     },
-        //     methods: {
-        //         handleChange () {
-        //             this.count++
-        //         }
-        //     }
-        // }, true)
-        // vm.$nextTick(_ => {
-        //     const options = vm.$el.querySelectorAll('.b-drop .b-option')
-        //     expect(vm.value).toBe('')
-        //     options[2].click()
-        //     vm.$nextTick(_ => {
-        //         expect(vm.value).toBe('005')
-        //         expect(vm.count).toBe(1)
-        //         options[3].click()
-        //         vm.$nextTick(_ => {
-        //             expect(vm.value).toBe('025')
-        //             expect(vm.count).toBe(2)
-        //             done()
-        //         })
-        //     })
-        // })
-        // vm = mount(select, {
-        //     propsData: {
-        //         options: options,
-        //         value: ''
-        //     }
-        // })
-        // const Options = vm.findAll('.b-option')
-        // Options.at(0).trigger('click')
-        // setTimeout(_ => {
-        //     expect(vm.find('.b-select-selection-content').text()).toBe('增专')
-        //     done()
-        // }, 20)
-        done()
+        vm = mount(select, {
+            propsData: {
+                options: options,
+                value: ''
+            }
+        })
+        setTimeout(_ => {
+            const options = vm.findAll('.b-option')
+            options.at(0).trigger('click')
+            setTimeout(_ => {
+                expect(vm.emitted()['on-change'][0][0]).toBe('004')
+                done()
+            }, 20)
+        }, 20)
     })
 
     it('disabled option', done => {
@@ -202,68 +167,42 @@ describe('Select', () => {
         })
     })
 
-    // it('multiple select', done => {
-    //     vm = createVue({
-    //         template: `
-    //         <${Select}
-    //             v-model="value"
-    //             :options='options'
-    //             :multiple='multiple'
-    //             @on-change='handleChange'>
-    //         </${Select}>
-    //         `,
-    //         data () {
-    //             return {
-    //                 options: options,
-    //                 multiple: true,
-    //                 value: '',
-    //                 count: 0
-    //             }
-    //         },
-    //         methods: {
-    //             handleChange () {
-    //                 this.count++
-    //             }
-    //         }
-    //     }, true)
-    //     vm.$nextTick(_ => {
-    //         const options = vm.$el.querySelectorAll('.b-drop .b-option')
-    //         expect(vm.value).toBe('')
-    //         options[2].click()
-    //         options[3].click()
-    //         vm.$nextTick(_ => {
-    //             expect(vm.value.join(',')).toBe('005,025')
-    //             // expect(vm.count).toBe(2)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('multiple select', done => {
+        vm = mount(select, {
+            propsData: {
+                options: options,
+                multiple: true,
+                value: ''
 
-    // it('multiple remove-tag', done => {
-    //     vm = createVue({
-    //         template: `
-    //         <${Select}
-    //             v-model="value"
-    //             :options='options'
-    //             :multiple='multiple'>
-    //         </${Select}>
-    //         `,
-    //         data () {
-    //             return {
-    //                 options: options,
-    //                 multiple: true,
-    //                 value: ['005', '025']
-    //             }
-    //         }
-    //     }, true)
-    //     vm.$nextTick(_ => {
-    //         const tagCloseIcons = vm.$el.querySelectorAll('.bw-quxiao-guanbi-shanchu')
-    //         expect(vm.value.join(',')).toBe('005,025')
-    //         tagCloseIcons[1].click()
-    //         vm.$nextTick(_ => {
-    //             expect(vm.value.join(',')).toBe('005')
-    //             done()
-    //         })
-    //     })
-    // })
+            }
+        })
+        setTimeout(_ => {
+            const options = vm.findAll('.b-option')
+            options.at(2).trigger('click')
+            options.at(3).trigger('click')
+            setTimeout(_ => {
+                expect(vm.emitted()['on-change'][1][0][0]).toBe('005')
+                expect(vm.emitted()['on-change'][1][0][1]).toBe('025')
+                done()
+            }, 20)
+        }, 20)
+    })
+
+    it('multiple remove-tag', done => {
+        vm = mount(select, {
+            propsData: {
+                options: options,
+                multiple: true,
+                value: ['005', '025']
+            }
+        })
+        setTimeout(_ => {
+            const tagCloseIcons = vm.findAll('.bw-quxiao-guanbi-shanchu')
+            tagCloseIcons.at(1).trigger('click')
+            setTimeout(_ => {
+                expect(vm.emitted()['on-change'][1][0].join(',')).toBe('005')
+                done()
+            }, 20)
+        }, 20)
+    })
 })

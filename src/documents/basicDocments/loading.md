@@ -146,7 +146,8 @@
 :::
 
 ### 指令用法 在当前元素中显示加载动画
-设置```loading-background```、```loading-text```来自定义加载文字与加载的背景颜色
+设置```loading-background```、```loading-text```来自定义加载文字与加载的背景颜色<br>
+设置```loading-spinner```、```loading-custom-class```来自定义加载动画与自定义的class<br>
 <div class="example">
     <div class="example-box">
         <div>
@@ -179,10 +180,10 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |----------|--------|---------- |-------------  |-------- |
 | target    | Loading 需要覆盖的 DOM 节点。可传入一个 DOM 对象或字符串；若传入字符串，<br/>则会将其作为参数传入 document.querySelector以获取到对应 DOM 节点   | Object/String  | - |   document.body  |
-| text     | 加载动画的文字   | String  | - |   -  |
-| background | 加载动画的背景的颜色   | String  | - |     |
-| spinner | 自定义加载图标类名   | String  | - |   -  |
+| text     | 加载动画的文字 指令的时候在绑定元素上用 loading-text设置  | String  | - |   -  |
+| background | 加载动画的背景的颜色 指令的时候在绑定元素上用 loading-background设置  | String  | - |     |
+| spinner | 自定义加载图标类名  指令的时候在绑定元素上用 loading-spinner设置 | String  | - |   -  |
 | body | 是否加载动画在body上   | Boolean  | `true`、`false` |   true  |
 | fullscreen | 是否全屏   | Boolean  | `true`、`false` |   true  |
 | lock | 锁定当前滚动条   | Boolean  | `true`、`false` |   false  |
-| customClass | Loading 的自定义类名   | String  | - |   -  |
+| customClass | Loading 的自定义类名 指令的时候在绑定元素上用 loading-custom-class设置  | String  | - |   -  |

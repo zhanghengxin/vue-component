@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import loadingVue from './Loading.vue'
-import {
-    addClass,
-    removeClass,
-    getStyle
-} from '../../../utils/dom'
+import { addClass, removeClass, getStyle } from '../../../utils/dom'
 import merge from '../../../utils/merge'
 import { prefix } from '../../../utils/common'
 const prefixCls = prefix + 'loading'
