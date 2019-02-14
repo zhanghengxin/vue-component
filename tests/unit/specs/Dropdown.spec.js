@@ -1,5 +1,4 @@
 import {createVue, destroyVM} from '../utils'
-import { mount } from '@vue/test-utils'
 import { prefix } from '&/utils/common'
 const Dropdown = `${prefix}dropdown`
 
