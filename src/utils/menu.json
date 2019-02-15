@@ -93,7 +93,7 @@
           "title": "Progress 进度条",
           "path": "/progress",
           "name": "progress"
-        }, 
+        },
         {
           "title": "Select 选择器",
           "path": "/select",
@@ -161,7 +161,6 @@
           "path": "/tree",
           "name": "tree"
         },
-
         {
           "title": "Notice 通知",
           "path": "/notice",
@@ -187,22 +186,24 @@
     {
       "title": "导航",
       "path": "/",
-      "items": [{
-        "title": "Breadcrumb 面包屑",
-        "path": "/breadcrumb",
-        "name": "breadcrumb"
-      },
-      {
+      "items": [
+        {
+          "title": "Breadcrumb 面包屑",
+          "path": "/breadcrumb",
+          "name": "breadcrumb"
+        },
+        {
           "title": "Steps 步骤条",
           "path": "/steps",
           "name": "steps"
-      },{
+        },
+        {
           "title": "Menu 导航菜单",
           "path": "/menu",
           "name": "menu"
         }
       ]
-        },
+    },
     {
       "title": "表单",
       "path": "/",
@@ -217,7 +218,8 @@
     {
       "title": "其他",
       "path": "/",
-      "items": [{
+      "items": [
+        {
           "title": "BackTop 返回顶部",
           "path": "/backTop",
           "name": "backTop"
