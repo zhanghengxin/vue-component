@@ -5,7 +5,7 @@ $css-prefix-tree: $css-prefix + 'tree';
   cursor: default;
   background: #fff;
   color: $Content;
-  .#{$css-prefix-tree}-children {
+  & &-children {
     margin: 0;
     padding: 0 0 0 10px;
     li {
@@ -16,48 +16,29 @@ $css-prefix-tree: $css-prefix + 'tree';
       outline: 0;
     }
   }
-}
-
-.#{$css-prefix-tree}-arrow {
-  cursor: pointer;
-  width: 12px;
-  text-align: center;
-  display: inline-block;
-  color: $Sub;
-}
-
-.#{$css-prefix-tree}-name {
-  display: inline-block;
-  margin: 0;
-  padding: 0 4px;
-  border-radius: 3px;
-  cursor: pointer;
-  vertical-align: top;
-  transition: all .2s ease-in-out;
-}
-
-.#{$css-prefix-tree}-name-selected {
-  background-color: transparentize($Primary, 0.9);
-  color: $Primary;
-}
-
-.#{$css-prefix-tree}-loop {
-  -webkit-animation: ani-load-loop 1s linear infinite;
-  animation: load-loop 1s linear infinite
-}
-
-@-webkit-keyframes load-loop {
-  from {
-    -webkit-transform: rotate(0);
-    transform: rotate(0)
+  &-arrow {
+    cursor: pointer;
+    width: 12px;
+    text-align: center;
+    display: inline-block;
+    color: $Sub;
   }
-  50% {
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg)
+  &-name {
+    display: inline-block;
+    margin: 0;
+    padding: 0 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    vertical-align: top;
+    transition: all .2s ease-in-out;
   }
-  to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg)
+  &-name-selected {
+    background-color: transparentize($Primary, 0.9);
+    color: $Primary;
+  }
+  &-loop {
+    -webkit-animation: ani-load-loop 1s linear infinite;
+    animation: load-loop 1s linear infinite
   }
 }
 
@@ -74,5 +55,4 @@ $css-prefix-tree: $css-prefix + 'tree';
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg)
   }
-
 }

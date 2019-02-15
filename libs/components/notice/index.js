@@ -10,9 +10,7 @@ const removeInstance = (instance) => {
     if (!instance) return
     const len = instances.length
     const index = instances.findIndex(inst => instance.id === inst.id)
-
     instances.splice(index, 1)
-
     if (len <= 1) return
     const removeHeight = instance.vm.height
     for (let i = index; i < len - 1; i++) {
@@ -27,13 +25,11 @@ const notice = (options) => {
             ...options
         }
     })
-
     const id = `b-notice_${seed++}`
     instance.id = id
     instance.vm = instance.$mount()
     document.body.appendChild(instance.vm.$el)
     instance.vm.visible = true
-
     let verticalOffset = 0
     instances.forEach(item => {
         verticalOffset += item.$el.offsetHeight + 16

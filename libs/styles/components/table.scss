@@ -164,7 +164,7 @@ $prefix-table: $css-prefix + 'table';
     &-desc {
       bottom: 0;
     }
-    .#{$prefix-table}-sort-active {
+    & &-active {
       color: $Primary;
     }
   }

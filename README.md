@@ -3,7 +3,7 @@
 
 ### 使用 npm 安装
 从[git仓库](http://192.168.0.247/BaiwangFE/bwUI)拉取项目，项目架构是基于vue-cli3.x【要求node8.x+】进行了一部分改造<br>
-所以可以直接在项目目录直接执行
+所以可以直接在项目目录执行
 
 ```bash
 npm i
@@ -45,7 +45,7 @@ npm i
 
 ........略
 ```
-一个完整的组件开发应该包括:组件代码、文档展示、样式归纳、测试用例模板等等，此项目中集成了 [ESlint](https://standardjs.com/)、
+一个完整的组件开发应该包括:组件代码、文档展示、样式归纳、测试用例等等，此项目中集成了 [ESlint](https://standardjs.com/)、
 [jest](http://facebook.github.io/jest/zh-Hans/)，同学们有好的建议欢迎提出
 
 ## Project setup
