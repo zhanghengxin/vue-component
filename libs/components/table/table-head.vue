@@ -72,7 +72,12 @@ export default {
         columns: Array,
         cloneColumns: Array,
         preCls: String,
-        headerStyle: Object,
+        headerStyle: {
+            type: Object,
+            default () {
+                return {}
+            }
+        },
         data: Array,
         resizeable: Boolean,
         dynamicable: Boolean,

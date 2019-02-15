@@ -94,7 +94,6 @@ describe('Collapse', () => {
         //         },
         //         methods: {
         //             handle (val) {
-        //                 // console.log(val)
         //             }
         //         }
         //     }, true)

@@ -624,7 +624,7 @@ export default {
             this.$set(column, '_sortType', options.type)
             this.$emit('on-sort-change', {
                 column: deepCopy(this.columns[options.index]),
-                key: options.key,
+                key: this.cloneColumns[options.index].key,
                 order: options.type
             })
         },

@@ -177,7 +177,6 @@ describe('DatePicker', () => {
                 }
                 const week = ['一', '二', '三', '四', '五', '六', '日']
                 const firstWeek = vm.find(`.${prefix}date-header`).text()
-                // console.log('first week', firstWeek)
                 expect(firstWeek).toBe(week[i - 1])
             })
             for (let i = 1; i <= 7; i++) {

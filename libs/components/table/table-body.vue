@@ -52,7 +52,7 @@ export default {
     },
     computed: {
         styles () {
-            const style = this.bodyStyle
+            const style = deepCopy(this.bodyStyle)
             const width = parseInt(this.bodyStyle.width)
             style.width = `${width}px`
             return style

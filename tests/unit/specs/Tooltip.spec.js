@@ -33,7 +33,6 @@ describe('Tooltip', () => {
     //         content: '你好',
     //         always: true
     //     })
-    //     console.log('vm', vm.$el.querySelector(`.${bTooltip}-popper`).getAttribute('style'))
     //     // expect(vm.$el.querySelector(`.${bTooltip}-popper`).getAttribute('style')).toContain('position: absolute;')
     // })
 

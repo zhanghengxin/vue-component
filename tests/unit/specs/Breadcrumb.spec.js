@@ -28,7 +28,6 @@ describe('breadcrumb.vue', () => { // describe相当于一个测试套，可以�
         expect(vm.$el.querySelectorAll(`${prefixCls}-item-link`).length).toBe(3)
 
         vm.$nextTick(_ => {
-            // console.log(vm.$el.querySelector('.ivu-breadcrumb-item-separator').innerHTML);
             expect(vm.$el.querySelector(`${prefixCls}-item-separator`).innerHTML).toBe('<b class="demo-breadcrumb-separator">=&gt;</b>')
             done()
         })

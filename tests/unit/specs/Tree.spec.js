@@ -189,7 +189,6 @@ describe('Tree', () => {
         //         }
         //     }, true)
         //     vm.$el.querySelectorAll(`${prefixCls}-name`)[1].click()
-        //     console.log(vm.$el.querySelectorAll(`${prefixCls}-name`))
         //     setTimeout(_ => {
         //         expect(result).to.exist
         //         done()

@@ -66,7 +66,6 @@ describe('inputNumber', () => {
                 expect(vm.emitted()['on-change'][1][0]).toBe(0.01)
                 up.trigger('click')
                 setTimeout(_ => {
-                    console.log(vm.emitted()['on-change'])
                     expect(vm.emitted()['on-change'][1][0]).toBe(0.01)
                     done()
                 }, 20)

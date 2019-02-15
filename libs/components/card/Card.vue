@@ -25,14 +25,12 @@
 </template>
 
 <script>
-import Icon from '../icon/index'
 import { prefix } from '../../utils/common'
 
 const prefixCls = prefix + 'card'
 
 export default {
     name: prefixCls,
-    components: { Icon },
     data () {
         return {
             prefixCls,

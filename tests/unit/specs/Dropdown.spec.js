@@ -47,8 +47,6 @@ describe('Dropwdown', () => {
     //     }, true)
     //     vm.find('.b-dropdown>div:first-children').trigger('click')
     //     setTimeout(_ => {
-    //         console.log(vm.find('b-drop'))
-    //         console.log(vm.find('b-drop').style)
     //         expect(vm.find('b-drop').style).toBe('')
     //         done()
     //     }, 300)
