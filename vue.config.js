@@ -28,13 +28,6 @@ module.exports = {
         open: true
     },
     productionSourceMap: false,
-    css: {
-        loaderOptions: {
-            sass: {
-                data: `@import "@/assets/scss/index.scss";`
-            }
-        }
-    },
     chainWebpack: config => {
         config.module
             .rule('md')

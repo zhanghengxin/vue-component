@@ -40,6 +40,7 @@ export default {
 </script>
 
 <style lang="scss">
+    @import "../../libs/styles/common/color";
     .nav {
         padding: 0;
         height: 100%;

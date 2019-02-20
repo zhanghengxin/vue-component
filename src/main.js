@@ -8,6 +8,7 @@ import router from './router'
 import bwUI from '../libs'
 import businessUI from '../businessLibs'
 import './assets/font/iconfont.css'
+import './assets/scss/index.scss'
 
 Vue.use(bwUI)
 Vue.use(businessUI)

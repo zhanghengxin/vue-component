@@ -26,6 +26,8 @@ export default {
 </script>
 
 <style lang="scss">
+    @import "../../libs/styles/common/color";
+
     .code-container {
         width: 100%;
         height: auto;
