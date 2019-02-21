@@ -1,19 +1,13 @@
-
+<template>
+    <ul :class="classes" :style="styles"><slot></slot></ul>
+</template>
 <script>
-import { prefix, oneOf } from '&/utils/common'
+import { prefix, oneOf } from '../../utils/common'
 import { MENU, SUBMENU } from './base'
 const prefixCls = `${prefix}menu`
 
 export default {
     name: MENU,
-    render (h) {
-        const component = (
-            <ul class={this.classes} style={this.styles}>
-                { this.$slots.default }
-            </ul>
-        )
-        return component
-    },
     props: {
         mode: {
             validator (value) {

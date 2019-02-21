@@ -1,10 +1,40 @@
-
+<template>
+    <li
+        :class="classes"
+        @mouseenter="handleMouseenter"
+        @mouseleave="handleMouseleave"
+    >
+        <div
+            :class="[prefixCls + '-submenu-title']"
+            ref="reference"
+            @click="handleClick"
+            :style="paddingStyle"
+        >
+            <b-icon
+                :type="icon"
+                size="14"
+                class="menu-pre-icon"
+                v-show="icon">
+            </b-icon>
+            <slot name="title"></slot>
+            <b-icon :type="submenuTitleIcon" class="menu-arrow"></b-icon>
+        </div>
+        <transition name='gradual' v-if="mode === 'vertical'">
+            <ul v-show="opened">
+                <slot></slot>
+            </ul>
+        </transition>
+        <transition name='gradual' v-else>
+            <ul :class="[prefixCls +'-drop-list']" v-show="opened">
+                <slot></slot>
+            </ul>
+        </transition>
+    </li>
+</template>
 <script>
 import { MENU, SUBMENU } from './base'
-import { prefix } from '&/utils/common'
-// import Drop from '../select/dropdown.vue'
+import { prefix } from '../../utils/common'
 import BIcon from '../icon'
-import CollapseTransition from './collapse-transition'
 import mixin from './menu-mixin'
 import Emitter from '../../mixins/emitter'
 
@@ -14,12 +44,12 @@ export default {
     name: SUBMENU,
     componentName: SUBMENU,
     components: {
-        BIcon,
-        CollapseTransition
+        BIcon
     },
     data () {
         return {
             timeout: null,
+            prefixCls: prefixCls,
             items: {},
             submenus: {}
         }
@@ -33,11 +63,11 @@ export default {
             type: Boolean,
             default: false
         },
-        iconType: {
+        icon: {
             type: String
         }
     },
-    mixins: [ Emitter, mixin ],
+    mixins: [Emitter, mixin],
     computed: {
         classes () {
             return [
@@ -68,8 +98,10 @@ export default {
             return style
         },
         opened () {
-            // return true
             return this.rootMenu.openedMenus.indexOf(this.name) > -1
+        },
+        submenuTitleIcon () {
+            return this.opened ? 'shang' : 'xia'
         }
     },
     methods: {
@@ -86,8 +118,7 @@ export default {
             delete this.submenus[item.name]
         },
         handleClick () {
-            // debugger
-            const { rootMenu, disabled } = this
+            const {rootMenu, disabled} = this
             if (
                 (this.trigger !== 'click') ||
                 (rootMenu.collapse && rootMenu.mode === 'vertical') ||
@@ -114,46 +145,6 @@ export default {
                 this.rootMenu.closeMenu(this.name)
             }, 150)
         }
-    },
-    render (h) {
-        this.icon = `${prefix}icon`
-        let submenuTitleIcon = this.opened ? 'shang' : 'xia'
-        const submenuTitle = (
-            <div
-                class={[prefixCls + '-submenu-title']}
-                ref="reference"
-                on-click={this.handleClick}
-                style={this.paddingStyle}
-            >
-                <this.icon type={this.iconType} size="14" class="menu-pre-icon" v-show={this.iconType}></this.icon>
-                { this.$slots.title }
-                <this.icon type={submenuTitleIcon} class="menu-arrow"></this.icon>
-            </div>
-        )
-        const verticalMenu = (
-            <collapse-transition>
-                <ul v-show={this.opened}>
-                    { this.$slots.default }
-                </ul>
-            </collapse-transition>
-        )
-        const horizontalMenu = (
-            <transition name="slide-up">
-                <ul class={[prefixCls + '-drop-list']} v-show={this.opened}>
-                    { this.$slots.default }
-                </ul>
-            </transition>
-        )
-        return (
-            <li
-                class={this.classes}
-                on-mouseenter={this.handleMouseenter}
-                on-mouseleave={this.handleMouseleave}
-            >
-                { submenuTitle }
-                { this.mode === 'vertical' ? verticalMenu : horizontalMenu }
-            </li>
-        )
     }
 }
 </script>
