@@ -1,34 +1,32 @@
-
+<template>
+    <transition name='gradual'>
+        <li :class="classes" :style="paddingStyle" @click="handleClick">
+            <span class="item-solt">
+            <Icon :type="icon"
+                  size="14"
+                  class="menu-pre-icon"
+                  v-show="icon">
+            </Icon>
+            <span :class="[prefixCls + '-item-dot']" v-show="!icon"></span>
+                <slot></slot>
+            </span>
+        </li>
+    </transition>
+</template>
 <script>
 import { MENU, MENUITEM } from './base'
-import { prefix } from '&/utils/common'
+import { prefix } from '../../utils/common'
 import mixin from './menu-mixin'
 import Emitter from '../../mixins/emitter'
+import Icon from '../icon'
+
 const prefixCls = `${prefix}menu`
 
 export default {
     name: MENUITEM,
     componentName: MENUITEM,
-    render (h) {
-        this.icon = `${prefix}icon`
-        const menuItemProps = {
-            class: this.classes,
-            style: this.paddingStyle,
-            on: {
-                click: this.handleClick
-            }
-        }
-        return (
-            <li {...menuItemProps}>
-                <span class="item-solt">
-                    <this.icon type={this.iconType} size="14" class="menu-pre-icon" v-show={this.iconType}></this.icon>
-                    <span class={prefixCls + '-item-dot'} v-show={!this.iconType}></span>
-                    { this.$slots.default }
-                </span>
-            </li>
-        )
-    },
-    mixins: [ Emitter, mixin ],
+    components: {Icon},
+    mixins: [Emitter, mixin],
     props: {
         name: {
             type: [String, Number],
@@ -41,13 +39,13 @@ export default {
             type: Boolean,
             default: false
         },
-        iconType: {
+        icon: {
             type: String
         }
     },
     data () {
         return {
-            // active: false
+            prefixCls: prefixCls
         }
     },
     computed: {

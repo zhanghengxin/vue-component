@@ -23,7 +23,7 @@
             @on-clear="handleClear"
             @on-click="handleClick">
         </b-input>
-        <transition name='slide'>
+        <transition name='gradual'>
             <BDropdown :width="width" v-if="label" :label-width="labelWidth" v-show="treeShow">
                 <tree-node
                     v-for="(item, index) in rootData"

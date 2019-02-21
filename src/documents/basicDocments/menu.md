@@ -10,21 +10,22 @@
 
 <div class="example">
     <div class="example-box">
-        <div style="width:400px;height:500px">
+        <div style="width:400px;">
             <b-menu
                 :router="false"
                 :accordion="false"
                 trigger="click"
+                active-name="2-1"
             >
-                <b-menu-item name="1" iconType="chaobaoshuiguanli">处理中心1</b-menu-item>
-                <b-submenu name="2" iconType="caiji">
+                <b-menu-item name="1" icon="chaobaoshuiguanli">处理中心1</b-menu-item>
+                <b-submenu name="2" icon="caiji">
                     <template slot="title">
                         处理中心2
                     </template>
                     <b-menu-item name="2-1">处理中心2-1</b-menu-item>
                     <b-menu-item name="2-2">处理中心2-2</b-menu-item>
                 </b-submenu>
-                <b-submenu name="3" iconType="baobiao">
+                <b-submenu name="3" icon="baobiao">
                     <template slot="title">
                         处理中心3
                     </template>
@@ -50,21 +51,22 @@
 ::: code
 ```html
    <div class="example-box">
-       <div style="width:400px;height:500px">
+       <div style="width:400px;">
            <b-menu
-               :router="false"
-               :accordion="false"
-               trigger="click"
+                :router="false"
+                :accordion="false"
+                trigger="click"
+                active-name="2-1"
            >
-               <b-menu-item name="1" iconType="chaobaoshuiguanli">处理中心1</b-menu-item>
-               <b-submenu name="2" iconType="caiji">
+               <b-menu-item name="1" icon="chaobaoshuiguanli">处理中心1</b-menu-item>
+               <b-submenu name="2" icon="caiji">
                    <template slot="title">
                        处理中心2
                    </template>
                    <b-menu-item name="2-1">处理中心2-1</b-menu-item>
                    <b-menu-item name="2-2">处理中心2-2</b-menu-item>
                </b-submenu>
-               <b-submenu name="3" iconType="baobiao">
+               <b-submenu name="3" icon="baobiao">
                    <template slot="title">
                        处理中心3
                    </template>
@@ -96,22 +98,22 @@
 
 <div class="example">
     <div class="example-box">
-        <div style="width:400px;height:500px">
+        <div style="width:400px;">
             <b-menu
                 mode="horizontal"
                 :router="true"
                 trigger="hover"
                 :accordion="true"
             >
-                <b-menu-item name="1" iconType="chaobaoshuiguanli" route="guide">指向项目介绍页面</b-menu-item>
-                <b-submenu name="2" iconType="caiji">
+                <b-menu-item name="1" icon="chaobaoshuiguanli" route="guide">指向项目介绍页面</b-menu-item>
+                <b-submenu name="2" icon="caiji">
                     <template slot="title">
                         处理中心2
                     </template>
                     <b-menu-item name="2-1">处理中心2-1</b-menu-item>
                     <b-menu-item name="2-2">处理中心2-2</b-menu-item>
                 </b-submenu>
-                <b-submenu name="3" iconType="baobiao">
+                <b-submenu name="3" icon="baobiao">
                     <template slot="title">
                         处理中心3
                     </template>
@@ -125,22 +127,22 @@
 ::: code
 ```html
    <div class="example-box">
-       <div style="width:400px;height:500px">
+       <div style="width:400px;">
            <b-menu
                mode="horizontal"
                :router="true"
                trigger="hover"
                :accordion="true"
            >
-               <b-menu-item name="1" iconType="chaobaoshuiguanli" route="guide">指向项目介绍页面</b-menu-item>
-               <b-submenu name="2" iconType="caiji">
+               <b-menu-item name="1" icon="chaobaoshuiguanli" route="guide">指向项目介绍页面</b-menu-item>
+               <b-submenu name="2" icon="caiji">
                    <template slot="title">
                        处理中心2
                    </template>
                    <b-menu-item name="2-1">处理中心2-1</b-menu-item>
                    <b-menu-item name="2-2">处理中心2-2</b-menu-item>
                </b-submenu>
-               <b-submenu name="3" iconType="baobiao">
+               <b-submenu name="3" icon="baobiao">
                    <template slot="title">
                        处理中心3
                    </template>
@@ -160,21 +162,21 @@
 
 <div class="example">
     <div class="example-box">
-        <div style="width:400px;height:400px">
+        <div style="width:400px;">
             <b-menu
                 :router="false"
                 :accordion="true"
                 trigger="click"
             >
-                <b-menu-item name="1" iconType="chaobaoshuiguanli">处理中心1</b-menu-item>
-                <b-submenu name="2" iconType="caiji">
+                <b-menu-item name="1" icon="chaobaoshuiguanli">处理中心1</b-menu-item>
+                <b-submenu name="2" icon="caiji">
                     <template slot="title">
                         处理中心2
                     </template>
                     <b-menu-item name="2-1">处理中心2-1</b-menu-item>
                     <b-menu-item name="2-2">处理中心2-2</b-menu-item>
                 </b-submenu>
-                <b-submenu name="3" iconType="baobiao">
+                <b-submenu name="3" icon="baobiao">
                     <template slot="title">
                         处理中心3
                     </template>
@@ -195,21 +197,21 @@
 ::: code
 ```html
    <div class="example-box">
-       <div style="width:400px;height:400px">
+       <div style="width:400px;">
            <b-menu
                :router="false"
                :accordion="true"
                trigger="click"
            >
-               <b-menu-item name="1" iconType="chaobaoshuiguanli">处理中心1</b-menu-item>
-               <b-submenu name="2" iconType="caiji">
+               <b-menu-item name="1" icon="chaobaoshuiguanli">处理中心1</b-menu-item>
+               <b-submenu name="2" icon="caiji">
                    <template slot="title">
                        处理中心2
                    </template>
                    <b-menu-item name="2-1">处理中心2-1</b-menu-item>
                    <b-menu-item name="2-2">处理中心2-2</b-menu-item>
                </b-submenu>
-               <b-submenu name="3" iconType="baobiao">
+               <b-submenu name="3" icon="baobiao">
                    <template slot="title">
                        处理中心3
                    </template>
@@ -263,7 +265,7 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | name     | 菜单项的唯一标识，必填   | String / Number    |    |   -  |
-| iconType     | 名称前面的icon类型   | String     |    |   -  |
+| icon     | 名称前面的icon类型   | String     |    |   -  |
 | route     | 跳转的链接，支持 vue-router 对象  | String / Object    |    |   -  |
 | disabled   | 是否禁用  | boolean    |  ```true```、```false```  |   false  |
 
@@ -272,7 +274,7 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | name     | 子菜单的唯一标识，必填  | String / Number    |    |   -  |
-| iconType     | 名称前面的icon类型   | String     |    |   -  |
+| icon     | 名称前面的icon类型   | String     |    |   -  |
 | disabled  | 是否禁用  | boolean    |  ```true```、```false```   |   false  |
 
 ### Submenu slot
@@ -285,4 +287,4 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | title  | 分组标题  | String   |    |   -  |
-| iconType     | 名称前面的icon类型   | String     |    |   -  |
+| icon     | 名称前面的icon类型   | String     |    |   -  |

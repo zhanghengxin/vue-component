@@ -2,7 +2,7 @@
     <li :class="menuGroupClass">
         <div :class="menuGroupTitleClass" :style="{paddingLeft: levelPadding + 'px'}">
             <template v-if="!$slots.title">
-                <Icon :type="iconType" size="12" class="menu-pre-icon" v-show="iconType"></Icon>
+                <Icon :type="icon" size="12" class="menu-pre-icon" v-show="icon"></Icon>
                 {{title}}
             </template>
             <slot v-else name="title"></slot>
@@ -15,7 +15,7 @@
 <script>
 import { MENUGROUP } from './base'
 import Icon from '../icon/Icon.vue'
-import { prefix } from '&/utils/common'
+import { prefix } from '../../utils/common'
 import mixin from './menu-mixin'
 import Emitter from '../../mixins/emitter'
 
@@ -30,7 +30,7 @@ export default {
         title: {
             type: String
         },
-        iconType: {
+        icon: {
             type: String
         }
     },
@@ -48,7 +48,6 @@ export default {
     mixins: [Emitter, mixin],
     data () {
         return {
-            icon: `${prefix}icon`,
             paddingLeft: 20
         }
     }

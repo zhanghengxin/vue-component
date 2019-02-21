@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition name="gradual">
         <ul
             :class="wrapCls"
             v-show="!data.invisible"
