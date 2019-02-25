@@ -136,7 +136,7 @@ export default {
             this.currentId = sharpLinkMatch[1]
         },
         handleScrollTo () {
-            const anchor = document.querySelector(`a[data-href="#${this.currentId}"]`)
+            const anchor = document.getElementById(this.currentId)
             const currentLinkElementA = document.querySelector(`a[data-href="${this.currentLink}"]`)
             let offset = this.scrollOffset
             if (currentLinkElementA) {
@@ -165,7 +165,7 @@ export default {
             })
             let offsetArr = []
             idArr.forEach(id => {
-                const titleEle = document.querySelector(`a[data-href="#${id}"]`)
+                const titleEle = document.getElementById(id)
                 // console.log('title ele', titleEle)
                 if (titleEle) {
                     offsetArr.push({

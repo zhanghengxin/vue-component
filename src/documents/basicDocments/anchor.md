@@ -4,34 +4,22 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-anchor show-ink>
-            <b-anchor-link href="#card" title="Card 卡片"></b-anchor-link>
-            <b-anchor-link href="#split" title="Split 面板分割"></b-anchor-link>
-            <b-anchor-link href="#transfer" title="Transfer 穿梭框"></b-anchor-link>
-            <b-anchor-link href="#carousel" title="Carousel 走马灯"></b-anchor-link>
-            <b-anchor-link href="#timeline" title="Timeline 时间轴"></b-anchor-link>
-            <b-anchor-link href="#picker" title="Picker 选择器">
-                <b-anchor-link href="#datepicker" title="Datepicker 日期选择器"></b-anchor-link>
-                <b-anchor-link href="#timepicker" title="Timepicker 时间选择器"></b-anchor-link>
-                <b-anchor-link href="#datetimepicker" title="Datetimepicker 日期时间选择器"></b-anchor-link>
-            </b-anchor-link>
+        <b-anchor affix show-ink>
+            <b-anchor-link href="#基础用法" title="基础用法"></b-anchor-link>
+            <b-anchor-link href="#Anchorprops" title="Anchor props"></b-anchor-link>
+            <b-anchor-link href="#AnchorLinkprops" title="AnchorLink props"></b-anchor-link>
+            <b-anchor-link href="#Anchorevents" title="Anchor events"></b-anchor-link>
         </b-anchor>
     </div>
 
 ::: code
 
 ```html
-    <b-anchor show-ink>
-        <b-anchor-link href="#card" title="Card 卡片"></b-anchor-link>
-        <b-anchor-link href="#split" title="Split 面板分割"></b-anchor-link>
-        <b-anchor-link href="#transfer" title="Transfer 穿梭框"></b-anchor-link>
-        <b-anchor-link href="#carousel" title="Carousel 走马灯"></b-anchor-link>
-        <b-anchor-link href="#timeline" title="Timeline 时间轴"></b-anchor-link>
-        <b-anchor-link href="#picker" title="Picker 选择器">
-            <b-anchor-link href="#datepicker" title="Datepicker 日期选择器"></b-anchor-link>
-            <b-anchor-link href="#timepicker" title="Timepicker 时间选择器"></b-anchor-link>
-            <b-anchor-link href="#datetimepicker" title="Datetimepicker 日期时间选择器"></b-anchor-link>
-        </b-anchor-link>
+    <b-anchor affix show-ink>
+        <b-anchor-link href="#基础用法" title="基础用法"></b-anchor-link>
+        <b-anchor-link href="#Anchorprops" title="Anchor props"></b-anchor-link>
+        <b-anchor-link href="#AnchorLinkprops" title="AnchorLink props"></b-anchor-link>
+        <b-anchor-link href="#Anchorevents" title="Anchor events"></b-anchor-link>
     </b-anchor>
 ```
 
