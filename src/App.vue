@@ -34,8 +34,7 @@ export default {
         }
     },
     watch: {
-        '$route.path' (val1, val2) {
-            console.log('val', val1, val2)
+        '$route.path' () {
             this.$nextTick(() => {
                 let h3s = this.$refs.content.querySelectorAll('h3')
                 this.anchors = h3s
