@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <slot name="footer" :confirm="confirmDate">
-                    <div v-if="confirm || innerType === 'datetime'" :class="footerCls">
+                    <div v-if="confirm || innerType === 'datetime' || innerType === 'time'" :class="footerCls">
                         <span v-if="innerType === 'datetime'" :class="datetimeCls" @click="pickTime">选择时间</span>
                         <b-button @on-click="confirmDate" size="small">
                             {{ confirmText }}
@@ -383,11 +383,21 @@ export default {
         },
         selectStartDate (date) {
             this.$set(this.curVal, 0, date)
-            if (this.curVal[1]) this.updateDate() && this.innerType !== 'datetime' && this.closePopup()
+            if (this.curVal[1]) {
+                this.updateDate()
+                if (this.innerType !== 'datetime' && this.innerType !== 'time') {
+                    this.closePopup()
+                }
+            }
         },
         selectEndDate (date) {
             this.$set(this.curVal, 1, date)
-            if (this.curVal[0]) this.updateDate() && this.innerType !== 'datetime' && this.closePopup()
+            if (this.curVal[0]) {
+                this.updateDate()
+                if (this.innerType !== 'datetime' && this.innerType !== 'time') {
+                    this.closePopup()
+                }
+            }
         },
         selectTime (time, close) {
             this.curVal = time
