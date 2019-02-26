@@ -1,8 +1,18 @@
 <template>
     <div id="app">
         <main-header></main-header>
-        <div class="content clearfix">
+        <div class="content clearfix" ref="content">
             <menu-nav class="nav"></menu-nav>
+            <div class="nav-right" v-if="anchors.length">
+                <b-anchor affix show-ink>
+                    <b-anchor-link
+                        :key="index"
+                        v-for="(item, index) in anchors"
+                        :href="'#title' + index"
+                        :title="item.innerText">
+                    </b-anchor-link>
+                </b-anchor>
+            </div>
             <router-view class="doc"/>
         </div>
     </div>
@@ -17,6 +27,23 @@ export default {
     components: {
         mainHeader,
         menuNav
+    },
+    data () {
+        return {
+            anchors: []
+        }
+    },
+    watch: {
+        '$route.path' () {
+            this.$nextTick(() => {
+                let h3s = this.$refs.content.querySelectorAll('h3')
+                this.anchors = h3s
+                console.log('h3s', h3s)
+                h3s.forEach((el, index) => {
+                    el.id = `title${index}`
+                })
+            })
+        }
     }
 }
 </script>
@@ -32,11 +59,19 @@ export default {
         margin: 0 auto;
         box-shadow: rgba(223, 225, 230, 0.5) 0px 4px 30px 0px;
         height: auto;
+        position: relative;
     }
 
     .nav {
         float: left;
         width: 200px;
+    }
+
+    .nav-right {
+        position: absolute;
+        top: 0;
+        left: 1400px;
+        z-index: 10000;
     }
 
     .doc {
