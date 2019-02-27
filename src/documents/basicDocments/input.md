@@ -42,13 +42,13 @@
 -----
 ### 基础用法
 可使用 v-model 实现数据的双向绑定。<br/>
-可直接设置 style 来改变输入框的宽度，默认 100%。<br/>
+可直接设置 width 来设置输入框的宽度，默认 100%。<br/>
 可直接设置 error 来改变输入框的hover focus样式
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value" placeholder="请输入..." style='width:200px' /></b-input>
-            <b-input v-model="value0" placeholder="请输入..." style='width:200px' :error='error'/></b-input>
+            <b-input v-model="value" placeholder="请输入..." :width='200' /></b-input>
+            <b-input v-model="value0" placeholder="请输入..." :width='200' :error='error'/></b-input>
         </div>
     </div>
 </div>
@@ -57,8 +57,8 @@
 ```html
 
     <template>
-        <b-input v-model="value" placeholder="请输入..." /></b-input>
-        <b-input v-model="value0" placeholder="请输入..." :error='error' /></b-input>
+        <b-input v-model="value" placeholder="请输入..." :width='200' /></b-input>
+        <b-input v-model="value0" placeholder="请输入..." :width='200' :error='error'/></b-input>
         <span>{{value}}</div>
     </template>
     <script>
@@ -345,6 +345,7 @@ label文字大小可根据input的size变化<br/>
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |----------|--------|---------- |-------------  |-------- |
 | value    | 绑定的值，可使用 v-model 双向绑定   | String,Number  | - |   -  |
+| width    | 设置输入框的宽度   | String,Number  | - |   -  |
 | type     | 输入框类型   | String  | `text`、`password`、`textarea`、`url`、`email` |   -  |
 | placeholder | 占位文本   | String  | - |   请输入..  |
 | disabled | 设置输入框为禁用状态   | Boolean  | `true`、`false` |   false  |

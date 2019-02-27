@@ -4,7 +4,7 @@
  * @created 2018/09/18 20:05:54
  */
 <template>
-    <div :class="boxClasses">
+    <div :class="boxClasses" :style='inputStyles'>
         <template v-if="type !== 'textarea'">
             <div
                 v-if="prefix"
@@ -165,6 +165,9 @@ export default {
                 return oneOf(value, ['off', 'on'])
             }
         },
+        width: {
+            type: [String, Number]
+        },
         // 样式属性
         size: {
             // default: 'default',
@@ -276,6 +279,13 @@ export default {
                     [`width: ${this.labelWidth}px`]: !this.fixed
                 }
             ]
+        },
+        inputStyles () {
+            let style = {}
+            if (this.width) {
+                style.width = `${this.width}px`
+            }
+            return style
         }
     },
     methods: {
@@ -300,7 +310,6 @@ export default {
             this.$emit('on-keydown', event)
         },
         handleInput (event) {
-            console.log('e', event)
             let value = event.target.value
             this.$emit('input', value)
             this.setCurrentValue(value)
