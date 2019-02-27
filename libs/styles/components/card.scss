@@ -1,12 +1,12 @@
 $css-prefix-card: $css-prefix + 'card';
 .#{$css-prefix-card}-wrapper {
-    background: $white;
+    @include _background($white);
     border-radius: 4px;
     font-size: 14px;
     position: relative;
     &:hover {
         box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
-        border-color: $Border;
+        @include _borderColor($Border);
     }
     &.#{$css-prefix-card}-dis-hover {
         box-shadow: none;
@@ -20,7 +20,7 @@ $css-prefix-card: $css-prefix + 'card';
             height: 20px;
             line-height: 20px;
             font-size: 14px;
-            color: $Title;
+            @include _color($Title);
             font-weight: 700;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -43,7 +43,8 @@ $css-prefix-card: $css-prefix + 'card';
 }
 
 .#{$css-prefix-card}-border {
-    border: 1px solid $Border;
+    border: 1px solid inherit;
+    @include _borderColor($Border);
 }
 
 .#{$css-prefix-card}-shadow {

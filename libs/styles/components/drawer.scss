@@ -83,7 +83,8 @@ $css-prefix-drawer: $css-prefix+'drawer';
     padding: 16px 24px;
     border-radius: 4px 4px 0 0;
     color: $Title;
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid inherit;
+    @include _borderColor($Border);
   }
   
   &-body {

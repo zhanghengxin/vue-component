@@ -42,7 +42,6 @@ $css-prefix-radio: $css-prefix+'radio';
     background-color: $white;
     border: 1px solid $Border;
     border-radius: 50%;
-    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
   }
   &-inner:after {
@@ -58,10 +57,7 @@ $css-prefix-radio: $css-prefix+'radio';
     content: ' ';
     background-color: $Primary;
     opacity: 0;
-    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
-    -webkit-transform: scale(0);
-    -ms-transform: scale(0);
     transform: scale(0);
   }
   &-large {
@@ -101,10 +97,7 @@ $css-prefix-radio: $css-prefix+'radio';
   }
   &-checked &-inner:after {
     opacity: 1;
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
     transform: scale(1);
-    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
   }
   &-checked:hover &-inner {
@@ -145,7 +138,6 @@ $css-prefix-radio: $css-prefix+'radio';
     padding: 0 15px;
     font-size: 12px;
     color: $Content;
-    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     cursor: pointer;
     border: 1px solid $Border;
@@ -166,7 +158,6 @@ $css-prefix-radio: $css-prefix+'radio';
     left: -1px;
     top: 0;
     background: $Border;
-    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
   }
   &-group-button &-wrapper:after {
@@ -207,7 +198,6 @@ $css-prefix-radio: $css-prefix+'radio';
     background: $white;
     border-color: $Primary;
     color: $Primary;
-    -webkit-box-shadow: -1px 0 0 0 $Primary;
     box-shadow: -1px 0 0 0 $Primary;
     z-index: 1;
   }
@@ -247,7 +237,6 @@ $css-prefix-radio: $css-prefix+'radio';
     color: $white;
     background-color: $Border;
     border-color: $Border;
-    -webkit-box-shadow: none !important;
     box-shadow: none !important;
   }
   &-group-button.#{$css-prefix-radio}-group-large .b-radio-wrapper {

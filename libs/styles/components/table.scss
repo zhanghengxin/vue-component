@@ -10,9 +10,9 @@ $prefix-table: $css-prefix + 'table';
     height: 100%;
     max-width: 100%;
     overflow: hidden;
-    color: $Content;
+    @include _color($Content);
     font-size: 12px;
-    background-color: $Background;
+    @include _background($Background);
     box-sizing: content-box;
     .#{$prefix-table}-column-center {
       text-align: center;
@@ -35,7 +35,7 @@ $prefix-table: $css-prefix + 'table';
   &:after, &:before {
     content: "";
     position: absolute;
-    background-color: $Border;
+    @include _borderColor($Border);
   }
   &:before {
     width: 100%;
@@ -68,7 +68,7 @@ $prefix-table: $css-prefix + 'table';
     height: 40px;
     white-space: nowrap;
     overflow: hidden;
-    background-color: $Background;
+    @include _background($Background);
   }
   &-cell {
     display: inline-block;
@@ -86,19 +86,19 @@ $prefix-table: $css-prefix + 'table';
     }
   }
   &-stripe tr:nth-child(2n) td {
-    background-color: $Background;
+    @include _background($Background);
   }
   &-draggable th {
     cursor: pointer;
   }
   &-stripe &-body &-row-hover, &-stripe &-body &-row-highlight {
     td {
-      background: lighten($LightPrimary, 30%);
+      @include _background(lighten($LightPrimary, 30%));
     }
   }
   &-row-hover, &-row-highlight {
     td {
-      background: lighten($LightPrimary, 30%);
+      @include _background(lighten($LightPrimary, 30%));
     }
   }
   &-border td, &-border th {
@@ -131,7 +131,7 @@ $prefix-table: $css-prefix + 'table';
       position: absolute;
       top: -1px;
       right: 0;
-      background-color: $Background;
+      @include _background($Background);
       border-top: 1px solid $Border;
       border-bottom: 1px solid $Border;
     }
@@ -151,7 +151,7 @@ $prefix-table: $css-prefix + 'table';
       line-height: 6px;
       overflow: hidden;
       position: absolute;
-      color: $DisContent;
+      @include _color($DisContent);
       transition: color .2s ease-in-out;
       font-size: 16px;
       &:hover {
@@ -165,7 +165,7 @@ $prefix-table: $css-prefix + 'table';
       bottom: 0;
     }
     & &-active {
-      color: $Primary;
+      @include _color($Primary);
     }
   }
   &-resize-border {

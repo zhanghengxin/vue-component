@@ -5,7 +5,7 @@ $css-prefix-form: $css-prefix + 'form';
     float: left;
     font-size: 12px;
     line-height: 1;
-    color: #495060;
+    @include _color(#495060);
     box-sizing: border-box;
     padding: 10px 12px 10px 0;
     text-align: right;
@@ -50,7 +50,7 @@ $css-prefix-form: $css-prefix + 'form';
     left: 0;
     line-height: 1;
     padding-top: 6px;
-    color: $Error;
+    @include _color($Error);
   }
   &-required {
     .#{$css-prefix-form-item}-label:before {
@@ -59,7 +59,7 @@ $css-prefix-form: $css-prefix + 'form';
       margin-right: 4px;
       font-size: 12px;
       line-height: 12px;
-      color: $Error;
+      @include _color($Error);
       font-family: SimSun;
     }
   }

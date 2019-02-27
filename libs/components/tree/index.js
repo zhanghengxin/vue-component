@@ -3,6 +3,6 @@
  *
  */
 
-import Tree from './Tree'
+import Tree from './Tree.vue'
 
 export default Tree

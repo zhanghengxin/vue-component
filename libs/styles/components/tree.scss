@@ -4,7 +4,7 @@ $css-prefix-tree: $css-prefix + 'tree';
   position: relative;
   cursor: default;
   background: #fff;
-  color: $Content;
+  @include _color($Content);
   & &-children {
     margin: 0;
     padding: 0 0 0 10px;
@@ -21,7 +21,7 @@ $css-prefix-tree: $css-prefix + 'tree';
     width: 12px;
     text-align: center;
     display: inline-block;
-    color: $Sub;
+    @include _color($Sub);
   }
   &-name {
     display: inline-block;
@@ -33,26 +33,22 @@ $css-prefix-tree: $css-prefix + 'tree';
     transition: all .2s ease-in-out;
   }
   &-name-selected {
-    background-color: transparentize($Primary, 0.9);
-    color: $Primary;
+    @include _color($Primary);
+    @include _background(transparentize($Primary, 0.9));
   }
   &-loop {
-    -webkit-animation: ani-load-loop 1s linear infinite;
     animation: load-loop 1s linear infinite
   }
 }
 
 @keyframes load-loop {
   from {
-    -webkit-transform: rotate(0);
     transform: rotate(0)
   }
   50% {
-    -webkit-transform: rotate(180deg);
     transform: rotate(180deg)
   }
   to {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg)
   }
 }

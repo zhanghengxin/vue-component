@@ -1,7 +1,7 @@
 $css-prefix-carousel: $css-prefix + 'carousel';
 .#{$css-prefix-carousel} {
   position: relative;
-  background: $Disabled;
+  @include _background($Disabled);
   overflow: hidden;
   .#{$css-prefix-carousel}-wrapper {
     overflow: hidden;
@@ -41,10 +41,10 @@ $css-prefix-carousel: $css-prefix + 'carousel';
       height: 10px;
       width: 10px;
       border-radius: 50%;
-      background: #ccc;
+      @include _background(#ccc);
       cursor: pointer;
       &.active {
-        background: $LinkContent;
+        @include _background($LinkContent);
       }
     }
   }
@@ -93,6 +93,6 @@ $css-prefix-carousel: $css-prefix + 'carousel';
   height: 100%;
   font-size: 60px;
   text-align: center;
-  color: $LightPrimary;
+  @include _color($LightPrimary);
   line-height: 360px;
 }

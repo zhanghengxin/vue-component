@@ -525,7 +525,7 @@ export default {
                 })
             } else {
                 this.bodyHeight = 0
-                this.$nextTick(() => this.bodyScrollReckon())
+                this.bodyScrollReckon()
             }
         },
         bodyScrollReckon () {

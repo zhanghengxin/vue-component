@@ -67,7 +67,7 @@ $trigger-bar-con-height: ($trigger-bar-weight + $trigger-bar-interval) * 8;
         &-vertical {
             width: $trigger-width;
             height: 100%;
-            background: $trigger-background;
+            @include _background($trigger-background);
             border-top: none;
             border-bottom: none;
             cursor: col-resize;
@@ -75,7 +75,7 @@ $trigger-bar-con-height: ($trigger-bar-weight + $trigger-bar-interval) * 8;
             .#{$css-prefix-split}-trigger-bar {
                 width: $trigger-bar-width;
                 height: 1px;
-                background: $trigger-bar-background;
+                @include _background($trigger-bar-background);
                 float: left;
                 margin-top: $trigger-bar-interval;
             }
@@ -83,7 +83,7 @@ $trigger-bar-con-height: ($trigger-bar-weight + $trigger-bar-interval) * 8;
         &-horizontal {
             height: $trigger-width;
             width: 100%;
-            background: $trigger-background;
+            @include _background($trigger-background);
             border-left: none;
             border-right: none;
             cursor: row-resize;
@@ -91,7 +91,7 @@ $trigger-bar-con-height: ($trigger-bar-weight + $trigger-bar-interval) * 8;
             .#{$css-prefix-split}-trigger-bar {
                 height: $trigger-bar-width;
                 width: 1px;
-                background: $trigger-bar-background;
+                @include _background($trigger-bar-background);
                 float: left;
                 margin-right: $trigger-bar-interval;
             }

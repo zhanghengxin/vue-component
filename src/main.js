@@ -5,13 +5,13 @@ import App from './App'
 import codeShow from './components/CodeShow.vue'
 import ColorShow from './components/ColorShow.vue'
 import router from './router'
-import bwUI from '../libs'
+import bwUi from '../libs/index'
+import '../libs/styles/index.scss'
 import businessUI from '../businessLibs'
-import './assets/font/iconfont.css'
 import './assets/scss/index.scss'
 
-Vue.use(bwUI)
 Vue.use(businessUI)
+Vue.use(bwUi)
 Vue.component('code-show', codeShow)
 Vue.component('color-show', ColorShow)
 Vue.config.productionTip = false

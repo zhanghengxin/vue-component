@@ -11,12 +11,12 @@ $prefix-number-icon: $css-prefix+'input-icon';
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: $Content;
+  @include _color($Content);
   user-select: none;
   line-height: 0;
 
   &:hover {
-    color: $Primary;
+    @include _color($Primary);
     cursor: pointer;
   }
 }

@@ -12,11 +12,12 @@ $css-prefix-loading-bar: $css-prefix + 'loading-bar';
         transition: width 0.2s linear;
 
         &-color-primary {
-            background-color: $Primary;
+            @include _background($Primary);
+
         }
 
         &-failed-color-error {
-            background-color: $Error;
+            @include _background($Error);
         }
     }
 }

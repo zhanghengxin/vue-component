@@ -2,7 +2,7 @@
  * modal
  * author by @zhengshuai
  */
-import Modal from './Confirm'
+import Modal from './Confirm.js'
 
 // modal 实例 单一
 let modalInstance
