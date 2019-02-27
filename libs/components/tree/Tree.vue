@@ -1,60 +1,23 @@
 <template>
 
     <div
-        :class="wrapCls" v-click-outside="clickOutside" ref="reference"
+        :class="wrapCls"
     >
-        <b-input
-            :width="width"
-            ref="input"
-            v-if="label"
-            :label="label"
-            :fixed="fixed"
-            type="text"
-            :class="inputClass"
-            :disabled="disabled"
-            :readonly="!filterable"
-            :value="currentValue"
-            :size="size"
-            suffix
-            :clearable="iconClearShow"
-            :icon="inputIcon"
-            :placeholder="placeholder"
-            @on-change="handleChange"
-            @on-clear="handleClear"
-            @on-click="handleClick">
-        </b-input>
-        <transition name='gradual'>
-            <BDropdown :width="width" v-if="label" :label-width="labelWidth" v-show="treeShow">
-                <tree-node
-                    v-for="(item, index) in rootData"
-                    :key="index"
-                    :data="item"
-                    :draggable="draggable"
-                    :show-checkbox="showCheckbox"
-                    :default-opt="defaultOpt"
-                >
-                </tree-node>
-            </BDropdown>
-        </transition>
-        <template v-if="!label">
-            <tree-node
-                v-for="(item, index) in rootData"
-                :key="index"
-                :data="item"
-                :draggable="draggable"
-                :show-checkbox="showCheckbox"
-                :default-opt="defaultOpt"
-            >
-            </tree-node>
-        </template>
+        <tree-node
+            v-for="(item, index) in rootData"
+            :key="index"
+            :data="item"
+            :draggable="draggable"
+            :show-checkbox="showCheckbox"
+            :default-opt="defaultOpt"
+        >
+        </tree-node>
     </div>
 </template>
 
 <script>
 import { prefix } from '../../utils/common'
 import TreeNode from './Node.vue'
-import BInput from '../input'
-import BDropdown from '../select/Dropdown'
 import Emitter from '../../mixins/emitter'
 import clickOutside from '../../utils/directives/clickOutside'
 
@@ -64,7 +27,7 @@ export default {
     mixins: [Emitter],
     directives: {clickOutside},
     components: {
-        TreeNode, BInput, BDropdown
+        TreeNode
     },
     data () {
         return {
@@ -167,24 +130,9 @@ export default {
         render: {
             type: Function
         },
-        inputClass: {
-            type: [String, Array]
-        },
-        label: {
-            type: [String, Number],
-            default: ''
-        },
-        placeholder: {
-            type: String,
-            default: ''
-        },
         size: {
             type: String,
             default: 'default'
-        },
-        width: {
-            type: [String, Number],
-            default: 240
         },
         disabled: {
             type: Boolean,
