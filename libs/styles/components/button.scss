@@ -11,13 +11,13 @@ $css-prefix-button: $css-prefix+'button';
 }
 
 @mixin textBorderColor($color, $border) {
-  color: $color;
-  border-color: $border;
+  @include _color($color);
+  border: 1px solid $border;
 }
 
 @mixin baseColor($color, $border, $bg) {
   @include textBorderColor($color, $border);
-  background: $bg;
+  @include _background($bg);
 }
 
 @mixin size($size, $height) {
@@ -32,11 +32,11 @@ $css-prefix-button: $css-prefix+'button';
 
 @mixin waterColor($bg) {
   &.#{$css-prefix-button}-round:after {
-    background-color: $bg;
+    @include _background($bg);
   }
 
   &.#{$css-prefix-button}-circle:after {
-    background-color: $bg;
+    @include _background($bg);
   }
 }
 
@@ -45,11 +45,11 @@ $css-prefix-button: $css-prefix+'button';
     @include baseColor($color, $borderColor, $bg);
 
     &:hover {
-      background-color: $hover;
+      @include _background($hover);
     }
 
     &:focus {
-      background-color: $focus;
+      @include _background($focus);
     }
 
     @include waterColor($bg);
@@ -103,7 +103,7 @@ $css-prefix-button: $css-prefix+'button';
   line-height: 1;
   border-radius: 4px;
   transition: color .2s linear, background-color .2s linear, border .2s linear, box-shadow .2s linear;
-  background-color: $white;
+  @include _background($white);
   box-sizing: border-box;
   position: relative;
 

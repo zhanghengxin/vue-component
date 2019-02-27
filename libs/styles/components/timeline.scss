@@ -31,21 +31,21 @@ $css-prefix-timeline: $css-prefix + 'timeline';
             position: absolute;
 
             &-blue {
-                border-color: $Primary;
-                color: $Primary;
+                @include _borderColor($Primary);
+                @include _color($Primary);
             }
             &-red {
-                border-color: $Error;
-                color: $Error;
+                @include _borderColor($Error);
+                @include _color($Error);
             }
             &-green {
-                border-color: $Success;
-                color: $Success;
+                @include _borderColor($Success);
+                @include _color($Success);
             }
 
             &-orange {
-                border-color: $Warning;
-                color: $Warning;
+                @include _borderColor($Warning);
+                @include _color($Warning);
             }
         }
 

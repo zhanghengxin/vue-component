@@ -47,3 +47,62 @@ npm i
 ```
 一个完整的组件开发应该包括:组件代码、文档展示、样式归纳、测试用例模板等等，项目中集成了 [ESlint](https://standardjs.com/)、
 SCSS，同学们有好的建议欢迎提出0.0
+
+### 引入 bwUi
+
+在 `webpack` 入口页面 `main.js` 中如下配置：
+```
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+import bwUi from 'bwUi'
+import 'bwUi/dist/styles/bwUi.css'
+
+Vue.use(bwUi)
+Vue.config.productionTip = false
+
+/* eslint-disable no-new */
+new Vue({
+    el: '#app',
+    router,
+    components: {App},
+    template: '<App/>'
+})
+
+```
+
+### 按需加载
+
+在 `webpack` 入口页面 `main.js` 中如下配置：
+```
+
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+import { Icon } from 'bwUi'
+import 'bwUi/dist/styles/bwUi.css'
+Vue.component(Icon.name, Icon)
+Vue.config.productionTip = false
+
+/* eslint-disable no-new */
+new Vue({
+    el: '#app',
+    router,
+    components: {App},
+    template: '<App/>'
+})
+
+```
+执行 cnpm i babel-plugin-import -D
+
+在`.babelrc`中配置
+```
+"plugins": [
+    "transform-vue-jsx",
+    "transform-runtime",
+    ["import", {
+        "libraryName": "bwUi",
+        "libraryDirectory": "components"
+    }]
+]
+```

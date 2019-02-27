@@ -47,16 +47,16 @@ $css-prefix-message: $css-prefix + 'message';
             line-height: 18px;
         }
         .#{$css-prefix-message}-info {
-            color:$Primary;
+            @include _color($Primary);
         }
         .#{$css-prefix-message}-error {
-            color:$Error;
+            @include _color($Error);
         }
         .#{$css-prefix-message}-success {
-            color:$Success;
+            @include _color($Success);
         }
         .#{$css-prefix-message}-warning {
-            color:$Warning;
+            @include _color($Warning);
         }
         .#{$css-prefix-message}-close {
             border: none;
@@ -64,7 +64,7 @@ $css-prefix-message: $css-prefix + 'message';
             background: none;
             cursor: pointer;
             font-size: 13px;
-            color: #646464;
+            @include _color(#646464);
             font-weight: 600;
             padding-left: 15px;
             margin-right: -7px;

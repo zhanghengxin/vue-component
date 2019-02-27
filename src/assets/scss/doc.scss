@@ -1,5 +1,5 @@
 // 示例文档样式
-@import "color";
+@import '../../../libs/styles/common/color';
 
 .doc {
   .b-table {
@@ -10,7 +10,7 @@
   }
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
   .code-show {
-    background-color: $Divider;
+    @include _background($Divider);
     margin: 0 4px;
     display: inline-block;
     padding: 1px 5px;
@@ -21,12 +21,12 @@
   }
   h1 {
     font-weight: 400;
-    color: $Title;
+    @include _color($Title);
     font-size: 26px;
   }
   h3 {
     font-weight: 400;
-    color: $Title;
+    @include _color($Title);
     font-size: 22px;
     margin: 25px 0 15px;
   }
@@ -38,7 +38,7 @@
   }
   h3 + p {
     font-size: 14px;
-    color: $Content;
+    @include _color($Content);
     line-height: 1.5em;
     margin-bottom: 10px;
   }
@@ -48,12 +48,12 @@
     line-height: 1.5;
     margin-bottom: 45px;
     border-collapse: collapse;
-    color: $Content;
+    @include _color($Content);
     th {
       padding: 8px 10px;
       text-align: left;
       font-weight: 400;
-      background-color: $Background;
+      @include _background($Background);
       border: 1px solid $Border;
     }
     td {
@@ -75,7 +75,7 @@
     color: $Primary;
   }
   .language-bash {
-    background: $Background;
+    @include _background($Background);
   }
   .icon-list {
     overflow: hidden;
@@ -113,12 +113,12 @@
       }
       .b-col:nth-child(odd) {
         div {
-          background: $Primary;
+          @include _background($Primary);
         }
       }
       .b-col:nth-child(even) {
         div {
-          background: $LightPrimary;
+          @include _background($LightPrimary);
         }
       }
     }
@@ -140,10 +140,10 @@
     text-align: center;
   }
   .b-col:nth-child(odd) {
-    background: $Primary;
+    @include _background($Primary);
   }
   .b-col:nth-child(even) {
-    background: $LightPrimary;
+    @include _background($LightPrimary);
   }
   td.test-table-columns {
     background: cornflowerblue;

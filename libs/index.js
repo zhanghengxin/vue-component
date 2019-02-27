@@ -100,7 +100,6 @@ const components = [
     TimePicker,
     DateTimePicker,
     Transfer,
-    Notice,
     Menu,
     MenuItem,
     Submenu,
@@ -123,9 +122,12 @@ const install = function (Vue) {
     Vue.prototype.$Loading = Loading.service
     Vue.prototype.$LoadingBar = LoadingBar
 }
-
-export default {
+let api = {
     install,
     LoadingBar,
+    Notice,
     ...components
 }
+
+// module.exports.default = module.exports = api
+export default api

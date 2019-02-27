@@ -5,5 +5,5 @@
  * @Last Modified time: 2018-11-15 14:57:20
  */
 
-import Tag from './Tag'
+import Tag from './Tag.vue'
 export default Tag

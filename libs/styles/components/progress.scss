@@ -26,11 +26,12 @@ $css-prefix-progress: $css-prefix+'progress';
   transition: all .2s linear;
 }
 .#{$css-prefix-progress}-success{
-  background-color: $Success
+  @include _background($Success);
+
 }
 .#{$css-prefix-progress}-exception{
-  background-color: $Error;
+  @include _background($Error);
 }
 .#{$css-prefix-progress}-primary{
-  background-color: $Primary;
+  @include _background($Primary);
 }

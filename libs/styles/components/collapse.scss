@@ -3,7 +3,8 @@
     border-radius: 3px;
     border: 1px solid #dcdee2;
     .#{$css-prefix}collapse-item{
-        border-top: 1px solid #dcdee2;
+        border-top: 1px solid inherit;
+        @include _borderColor(#dcdee2);
     }
     .#{$css-prefix}collapse-item:first-child{
         border-top:0
@@ -13,16 +14,18 @@
         height: 45px;
         line-height: 45px;
         padding-left: 16px;
-        background: #f7f7f7;
+        @include _background($Background);
     }
     /* 展开 */
     .#{$css-prefix}collapse-item-header-active .#{$css-prefix}collapse-item-header{
-        border-bottom: 1px solid #dcdee2;
+        border-bottom: 1px solid inherit;
+        @include _borderColor($Border);
+
     }
     .#{$css-prefix}collapse-item-content{
         color: #515a6e;
-        padding:16px; 
-        background-color: #fff;
+        padding:16px;
+        @include _background(#fff);
     }
     
     // item
@@ -62,7 +65,7 @@
     border-left:none;
     border-right:none;  
     .#{$css-prefix}collapse-item-header{
-        background: #fff;
+        @include _background(#fff);
     }
     .#{$css-prefix}collapse-item-header-active .#{$css-prefix}collapse-item-header{
         border-bottom:none;

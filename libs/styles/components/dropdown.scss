@@ -36,14 +36,14 @@ $css-prefix-drop: $css-prefix+'drop';
     }
 
     &-selected {
-      background-color: #ecf5ff;
-      color: #66b1ff
+      @include _background($Background);
+      @include _color($Primary);
     }
 
     &:focus,
     &:not(&-disabled):hover {
-      background-color: #ecf5ff;
-      color: #66b1ff
+      @include _background($Background);
+      @include _color($Primary);
     }
   }
 }

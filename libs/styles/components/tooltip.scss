@@ -57,7 +57,7 @@
         max-width: $tooltip-max-width;
         min-height: 34px;
         padding: 8px 12px;
-        color: $tooltip-color;
+        @include _color($tooltip-color);
         text-align: left;
         text-decoration: none;
         background-color: $tooltip-bg;
@@ -73,7 +73,7 @@
 
     &-light &-inner{
         background-color: #fff;
-        color: $text-color;
+        @include _color($text-color);
     }
 
     &-arrow{

@@ -26,6 +26,7 @@ $bgFont: #ccc;
 
 .#{$css-prefix-picker}-popup {
   background-color: $white;
+
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   z-index: 1000;
   border-radius: 4px;

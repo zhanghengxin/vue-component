@@ -4,11 +4,22 @@
             <img src="../assets/logo.png">
             <span>百望 UI</span>
         </div>
+        <span class="color-change" @click="changeColor">一键换肤</span>
     </div>
 </template>
 
 <script>
-export default {}
+export default {
+    methods: {
+        changeColor () {
+            if (document.documentElement.getAttribute('data-theme') === 'theme1') {
+                window.document.documentElement.setAttribute('data-theme', '')
+            } else {
+                window.document.documentElement.setAttribute('data-theme', 'theme1')
+            }
+        }
+    }
+}
 </script>
 
 <style lang="scss">
@@ -26,5 +37,10 @@ export default {}
         margin-top: 10px;
         width: 50px;
         height: 50px;
+    }
+
+    .color-change {
+        margin: 10px 10px 0 0;
+        float: right;
     }
 </style>

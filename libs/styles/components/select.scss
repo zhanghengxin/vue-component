@@ -19,7 +19,7 @@ $css-prefix-option: $css-prefix+'option';
 
 @mixin selectMockClass($color, $shadow) {
   &-focused {
-    border-color: $color;
+    @include _borderColor($color);
     box-shadow: $shadow;
 
     .#{$css-prefix-select}-arrow {
@@ -28,7 +28,7 @@ $css-prefix-option: $css-prefix+'option';
   }
 
   &:hover {
-    border-color: $color;
+    @include _borderColor($color);
   }
 }
 
@@ -242,25 +242,26 @@ $css-prefix-option: $css-prefix+'option';
 
   &:hover {
     background: $Divider;
+    @include _background($Divider);
   }
 
   &-selected,
   &-selected:hover {
-    background: $Info;
+    @include _background($Info);
     color: $white;
   }
 
   &-selected-multiple {
-    color: $Info;
+    @include _color($Info);
   }
 
   .icon {
-    color: $Success;
+    @include _color($Success);
     float: right;
   }
 
   &-disabled {
-    color: $DisContent;
+    @include _color($DisContent);
     cursor: not-allowed;
   }
 }

@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import Component from './notice.vue'
 

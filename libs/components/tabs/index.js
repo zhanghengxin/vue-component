@@ -1,4 +1,4 @@
-import Tabs from './Tabs'
-import TabPanel from './TabPanel'
+import Tabs from './Tabs.vue'
+import TabPanel from './TabPanel.vue'
 
 export {Tabs, TabPanel}

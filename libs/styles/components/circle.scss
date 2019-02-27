@@ -11,7 +11,7 @@ $css-prefix-circle: $css-prefix + 'circle';
         text-align: center;
     }
     &-textc{
-        color: $Content;
+        @include _color($Content);
     }
     &-strokec{
         stroke: #eceef2;
