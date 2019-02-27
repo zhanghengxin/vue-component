@@ -5,10 +5,10 @@
 <div class='example'>
     <div class='example-box'>
         <b-anchor affix show-ink>
-            <b-anchor-link href="#基础用法" title="基础用法"></b-anchor-link>
-            <b-anchor-link href="#Anchorprops" title="Anchor props"></b-anchor-link>
-            <b-anchor-link href="#AnchorLinkprops" title="AnchorLink props"></b-anchor-link>
-            <b-anchor-link href="#Anchorevents" title="Anchor events"></b-anchor-link>
+            <b-anchor-link href="#title0" title="基础用法"></b-anchor-link>
+            <b-anchor-link href="#title1" title="Anchor props"></b-anchor-link>
+            <b-anchor-link href="#title2" title="AnchorLink props"></b-anchor-link>
+            <b-anchor-link href="#title3" title="Anchor events"></b-anchor-link>
         </b-anchor>
     </div>
 
@@ -16,10 +16,10 @@
 
 ```html
     <b-anchor affix show-ink>
-        <b-anchor-link href="#基础用法" title="基础用法"></b-anchor-link>
-        <b-anchor-link href="#Anchorprops" title="Anchor props"></b-anchor-link>
-        <b-anchor-link href="#AnchorLinkprops" title="AnchorLink props"></b-anchor-link>
-        <b-anchor-link href="#Anchorevents" title="Anchor events"></b-anchor-link>
+        <b-anchor-link href="#title0" title="基础用法"></b-anchor-link>
+        <b-anchor-link href="#title1" title="Anchor props"></b-anchor-link>
+        <b-anchor-link href="#title2" title="AnchorLink props"></b-anchor-link>
+        <b-anchor-link href="#title3" title="Anchor events"></b-anchor-link>
     </b-anchor>
 ```
 
