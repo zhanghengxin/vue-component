@@ -10,7 +10,6 @@
     "unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
     "markdown-it": "^8.4.2",
     "markdown-it-container": "^2.0.0",
     "vue": "^2.6.0",
