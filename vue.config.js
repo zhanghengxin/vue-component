@@ -66,6 +66,9 @@ module.exports = {
                     ]
                 ]
             })
+        config
+            .entry('index')
+            .add('babel-polyfill')
     },
     configureWebpack: config => {
         config.resolve = {
