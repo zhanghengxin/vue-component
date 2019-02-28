@@ -4,7 +4,12 @@
             <img src="../assets/logo.png">
             <span>百望 UI</span>
         </div>
-        <span class="color-change" @click="changeColor">一键换肤</span>
+        <b-button
+            class="color-change"
+            type="primary"
+            @on-click="changeColor">
+            一键换肤
+        </b-button>
     </div>
 </template>
 
