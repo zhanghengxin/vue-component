@@ -1,0 +1,30 @@
+@mixin _clearfix {
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+@mixin _background($color) {
+  background-color: $color;
+  [data-theme="theme1"] & {
+    background-color: darken($color, 10%);
+  }
+}
+
+@mixin _color($color) {
+  color: $color;
+  [data-theme="theme1"] & {
+    color: darken($color, 10%);
+  }
+}
+
+@mixin _borderColor($color) {
+  border-color: $color;
+  [data-theme="theme1"] & {
+    border-color: darken($color, 10%);
+  }
+}

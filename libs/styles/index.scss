@@ -4,6 +4,7 @@ article, aside, blockquote, body, button, dd, details, div, dl, dt, fieldset, fi
 }
 
 @import "./common/prefix";
+@import "./mixin/common";
 @import "./common/color";
 @import "./iconfont/iconfont";
 @import './animation/index';
