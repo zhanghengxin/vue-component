@@ -329,6 +329,31 @@
 </div>
 
 
+### 响应式布局
+参考 [Bootstrap](https://v4.bootcss.com/docs/4.0/layout/overview/) 的响应式设计，五个响应尺寸：xs sm md lg xl。<br>可以调整浏览器尺寸来查看效果。
+<div class="example">
+    <div class="example-box">
+        <b-row>
+           <b-col :xs="1" :sm="4" :md="6" :lg="8" :xl='3'>b-col</b-col>
+           <b-col :xs="1" :sm="4" :md="12" :lg="8" :xl='3'>b-col</b-col>
+           <b-col :xs="22" :sm="16" :md="6" :lg="8" :xl='18'>b-col</b-col>
+        </b-row>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-row>
+           <b-col :xs="1" :sm="4" :md="6" :lg="8" :xl='3'>b-col</b-col>
+           <b-col :xs="1" :sm="4" :md="12" :lg="8" :xl='3'>b-col</b-col>
+           <b-col :xs="22" :sm="16" :md="6" :lg="8" :xl='18'>b-col</b-col>
+        </b-row>
+    </div>
+```
+:::
+</div>
+
+
 ### row props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -341,7 +366,12 @@
 ### col props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| span     | 栅格的占位格数  | Number    |  0~24的整数 |     -  |
-| forward     |  栅格向后移动格数   |  Number    |   - |     - |
-| back     |  栅格向前移动格数   |  Number    |   - |     - |
-| offset     |  栅格左侧的间隔格数	   |  Number    |   - |     - |
+| span     | 栅格的占位格数  | Number / String    |  0~24的整数 |     -  |
+| forward     |  栅格向后移动格数   |  Number / String    |   - |     - |
+| back     |  栅格向前移动格数   |  Number / String    |   - |     - |
+| offset     |  栅格左侧的间隔格数	   |  Number / String    |   - |     - |
+| xs     |  `<768px` 响应式栅格，可为栅格数或一个包含其他属性的对象	   |  Number / String / Object	    |   - |     - |
+| sm     |  `>=768px` 响应式栅格，可为栅格数或一个包含其他属性的对象	   |  Number / String / Object	    |   - |     - |
+| md     |  `>=992px` 响应式栅格，可为栅格数或一个包含其他属性的对象	   |  Number / String / Object	    |   - |     - |
+| lg     |  `>=1200px` 响应式栅格，可为栅格数或一个包含其他属性的对象	   |  Number / String / Object	    |   - |     - |
+| xl     |  `>=1600px` 响应式栅格，可为栅格数或一个包含其他属性的对象	   |  Number / String / Object	    |   - |     - |

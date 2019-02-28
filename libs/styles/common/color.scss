@@ -1,3 +1,4 @@
+@import "../mixin/common";
 // 全局颜色表
 // 主色调
 $LightPrimary: #52b7fc; // hover
@@ -21,24 +22,3 @@ $Content: #495060; // content
 $SubContent: #9ea7b4; // subContent
 $DisContent: #bbbbbb; //  disContent
 $LinkContent: #0079cc; // linkContent
-
-@mixin _background($color) {
-  background-color: $color;
-  [data-theme="theme1"] & {
-    background-color: darken($color, 10%);
-  }
-}
-
-@mixin _color($color) {
-  color: $color;
-  [data-theme="theme1"] & {
-    color: darken($color, 10%);
-  }
-}
-
-@mixin _borderColor($color) {
-  border-color: $color;
-  [data-theme="theme1"] & {
-    border-color: darken($color, 10%);
-  }
-}

@@ -16,6 +16,11 @@ export default {
         back: [Number, String],
         offset: [Number, String],
         order: [Number, String],
+        xs: [Number, Object, String],
+        sm: [Number, Object, String],
+        md: [Number, Object, String],
+        lg: [Number, Object, String],
+        xl: [Number, Object, String],
         className: String
     },
     data () {
@@ -35,7 +40,22 @@ export default {
                     [`${prefixCls}-order-${this.order}`]: this.order,
                     [`${this.className}`]: !!this.className
                 }
-            ]
+
+            ];
+            ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
+                if (typeof this[size] === 'number') {
+                    classList.push(`${prefixCls}-span-${size}-${this[size]}`)
+                } else if (typeof this[size] === 'object') {
+                    let props = this[size]
+                    Object.keys(props).forEach(prop => {
+                        classList.push(
+                            prop !== 'span'
+                                ? `${prefixCls}-${size}-${prop}-${props[prop]}`
+                                : `${prefixCls}-span-${size}-${props[prop]}`
+                        )
+                    })
+                }
+            })
             return classList
         },
         styles () {
