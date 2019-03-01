@@ -47,6 +47,7 @@
                 @on-click="handleClear">
             </b-icon>
             <label
+                ref="label"
                 :class="labelClasses"
                 :style='labelStyles'
                 v-if="label || $slots.label">
@@ -339,6 +340,7 @@ export default {
             this.$emit('input', '')
             this.setCurrentValue('')
             this.$emit('on-change', e)
+            this.$emit('on-clear', '')
         },
         focus () {
             if (this.type === 'textarea') {
