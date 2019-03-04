@@ -16,17 +16,19 @@
         :disabled="disabled"
         :readonly="readonly"
         :size="size"
-        :suffix="!disabled"
+        :suffix="!disabled && (operationShow || !type)"
         :prefix="!disabled && !type && !label"
         @on-change="handleChange"
         @on-blur="handleBlur"
         @on-focus="handleFocus"
+        @on-mouseenter="operationShow = true"
+        @on-mouseleave="operationShow = false"
         >
-        <template v-if='!disabled && type' slot='suffix'>
+        <template v-if='!disabled && type && operationShow' slot='suffix'>
             <span @click="up" :class='[prefixCls+`-up`,prefixCls+`-up-border`]'><Icon type='shang'></Icon></span>
             <span @click="down" :class='[prefixCls+`-down`]'><Icon type='xia'></Icon></span>
         </template>
-        <template v-if='!disabled && !type'>
+        <template v-if='!disabled && !type' v-show='operationShow'>
             <template slot='prefix'>
                 <span @click="up" :class='[prefixCls+`-up`,prefixCls+`-icon`]'>+</span>
             </template>
@@ -106,7 +108,8 @@ export default {
     data () {
         return {
             prefixCls,
-            currentValue: 0
+            currentValue: 0,
+            operationShow: false
         }
     },
     created () {

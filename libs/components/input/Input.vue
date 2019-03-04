@@ -4,7 +4,9 @@
  * @created 2018/09/18 20:05:54
  */
 <template>
-    <div :class="boxClasses" :style='inputStyles'>
+    <div :class="boxClasses" :style='inputBoxStyles'
+        @mouseenter="mouseenterHandle"
+        @mouseleave="mouseleaveHandle">
         <template v-if="type !== 'textarea'">
             <div
                 v-if="prefix"
@@ -20,21 +22,23 @@
                     </b-icon>
                 </slot>
             </div>
-            <div
-                v-if="suffix"
-                :class='[
-                prefixCls+`-icon`,
-                prefixCls+`-icon-`+size,
-                prefixCls+`-icon-suffix`]'>
-                <slot name='suffix'>
-                    <b-icon
-                        size
-                        :type="icon"
-                        :class="[prefixCls+`-noclear`]"
-                        @on-click="handleIconClick">
-                    </b-icon>
-                </slot>
-            </div>
+            <transition name='fade'>
+                <div
+                    v-if="suffix"
+                    :class='[
+                    prefixCls+`-icon`,
+                    prefixCls+`-icon-`+size,
+                    prefixCls+`-icon-suffix`]'>
+                    <slot name='suffix'>
+                        <b-icon
+                            size
+                            :type="icon"
+                            :class="[prefixCls+`-noclear`]"
+                            @on-click="handleIconClick">
+                        </b-icon>
+                    </slot>
+                </div>
+            </transition>
             <b-icon
                 v-if="clearable && currentValue"
                 size
@@ -59,6 +63,7 @@
                 ref="input"
                 :value="currentValue"
                 :name="name"
+                :style='inputStyles'
                 :placeholder="placeholder"
                 :disabled="disabled"
                 :maxlength="maxlength"
@@ -280,15 +285,32 @@ export default {
                 }
             ]
         },
-        inputStyles () {
+        // 整体的input的宽度
+        inputBoxStyles () {
+            const { label } = this
             let style = {}
-            if (this.width) {
+            if (!label) {
+                style.width = `${this.width}px`
+            }
+            return style
+        },
+        // label的时候 fixed为false  input的宽度
+        inputStyles () {
+            const { label } = this
+            let style = {}
+            if (label && this.width) {
                 style.width = `${this.width}px`
             }
             return style
         }
     },
     methods: {
+        mouseenterHandle (event) {
+            this.$emit('on-mouseenter', event)
+        },
+        mouseleaveHandle (event) {
+            this.$emit('on-mouseleave', event)
+        },
         handleChange (event) {
             this.$emit('on-change', event)
         },

@@ -215,8 +215,8 @@ export default {
         options () {
             return this.sizeOptions.map(function (item) {
                 return {
-                    name: `${item}条/每页`,
-                    code: item
+                    label: `${item}条/每页`,
+                    value: item
                 }
             })
         },
