@@ -1,7 +1,7 @@
 <template>
-    <div ref="picker" :class="wrapperCls" v-clickoutside="closePopup">
+    <div :class="wrapperCls" v-clickoutside="closePopup">
         <b-input
-            ref="input"
+            ref="reference"
             :label="label"
             :fixed="fixed"
             type="text"
@@ -17,15 +17,16 @@
             icon="rili"
             :style="inputStyle"
             :placeholder="innerPlaceholder"
-            @input="handleInput"
+            @on-clear="handleClear"
             @on-change="handleChange"
             @on-focus="showPopup">
         </b-input>
         <transition name="slide">
-            <div
+            <Drop
                 v-show="popupVisible"
-                :class="popupCls"
-                ref="calendar">
+                :labelWidth="labelWidth"
+                :placement="placement"
+                :className="popupCls">
                 <div :class="popupContentCls">
                     <slot name="shortcuts">
                         <div
@@ -102,15 +103,16 @@
                         </b-button>
                     </div>
                 </slot>
-            </div>
+            </Drop>
         </transition>
     </div>
 </template>
 
 <script>
-import Vue from 'vue'
 import Panel from './panel/panel'
-import bButton from '../button/Button'
+import bButton from '../button'
+import bInput from '../input'
+import Drop from '../select/Dropdown'
 import { oneOf, prefix } from '../../utils/common'
 import clickoutside from '../../utils/directives/clickOutside'
 import {
@@ -127,15 +129,16 @@ import {
     rangeShortcuts,
     placeholder
 } from '../../utils/date'
-const isServer = Vue.prototype.$isServer
-const Popper = isServer ? function () {} : require('popper.js/dist/umd/popper.js')
+import Emitter from '../../mixins/emitter'
+
 const pickerCls = `${prefix}datepicker`
 const shortcutsCls = `${prefix}shortcuts`
 const rangeCls = `${prefix}range`
 
 export default {
-    components: { Panel, bButton },
+    components: { Panel, bButton, Drop, bInput },
     directives: { clickoutside },
+    mixins: [ Emitter ],
     props: {
         value: null,
         // input 组件 -- start
@@ -240,6 +243,10 @@ export default {
             type: Number,
             default: 7,
             validator: val => val >= 1 && val <= 7
+        },
+        placement: {
+            type: String,
+            default: 'bottom-start'
         }
     },
     data () {
@@ -248,7 +255,8 @@ export default {
             prefix,
             curVal: this.range ? [null, null] : null,
             userInput: null,
-            popupVisible: false
+            popupVisible: false,
+            labelWidth: 0
         }
     },
     computed: {
@@ -306,15 +314,13 @@ export default {
             if (this.dateFormat) return this.dateFormat
             if (this.innerType === 'date') return this.format
             return this.format.replace(/[Hh]+.*[msSaAZ]|\[.*?\]/g, '').trim() || 'YYYY-MM-DD'
-        },
-        labelWidth () {
-            const inputBox = this.$refs.input
-            if (inputBox.$el.children.length < 2) return 0
-            const offsetWidth = inputBox.$el.children[1].offsetWidth
-            if (this.label && this.fixed) return offsetWidth
-            if (this.label) return offsetWidth + 4
-            return 0
         }
+    },
+    mounted () {
+        this.getLabelWidth()
+    },
+    updated () {
+        this.getLabelWidth()
     },
     watch: {
         value: {
@@ -335,7 +341,6 @@ export default {
         },
         init () {
             this.handleValChange(this.value)
-            this.update()
         },
         stringify (date, format) {
             return formatDate(date, format || this.format)
@@ -410,14 +415,17 @@ export default {
             this.selectEndDate(time)
         },
         showPopup () {
+            // console.log('show popup')
             if (this.disabled) return
+            this.broadcast(`${prefix}drop`, 'on-update-popper')
             this.popupVisible = true
         },
         closePopup () {
             this.popupVisible = false
-            this.destroy()
+            this.broadcast(`${prefix}drop`, 'on-destroy-popper')
         },
-        handleInput (val) {
+        handleClear (val) {
+            // console.log('val input: %o', val)
             if (val) {
                 this.userInput = val
             } else {
@@ -459,61 +467,9 @@ export default {
                 this.$refs.panel.panel = 'TIME'
             }
         },
-        update () {
-            if (this.popper) {
-                this.$nextTick(() => {
-                    this.popper.update()
-                    this.popperStatus = true
-                })
-            } else {
-                this.$nextTick(() => {
-                    this.popper = new Popper(this.$refs.picker, this.$refs.calendar, {
-                        placement: 'bottom-start',
-                        modifiers: {
-                            computeStyle: {
-                                gpuAcceleration: false
-                            },
-                            preventOverflow: {
-                                boundariesElement: 'window'
-                            },
-                            offset: {
-                                offset: this.labelWidth
-                            }
-                        },
-                        onCreate: () => {
-                            this.resetTransformOrigin()
-                            this.$nextTick(this.popper.update())
-                        },
-                        onUpdate: () => {
-                            this.resetTransformOrigin()
-                        }
-                    })
-                })
-            }
-        },
-        destroy () {
-            if (this.popper) {
-                setTimeout(() => {
-                    if (this.popper && !this.popperStatus) {
-                        this.popper.destroy()
-                        this.popper = null
-                    }
-                    this.popperStatus = false
-                }, 1000)
-            }
-        },
-        resetTransformOrigin () {
-            if (!this.popper) return
-            let xPlacement = this.popper.popper.getAttribute('x-placement')
-            let placementStart = xPlacement.split('-')[0]
-            let placementEnd = xPlacement.split('-')[1]
-            const leftOrRight = xPlacement === 'left' || xPlacement === 'right'
-            if (!leftOrRight) {
-                this.popper.popper.style.transformOrigin = placementStart === 'bottom' || (placementStart !== 'top' && placementEnd === 'start') ? 'center top' : 'center bottom'
-            }
-        },
-        beforeDestroy () {
-            if (this.popper) this.popper.destroy()
+        getLabelWidth () {
+            const { label } = this.$refs.reference.$refs
+            this.labelWidth = label ? label.offsetWidth : 0
         }
     }
 }
