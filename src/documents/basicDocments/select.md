@@ -25,31 +25,31 @@
                 autowarp:true,
                 fixed:true,
                 options:[{
-                    name:'增专',
-                    code:'004'
+                    label:'增专',
+                    value:'004'
                 },{
-                    name:'增普',
-                    code:'007'
+                    label:'增普',
+                    value:'007'
                 },{
-                    name:'机动车',
-                    code:'005'
+                    label:'机动车',
+                    value:'005'
                 },{
-                    name:'电子票',
-                    code:'025'
+                    label:'电子票',
+                    value:'025'
                 }],
                 options1:[{
-                    name:'增专',
-                    code:'004'
+                    label:'增专',
+                    value:'004'
                 },{
-                    name:'增普',
-                    code:'007'
+                    label:'增普',
+                    value:'007'
                 },{
-                    name:'机动车',
-                    code:'005',
+                    label:'机动车',
+                    value:'005',
                     disabled:true
                 },{
-                    name:'电子票',
-                    code:'025'
+                    label:'电子票',
+                    value:'025'
                 }],
                 options2:[{
                     label:'增专',
@@ -64,6 +64,7 @@
                     label:'电子票',
                     value:'025'
                 }],
+                nameInCode:true,
                 options3:[],
                 options4:[],
                 nameKey:'label',
@@ -78,14 +79,14 @@
                 console.log('e',e)
             },
             filterFn(query,item){
-                return (item.name + item.code).indexOf(query) > -1
+                return (item.label + item.value).indexOf(query) > -1
             },
             remoteFn(query){
                 if (query !== '') {
                     this.loading = true
                     setTimeout(() => {
                         this.loading = false
-                        this.options3 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                        this.options3 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
                     }, 2000)
                 } else {
                     this.options3 = []
@@ -96,7 +97,7 @@
                     this.loading = true
                     setTimeout(() => {
                         this.loading = false
-                        this.options4 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                        this.options4 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
                     }, 2000)
                 } else {
                     this.options4 = []
@@ -115,7 +116,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value" @on-change='changeConsole'  style="width:200px" :options='options'></b-select>
+            <b-select v-model="value" @on-change='changeConsole' :nameInCode='nameInCode'  style="width:200px" :options='options'></b-select>
             <span>{{value}}</span>
         </div>
     </div>
@@ -140,17 +141,17 @@
                 return {
                     value: '',
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -190,17 +191,17 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                     value01: '',
                     value02: '',
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -256,31 +257,31 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                     value2: '',
                     disabled:true,
                     options1:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005',
+                        label:'机动车',
+                        value:'005',
                         disabled:true
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }],
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -344,17 +345,17 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                     value4: '',
                     autowarp:true,
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -364,7 +365,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 :::
 
 ### 自定义nameKey codeKey
-可直接设置 ```nameKey```\```codeKey``` 的值来从options的各个项目中取值。<br/>
+可直接设置 ```nameKey```、```codeKey``` 的值来从options的各个项目中取值。<br/>
 <div class="example">
     <div class="example-box">
         <div>
@@ -454,17 +455,17 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                     value0: '',
                     clearabled:true,
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -529,17 +530,17 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                     value7: [],
                     filterabled:true,
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -588,23 +589,23 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                     value8: '',
                     filterabled:true,
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             },
             methods:{
                 filterFn(query,item){
-                    return (item.name + item.code).indexOf(query) > -1
+                    return (item.label + item.value).indexOf(query) > -1
                 }
             }
         }
@@ -664,17 +665,17 @@ fixed为true  默认280px false 默认220px<br/>
                     value10: '',
                     fixed: true,
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -740,17 +741,17 @@ fixed为true  默认280px false 默认220px<br/>
                 value03: '',
                 value04: '',
                 options:[{
-                    name:'增专',
-                    code:'004'
+                    label:'增专',
+                    value:'004'
                 },{
-                    name:'增普',
-                    code:'007'
+                    label:'增普',
+                    value:'007'
                 },{
-                    name:'机动车',
-                    code:'005'
+                    label:'机动车',
+                    value:'005'
                 },{
-                    name:'电子票',
-                    code:'025'
+                    label:'电子票',
+                    value:'025'
                 }],
                 options3:[],
                 options4:[],
@@ -765,7 +766,7 @@ fixed为true  默认280px false 默认220px<br/>
                     this.loading = true
                     setTimeout(() => {
                         this.loading = false
-                        this.options3 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                        this.options3 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
                     }, 2000)
                 } else {
                     this.options3 = []
@@ -776,7 +777,7 @@ fixed为true  默认280px false 默认220px<br/>
                     this.loading = true
                     setTimeout(() => {
                         this.loading = false
-                        this.options4 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                        this.options4 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
                     }, 2000)
                 } else {
                     this.options4 = []
@@ -790,8 +791,8 @@ fixed为true  默认280px false 默认220px<br/>
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |----------|--------|---------- |-------------  |-------- |
-| value    | 指定选中项的 code 值，可以使用 v-model 双向绑定数据。<br/>单选时只接受 String 或 Number，多选时只接受 Array   | String,Number,Array |	-   |     -    |
-| nameInCode | change返回值得类型 <br/>默认false返回单选返回string 多选返回array <br/>true返回[{code:'',name:''}]	|Boolean | `true`、`false` |   false  |
+| value    | 指定选中项的 value 值，可以使用 v-model 双向绑定数据。<br/>单选时只接受 String 或 Number，多选时只接受 Array   | String,Number,Array |	-   |     -    |
+| nameInCode | change返回值得类型 <br/>默认false返回单选返回string 多选返回array <br/>true返回[{value:'',label:''}]	|Boolean | `true`、`false` |   false  |
 | multiple | 是否支持多选	|Boolean | `true`、`false` |   false  |
 | disabled | 是否禁用	|Boolean | `true`、`false` |   false  |
 | disabled | 是否禁用	|Boolean | `true`、`false` |   false  |
@@ -801,8 +802,8 @@ fixed为true  默认280px false 默认220px<br/>
 | size | 设置选择器的尺寸 | String  | `small`、`default`、`large` | `default`|
 | placeholder | 选择框默认文字	|String |	-   |     -    |
 | name      | 原生name	| String |	-   |     -    |
-| nameKey      | 要展示的字段的key值	| String |	-   |     name    |
-| codeKey      | 要设为value的字段的key值	| String |	-   |     code    |
+| nameKey      | 要展示的字段的key值	| String |	-   |     label    |
+| codeKey      | 要设为value的字段的key值	| String |	-   |     value    |
 | options      | 传入的下拉列表的数据	| Array |	-   |     -    |
 | className      | 最外层可扩展class	| String |	-   |     -    |
 | width      | 设置select的宽度	| Number |	-   |     -    |
@@ -818,15 +819,15 @@ fixed为true  默认280px false 默认220px<br/>
 ### events
 | 事件名	      | 说明	    | 返回值 |
 |-------------|---------|----------|
-| on-change   | 选中的Option变化时触发，默认返回 [{name,code}] | event |
+| on-change   | 选中的Option变化时触发，默认返回 [{label,value}] | event |
 | on-clear   | 点击清空按钮时触发 | - |
 
 ### options
 | 数据	      | 说明	    |
 |-------------|---------|
 | disabled   | 默认为false  |
-| code   | 默认为为code为key值 可用codeKey修改 |
-| name   | 默认为name为key值 可用nameKey修改 |
+| value   | 默认为为code为key值 可用codeKey修改 |
+| label   | 默认为name为key值 可用nameKey修改 |
 
 ### filterFn
 | 数据	      | 说明	    |

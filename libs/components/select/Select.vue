@@ -24,9 +24,9 @@
                     <template v-if='multiple'>
                         <div
                             v-for="item in values"
-                            :key='item.code'
+                            :key='item.value'
                             :class="[prefixCls+`-tag`]">
-                            <span>{{item.name}}</span>
+                            <span>{{item.label}}</span>
                             <b-icon type='quxiao-guanbi-shanchu' @click.native.stop='removeTag(item)'></b-icon>
                         </div>
                     </template>
@@ -72,9 +72,9 @@
                     <ul v-if='(dropList.length > 0) && !loading'>
                         <Option
                             v-for='item in dropList'
-                            :key='item.code'
-                            :code='item.code'
-                            :name='item.name'
+                            :key='item.value'
+                            :value='item.value'
+                            :label='item.label'
                             :disabled='item.disabled'
                             :multiple='multiple'
                             :publicValue='publicValue'>
@@ -131,15 +131,15 @@ export default {
         },
         nameKey: {
             type: String,
-            default: 'name'
+            default: 'label'
+        },
+        codeKey: {
+            type: String,
+            default: 'value'
         },
         nameInCode: {
             type: Boolean,
             default: false
-        },
-        codeKey: {
-            type: String,
-            default: 'code'
         },
         multiple: {
             type: Boolean,
@@ -299,7 +299,7 @@ export default {
             if (multiple) {
                 return ''
             } else {
-                return values[0] ? values[0].name : ''
+                return values[0] ? values[0].label : ''
             }
         },
         showContent () {
@@ -313,7 +313,7 @@ export default {
         },
         publicValue () {
             const {multiple, values} = this
-            return multiple ? values.map(option => option.code) : (values[0] || {}).code
+            return multiple ? values.map(option => option.value) : (values[0] || {}).value
         },
         notFoundData () {
             const {filterabled, dropList, loading} = this
@@ -326,8 +326,8 @@ export default {
             const {options, filterabled, filterFn, query, remoteFn} = this
             let dropList = options.map(item => {
                 return typeOf(item) === 'object' && {
-                    code: item[this.codeKey],
-                    name: item[this.nameKey],
+                    value: item[this.codeKey],
+                    label: item[this.nameKey],
                     disabled: item.disabled || false
                 }
             })
@@ -335,7 +335,7 @@ export default {
                 if (filterFn) {
                     dropList = dropList.filter(item => this.filterFn(query, item))
                 } else {
-                    dropList = dropList.filter(({name}) => name.indexOf(query) > -1)
+                    dropList = dropList.filter(({label}) => label.indexOf(query) > -1)
                 }
             }
             return dropList || []
@@ -370,9 +370,9 @@ export default {
                 if (filterabled) {
                     this.query = ''
                 }
-                let isLive = values.filter(({code}) => code === option.code) || []
+                let isLive = values.filter(({value}) => value === option.value) || []
                 if (isLive.length) { // 如果点击的已存在values中 则过滤
-                    this.values = values.filter(({code}) => code !== option.code)
+                    this.values = values.filter(({value}) => value !== option.value)
                 } else {
                     this.values = values.concat(option)
                 }
@@ -388,13 +388,13 @@ export default {
             if (!multiple && (typeOf(initValue[0]) === 'undefined' || String(initValue[0]).trim() === '')) { initValue = [] }
             return initValue
         },
-        getOptionData (value) {
+        getOptionData (val) {
             const {multiple, dropList} = this
             if (multiple) {
-                let items = dropList.filter(({code}) => value && value.indexOf(code) > -1)
+                let items = dropList.filter(({value}) => val && val.indexOf(value) > -1)
                 return items && items[0]
             } else {
-                let item = dropList.filter(({code}) => code === value)
+                let item = dropList.filter(({value}) => value === val)
                 return item && item[0]
             }
         },
@@ -412,7 +412,7 @@ export default {
         removeTag (e) {
             const {disabled, values} = this
             if (!disabled) {
-                this.values = values.filter(({code}) => code !== e.code)
+                this.values = values.filter(({value}) => value !== e.value)
                 this.broadcastPopperUpdate()
             }
         },
@@ -463,10 +463,10 @@ export default {
             const newValue = JSON.stringify(now)
             const oldValue = JSON.stringify(before)
             const emitInput = newValue !== oldValue && publicValue !== value
-            this.query = values.length > 0 ? (multiple ? '' : values[0].name) : ''
+            this.query = values.length > 0 ? (multiple ? '' : values[0].label) : ''
             if (emitInput) {
                 this.$emit('input', publicValue) // to update v-model
-                this.$emit('on-change', nameInCode ? values : publicValue)
+                this.$emit('on-change', nameInCode ? (multiple ? values : values[0]) : publicValue)
                 this.dispatch('FormItem', 'on-form-change', nameInCode ? values : publicValue)
             }
         },

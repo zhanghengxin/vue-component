@@ -80,6 +80,16 @@
           "name": "message"
         },
         {
+          "title": "Steps 步骤条",
+          "path": "/steps",
+          "name": "steps"
+        },
+        {
+          "title": "Upload 上传",
+          "path": "/upload",
+          "name": "upload"
+        },
+        {
           "title": "Dropdown下拉",
           "path": "/dropdown",
           "name": "dropdown"
