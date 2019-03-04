@@ -6,7 +6,7 @@
         @mousedown.prevent
         @touchstart.prevent
     >
-        <slot>{{ label }}
+        <slot>{{ labelText }}
             <b-icon type='queding' v-if='showSelected'/>
         </slot>
     </li>
@@ -21,11 +21,11 @@ export default {
     name: prefixCls,
     mixins: [Emitter],
     props: {
-        code: {
+        value: {
             type: [String, Number],
             required: true
         },
-        name: {
+        label: {
             type: [String, Number]
         },
         disabled: {
@@ -61,17 +61,17 @@ export default {
                 }
             ]
         },
-        label () {
-            return (this.name) ? this.name : this.code
+        labelText () {
+            return (this.label) ? this.label : this.value
         },
         optionLabel () {
-            return this.name || (this.$el && this.$el.textContent)
+            return this.label || (this.$el && this.$el.textContent)
         },
         selected () {
             if (!this.multiple) { // 非多选
-                return this.code === this.publicValue
+                return this.value === this.publicValue
             } else { // 多选
-                return this.publicValue && this.publicValue.indexOf(this.code) > -1
+                return this.publicValue && this.publicValue.indexOf(this.value) > -1
             }
         },
         showSelected () {
@@ -82,12 +82,12 @@ export default {
         selectFn (e) {
             if (this.disabled) return false
             this.dispatch(`${prefix}select`, 'on-select-selected', {
-                code: this.code,
-                name: this.optionLabel
+                value: this.value,
+                label: this.optionLabel
             })
             this.$emit('on-select-selected', {
-                code: this.code,
-                name: this.optionLabel
+                value: this.value,
+                label: this.optionLabel
             })
         }
     }

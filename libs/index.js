@@ -23,6 +23,7 @@ import { Row, Col } from './components/grid'
 import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
+import Upload from './components/upload'
 import BackTop from './components/backTop'
 import Dropdown from './components/dropdown'
 import DropdownItem from './components/dropdown-item'
@@ -88,6 +89,7 @@ const components = [
     Modal,
     Circle,
     Tooltip,
+    Upload,
     BackTop,
     Form,
     Form.FormItem,
