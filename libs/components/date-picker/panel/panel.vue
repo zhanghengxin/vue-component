@@ -31,15 +31,15 @@
                 {{year}}
             </a>
             <a
-                v-if="panel === 'DATE'"
-                :class="[`${icon}-next-month`]"
-                @click="handleIconMonth(1)">
-                &raquo;
-            </a>
-            <a
                 v-if="panel !== 'TIME'"
                 :class="[`${icon}-next-year`]"
                 @click="handleIconYear(1)">
+                &raquo;
+            </a>
+            <a
+                v-if="panel === 'DATE'"
+                :class="[`${icon}-next-month`]"
+                @click="handleIconMonth(1)">
                 &rsaquo;
             </a>
             <a
