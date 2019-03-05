@@ -13,19 +13,31 @@
 
 // page组件  示例
 ```bash
-$css-prefix-page: $css-prefix + 'page';
+$loading:$css-prefix+'loading';
 
-.#{$css-prefix-page} {
-  font-size: 0;
-  .#{$css-prefix-page}-item-content {
-    color: $Content;
-  }
-  .#{$css-prefix-page}-arrow {
-    color: $Content;
-    &:hover {
-      color: $LightPrimary;
+.#{$loading} {
+  &-parent {
+    &-relative {
+      position: relative !important;
+    }
+
+    &-hidden {
+      overflow: hidden !important;
     }
   }
+
+  &-mask {
+    position: absolute;
+    z-index: 2000;
+    background-color: rgba(255, 255, 255, .9);
+    margin: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: opacity .3;
+  }
+
 }
 ```
 
@@ -60,8 +72,4 @@ $css-prefix-page: $css-prefix + 'page';
 ```
 - 每一个组件要单独拉一个分支管理，比如 `page` 组件的分支名为 `release-ggq-page`,方便以后迭代更新。
 ### 测试
-初期 UI 测试采用常见的的Karma + Mocha单元测试，测试用例请参考test/unit/specs/Icon.spec.js,测试用例编写以后，执行 npm run unit 进行测试
-
-以下是测试用例执行成功的截图
-
-![avatar](../../assets/image/test.jpg)
+UI 测试采用常见的的jest + vue/test-utils单元测试，测试用例编写以后，执行 npm run test 进行测试
