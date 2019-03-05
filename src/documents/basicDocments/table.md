@@ -1569,11 +1569,12 @@
 </div>
 
 ### 表格序号
-通过给组件设置 showIndex 属性可以开启序号,可以通过配置`indexInfo`来支持分页以及其他属性，详见文档
+通过给组件设置 showIndex 属性可以开启序号,可以通过配置`indexInfo`来支持分页以及其他属性
 <div class="example">
     <div class="example-box">
         <div>
            <b-table show-index border width=1000 :columns='columns11' :data='data11'></b-table>
+           <b-table border width=1000 :columns='columns13' :data='data11'></b-table>
         </div>
     </div>
 
@@ -1617,6 +1618,37 @@
                              key: 'book',
                              width:200
                          }
+                    ],
+                    columns13: [
+                        {
+                           title: '序号',
+                           width:60,
+                           align:'center',
+                           type:'index'
+                        },
+                        {
+                           title: 'Age',
+                           key: 'age',
+                           width:100
+                        },
+                        {
+                           title: 'Pets',
+                           key: 'pets',
+                           minWidth:100
+                        },
+                        {
+                           title: 'Like',
+                           key: 'like',
+                           maxWidth:100
+                        },
+                        {
+                           title: 'ID',
+                           key: 'id',
+                        },
+                        {
+                           title: 'Book',
+                           key: 'book'
+                        }
                     ],
                     data11: [
                         {
@@ -2715,6 +2747,37 @@
                        key: 'book'
                     }
                 ],
+                columns13: [
+                    {
+                       title: '序号',
+                       width:60,
+                       align:'center',
+                       type:'index'
+                    },
+                    {
+                       title: 'Age',
+                       key: 'age',
+                       width:100
+                    },
+                    {
+                       title: 'Pets',
+                       key: 'pets',
+                       minWidth:100
+                    },
+                    {
+                       title: 'Like',
+                       key: 'like',
+                       maxWidth:100
+                    },
+                    {
+                       title: 'ID',
+                       key: 'id',
+                    },
+                    {
+                       title: 'Book',
+                       key: 'book'
+                    }
+                ],
                 loading:true
             }
         },
@@ -2746,14 +2809,14 @@
 | draggable     |  是否开启拖拽排序  |  Boolean  |    false   |
 | dynamicable     |  是否开启显示隐藏列  |  Boolean  |  false   |
 | dynamicallocation     |  是否开启显示隐藏列【弹层模式】，dynamicable显示隐藏列和此模式二者只能开启一种  |  Boolean  |   false   |
-| show-index     |  是否开启表格序号，如果需要支持分页请见下文配置  |  Boolean  |  false   |
+| show-index     |  是否开启表格序号  |  Boolean  |  false   |
+| index-info     |  表格序号的配置项 |   Object  |   `page`:当前页【1】<br> `size`:页大小【10】<br>`width`: 序号列宽【50】<br>`align`:排列方式 【center】<br>`fixed`:固定列情况 【】<br>`title`:表头 【序号】<br> |
 | width     |  表格宽度	  |  Number / String  |   auto   |
 | height     |  表格高度，设置后，如果表格内容大于此值，会固定表头	  |  Number / String  |  -    |    auto   |
 | loading     |  	表格是否加载中	  |  Boolean  |    false   |
 | highlight-row     |  	是否支持高亮选中的行，即单选	  |  Boolean  |    false   |
 | no-data-text     |  	数据为空时显示的提示内容	  |  Number / String  |    暂无数据   |
 | loading-text     |  	加载数据时显示的文本	  |  Number / String  |    -   |
-| show-index     |  	显示序号	  |  Boolean  |    false   |
 
 ### columns
 | 属性      | 说明    | 类型      | 可选值       | 默认值       |

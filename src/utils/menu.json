@@ -16,6 +16,11 @@
       "title": "组件开发规范"
     },
     {
+      "name": "update",
+      "path": "/update",
+      "title": "更新日志"
+    },
+    {
       "path": "/",
       "redirect": "/guide"
     },
