@@ -302,6 +302,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 :multiple='multiple' 
                 :options='options' 
                 @on-change='changeConsole'
+                :nameInCode='nameInCode'
                 style="width:200px" >
             </b-select>
             <b-select 

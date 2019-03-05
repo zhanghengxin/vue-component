@@ -205,11 +205,11 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ### label属性的两种样式
 通过设置```label```属性 设置带文字描述的input组合组件 <br/>
 label文字大小可根据input的size变化<br/>
-通过设置```labelWidth```属性可设置label文字所占的宽度 labelWidth默认36px<br/>
+通过设置```labelWidth```属性可设置label文字所占的宽度 labelWidth默认36px 可通过width设置input框```(只设置input框)```的宽度<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" label='姓名' placeholder="请输入..." /></b-input>
+            <b-input v-model="value6" label='姓名' :width='200' placeholder="请输入..." /></b-input>
             <b-input v-model="value6" label='密码' type='password' placeholder="请输入..." /></b-input>
         </div>
     </div>

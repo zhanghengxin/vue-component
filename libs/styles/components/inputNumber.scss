@@ -37,13 +37,13 @@ $prefix-number-icon: $css-prefix+'input-icon';
 }
 
 .#{$prefix-number} {
-  &:hover{
-    .#{$prefix-number-icon}{
-        display: block;
-        opacity: 1;
-        transition: all .3s linear;
-    }
-  }
+  // &:hover{
+  //   .#{$prefix-number-icon}{
+  //       display: block;
+  //       opacity: 1;
+  //       transition: all .3s linear;
+  //   }
+  // }
 
   .#{$prefix-number-icon} {
     // display: none;
@@ -56,6 +56,19 @@ $prefix-number-icon: $css-prefix+'input-icon';
       border-right: 1px solid $Border;
     }
   }
+
+  .b-input-number-icon.#{$prefix-number-icon} {
+    // display: none;
+    // opacity: 0;
+    &-suffix {
+      border-left: none !important;
+    }
+
+    &-prefix {
+      border-right: none !important;
+    }
+  }
+
   @include icons();
 
   &-icon {
