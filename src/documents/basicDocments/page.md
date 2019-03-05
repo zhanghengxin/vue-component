@@ -192,6 +192,7 @@
 | show-elevator     |  是否显示电梯功能 | boolean    |  -  |     false  |
 | show-total     |  是否显示总数 | boolean    |  -  |     false  |
 | show-sizer     |  是否显示切换页数 | boolean    |  -  |     false  |
+| size-options     |  自定义切换页数,当show-sizer开启时生效   | 	 array    |  -  |   [10, 20, 50, 100]    |
 | prev-text     |  自定义上一页的文本   | 	string    |   -  |     -  |
 | next-text     | 自定义下一页的文本   | 	string    |  -  |   -    |
 
