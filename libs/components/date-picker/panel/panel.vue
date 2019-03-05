@@ -34,13 +34,13 @@
                 v-if="panel === 'DATE'"
                 :class="[`${icon}-next-month`]"
                 @click="handleIconMonth(1)">
-                &rsaquo;
+                &raquo;
             </a>
             <a
                 v-if="panel !== 'TIME'"
                 :class="[`${icon}-next-year`]"
                 @click="handleIconYear(1)">
-                &raquo;
+                &rsaquo;
             </a>
             <a
                 v-if="panel === 'TIME'"
