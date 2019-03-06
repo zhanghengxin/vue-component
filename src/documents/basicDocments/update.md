@@ -1,11 +1,20 @@
 更新日志
 
-### 0.2.5
-## `2018-11-19`
+### 0.2.6
+## `2019-03-06`
 <br>
 <b-timeline>
     <b-timeline-item>
-    修改 select 向外暴露的值  由code、name 修改为 value、label
+    修复 page 组件动态修改 page属性,没有生效的问题
+    </b-timeline-item>
+</b-timeline>
+
+### 0.2.5
+## `2019-03-05`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        修改 select 向外暴露的值  由code、name 修改为 value、label
     </b-timeline-item>
     <b-timeline-item>
         修改 input  在label fixed为false下设置width出现样式问题

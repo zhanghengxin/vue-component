@@ -170,6 +170,11 @@
 
  <script>
         export default {
+            data () {
+                return {
+                   page:1
+                }
+            },
             methods: {
                 handleChange(page) {
                     alert('当前选中页数为'+ page)

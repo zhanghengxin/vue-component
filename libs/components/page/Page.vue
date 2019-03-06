@@ -158,6 +158,11 @@ export default {
             currentSize: Number(this.size)
         }
     },
+    watch: {
+        page () {
+            this.currentPage = Number(this.page)
+        }
+    },
     props: {
         page: {
             type: [Number, String],
