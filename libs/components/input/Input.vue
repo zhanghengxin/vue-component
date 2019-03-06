@@ -25,6 +25,7 @@
             <transition name='fade'>
                 <div
                     v-if="suffix"
+                    v-show='inputNumber'
                     :class='[
                     prefixCls+`-icon`,
                     prefixCls+`-icon-`+size,
@@ -144,6 +145,10 @@ export default {
             default: false
         },
         readonly: {
+            type: Boolean,
+            default: false
+        },
+        inputNumber: {
             type: Boolean,
             default: false
         },

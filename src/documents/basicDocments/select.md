@@ -20,7 +20,7 @@
                 value02: '',
                 value03: '',
                 value04: '',
-                clearabled:true,
+                clearable:true,
                 disabled:true,
                 autowarp:true,
                 fixed:true,
@@ -429,7 +429,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value0"  style="width:200px" :clearabled='clearabled' :options='options' ></b-select></b-select>
+            <b-select v-model="value0"  style="width:200px" :clearable='clearable' :options='options' ></b-select></b-select>
             <span>{{value0}}</span>
         </div>
     </div>
@@ -443,7 +443,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
             <b-select 
                 v-model="value0"  
                 style="width:200px" 
-                :clearabled='clearabled' 
+                :clearable='clearable' 
                 :options='options' >
             </b-select>
             <span>{{value0}}</span>
@@ -454,7 +454,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
             data () {
                 return {
                     value0: '',
-                    clearabled:true,
+                    clearable:true,
                     options:[{
                         label:'增专',
                         value:'004'
