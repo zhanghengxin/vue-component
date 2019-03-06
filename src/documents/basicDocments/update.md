@@ -1,5 +1,14 @@
 更新日志
 
+### 0.2.7
+## `2019-03-06`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 select的clearable、input-number的icon显示隐藏在不设置width时的问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.2.6
 ## `2019-03-06`
 <br>
