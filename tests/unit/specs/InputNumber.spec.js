@@ -15,6 +15,7 @@ describe('inputNumber', () => {
             }
         })
         setTimeout(_ => {
+            vm.trigger('mouseenter')
             const up = vm.find('.b-input-number-up')
             const down = vm.find('.b-input-number-down')
             up.trigger('click')
@@ -37,6 +38,7 @@ describe('inputNumber', () => {
             }
         })
         setTimeout(_ => {
+            vm.trigger('mouseenter')
             const up = vm.find('.b-input-number-up')
             const down = vm.find('.b-input-number-down')
             up.trigger('click')
@@ -60,6 +62,7 @@ describe('inputNumber', () => {
             }
         })
         setTimeout(_ => {
+            vm.trigger('mouseenter')
             const up = vm.find('.b-input-number-up')
             up.trigger('click')
             setTimeout(_ => {
@@ -82,6 +85,7 @@ describe('inputNumber', () => {
             }
         })
         setTimeout(_ => {
+            vm.trigger('mouseenter')
             const down = vm.find('.b-input-number-down')
             down.trigger('click')
             setTimeout(_ => {

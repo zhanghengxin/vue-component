@@ -5,18 +5,18 @@ import { mount } from '@vue/test-utils'
 const prefixCls = `.${prefix}select`
 const Select = `${prefix}select`
 const options = [{
-    name: '增专',
-    code: '004'
+    label: '增专',
+    value: '004'
 }, {
-    name: '增普',
-    code: '007',
+    label: '增普',
+    value: '007',
     disabled: true
 }, {
-    name: '机动车',
-    code: '005'
+    label: '机动车',
+    value: '005'
 }, {
-    name: '电子票',
-    code: '025'
+    label: '电子票',
+    value: '025'
 }]
 
 const options1 = [{
@@ -38,19 +38,19 @@ describe('Select', () => {
     afterEach(() => {
         destroyVM(vm)
     })
-    it('create && clearabled && v-model', done => {
+    it('create && clearable && v-model', done => {
         vm = createVue({
             template: `
             <${Select}
                 v-model="value"
                 :options='options'
-                :clearabled="clearabled">
+                :clearable="clearable">
             </${Select}>
             `,
             data () {
                 return {
                     options: options,
-                    clearabled: true,
+                    clearable: true,
                     value: '004'
                 }
             }

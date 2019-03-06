@@ -16,8 +16,8 @@
                 @blur="toggleHeaderFocus"
                 @focus="toggleHeaderFocus"
                 @click="toggleMenu"
-                @mouseenter="clearShow = clearabled && true"
-                @mouseleave="clearShow =  clearabled && false">
+                @mouseenter="clearShow = clearable && true"
+                @mouseleave="clearShow = clearable && false">
                 <input type="hidden" :name="name" :value="publicValue">
                 <div :class='[`${prefixCls}-show-selection`]'>
                     <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
@@ -54,7 +54,7 @@
                 </b-icon>
                 <b-icon
                     type='shibai-mian'
-                    v-if='clearabled'
+                    v-if='clearable'
                     v-show='closeIcon'
                     :class="[prefixCls+`-arrow`]"
                     @click.native.stop='clearValues'>
@@ -145,7 +145,7 @@ export default {
             type: Boolean,
             default: false
         },
-        clearabled: {
+        clearable: {
             type: Boolean,
             default: false
         },
@@ -287,8 +287,8 @@ export default {
             return !multiple || ((show && multiple) || !values.length)
         },
         iconShow () {
-            const {clearabled, clearShow, values, disabled} = this
-            return clearabled && clearShow ? !values.length : !disabled
+            const {clearable, clearShow, values, disabled} = this
+            return clearable && clearShow ? !values.length : !disabled
         },
         closeIcon () {
             const {disabled, clearShow, values} = this
