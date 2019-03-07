@@ -302,9 +302,9 @@ export default {
         },
         // label的时候 fixed为false  input的宽度
         inputStyles () {
-            const { label } = this
+            const { label, fixed } = this
             let style = {}
-            if (label && this.width) {
+            if (label && this.width && !fixed) {
                 style.width = `${this.width}px`
             }
             return style
