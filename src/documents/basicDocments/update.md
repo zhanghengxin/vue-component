@@ -1,5 +1,20 @@
 更新日志
 
+### 0.2.8
+## `2019-03-07`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 input与select的placeholder的颜色
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 去掉input在IE浏览器中原生清空icon
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 input设置label与disabled时的样式问题
+     </b-timeline-item>
+</b-timeline>
+
 ### 0.2.7
 ## `2019-03-06`
 <br>
