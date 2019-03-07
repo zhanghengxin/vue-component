@@ -123,6 +123,14 @@ $css-prefix-option: $css-prefix+'option';
 
     .#{$css-prefix-select}-selection {
       border: 0;
+      &-disabled {
+        @include border-left-radius($Disabled, 0);
+        cursor: not-allowed;
+  
+        .#{$css-prefix-select}-input {
+          @include border-left-radius($Disabled, 0)
+        }
+      }
     }
 
     @include selectWidth(100%);
@@ -190,11 +198,11 @@ $css-prefix-option: $css-prefix+'option';
     }
 
     &-disabled {
-      @include border-left-radius($Disabled, 0);
+      background-color: $Disabled;
       cursor: not-allowed;
 
       .#{$css-prefix-select}-input {
-        @include border-left-radius($Disabled, 0)
+        background-color: $Disabled;
       }
     }
   }
@@ -219,6 +227,7 @@ $css-prefix-option: $css-prefix+'option';
     width: 100%;
     border-radius: 4px;
     padding: 0 24px 0 8px;
+    @include placeholder($SubContent)
   }
 
   .#{$css-prefix-drop} {
