@@ -54,6 +54,7 @@
                         :minute-step="minuteStep"
                         :disabled-days="disabledDays"
                         :first-day-of-week="firstDayOfWeek"
+                        :split-panels="splitPanels"
                         @select-date="selectDate"
                         @select-time="selectTime">
                     </panel>
@@ -73,6 +74,8 @@
                             :minute-step="minuteStep"
                             :disabled-days="disabledDays"
                             :first-day-of-week="firstDayOfWeek"
+                            :split-panels="splitPanels"
+                            panel-position="left"
                             @select-date="selectStartDate"
                             @select-time="selectStartTime">
                         </panel>
@@ -90,6 +93,8 @@
                             :visible="popupVisible"
                             :disabled-days="disabledDays"
                             :first-day-of-week="firstDayOfWeek"
+                            :split-panels="splitPanels"
+                            panel-position="right"
                             @select-date="selectEndDate"
                             @select-time="selectEndTime">
                         </panel>
@@ -247,6 +252,10 @@ export default {
         placement: {
             type: String,
             default: 'bottom-start'
+        },
+        splitPanels: {
+            type: Boolean,
+            default: true
         }
     },
     data () {

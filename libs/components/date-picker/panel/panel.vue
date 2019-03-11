@@ -2,13 +2,13 @@
     <div :class="calendarCls">
         <div :class="[`${calendarCls}-header`]">
             <a
-                v-if="panel !== 'TIME'"
+                v-if="panel !== 'TIME' && leftPanel"
                 :class="[`${icon}-last-year`]"
                 @click="handleIconYear(-1)">
                 &laquo;
             </a>
             <a
-                v-if="panel === 'DATE'"
+                v-if="panel === 'DATE' && leftPanel"
                 :class="[`${icon}-last-month`]"
                 @click="handleIconMonth(-1)">
                 &lsaquo;
@@ -28,16 +28,16 @@
                 v-if="panel === 'DATE' || panel === 'MONTH'"
                 :class="[`${prefix}current-year`]"
                 @click="handleClickYear">
-                {{year}}
+                {{`${year} 年`}}
             </a>
             <a
-                v-if="panel !== 'TIME'"
+                v-if="panel !== 'TIME' && rightPanel"
                 :class="[`${icon}-next-year`]"
                 @click="handleIconYear(1)">
                 &raquo;
             </a>
             <a
-                v-if="panel === 'DATE'"
+                v-if="panel === 'DATE' && rightPanel"
                 :class="[`${icon}-next-month`]"
                 @click="handleIconMonth(1)">
                 &rsaquo;
@@ -154,6 +154,14 @@ export default {
             default () {
                 return null
             }
+        },
+        splitPanels: {
+            type: Boolean,
+            default: true
+        },
+        panelPosition: {
+            type: String,
+            default: null
         }
     },
     data () {
@@ -161,7 +169,6 @@ export default {
         let year = _date.getFullYear()
         let month = _date.getMonth()
         let firstYear = Math.floor(year / 10) * 10
-
         return {
             icon,
             prefix,
@@ -198,7 +205,7 @@ export default {
             return ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
         },
         yearHeader () {
-            return this.firstYear + ' ~ ' + (this.firstYear + 10)
+            return this.firstYear + ' ~ ' + (this.firstYear + 9)
         },
         timeHeader () {
             if (this.type === 'time') {
@@ -213,6 +220,12 @@ export default {
         },
         notAfterTime () {
             return this.getCriticalTime(this.notAfter)
+        },
+        leftPanel () {
+            return (this.panelPosition === 'left' && !this.splitPanels) || this.panel === 'YEAR' || this.splitPanels
+        },
+        rightPanel () {
+            return (this.panelPosition === 'right' && !this.splitPanels) || this.panel === 'YEAR' || this.splitPanels
         }
     },
     watch: {
@@ -382,10 +395,22 @@ export default {
         },
         handleIconYear (flag) {
             if (this.panel === 'YEAR') {
-                this.changePanelYears(flag)
+                 if (this.panelPosition && !this.splitPanels) {
+                    this.$parent.$children[0].changePanelYears(flag)
+                    this.$parent.$children[1].changePanelYears(flag)
+                } else {
+                    this.changePanelYears(flag)
+                }
             } else {
                 let year = this.year
-                this.changeYear(year + flag)
+                // console.log('this.$parent', this.$parent)
+                if (this.panelPosition && !this.splitPanels) {
+                    this.$parent.$children[0].changeYear(year + flag)
+                    this.$parent.$children[1].changeYear(year + flag)
+                } else {
+                    this.changeYear(year + flag)
+                }
+
                 this.$parent.$emit('change-calendar-year', {
                     year,
                     flag,
@@ -396,13 +421,31 @@ export default {
         },
         handleIconMonth (flag) {
             let month = this.month
-            this.changeMonth(month + flag)
+            if (this.panelPosition && !this.splitPanels) {
+                this.$parent.$children[0].changeMonth(month + flag)
+                this.$parent.$children[1].changeMonth(month + flag)
+            } else {
+                this.changeMonth(month + flag)
+            }
+
             this.$parent.$emit('change-calendar-month', {
                 month,
                 flag,
                 vm: this,
                 sibling: this.getSibling()
             })
+        },
+        changeSplitMonth (month) {
+            if (this.panelPosition && !this.splitPanels) {
+                this.$parent.$children[0].changeMonth(month)
+                this.$parent.$children[1].changeMonth(month)
+            }
+        },
+        changeSplitYear (year) {
+            if (this.panelPosition && !this.splitPanels) {
+                this.$parent.$children[0].changeYear(year)
+                this.$parent.$children[1].changeYear(year)
+            }
         },
         handleClickYear () {
             this.panel = 'YEAR'
