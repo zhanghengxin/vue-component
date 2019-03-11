@@ -1,5 +1,17 @@
 更新日志
 
+### 0.2.9
+## `2019-03-11`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    table 表格添加过滤功能
+    </b-timeline-item>
+     <b-timeline-item>
+        icon 添加过滤、纳税申报新图标
+     </b-timeline-item>
+</b-timeline>
+
 ### 0.2.8
 ## `2019-03-07`
 <br>

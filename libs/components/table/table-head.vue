@@ -49,7 +49,7 @@
                             placement="bottom"
                             theme="light">
                             <span :class="[preCls + '-filter']">
-                                <Icon type="chaxun"></Icon>
+                                <Icon type="shaixuan"></Icon>
                             </span>
                             <div slot="content" :class="[preCls + '-filter-list']">
                                 <ul :class="[preCls + '-filter-list-single']">

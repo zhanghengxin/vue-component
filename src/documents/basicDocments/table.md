@@ -2917,6 +2917,7 @@
                        title: 'Age',
                        key: 'age',
                        width:100,
+                       sortable:true,
                        filters: [
                            {
                                label: 'Greater than 18',
