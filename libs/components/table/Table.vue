@@ -243,6 +243,8 @@ export default {
         this.$on('drag-drop', this.handleDragDrop)
         this.$on('drag-end', this.handleDragEnd)
         this.$on('context-menu', this.handleContextMenu)
+        this.$on('filiter-reset', this.handleFilterReset)
+        this.$on('filiter-select', this.handleFilterSelect)
     },
     mounted () {
         this.handleResize()
@@ -747,6 +749,35 @@ export default {
                     this.$set(cloneColumns[index], '_visible', status)
                 }
             }
+        },
+        // 过滤数据
+        // 还原全部数据
+        handleFilterReset (_index) {
+            const index = _index
+            this.$set(this.cloneColumns[index], '_filterChecked', [])
+            let filterData = this.buildData()
+            this.formatData = filterData
+            this.$emit('on-filter-change', this.cloneColumns[index])
+        },
+        handleFilterSelect (option) {
+            this.$set(this.cloneColumns[option.index], '_filterChecked', [option.value])
+            this.handleFilter(option.index)
+        },
+        handleFilter (index) {
+            const column = this.cloneColumns[index]
+            let filterData = this.buildData()
+            this.formatData = this.filterData(filterData, column)
+            this.$emit('on-filter-change', column)
+        },
+        filterData (data, column) {
+            return data.filter((row) => {
+                let status = !column._filterChecked.length
+                for (let i = 0; i < column._filterChecked.length; i++) {
+                    status = column.filterMethod(column._filterChecked[i], row)
+                    if (status) break
+                }
+                return status
+            })
         }
     }
 }

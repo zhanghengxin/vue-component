@@ -1933,6 +1933,134 @@
 :::
 </div>
 
+### 过滤
+通过给数据 columns 里的 row  设置字段 filters 可以给列表设置过滤效果，具体见示例以及文档
+
+<div class="example">
+    <div class="example-box">
+        <div>
+             <b-table border width=1000 :columns='columns14' :data='data11'></b-table>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+            <b-table border width=1000 :columns='columns14' :data='data11'></b-table>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    columns14: [
+                        {
+                           title: '序号',
+                           width:60,
+                           align:'center',
+                           type:'index'
+                        },
+                        {
+                           title: 'Age',
+                           key: 'age',
+                           width:100,
+                           filters: [
+                               {
+                                   label: 'Greater than 18',
+                                   value: 1
+                               },
+                               {
+                                   label: 'Less than 18',
+                                   value: 2
+                               }
+                           ],
+                           filterMethod (value, row) {
+                               if (value === 1) {
+                                   return row.age >= 18;
+                               } else if (value === 2) {
+                                   return row.age < 18;
+                               }
+                           }
+                        },
+                        {
+                           title: 'Pets',
+                           key: 'pets',
+                           minWidth:100
+                        },
+                        {
+                           title: 'Like',
+                           key: 'like',
+                           maxWidth:100
+                        },
+                        {
+                           title: 'ID',
+                           key: 'id',
+                        },
+                        {
+                           title: 'Book',
+                           key: 'book'
+                        }
+                    ],
+                    data11: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby:'Swimming',
+                            pets:'dog',
+                            occupation:'Doctor',
+                            like:'red',
+                            id:'1',
+                            book:'《贩罪》'
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets:'cat',
+                            hobby:'Swimming',
+                            id:'2',
+                            book:'《霸皇纪》',
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets:'rhizomys',
+                            hobby:'Swimming',
+                            id:'3',
+                            book:'《龙族》',
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            sex: '男',
+                            pets:'cat',
+                            hobby:'Swimming',
+                            book:'《卡徒》',
+                            id:'4',
+                            occupation:'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            sex: '男',
+                            book:'《无限道武者路》',
+                            id:'5',
+                            pets:'rhizomys',
+                            hobby:'Thousand-hand Bodhisattva',
+                            occupation:'President'
+                        }
+                    ]
+                }
+            }
+    </script>
+```
+:::
+</div>
+
+
 <script>
     export default {
         data () {
@@ -2778,6 +2906,54 @@
                        key: 'book'
                     }
                 ],
+                columns14: [
+                    {
+                       title: '序号',
+                       width:60,
+                       align:'center',
+                       type:'index'
+                    },
+                    {
+                       title: 'Age',
+                       key: 'age',
+                       width:100,
+                       filters: [
+                           {
+                               label: 'Greater than 18',
+                               value: 1
+                           },
+                           {
+                               label: 'Less than 18',
+                               value: 2
+                           }
+                       ],
+                       filterMethod (value, row) {
+                           if (value === 1) {
+                               return row.age >= 18;
+                           } else if (value === 2) {
+                               return row.age < 18;
+                           }
+                       }
+                    },
+                    {
+                       title: 'Pets',
+                       key: 'pets',
+                       minWidth:100
+                    },
+                    {
+                       title: 'Like',
+                       key: 'like',
+                       maxWidth:100
+                    },
+                    {
+                       title: 'ID',
+                       key: 'id',
+                    },
+                    {
+                       title: 'Book',
+                       key: 'book'
+                    }
+                ],
                 loading:true
             }
         },
@@ -2834,6 +3010,9 @@
 | sortable     |  对应列是否可以排序	  |  Boolean  | -  | false   |
 | sortMethod     |  自定义排序使用的方法，当设置 sortable: true 时有效。详见示例	  |  Boolean  | -  | -   |
 | sortType     |  设置初始化排序	  |  Boolean  | `asc`、`desc`  | -   |
+| filters     |  过滤数据的选项，格式为数组，数组中每项包含 label 和 value 属性，使用过滤，必须同时配置 filterMethod	  |  Array  |-  | -   |
+| filterMethod     |  数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示		  |  Function  | -  | -   |
+| filterMultiple     |  数据过滤的选项是否多选  |  Boolean  | -  | false   |
 
 ### data
 | 属性      | 说明    | 类型      | 可选值       | 默认值       |

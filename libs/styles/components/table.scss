@@ -209,4 +209,17 @@ $prefix-table: $css-prefix + 'table';
       z-index: 100;
     }
   }
+  &-filter {
+    &-select-item {
+      margin: 0;
+      padding: 8px;
+      cursor: pointer;
+      &:hover {
+        color: $LightPrimary;
+      }
+      &-selected {
+        color: $LightPrimary;
+      }
+    }
+  }
 }
