@@ -3035,3 +3035,4 @@
 | on-row-click     |  当选中节点时触发   |  `row`: 当前选中的数据  |
 | on-row-dbclick     |  当选中节点时触发   |  `row`: 当前选中的数据  |
 | on-sort-change     |  当选中节点时触发   |  `column`: 当前列数据 <br> `key`: 排序依据的指标 <br> `order`: 排序的顺序，值为 asc 或 desc|
+| on-filter-change	    |  筛选条件发生变化时触发	   |  当前列数据 |
