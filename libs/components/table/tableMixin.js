@@ -25,6 +25,9 @@ export default {
             if (width === '0') width = ''
             return width
         },
+        isPopperShow (column) {
+            return column.filters && ((!this.fixed && !column.fixed) || (this.fixed === 'left' && column.fixed === 'left') || (this.fixed === 'right' && column.fixed === 'right'))
+        },
         cellColspan (row, column) {
             let colspan = 1
             if (row._colspan && column.key && row._colspan[column.key]) {

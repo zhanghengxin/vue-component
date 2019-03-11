@@ -8,10 +8,10 @@
             <table-tr
                 :row="row"
                 :pre-cls="preCls"
-                @mouseenter.native.stop="handleMouseIn(row._index)"
-                @mouseleave.native.stop="handleMouseOut(row._index)"
-                @click.native="clickCurrentRow(row._index)"
-                @dblclick.native.stop="dblclickCurrentRow(row._index)"
+                @mouseenter.native.stop="handleMouseIn(index)"
+                @mouseleave.native.stop="handleMouseOut(index)"
+                @click.native="clickCurrentRow(index)"
+                @dblclick.native.stop="dblclickCurrentRow(index)"
                 :key="index">
                 <td
                     v-for="(column,_index) in cellColumns(visibleColumns,row,index)"

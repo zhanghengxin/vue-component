@@ -44,6 +44,28 @@
                                 @on-click="handleSort(item._index, 'desc')">
                             </Icon>
                         </span>
+                        <Tooltip
+                            v-if="isPopperShow(item)"
+                            placement="bottom"
+                            theme="light">
+                            <span :class="[preCls + '-filter']">
+                                <Icon type="chaxun"></Icon>
+                            </span>
+                            <div slot="content" :class="[preCls + '-filter-list']">
+                                <ul :class="[preCls + '-filter-list-single']">
+                                    <li
+                                        :class="itemAllClasses(item)"
+                                        @click="filterReset(index)">全部
+                                    </li>
+                                    <li
+                                        :class="itemClasses(item,filter)"
+                                        v-for="(filter,key) in item.filters"
+                                        @click="filterSelect(index, filter.value)"
+                                        :key="key">{{ filter.label }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </Tooltip>
                     </template>
                 </div>
             </th>
@@ -55,6 +77,7 @@
 <script>
 import tableMixin from './tableMixin'
 import Checkbox from '../checkbox/Checkbox.vue'
+import Tooltip from '../tooltip/Tooltip.vue'
 import Icon from '../icon/Icon'
 import Emitter from '../../mixins/emitter'
 import { findComponentUpward } from '../../utils/assist'
@@ -62,15 +85,15 @@ import { findComponentUpward } from '../../utils/assist'
 export default {
     name: 'TableHead',
     mixins: [tableMixin, Emitter],
-    components: {Checkbox, Icon},
+    components: {Checkbox, Icon, Tooltip},
     data () {
         return {
-            isResizing: false
+            isResizing: false,
+            visibleColumns: this.columns.filter((item) => item._visible)
         }
     },
     props: {
         columns: Array,
-        cloneColumns: Array,
         preCls: String,
         headerStyle: {
             type: Object,
@@ -82,6 +105,14 @@ export default {
         resizeable: Boolean,
         dynamicable: Boolean,
         draggable: Boolean
+    },
+    watch: {
+        columns: {
+            handler () {
+                this.visibleColumns = this.columns.filter((item) => item._visible)
+            },
+            deep: true
+        }
     },
     computed: {
         styles () {
@@ -101,10 +132,11 @@ export default {
                 }
             }
             return status
-        },
-        visibleColumns () {
-            return this.columns.filter((item) => item._visible)
         }
+        // visibleColumns () {
+        //     console.log(this.columns, 'this.columns')
+        //     return this.columns.filter((item) => item._visible)
+        // }
     },
     methods: {
         cellCls () {
@@ -264,6 +296,41 @@ export default {
                 document.addEventListener('contextmenu', oncontextmenu)
                 this.dispatch(this.preCls, 'context-menu', event)
             }
+        },
+        itemClasses (column, item) {
+            return [
+                `${this.preCls}-filter-select-item`,
+                {
+                    [`${this.preCls}-filter-select-item-selected`]: column._filterChecked && column._filterChecked[0] === item.value
+                }
+            ]
+        },
+        itemAllClasses (column) {
+            return [
+                `${this.preCls}-filter-select-item`,
+                {
+                    [`${this.preCls}-filter-select-item-selected`]: !column._filterChecked || !column._filterChecked.length
+                }
+            ]
+        },
+        getColumn (rowIndex, index) {
+            const isGroup = this.columnRows.length > 1
+
+            if (isGroup) {
+                const id = this.headRows[rowIndex][index].__id
+                return this.columns.filter(item => item.__id === id)[0]
+            } else {
+                return this.headRows[rowIndex][index]
+            }
+        },
+        filterReset (index) {
+            this.dispatch(this.preCls, 'filiter-reset', index)
+        },
+        filterSelect (index, value) {
+            this.dispatch(this.preCls, 'filiter-select', {
+                index: index,
+                value: value
+            })
         }
     }
 }
