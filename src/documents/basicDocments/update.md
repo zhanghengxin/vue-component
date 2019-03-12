@@ -1,5 +1,20 @@
 更新日志
 
+### 0.3.0
+## `2019-03-12`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 Button 鼠标放上去之后，边框色视觉效果
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 radio，switch 组件新增 on-click 事件，在change 事件前执行
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 radio组件的边框颜色适配问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.2.9
 ## `2019-03-11`
 <br>
