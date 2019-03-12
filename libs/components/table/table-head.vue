@@ -81,6 +81,7 @@ import Tooltip from '../tooltip/Tooltip.vue'
 import Icon from '../icon/Icon'
 import Emitter from '../../mixins/emitter'
 import { findComponentUpward } from '../../utils/assist'
+import { preventDefault } from '../../utils/compatible'
 
 export default {
     name: 'TableHead',
@@ -178,7 +179,7 @@ export default {
                 if (rect.width > 12 && rect.right - e.pageX < 10) {
                     bodyStyle.cursor = 'col-resize'
                     this.isResizing = true
-                    event.preventDefault()
+                    preventDefault(event)
                 } else {
                     if (this.draggable) {
                         bodyStyle.cursor = 'pointer'
@@ -233,7 +234,7 @@ export default {
                 })
             }
             const handleMouseDown = (event) => {
-                event.preventDefault()
+                preventDefault(event)
             }
             const handleMouseUp = (event) => {
                 let deltaX = event.pageX - startX
@@ -255,7 +256,7 @@ export default {
             document.addEventListener('mouseup', handleMouseUp)
         },
         handleDragStart (event, index) {
-            if (!this.draggable || this.isResizing) event.preventDefault()
+            if (!this.draggable || this.isResizing) preventDefault(event)
             try {
                 // setData is required for draggable to work in FireFox
                 // the content has to be '' so dragging a node out of the tree won't open a new tab in FireFox
@@ -277,7 +278,7 @@ export default {
                 borderLeft = event.pageX - tableLeft
             }
             this.dispatch(this.preCls, 'drag-over', borderLeft)
-            event.preventDefault()
+            preventDefault(event)
         },
         handleEndDrop () {
             if (!this.draggable) return false
@@ -290,7 +291,7 @@ export default {
         rightClick (event) {
             if (event.button === 2) {
                 const oncontextmenu = (event) => {
-                    event.preventDefault()
+                    preventDefault(event)
                     document.removeEventListener('contextmenu', oncontextmenu)
                 }
                 document.addEventListener('contextmenu', oncontextmenu)
