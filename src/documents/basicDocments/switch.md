@@ -4,12 +4,12 @@
 
 <div class="example">
     <div class="example-box">
-        <b-switch v-model="switch1" @on-change="change"></b-switch>
+        <b-switch v-model="switch1" @on-change="change" @on-click='handleClick'></b-switch>
     </div>
 
 ::: code
 ```html
-    <b-switch v-model="switch1" @on-change="change"></b-switch>
+    <b-switch v-model="switch1" @on-change="change" @on-click='handleClick'></b-switch>
     <script>
         export default {
             data () {
@@ -19,7 +19,10 @@
             },
             methods: {
                 change (status) {
-                    alert("开关状态"+status)
+                    console.log("开关状态"+status)
+                },
+                handleClick (status) {
+                    console.log("点击前开关"+status)
                 }
             }
         }
@@ -110,7 +113,10 @@ export default {
         },
         methods: {
             change (status) {
-                alert("开关状态"+status)
+                console.log("开关状态"+status)
+            },
+            handleClick (status) {
+                console.log("点击前开关"+status)
             }
         }
 }

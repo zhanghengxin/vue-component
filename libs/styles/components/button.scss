@@ -46,6 +46,7 @@ $css-prefix-button: $css-prefix+'button';
 
     &:hover {
       @include _background($hover);
+      @include _borderColor($hover);
     }
 
     &:focus {

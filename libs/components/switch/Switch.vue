@@ -67,6 +67,7 @@ export default {
             if (this.disabled) {
                 return false
             }
+            this.$emit('on-click', this.currentValue)
             const checked = this.currentValue === this.trueValue ? this.falseValue : this.trueValue
             this.currentValue = checked
             this.$emit('input', checked)

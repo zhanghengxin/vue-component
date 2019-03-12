@@ -15,7 +15,10 @@
               console.log('change',data)
           },
           changeGroup(data){
-          console.log('changegroup',data)
+            console.log('changegroup',data)
+          },
+          handleClick(data){
+            console.log('clickValue',data)
           }
       }
   }
@@ -180,7 +183,7 @@
             </b-radio-group>
             <p>{{button2}}</p>
             <br>
-            <b-radio-group v-model="button3"  size="small" type="button" @on-change="changeGroup">
+            <b-radio-group v-model="button3"  size="small" type="button" @on-change="changeGroup" @on-click="handleClick">
                 <b-radio label='兔子'></b-radio>
                 <b-radio label='猴子'></b-radio>
                 <b-radio label='泰迪'></b-radio>
@@ -207,7 +210,7 @@
         </b-radio-group>
         <p>{{button2}}</p>
         <br>
-        <b-radio-group v-model="button3"  size="small" type="button" @on-change="changeGroup">
+        <b-radio-group v-model="button3"  size="small" type="button" @on-change="changeGroup" @on-click="handleClick">
             <b-radio label='兔子'></b-radio>
             <b-radio label='猴子'></b-radio>
             <b-radio label='泰迪'></b-radio>
@@ -252,4 +255,5 @@
 | 事件名	      | 说明	    | 返回值 |
 |---------- |-------- |---------- |
 | on-change     |  在选项状态发生改变时触发，返回当前选中的项。通过修改外部的数据改变时不会触发   |  ...  |
+| on-click     |  点击当前选中的项触发，返回当前选中的项。   |  ...  |
 
