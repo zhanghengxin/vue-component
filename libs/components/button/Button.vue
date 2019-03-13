@@ -12,8 +12,7 @@
     <button ref="button"
             :disabled="disabled"
             @click='handleClick($event)'
-            :class="bodyCls"
-    >
+            :class="[bodyCls,customClasses]">
         <i v-if='loading' class="iconfont icon-loading"></i>
         <b-icon v-if="icon" :type="iconcls"></b-icon>
         <span>
@@ -38,10 +37,9 @@ export default {
                 `${prefixCls}-size-${this.size}`,
                 `${prefixCls}-type-${this.type} `,
                 {
-                    [`${prefixCls}-round`]: this.round,
-                    [`${prefixCls}-circle`]: this.circle || this.icon,
-                    [`${prefixCls}-disabled`]: this.disabled,
-                    [`${prefixCls}-plain`]: this.plain
+                    [`${prefixCls}-round`]: this.round, // 圆角
+                    [`${prefixCls}-circle`]: this.circle, // 圆形
+                    [`${prefixCls}-disabled`]: this.disabled // 禁用
                 }
             ]
         }
@@ -81,6 +79,10 @@ export default {
         },
         icon: {
             type: String,
+            default: ''
+        },
+        customClasses: {
+            type: [String, Array],
             default: ''
         }
     },

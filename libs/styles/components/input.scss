@@ -208,7 +208,7 @@ $input-large-font:14px;
 
 // input label组合 固定长度label input的宽度自适应
 .#{$css-prefix-input}-group {
-  width: 280px;
+  width: 100%;
   display: table;
   @include borderTrans();
   @include labelMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));

@@ -16,7 +16,7 @@
         :disabled="disabled"
         :readonly="readonly"
         :size="size"
-        :inputNumber="operationShow || !type"
+        :showSuffix="operationShow || !type"
         :suffix="!disabled"
         :prefix="!disabled && !type && !label"
         @on-change="handleChange"
