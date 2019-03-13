@@ -39,7 +39,6 @@ export default {
                 // 兼容 IE11 浏览器，将 NodeList 类似数组转成数组
                 let h3s = Array.prototype.slice.call(this.$refs.content.querySelectorAll('h3'))
                 this.anchors = h3s
-                console.log('h3s', h3s)
                 h3s.forEach((el, index) => {
                     el.id = `title${index}`
                 })

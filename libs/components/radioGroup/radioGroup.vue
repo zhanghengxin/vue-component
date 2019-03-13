@@ -23,10 +23,6 @@ export default {
             default: ''
         }
     },
-    data () {
-        return {
-        }
-    },
     computed: {
         radioGroupClass () {
             return [
@@ -51,6 +47,7 @@ export default {
         },
         change (label) {
             this.$emit('input', label)
+            this.$emit('on-click', label)
             this.$emit('on-change', label)
         }
     }

@@ -38,10 +38,10 @@ export default {
             return [`${prefix}panel`, `${prefix}panel-month`]
         },
         curYear () {
-            return this.value && new Date(this.value).getFullYear()
+            return new Date(this.value || new Date()).getFullYear()
         },
         curMonth () {
-            return this.value && new Date(this.value).getMonth()
+            return new Date(this.value || new Date()).getMonth()
         }
     },
     methods: {
@@ -50,6 +50,7 @@ export default {
         },
         selectMonth (month) {
             if (!this.disabledMonth(month)) {
+                this.$parent.changeSplitMonth(month)
                 this.$emit('select', month)
             }
         }

@@ -1,5 +1,47 @@
 更新日志
 
+### 0.3.0
+## `2019-03-12`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 Button 鼠标放上去之后，边框色视觉效果
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 radio，switch 组件新增 on-click 事件，在change 事件前执行
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 radio组件的边框颜色适配问题
+    </b-timeline-item>
+</b-timeline>
+
+### 0.2.9
+## `2019-03-11`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    table 表格添加过滤功能
+    </b-timeline-item>
+     <b-timeline-item>
+        icon 添加过滤、纳税申报新图标
+     </b-timeline-item>
+</b-timeline>
+
+### 0.2.8
+## `2019-03-07`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 input与select的placeholder的颜色
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 去掉input在IE浏览器中原生清空icon
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 input设置label与disabled时的样式问题
+     </b-timeline-item>
+</b-timeline>
+
 ### 0.2.7
 ## `2019-03-06`
 <br>

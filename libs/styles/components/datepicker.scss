@@ -11,6 +11,8 @@ $inrange: #DCF1FE;
 $bgFont: #ccc;
 
 .#{$css-prefix-picker} {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
   position: relative;
   display: inline-block;
   color: $Sub;

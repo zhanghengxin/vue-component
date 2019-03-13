@@ -7,6 +7,7 @@
                     :disabled='disabled'
                     :checked='checkedValue'
                     :class="inputClasse"
+                    @keydown="handleClick"
                     @change="change">
             </span>
         <slot>{{ label }}</slot>
@@ -76,9 +77,18 @@ export default {
             }
             this.$emit('input', this.checkedValue)
             this.$emit('on-change', this.checkedValue)
+        },
+        handleClick () {
+            let arr = this.$parent.$children
+            arr.map((item) => {
+                item.checkedValue = false
+            })
+            let checked = event.target.checked
+            this.checkedValue = checked
+            if (this.checkedValue && this.label) {
+                this.$parent.change(this.label)
+            }
         }
-    },
-    mounted () {
     }
 }
 </script>
