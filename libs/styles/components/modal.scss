@@ -167,14 +167,15 @@ $icon-prefix-cls: "b-icon";
   &-no-mask {
     pointer-events: none;
   }
-  &-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .#{$modal-prefix-cls} {
-      top: 0;
-    }
-  }
+  // fix ie position bug
+  // &-center {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   .#{$modal-prefix-cls} {
+  //     top: 0;
+  //   }
+  // }
 }
 
 @media (max-width: 768px) {

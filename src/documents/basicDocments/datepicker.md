@@ -152,6 +152,33 @@
 :::
 </div>
 
+### 面板联动
+
+设置属性 `split-panels` 为 false 可在一个选择器中选择一个日期范围
+
+<div class='example'>
+    <div class='example-box'>
+        <b-datepicker v-model='splitPanels' range :split-panels='false'><b-datepicker>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-datepicker v-model='splitPanels' range :split-panels='false'><b-datepicker>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    splitPanels: '',
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
 ### 选择年份
 
 设置属性 `type` 为 year 显示选择年份，搭配 `format` 使用
@@ -491,7 +518,8 @@
                 notSelect: '',
                 notSelectRange: '',
                 disabledDaysTime: '',
-                disabledDays: [preDate, new Date(), nextDate]
+                disabledDays: [preDate, new Date(), nextDate],
+                splitPanels: ''
             }
         },
         methods: {

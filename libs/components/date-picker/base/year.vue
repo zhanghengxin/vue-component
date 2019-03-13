@@ -34,7 +34,7 @@ export default {
             return Math.floor(this.firstYear / 10) * 10
         },
         curYear () {
-            return this.value && new Date(this.value).getFullYear()
+            return new Date(this.value || new Date()).getFullYear()
         }
     },
     methods: {
@@ -43,6 +43,7 @@ export default {
         },
         selectYear (year) {
             if (!this.isDisabled(year)) {
+                this.$parent.changeSplitYear(year)
                 this.$emit('select', year)
             }
         }
