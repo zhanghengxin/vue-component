@@ -4,6 +4,7 @@
             ref="reference"
             suffix
             clearable
+            readonly
             icon="rili"
             @on-focus="showPopup">
         </b-input>
@@ -11,13 +12,16 @@
             <Drop
                 v-show="popupVisible">
                 <div>
-                    <div>
-                        <button
-                            type="button">
-                            测试
-                        </button>
-                    </div>
+                    <b-input
+                        v-model='filterText'
+                        ref="reference"
+                        prefix
+                        clearable
+                        icon="chaxun"
+                        @on-focus="showPopup">
+                    </b-input>
                     <Tree
+                        :filter-text="filterText"
                         :data='data'
                         :show-checkbox="showCheckbox"
                         :checkboxOptions='checkboxOptions'>
@@ -32,18 +36,19 @@
 import { prefix } from '../../utils/common'
 import Tree from './Tree.vue'
 import Drop from '../select/Dropdown'
-import clickOutside from '../../utils/directives/clickOutside'
+import clickoutside from '../../utils/directives/clickOutside'
 
 const prefixCls = prefix + 'label-tree'
 export default {
     name: prefixCls,
-    directives: {clickOutside},
+    directives: {clickoutside},
     components: {
         Tree, Drop
     },
     data () {
         return {
             prefixCls: prefixCls,
+            filterText: '',
             popupVisible: false
         }
     },

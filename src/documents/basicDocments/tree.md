@@ -470,6 +470,95 @@ Render 函数的第二个参数，包含三个字段：
 :::
 </div>
 
+### 模糊检索
+在需要对节点进行过滤时，传入`filterText`关键字进行过滤，同时也需要设置`filter-method`作为过滤函数。
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-input v-model='filterText'></b-input>
+            <b-tree :data='data4' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-input v-model='filterText'></b-input>
+        <b-tree :data='data4' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    data4:[
+                       {
+                           name: 'parent 1',
+                           expand: true,
+                           children: [
+                               {
+                                   name: 'parent 1-1',
+                                   children: [
+                                       {
+                                           name: 'leaf 1-1-1'
+                                       },
+                                       {
+                                           name: 'leaf 1-1-2'
+                                       }
+                                   ]
+                               },
+                               {
+                                   name: 'parent 1-2',
+                                   children: [
+                                       {
+                                           name: 'leaf 1-2-1'
+                                       },
+                                       {
+                                           name: 'leaf 1-2-2',
+                                           children: [
+                                              {
+                                                  name: 'parent 1-2-2-1',
+                                                  children: [
+                                                      {
+                                                          name: 'leaf 1-2-2-1-1'
+                                                      },
+                                                      {
+                                                          name: 'leaf 1-2-2-1-2'
+                                                      }
+                                                  ]
+                                              },
+                                              {
+                                                  name: 'parent 1-2-2-1',
+                                                  children: [
+                                                      {
+                                                          name: 'leaf 1-2-2-1-1'
+                                                      },
+                                                      {
+                                                          name: 'leaf 1-2-2-1-2'
+                                                      }
+                                                  ]
+                                              }
+                                          ]
+                                       }
+                                   ]
+                               }
+                           ]
+                       }
+                    ]
+                }
+            },
+            methods: {
+                filterMethod(value, data){
+                     return data.name.indexOf(value) !== -1
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
+
+
 ### 自定义输入框格式
 - 支持节点级联勾选或只能单个勾选,`show-checkbox来控制`是否显示勾选栏,`checkboxOptions`来配置级联的效果
 - 给节点设置 `expand`、`selected`、`checked` 和 `disabled` 可以将节点设置为展开、选中、勾选和禁用

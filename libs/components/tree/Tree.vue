@@ -47,6 +47,9 @@ export default {
                 if (!this.checkboxOptions.parent && this.checkboxOptions.children) return
                 this.formatTreeData()
             }
+        },
+        filterText (value) {
+            this.filterTreeData(value)
         }
     },
     props: {
@@ -112,12 +115,11 @@ export default {
                 return data.name.indexOf(value) !== -1
             }
         },
+        filterText: {
+            type: [String, Number]
+        },
         render: {
             type: Function
-        },
-        filterable: {
-            type: Boolean,
-            default: false
         }
     },
     created () {
@@ -285,7 +287,6 @@ export default {
             this.$emit('on-expand', {data: node})
         },
         filterTreeData (value) {
-            if (!this.filterable) return
             const defaultOpt = this.defaultOpt
             const _this = this
             const cascadeParent = function (data) {
@@ -360,9 +361,6 @@ export default {
             if (childrenIndex !== undefined) {
                 dataList[parentKey].node.children.splice(childrenIndex, 1)
             }
-        },
-        handleChange (event) {
-            this.filterTreeData(event.target.value)
         }
     }
 }
