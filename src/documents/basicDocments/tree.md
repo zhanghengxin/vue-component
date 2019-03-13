@@ -470,6 +470,103 @@ Render 函数的第二个参数，包含三个字段：
 :::
 </div>
 
+### 自定义输入框格式
+- 支持节点级联勾选或只能单个勾选,`show-checkbox来控制`是否显示勾选栏,`checkboxOptions`来配置级联的效果
+- 给节点设置 `expand`、`selected`、`checked` 和 `disabled` 可以将节点设置为展开、选中、勾选和禁用
+- 也可以通过`defaultOpt`配置以上 Key值【见文档配置项】
+<div class="example">
+    <div class="example-box">
+        <div>
+           <b-label-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions' @on-check='handleChecked'></b-tree>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    data3:[
+                       {
+                           name: 'parent 1',
+                           expand: true,
+                           children: [
+                               {
+                                   name: 'parent 1-1',
+                                   checked:true,
+                                   children: [
+                                       {
+                                           name: 'leaf 1-1-1'
+                                       },
+                                       {
+                                           name: 'leaf 1-1-2'
+                                       }
+                                   ]
+                               },
+                               {
+                                   name: 'parent 1-2',
+                                   children: [
+                                       {
+                                           name: 'leaf 1-2-1'
+                                       },
+                                       {
+                                           name: 'leaf 1-2-2',
+                                           children: [
+                                              {
+                                                  name: 'parent 1-2-2-1',
+                                                  children: [
+                                                      {
+                                                          name: 'leaf 1-2-2-1-1'
+                                                      },
+                                                      {
+                                                          name: 'leaf 1-2-2-1-2'
+                                                      }
+                                                  ]
+                                              },
+                                              {
+                                                  name: 'parent 1-2-2-1',
+                                                  children: [
+                                                      {
+                                                          name: 'leaf 1-2-2-1-1'
+                                                      },
+                                                      {
+                                                          name: 'leaf 1-2-2-1-2'
+                                                      }
+                                                  ]
+                                              }
+                                          ]
+                                       }
+                                   ]
+                               }
+                           ]
+                       }
+                    ],
+                    checkboxOptions: {
+                        parent: true,
+                        children: true
+                    }
+                }
+            },
+            methods:{
+                handleChecked (options){
+                    console.log(`选中获取的数据:`,options)
+                }
+            }
+
+        }
+    </script>
+```
+:::
+</div>
+
+
+
+
+
 <script>
 export default {
     data () {

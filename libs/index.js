@@ -56,6 +56,7 @@ import LoadingBar from './components/loading-bar/'
 import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
+import LabelTree from './components/tree/labelTree'
 
 const components = [
     Input,
@@ -65,6 +66,7 @@ const components = [
     Drawer,
     Tag,
     Tree,
+    LabelTree,
     Table,
     Icon,
     Message,
