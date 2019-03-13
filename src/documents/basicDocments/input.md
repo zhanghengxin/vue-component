@@ -44,10 +44,15 @@
 可使用 v-model 实现数据的双向绑定。<br/>
 可直接设置 width 来设置输入框的宽度，默认 100%。<br/>
 可直接设置 error 来改变输入框的hover focus样式
+可slot设置icon
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value" placeholder="请输入..." :width='200' /></b-input>
+            <b-input v-model="value" placeholder="请输入..." :width='200' :suffix='suffix'/>
+                <div slot='suffix'>
+                    icon
+                </div>
+            </b-input>
             <b-input v-model="value0" placeholder="请输入..." :width='200' :error='error'/></b-input>
         </div>
     </div>
@@ -57,7 +62,11 @@
 ```html
 
     <template>
-        <b-input v-model="value" placeholder="请输入..." :width='200' /></b-input>
+         <b-input v-model="value" placeholder="请输入..." :width='200' :suffix='suffix'/>
+            <div slot='suffix'>
+                icon
+            </div>
+        </b-input>
         <b-input v-model="value0" placeholder="请输入..." :width='200' :error='error'/></b-input>
         <span>{{value}}</div>
     </template>
@@ -377,3 +386,9 @@ label文字大小可根据input的size变化<br/>
 | on-blur   | 输入框失去聚焦时触发 | - |
 | on-keyup   | 原生的 keyup 事件 | event |
 | on-keydown   | 原生的 keydown 事件 | event |
+
+### slot
+| name	      | 说明	    | 返回值 |
+|-------------|---------|----------|
+| prefix    | 需要设置prefix为true    | -  |
+| suffix   | 需要设置prefix为true  | - |

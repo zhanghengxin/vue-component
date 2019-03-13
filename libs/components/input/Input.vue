@@ -25,7 +25,7 @@
             <transition name='fade'>
                 <div
                     v-if="suffix"
-                    v-show='inputNumber'
+                    v-show='showSuffix'
                     :class='[
                     prefixCls+`-icon`,
                     prefixCls+`-icon-`+size,
@@ -148,9 +148,9 @@ export default {
             type: Boolean,
             default: false
         },
-        inputNumber: {
+        showSuffix: {
             type: Boolean,
-            default: false
+            default: true
         },
         name: {
             type: String
