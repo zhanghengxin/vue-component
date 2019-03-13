@@ -117,10 +117,6 @@ $css-prefix-button: $css-prefix+'button';
     opacity: 0.3;
   }
 
-  &-plain {
-    opacity: 0.7;
-  }
-
   //圆角
   &-round {
     @include waterShadow(20px);

@@ -110,7 +110,7 @@ $css-prefix-option: $css-prefix+'option';
 
   &.#{$css-prefix-select}-group-fixed {
     display: flex;
-    width: 280px;
+    width: 100%;
     @include borderInit($Border, 4px);
     @include transitionAll();
     @include selectMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));

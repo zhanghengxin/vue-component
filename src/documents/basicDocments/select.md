@@ -3,8 +3,8 @@
     export default {
         data () {
             return {
-                value: '',
-                value0: '',
+                value: '004',
+                value0: '007',
                 value1: '',
                 value2: [],
                 value3: '',
