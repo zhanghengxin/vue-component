@@ -1,5 +1,18 @@
 更新日志
 
+### 0.3.1
+## `2019-03-13`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 select、input width默认值设置为100%
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 input-suffix【后缀自定义】的slot
+    </b-timeline-item>
+
+</b-timeline>
+
 ### 0.3.0
 ## `2019-03-12`
 <br>
