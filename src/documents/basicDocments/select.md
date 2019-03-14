@@ -64,6 +64,7 @@
                     label:'电子票',
                     value:'025'
                 }],
+                options3:[],
                 nameInCode:true,
                 options3:[],
                 options4:[],
@@ -73,6 +74,11 @@
                 filterabled:true,
                 loading:false
             }
+        },
+        mounted () {
+            setTimeout(_=>{
+                this.options3 = this.options2
+            },1000)
         },
         methods:{
             changeConsole(e){

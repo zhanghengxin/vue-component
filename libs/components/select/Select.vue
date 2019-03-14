@@ -62,10 +62,8 @@
             </div>
             <transition name='slide'>
                 <Drop
-                    :style='dropStyles'
                     v-show='show'
-                    :width='dropWidth'
-                >
+                    :width='dropWidth'>
                     <ul v-if='notFoundData'>
                         <li :class='[prefix+`option`]'>{{notFoundText}}</li>
                     </ul>
@@ -111,10 +109,10 @@ export default {
             clearShow: false,
             values: [],
             isFocused: false,
-            dropStyles: {},
             query: '',
             lastRemoteQuery: '',
-            dropWidth: null
+            dropWidth: null,
+            dropStatus: false
         }
     },
     props: {
@@ -312,8 +310,10 @@ export default {
             return (values && values.length > 0) ? '' : placeholder
         },
         publicValue () {
-            const {multiple, values} = this
-            return multiple ? values.map(option => option.value) : (values[0] || {}).value
+            const {multiple, values, value} = this
+            let s = multiple ? values.map(option => option.value) : (values[0] || {}).value
+            console.log('value', s, value)
+            return s
         },
         notFoundData () {
             const {filterabled, dropList, loading} = this
@@ -407,7 +407,7 @@ export default {
                 return false
             }
             this.show = !this.show
-            // if (this.show) { this.broadcastPopperUpdate() }
+            if (this.show) { this.broadcastPopperUpdate() }
         },
         removeTag (e) {
             const {disabled, values} = this
@@ -488,6 +488,12 @@ export default {
             if (filterabled && remoteFn && query !== '') {
                 this.remoteFn(query)
             }
+        },
+        options () {
+            this.values = this.getInitValue().map(value => {
+                if (typeof value !== 'number' && !value) return null
+                return this.getOptionData(value)
+            }).filter(Boolean)
         }
     }
 }
