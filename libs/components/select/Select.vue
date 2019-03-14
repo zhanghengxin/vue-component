@@ -407,7 +407,7 @@ export default {
                 return false
             }
             this.show = !this.show
-            // if (this.show) { this.broadcastPopperUpdate() }
+            if (this.show) { this.broadcastPopperUpdate() }
         },
         removeTag (e) {
             const {disabled, values} = this
