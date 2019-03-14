@@ -60,6 +60,7 @@
             <table-month
                 v-if="panel === 'MONTH'"
                 :value="value"
+                :year="year"
                 :disabled-month="isDisabledMonth"
                 @select="selectMonth">
             </table-month>
@@ -211,9 +212,9 @@ export default {
             if (this.type === 'time') {
                 // parent drop, drop's parent picker
                 if (this.minuteStep !== 0) return this.$parent.$parent.format.slice(0, 5)
-                return this.$parent.format
+                return this.$parent.format || 'HH:mm:ss'
             }
-            return this.value && formatDate(this.value, this.dateFormat)
+            return this.value ? formatDate(this.value, this.dateFormat) : ''
         },
         notBeforeTime () {
             return this.getCriticalTime(this.notBefore)
