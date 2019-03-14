@@ -174,7 +174,20 @@ export default {
             default: 'date'
         },
         // input 组件 -- end
-        dateFormat: String,
+        dateFormat: {
+            type: String,
+            default () {
+                const type = {
+                    date: 'YYYY-MM-DD',
+                    year: 'YYYY',
+                    month: 'YYYY-MM',
+                    time: 'HH:mm:ss',
+                    datetime: 'YYYY-MM-DD HH:mm:ss'
+                }
+                let innerType = String(this.type).toLowerCase()
+                return type[innerType]
+            }
+        },
         type: {
             type: String,
             default: 'date'
