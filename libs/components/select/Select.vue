@@ -27,7 +27,7 @@
                             :key='item.value'
                             :class="[prefixCls+`-tag`]">
                             <span>{{item.label}}</span>
-                            <b-icon type='quxiao-guanbi-shanchu' @click.native.stop='removeTag(item)'></b-icon>
+                            <Icon type='quxiao-guanbi-shanchu' @click.native.stop='removeTag(item)'></Icon>
                         </div>
                     </template>
                     <input
@@ -46,19 +46,19 @@
                         @keydown.delete="handleInputDelete"
                     />
                 </div>
-                <b-icon
+                <Icon
                     type='xia'
                     v-if='!disabled'
                     v-show='iconShow'
                     :class="[prefixCls+`-arrow`]">
-                </b-icon>
-                <b-icon
+                </Icon>
+                <Icon
                     type='shibai-mian'
                     v-if='clearable'
                     v-show='closeIcon'
                     :class="[prefixCls+`-arrow`]"
                     @click.native.stop='clearValues'>
-                </b-icon>
+                </Icon>
             </div>
             <transition name='slide'>
                 <Drop
@@ -93,6 +93,7 @@ import Emitter from '../../mixins/emitter'
 import clickOutside from '../../utils/directives/clickOutside'
 import { typeOf } from '../../utils/assist'
 import { prefix } from '../../utils/common'
+import Icon from '../icon'
 
 const prefixCls = prefix + 'select'
 
@@ -100,7 +101,7 @@ export default {
     name: prefixCls,
     mixins: [Emitter],
     directives: {clickOutside},
-    components: {Drop, Option},
+    components: {Drop, Option, Icon},
     data () {
         return {
             prefix,
@@ -349,7 +350,6 @@ export default {
                 return this.getOptionData(value)
             }).filter(Boolean)
         }
-
         this.fixedInitDrop()
     },
     methods: {

@@ -15,11 +15,11 @@
                 prefixCls+`-icon-`+size,
                 prefixCls+`-icon-prefix`]'>
                 <slot name='prefix'>
-                    <b-icon
+                    <Icon
                         size
                         :type="icon"
                         @on-click="handleIconClick">
-                    </b-icon>
+                    </Icon>
                 </slot>
             </div>
             <transition name='fade'>
@@ -31,16 +31,16 @@
                     prefixCls+`-icon-`+size,
                     prefixCls+`-icon-suffix`]'>
                     <slot name='suffix'>
-                        <b-icon
+                        <Icon
                             size
                             :type="icon"
                             :class="[prefixCls+`-noclear`]"
                             @on-click="handleIconClick">
-                        </b-icon>
+                        </Icon>
                     </slot>
                 </div>
             </transition>
-            <b-icon
+            <Icon
                 v-if="clearable && currentValue"
                 size
                 type="shibai-mian"
@@ -50,7 +50,7 @@
                 prefixCls+`-icon-suffix`,
                 prefixCls+`-icon-clear`]"
                 @on-click="handleClear">
-            </b-icon>
+            </Icon>
             <label
                 ref="label"
                 :class="labelClasses"
@@ -115,12 +115,14 @@ import calcTextareaHeight from './calcTeatareaHeight.js'
 import { findComponentUpward } from '../../utils/assist'
 import { prefix, oneOf } from '../../utils/common'
 import Emitter from '../../mixins/emitter'
+import Icon from '../icon'
 
 const prefixCls = prefix + 'input' // b-input
 
 export default {
     name: prefixCls,
     mixins: [Emitter],
+    components: {Icon},
     props: {
         // 接收input的自带属性
         elementId: {

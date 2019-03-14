@@ -3,13 +3,13 @@
         <div :class="[tailClass]" v-if="ifShowTail"></div>
         <div :class="[stepMain]">
             <div :class="[stepPoint,stepPointAsIcon]" v-if="icon" @click="stepClick">
-                <b-icon :type="icon" :size="size==='small' ? 14 : 16"></b-icon>
+                <Icon :type="icon" :size="size==='small' ? 14 : 16"></Icon>
             </div>
             <div :class="[stepPoint]" v-else-if="(status || stepsStatus) === 'finish'" @click="stepClick">
-                <b-icon type="queding" :size="size==='small' ? 14 : 16"></b-icon>
+                <Icon type="queding" :size="size==='small' ? 14 : 16"></Icon>
             </div>
             <div :class="[stepPoint]" v-else-if="(status || stepsStatus) === 'error'" @click="stepClick">
-                <b-icon type="quxiao-guanbi-shanchu" :size="size==='small' ? 14 : 16"></b-icon>
+                <Icon type="quxiao-guanbi-shanchu" :size="size==='small' ? 14 : 16"></Icon>
             </div>
             <div :class="[stepPoint]" v-else @click="stepClick">
                 {{label}}
@@ -23,10 +23,12 @@
 <script>
 import Common from './common'
 import { prefix } from '../../utils/common'
+import Icon from '../icon'
 
 const prefixCls = prefix + 'step'
 export default {
     name: prefixCls,
+    components: {Icon},
     props: {
         title: {// 标题
             type: String,
@@ -152,10 +154,8 @@ export default {
         // icon的大小
         setIconSize () {
             if (this.size === 'small') {
-                console.log('small12')
                 return 12
             } else {
-                console.log('normal16')
                 return 16
             }
         },
@@ -172,7 +172,6 @@ export default {
             }
             return str
         }
-
     }
 }
 </script>
