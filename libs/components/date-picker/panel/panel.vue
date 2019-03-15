@@ -92,7 +92,7 @@
 
 <script>
 import { isValidDate, isDateObject, formatDate } from '../../../utils/date'
-import scrollIntoView from '../../../utils/scroll-into-view'
+// import scrollIntoView from '../../../utils/scroll-into-view'
 import { TableYear, TableMonth, TableDate, TableTime } from '../base'
 import { prefix } from '../../../utils/common'
 
@@ -278,15 +278,17 @@ export default {
             this.$emit('panel-change', panel, oldPanel)
             if (panel === 'YEAR') {
                 this.firstYear = Math.floor(this.year / 10) * 10
-            } else if (panel === 'TIME') {
-                this.$nextTick(() => {
-                    let list = this.$el.querySelectorAll('.b-panel-time .b-time-list')
-                    for (let i = 0, len = list.length; i < len; i++) {
-                        let el = list[i]
-                        scrollIntoView(el, el.querySelector('.actived'))
-                    }
-                })
             }
+            // else if (panel === 'TIME') {
+            //     this.$nextTick(() => {
+            //         let list = this.$el.querySelectorAll('.b-panel-time .b-time-list')
+            //         for (let i = 0, len = list.length; i < len; i++) {
+            //             let el = list[i]
+            //             console.log('el', el)
+            //             scrollIntoView(el, el.querySelector('.actived'))
+            //         }
+            //     })
+            // }
         },
         selectDate (date) {
             if (this.type === 'datetime') {
