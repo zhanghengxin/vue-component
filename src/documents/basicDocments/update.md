@@ -1,7 +1,7 @@
 更新日志
 
 ### 0.3.2
-## `2019-03-14`
+## `2019-03-15`
 <br>
 <b-timeline>
     <b-timeline-item>
@@ -11,11 +11,15 @@
     优化 select下拉框的下拉更新触发
     </b-timeline-item>
     <b-timeline-item>
+    优化 select 文档显示
+    </b-timeline-item>
+    <b-timeline-item>
     优化 datepicker单一组件扩展支持timepicker/datetimepicker，优化split-panels属性
     </b-timeline-item>
     <b-timeline-item>
     优化 部分组件按需引入报错的问题【Message、input等】
     </b-timeline-item>
+
 </b-timeline>
 
 ### 0.3.1
