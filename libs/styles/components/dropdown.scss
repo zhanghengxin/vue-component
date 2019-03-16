@@ -1,5 +1,12 @@
 $dropdown-prefix-cls: $css-prefix+'dropdown';
 $css-prefix-drop: $css-prefix+'drop';
+$css-prefix-tree: $css-prefix+'label-tree';
+
+.#{$css-prefix-tree} {
+  .#{$css-prefix+'tree'} {
+    min-height: 32px;
+  }
+}
 
 .#{$dropdown-prefix-cls} {
   cursor: pointer;

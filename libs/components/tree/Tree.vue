@@ -23,7 +23,7 @@ import clickOutside from '../../utils/directives/clickOutside'
 
 const prefixCls = prefix + 'tree'
 export default {
-    name: prefixCls,
+    name: prefixCls + '-root',
     mixins: [Emitter],
     directives: {clickOutside},
     components: {
@@ -115,11 +115,15 @@ export default {
                 return data.name.indexOf(value) !== -1
             }
         },
+        loadMethod: {
+            type: Function
+        },
         filterText: {
             type: [String, Number]
         },
         render: {
-            type: Function
+            type: [Function, Boolean],
+            default: false
         }
     },
     created () {

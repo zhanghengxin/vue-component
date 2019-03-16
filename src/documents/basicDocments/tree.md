@@ -557,8 +557,6 @@ Render 函数的第二个参数，包含三个字段：
 :::
 </div>
 
-
-
 ### 自定义输入框格式
 - 支持节点级联勾选或只能单个勾选,`show-checkbox来控制`是否显示勾选栏,`checkboxOptions`来配置级联的效果
 - 给节点设置 `expand`、`selected`、`checked` 和 `disabled` 可以将节点设置为展开、选中、勾选和禁用
@@ -566,73 +564,97 @@ Render 函数的第二个参数，包含三个字段：
 <div class="example">
     <div class="example-box">
         <div>
-           <b-label-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
+           <div style="display:inline-block;">
+                <b-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+           </div>
+           <div style="display:inline-block;">
+                <b-tree fixed label='复选' width='200' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
+           </div>
+           <div style="display:inline-block;">
+                <b-tree fixed label='模糊检索' width='200' filter :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+           </div>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions' @on-check='handleChecked'></b-tree>
+        <b-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+        <b-tree fixed label='复选' width='200' :data='data3' multiple :checkboxOptions='checkboxOptions'></b-tree>
+        <b-tree fixed label='模糊检索' width='200' filter :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
     </div>
     <script>
         export default {
             data () {
                 return {
                     data3:[
-                       {
-                           name: 'parent 1',
-                           expand: true,
-                           children: [
-                               {
-                                   name: 'parent 1-1',
-                                   checked:true,
-                                   children: [
-                                       {
-                                           name: 'leaf 1-1-1'
-                                       },
-                                       {
-                                           name: 'leaf 1-1-2'
-                                       }
-                                   ]
-                               },
-                               {
-                                   name: 'parent 1-2',
-                                   children: [
-                                       {
-                                           name: 'leaf 1-2-1'
-                                       },
-                                       {
-                                           name: 'leaf 1-2-2',
-                                           children: [
-                                              {
-                                                  name: 'parent 1-2-2-1',
-                                                  children: [
-                                                      {
-                                                          name: 'leaf 1-2-2-1-1'
-                                                      },
-                                                      {
-                                                          name: 'leaf 1-2-2-1-2'
-                                                      }
-                                                  ]
-                                              },
-                                              {
-                                                  name: 'parent 1-2-2-1',
-                                                  children: [
-                                                      {
-                                                          name: 'leaf 1-2-2-1-1'
-                                                      },
-                                                      {
-                                                          name: 'leaf 1-2-2-1-2'
-                                                      }
-                                                  ]
-                                              }
-                                          ]
-                                       }
-                                   ]
-                               }
-                           ]
-                       }
+                    {
+                         name: 'root',
+                         expand: true,
+                         id:1,
+                         children: [
+                             {
+                                 name: 'parent1',
+                                 checked:true,
+                                 disabled:true,
+                                 id:2,
+                                 children: [
+                                     {
+                                         id:3,
+                                         name: 'leaf 1-1-1'
+                                     },
+                                     {
+                                         id:4,
+                                         name: 'leaf 1-1-2'
+                                     }
+                                 ]
+                             },
+                             {
+                                 id:5,
+                                 name: 'parent2',
+                                 children: [
+                                     {
+                                         id:6,
+                                         name: 'leaf 1-2-1'
+                                     },
+                                     {
+                                         id:7,
+                                         name: 'leaf 1-2-2',
+                                         children: [
+                                            {
+                                                id:8,
+                                                name: 'parent 1-2-2-1',
+                                                children: [
+                                                    {
+                                                        id:10,
+                                                        name: 'leaf 1-2-2-1-1'
+                                                    },
+                                                    {
+                                                        id:11,
+                                                        name: 'leaf 1-2-2-1-2'
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                id:9,
+                                                name: 'parent 1-2-2-1',
+                                                children: [
+                                                    {
+                                                        id:12,
+                                                        name: 'leaf 1-2-2-1-1'
+                                                    },
+                                                    {
+                                                        id:13,
+                                                        name: 'leaf 1-2-2-1-2'
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                     }
+                                 ]
+                             }
+                         ]
+                      }
                     ],
                     checkboxOptions: {
                         parent: true,
@@ -651,10 +673,6 @@ Render 函数的第二个参数，包含三个字段：
 ```
 :::
 </div>
-
-
-
-
 
 <script>
 export default {
@@ -746,49 +764,64 @@ export default {
                ],
             data3:[
                {
-                   name: 'parent 1',
+                   name: 'root',
                    expand: true,
+                   id:1,
                    children: [
                        {
-                           name: 'parent 1-1',
+                           name: 'parent1',
                            checked:true,
                            disabled:true,
+                           id:2,
                            children: [
                                {
-                                   name: 'leaf 1-1-1'
+                                   id:3,
+                                   checked:true,
+                                   name: 'leaf1'
                                },
                                {
-                                   name: 'leaf 1-1-2'
+                                   id:4,
+                                   checked:true,
+                                   name: 'leaf2'
                                }
                            ]
                        },
                        {
-                           name: 'parent 1-2',
+                           id:5,
+                           name: 'parent2',
                            children: [
                                {
+                                   id:6,
                                    name: 'leaf 1-2-1'
                                },
                                {
+                                   id:7,
                                    name: 'leaf 1-2-2',
                                    children: [
                                       {
+                                          id:8,
                                           name: 'parent 1-2-2-1',
                                           children: [
                                               {
+                                                  id:10,
                                                   name: 'leaf 1-2-2-1-1'
                                               },
                                               {
+                                                  id:11,
                                                   name: 'leaf 1-2-2-1-2'
                                               }
                                           ]
                                       },
                                       {
+                                          id:9,
                                           name: 'parent 1-2-2-1',
                                           children: [
                                               {
+                                                  id:12,
                                                   name: 'leaf 1-2-2-1-1'
                                               },
                                               {
+                                                  id:13,
                                                   name: 'leaf 1-2-2-1-2'
                                               }
                                           ]
@@ -797,8 +830,9 @@ export default {
                                }
                            ]
                        }
-                   ]}
-               ],
+                   ]
+                }
+            ],
             data4:[
                {
                    name: 'parent 1',
@@ -945,6 +979,7 @@ export default {
              return data.name.indexOf(value) !== -1
         },
         loadMethod (item, callback) {
+            console.log(3123)
             setTimeout(() => {
                 const data = [
                     {
@@ -1020,10 +1055,13 @@ export default {
 | loading     | 是否开启懒加载   | Boolean    |  -  |     false  |
 | load-method     |  异步加载数据的方法，详见例子 | Function    |  -  |     -  |
 | filter-text     |  模糊搜索的关键字 |  String \ Number    |  -  |     ''  |
-| filter-method     |  自定义上一页的文本   | 	string    |   -  |     -  |
+| filter-method     |  模糊检索的自定义函数   | 	string    |   -  |     -  |
 | defaultOpt     | 各种选中效果的配置项，具体配置见下文   | 	Object    |  -  |   -    |
 | draggable     |  是否开启节点拖拽编辑 | 	Boolean    |  -  |    fasle    |
 | render     |  自定义渲染内容，见示例	 | 	Function    |  -  |    -    |
+| label      | 设置说明文字 	| String，Number | - |  -  |
+| fixed      | 搭配文字的两种样式类型	| Boolean | - |   false  |
+| width | 自定义宽度	| Number |	-   |     -   |
 
 ### children
 | 属性      | 说明    | 类型      | 默认值       |
@@ -1045,6 +1083,7 @@ export default {
 | checkedKey     |  勾选属性配置项Key值  |  String  |  checked    |
 | expandKey     |  展开属性配置项Key值  |  String  |  expand   |
 | selectedKey     |  选中属性配置项Key值  |  String  |  selected   |
+| idKey     |  选中数据唯一标识配置项Key值【当开启label时有效】  |  String  |   id   |
 
 ### accordionOptions
 | 属性      | 说明    | 类型      | 默认值       |
