@@ -323,6 +323,121 @@
 :::
 </div>
 
+### 选择时间
+
+<div class='example'>
+    <div class='example-box'>
+        <b-datepicker 
+            type='time'
+            v-model='time'>
+        <b-datepicker>
+    </div>
+    
+::: code
+```html
+    <div>
+        <b-datepicker v-model='time' type='time'><b-datepicker>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    time: '',
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
+### 选择时间范围
+
+设置属性 `range` 为 true 可在一个选择器中选择一个时间范围
+
+<div class='example'>
+    <div class='example-box'>
+        <b-datepicker v-model='daterange' range type='time'><b-datepicker>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-datepicker v-model='timerange' range type='time'><b-datepicker>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    timerange: '',
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
+### 选择日期时间
+
+<div class='example'>
+    <div class='example-box'>
+        <b-datepicker v-model='datetime' type='datetime'><b-datepicker>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-datepicker v-model='datetime' type='datetime'><b-datepicker>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    datetime: ''
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
+### 选择日期时间范围
+
+设置属性 `range` 为 true 可在一个选择器中选择一个日期时间范围
+
+<div class='example'>
+    <div class='example-box'>
+        <b-datepicker 
+            v-model='datetimerange' 
+            range 
+            type='datetime'>
+        <b-datepicker>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-datepicker 
+            v-model='datetimerange' 
+            range
+            type='datetime'>
+        <b-datepicker>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    datetimerange: '',
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
 ### 快捷方式
 
 设置属性 `shortcuts` 显示快捷方式
@@ -519,7 +634,11 @@
                 notSelectRange: '',
                 disabledDaysTime: '',
                 disabledDays: [preDate, new Date(), nextDate],
-                splitPanels: ''
+                splitPanels: '',
+                time: '',
+                datetime: '',
+                timerange: '',
+                datetimerange: ''
             }
         },
         methods: {
@@ -541,7 +660,7 @@
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | ---- | ---- | ---- | ---- | ---- |
 | value | 日期选择器中的值，使用 v-model 双向绑定数据 | String |
-| type | 类型 | String  | `date` `year` `month` | date |
+| type | 类型 | String  | `date` `year` `month` `time` `datetime` | date |
 | label | input前的说明文字 | String | | |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
 | size | input组件的尺寸 | Boolean  | `small` `default` `large` | default |
@@ -559,6 +678,7 @@
 | not-after |禁止选择这个时间之后的时间 | String/Date | | false |
 | disabled-days | 自定义禁止的日期 | Array/function |  | [] |
 | first-day-of-week | 日历星期几开头 | Number |  | 7 |
+| split-panels | 面板是否联动，当 rang 为 true 时可用| Boolean | `true` `false` | true |
 
 
 ### Slots

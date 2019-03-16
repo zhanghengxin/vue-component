@@ -64,6 +64,7 @@
                     label:'电子票',
                     value:'025'
                 }],
+                options3:[],
                 nameInCode:true,
                 options3:[],
                 options4:[],
@@ -73,6 +74,11 @@
                 filterabled:true,
                 loading:false
             }
+        },
+        mounted () {
+            setTimeout(_=>{
+                this.options3 = this.options2
+            },1000)
         },
         methods:{
             changeConsole(e){
@@ -550,8 +556,6 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 ```
 :::
 
-<br/>
-<br/>
 可设置```filterFn```函数定义筛选条件。<br/>
 <div class="example">
     <div class="example-box">
@@ -617,8 +621,6 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 
 ### label样式
 可设置 ```label```，```fixed```设置label的两种样式。<br/>
-fixed为false 的时候可设置labelWidth的值 默认72px<br/>
-fixed为true  默认280px false 默认220px<br/>
 <div class="example">
     <div class="example-box">
         <div>
@@ -796,7 +798,6 @@ fixed为true  默认280px false 默认220px<br/>
 | nameInCode | change返回值得类型 <br/>默认false返回单选返回string 多选返回array <br/>true返回[{value:'',label:''}]	|Boolean | `true`、`false` |   false  |
 | multiple | 是否支持多选	|Boolean | `true`、`false` |   false  |
 | disabled | 是否禁用	|Boolean | `true`、`false` |   false  |
-| disabled | 是否禁用	|Boolean | `true`、`false` |   false  |
 | clearable | 是否可以清空选项	|Boolean | `true`、`false` |   false  |
 | autowarp | 多选的时候是否自动换行	| Boolean | `true`、`false` |   false  |
 | width | 自定义宽度	| Number |	-   |     -   |
@@ -807,7 +808,6 @@ fixed为true  默认280px false 默认220px<br/>
 | codeKey      | 要设为value的字段的key值	| String |	-   |     value    |
 | options      | 传入的下拉列表的数据	| Array |	-   |     -    |
 | className      | 最外层可扩展class	| String |	-   |     -    |
-| width      | 设置select的宽度	| Number |	-   |     -    |
 | filterabled      | 是否支持筛选	| Boolean | `true`、`false` |   false  |
 | notFoundText      | 没有数据的提示	| String | - |   '无匹配数据'  |
 | filterFn      | 筛选函数，filterabled为true时可用	| Function | - |  -  |

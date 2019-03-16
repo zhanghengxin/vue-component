@@ -48,12 +48,12 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value" placeholder="请输入..." :width='200' :suffix='suffix'/>
+            <b-input v-model="value" placeholder="请输入..." :width='200' :suffix='suffix'>
                 <div slot='suffix'>
                     icon
                 </div>
             </b-input>
-            <b-input v-model="value0" placeholder="请输入..." :width='200' :error='error'/></b-input>
+            <b-input v-model="value0" placeholder="请输入..." :width='200' :error='error'></b-input>
         </div>
     </div>
 </div>
@@ -62,12 +62,12 @@
 ```html
 
     <template>
-         <b-input v-model="value" placeholder="请输入..." :width='200' :suffix='suffix'/>
+         <b-input v-model="value" placeholder="请输入..." :width='200' :suffix='suffix'>
             <div slot='suffix'>
                 icon
             </div>
         </b-input>
-        <b-input v-model="value0" placeholder="请输入..." :width='200' :error='error'/></b-input>
+        <b-input v-model="value0" placeholder="请输入..." :width='200' :error='error'></b-input>
         <span>{{value}}</div>
     </template>
     <script>
@@ -218,8 +218,12 @@ label文字大小可根据input的size变化<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" label='姓名' :width='200' placeholder="请输入..." /></b-input>
-            <b-input v-model="value6" label='密码' type='password' placeholder="请输入..." /></b-input>
+            <b-input v-model="value6" label='姓名' :width='200' placeholder="请输入..." :suffix='true'>
+                <div slot='suffix'>
+                    icon
+                </div>
+            </b-input>
+            <b-input v-model="value6" label='密码' type='password' placeholder="请输入..." ></b-input>
         </div>
     </div>
 </div>
@@ -228,8 +232,8 @@ label文字大小可根据input的size变化<br/>
 ```html
 
     <template>
-        <b-input v-model="value6" label='姓名' placeholder="请输入..." /></b-input>
-        <b-input v-model="value6" label='密码' type='password' placeholder="请输入..." /></b-input>
+        <b-input v-model="value6" label='姓名' placeholder="请输入..." ></b-input>
+        <b-input v-model="value6" label='密码' type='password' placeholder="请输入..." ></b-input>
     </template>
     <script>
         export default {
@@ -253,9 +257,9 @@ label文字大小可根据input的size变化<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" label='姓名' :fixed='fixed' placeholder="请输入..." /></b-input>
+            <b-input v-model="value6" label='姓名' :fixed='fixed' placeholder="请输入..." ></b-input>
             <br/>
-            <b-input v-model="value6" label='密码' :fixed='fixed' :error='error' type='password' placeholder="请输入..." /></b-input>
+            <b-input v-model="value6" label='密码' :fixed='fixed' :error='error' type='password' placeholder="请输入..." ></b-input>
         </div>
     </div>
 </div>
@@ -264,8 +268,8 @@ label文字大小可根据input的size变化<br/>
 ```html
 
     <template>
-        <b-input v-model="value6" label='姓名' :fixed="fixed" placeholder="请输入..." /></b-input>
-        <b-input v-model="value6" label='密码' :fixed="fixed" :error='error' type='password' placeholder="请输入..." /></b-input>
+        <b-input v-model="value6" label='姓名' :fixed="fixed" placeholder="请输入..." ></b-input>
+        <b-input v-model="value6" label='密码' :fixed="fixed" :error='error' type='password' placeholder="请输入..." ></b-input>
     </template>
     <script>
         export default {
@@ -289,8 +293,8 @@ label文字大小可根据input的size变化<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value8" type="textarea" /></b-input>
-            <b-input v-model="value9" type="textarea" :rows="4" /></b-input>
+            <b-input v-model="value8" type="textarea" ></b-input>
+            <b-input v-model="value9" type="textarea" :rows="4" ></b-input>
             <b-input v-model="value10" type="textarea" :rows="4" disabled></b-input>
         </div>
     </div>
@@ -300,8 +304,8 @@ label文字大小可根据input的size变化<br/>
 ```html
 
     <template>
-        <b-input v-model="value8" type="textarea" /></b-input>
-        <b-input v-model="value9" type="textarea" :rows="4" /></b-input>
+        <b-input v-model="value8" type="textarea" ></b-input>
+        <b-input v-model="value9" type="textarea" :rows="4" ></b-input>
         <b-input v-model="value10" type="textarea" :rows="4" disabled></b-input>
     </template>
     <script>

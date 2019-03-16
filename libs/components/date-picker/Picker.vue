@@ -24,7 +24,6 @@
         <transition name="slide">
             <Drop
                 v-show="popupVisible"
-                :labelWidth="labelWidth"
                 :placement="placement"
                 :className="popupCls">
                 <div :class="popupContentCls">
@@ -174,7 +173,20 @@ export default {
             default: 'date'
         },
         // input 组件 -- end
-        dateFormat: String,
+        dateFormat: {
+            type: String,
+            default () {
+                const type = {
+                    date: 'YYYY-MM-DD',
+                    year: 'YYYY',
+                    month: 'YYYY-MM',
+                    time: 'HH:mm:ss',
+                    datetime: 'YYYY-MM-DD HH:mm:ss'
+                }
+                let innerType = String(this.type).toLowerCase()
+                return type[innerType]
+            }
+        },
         type: {
             type: String,
             default: 'date'
@@ -478,7 +490,12 @@ export default {
         },
         getLabelWidth () {
             const { label } = this.$refs.reference.$refs
-            this.labelWidth = label ? label.offsetWidth : 0
+            let labelWidth = label ? label.offsetWidth : 0
+            if (labelWidth) {
+                if (!this.fixed) labelWidth += 4
+                const popup = this.$el.querySelector(`.${pickerCls}-popup`)
+                popup.style.left = `${labelWidth}px`
+            }
         }
     }
 }

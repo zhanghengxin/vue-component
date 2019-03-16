@@ -27,8 +27,7 @@
                             :key='item.value'
                             :class="[prefixCls+`-tag`]">
                             <span v-text="showMultipleValues(item)"></span>
-                            <b-icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu'
-                                    @click.native.stop='removeTag(item)'></b-icon>
+                            <Icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu' @click.native.stop='removeTag(item)'></Icon>
                         </div>
                     </template>
                     <input
@@ -47,24 +46,23 @@
                         @keydown.delete="handleInputDelete"
                     />
                 </div>
-                <b-icon
+                <Icon
                     type='xia'
                     v-if='!disabled'
                     v-show='iconShow'
                     :class="[prefixCls+`-arrow`]">
-                </b-icon>
-                <b-icon
+                </Icon>
+                <Icon
                     type='shibai-mian'
                     v-if='clearable && showMultipleIcon'
                     v-show='closeIcon'
                     :class="[prefixCls+`-arrow`]"
                     @click.native.stop='clearValues'>
-                </b-icon>
+                </Icon>
             </div>
             <slot>
                 <transition name='slide'>
                     <Drop
-                        :style='dropStyles'
                         v-show='show'
                         :width='dropWidth'
                     >
@@ -88,6 +86,7 @@
                     </Drop>
                 </transition>
             </slot>
+
         </div>
     </div>
 </template>
@@ -98,6 +97,7 @@ import Emitter from '../../mixins/emitter'
 import clickOutside from '../../utils/directives/clickOutside'
 import { typeOf } from '../../utils/assist'
 import { prefix } from '../../utils/common'
+import Icon from '../icon'
 
 const prefixCls = prefix + 'select'
 
@@ -105,7 +105,7 @@ export default {
     name: prefixCls,
     mixins: [Emitter],
     directives: {clickOutside},
-    components: {Drop, Option},
+    components: {Drop, Option, Icon},
     data () {
         return {
             prefix,
@@ -114,10 +114,10 @@ export default {
             clearShow: false,
             values: [],
             isFocused: false,
-            dropStyles: {},
             query: '',
             lastRemoteQuery: '',
-            dropWidth: null
+            dropWidth: null,
+            dropStatus: false
         }
     },
     props: {
@@ -338,8 +338,10 @@ export default {
             return (values && values.length > 0) ? '' : placeholder
         },
         publicValue () {
-            const {multiple, values} = this
-            return multiple ? values.map(option => option.value) : (values[0] || {}).value
+            const {multiple, values, value} = this
+            let s = multiple ? values.map(option => option.value) : (values[0] || {}).value
+            console.log('value', s, value)
+            return s
         },
         notFoundData () {
             const {filterabled, dropList, loading} = this
@@ -383,7 +385,6 @@ export default {
                 return this.getOptionData(value)
             }).filter(Boolean)
         }
-
         this.fixedInitDrop()
     },
     methods: {
@@ -443,7 +444,7 @@ export default {
             }
             this.show = !this.show
             this.$emit('on-click')
-            // if (this.show) { this.broadcastPopperUpdate() }
+            if (this.show) { this.broadcastPopperUpdate() }
         },
         removeTag (item) {
             const {disabled, values} = this
@@ -530,6 +531,12 @@ export default {
             if (filterabled && remoteFn && query !== '') {
                 this.remoteFn(query)
             }
+        },
+        options () {
+            this.values = this.getInitValue().map(value => {
+                if (typeof value !== 'number' && !value) return null
+                return this.getOptionData(value)
+            }).filter(Boolean)
         }
     }
 }
