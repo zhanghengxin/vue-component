@@ -23,7 +23,7 @@ import clickOutside from '../../utils/directives/clickOutside'
 
 const prefixCls = prefix + 'tree'
 export default {
-    name: prefixCls,
+    name: prefixCls + '-root',
     mixins: [Emitter],
     directives: {clickOutside},
     components: {
@@ -33,10 +33,7 @@ export default {
         return {
             prefixCls: prefixCls,
             rootData: this.data,
-            labelWidth: 0,
             dataList: [],
-            treeShow: false,
-            currentValue: '',
             dargState: {}
         }
     },
@@ -51,10 +48,8 @@ export default {
                 this.formatTreeData()
             }
         },
-        treeShow () {
-            this.$nextTick(() => {
-                this.broadcast(`${prefix}drop`, this.treeShow ? 'on-update-popper' : 'on-destroy-popper')
-            })
+        filterText (value) {
+            this.filterTreeData(value)
         }
     },
     props: {
@@ -114,36 +109,20 @@ export default {
             type: Boolean,
             default: false
         },
-        clearable: {
-            type: Boolean,
-            default: false
-        },
-        loadMethod: {
-            type: Function
-        },
         filterMethod: {
             type: Function,
             default (value, data) {
                 return data.name.indexOf(value) !== -1
             }
         },
-        render: {
+        loadMethod: {
             type: Function
         },
-        size: {
-            type: String,
-            default: 'default'
+        filterText: {
+            type: [String, Number]
         },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
-        fixed: {
-            type: Boolean,
-            default: false
-        },
-        filterable: {
-            type: Boolean,
+        render: {
+            type: [Function, Boolean],
             default: false
         }
     },
@@ -157,8 +136,6 @@ export default {
         this.$on('on-check-change', this.handleCheck)
         this.$on('on-drag-start', this.handleDragStart)
         this.$on('on-drag-drop', this.handleDrop)
-        if (this.label) this.treeShow = false
-        this.labelWidth = this.getLabelWidth()
     },
     computed: {
         wrapCls () {
@@ -168,40 +145,9 @@ export default {
                     [`${this.className}`]: !!this.className
                 }
             ]
-        },
-        inputIcon () {
-            if (this.filterable) {
-                return 'chaxun'
-            } else {
-                return ''
-            }
-        },
-        iconClearShow () {
-            if (this.label && this.showCheckbox) {
-                return false
-            }
-            return this.clearable
         }
     },
     methods: {
-        getLabelWidth () {
-            const inputBox = this.$refs.input
-            let offsetWidth = 0
-            if (inputBox) {
-                if (inputBox.$el.children.length < 2) {
-                    offsetWidth = 0
-                } else {
-                    offsetWidth = inputBox.$el.children[1].offsetWidth
-                }
-                if (this.label) {
-                    offsetWidth += 4
-                }
-                if (this.fixed) {
-                    offsetWidth -= 4
-                }
-            }
-            return offsetWidth
-        },
         getCheckedNodes () {
             const checkedKey = this.defaultOpt.checkedKey
             return this.dataList.filter(obj => obj.node[checkedKey]).map(obj => obj.node)
@@ -290,12 +236,7 @@ export default {
             const selectedIndex = this.dataList.findIndex(obj => obj.node.selected)
             if (selectedIndex >= 0 && selectedIndex !== nodeKey) this.$set(this.dataList[selectedIndex].node, selectedKey, false)
             this.$set(node, selectedKey, !node.selected)
-            this.currentValue = node[this.defaultOpt.nameKey]
-            console.log(node)
             this.$emit('on-select', {data: node})
-            if (this.label && !this.showCheckbox) {
-                this.treeShow = false
-            }
         },
         // 选中
         handleCheck ({checked, nodeKey}) {
@@ -316,11 +257,6 @@ export default {
                 currentNode: node
             }
             options.checkedAndIndeterminateNodes = options.checkedNodes.concat(options.indeterminateNodes)
-            if (this.label && !this.filterable) {
-                this.currentValue = options.checkedNodes.map(item => {
-                    return item[defaultOpt.nameKey]
-                }).join(',')
-            }
             this.$emit('on-check', options)
         },
         // 展开/关闭
@@ -355,7 +291,6 @@ export default {
             this.$emit('on-expand', {data: node})
         },
         filterTreeData (value) {
-            if (!this.filterable) return
             const defaultOpt = this.defaultOpt
             const _this = this
             const cascadeParent = function (data) {
@@ -430,20 +365,6 @@ export default {
             if (childrenIndex !== undefined) {
                 dataList[parentKey].node.children.splice(childrenIndex, 1)
             }
-        },
-        handleChange (event) {
-            this.filterTreeData(event.target.value)
-        },
-        handleClick () {
-            if (this.disabled) return
-            this.treeShow = !this.treeShow
-        },
-        clickOutside () {
-            if (!this.label) return
-            this.treeShow = false
-        },
-        handleClear () {
-            this.currentValue = ''
         }
     }
 }

@@ -10,7 +10,7 @@
             :draggable="draggable">
             <li>
             <span :class="arrowsCls">
-                <Icon v-if="showArrow" :type="arrowType" @on-click="expanded"></Icon>
+                <Icon v-if="showArrow" :type="arrowType" @on-click.stop="expanded"></Icon>
                 <Icon v-if="showLoading" type="chushihua" :class="[prefixCls +'-loop']"></Icon>
             </span>
                 <Checkbox
@@ -29,6 +29,7 @@
                         :key="key"
                         :draggable="draggable"
                         :data="item"
+                        :render="render"
                         :show-checkbox="showCheckbox"
                         :default-opt="defaultOpt">
                     </tree-node>
@@ -119,7 +120,7 @@ export default {
             return 'loading' in this.data && this.data.loading
         },
         node () {
-            const Tree = findComponentUpward(this, prefix + 'tree')
+            const Tree = findComponentUpward(this, prefix + 'tree-root')
             if (Tree) {
                 // 将所有的 node（即flatState）和当前 node 都传递
                 return [Tree.dataList, Tree.dataList.find(item => item.nodeKey === this.data.nodeKey)]
@@ -128,11 +129,11 @@ export default {
             }
         },
         isParentRender () {
-            const Tree = findComponentUpward(this, prefix + 'tree')
+            const Tree = findComponentUpward(this, prefix + 'tree-root')
             return Tree && Tree.render
         },
         parentRender () {
-            const Tree = findComponentUpward(this, prefix + 'tree')
+            const Tree = findComponentUpward(this, prefix + 'tree-root')
             if (Tree && Tree.render) {
                 return Tree.render
             } else {
@@ -168,12 +169,12 @@ export default {
                 return item.data
             })
             parents.push(data)
-            this.dispatch(prefix + 'tree', 'on-expand-change', {data: this.data, parents: parents})
+            this.dispatch(prefix + 'tree-root', 'on-expand-change', {data: this.data, parents: parents})
         },
         selectData () {
             const defaultOpt = this.defaultOpt
             if (this.data[defaultOpt.disabled] || this.showCheckbox) return
-            this.dispatch(prefix + 'tree', 'on-selected-change', this.data.nodeKey)
+            this.dispatch(prefix + 'tree-root', 'on-selected-change', this.data.nodeKey)
         },
         handleCheck () {
             const defaultOpt = this.defaultOpt
@@ -182,22 +183,22 @@ export default {
                 checked: !this.data[defaultOpt.checkedKey] && !this.data[defaultOpt.indeterminateKey],
                 nodeKey: this.data.nodeKey
             }
-            this.dispatch(prefix + 'tree', 'on-check-change', changes)
+            this.dispatch(prefix + 'tree-root', 'on-check-change', changes)
         },
         handleDragStart (event) {
-            this.dispatch(prefix + 'tree', 'on-drag-start', {
+            this.dispatch(prefix + 'tree-root', 'on-drag-start', {
                 event: event,
                 treeNode: this
             })
         },
         handleDragOver (event) {
             if ('draggable' in this.data && !this.data.draggable) return
-            this.dispatch(prefix + 'tree', 'on-drag-over', this)
+            this.dispatch(prefix + 'tree-root', 'on-drag-over', this)
             event.preventDefault()
         },
         handleDrop (event) {
             if ('draggable' in this.data && !this.data.draggable) return
-            this.dispatch(prefix + 'tree', 'on-drag-drop', {
+            this.dispatch(prefix + 'tree-root', 'on-drag-drop', {
                 event: event,
                 treeNode: this.data
             })
