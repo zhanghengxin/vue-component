@@ -1,5 +1,14 @@
 更新日志
 
+### 0.3.3
+## `2019-03-18`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 自定义输入框格式【支持销项定制新需求】
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.3.2
 ## `2019-03-15`
 <br>
@@ -19,7 +28,6 @@
     <b-timeline-item>
     优化 部分组件按需引入报错的问题【Message、input等】
     </b-timeline-item>
-
 </b-timeline>
 
 ### 0.3.1

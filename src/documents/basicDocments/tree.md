@@ -558,9 +558,9 @@ Render 函数的第二个参数，包含三个字段：
 </div>
 
 ### 自定义输入框格式
-- 支持节点级联勾选或只能单个勾选,`show-checkbox来控制`是否显示勾选栏,`checkboxOptions`来配置级联的效果
-- 给节点设置 `expand`、`selected`、`checked` 和 `disabled` 可以将节点设置为展开、选中、勾选和禁用
-- 也可以通过`defaultOpt`配置以上 Key值【见文档配置项】
+- 可设置 `label`，`fixed`设置`label`的两种样式。
+- 可设置 `show-checkbox`开启多选模式
+
 <div class="example">
     <div class="example-box">
         <div>
@@ -1059,9 +1059,9 @@ export default {
 | defaultOpt     | 各种选中效果的配置项，具体配置见下文   | 	Object    |  -  |   -    |
 | draggable     |  是否开启节点拖拽编辑 | 	Boolean    |  -  |    fasle    |
 | render     |  自定义渲染内容，见示例	 | 	Function    |  -  |    -    |
-| label      | 设置说明文字 	| String，Number | - |  -  |
-| fixed      | 搭配文字的两种样式类型	| Boolean | - |   false  |
-| width | 自定义宽度	| Number |	-   |     -   |
+| label      | 开启 label 模式，设置说明文字 	| String，Number | - |  -  |
+| fixed      | 开启 `label` 模式时生效，搭配文字的两种样式类型	| Boolean | - |   false  |
+| width | 开启 `label` 模式时生效,自定义宽度	| Number |	-   |     -   |
 
 ### children
 | 属性      | 说明    | 类型      | 默认值       |

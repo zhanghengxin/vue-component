@@ -209,6 +209,7 @@ export default {
                 }
             ]
             this.$emit('on-select', options)
+            this.popupVisible = false
         },
         handleExpand (options) {
             this.$emit('on-expand', options)

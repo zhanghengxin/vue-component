@@ -27,7 +27,8 @@
                             :key='item.value'
                             :class="[prefixCls+`-tag`]">
                             <span v-text="showMultipleValues(item)"></span>
-                            <Icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu' @click.native.stop='removeTag(item)'></Icon>
+                            <Icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu'
+                                  @click.native.stop='removeTag(item)'></Icon>
                         </div>
                     </template>
                     <input
@@ -311,8 +312,8 @@ export default {
             return !multiple || ((show && multiple) || !values.length)
         },
         iconShow () {
-            const {clearable, clearShow, values, disabled} = this
-            return clearable && clearShow ? !values.length : !disabled
+            const {clearable, clearShow, values, disabled, treeValues} = this
+            return clearable && clearShow ? !(values.length || treeValues.length) : !disabled
         },
         closeIcon () {
             const {disabled, clearShow, values, treeValues} = this
