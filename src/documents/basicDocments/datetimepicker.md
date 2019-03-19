@@ -148,7 +148,9 @@
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | ---- | ---- | ---- | ---- | ---- |
 | value | 日期选择器中的值，使用 v-model 双向绑定数据 | String |
-| label | input前的说明文字 | String | | |
+| width | input宽度 | Number |
+| label | input前的说明文字 | String |
+| labelWidth | label模式下label的宽度 |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
 | size | input组件的尺寸 | Boolean  | `small` `default` `large` | default |
 | range | 日期选择中选择一个时间范围 | Boolean  | `true` `false` | false |
