@@ -113,7 +113,7 @@
 <script>
 import calcTextareaHeight from './calcTeatareaHeight.js'
 import { findComponentUpward } from '../../utils/assist'
-import { prefix, oneOf } from '../../utils/common'
+import { prefix, oneOf, propsInit } from '../../utils/common'
 import Emitter from '../../mixins/emitter'
 
 const prefixCls = prefix + 'input' // b-input
@@ -140,14 +140,6 @@ export default {
             type: String,
             default: '请输入...'
         },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
-        readonly: {
-            type: Boolean,
-            default: false
-        },
         showSuffix: {
             type: Boolean,
             default: true
@@ -155,29 +147,12 @@ export default {
         name: {
             type: String
         },
-        maxlength: {
-            type: Number
-        },
-        minlength: {
-            type: Number
-        },
-        autofocus: {
-            type: Boolean,
-            default: false
-        },
-        spellcheck: {
-            type: Boolean,
-            default: false
-        },
         autocomplete: {
             type: String,
             default: 'off',
             validator (value) {
                 return oneOf(value, ['off', 'on'])
             }
-        },
-        width: {
-            type: [String, Number]
         },
         // 样式属性
         size: {
@@ -189,42 +164,14 @@ export default {
                 return !this.size || this.size === '' ? 'default' : this.size
             }
         },
-        error: {
-            type: Boolean,
-            default: false
-        },
-        clearable: {
-            type: Boolean,
-            default: false
-        },
-        label: {
-            type: String
-        },
-        // 定长包裹着input的样式 true input前只有文字的样式 false
-        fixed: {
-            type: Boolean,
-            default: false
-        },
-        labelWidth: {
-            type: Number,
-            default: 36
-        },
         // icon属性
         icon: {
             type: String,
             default: ''
         },
-        prefix: {
-            type: Boolean,
-            default: false
-        },
-        suffix: {
-            type: Boolean,
-            default: false
-        },
         // textarea
         rows: {
-            type: Number,
+            type: [Number, String],
             default: 2
         },
         autosize: {
@@ -238,7 +185,36 @@ export default {
                 }
             },
             default: 'soft'
-        }
+        },
+        // props type为[Number, String]的配置
+        ...propsInit({
+            // label label样式的文字描述
+            // width input的宽度
+            // labelWidth label样式的文字的宽度 仅在fixed为false时有效
+            // maxlength lmaxlength
+            // minlength minlength
+            props: ['label', 'width', 'labelWidth', 'maxlength', 'minlength'],
+            config: {
+                type: [Number, String]
+            }
+        }),
+        // props type为 Boolean 的配置
+        ...propsInit({
+            // disabled disabled
+            // readonly readonly
+            // autofocus autofocus
+            // spellcheck 原生的拼写检测
+            // error error的样式设置
+            // clearable 清空
+            // fixed label的两种样式
+            // prefix 前面的icon显示
+            // suffix 后面的icon显示
+            props: ['disabled', 'readonly', 'autofocus', 'spellcheck', 'error', 'clearable', 'fixed', 'prefix', 'suffix'],
+            config: {
+                type: Boolean,
+                default: false
+            }
+        })
     },
     data () {
         return {
@@ -285,18 +261,21 @@ export default {
             ]
         },
         labelStyles () {
-            return [
-                {
-                    [`width: ${this.labelWidth}px`]: !this.fixed
+            const {label, fixed, labelWidth} = this
+            let style = {}
+            if (label && !fixed && labelWidth) {
+                style = {
+                    width: labelWidth && `${labelWidth}px`
                 }
-            ]
+            }
+            return style
         },
         // 整体的input的宽度
         inputBoxStyles () {
-            const { label } = this
+            const {label, fixed, width} = this
             let style = {}
-            if (!label) {
-                style.width = `${this.width}px`
+            if (!label || (label && width && fixed)) {
+                style.width = `${width}px`
             }
             return style
         },

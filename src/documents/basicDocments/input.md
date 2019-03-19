@@ -26,7 +26,8 @@
                 suffix:true,
                 icon:'chaxun',
                 autosize:true,
-                fixed:true
+                fixed:true,
+                labelWidth:72
             }
         },
         methods:{
@@ -218,12 +219,12 @@ label文字大小可根据input的size变化<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" label='姓名' :width='200' placeholder="请输入..." :suffix='true'>
+            <b-input v-model="value6" label='姓名' :labelWidth='labelWidth' :width='200' placeholder="请输入..." :suffix='true'>
                 <div slot='suffix'>
                     icon
                 </div>
             </b-input>
-            <b-input v-model="value6" label='密码' type='password' placeholder="请输入..." ></b-input>
+            <b-input v-model="value6" label='密码' :labelWidth='labelWidth' :width='200' type='password' placeholder="请输入..." ></b-input>
         </div>
     </div>
 </div>
@@ -251,15 +252,14 @@ label文字大小可根据input的size变化<br/>
 :::
 
 <br/>
-通过设置fixed为```true``` 属性可设置带label文字描述的样式 label文字与input的宽度根据自动适应 整体宽度默认280px
+通过设置fixed为```true``` 属性可设置带label文字描述的样式 label文字与input的宽度根据自动适应 整体宽度默认100%
 <br/>
 <br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" label='姓名' :fixed='fixed' placeholder="请输入..." ></b-input>
-            <br/>
-            <b-input v-model="value6" label='密码' :fixed='fixed' :error='error' type='password' placeholder="请输入..." ></b-input>
+            <b-input v-model="value6" label='姓名' width='200' :fixed='fixed' placeholder="请输入..." ></b-input>
+            <b-input v-model="value6" label='密码' width='200' :fixed='fixed' placeholder="请输入..." ></b-input>
         </div>
     </div>
 </div>
@@ -268,8 +268,8 @@ label文字大小可根据input的size变化<br/>
 ```html
 
     <template>
-        <b-input v-model="value6" label='姓名' :fixed="fixed" placeholder="请输入..." ></b-input>
-        <b-input v-model="value6" label='密码' :fixed="fixed" :error='error' type='password' placeholder="请输入..." ></b-input>
+        <b-input v-model="value6" label='姓名' width='200' :fixed="fixed" placeholder="请输入..." ></b-input>
+        <b-input v-model="value6" label='密码' width='200' :fixed="fixed" placeholder="请输入..." ></b-input>
     </template>
     <script>
         export default {
@@ -395,4 +395,4 @@ label文字大小可根据input的size变化<br/>
 | name	      | 说明	    | 返回值 |
 |-------------|---------|----------|
 | prefix    | 需要设置prefix为true    | -  |
-| suffix   | 需要设置prefix为true  | - |
+| suffix   | 需要设置suffix为true  | - |
