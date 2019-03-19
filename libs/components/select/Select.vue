@@ -1,5 +1,5 @@
 <template>
-    <div :class='selectGroupClasses'>
+    <div :class='selectGroupClasses' :style='selectBoxStyles'>
         <div v-if='label'
              :class='[prefixCls+`-label`]'
              :style='labelStyles'
@@ -7,7 +7,7 @@
         </div>
         <div
             v-click-outside="clickOutside"
-            :style='widthStyle'
+            :style='[widthStyle,selectWidth]'
             :class="selectClasses">
             <div
                 ref="reference"
@@ -19,13 +19,13 @@
                 @mouseenter="clearShow = clearable && true"
                 @mouseleave="clearShow = clearable && false">
                 <input type="hidden" :name="name" :value="publicValue">
-                <div :class='[`${prefixCls}-show-selection`]'>
+                <div :class='[`${prefixCls}-main-show-selection`]'>
                     <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
                     <template v-if='multiple'>
                         <div
                             v-for="item in multipleValues"
                             :key='item.value'
-                            :class="[prefixCls+`-tag`]">
+                            :class="[prefixCls+`-main-tag`]">
                             <span v-text="showMultipleValues(item)"></span>
                             <Icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu'
                                   @click.native.stop='removeTag(item)'></Icon>
@@ -37,7 +37,7 @@
                         v-show='inputShow'
                         v-model="query"
                         :disabled="disabled"
-                        :class="[prefixCls + '-input']"
+                        :class="[prefixCls + '-main-input']"
                         :placeholder="localePlaceholder"
                         :style="inputStyle"
                         autocomplete="off"
@@ -51,13 +51,13 @@
                     type='xia'
                     v-if='!disabled'
                     v-show='iconShow'
-                    :class="[prefixCls+`-arrow`]">
+                    :class="[prefixCls+`-main-arrow`]">
                 </Icon>
                 <Icon
                     type='shibai-mian'
                     v-if='clearable && showMultipleIcon'
                     v-show='closeIcon'
-                    :class="[prefixCls+`-arrow`]"
+                    :class="[prefixCls+`-main-arrow`]"
                     @click.native.stop='clearValues'>
                 </Icon>
             </div>
@@ -97,7 +97,7 @@ import Option from './Option'
 import Emitter from '../../mixins/emitter'
 import clickOutside from '../../utils/directives/clickOutside'
 import { typeOf } from '../../utils/assist'
-import { prefix } from '../../utils/common'
+import { prefix, propsInit } from '../../utils/common'
 import Icon from '../icon'
 
 const prefixCls = prefix + 'select'
@@ -118,7 +118,7 @@ export default {
             query: '',
             lastRemoteQuery: '',
             dropWidth: null,
-            dropStatus: false
+            selectWidth: {}
         }
     },
     props: {
@@ -141,22 +141,6 @@ export default {
             type: String,
             default: 'value'
         },
-        nameInCode: {
-            type: Boolean,
-            default: false
-        },
-        multiple: {
-            type: Boolean,
-            default: false
-        },
-        clearable: {
-            type: Boolean,
-            default: false
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
         placeholder: {
             type: String,
             default: '请选择'
@@ -165,22 +149,11 @@ export default {
             type: String,
             default: ''
         },
-        autowarp: { // 多选的时候是否仅单行显示
-            type: Boolean,
-            default: false
-        },
         size: {
             default: 'default',
             validator: function (value) {
                 return ['large', 'small', 'default'].indexOf(value) !== -1
             }
-        },
-        width: {
-            type: [String, Number]
-        },
-        filterabled: {
-            type: Boolean,
-            default: false
         },
         notFoundText: {
             type: String,
@@ -190,28 +163,38 @@ export default {
             type: String,
             default: '加载中..'
         },
-        loading: {
-            type: Boolean,
-            default: false
-        },
         filterFn: {
             type: Function
         },
         remoteFn: {
             type: Function
         },
-        label: {
-            type: [String, Number],
-            default: ''
-        },
-        labelWidth: {
-            type: [String, Number],
-            default: '72'
-        },
-        fixed: {
-            type: Boolean,
-            default: false
-        },
+        // props type为[Number, String]的配置
+        ...propsInit({
+            // label label样式的文字描述
+            // width input的宽度
+            // labelWidth label样式的文字的宽度 仅在fixed为false时有效
+            props: ['label', 'width', 'labelWidth'],
+            config: {
+                type: [Number, String]
+            }
+        }),
+         // props type为 Boolean 的配置
+        ...propsInit({
+            // nameInCode 返回值包含value 与 label
+            // multiple 多选
+            // clearable 清空
+            // disabled disabled
+            // autowarp 多选的时候是否仅单行显示
+            // filterabled 筛选
+            // loading loading
+            // fixed label的两种样式
+            props: ['nameInCode', 'multiple', 'clearable', 'disabled', 'autowarp', 'filterabled', 'loading', 'fixed'],
+            config: {
+                type: Boolean,
+                default: false
+            }
+        }),
         defaultOpt: {
             type: Object,
             default () {
@@ -237,8 +220,9 @@ export default {
     computed: {
         selectGroupClasses () {
             return [
-                `${prefixCls}-container`,
+                `${prefixCls}`,
                 {
+                    [`${prefixCls}-${this.size}`]: this.size,
                     [`${prefixCls}-group`]: this.label && !this.fixed,
                     [`${prefixCls}-group-fixed`]: this.label && this.fixed,
                     [`${prefixCls}-group-fixed-focused`]: this.isFocused && this.show && !!this.label && !!this.fixed
@@ -247,10 +231,9 @@ export default {
         },
         selectClasses () {
             return [
-                `${prefixCls}`,
+                `${prefixCls}-main`,
                 {
-                    [`${prefixCls}-multiple`]: this.multiple,
-                    [`${prefixCls}-${this.size}`]: this.size,
+                    [`${prefixCls}-main-multiple`]: this.multiple,
                     [`${this.className}`]: this.className
                 }
             ]
@@ -260,9 +243,9 @@ export default {
                 `${prefixCls}-selection`,
                 {
                     [`${prefixCls}-show`]: this.show, // 旋转小icon
-                    [`${prefixCls}-selection-focused`]: this.isFocused && this.show && (!this.label || !this.fixed),
-                    [`${prefixCls}-selection-disabled`]: this.disabled,
-                    [`${prefixCls}-selection-autowarp`]: this.multiple && !this.autowarp
+                    [`${prefixCls}-focused`]: this.isFocused && this.show && (!this.label || !this.fixed),
+                    [`${prefixCls}-disabled`]: this.disabled,
+                    [`${prefixCls}-autowarp`]: this.multiple && !this.autowarp
                 }
             ]
         },
@@ -274,15 +257,31 @@ export default {
                 }
             ]
         },
-        widthStyle () {
-            return {
-                width: this.width && `${this.width}px`
-            }
-        },
         labelStyles () {
-            return {
-                width: this.labelWidth && `${this.labelWidth}px`
+            const {label, fixed, labelWidth} = this
+            let style = {}
+            if (label && !fixed && labelWidth) {
+                style = {
+                    width: labelWidth && `${labelWidth}px`
+                }
             }
+            return style
+        },
+        selectBoxStyles () {
+            const { label, fixed } = this
+            let style = {}
+            if (!label || (label && fixed)) {
+                style.width = `${this.width}px`
+            }
+            return style
+        },
+        widthStyle () {
+            const { label, fixed } = this
+            let style = {}
+            if (label && !fixed && this.width) {
+                style.width = `${this.width}px`
+            }
+            return style
         },
         inputStyle () {
             let style = {}
@@ -339,10 +338,8 @@ export default {
             return (values && values.length > 0) ? '' : placeholder
         },
         publicValue () {
-            const {multiple, values, value} = this
-            let s = multiple ? values.map(option => option.value) : (values[0] || {}).value
-            console.log('value', s, value)
-            return s
+            const {multiple, values} = this
+            return multiple ? values.map(option => option.value) : (values[0] || {}).value
         },
         notFoundData () {
             const {filterabled, dropList, loading} = this
@@ -534,10 +531,12 @@ export default {
             }
         },
         options () {
-            this.values = this.getInitValue().map(value => {
-                if (typeof value !== 'number' && !value) return null
-                return this.getOptionData(value)
-            }).filter(Boolean)
+            if (!this.remoteFn) {
+                this.values = this.getInitValue().map(value => {
+                    if (typeof value !== 'number' && !value) return null
+                    return this.getOptionData(value)
+                }).filter(Boolean)
+            }
         }
     }
 }

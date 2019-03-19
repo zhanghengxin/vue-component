@@ -56,7 +56,7 @@ describe('Select', () => {
             }
         }, true)
         vm.$nextTick(_ => {
-            expect(vm.$el.className).toBe(`${Select}-container`)
+            expect(vm.$el.classList.contains(`${Select}`)).toBeTruthy()
             expect(vm.$el.querySelector(`${prefixCls}-selection-content`).textContent).toBe('增专')
             expect(vm.$el.querySelector(`[type='hidden']`).value).toBe('004')
             expect(vm.$el.querySelector(`.bw-shibai-mian`)).toBeTruthy()
@@ -138,7 +138,7 @@ describe('Select', () => {
             }
         }, true)
         vm.$nextTick(_ => {
-            expect(vm.$el.querySelector('.b-select-selection-disabled')).toBeTruthy()
+            expect(vm.$el.querySelector('.b-select-disabled')).toBeTruthy()
             done()
         })
     })

@@ -118,7 +118,7 @@
 -----
 ### 单选
 可使用 v-model 实现数据的双向绑定。<br/>
-可直接设置 style 来改变输入框的宽度，默认 100%。<br/>
+可直接设置 style 或 width 来改变输入框的宽度，默认 100%。<br/>
 <div class="example">
     <div class="example-box">
         <div>
@@ -305,17 +305,20 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
         <div>
             <b-select 
                 v-model="value3"
+                label='发票类型'
+                width='200'
+                labelWidth='72'
                 :multiple='multiple' 
                 :options='options' 
                 @on-change='changeConsole'
-                :nameInCode='nameInCode'
-                style="width:200px" >
+                :nameInCode='nameInCode'>
             </b-select>
             <b-select 
                 v-model="value4" 
-                style="width:200px"
+                label='发票类型'
                 :multiple='multiple' 
-                :options='options' 
+                :options='options'
+                width='200'
                 :autowarp='autowarp'>
             </b-select>
             <span>{{value4}}</span>
@@ -328,17 +331,22 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 
     <template>
         <div>
-            <b-select 
-                v-model="value3" 
+             <b-select 
+                v-model="value3"
+                label='发票类型'
+                width='200'
+                labelWidth='72'
                 :multiple='multiple' 
                 :options='options' 
-                style="width:200px" >
+                @on-change='changeConsole'
+                :nameInCode='nameInCode'>
             </b-select>
             <b-select 
                 v-model="value4" 
-                style="width:200px"
+                label='发票类型'
                 :multiple='multiple' 
-                :options='options' 
+                :options='options'
+                width='200'
                 :autowarp='autowarp'>
             </b-select>
             <span>{{value4}}</span>
@@ -621,21 +629,23 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 
 ### label样式
 可设置 ```label```，```fixed```设置label的两种样式。<br/>
+fixed 为false时可设置labelWidth的值 默认72px select框的width默认为200<br/>
+可设置通过width来设置带select的样式 fixed为true的时候设置整体 为false的时候仅设置select框的宽度<br/>
 <div class="example">
     <div class="example-box">
         <div>
              <b-select 
                 v-model="value9"  
-                label='姓名'
+                label='发票类型'
                 :fixed='fixed'
                 :disabled='disabled'
+                width='280'
                 :options='options' >
             </b-select>
-            <br/>
-            <br/>
             <b-select 
                 v-model="value10" 
-                label='姓名' 
+                label='发票类型'
+                width='217' 
                 :options='options' >
             </b-select>
         </div>
@@ -646,16 +656,19 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 ```html
 
     <template>
-        <div>
-            <b-select 
+         <div>
+             <b-select 
                 v-model="value9"  
-                label='姓名'
+                label='发票类型'
                 :fixed='fixed'
+                :disabled='disabled'
+                width='280'
                 :options='options' >
             </b-select>
             <b-select 
                 v-model="value10" 
-                label='姓名' 
+                label='发票类型'
+                width='217' 
                 :options='options' >
             </b-select>
         </div>

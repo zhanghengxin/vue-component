@@ -43,3 +43,17 @@ export function findComponentDownward (context, componentName) {
     }
     return children
 }
+
+/**
+* propsInit
+* @param {Obj} params
+* params.props {Array} props name
+* params.config {Obj} props config
+*/
+export function propsInit (params) {
+    let propsInitObj = {}
+    for (let val of params.props) {
+        propsInitObj[val] = params.config
+    }
+    return propsInitObj
+}
