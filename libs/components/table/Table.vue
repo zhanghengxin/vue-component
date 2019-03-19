@@ -3,7 +3,7 @@
         :class="wrapCls" :style="styles" v-loading="loading" :loading-text="loadingText"
     >
         <div :class="tableCls">
-            <div :class="[preCls + '-header']" ref="header">
+            <div v-if="showHeader" :class="[preCls + '-header']" ref="header">
                 <table-head
                     :columns="cloneColumns"
                     :header-style="headerStyle"
@@ -46,7 +46,9 @@
                 ref="leftTable"
                 :dynamicable="dynamicable"
                 :data="formatData"
+                :show-header="showHeader"
                 :resizeable="resizeable"
+                :columns="cloneColumns"
                 :draggable="draggable"
                 :fixed-columns="leftFixedColumns"
             >
@@ -58,6 +60,8 @@
                 ref="rightTable"
                 :dynamicable="dynamicable"
                 fixed="right"
+                :columns="cloneColumns"
+                :show-header="showHeader"
                 :data="formatData"
                 :draggable="draggable"
                 :resizeable="resizeable"
@@ -105,6 +109,8 @@
                 </li>
             </ul>
         </Modal>
+        <span :class="[preCls + '-right-border']"></span>
+        <span :class="[preCls + '-bottom-border']"></span>
     </div>
 </template>
 
@@ -176,6 +182,10 @@ export default {
             type: Boolean,
             default: false
         },
+        showHeader: {
+            type: Boolean,
+            default: true
+        },
         draggable: {
             type: Boolean,
             default: false
@@ -245,6 +255,7 @@ export default {
         this.$on('context-menu', this.handleContextMenu)
         this.$on('filiter-reset', this.handleFilterReset)
         this.$on('filiter-select', this.handleFilterSelect)
+        this.$on('expand-change', this.handleExpand)
     },
     mounted () {
         this.handleResize()
@@ -707,7 +718,8 @@ export default {
         },
         getDragBorderHeight () {
             let style = {}
-            let height = this.$el.getBoundingClientRect().height - getStyle(this.$refs.header, 'height').replace(/px/, '')
+            let headerHeight = this.$refs.header ? getStyle(this.$refs.header, 'height').replace(/px/, '') : 0
+            let height = this.$el.getBoundingClientRect().height - headerHeight
             if (this.horizontalScroll) {
                 height = height - (this.horizontalScroll ? this.scrollBarWidth : 0)
             }
@@ -778,6 +790,15 @@ export default {
                 }
                 return status
             })
+        },
+        handleExpand (_index) {
+            let {formatData} = this
+            const status = !formatData[_index]._expanded
+            this.$set(formatData[_index], '_expanded', status)
+            // this.$emit('on-expand', deepCopy(this.data[_index]), status)
+            // if (this.height) {
+            //     this.$nextTick(() => this.bodyScrollReckon())
+            // }
         }
     }
 }
