@@ -38,6 +38,11 @@ export default {
             checkedValue: this.value
         }
     },
+    watch: {
+        value () {
+            this.checkedValue = this.value
+        }
+    },
     computed: {
         wrapClasses () {
             return [
