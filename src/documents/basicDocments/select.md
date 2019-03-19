@@ -564,8 +564,6 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 ```
 :::
 
-<br/>
-<br/>
 可设置```filterFn```函数定义筛选条件。<br/>
 <div class="example">
     <div class="example-box">
@@ -823,7 +821,6 @@ fixed 为false时可设置labelWidth的值 默认72px select框的width默认为
 | codeKey      | 要设为value的字段的key值	| String |	-   |     value    |
 | options      | 传入的下拉列表的数据	| Array |	-   |     -    |
 | className      | 最外层可扩展class	| String |	-   |     -    |
-| width      | 设置select的宽度	| Number |	-   |     -    |
 | filterabled      | 是否支持筛选	| Boolean | `true`、`false` |   false  |
 | notFoundText      | 没有数据的提示	| String | - |   '无匹配数据'  |
 | filterFn      | 筛选函数，filterabled为true时可用	| Function | - |  -  |

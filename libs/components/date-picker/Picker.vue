@@ -24,7 +24,6 @@
         <transition name="slide">
             <Drop
                 v-show="popupVisible"
-                :labelWidth="labelWidth"
                 :placement="placement"
                 :className="popupCls">
                 <div :class="popupContentCls">
@@ -491,7 +490,12 @@ export default {
         },
         getLabelWidth () {
             const { label } = this.$refs.reference.$refs
-            this.labelWidth = label ? label.offsetWidth : 0
+            let labelWidth = label ? label.offsetWidth : 0
+            if (labelWidth) {
+                if (!this.fixed) labelWidth += 4
+                const popup = this.$el.querySelector(`.${pickerCls}-popup`)
+                popup.style.left = `${labelWidth}px`
+            }
         }
     }
 }

@@ -41,7 +41,7 @@
                         v-show="file.status === 'finished'"
                         @click.native="handleRemove(file)"
                     > -->
-                      <b-icon type="shibai" size=12></b-icon>
+                      <Icon type="shibai" size=12></Icon>
                     <!-- <button
                         @click="handleRemove(file)"
                     > -->

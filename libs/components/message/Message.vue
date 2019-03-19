@@ -13,11 +13,11 @@
                 :class="[prefixCls]"
                 @mouseenter="enter"
                 @mouseleave="leave">
-                <b-icon
+                <Icon
                     v-if="imgSrc"
                     :class="[prefixCls+'-img',fsColor]"
                     :type="imgSrc">
-                </b-icon>
+                </Icon>
                 <span :class="[prefixCls+'-content']">{{message}}</span>
                 <button
                     v-if="showClose"
@@ -32,10 +32,12 @@
 
 <script>
 import { prefix } from '../../utils/common'
+import Icon from '../icon'
 
 const prefixCls = prefix + 'message'
 export default {
     name: prefixCls,
+    components: {Icon},
     data () {
         return {
             show: false,

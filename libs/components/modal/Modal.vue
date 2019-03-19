@@ -1,4 +1,3 @@
-
 <template>
     <div v-transfer-dom :data-transfer="transfer">
         <transition :name="transitionNames[1]">
@@ -18,11 +17,14 @@
                                 <div :class="[prefixCls + '-header-inner']">{{ title }}</div>
                             </slot>
                         </div>
-                        <div :class="[prefixCls + '-body']"><slot></slot></div>
+                        <div :class="[prefixCls + '-body']">
+                            <slot></slot>
+                        </div>
                         <div :class="[prefixCls + '-footer']" v-if="!footerHide">
                             <slot name="footer">
-                                <b-button @click.native="cancel">{{ localeCancelText }}</b-button>
-                                <b-button type="primary" :loading="buttonLoading" @click.native="ok">{{ localeOkText }}</b-button>
+                                <Button @click.native="cancel">{{ localeCancelText }}</Button>
+                                <Button type="primary" :loading="buttonLoading" @click.native="ok">{{ localeOkText }}
+                                </Button>
                             </slot>
                         </div>
                     </div>
@@ -32,19 +34,20 @@
     </div>
 </template>
 <script>
-import BButton from '../button'
+import Button from '../button'
 import BIcon from '../icon'
 import TransferDom from './directive/transfer-dom'
 import { on, off } from '../../utils/dom'
 import Scrollbar from './mixins/scrollbar'
+import { prefix } from '../../utils/common'
 
-const prefixCls = 'b-modal'
+const prefixCls = prefix + 'modal'
 
 export default {
-    name: 'BModal',
-    mixins: [ Scrollbar ],
-    components: { BButton, BIcon },
-    directives: { TransferDom },
+    name: prefixCls,
+    mixins: [Scrollbar],
+    components: {Button, BIcon},
+    directives: {TransferDom},
     props: {
         value: {
             type: Boolean,
