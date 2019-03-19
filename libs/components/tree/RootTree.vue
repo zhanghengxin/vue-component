@@ -33,6 +33,8 @@
         :filter="filter"
         :label="label"
         :fixed="fixed"
+        :width="width"
+        :label-width="labelWidth"
         :accordion-options="accordionOptions"
         @on-check="handleCheck"
         @on-select="handleSelect"
@@ -150,6 +152,10 @@ export default {
         width: {
             type: [String, Number],
             default: 200
+        },
+        labelWidth: {
+            type: [String, Number],
+            default: 72
         }
     },
     methods: {

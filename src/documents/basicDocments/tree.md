@@ -564,24 +564,20 @@ Render 函数的第二个参数，包含三个字段：
 <div class="example">
     <div class="example-box">
         <div>
-           <div style="display:inline-block;">
-                <b-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
-           </div>
-           <div style="display:inline-block;">
-                <b-tree fixed label='复选' width='200' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
-           </div>
-           <div style="display:inline-block;">
-                <b-tree fixed label='模糊检索' width='200' filter :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
-           </div>
+            <b-tree label='单选' width='250' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+            <b-tree fixed label='单选' width='250' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+            <b-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
+            <b-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
-        <b-tree fixed label='复选' width='200' :data='data3' multiple :checkboxOptions='checkboxOptions'></b-tree>
-        <b-tree fixed label='模糊检索' width='200' filter :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+        <b-tree label='单选' width='250' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+        <b-tree fixed label='单选' width='250' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+        <b-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
+        <b-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
     </div>
     <script>
         export default {
@@ -1062,6 +1058,7 @@ export default {
 | label      | 开启 label 模式，设置说明文字 	| String，Number | - |  -  |
 | fixed      | 开启 `label` 模式时生效，搭配文字的两种样式类型	| Boolean | - |   false  |
 | width | 开启 `label` 模式时生效,自定义宽度	| Number |	-   |     -   |
+| labelWidth | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
 
 ### children
 | 属性      | 说明    | 类型      | 默认值       |
