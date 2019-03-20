@@ -5,14 +5,14 @@
             <col v-if="$parent.verticalScroll" :width="$parent.scrollBarWidth"/>
         </colgroup>
         <thead>
-        <tr>
+        <tr v-for="(columns, rowIndex) in groupRows" :key="rowIndex">
             <th
-                v-for="(item,index) in visibleColumns"
+                v-for="(item,index) in columns"
                 :key="index"
                 :class="alignCls(item)"
                 :colspan="item.colSpan"
-                :draggable="draggable"
                 :rowspan="item.rowSpan"
+                :draggable="draggable"
                 @dragstart.stop="handleDragStart($event,index)"
                 @dragover.stop="handleDragOver($event)"
                 @dragend.stop="handleEndDrop($event)"
@@ -95,6 +95,7 @@ export default {
     },
     props: {
         columns: Array,
+        columnRows: Array,
         preCls: String,
         headerStyle: {
             type: Object,
@@ -133,11 +134,15 @@ export default {
                 }
             }
             return status
+        },
+        groupRows () {
+            const isGroup = this.columnRows && this.columnRows.length > 1
+            if (isGroup) {
+                return this.fixed ? [this.columns] : this.columnRows
+            } else {
+                return [this.columns]
+            }
         }
-        // visibleColumns () {
-        //     console.log(this.columns, 'this.columns')
-        //     return this.columns.filter((item) => item._visible)
-        // }
     },
     methods: {
         cellCls () {
@@ -313,16 +318,6 @@ export default {
                     [`${this.preCls}-filter-select-item-selected`]: !column._filterChecked || !column._filterChecked.length
                 }
             ]
-        },
-        getColumn (rowIndex, index) {
-            const isGroup = this.columnRows.length > 1
-
-            if (isGroup) {
-                const id = this.headRows[rowIndex][index].__id
-                return this.columns.filter(item => item.__id === id)[0]
-            } else {
-                return this.headRows[rowIndex][index]
-            }
         },
         filterReset (index) {
             this.dispatch(this.preCls, 'filiter-reset', index)

@@ -2233,19 +2233,16 @@
     </script>
 
     // render-tabele
-    <template>
-        <b-table
-            class="expend-table"
-            :border="border"
-            :columns='columns'
-            disHover
-            :stripe='stripe'
-            :show-header="showHeader"
-            :data='data'>
-        </b-table>
-    </template>
+    <b-table
+        class="expend-table"
+        :border="border"
+        :columns='columns'
+        disHover
+        :stripe='stripe'
+        :show-header="showHeader"
+        :data='data'>
+    </b-table>
 
-    <script>
     export default {
         name: 'render-table',
         data () {
@@ -2276,6 +2273,165 @@
             }
         }
     }
+
+```
+:::
+</div>
+
+### 多级表头
+
+表格内容多不能完全展示时使用。<br/>
+
+<div class="example">
+    <div class="example-box">
+        <div>
+             <b-table border width=1000 :columns='columns17' :data='data11'></b-table>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+         <b-table height=200 width=1000 :columns='columns15' :data='data12'></b-table>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    data12: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            pets:'dog',
+                            occupation:'red',
+                            book:'《贩罪》',
+                            children:[
+                                {
+                                    name: '佐罗',
+                                    age: 15,
+                                    pets:'pig',
+                                    occupation:'yellow',
+                                    book:'《惊悚乐园》'
+                                },
+                                {
+                                    name: '轩辕',
+                                    age: 12,
+                                    pets:'drag',
+                                    occupation:'red',
+                                    book:'《龙族》'
+                                }
+                            ]
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets:'cat',
+                            book:'《霸皇纪》',
+                            _disableExpand:true,
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets:'rhizomys',
+                            _disableExpand:true,
+                            book:'《龙族》',
+                            _disableExpand:true,
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            pets:'cat',
+                            book:'《卡徒》',
+                            _disableExpand:true,
+                            occupation:'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            book:'《无限道武者路》',
+                            pets:'rhizomys',
+                            _disableExpand:true,
+                            occupation:'President'
+                        }
+                    ],
+                    columns15: [
+                        {
+                            type: 'expand',
+                            width: 40,
+                            center:'align',
+                            expandRender: (h, params) => {
+                                return h('render-table', {
+                                    props: {
+                                        data: params.row.children,
+                                        columns: this.columns16
+                                    }
+                                })
+                            }
+                        },
+                        {
+                           title: 'Name',
+                           key: 'name',
+                           width:100
+                        },
+                        {
+                           title: 'Age',
+                           key: 'age',
+                           width:100,
+                           sortable:true
+                        },
+                        {
+                           title: 'Pets',
+                           key: 'pets',
+                           minWidth:100
+                        },
+                        {
+                           title: 'Occupation',
+                           key: 'occupation',
+                           maxWidth:100
+                        },
+                        {
+                           title: 'Book',
+                           key: 'book',
+                           width:100
+                        }
+                    ],
+                    columns16:[
+                        {
+                          width: 40
+                        },
+                        {
+                         title: 'Name',
+                         key: 'name',
+                         width:100
+                        },
+                        {
+                         title: 'Age',
+                         key: 'age',
+                         width:100,
+                         sortable:true
+                        },
+                        {
+                         title: 'Pets',
+                         key: 'pets',
+                         minWidth:100
+                        },
+                        {
+                         title: 'Occupation',
+                         key: 'occupation',
+                         maxWidth:100
+                        },
+                        {
+                         title: 'Book',
+                         key: 'book',
+                         width:100
+                        }
+                    ]
+                }
+            }
     </script>
 ```
 :::
@@ -3300,6 +3456,62 @@
                      title: 'Occupation',
                      key: 'occupation',
                      maxWidth:100
+                    },
+                    {
+                     title: 'Book',
+                     key: 'book',
+                     width:100
+                    }
+                ],
+                columns17:[
+                    {
+                         title: '测试',
+                         children:[
+                            {
+                              title: 'Name',
+                              key: 'name',
+                              width:200,
+                              sortable:true
+                            },
+                            {
+                              title: 'Sex',
+                              key: 'sex',
+                              width:200,
+                              sortable:true
+                            },
+                            {
+                                title: '合计',
+                                children:[
+                                  {
+                                    title: 'Hobby',
+                                    key: 'hobby',
+                                    width:100,
+                                    sortable:true
+                                  },
+                                  {
+                                    title: 'id',
+                                    key: 'id',
+                                    width:100
+                                  }
+                                ]
+                            }
+                         ]
+                    },
+                    {
+                     title: 'Age',
+                     key: 'age',
+                     width:100,
+                     sortable:true
+                    },
+                    {
+                     title: 'Pets',
+                     key: 'pets',
+                     width:100
+                    },
+                    {
+                     title: 'Occupation',
+                     key: 'occupation',
+                     width:100
                     },
                     {
                      title: 'Book',

@@ -6,6 +6,7 @@
             <div v-if="showHeader" :class="[preCls + '-header']" ref="header">
                 <table-head
                     :columns="cloneColumns"
+                    :column-rows="columnRows"
                     :header-style="headerStyle"
                     :pre-cls="preCls"
                     :data="formatData"
@@ -126,6 +127,7 @@ import Icon from '../icon'
 import Modal from '../modal'
 import Checkbox from '../checkbox'
 import Emitter from '../../mixins/emitter'
+import { getRandomStr, convertToRows, getAllColumns } from './utils'
 
 const preCls = prefix + 'table'
 export default {
@@ -135,10 +137,12 @@ export default {
         tableHead, tableBody, tableFixed, dynamicColumn, Icon, Modal, Checkbox
     },
     data () {
+        const colsWithId = this.makeColumnsId(this.columns)
         return {
             preCls: preCls,
             formatData: [],
-            cloneColumns: [],
+            cloneColumns: this.buildColumns(colsWithId),
+            columnRows: this.makeColumnRows(false, colsWithId),
             tableWidth: 0,
             bodyHeight: 0,
             dragStartIndex: '',
@@ -239,7 +243,7 @@ export default {
     },
     created () {
         this.formatData = this.buildData()
-        this.cloneColumns = this.buildColumns()
+        // this.cloneColumns = this.buildColumns(this.columns)
         this.$on('selected-change', this.toggleSelect)
         this.$on('selected-all-change', this.selectAll)
         this.$on('sort-change', this.handleSort)
@@ -284,7 +288,8 @@ export default {
         },
         columns: {
             handler () {
-                this.cloneColumns = this.buildColumns()
+                const cols = this.makeColumnsId(this.columns)
+                this.cloneColumns = this.buildColumns(cols)
                 this.handleResize()
             },
             deep: true
@@ -415,8 +420,8 @@ export default {
             })
             return data
         },
-        buildColumns () {
-            let columns = deepCopy(this.columns)
+        buildColumns (cols) {
+            let columns = deepCopy(getAllColumns(cols))
             // Clumns in disorder
             let indexArr = []
             if (this.showIndex) {
@@ -552,6 +557,10 @@ export default {
                 let bodyEl = bodyContentEl.parentElement
                 let bodyContentHeight = bodyContentEl.offsetHeight
                 this.horizontalScroll = bodyEl.offsetWidth < bodyContentEl.offsetWidth + (this.verticalScroll ? this.scrollBarWidth : 0) - 1
+                if (this.columnRows.length > 1) {
+                    console.log(bodyEl.offsetWidth, 'bodyEl.offsetWidth')
+                    console.log(bodyContentEl.offsetWidth, 'bodyContentEl.offsetWidth')
+                }
                 this.verticalScroll = this.bodyHeight ? bodyContentHeight > this.bodyHeight : false
                 if (this.verticalScroll) {
                     bodyEl.classList.add(this.preCls + '-overflowY')
@@ -795,10 +804,23 @@ export default {
             let {formatData} = this
             const status = !formatData[_index]._expanded
             this.$set(formatData[_index], '_expanded', status)
-            // this.$emit('on-expand', deepCopy(this.data[_index]), status)
+            this.$emit('on-expand', deepCopy(this.data[_index]), status)
             // if (this.height) {
             //     this.$nextTick(() => this.bodyScrollReckon())
             // }
+        },
+        // 多级表头 start
+        // 修改列，设置一个隐藏的 id，便于后面的多级表头寻找对应的列，否则找不到
+        makeColumnsId (columns) {
+            return columns.map(item => {
+                if ('children' in item) this.makeColumnsId(item.children)
+                item.__id = getRandomStr(6)
+                return item
+            })
+        },
+        // create a multiple table-head
+        makeColumnRows (fixedType, cols) {
+            return convertToRows(cols, fixedType)
         }
     }
 }
