@@ -10,7 +10,8 @@
             :disabled="disabled"
             :readonly="!editable"
             :value="text"
-            :labelWidth="width"
+            :labelWidth="labelWidth"
+            :width="width"
             :size="size"
             suffix
             clearable
@@ -203,6 +204,10 @@ export default {
             type: [String, Number],
             default: null
         },
+        labelWidth: {
+            type: [String, Number],
+            default: null
+        },
         confirm: {
             type: Boolean,
             default: false
@@ -276,8 +281,7 @@ export default {
             prefix,
             curVal: this.range ? [null, null] : null,
             userInput: null,
-            popupVisible: false,
-            labelWidth: 0
+            popupVisible: false
         }
     },
     computed: {

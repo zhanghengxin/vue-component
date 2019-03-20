@@ -178,7 +178,7 @@ export default {
                 type: [Number, String]
             }
         }),
-         // props type为 Boolean 的配置
+        // props type为 Boolean 的配置
         ...propsInit({
             // nameInCode 返回值包含value 与 label
             // multiple 多选
@@ -267,7 +267,7 @@ export default {
             return style
         },
         selectBoxStyles () {
-            const { label, fixed } = this
+            const {label, fixed} = this
             let style = {}
             if (!label || (label && fixed)) {
                 style.width = `${this.width}px`
@@ -275,7 +275,7 @@ export default {
             return style
         },
         widthStyle () {
-            const { label, fixed } = this
+            const {label, fixed} = this
             let style = {}
             if (label && !fixed && this.width) {
                 style.width = `${this.width}px`
@@ -477,6 +477,7 @@ export default {
             } else {
                 this.dropWidth = $el.clientWidth
             }
+            this.$emit('get-drop-width', this.dropWidth)
         },
         broadcastPopperUpdate () {
             this.broadcast(`${prefix}drop`, 'on-update-popper')

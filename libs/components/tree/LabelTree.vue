@@ -9,7 +9,9 @@
             :default-opt="defaultOpt"
             clearable
             :width="width"
+            :label-width="labelWidth"
             placeholder=""
+            @get-drop-width="getDropWidth"
             :options='options'>
         <transition name="slide">
             <Drop
@@ -19,7 +21,7 @@
                         v-model='filterText'
                         ref="reference"
                         prefix
-                        :width="width"
+                        :width="dropWidth"
                         clearable
                         v-if="filter"
                         icon="chaxun">
@@ -67,6 +69,7 @@ export default {
             prefixCls: prefixCls,
             filterText: '',
             values: [],
+            dropWidth: '',
             options: [],
             popupVisible: false
         }
@@ -80,10 +83,6 @@ export default {
             default () {
                 return []
             }
-        },
-        width: {
-            type: [String, Number],
-            default: 200
         },
         showCheckbox: {
             type: Boolean,
@@ -159,6 +158,14 @@ export default {
             type: String,
             default: ''
         },
+        labelWidth: {
+            type: [String, Number],
+            default: 72
+        },
+        width: {
+            type: [String, Number],
+            default: 200
+        },
         fixed: {
             type: Boolean,
             default: false
@@ -182,7 +189,7 @@ export default {
         },
         wrapSty () {
             return {
-                width: this.width && `${this.width}px`
+                width: this.dropWidth && `${this.dropWidth}px`
             }
         }
     },
@@ -275,6 +282,9 @@ export default {
                     this.downTraversal(child, options)
                 })
             }
+        },
+        getDropWidth (width) {
+            this.dropWidth = width
         }
     }
 }

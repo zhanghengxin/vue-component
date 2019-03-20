@@ -6,145 +6,136 @@
 </template>
 
 <script>
-import Common from './common'
-import { prefix } from '../../utils/common'
+    import Common from './common'
+    import { prefix } from '../../utils/common'
 
-const prefixCls = prefix + 'step-area'
-export default {
-    name: prefix + 'steps',
-    props: {
-        current: {// 当前步数
-            type: [Number, String],
-            default: 0
-        },
-        status: {// step的状态
-            type: String,
-            default: 'process'
-        },
-        size: {// 组件的型号
-            type: String,
-            default: 'normal'
-        },
-        length: {// 组件的宽度
-            type: [Number, String],
-            default: '100%'
-        },
-        direction: { // step组件布局的方向
-            type: String,
-            default: ''
-        },
-        click: {// 单击事件的方法，没有规定类型为function，因为需要做非空判断
-            type: [Function, String],
-            default: ''
-        }
-    },
-    data () {
-        return {
-            ifHaveContent: false, // 是否含有content
-            ifHaveSingle: false,
-            haveContentClass: ' '// 若有content时的class
-        }
-    },
-    computed: {
-        stepsArea: () => { // 返回stepsArea的class
-            return `${prefixCls}`
-        },
-        setDirection () {
-            if (this.direction === 'vertical') {
-                return `${prefixCls}-vertical`
+    const prefixCls = prefix + 'step-area'
+    export default {
+        name: Common.stepsName,
+        props: {
+            current: {// 当前步数
+                type: [Number, String],
+                default: 0
+            },
+            status: {// step的状态
+                type: String,
+                default: 'process'
+            },
+            size: {// 组件的型号
+                type: String,
+                default: 'normal'
+            },
+            length: {// 组件的宽度
+                type: [Number, String],
+                default: '100%'
+            },
+            direction: { // step组件布局的方向
+                type: String,
+                default: ''
             }
-            return `${prefixCls}-horizontal`
         },
-        setStyle () {
-            let length = this.length
-            if (+length) {
-                length = length + 'px'
+        data () {
+            return {
+                ifHaveContent: false, // 是否含有content
+                ifHaveSingle: false,
+                haveContentClass: ' '// 若有content时的class
             }
-            let params = this.direction === 'vertical' ? 'height' : 'width'
-            return {[params]: length}
-        }
-    },
-    mounted () { // 初次加载时触发属性设置方法
-        this.setChildrenAttr()
-    },
-    updated () { // 更新时触发属性设置方法
-        this.setChildrenAttr()
-    },
-    methods: {
-        // 若子组件有content，则操作class
-        haveContent () {
-            this.haveContentClass = `${prefixCls}-haveContent`
         },
-        haveSingle () {
-            this.ifHaveSingle = true
-        },
-        // 获取steps组件的size属性
-        stepsSize () {
-            let size = this.size
-            let className = ' '
-            switch (size) {
-                case 'small':
-                    className = `${prefixCls}-small`
-                    break
-                default :
-                    className = ' '
-            }
-            return className
-        },
-        // 设置子元素的属性
-        setChildrenAttr () {
-            let that = this
-            let childrenLength = that.$children.length
-            // 设置子组件（Step）的默认值，比如index，showLine。
-            that.$children.map((seg, idx) => {
-                seg['size'] = that.size
-                seg['direction'] = that.direction
-                if (that.ifHaveSingle) {
-                    seg['index'] = idx
-                } else {
-                    seg['index'] = idx + 1
+        computed: {
+            stepsArea: () => { // 返回stepsArea的class
+                return `${prefixCls}`
+            },
+            setDirection () {
+                if (this.direction === 'vertical') {
+                    return `${prefixCls}-vertical`
                 }
-                idx === (childrenLength - 1) && (seg['theLast'] = true)
-                that.setStepStatus(seg, idx)
-                that.setClick(seg)
-                that.setChildrenLength(seg, childrenLength)
+                return `${prefixCls}-horizontal`
+            },
+            setStyle () {
+                let length = this.length
+                if (+length) {
+                    length = length + 'px'
+                }
+                let params = this.direction === 'vertical' ? 'height' : 'width'
+                return {[params]: length}
+            }
+        },
+        mounted () { // 初次加载时触发属性设置方法
+            this.setChildrenAttr()
+            this.$on('step-click', (options) => {
+                this.$emit('on-click', options)
             })
         },
-        // 设置子组件的length
-        setChildrenLength (seg, length) {
-            seg['length'] = ~~(95 / length) + '%'
+        updated () { // 更新时触发属性设置方法
+            this.setChildrenAttr()
         },
-        // 设置单击事件
-        setClick (seg) {
-            let stepsClick = this.click
-            if (typeof stepsClick === 'function') {
-                seg['stepsClick'] = stepsClick
-            }
-        },
-        // 设置step的status
-        setStepStatus (seg, index) {
-            let {status, current} = this
-            let childrenStatus = 'stepsStatus'
-            let statusList = Common.statusList
-            switch (true) {
-                case +current === index :
-                    if (status) {
-                        seg[childrenStatus] = status
+        methods: {
+            // 若子组件有content，则操作class
+            haveContent () {
+                this.haveContentClass = `${prefixCls}-haveContent`
+            },
+            haveSingle () {
+                this.ifHaveSingle = true
+            },
+            // 获取steps组件的size属性
+            stepsSize () {
+                let size = this.size
+                let className = ' '
+                switch (size) {
+                    case 'small':
+                        className = `${prefixCls}-small`
+                        break
+                    default :
+                        className = ' '
+                }
+                return className
+            },
+            // 设置子元素的属性
+            setChildrenAttr () {
+                let that = this
+                let childrenLength = that.$children.length
+                // 设置子组件（Step）的默认值，比如index，showLine。
+                that.$children.map((seg, idx) => {
+                    seg['size'] = that.size
+                    seg['direction'] = that.direction
+                    if (that.ifHaveSingle) {
+                        seg['index'] = idx
                     } else {
-                        seg[childrenStatus] = statusList[1]
+                        seg['index'] = idx + 1
                     }
-                    break
-                case +current > index:
-                    seg[childrenStatus] = statusList[2]
-                    break
-                case +current < index:
-                default :
-                    seg[childrenStatus] = statusList[0]
-                    break
+                    idx === (childrenLength - 1) && (seg['theLast'] = true)
+                    that.setStepStatus(seg, idx)
+                    that.setChildrenLength(seg, childrenLength)
+                })
+            },
+            // 设置子组件的length
+            setChildrenLength (seg, length) {
+                seg['length'] = ~~(95 / length) + '%'
+            },
+            // 设置step的status
+            setStepStatus (seg, index) {
+                let {status, current} = this
+                let childrenStatus = 'stepsStatus'
+                let statusList = Common.statusList
+                switch (true) {
+                    case +current === index :
+                        if (status) {
+                            seg[childrenStatus] = status
+                        } else {
+                            seg[childrenStatus] = statusList[1]
+                        }
+                        break
+                    case +current > index:
+                        seg[childrenStatus] = statusList[2]
+                        break
+                    case +current < index:
+                    default :
+                        seg[childrenStatus] = statusList[0]
+                        break
+                }
             }
         }
     }
-}
 </script>
 
 <style scoped>
