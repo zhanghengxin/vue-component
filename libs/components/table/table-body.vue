@@ -134,7 +134,7 @@ export default {
             this.dispatch(this.preCls, 'row-click', _index)
         },
         rowExpanded (_index) {
-            return this.data[_index]._expanded
+            return this.data[_index] && this.data[_index]._expanded
         },
         dblclickCurrentRow (_index) {
             this.dispatch(this.preCls, 'row-dbclick', _index)

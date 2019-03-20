@@ -2245,7 +2245,6 @@
         </b-table>
     </template>
 
-    <script>
     export default {
         name: 'render-table',
         data () {
@@ -2276,7 +2275,6 @@
             }
         }
     }
-    </script>
 ```
 :::
 </div>
