@@ -76,6 +76,7 @@ export default {
 
     .doc {
         min-width: 1000px;
+        max-width: 1050px;
         float: left;
         border-left: 1px solid #eaeefb;
         padding: 20px;
