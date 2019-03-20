@@ -211,6 +211,7 @@ $input-large-font:14px;
 .#{$css-prefix-input}-group {
   width: 100%;
   display: inline-table;
+  vertical-align: middle;
   @include borderTrans();
   @include labelMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
 

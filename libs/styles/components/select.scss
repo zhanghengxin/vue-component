@@ -83,6 +83,7 @@ $css-prefix-option: $css-prefix+'option';
   font-size: 12px;
   display: inline-table;
   vertical-align: middle;
+  position: relative;
 
   //label
   &-label {
