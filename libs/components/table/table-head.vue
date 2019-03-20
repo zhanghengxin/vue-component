@@ -31,7 +31,7 @@
                         </Checkbox>
                     </template>
                     <template v-else>
-                        <span :class="{[preCls + '-cell-sort']: item.sortable}">{{ item.title || '...' }}</span>
+                        <span :class="{[preCls + '-cell-sort']: item.sortable}">{{ item.title }}</span>
                         <span :class="[preCls + '-sort']" v-if="item.sortable">
                             <Icon
                                 :class="iconCls('asc',item)"

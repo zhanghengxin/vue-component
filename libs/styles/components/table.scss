@@ -222,4 +222,26 @@ $prefix-table: $css-prefix + 'table';
       }
     }
   }
+  &-expand {
+    &-icon {
+      border: 1px solid $Border;
+    }
+  }
+  &-right-border, &-bottom-border {
+    z-index: 3;
+    background-color: $Border;
+    position: absolute;
+  }
+  &-right-border {
+    width: 1px;
+    height: 100%;
+    top: 0;
+    right: 0;
+  }
+  &-bottom-border {
+    width: 100%;
+    height: 1px;
+    left: 0;
+    bottom: 0;
+  }
 }
