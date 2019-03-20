@@ -36,12 +36,22 @@ export default {
     mounted () {
         this.defaultChange()
     },
+    watch: {
+        value: {
+            handler () {
+                this.defaultChange()
+            },
+            deep: true
+        }
+    },
     methods: {
         defaultChange () {
             let arr = this.$children
             arr.map((item) => {
                 if (this.value === item.label) {
                     item.checkedValue = true
+                } else {
+                    item.checkedValue = false
                 }
             })
         },

@@ -29,6 +29,14 @@
                  },
                  nextStep() {
                     this.step == 2?(this.step = 0):(this.step += 1)
+                 },
+                 consoleLog(option){
+                    console.log(111)
+                    console.log(option)
+                 },
+                 consoleLog2(option){
+                    console.log(222)
+                    console.log(option)
                  }
              },
              data:function(){
@@ -51,7 +59,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-steps current='2' >
+            <b-steps current='2'>
                 <b-step title='已完成' :content='content'></b-step>
                 <b-step title='正进行' :content='content'></b-step>
                 <b-step title='在等待' :content='content'></b-step>
@@ -93,7 +101,7 @@
             </b-steps>
         </div>
         <div>
-           <b-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</b-button>
+           <b-button size="default" @on-click="handleClick">切换为{{afterChangeSize}}</b-button>
         </div>
     </div>
 
@@ -108,7 +116,7 @@
             </b-steps>
         </div>
         <div>
-           <b-button size="normal" @on-click="handleClick">切换为{{afterChangeSize}}</b-button>
+           <b-button size="default" @on-click="handleClick">切换为{{afterChangeSize}}</b-button>
         </div>
          <script>
              export default {
@@ -188,7 +196,7 @@
            </b-steps>
        </div>
         <div>
-           <b-button size="normal" @on-click="nextStep">下一步</b-button>
+           <b-button size="default" @on-click="nextStep">下一步</b-button>
         </div>
     </div>
 
@@ -203,7 +211,7 @@
           </b-steps>
        </div>
         <div>
-           <b-button size="normal" @on-click="nextStep">下一步</b-button>
+           <b-button size="default" @on-click="nextStep">下一步</b-button>
         </div>
          <script>
              export default {

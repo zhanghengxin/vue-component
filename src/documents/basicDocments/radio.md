@@ -102,21 +102,21 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-radio-group v-model="button1" type="button1" @on-change="changeGroup">
+            <b-radio-group v-model="button1" type="button" @on-change="changeGroup">
                 <b-radio label='兔子'></b-radio>
                 <b-radio label='猴子'></b-radio>
                 <b-radio label='泰迪'></b-radio>
             </b-radio-group>
             <p>{{button1}}</p>
             <br>
-            <b-radio-group v-model="button2" type="button2" @on-change="changeGroup">
+            <b-radio-group v-model="button2" type="button" @on-change="changeGroup">
                 <b-radio label='兔子'></b-radio>
                 <b-radio label='猴子' disabled></b-radio>
                 <b-radio label='泰迪'></b-radio>
             </b-radio-group>
             <p>{{button2}}</p>
             <br>
-            <b-radio-group v-model="button3" type="button3" @on-change="changeGroup">
+            <b-radio-group v-model="button3" type="button" @on-change="changeGroup">
                 <b-radio label='兔子' disabled></b-radio>
                 <b-radio label='猴子' disabled></b-radio>
                 <b-radio label='泰迪' disabled></b-radio>
@@ -129,21 +129,21 @@
 ::: code
 ```html
     <template>
-        <b-radio-group v-model="button1" type="button1" @on-change="changeGroup">
+        <b-radio-group v-model="button1" type="button" @on-change="changeGroup">
             <b-radio label='兔子'></b-radio>
             <b-radio label='猴子'></b-radio>
             <b-radio label='泰迪'></b-radio>
         </b-radio-group>
         <p>{{button1}}</p>
         <br>
-        <b-radio-group v-model="button2" type="button2" @on-change="changeGroup">
+        <b-radio-group v-model="button2" type="button" @on-change="changeGroup">
             <b-radio label='兔子'></b-radio>
             <b-radio label='猴子' disabled></b-radio>
             <b-radio label='泰迪'></b-radio>
         </b-radio-group>
         <p>{{button2}}</p>
         <br>
-        <b-radio-group v-model="button3" type="button3" @on-change="changeGroup">
+        <b-radio-group v-model="button3" type="button" @on-change="changeGroup">
             <b-radio label='兔子' disabled></b-radio>
             <b-radio label='猴子' disabled></b-radio>
             <b-radio label='泰迪' disabled></b-radio>
