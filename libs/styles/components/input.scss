@@ -97,6 +97,7 @@ $input-large-font:14px;
 //input基础样式
 .#{$css-prefix-input}-box {
   display: inline-block;
+  vertical-align: middle;
   position: relative;
 
   //b-input-box：hover 显示clear-icon

@@ -66,6 +66,7 @@
                     <Drop
                         v-show='show'
                         :width='dropWidth'
+                        :placement='placement'
                     >
                         <ul v-if='notFoundData'>
                             <li :class='[prefix+`option`]'>{{notFoundText}}</li>
@@ -167,6 +168,10 @@ export default {
         },
         remoteFn: {
             type: Function
+        },
+        placement: {
+            type: String,
+            default: 'bottom-start'
         },
         // props type为[Number, String]的配置
         ...propsInit({

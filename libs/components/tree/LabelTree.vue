@@ -15,6 +15,7 @@
             :options='options'>
         <transition name="slide">
             <Drop
+                :placement='placement'
                 v-show="popupVisible">
                 <div :class="wrapCls" :style="wrapSty">
                     <b-input
@@ -169,6 +170,10 @@ export default {
         fixed: {
             type: Boolean,
             default: false
+        },
+        placement: {
+            type: String,
+            default: 'bottom-start'
         }
     },
     watch: {

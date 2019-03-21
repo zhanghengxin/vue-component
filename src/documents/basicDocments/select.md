@@ -823,6 +823,7 @@ fixed 为false时可设置labelWidth的值 select框的width默认为200<br/>
 | notFoundText      | 没有数据的提示	| String | - |   '无匹配数据'  |
 | filterFn      | 筛选函数，filterabled为true时可用	| Function | - |  -  |
 | label      | 设置说明文字 	| String，Number | - |  -  |
+| placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
 | fixed      | 搭配文字的两种样式类型	| Boolean | `true`、`false` |   false  |
 | labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   72  |
 | loading  | 远程加载时的加载状态   | Boolean  |  `true`、`false`  |   false  |
