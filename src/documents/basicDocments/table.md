@@ -1581,7 +1581,8 @@
 ::: code
 ```html
     <div>
-       <b-table show-index border width=1000 :columns='columns11' :data='data11'></b-table>
+        <b-table show-index border width=1000 :columns='columns11' :data='data11'></b-table>
+        <b-table border width=1000 :columns='columns13' :data='data11'></b-table>
     </div>
     <script>
         export default {
@@ -2292,43 +2293,107 @@
 ::: code
 ```html
     <div>
-         <b-table height=200 width=1000 :columns='columns15' :data='data12'></b-table>
+         <b-table height=200 width=1000 :columns='columns17' :data='data11'></b-table>
     </div>
     <script>
         export default {
             data () {
                 return {
-                    data12: [
+                    columns17:[
+                        {
+                             title: 'Age',
+                             key: 'age',
+                             width:100,
+                             fixed: 'left',
+                             sortable:true,
+                             filters: [
+                                {
+                                    label: 'Greater than 18',
+                                    value: 1
+                                },
+                                {
+                                    label: 'Less than 18',
+                                    value: 2
+                                }
+                            ],
+                            filterMethod (value, row) {
+                                if (value === 1) {
+                                    return row.age >= 18;
+                                } else if (value === 2) {
+                                    return row.age < 18;
+                                }
+                            }
+                        },
+                        {
+                             title: '测试',
+                             align:'center',
+                             children:[
+                                {
+                                  title: 'Name',
+                                  key: 'name',
+                                  width:200,
+                                  sortable:true
+                                },
+                                {
+                                  title: 'Sex',
+                                  key: 'sex',
+                                  width:200,
+                                  sortable:true
+                                },
+                                {
+                                    title: '合计',
+                                    children:[
+                                      {
+                                        title: 'Hobby',
+                                        key: 'hobby',
+                                        width:100,
+                                        sortable:true
+                                      },
+                                      {
+                                        title: 'id',
+                                        key: 'id',
+                                        width:100
+                                      }
+                                    ]
+                                }
+                             ]
+                        },
+                        {
+                         title: 'Pets',
+                         key: 'pets',
+                         width:100
+                        },
+                        {
+                         title: 'Occupation',
+                         key: 'occupation',
+                         width:100
+                        },
+                        {
+                         title: 'Book',
+                         key: 'book',
+                         width:200
+                        }
+                    ],
+                    data11: [
                         {
                             name: '欧阳',
                             age: 12,
+                            sex: '男',
+                            hobby:'Swimming',
                             pets:'dog',
-                            occupation:'red',
-                            book:'《贩罪》',
-                            children:[
-                                {
-                                    name: '佐罗',
-                                    age: 15,
-                                    pets:'pig',
-                                    occupation:'yellow',
-                                    book:'《惊悚乐园》'
-                                },
-                                {
-                                    name: '轩辕',
-                                    age: 12,
-                                    pets:'drag',
-                                    occupation:'red',
-                                    book:'《龙族》'
-                                }
-                            ]
+                            occupation:'Doctor',
+                            like:'red',
+                            id:'1',
+                            book:'《贩罪》'
                         },
                         {
                             name: '青蛙',
                             sex: '男',
                             age: 22,
                             pets:'cat',
+                            hobby:'Swimming',
+                            id:'2',
                             book:'《霸皇纪》',
-                            _disableExpand:true,
                             occupation:'Doctor'
                         },
                         {
@@ -2336,98 +2401,30 @@
                             age: 18,
                             sex: '男',
                             pets:'rhizomys',
-                            _disableExpand:true,
+                            hobby:'Swimming',
+                            id:'3',
                             book:'《龙族》',
-                            _disableExpand:true,
                             occupation:'Doctor'
                         },
                         {
                             name: '球形闪电',
                             age: 6,
+                            sex: '男',
                             pets:'cat',
+                            hobby:'Swimming',
                             book:'《卡徒》',
-                            _disableExpand:true,
+                            id:'4',
                             occupation:'Bodyguard'
                         },
                         {
                             name: '会长',
                             age: 38,
+                            sex: '男',
                             book:'《无限道武者路》',
+                            id:'5',
                             pets:'rhizomys',
-                            _disableExpand:true,
+                            hobby:'Thousand-hand Bodhisattva',
                             occupation:'President'
-                        }
-                    ],
-                    columns15: [
-                        {
-                            type: 'expand',
-                            width: 40,
-                            center:'align',
-                            expandRender: (h, params) => {
-                                return h('render-table', {
-                                    props: {
-                                        data: params.row.children,
-                                        columns: this.columns16
-                                    }
-                                })
-                            }
-                        },
-                        {
-                           title: 'Name',
-                           key: 'name',
-                           width:100
-                        },
-                        {
-                           title: 'Age',
-                           key: 'age',
-                           width:100,
-                           sortable:true
-                        },
-                        {
-                           title: 'Pets',
-                           key: 'pets',
-                           minWidth:100
-                        },
-                        {
-                           title: 'Occupation',
-                           key: 'occupation',
-                           maxWidth:100
-                        },
-                        {
-                           title: 'Book',
-                           key: 'book',
-                           width:100
-                        }
-                    ],
-                    columns16:[
-                        {
-                          width: 40
-                        },
-                        {
-                         title: 'Name',
-                         key: 'name',
-                         width:100
-                        },
-                        {
-                         title: 'Age',
-                         key: 'age',
-                         width:100,
-                         sortable:true
-                        },
-                        {
-                         title: 'Pets',
-                         key: 'pets',
-                         minWidth:100
-                        },
-                        {
-                         title: 'Occupation',
-                         key: 'occupation',
-                         maxWidth:100
-                        },
-                        {
-                         title: 'Book',
-                         key: 'book',
-                         width:100
                         }
                     ]
                 }
@@ -3397,12 +3394,12 @@
                         width: 40,
                         center:'align',
                         expandRender: (h, params) => {
-                            return h('render-table', {
-                                props: {
-                                    data: params.row.children,
-                                    columns: this.columns16
-                                }
-                            })
+                           return h('render-table', {
+                               props: {
+                                   data: params.row.children,
+                                   columns: this.columns16
+                               }
+                           })
                         }
                     },
                     {
@@ -3465,7 +3462,32 @@
                 ],
                 columns17:[
                     {
+                         title: 'Age',
+                         key: 'age',
+                         width:100,
+                         fixed: 'left',
+                         sortable:true,
+                         filters: [
+                            {
+                                label: 'Greater than 18',
+                                value: 1
+                            },
+                            {
+                                label: 'Less than 18',
+                                value: 2
+                            }
+                        ],
+                        filterMethod (value, row) {
+                            if (value === 1) {
+                                return row.age >= 18;
+                            } else if (value === 2) {
+                                return row.age < 18;
+                            }
+                        }
+                    },
+                    {
                          title: '测试',
+                         align:'center',
                          children:[
                             {
                               title: 'Name',
@@ -3498,12 +3520,6 @@
                          ]
                     },
                     {
-                     title: 'Age',
-                     key: 'age',
-                     width:100,
-                     sortable:true
-                    },
-                    {
                      title: 'Pets',
                      key: 'pets',
                      width:100
@@ -3516,7 +3532,7 @@
                     {
                      title: 'Book',
                      key: 'book',
-                     width:100
+                     width:200
                     }
                 ],
                 loading:true
@@ -3580,6 +3596,7 @@
 | filters     |  过滤数据的选项，格式为数组，数组中每项包含 label 和 value 属性，使用过滤，必须同时配置 filterMethod	  |  Array  |-  | -   |
 | filterMethod     |  数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示		  |  Function  | -  | -   |
 | filterMultiple     |  数据过滤的选项是否多选  |  Boolean  | -  | false   |
+| children     |  多级表头配置项，具体见示例  |   Array  | -  | -   |
 
 ### data
 | 属性      | 说明    | 类型      | 可选值       | 默认值       |

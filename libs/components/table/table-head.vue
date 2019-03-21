@@ -34,14 +34,14 @@
                         <span :class="{[preCls + '-cell-sort']: item.sortable}">{{ item.title }}</span>
                         <span :class="[preCls + '-sort']" v-if="item.sortable">
                             <Icon
-                                :class="iconCls('asc',item)"
+                                :class="iconCls('asc',index,rowIndex)"
                                 type="shangsanjiao"
-                                @on-click="handleSort(item._index, 'asc')">
+                                @on-click="handleSort(rowIndex,index, 'asc')">
                             </Icon>
                             <Icon
-                                :class="iconCls('desc',item)"
+                                :class="iconCls('desc',index,rowIndex)"
                                 type="xiasanjiao"
-                                @on-click="handleSort(item._index, 'desc')">
+                                @on-click="handleSort(rowIndex,index, 'desc')">
                             </Icon>
                         </span>
                         <Tooltip
@@ -96,6 +96,8 @@ export default {
     props: {
         columns: Array,
         columnRows: Array,
+        fixedColumnRows: Array,
+        fixed: String,
         preCls: String,
         headerStyle: {
             type: Object,
@@ -138,23 +140,35 @@ export default {
         groupRows () {
             const isGroup = this.columnRows && this.columnRows.length > 1
             if (isGroup) {
-                return this.fixed ? [this.columns] : this.columnRows
+                return this.fixed ? this.fixedColumnRows : this.columnRows
             } else {
                 return [this.columns]
             }
         }
     },
     methods: {
+        // 因为表头嵌套不是深拷贝，所以没有 _ 开头的方法，在 isGroup 下用此列
+        getColumn (rowIndex, index) {
+            const isGroup = this.columnRows.length > 1
+
+            if (isGroup) {
+                const id = this.groupRows[rowIndex][index].__id
+                return this.columns.filter(item => item.__id === id)[0]
+            } else {
+                return this.groupRows[rowIndex][index]
+            }
+        },
         cellCls () {
             return [
                 `${this.preCls}-cell`
             ]
         },
-        iconCls (type, item) {
+        iconCls (type, index, rowIndex) {
+            let item = this.getColumn(rowIndex, index)
             return [
                 `${this.preCls}-sort-${type}`,
                 {
-                    [`${this.preCls}-sort-active`]: item._sortType === type
+                    [`${this.preCls}-sort-active`]: item && item._sortType === type
                 }
             ]
         },
@@ -163,9 +177,9 @@ export default {
             const status = !this.isSelectAll
             this.dispatch(this.preCls, 'selected-all-change', status)
         },
-        handleSort (index, type) {
+        handleSort (rowIndex, index, type) {
             this.dispatch(this.preCls, 'sort-change', {
-                index: index,
+                index: this.getColumn(rowIndex, index)._index,
                 type: type
             })
         },

@@ -113,6 +113,12 @@ $prefix-table: $css-prefix + 'table';
   &-fixed {
     position: absolute;
     top: 0;
+    & th .#{$prefix-table}-cell {
+      white-space: nowrap;
+    }
+    table {
+      table-layout: fixed;
+    }
   }
   &-fixed-body {
     overflow: hidden;
