@@ -557,10 +557,6 @@ export default {
                 let bodyEl = bodyContentEl.parentElement
                 let bodyContentHeight = bodyContentEl.offsetHeight
                 this.horizontalScroll = bodyEl.offsetWidth < bodyContentEl.offsetWidth + (this.verticalScroll ? this.scrollBarWidth : 0) - 1
-                if (this.columnRows.length > 1) {
-                    console.log(bodyEl.offsetWidth, 'bodyEl.offsetWidth')
-                    console.log(bodyContentEl.offsetWidth, 'bodyContentEl.offsetWidth')
-                }
                 this.verticalScroll = this.bodyHeight ? bodyContentHeight > this.bodyHeight : false
                 if (this.verticalScroll) {
                     bodyEl.classList.add(this.preCls + '-overflowY')

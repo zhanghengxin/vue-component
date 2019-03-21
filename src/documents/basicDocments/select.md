@@ -629,7 +629,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 
 ### label样式
 可设置 ```label```，```fixed```设置label的两种样式。<br/>
-fixed 为false时可设置labelWidth的值 默认72px select框的width默认为200<br/>
+fixed 为false时可设置labelWidth的值 select框的width默认为200<br/>
 可设置通过width来设置带select的样式 fixed为true的时候设置整体 为false的时候仅设置select框的宽度<br/>
 <div class="example">
     <div class="example-box">
@@ -638,7 +638,6 @@ fixed 为false时可设置labelWidth的值 默认72px select框的width默认为
                 v-model="value9"  
                 label='发票类型'
                 :fixed='fixed'
-                :disabled='disabled'
                 width='280'
                 :options='options' >
             </b-select>
@@ -661,7 +660,6 @@ fixed 为false时可设置labelWidth的值 默认72px select框的width默认为
                 v-model="value9"  
                 label='发票类型'
                 :fixed='fixed'
-                :disabled='disabled'
                 width='280'
                 :options='options' >
             </b-select>

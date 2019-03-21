@@ -87,7 +87,6 @@
                     </Drop>
                 </transition>
             </slot>
-
         </div>
     </div>
 </template>
@@ -349,11 +348,11 @@ export default {
             return this.disabled || 0
         },
         dropList () {
-            const {options, filterabled, filterFn, query, remoteFn} = this
+            const {options, filterabled, filterFn, query, remoteFn, codeKey, nameKey} = this
             let dropList = options.map(item => {
                 return typeOf(item) === 'object' && {
-                    value: item[this.codeKey],
-                    label: item[this.nameKey],
+                    value: item[codeKey],
+                    label: item[nameKey],
                     disabled: item.disabled || false
                 }
             })

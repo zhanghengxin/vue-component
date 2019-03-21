@@ -1,5 +1,29 @@
 更新日志
 
+### 0.3.4
+## `2019-03-20`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 radio 动态没有回显的问题
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 page 下拉页动态弹出位置不正常的问题
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 select、input的代码结构\样式显示、支持label状态的行内显示
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 datepicker的width/labelWidth属性
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 tree 适配 select 重构
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 table 扩展功能
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.3.3
 ## `2019-03-18`
 <br>

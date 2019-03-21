@@ -14,7 +14,7 @@
             @click='handleClick($event)'
             :class="[bodyCls,customClasses]">
         <i v-if='loading' class="iconfont icon-loading"></i>
-        <Icon v-if="icon" :type="iconcls"></Icon>
+        <Icon v-if="icon" :type="icon"></Icon>
         <span>
             <slot></slot>
         </span>
@@ -30,9 +30,6 @@ export default {
     name: prefixCls,
     components: {Icon},
     computed: {
-        iconcls () {
-            return `${this.icon}`
-        },
         bodyCls () {
             return [
                 `${prefixCls}`,
