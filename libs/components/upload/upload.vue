@@ -287,7 +287,6 @@ export default {
                 const checked = this.format.some(item => {
                     return item.toLocaleLowerCase() === _fileSuffix
                 })
-                console.log(checked)
                 if (!checked) {
                     this.onFormatError(file, this.fileList)
                     return false

@@ -20,6 +20,8 @@
                 value02: '',
                 value03: '',
                 value04: '',
+                value05: [],
+                value06: [],
                 clearable:true,
                 disabled:true,
                 autowarp:true,
@@ -647,6 +649,23 @@ fixed 为false时可设置labelWidth的值 select框的width默认为200<br/>
                 width='217' 
                 :options='options' >
             </b-select>
+            <br/>
+            <br/>
+             <b-select 
+                v-model="value05"  
+                label='发票类型'
+                :multiple='multiple'
+                :fixed='fixed'
+                width='280'
+                :options='options' >
+            </b-select>
+            <b-select 
+                v-model="value06"
+                :multiple='multiple' 
+                label='发票类型'
+                width='217' 
+                :options='options' >
+            </b-select>
         </div>
     </div>
 </div>
@@ -669,6 +688,23 @@ fixed 为false时可设置labelWidth的值 select框的width默认为200<br/>
                 width='217' 
                 :options='options' >
             </b-select>
+            <br/>
+            <br/>
+             <b-select 
+                v-model="value05"  
+                label='发票类型'
+                :multiple='multiple'
+                :fixed='fixed'
+                width='280'
+                :options='options' >
+            </b-select>
+            <b-select 
+                v-model="value06"
+                :multiple='multiple' 
+                label='发票类型'
+                width='217' 
+                :options='options' >
+            </b-select>
         </div>
     </template>
     <script>
@@ -677,6 +713,8 @@ fixed 为false时可设置labelWidth的值 select框的width默认为200<br/>
                 return {
                     value9: '',
                     value10: '',
+                    value05: [],
+                    value06: [],
                     fixed: true,
                     options:[{
                         label:'增专',
@@ -823,6 +861,7 @@ fixed 为false时可设置labelWidth的值 select框的width默认为200<br/>
 | notFoundText      | 没有数据的提示	| String | - |   '无匹配数据'  |
 | filterFn      | 筛选函数，filterabled为true时可用	| Function | - |  -  |
 | label      | 设置说明文字 	| String，Number | - |  -  |
+| placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
 | fixed      | 搭配文字的两种样式类型	| Boolean | `true`、`false` |   false  |
 | labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   72  |
 | loading  | 远程加载时的加载状态   | Boolean  |  `true`、`false`  |   false  |

@@ -137,6 +137,7 @@
             v-model="currentSize"
             @on-change="sizeChange"
             width="95"
+            :placement='placement'
             :options="options">
         </select-drop>
     </ul>
@@ -210,6 +211,10 @@ export default {
             default () {
                 return [10, 20, 50, 100]
             }
+        },
+        placement: {
+            type: String,
+            default: 'bottom-start'
         }
     },
     computed: {

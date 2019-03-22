@@ -235,7 +235,7 @@ export default {
                     [`${prefixCls}-error`]: this.error,
                     [`${prefixCls}-box-clear`]: this.clearable && this.currentValue,
                     [`${prefixCls}-group`]: this.label && this.fixed,
-                    'focus': this.label && this.labelFocus && this.fixed
+                    [`${prefixCls}-box-textarea`]: this.type === 'textarea'
                 }
             ]
         },
@@ -259,7 +259,8 @@ export default {
         },
         textareaClasses () {
             return [
-                `${prefixCls}`
+                `${prefixCls}`,
+                `${prefixCls}-textarea`
             ]
         },
         labelStyles () {
