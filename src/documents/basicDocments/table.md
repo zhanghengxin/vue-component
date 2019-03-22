@@ -2060,6 +2060,224 @@
 :::
 </div>
 
+### 扩展
+表格内容多不能完全展示时使用。<br/>
+给 `columns` 数据设置设置 `type: 'expand'`，开启扩展功能。<br/>
+给 `data` 的某项设置 `_disableExpand` 可以禁用当前行的展开功能。<br/>
+渲染展开区域与自定义列模板方法类似，使用 render 函数，函数名为`expandRender`。
+
+<div class="example">
+    <div class="example-box">
+        <div>
+             <b-table height=200 width=1000 :columns='columns15' :data='data12'></b-table>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+         <b-table height=200 width=1000 :columns='columns15' :data='data12'></b-table>
+    </div>
+    <style>
+    .b-table {
+        b-table-expand-cell {
+          border-bottom: none;
+          .expend-table {
+            margin-bottom: 0px;
+            border: none;
+            td {
+              background: $Background;
+            }
+          }
+        }
+    }
+    </style>
+    <script>
+        export default {
+            data () {
+                return {
+                    data12: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            pets:'dog',
+                            occupation:'red',
+                            book:'《贩罪》',
+                            children:[
+                                {
+                                    name: '佐罗',
+                                    age: 15,
+                                    pets:'pig',
+                                    occupation:'yellow',
+                                    book:'《惊悚乐园》'
+                                },
+                                {
+                                    name: '轩辕',
+                                    age: 12,
+                                    pets:'drag',
+                                    occupation:'red',
+                                    book:'《龙族》'
+                                }
+                            ]
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets:'cat',
+                            book:'《霸皇纪》',
+                            _disableExpand:true,
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets:'rhizomys',
+                            _disableExpand:true,
+                            book:'《龙族》',
+                            _disableExpand:true,
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            pets:'cat',
+                            book:'《卡徒》',
+                            _disableExpand:true,
+                            occupation:'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            book:'《无限道武者路》',
+                            pets:'rhizomys',
+                            _disableExpand:true,
+                            occupation:'President'
+                        }
+                    ],
+                    columns15: [
+                        {
+                            type: 'expand',
+                            width: 40,
+                            center:'align',
+                            expandRender: (h, params) => {
+                                return h('render-table', {
+                                    props: {
+                                        data: params.row.children,
+                                        columns: this.columns16
+                                    }
+                                })
+                            }
+                        },
+                        {
+                           title: 'Name',
+                           key: 'name',
+                           width:100
+                        },
+                        {
+                           title: 'Age',
+                           key: 'age',
+                           width:100,
+                           sortable:true
+                        },
+                        {
+                           title: 'Pets',
+                           key: 'pets',
+                           minWidth:100
+                        },
+                        {
+                           title: 'Occupation',
+                           key: 'occupation',
+                           maxWidth:100
+                        },
+                        {
+                           title: 'Book',
+                           key: 'book',
+                           width:100
+                        }
+                    ],
+                    columns16:[
+                        {
+                          width: 40
+                        },
+                        {
+                         title: 'Name',
+                         key: 'name',
+                         width:100
+                        },
+                        {
+                         title: 'Age',
+                         key: 'age',
+                         width:100,
+                         sortable:true
+                        },
+                        {
+                         title: 'Pets',
+                         key: 'pets',
+                         minWidth:100
+                        },
+                        {
+                         title: 'Occupation',
+                         key: 'occupation',
+                         maxWidth:100
+                        },
+                        {
+                         title: 'Book',
+                         key: 'book',
+                         width:100
+                        }
+                    ]
+                }
+            }
+    </script>
+
+    // render-tabele
+    <template>
+        <b-table
+            class="expend-table"
+            :border="border"
+            :columns='columns'
+            disHover
+            :stripe='stripe'
+            :show-header="showHeader"
+            :data='data'>
+        </b-table>
+    </template>
+
+    export default {
+        name: 'render-table',
+        data () {
+            return {
+                showHeader: false
+            }
+        },
+        props: {
+            columns: {
+                type: Array,
+                default () {
+                    return []
+                }
+            },
+            data: {
+                type: Array,
+                default () {
+                    return []
+                }
+            },
+            border: {
+                type: Boolean,
+                default: false
+            },
+            stripe: {
+                type: Boolean,
+                default: false
+            }
+        }
+    }
+```
+:::
+</div>
 
 <script>
     export default {
@@ -2955,6 +3173,138 @@
                        key: 'book'
                     }
                 ],
+                data12: [
+                    {
+                        name: '欧阳',
+                        age: 12,
+                        pets:'dog',
+                        occupation:'red',
+                        book:'《贩罪》',
+                        children:[
+                            {
+                                name: '佐罗',
+                                age: 15,
+                                pets:'pig',
+                                occupation:'yellow',
+                                book:'《惊悚乐园》'
+                            },
+                            {
+                                name: '轩辕',
+                                age: 12,
+                                pets:'drag',
+                                occupation:'red',
+                                book:'《龙族》'
+                            }
+                        ]
+                    },
+                    {
+                        name: '青蛙',
+                        sex: '男',
+                        age: 22,
+                        pets:'cat',
+                        book:'《霸皇纪》',
+                        _disableExpand:true,
+                        occupation:'Doctor'
+                    },
+                    {
+                        name: '警长',
+                        age: 18,
+                        sex: '男',
+                        pets:'rhizomys',
+                        _disableExpand:true,
+                        book:'《龙族》',
+                        _disableExpand:true,
+                        occupation:'Doctor'
+                    },
+                    {
+                        name: '球形闪电',
+                        age: 6,
+                        pets:'cat',
+                        book:'《卡徒》',
+                        _disableExpand:true,
+                        occupation:'Bodyguard'
+                    },
+                    {
+                        name: '会长',
+                        age: 38,
+                        book:'《无限道武者路》',
+                        pets:'rhizomys',
+                        _disableExpand:true,
+                        occupation:'President'
+                    }
+                ],
+                columns15: [
+                    {
+                        type: 'expand',
+                        width: 40,
+                        center:'align',
+                        expandRender: (h, params) => {
+                            return h('render-table', {
+                                props: {
+                                    data: params.row.children,
+                                    columns: this.columns16
+                                }
+                            })
+                        }
+                    },
+                    {
+                       title: 'Name',
+                       key: 'name',
+                       width:100
+                    },
+                    {
+                       title: 'Age',
+                       key: 'age',
+                       width:100,
+                       sortable:true
+                    },
+                    {
+                       title: 'Pets',
+                       key: 'pets',
+                       minWidth:100
+                    },
+                    {
+                       title: 'Occupation',
+                       key: 'occupation',
+                       maxWidth:100
+                    },
+                    {
+                       title: 'Book',
+                       key: 'book',
+                       width:100
+                    }
+                ],
+                columns16:[
+                    {
+                      width: 40
+                    },
+                    {
+                     title: 'Name',
+                     key: 'name',
+                     width:100
+                    },
+                    {
+                     title: 'Age',
+                     key: 'age',
+                     width:100,
+                     sortable:true
+                    },
+                    {
+                     title: 'Pets',
+                     key: 'pets',
+                     minWidth:100
+                    },
+                    {
+                     title: 'Occupation',
+                     key: 'occupation',
+                     maxWidth:100
+                    },
+                    {
+                     title: 'Book',
+                     key: 'book',
+                     width:100
+                    }
+                ],
                 loading:true
             }
         },
@@ -2994,11 +3344,13 @@
 | highlight-row     |  	是否支持高亮选中的行，即单选	  |  Boolean  |    false   |
 | no-data-text     |  	数据为空时显示的提示内容	  |  Number / String  |    暂无数据   |
 | loading-text     |  	加载数据时显示的文本	  |  Number / String  |    -   |
+| disHover     |  	关闭 hover 模式	  |  Boolean  |     false   |
+| show-header     |  	 是否显示表头	  |  Boolean  |      true   |
 
 ### columns
 | 属性      | 说明    | 类型      | 可选值       | 默认值       |
 | ---------- | -------- | ----------- | ------------- | -------- |
-| type     |  列类型，可选值为   |  String  | `selection`、`html`   | html    |
+| type     |  列类型，可选值为   |  String  | `selection`、`html`、`index`、`expand`   | html    |
 | title     |  列头显示文字  |  String  |  -    | '...'    |
 | key     |  对应列内容的字段名  |  String  |  -    | -    |
 | width     |  列宽	  |  Number  |  -    | -    |
@@ -3024,6 +3376,7 @@
 | _cellClass     |  给任意一个单元格指定样式,详见特定样式	  |  Object  |  -    | -    |
 | _colspan     |  某一行的合并单元格,详见合并行、列	  |  Object  |  -    | -    |
 | _rowspan     |  某一列的合并单元格,详见合并行、列  |  Object  |  -    | -    |
+| _disableExpand     |   某一行禁用扩展功能  |   Boolean  |  -    | false    |
 
 ### events
 | 方法名	      | 说明	    | 参数 |

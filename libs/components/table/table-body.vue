@@ -29,6 +29,11 @@
                     ></table-cell>
                 </td>
             </table-tr>
+            <tr :key="'expand-'+index" v-if="rowExpanded(row._index)" :class="[preCls + '-expand']">
+                <td :colspan="columns.length" :class="preCls + '-expand-cell'">
+                    <Render :row="row" :render="expandRender" :index="row._index"></Render>
+                </td>
+            </tr>
         </template>
         </tbody>
     </table>
@@ -36,6 +41,7 @@
 <script>
 import tableMixin from './tableMixin'
 import TableTr from './table-tr'
+import Render from './render'
 import TableCell from './table-cell'
 import Emitter from '../../mixins/emitter'
 import { deepCopy } from '../../utils/assist'
@@ -43,11 +49,13 @@ import { deepCopy } from '../../utils/assist'
 export default {
     name: 'TableHead',
     mixins: [tableMixin, Emitter],
-    components: {TableTr, TableCell},
+    components: {TableTr, TableCell, Render},
     props: {
         columns: Array,
+        cloneColumns: Array,
         data: Array,
         preCls: String,
+        fixed: String,
         bodyStyle: Object
     },
     computed: {
@@ -59,6 +67,27 @@ export default {
         },
         visibleColumns () {
             return this.columns.filter((item) => item._visible)
+        },
+        expandRender () {
+            let render = () => {
+                return ''
+            }
+            if (this.fixed) {
+                for (let i = 0; i < this.cloneColumns.length; i++) {
+                    const column = this.cloneColumns[i]
+                    if (column.type && column.type === 'expand') {
+                        if (column.expandRender) render = column.expandRender
+                    }
+                }
+            } else {
+                for (let i = 0; i < this.columns.length; i++) {
+                    const column = this.columns[i]
+                    if (column.type && column.type === 'expand') {
+                        if (column.expandRender) render = column.expandRender
+                    }
+                }
+            }
+            return render
         }
     },
     methods: {
@@ -103,6 +132,9 @@ export default {
         },
         clickCurrentRow (_index) {
             this.dispatch(this.preCls, 'row-click', _index)
+        },
+        rowExpanded (_index) {
+            return this.data[_index] && this.data[_index]._expanded
         },
         dblclickCurrentRow (_index) {
             this.dispatch(this.preCls, 'row-dbclick', _index)
