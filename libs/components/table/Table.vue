@@ -733,6 +733,7 @@ export default {
             style.top = getStyle(this.$refs.header, 'height')
             return style
         },
+        // dynamic
         handleContextMenu (event) {
             let tablePosition = this.$el.getBoundingClientRect()
             this.dynamicColumnBoxShow = true
@@ -769,7 +770,6 @@ export default {
             }
         },
         // 过滤数据
-        // 还原全部数据
         handleFilterReset (_index) {
             const index = _index
             this.$set(this.cloneColumns[index], '_filterChecked', [])
@@ -797,17 +797,17 @@ export default {
                 return status
             })
         },
+        // expand
         handleExpand (_index) {
             let {formatData} = this
             const status = !formatData[_index]._expanded
             this.$set(formatData[_index], '_expanded', status)
-            this.$emit('on-expand', deepCopy(this.data[_index]), status)
-            // if (this.height) {
-            //     this.$nextTick(() => this.bodyScrollReckon())
-            // }
+            this.$emit('on-expand-change', deepCopy(this.data[_index]), status)
+            if (this.height) {
+                this.$nextTick(() => this.bodyScrollReckon())
+            }
         },
-        // 多级表头 start
-        // 修改列，设置一个隐藏的 id，便于后面的多级表头寻找对应的列，否则找不到
+        // 多级表头
         makeColumnsId (columns, showIndex = false) {
             if (showIndex && columns.filter((item) => (item.key === '_indexNo')).length < 1) {
                 let indexArr = []

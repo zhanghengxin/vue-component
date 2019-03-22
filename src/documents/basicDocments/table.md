@@ -23,6 +23,7 @@
 - 拖拽修改列宽
 - 拖拽编辑表格
 - 单元格编辑
+- 多级表头
 
 ### 基础用法
 通过设置`columns`以及`data`来渲染基础的表格
@@ -667,14 +668,14 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border width=1000 :columns='columns7' :data='data6'></b-table>
+           <b-table @on-sort-change="sortChange" border width=1000 :columns='columns7' :data='data6'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-         <b-table border width=1000 :columns='columns7' :data='data6'></b-table>
+         <b-table @on-sort-change="sortChange" border width=1000 :columns='columns7' :data='data6'></b-table>
     </div>
     <script>
         export default {
@@ -752,6 +753,13 @@
                            occupation:'President'
                        }
                    ]
+                }
+            },
+            methods:{
+                sortChange(options){
+                    console.log(options.column,'column')
+                    console.log(options.key,'key')
+                    console.log(options.order,'order')
                 }
             }
     </script>
@@ -2280,8 +2288,8 @@
 </div>
 
 ### 多级表头
-
-表格内容多不能完全展示时使用。<br/>
+column 设置 children，可以渲染出多级表头<br/>
+注意：不支持在多级表头里面嵌套 fixed 固定列
 
 <div class="example">
     <div class="example-box">
@@ -3550,6 +3558,11 @@
             },
             edit (data,index) {
                 this.data5[index].age = new Date()
+            },
+            sortChange(options){
+                console.log(options.column,'column')
+                console.log(options.key,'key')
+                console.log(options.order,'order')
             }
         }
     }
@@ -3621,3 +3634,4 @@
 | on-row-dbclick     |  当选中节点时触发   |  `row`: 当前选中的数据  |
 | on-sort-change     |  当选中节点时触发   |  `column`: 当前列数据 <br> `key`: 排序依据的指标 <br> `order`: 排序的顺序，值为 asc 或 desc|
 | on-filter-change	    |  筛选条件发生变化时触发	   |  当前列数据 |
+| on-expand-change	    |  扩展状态改变时触发	   |  `row`: 当前扩展的数据<br> `status`: 展开状态 |

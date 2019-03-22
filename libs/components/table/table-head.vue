@@ -142,7 +142,7 @@ export default {
             if (isGroup) {
                 return this.fixed ? this.fixedColumnRows : this.columnRows
             } else {
-                return [this.columns]
+                return [this.visibleColumns]
             }
         }
     },
