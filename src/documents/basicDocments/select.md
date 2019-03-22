@@ -20,6 +20,8 @@
                 value02: '',
                 value03: '',
                 value04: '',
+                value05: [],
+                value06: [],
                 clearable:true,
                 disabled:true,
                 autowarp:true,
@@ -647,6 +649,23 @@ fixed 为false时可设置labelWidth的值 select框的width默认为200<br/>
                 width='217' 
                 :options='options' >
             </b-select>
+            <br/>
+            <br/>
+             <b-select 
+                v-model="value05"  
+                label='发票类型'
+                :multiple='multiple'
+                :fixed='fixed'
+                width='280'
+                :options='options' >
+            </b-select>
+            <b-select 
+                v-model="value06"
+                :multiple='multiple' 
+                label='发票类型'
+                width='217' 
+                :options='options' >
+            </b-select>
         </div>
     </div>
 </div>
@@ -669,6 +688,23 @@ fixed 为false时可设置labelWidth的值 select框的width默认为200<br/>
                 width='217' 
                 :options='options' >
             </b-select>
+            <br/>
+            <br/>
+             <b-select 
+                v-model="value05"  
+                label='发票类型'
+                :multiple='multiple'
+                :fixed='fixed'
+                width='280'
+                :options='options' >
+            </b-select>
+            <b-select 
+                v-model="value06"
+                :multiple='multiple' 
+                label='发票类型'
+                width='217' 
+                :options='options' >
+            </b-select>
         </div>
     </template>
     <script>
@@ -677,6 +713,8 @@ fixed 为false时可设置labelWidth的值 select框的width默认为200<br/>
                 return {
                     value9: '',
                     value10: '',
+                    value05: [],
+                    value06: [],
                     fixed: true,
                     options:[{
                         label:'增专',

@@ -1,94 +1,94 @@
 <template>
-    <div :class='selectGroupClasses' :style='selectBoxStyles'>
+   <div :class='[boxClasses,]'
+        :style='selectBoxStyles'
+        v-click-outside="clickOutside">
+    <div :class='selectGroupClasses'>
         <div v-if='label'
              :class='[prefixCls+`-label`]'
              :style='labelStyles'
         >{{label}}
         </div>
         <div
-            v-click-outside="clickOutside"
+            ref="reference"
+            :class="classes"
             :style='[widthStyle,selectWidth]'
-            :class="selectClasses">
-            <div
-                ref="reference"
-                :class="classes"
-                :tabindex="tabindex"
-                @blur="toggleHeaderFocus"
-                @focus="toggleHeaderFocus"
-                @click="toggleMenu"
-                @mouseenter="clearShow = clearable && true"
-                @mouseleave="clearShow = clearable && false">
-                <input type="hidden" :name="name" :value="publicValue">
-                <div :class='[`${prefixCls}-main-show-selection`]'>
-                    <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
-                    <template v-if='multiple'>
-                        <div
-                            v-for="item in multipleValues"
-                            :key='item.value'
-                            :class="[prefixCls+`-main-tag`]">
-                            <span v-text="showMultipleValues(item)"></span>
-                            <Icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu'
-                                  @click.native.stop='removeTag(item)'></Icon>
-                        </div>
-                    </template>
-                    <input
-                        type="text"
-                        v-if="filterabled"
-                        v-show='inputShow'
-                        v-model="query"
-                        :disabled="disabled"
-                        :class="[prefixCls + '-main-input']"
-                        :placeholder="localePlaceholder"
-                        :style="inputStyle"
-                        autocomplete="off"
-                        spellcheck="false"
-                        @keydown.exact="slideDropAndSetInput"
-                        @focus="onInputFocus"
-                        @keydown.delete="handleInputDelete"
-                    />
-                </div>
-                <Icon
-                    type='xia'
-                    v-if='!disabled'
-                    v-show='iconShow'
-                    :class="[prefixCls+`-main-arrow`]">
-                </Icon>
-                <Icon
-                    type='shibai-mian'
-                    v-if='clearable && showMultipleIcon'
-                    v-show='closeIcon'
-                    :class="[prefixCls+`-main-arrow`]"
-                    @click.native.stop='clearValues'>
-                </Icon>
+            :tabindex="tabindex"
+            @blur="toggleHeaderFocus"
+            @focus="toggleHeaderFocus"
+            @click="toggleMenu"
+            @mouseenter="clearShow = clearable && true"
+            @mouseleave="clearShow = clearable && false">
+            <input type="hidden" :name="name" :value="publicValue">
+            <div :class='[`${prefixCls}-main-flex`]'>
+                <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
+                <template v-if='multiple'>
+                    <div
+                        v-for="item in multipleValues"
+                        :key='item.value'
+                        :class="[prefixCls+`-tag`]">
+                        <span v-text="showMultipleValues(item)"></span>
+                        <Icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu'
+                                @click.native.stop='removeTag(item)'></Icon>
+                    </div>
+                </template>
+                <input
+                    type="text"
+                    v-if="filterabled"
+                    v-show='inputShow'
+                    v-model="query"
+                    :disabled="disabled"
+                    :class="[prefixCls + '-input']"
+                    :placeholder="localePlaceholder"
+                    :style="inputStyle"
+                    autocomplete="off"
+                    spellcheck="false"
+                    @keydown.exact="slideDropAndSetInput"
+                    @focus="onInputFocus"
+                    @keydown.delete="handleInputDelete"
+                />
             </div>
-            <slot>
-                <transition name='slide'>
-                    <Drop
-                        v-show='show'
-                        :width='dropWidth'
-                        :placement='placement'
-                    >
-                        <ul v-if='notFoundData'>
-                            <li :class='[prefix+`option`]'>{{notFoundText}}</li>
-                        </ul>
-                        <ul v-if='(dropList.length > 0) && !loading'>
-                            <Option
-                                v-for='item in dropList'
-                                :key='item.value'
-                                :value='item.value'
-                                :label='item.label'
-                                :disabled='item.disabled'
-                                :multiple='multiple'
-                                :publicValue='publicValue'>
-                            </Option>
-                        </ul>
-                        <ul v-if='loading'>
-                            <li :class='[prefix+`option`]'>{{loadingText}}</li>
-                        </ul>
-                    </Drop>
-                </transition>
-            </slot>
+            <Icon
+                type='xia'
+                v-if='!disabled'
+                v-show='iconShow'
+                :class="[prefixCls+`-arrow`]">
+            </Icon>
+            <Icon
+                type='shibai-mian'
+                v-if='clearable && showMultipleIcon'
+                v-show='closeIcon'
+                :class="[prefixCls+`-arrow`]"
+                @click.native.stop='clearValues'>
+            </Icon>
         </div>
+    </div>
+        <slot>
+            <transition name='slide'>
+                <Drop
+                    v-show='show'
+                    :width='dropWidth'
+                    :placement='placement'
+                >
+                    <ul v-if='notFoundData'>
+                        <li :class='[prefix+`option`]'>{{notFoundText}}</li>
+                    </ul>
+                    <ul v-if='(dropList.length > 0) && !loading'>
+                        <Option
+                            v-for='item in dropList'
+                            :key='item.value'
+                            :value='item.value'
+                            :label='item.label'
+                            :disabled='item.disabled'
+                            :multiple='multiple'
+                            :publicValue='publicValue'>
+                        </Option>
+                    </ul>
+                    <ul v-if='loading'>
+                        <li :class='[prefix+`option`]'>{{loadingText}}</li>
+                    </ul>
+                </Drop>
+            </transition>
+        </slot>
     </div>
 </template>
 <script>
@@ -222,29 +222,28 @@ export default {
         }
     },
     computed: {
-        selectGroupClasses () {
+        boxClasses () {
             return [
                 `${prefixCls}`,
                 {
-                    [`${prefixCls}-${this.size}`]: this.size,
                     [`${prefixCls}-group`]: this.label && !this.fixed,
+                    [`${this.className}`]: this.className
+                }
+            ]
+        },
+        selectGroupClasses () {
+            return [
+                {
+                    [`${prefixCls}-${this.size}`]: this.size,
+                    [`${prefixCls}-multiple`]: this.multiple,
                     [`${prefixCls}-group-fixed`]: this.label && this.fixed,
                     [`${prefixCls}-group-fixed-focused`]: this.isFocused && this.show && !!this.label && !!this.fixed
                 }
             ]
         },
-        selectClasses () {
-            return [
-                `${prefixCls}-main`,
-                {
-                    [`${prefixCls}-main-multiple`]: this.multiple,
-                    [`${this.className}`]: this.className
-                }
-            ]
-        },
         classes () {
             return [
-                `${prefixCls}-selection`,
+                `${prefixCls}-main`,
                 {
                     [`${prefixCls}-show`]: this.show, // 旋转小icon
                     [`${prefixCls}-focused`]: this.isFocused && this.show && (!this.label || !this.fixed),
@@ -255,9 +254,9 @@ export default {
         },
         showSelectedCls () {
             return [
-                `${prefixCls}-selection-content`,
+                `${prefixCls}-main-content`,
                 {
-                    [`${prefixCls}-selection-placeholder`]: this.localePlaceholder && (!this.showValue || this.multiple)
+                    [`${prefixCls}-main-placeholder`]: this.localePlaceholder && (!this.showValue || this.multiple)
                 }
             ]
         },
