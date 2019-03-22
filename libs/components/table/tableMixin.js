@@ -12,6 +12,7 @@ export default {
             return [
                 {
                     [`${this.preCls}-column-${column.align}`]: column.align,
+                    [`${this.preCls}-column-expand`]: column.expandRender,
                     [`${column.className}`]: column.className,
                     [`${_cellClass}`]: _cellClass
                 }

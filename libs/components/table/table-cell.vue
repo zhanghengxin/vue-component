@@ -13,6 +13,11 @@
         <template v-if="renderType === 'normal'">
             <span :title="row[column.key]">{{row[column.key]}}</span>
         </template>
+        <template v-if="renderType === 'expand'">
+            <div @click="toggleExpand">
+                <Icon :class="[preCls + '-expand-icon']" :type="iconType"></Icon>
+            </div>
+        </template>
         <Render
             v-if="renderType === 'render'"
             :row="row"
@@ -25,12 +30,13 @@
 </template>
 <script>
 import Checkbox from '../checkbox/Checkbox.vue'
+import Icon from '../icon'
 import Emitter from '../../mixins/emitter'
 import Render from './render'
 
 export default {
     name: 'TableCell',
-    components: {Checkbox, Render},
+    components: {Checkbox, Render, Icon},
     mixins: [Emitter],
     props: {
         preCls: String,
@@ -60,6 +66,8 @@ export default {
                 type = 'html'
             } else if (this.column.render) {
                 type = 'render'
+            } else if (this.column.type === 'expand' && !this.row._disableExpand) {
+                type = 'expand'
             } else {
                 type = 'normal'
             }
@@ -70,12 +78,22 @@ export default {
             const width = parseInt(this.column._width - 1)
             style.width = `${width}px`
             return style
+        },
+        iconType () {
+            let icon = 'jiahao'
+            if (this.row._expanded) {
+                icon = 'jianhao'
+            }
+            return icon
         }
     },
     methods: {
         handleClick () {
             if (this.disabled) return
             this.dispatch(this.preCls, 'selected-change', this.index)
+        },
+        toggleExpand () {
+            this.dispatch(this.preCls, 'expand-change', this.index)
         }
     }
 }
