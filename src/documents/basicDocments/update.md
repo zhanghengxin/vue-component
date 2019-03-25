@@ -1,4 +1,21 @@
 更新日志
+### 0.3.7
+## `2019-03-25`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 labelTree 兼容 select
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 select、input的width与labelwidth控制的宽度
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 datepicker 统一type传参后错误传参的兼容
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 button的路由跳转支持
+    </b-timeline-item>
+</b-timeline>
 
 ### 0.3.6
 ## `2019-03-25`
@@ -20,7 +37,7 @@
     优化 radio 结构调整
     </b-timeline-item>
     <b-timeline-item>
-    修复 select、input的 label 模式屏幕缩放，边框显示不正常问题修复
+    修复 select、input的 label 模式屏幕缩放，边框显示不正常问题修复【修改了 width 的使用方式，由输入框的宽度改为整体的宽度】
     </b-timeline-item>
 </b-timeline>
 

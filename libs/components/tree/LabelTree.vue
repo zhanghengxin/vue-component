@@ -185,7 +185,6 @@ export default {
                         this.getTreeValues()
                     })
                 }
-                console.log(this.data, 'a')
             }
         }
     },
@@ -201,8 +200,6 @@ export default {
     },
     mounted () {
         if (this.showCheckbox) this.getTreeValues()
-        console.log(this.data, 'asd')
-        console.log(this.defaultOpt, 'aaa')
     },
     methods: {
         clickPopup () {
