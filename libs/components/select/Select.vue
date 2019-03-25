@@ -11,7 +11,7 @@
         <div
             ref="reference"
             :class="classes"
-            :style='[widthStyle,selectWidth]'
+            :style='[selectWidth]'
             :tabindex="tabindex"
             @blur="toggleHeaderFocus"
             @focus="toggleHeaderFocus"
@@ -235,6 +235,7 @@ export default {
             return [
                 {
                     [`${prefixCls}-${this.size}`]: this.size,
+                    [`${prefixCls}-fixed-disabled`]: this.label && this.fixed && this.disabled,
                     [`${prefixCls}-multiple`]: this.multiple,
                     [`${prefixCls}-group-fixed`]: this.label && this.fixed,
                     [`${prefixCls}-group-fixed-focused`]: this.isFocused && this.show && !!this.label && !!this.fixed
@@ -261,31 +262,29 @@ export default {
             ]
         },
         labelStyles () {
-            const {label, fixed, labelWidth} = this
+            const {label, labelWidth} = this
             let style = {}
-            if (label && !fixed && labelWidth) {
+            if (label && labelWidth) {
                 style = {
-                    width: labelWidth && `${labelWidth}px`
+                    width: `${labelWidth}px`
                 }
             }
             return style
         },
         selectBoxStyles () {
-            const {label, fixed} = this
+            // const {label, fixed} = this
             let style = {}
-            if (!label || (label && fixed)) {
-                style.width = `${this.width}px`
-            }
+            style.width = `${this.width}px`
             return style
         },
-        widthStyle () {
-            const {label, fixed} = this
-            let style = {}
-            if (label && !fixed && this.width) {
-                style.width = `${this.width}px`
-            }
-            return style
-        },
+        // widthStyle () {
+        //     const {label, fixed} = this
+        //     let style = {}
+        //     if (label && !fixed && this.width) {
+        //         style.width = `${this.width}px`
+        //     }
+        //     return style
+        // },
         inputStyle () {
             let style = {}
             const {multiple, values, inputLength} = this
@@ -387,8 +386,21 @@ export default {
             }).filter(Boolean)
         }
         this.fixedInitDrop()
+        this.label && this.widthInit()
     },
     methods: {
+        widthInit () {
+            const {label, $el} = this
+            let width = ''
+            if (label) {
+                let clientWidth = $el.clientWidth
+                let labelWidth = this.labelWidth || +$el.querySelector(`.${prefixCls}-label`).clientWidth
+                width = clientWidth - labelWidth - 2
+                this.selectWidth = {
+                    width: width + 'px'
+                }
+            }
+        },
         clickOutside () {
             if (this.filterabled) {
                 if (this.multiple && this.values.length > 0) {

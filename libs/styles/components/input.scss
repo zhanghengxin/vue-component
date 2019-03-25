@@ -29,9 +29,9 @@ $input-large-font:14px;
     cursor: not-allowed;
   }
 
-  // &:disabled:hover {
-  //   border-color: $Border;
-  // }
+  &:disabled:hover {
+    border-color: $Border;
+  }
 }
 
 @mixin labelMockClass($color, $shadowColor) {
@@ -122,14 +122,15 @@ $input-large-font:14px;
   @include inputSize(default, $input-default-size, 8px, $input-default-font);
   @include inputSize(large, $input-large-size, 12px 8px, $input-large-font);
 
+
+
   .#{$css-prefix-input} {
-    display: inline-block;
+    display: table-cell;
     width: 100%;
     line-height: 1.5;
     font-size: 12px;
     color: $Content;
-    background-color: $white;
-    background-image: none;
+    background: $white;
     cursor: text;
     outline: none;
     margin: 0;
@@ -142,13 +143,14 @@ $input-large-font:14px;
 
     //input label样式
     &-label {
-      line-height: 1;
-      font-size: inherit;
+      display: table-cell;
+      word-break: keep-all;
+      white-space: nowrap;
+      vertical-align: middle;
+      color: #495060;
       padding: 0 7px;
-      color: $Content;
-      display: inline-block;
-      box-sizing: border-box;
       text-align: center;
+      box-sizing: border-box;
 
       &-box {
         display: table-cell;
@@ -160,10 +162,6 @@ $input-large-font:14px;
         white-space: nowrap;
         vertical-align: middle;
       }
-    }
-
-    &-nobox {
-      width: auto;
     }
 
     //icon样式
@@ -213,13 +211,33 @@ $input-large-font:14px;
   }
 }
 
-// input label组合 固定长度label input的宽度自适应
+.#{$css-prefix-input}-fixed-disabled {
+  background: $Disabled;
+  border-color: $Border !important;
+}
+
 .#{$css-prefix-input}-group {
+  .#{$css-prefix-input}-main {
+    display: table-cell;
+  }
+}
+
+// input label组合 固定长度label input的宽度自适应
+.#{$css-prefix-input}-group-fixed {
   width: 100%;
-  display: inline-table;
+  display: inline-block;
   vertical-align: middle;
   @include borderTrans();
   @include labelMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
+
+  .#{$css-prefix-input} {
+    border: 0;
+    width: 100%;
+
+    &-main {
+      display: table-cell;
+    }
+  }
 
   &.#{$css-prefix-input}-error {
     @include labelMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
@@ -229,13 +247,5 @@ $input-large-font:14px;
     @include inputSize(small, $input-small-size - 2, 4px 8px, $input-small-font);
     @include inputSize(default, $input-default-size - 2, 8px, $input-default-font);
     @include inputSize(large, $input-large-size - 2, 12px 8px, $input-large-font);
-  }
-
-  .#{$css-prefix-input} {
-    border: 0;
-    width: 100%;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-    float: left;
   }
 }

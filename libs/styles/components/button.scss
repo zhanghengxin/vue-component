@@ -166,10 +166,19 @@ $css-prefix-button: $css-prefix+'button';
     @include waterColor($Sub);
   }
 
-  .icon-loading:before {
+  .circular{
+    height: 20px;
+    width: 20px;
     vertical-align: middle;
-    animation: rotating 5s linear infinite;
-    display: inline-block;
+  }
+
+  .path {
+    animation: loading-dash 1.5s ease-in-out infinite;
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: 0;
+    stroke-width: 2;
+    stroke: $Primary;
+    stroke-linecap: round;
   }
 
   @include size(default, 32px);

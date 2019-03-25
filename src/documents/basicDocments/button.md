@@ -176,7 +176,7 @@ Button 组件可以在不同场景下选择是否可以点击。
 <div class="example">
     <div class="example-box">
         <div>
-            <b-button  type="primary" :loading="true">加载中</b-button>
+            <b-button :loading="true">加载中</b-button>
         </div>
     </div>
 </div>
@@ -184,7 +184,7 @@ Button 组件可以在不同场景下选择是否可以点击。
 ::: code
 ```html
     <div>
-        <b-button type="primary" :loading="true">加载中</b-button>
+        <b-button :loading="true">加载中</b-button>
     </div>
 ```
 :::
@@ -232,10 +232,14 @@ Button 支持click 事件
 |---------- |-------- |---------- |-------------  |-------- |
 | size     | 尺寸   | string  |  `default`、`small`  、`large`       |    default   |
 | type     | 类型   | string    |   `default` 、`primary`、`success`  、`warning` 、`error`|     primary  |
-| loading     | 是否加载中状态   | Boolean    |    |     false  |
-| round     |  是否圆角按钮 | Boolean    |    |     false  |
-| disabled     | 是否禁用状态   | 	Boolean    |   `无`  |     false  |
-| icon     | 带icon的按钮   | 	string    |   `参考icon代码`  |       |
+| type     | 类型   | string    |   `button`、 `submit`、 `reset'`|     primary  |
+| loading     | 是否加载中状态   | Boolean    |   - |     false  |
+| round     |  是否圆角按钮 | Boolean    |  -  |     false  |
+| disabled   | 是否禁用状态   | 	Boolean    |  -` |     false  |
+| icon     | 带icon的按钮   | 	string  |-  |   `参考icon代码`  |       |
+| to	|跳转的链接，支持 vue-router 对象	|String\Object|-|	-|
+| replace| 路由跳转时，开启 replace 将不会向 history 添加新记录|Boolean|-|	false|
+| target	| 相当于 a 链接的 target 属性|	String| `_blank`、 `_self`、 `_parent`、 `_top`    |	_self|
 
 ### events
 | 事件名	      | 说明	    | 返回值 |

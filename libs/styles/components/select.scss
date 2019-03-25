@@ -28,11 +28,12 @@ $css-prefix-option: $css-prefix+'option';
 
 @mixin size($type, $height, $tagHeight) {
   &-#{$type} {
-
     .#{$css-prefix-select} {
       &-autowarp {
-        max-height: $height + 2px;
-        overflow: hidden;
+        .#{$css-prefix-select}-main-flex {
+          max-height: $height;
+          overflow: hidden;
+        }
       }
 
       &-main {
@@ -67,7 +68,7 @@ $css-prefix-option: $css-prefix+'option';
 }
 
 @mixin border-left-radius($bg, $radius) {
-  background-color: $bg;
+  background: $bg;
   border-bottom-left-radius: $radius;
   border-top-left-radius: $radius;
 }
@@ -75,13 +76,14 @@ $css-prefix-option: $css-prefix+'option';
 //最外层的盒子
 .#{$css-prefix-select} {
   width: 100%;
-  font-size: 12px;
-  display: inline-table;
+  font-size: 0;
+  display: inline-block;
   vertical-align: middle;
   position: relative;
 
   //label
   &-label {
+    font-size: 12px;
     display: table-cell;
     word-break: keep-all;
     white-space: nowrap;
@@ -93,10 +95,8 @@ $css-prefix-option: $css-prefix+'option';
 
   &-group {
     width: auto;
-
     .#{$css-prefix-select}-main {
       display: table-cell;
-      width: 200px;
     }
   }
 
@@ -113,8 +113,8 @@ $css-prefix-option: $css-prefix+'option';
       }
 
       &-main {
-        display: table-cell;
         border: 0;
+        display: table-cell;
       }
 
       &-disabled {
@@ -137,6 +137,9 @@ $css-prefix-option: $css-prefix+'option';
       &-input {
         padding: 0 0 0 4px;
       }
+      &-main-placeholder{
+        padding-left: 4px;
+      }
     }
   }
 
@@ -146,6 +149,7 @@ $css-prefix-option: $css-prefix+'option';
     box-sizing: border-box;
     color: $Content;
     outline: 0;
+    font-size: 12px;
     user-select: none;
     cursor: pointer;
     position: relative;
@@ -196,7 +200,7 @@ $css-prefix-option: $css-prefix+'option';
     display: inline-block;
     margin: 3px 4px 3px 0;
     padding: 0 8px;
-    background-color: $Background;
+    background: $Background;
     vertical-align: middle;
     overflow: hidden;
     cursor: pointer;
@@ -207,12 +211,17 @@ $css-prefix-option: $css-prefix+'option';
   }
 
   &-disabled {
-    background-color: $Disabled;
+    background: $Disabled;
     cursor: not-allowed;
 
     .#{$css-prefix-select}-input {
-      background-color: $Disabled;
+      background: $Disabled;
     }
+  }
+
+  &-fixed-disabled{
+    background: $Disabled;
+    border-color: $Border !important;
   }
 
   //type
