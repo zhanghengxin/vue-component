@@ -1,11 +1,23 @@
 更新日志
 
+### 0.3.6
+## `2019-03-25`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 table 多级表头
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 table 先过滤后排序后显示不正常问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.3.5
 ## `2019-03-22`
 <br>
 <b-timeline>
     <b-timeline-item>
-    优化 radio 结构优化
+    优化 radio 结构调整
     </b-timeline-item>
     <b-timeline-item>
     修复 select、input的 label 模式屏幕缩放，边框显示不正常问题修复
