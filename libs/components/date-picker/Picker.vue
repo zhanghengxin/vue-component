@@ -338,7 +338,8 @@ export default {
         innnerDateFormat () {
             if (this.dateFormat) return this.dateFormat
             if (this.innerType === 'date') return this.format
-            return this.format.replace(/[Hh]+.*[msSaAZ]|\[.*?\]/g, '').trim() || 'YYYY-MM-DD'
+            if (this.format) return this.format.replace(/[Hh]+.*[msSaAZ]|\[.*?\]/g, '').trim()
+            return 'YYYY-MM-DD'
         }
     },
     mounted () {
@@ -493,6 +494,7 @@ export default {
             }
         },
         getLabelWidth () {
+            if (!this.$refs.reference) return
             const { label } = this.$refs.reference.$refs
             let labelWidth = label ? label.offsetWidth : 0
             if (labelWidth) {
