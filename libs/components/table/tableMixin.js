@@ -12,6 +12,7 @@ export default {
             return [
                 {
                     [`${this.preCls}-column-${column.align}`]: column.align,
+                    [`${this.preCls}-column-expand`]: column.expandRender,
                     [`${column.className}`]: column.className,
                     [`${_cellClass}`]: _cellClass
                 }
@@ -24,6 +25,9 @@ export default {
             }
             if (width === '0') width = ''
             return width
+        },
+        isPopperShow (column) {
+            return column.filters && ((!this.fixed && !column.fixed) || (this.fixed === 'left' && column.fixed === 'left') || (this.fixed === 'right' && column.fixed === 'right'))
         },
         cellColspan (row, column) {
             let colspan = 1

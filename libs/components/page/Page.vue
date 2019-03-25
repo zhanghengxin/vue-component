@@ -137,6 +137,7 @@
             v-model="currentSize"
             @on-change="sizeChange"
             width="95"
+            :placement='placement'
             :options="options">
         </select-drop>
     </ul>
@@ -156,6 +157,11 @@ export default {
             prefixCls: prefixCls,
             currentPage: Number(this.page),
             currentSize: Number(this.size)
+        }
+    },
+    watch: {
+        page () {
+            this.currentPage = Number(this.page)
         }
     },
     props: {
@@ -205,6 +211,10 @@ export default {
             default () {
                 return [10, 20, 50, 100]
             }
+        },
+        placement: {
+            type: String,
+            default: 'bottom-start'
         }
     },
     computed: {
@@ -215,8 +225,8 @@ export default {
         options () {
             return this.sizeOptions.map(function (item) {
                 return {
-                    name: `${item}条/每页`,
-                    code: item
+                    label: `${item}条/每页`,
+                    value: item
                 }
             })
         },

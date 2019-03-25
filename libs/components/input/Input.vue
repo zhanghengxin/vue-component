@@ -4,7 +4,9 @@
  * @created 2018/09/18 20:05:54
  */
 <template>
-    <div :class="boxClasses" :style='inputStyles'>
+    <div :class="boxClasses" :style='inputBoxStyles'
+        @mouseenter="mouseenterHandle"
+        @mouseleave="mouseleaveHandle">
         <template v-if="type !== 'textarea'">
             <div
                 v-if="prefix"
@@ -13,29 +15,32 @@
                 prefixCls+`-icon-`+size,
                 prefixCls+`-icon-prefix`]'>
                 <slot name='prefix'>
-                    <b-icon
+                    <Icon
                         size
                         :type="icon"
                         @on-click="handleIconClick">
-                    </b-icon>
+                    </Icon>
                 </slot>
             </div>
-            <div
-                v-if="suffix"
-                :class='[
-                prefixCls+`-icon`,
-                prefixCls+`-icon-`+size,
-                prefixCls+`-icon-suffix`]'>
-                <slot name='suffix'>
-                    <b-icon
-                        size
-                        :type="icon"
-                        :class="[prefixCls+`-noclear`]"
-                        @on-click="handleIconClick">
-                    </b-icon>
-                </slot>
-            </div>
-            <b-icon
+            <transition name='fade'>
+                <div
+                    v-if="suffix"
+                    v-show='showSuffix'
+                    :class='[
+                    prefixCls+`-icon`,
+                    prefixCls+`-icon-`+size,
+                    prefixCls+`-icon-suffix`]'>
+                    <slot name='suffix'>
+                        <Icon
+                            size
+                            :type="icon"
+                            :class="[prefixCls+`-noclear`]"
+                            @on-click="handleIconClick">
+                        </Icon>
+                    </slot>
+                </div>
+            </transition>
+            <Icon
                 v-if="clearable && currentValue"
                 size
                 type="shibai-mian"
@@ -45,7 +50,7 @@
                 prefixCls+`-icon-suffix`,
                 prefixCls+`-icon-clear`]"
                 @on-click="handleClear">
-            </b-icon>
+            </Icon>
             <label
                 ref="label"
                 :class="labelClasses"
@@ -60,6 +65,7 @@
                 ref="input"
                 :value="currentValue"
                 :name="name"
+                :style='inputStyles'
                 :placeholder="placeholder"
                 :disabled="disabled"
                 :maxlength="maxlength"
@@ -107,14 +113,16 @@
 <script>
 import calcTextareaHeight from './calcTeatareaHeight.js'
 import { findComponentUpward } from '../../utils/assist'
-import { prefix, oneOf } from '../../utils/common'
+import { prefix, oneOf, propsInit } from '../../utils/common'
 import Emitter from '../../mixins/emitter'
+import Icon from '../icon'
 
 const prefixCls = prefix + 'input' // b-input
 
 export default {
     name: prefixCls,
     mixins: [Emitter],
+    components: {Icon},
     props: {
         // 接收input的自带属性
         elementId: {
@@ -134,30 +142,12 @@ export default {
             type: String,
             default: '请输入...'
         },
-        disabled: {
+        showSuffix: {
             type: Boolean,
-            default: false
-        },
-        readonly: {
-            type: Boolean,
-            default: false
+            default: true
         },
         name: {
             type: String
-        },
-        maxlength: {
-            type: Number
-        },
-        minlength: {
-            type: Number
-        },
-        autofocus: {
-            type: Boolean,
-            default: false
-        },
-        spellcheck: {
-            type: Boolean,
-            default: false
         },
         autocomplete: {
             type: String,
@@ -165,9 +155,6 @@ export default {
             validator (value) {
                 return oneOf(value, ['off', 'on'])
             }
-        },
-        width: {
-            type: [String, Number]
         },
         // 样式属性
         size: {
@@ -179,42 +166,14 @@ export default {
                 return !this.size || this.size === '' ? 'default' : this.size
             }
         },
-        error: {
-            type: Boolean,
-            default: false
-        },
-        clearable: {
-            type: Boolean,
-            default: false
-        },
-        label: {
-            type: String
-        },
-        // 定长包裹着input的样式 true input前只有文字的样式 false
-        fixed: {
-            type: Boolean,
-            default: false
-        },
-        labelWidth: {
-            type: Number,
-            default: 36
-        },
         // icon属性
         icon: {
             type: String,
             default: ''
         },
-        prefix: {
-            type: Boolean,
-            default: false
-        },
-        suffix: {
-            type: Boolean,
-            default: false
-        },
         // textarea
         rows: {
-            type: Number,
+            type: [Number, String],
             default: 2
         },
         autosize: {
@@ -228,7 +187,36 @@ export default {
                 }
             },
             default: 'soft'
-        }
+        },
+        // props type为[Number, String]的配置
+        ...propsInit({
+            // label label样式的文字描述
+            // width input的宽度
+            // labelWidth label样式的文字的宽度 仅在fixed为false时有效
+            // maxlength lmaxlength
+            // minlength minlength
+            props: ['label', 'width', 'labelWidth', 'maxlength', 'minlength'],
+            config: {
+                type: [Number, String]
+            }
+        }),
+        // props type为 Boolean 的配置
+        ...propsInit({
+            // disabled disabled
+            // readonly readonly
+            // autofocus autofocus
+            // spellcheck 原生的拼写检测
+            // error error的样式设置
+            // clearable 清空
+            // fixed label的两种样式
+            // prefix 前面的icon显示
+            // suffix 后面的icon显示
+            props: ['disabled', 'readonly', 'autofocus', 'spellcheck', 'error', 'clearable', 'fixed', 'prefix', 'suffix'],
+            config: {
+                type: Boolean,
+                default: false
+            }
+        })
     },
     data () {
         return {
@@ -247,7 +235,7 @@ export default {
                     [`${prefixCls}-error`]: this.error,
                     [`${prefixCls}-box-clear`]: this.clearable && this.currentValue,
                     [`${prefixCls}-group`]: this.label && this.fixed,
-                    'focus': this.label && this.labelFocus && this.fixed
+                    [`${prefixCls}-box-textarea`]: this.type === 'textarea'
                 }
             ]
         },
@@ -271,25 +259,46 @@ export default {
         },
         textareaClasses () {
             return [
-                `${prefixCls}`
+                `${prefixCls}`,
+                `${prefixCls}-textarea`
             ]
         },
         labelStyles () {
-            return [
-                {
-                    [`width: ${this.labelWidth}px`]: !this.fixed
-                }
-            ]
-        },
-        inputStyles () {
+            const {label, fixed, labelWidth} = this
             let style = {}
-            if (this.width) {
+            if (label && !fixed && labelWidth) {
+                style = {
+                    width: labelWidth && `${labelWidth}px`
+                }
+            }
+            return style
+        },
+        // 整体的input的宽度
+        inputBoxStyles () {
+            const {label, fixed, width} = this
+            let style = {}
+            if (!label || (label && width && fixed)) {
+                style.width = `${width}px`
+            }
+            return style
+        },
+        // label的时候 fixed为false  input的宽度
+        inputStyles () {
+            const { label, fixed } = this
+            let style = {}
+            if (label && this.width && !fixed) {
                 style.width = `${this.width}px`
             }
             return style
         }
     },
     methods: {
+        mouseenterHandle (event) {
+            this.$emit('on-mouseenter', event)
+        },
+        mouseleaveHandle (event) {
+            this.$emit('on-mouseleave', event)
+        },
         handleChange (event) {
             this.$emit('on-change', event)
         },

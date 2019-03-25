@@ -113,6 +113,12 @@ $prefix-table: $css-prefix + 'table';
   &-fixed {
     position: absolute;
     top: 0;
+    & th .#{$prefix-table}-cell {
+      white-space: nowrap;
+    }
+    table {
+      table-layout: fixed;
+    }
   }
   &-fixed-body {
     overflow: hidden;
@@ -208,5 +214,40 @@ $prefix-table: $css-prefix + 'table';
       cursor: pointer;
       z-index: 100;
     }
+  }
+  &-filter {
+    &-select-item {
+      margin: 0;
+      padding: 8px;
+      cursor: pointer;
+      &:hover {
+        color: $LightPrimary;
+      }
+      &-selected {
+        color: $LightPrimary;
+      }
+    }
+  }
+  &-expand {
+    &-icon {
+      border: 1px solid $Border;
+    }
+  }
+  &-right-border, &-bottom-border {
+    z-index: 3;
+    background-color: $Border;
+    position: absolute;
+  }
+  &-right-border {
+    width: 1px;
+    height: 100%;
+    top: 0;
+    right: 0;
+  }
+  &-bottom-border {
+    width: 100%;
+    height: 1px;
+    left: 0;
+    bottom: 0;
   }
 }

@@ -12,10 +12,9 @@
     <button ref="button"
             :disabled="disabled"
             @click='handleClick($event)'
-            :class="bodyCls"
-    >
+            :class="[bodyCls,customClasses]">
         <i v-if='loading' class="iconfont icon-loading"></i>
-        <b-icon v-if="icon" :type="iconcls"></b-icon>
+        <Icon v-if="icon" :type="icon"></Icon>
         <span>
             <slot></slot>
         </span>
@@ -24,24 +23,22 @@
 
 <script>
 import { prefix, oneOf } from '../../utils/common'
+import Icon from '../icon'
 
 const prefixCls = prefix + 'button'
 export default {
     name: prefixCls,
+    components: {Icon},
     computed: {
-        iconcls () {
-            return `${this.icon}`
-        },
         bodyCls () {
             return [
                 `${prefixCls}`,
                 `${prefixCls}-size-${this.size}`,
                 `${prefixCls}-type-${this.type} `,
                 {
-                    [`${prefixCls}-round`]: this.round,
-                    [`${prefixCls}-circle`]: this.circle || this.icon,
-                    [`${prefixCls}-disabled`]: this.disabled,
-                    [`${prefixCls}-plain`]: this.plain
+                    [`${prefixCls}-round`]: this.round, // 圆角
+                    [`${prefixCls}-circle`]: this.circle, // 圆形
+                    [`${prefixCls}-disabled`]: this.disabled // 禁用
                 }
             ]
         }
@@ -81,6 +78,10 @@ export default {
         },
         icon: {
             type: String,
+            default: ''
+        },
+        customClasses: {
+            type: [String, Array],
             default: ''
         }
     },

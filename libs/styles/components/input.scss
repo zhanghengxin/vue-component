@@ -77,9 +77,10 @@ $input-large-font:14px;
 // icon 的大小
 @mixin inputIconSize($type, $icon-size, $fontSize) {
   &-#{$type} {
-    .icon{
+    .icon {
       font-size: $fontSize;
     }
+
     width: $icon-size;
     line-height: $icon-size - 2px;
   }
@@ -96,7 +97,13 @@ $input-large-font:14px;
 //input基础样式
 .#{$css-prefix-input}-box {
   display: inline-block;
+  vertical-align: middle;
   position: relative;
+  overflow: hidden;
+
+  &-textarea {
+    overflow: inherit;
+  }
 
   //b-input-box：hover 显示clear-icon
   &-clear {
@@ -130,15 +137,18 @@ $input-large-font:14px;
     vertical-align: middle;
     @include borderTrans();
     @include inputMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
+    @include placeholder($SubContent);
+    //去掉IE的默认清空与小眼睛 icon
 
     //input label样式
     &-label {
       line-height: 1;
-      font-weight: default;
       font-size: inherit;
-      padding: 4px 7px;
+      padding: 0 7px;
       color: $Content;
       display: inline-block;
+      box-sizing: border-box;
+      text-align: center;
 
       &-box {
         display: table-cell;
@@ -153,7 +163,7 @@ $input-large-font:14px;
     }
 
     &-nobox {
-      width: 220px;
+      width: auto;
     }
 
     //icon样式
@@ -163,7 +173,7 @@ $input-large-font:14px;
       z-index: 3;
       text-align: center;
       height: calc(100% - 2px);
-     
+
 
       &-prefix {
         left: 1px;
@@ -178,10 +188,20 @@ $input-large-font:14px;
         z-index: 3;
         color: #666;
         opacity: .7;
+        cursor: pointer;
       }
+
       @include inputIconSize(small, $input-small-size, $input-small-font);
       @include inputIconSize(default, $input-default-size, $input-default-font);
       @include inputIconSize(large, $input-large-size, $input-large-font);
+    }
+
+    //Reset height for textarea
+    &-textarea {
+      max-width: 100%;
+      height: auto;
+      min-height: $input-default-size;
+      vertical-align: bottom;
     }
   }
 
@@ -191,28 +211,21 @@ $input-large-font:14px;
       @include inputMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
     }
   }
-
-  //Reset height for textarea
-  textarea.#{$css-prefix-input} {
-    max-width: 100%;
-    height: auto;
-    min-height: $input-default-size;
-    vertical-align: bottom;
-  }
 }
 
 // input label组合 固定长度label input的宽度自适应
 .#{$css-prefix-input}-group {
-  width: 280px;
-  display: table;
+  width: 100%;
+  display: inline-table;
+  vertical-align: middle;
   @include borderTrans();
   @include labelMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
 
   &.#{$css-prefix-input}-error {
     @include labelMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
   }
-  
-  &.#{$css-prefix-input}-box{
+
+  &.#{$css-prefix-input}-box {
     @include inputSize(small, $input-small-size - 2, 4px 8px, $input-small-font);
     @include inputSize(default, $input-default-size - 2, 8px, $input-default-font);
     @include inputSize(large, $input-large-size - 2, 12px 8px, $input-large-font);

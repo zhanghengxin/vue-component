@@ -30,7 +30,6 @@ export function findComponentUpwards (context, componentName) {
 export function findComponentDownward (context, componentName) {
     const childrens = context.$children
     let children = null
-
     if (childrens.length) {
         for (const child of childrens) {
             const name = child.$options.name
@@ -101,29 +100,30 @@ export function firstUpperCase (str) {
 
 export function scrollTop (el, from = 0, to, duration = 500, endCallback) {
     if (!window.requestAnimationFrame) {
-        window.requestAnimationFrame = (
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            function (callback) {
-                return window.setTimeout(callback, 1000 / 60)
-            }
-        )
+        // window.requestAnimationFrame = (
+        //     window.webkitRequestAnimationFrame ||
+        //     window.mozRequestAnimationFrame ||
+        //     window.msRequestAnimationFrame ||
+        //     function (callback) {
+        //         return window.setTimeout(callback, 1000 / 60)
+        //     }
+        // )
+        window.requestAnimationFrame = window.requestAnimationFrame || function (fn) {
+            return setTimeout(fn, 1000 / 60)
+        }
+        window.cancelAnimationFrame = window.cancelAnimationFrame || clearTimeout
     }
     const difference = Math.abs(from - to)
     const step = Math.ceil(difference / duration * 50)
-
     function scroll (start, end, step) {
         if (start === end) {
             endCallback && endCallback()
             return
         }
-
         let d = (start + step > end) ? end : start + step
         if (start > end) {
             d = (start - step < end) ? end : start - step
         }
-
         if (el === window) {
             window.scrollTo(d, d)
         } else {

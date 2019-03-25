@@ -1,40 +1,68 @@
 <template>
     <label :class="wrapClasses">
-            <span :class="radioClasses">
-                <span :class="innerClasses"></span>
-                <input
-                    type="radio"
-                    :disabled='disabled'
-                    :checked='checkedValue'
-                    :class="inputClasse"
-                    @change="change">
-            </span>
-        <slot>{{ label }}</slot>
+        <span :class="radioClasses">
+            <span :class="innerClasses"></span>
+            <input
+                type="radio"
+                :class="inputClasses"
+                :disabled="disabled"
+                :checked="currentValue"
+                :name="groupName"
+                @change="change"
+                @focus="onFocus"
+                @blur="onBlur">
+        </span><slot>{{ label }}</slot>
     </label>
 </template>
 <script>
-import { prefix } from '../../utils/common'
 
+import { findComponentUpward } from '../../utils/assist'
+import { prefix, oneOf } from '../../utils/common'
+import Emitter from '../../mixins/emitter'
 const prefixCls = prefix + 'radio'
+const groupPrefixCls = prefix + 'radio-group'
+
 export default {
     name: prefixCls,
+    mixins: [ Emitter ],
     props: {
+        value: {
+            type: [String, Number, Boolean],
+            default: false
+        },
+        trueValue: {
+            type: [String, Number, Boolean],
+            default: true
+        },
+        falseValue: {
+            type: [String, Number, Boolean],
+            default: false
+        },
+        label: {
+            type: [String, Number]
+        },
         disabled: {
             type: Boolean,
             default: false
         },
-        value: {
-            type: Boolean,
-            default: false
+        size: {
+            validator (value) {
+                return oneOf(value, ['small', 'large', 'default'])
+            },
+            default: 'default'
         },
-        label: {
-            type: String,
-            default: ''
+        name: {
+            type: String
         }
     },
     data () {
         return {
-            checkedValue: this.value
+            currentValue: this.value,
+            group: false,
+            groupName: this.name,
+            parent: findComponentUpward(this, groupPrefixCls),
+            focusWrapper: false,
+            focusInner: false
         }
     },
     computed: {
@@ -42,43 +70,93 @@ export default {
             return [
                 `${prefixCls}-wrapper`,
                 {
-                    [` ${prefixCls}-wrapper-disabled`]: this.disabled,
-                    [` ${prefixCls}-wrapper-checked`]: this.checkedValue
+                    [`${prefixCls}-group-item`]: this.group,
+                    [`${prefixCls}-wrapper-checked`]: this.currentValue,
+                    [`${prefixCls}-wrapper-disabled`]: this.disabled,
+                    [`${prefixCls}-${this.size}`]: !!this.size,
+                    [`${prefixCls}-focus`]: this.focusWrapper
                 }
             ]
         },
         radioClasses () {
             return [
+                `${prefixCls}`,
                 {
-                    [` ${prefixCls}-disabled`]: this.disabled,
-                    [` ${prefixCls}-checked`]: this.checkedValue
+                    [`${prefixCls}-checked`]: this.currentValue,
+                    [`${prefixCls}-disabled`]: this.disabled
                 }
             ]
         },
         innerClasses () {
-            return `${prefixCls}-inner`
+            return [
+                `${prefixCls}-inner`,
+                {
+                    [`${prefixCls}-focus`]: this.focusInner
+                }
+            ]
         },
-        inputClasse () {
+        inputClasses () {
             return `${prefixCls}-input`
-        }
-
-    },
-    methods: {
-        change (event) {
-            let arr = this.$parent.$children
-            arr.map((item) => {
-                item.checkedValue = false
-            })
-            let checked = event.target.checked
-            this.checkedValue = checked
-            if (this.checkedValue && this.label) {
-                this.$parent.change(this.label)
-            }
-            this.$emit('input', this.checkedValue)
-            this.$emit('on-change', this.checkedValue)
         }
     },
     mounted () {
+        if (this.parent) {
+            this.group = true
+            if (!this.name || this.name === this.parent.name) {
+               this.groupName = this.parent.name
+            }
+        }
+        if (this.group) {
+            this.parent.updateValue()
+        } else {
+            this.updateValue()
+        }
+    },
+    methods: {
+        change (event) {
+            if (this.disabled) {
+                return false
+            }
+
+            const checked = event.target.checked
+            this.currentValue = checked
+
+            const value = checked ? this.trueValue : this.falseValue
+            this.$emit('input', value)
+
+            if (this.group) {
+                if (this.label !== undefined) {
+                    this.parent.change({
+                        value: this.label,
+                        checked: this.value
+                    })
+                }
+            } else {
+                this.$emit('on-change', value)
+                this.dispatch('FormItem', 'on-form-change', value)
+            }
+        },
+        updateValue () {
+            this.currentValue = this.value === this.trueValue
+        },
+        onBlur () {
+            this.focusWrapper = false
+            this.focusInner = false
+        },
+        onFocus () {
+            if (this.group && this.parent.type === 'button') {
+                this.focusWrapper = true
+            } else {
+                this.focusInner = true
+            }
+        }
+    },
+    watch: {
+        value (val) {
+            if (val === this.trueValue || val === this.falseValue) {
+                this.updateValue()
+            }
+        }
     }
 }
 </script>

@@ -1,9 +1,9 @@
 /*
- * @Author: lijiahang
- * @Date: 2018-11-15 17:52:20
- * @Last Modified by: hanshuai@baiwang.com
- * @Last Modified time: 2019-01-16 15:21:06
- */
+* @Author: lijiahang
+* @Date: 2018-11-15 17:52:20
+* @Last Modified by: hanshuai@baiwang.com
+* @Last Modified time: 2019-01-16 15:21:06
+*/
 
 <template>
     <div :class="btagoutclass" v-if="show" @click="handleClick">
@@ -14,19 +14,22 @@
         <span>
             <slot></slot>
         </span>
-        <b-icon
+        <Icon
             v-if="closeable"
             type="quxiao-guanbi-shanchu"
             @click.native='close'>
-        </b-icon>
+        </Icon>
     </div>
 </template>
 
 <script>
+import Icon from '../icon'
 import { prefix } from '../../utils/common'
+
 const prefixCls = prefix + 'tag'
 export default {
     name: prefixCls,
+    components: {Icon},
     props: {
         color: {
             type: String,

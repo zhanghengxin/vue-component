@@ -5,14 +5,14 @@
             <col v-if="$parent.verticalScroll" :width="$parent.scrollBarWidth"/>
         </colgroup>
         <thead>
-        <tr>
+        <tr v-for="(columns, rowIndex) in groupRows" :key="rowIndex">
             <th
-                v-for="(item,index) in visibleColumns"
+                v-for="(item,index) in columns"
                 :key="index"
                 :class="alignCls(item)"
                 :colspan="item.colSpan"
-                :draggable="draggable"
                 :rowspan="item.rowSpan"
+                :draggable="draggable"
                 @dragstart.stop="handleDragStart($event,index)"
                 @dragover.stop="handleDragOver($event)"
                 @dragend.stop="handleEndDrop($event)"
@@ -31,19 +31,41 @@
                         </Checkbox>
                     </template>
                     <template v-else>
-                        <span :class="{[preCls + '-cell-sort']: item.sortable}">{{ item.title || '...' }}</span>
+                        <span :class="{[preCls + '-cell-sort']: item.sortable}">{{ item.title }}</span>
                         <span :class="[preCls + '-sort']" v-if="item.sortable">
                             <Icon
-                                :class="iconCls('asc',item)"
+                                :class="iconCls('asc',index,rowIndex)"
                                 type="shangsanjiao"
-                                @on-click="handleSort(item._index, 'asc')">
+                                @on-click="handleSort(rowIndex,index, 'asc')">
                             </Icon>
                             <Icon
-                                :class="iconCls('desc',item)"
+                                :class="iconCls('desc',index,rowIndex)"
                                 type="xiasanjiao"
-                                @on-click="handleSort(item._index, 'desc')">
+                                @on-click="handleSort(rowIndex,index, 'desc')">
                             </Icon>
                         </span>
+                        <Tooltip
+                            v-if="isPopperShow(item)"
+                            placement="bottom"
+                            theme="light">
+                            <span :class="[preCls + '-filter']">
+                                <Icon type="shaixuan"></Icon>
+                            </span>
+                            <div slot="content" :class="[preCls + '-filter-list']">
+                                <ul :class="[preCls + '-filter-list-single']">
+                                    <li
+                                        :class="itemAllClasses(item)"
+                                        @click="filterReset(index)">全部
+                                    </li>
+                                    <li
+                                        :class="itemClasses(item,filter)"
+                                        v-for="(filter,key) in item.filters"
+                                        @click="filterSelect(index, filter.value)"
+                                        :key="key">{{ filter.label }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </Tooltip>
                     </template>
                 </div>
             </th>
@@ -55,22 +77,27 @@
 <script>
 import tableMixin from './tableMixin'
 import Checkbox from '../checkbox/Checkbox.vue'
+import Tooltip from '../tooltip/Tooltip.vue'
 import Icon from '../icon/Icon'
 import Emitter from '../../mixins/emitter'
 import { findComponentUpward } from '../../utils/assist'
+import { preventDefault } from '../../utils/compatible'
 
 export default {
     name: 'TableHead',
     mixins: [tableMixin, Emitter],
-    components: {Checkbox, Icon},
+    components: {Checkbox, Icon, Tooltip},
     data () {
         return {
-            isResizing: false
+            isResizing: false,
+            visibleColumns: this.columns.filter((item) => item._visible)
         }
     },
     props: {
         columns: Array,
-        cloneColumns: Array,
+        columnRows: Array,
+        fixedColumnRows: Array,
+        fixed: String,
         preCls: String,
         headerStyle: {
             type: Object,
@@ -82,6 +109,14 @@ export default {
         resizeable: Boolean,
         dynamicable: Boolean,
         draggable: Boolean
+    },
+    watch: {
+        columns: {
+            handler () {
+                this.visibleColumns = this.columns.filter((item) => item._visible)
+            },
+            deep: true
+        }
     },
     computed: {
         styles () {
@@ -102,21 +137,38 @@ export default {
             }
             return status
         },
-        visibleColumns () {
-            return this.columns.filter((item) => item._visible)
+        groupRows () {
+            const isGroup = this.columnRows && this.columnRows.length > 1
+            if (isGroup) {
+                return this.fixed ? this.fixedColumnRows : this.columnRows
+            } else {
+                return [this.visibleColumns]
+            }
         }
     },
     methods: {
+        // 因为表头嵌套不是深拷贝，所以没有 _ 开头的方法，在 isGroup 下用此列
+        getColumn (rowIndex, index) {
+            const isGroup = this.columnRows.length > 1
+
+            if (isGroup) {
+                const id = this.groupRows[rowIndex][index].__id
+                return this.columns.filter(item => item.__id === id)[0]
+            } else {
+                return this.groupRows[rowIndex][index]
+            }
+        },
         cellCls () {
             return [
                 `${this.preCls}-cell`
             ]
         },
-        iconCls (type, item) {
+        iconCls (type, index, rowIndex) {
+            let item = this.getColumn(rowIndex, index)
             return [
                 `${this.preCls}-sort-${type}`,
                 {
-                    [`${this.preCls}-sort-active`]: item._sortType === type
+                    [`${this.preCls}-sort-active`]: item && item._sortType === type
                 }
             ]
         },
@@ -125,9 +177,9 @@ export default {
             const status = !this.isSelectAll
             this.dispatch(this.preCls, 'selected-all-change', status)
         },
-        handleSort (index, type) {
+        handleSort (rowIndex, index, type) {
             this.dispatch(this.preCls, 'sort-change', {
-                index: index,
+                index: this.getColumn(rowIndex, index)._index,
                 type: type
             })
         },
@@ -146,7 +198,7 @@ export default {
                 if (rect.width > 12 && rect.right - e.pageX < 10) {
                     bodyStyle.cursor = 'col-resize'
                     this.isResizing = true
-                    event.preventDefault()
+                    preventDefault(event)
                 } else {
                     if (this.draggable) {
                         bodyStyle.cursor = 'pointer'
@@ -201,7 +253,7 @@ export default {
                 })
             }
             const handleMouseDown = (event) => {
-                event.preventDefault()
+                preventDefault(event)
             }
             const handleMouseUp = (event) => {
                 let deltaX = event.pageX - startX
@@ -223,7 +275,7 @@ export default {
             document.addEventListener('mouseup', handleMouseUp)
         },
         handleDragStart (event, index) {
-            if (!this.draggable || this.isResizing) event.preventDefault()
+            if (!this.draggable || this.isResizing) preventDefault(event)
             try {
                 // setData is required for draggable to work in FireFox
                 // the content has to be '' so dragging a node out of the tree won't open a new tab in FireFox
@@ -245,7 +297,7 @@ export default {
                 borderLeft = event.pageX - tableLeft
             }
             this.dispatch(this.preCls, 'drag-over', borderLeft)
-            event.preventDefault()
+            preventDefault(event)
         },
         handleEndDrop () {
             if (!this.draggable) return false
@@ -258,12 +310,37 @@ export default {
         rightClick (event) {
             if (event.button === 2) {
                 const oncontextmenu = (event) => {
-                    event.preventDefault()
+                    preventDefault(event)
                     document.removeEventListener('contextmenu', oncontextmenu)
                 }
                 document.addEventListener('contextmenu', oncontextmenu)
                 this.dispatch(this.preCls, 'context-menu', event)
             }
+        },
+        itemClasses (column, item) {
+            return [
+                `${this.preCls}-filter-select-item`,
+                {
+                    [`${this.preCls}-filter-select-item-selected`]: column._filterChecked && column._filterChecked[0] === item.value
+                }
+            ]
+        },
+        itemAllClasses (column) {
+            return [
+                `${this.preCls}-filter-select-item`,
+                {
+                    [`${this.preCls}-filter-select-item-selected`]: !column._filterChecked || !column._filterChecked.length
+                }
+            ]
+        },
+        filterReset (index) {
+            this.dispatch(this.preCls, 'filiter-reset', index)
+        },
+        filterSelect (index, value) {
+            this.dispatch(this.preCls, 'filiter-select', {
+                index: index,
+                value: value
+            })
         }
     }
 }

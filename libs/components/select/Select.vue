@@ -1,4 +1,7 @@
 <template>
+   <div :class='[boxClasses,]'
+        :style='selectBoxStyles'
+        v-click-outside="clickOutside">
     <div :class='selectGroupClasses'>
         <div v-if='label'
              :class='[prefixCls+`-label`]'
@@ -6,65 +9,65 @@
         >{{label}}
         </div>
         <div
-            v-click-outside="clickOutside"
-            :style='widthStyle'
-            :class="selectClasses">
-            <div
-                ref="reference"
-                :class="classes"
-                :tabindex="tabindex"
-                @blur="toggleHeaderFocus"
-                @focus="toggleHeaderFocus"
-                @click="toggleMenu"
-                @mouseenter="clearShow = clearabled && true"
-                @mouseleave="clearShow =  clearabled && false">
-                <input type="hidden" :name="name" :value="publicValue">
-                <div :class='[`${prefixCls}-show-selection`]'>
-                    <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
-                    <template v-if='multiple'>
-                        <div
-                            v-for="item in values"
-                            :key='item.code'
-                            :class="[prefixCls+`-tag`]">
-                            <span>{{item.name}}</span>
-                            <b-icon type='quxiao-guanbi-shanchu' @click.native.stop='removeTag(item)'></b-icon>
-                        </div>
-                    </template>
-                    <input
-                        type="text"
-                        v-if="filterabled"
-                        v-show='inputShow'
-                        v-model="query"
-                        :disabled="disabled"
-                        :class="[prefixCls + '-input']"
-                        :placeholder="localePlaceholder"
-                        :style="inputStyle"
-                        autocomplete="off"
-                        spellcheck="false"
-                        @keydown.exact="slideDropAndSetInput"
-                        @focus="onInputFocus"
-                        @keydown.delete="handleInputDelete"
-                    />
-                </div>
-                <b-icon
-                    type='xia'
-                    v-if='!disabled'
-                    v-show='iconShow'
-                    :class="[prefixCls+`-arrow`]">
-                </b-icon>
-                <b-icon
-                    type='shibai-mian'
-                    v-if='clearabled'
-                    v-show='closeIcon'
-                    :class="[prefixCls+`-arrow`]"
-                    @click.native.stop='clearValues'>
-                </b-icon>
+            ref="reference"
+            :class="classes"
+            :style='[widthStyle,selectWidth]'
+            :tabindex="tabindex"
+            @blur="toggleHeaderFocus"
+            @focus="toggleHeaderFocus"
+            @click="toggleMenu"
+            @mouseenter="clearShow = clearable && true"
+            @mouseleave="clearShow = clearable && false">
+            <input type="hidden" :name="name" :value="publicValue">
+            <div :class='[`${prefixCls}-main-flex`]'>
+                <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
+                <template v-if='multiple'>
+                    <div
+                        v-for="item in multipleValues"
+                        :key='item.value'
+                        :class="[prefixCls+`-tag`]">
+                        <span v-text="showMultipleValues(item)"></span>
+                        <Icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu'
+                                @click.native.stop='removeTag(item)'></Icon>
+                    </div>
+                </template>
+                <input
+                    type="text"
+                    v-if="filterabled"
+                    v-show='inputShow'
+                    v-model="query"
+                    :disabled="disabled"
+                    :class="[prefixCls + '-input']"
+                    :placeholder="localePlaceholder"
+                    :style="inputStyle"
+                    autocomplete="off"
+                    spellcheck="false"
+                    @keydown.exact="slideDropAndSetInput"
+                    @focus="onInputFocus"
+                    @keydown.delete="handleInputDelete"
+                />
             </div>
+            <Icon
+                type='xia'
+                v-if='!disabled'
+                v-show='iconShow'
+                :class="[prefixCls+`-arrow`]">
+            </Icon>
+            <Icon
+                type='shibai-mian'
+                v-if='clearable && showMultipleIcon'
+                v-show='closeIcon'
+                :class="[prefixCls+`-arrow`]"
+                @click.native.stop='clearValues'>
+            </Icon>
+        </div>
+    </div>
+        <slot>
             <transition name='slide'>
                 <Drop
-                    :style='dropStyles'
                     v-show='show'
                     :width='dropWidth'
+                    :placement='placement'
                 >
                     <ul v-if='notFoundData'>
                         <li :class='[prefix+`option`]'>{{notFoundText}}</li>
@@ -72,9 +75,9 @@
                     <ul v-if='(dropList.length > 0) && !loading'>
                         <Option
                             v-for='item in dropList'
-                            :key='item.code'
-                            :code='item.code'
-                            :name='item.name'
+                            :key='item.value'
+                            :value='item.value'
+                            :label='item.label'
                             :disabled='item.disabled'
                             :multiple='multiple'
                             :publicValue='publicValue'>
@@ -85,7 +88,7 @@
                     </ul>
                 </Drop>
             </transition>
-        </div>
+        </slot>
     </div>
 </template>
 <script>
@@ -94,7 +97,8 @@ import Option from './Option'
 import Emitter from '../../mixins/emitter'
 import clickOutside from '../../utils/directives/clickOutside'
 import { typeOf } from '../../utils/assist'
-import { prefix } from '../../utils/common'
+import { prefix, propsInit } from '../../utils/common'
+import Icon from '../icon'
 
 const prefixCls = prefix + 'select'
 
@@ -102,7 +106,7 @@ export default {
     name: prefixCls,
     mixins: [Emitter],
     directives: {clickOutside},
-    components: {Drop, Option},
+    components: {Drop, Option, Icon},
     data () {
         return {
             prefix,
@@ -111,10 +115,10 @@ export default {
             clearShow: false,
             values: [],
             isFocused: false,
-            dropStyles: {},
             query: '',
             lastRemoteQuery: '',
-            dropWidth: null
+            dropWidth: null,
+            selectWidth: {}
         }
     },
     props: {
@@ -131,27 +135,11 @@ export default {
         },
         nameKey: {
             type: String,
-            default: 'name'
-        },
-        nameInCode: {
-            type: Boolean,
-            default: false
+            default: 'label'
         },
         codeKey: {
             type: String,
-            default: 'code'
-        },
-        multiple: {
-            type: Boolean,
-            default: false
-        },
-        clearabled: {
-            type: Boolean,
-            default: false
-        },
-        disabled: {
-            type: Boolean,
-            default: false
+            default: 'value'
         },
         placeholder: {
             type: String,
@@ -161,22 +149,11 @@ export default {
             type: String,
             default: ''
         },
-        autowarp: { // 多选的时候是否仅单行显示
-            type: Boolean,
-            default: false
-        },
         size: {
             default: 'default',
             validator: function (value) {
                 return ['large', 'small', 'default'].indexOf(value) !== -1
             }
-        },
-        width: {
-            type: [String, Number]
-        },
-        filterabled: {
-            type: Boolean,
-            default: false
         },
         notFoundText: {
             type: String,
@@ -186,78 +163,128 @@ export default {
             type: String,
             default: '加载中..'
         },
-        loading: {
-            type: Boolean,
-            default: false
-        },
         filterFn: {
             type: Function
         },
         remoteFn: {
             type: Function
         },
-        label: {
-            type: [String, Number],
-            default: ''
+        placement: {
+            type: String,
+            default: 'bottom-start'
         },
-        labelWidth: {
-            type: [String, Number],
-            default: '72'
+        // props type为[Number, String]的配置
+        ...propsInit({
+            // label label样式的文字描述
+            // width input的宽度
+            // labelWidth label样式的文字的宽度 仅在fixed为false时有效
+            props: ['label', 'width', 'labelWidth'],
+            config: {
+                type: [Number, String]
+            }
+        }),
+        // props type为 Boolean 的配置
+        ...propsInit({
+            // nameInCode 返回值包含value 与 label
+            // multiple 多选
+            // clearable 清空
+            // disabled disabled
+            // autowarp 多选的时候是否仅单行显示
+            // filterabled 筛选
+            // loading loading
+            // fixed label的两种样式
+            props: ['nameInCode', 'multiple', 'clearable', 'disabled', 'autowarp', 'filterabled', 'loading', 'fixed'],
+            config: {
+                type: Boolean,
+                default: false
+            }
+        }),
+        defaultOpt: {
+            type: Object,
+            default () {
+                return {
+                    childrenKey: 'children',
+                    nameKey: 'name',
+                    disabledKey: 'disabled',
+                    checkedKey: 'checked',
+                    expandKey: 'expand',
+                    selectedKey: 'selected',
+                    indeterminateKey: 'indeterminate',
+                    idKey: 'id'
+                }
+            }
         },
-        fixed: {
-            type: Boolean,
-            default: false
+        treeValues: { // 兼容label-tree 的缓存 values
+            type: Array,
+            default () {
+                return []
+            }
         }
     },
     computed: {
-        selectGroupClasses () {
+        boxClasses () {
             return [
-                `${prefixCls}-container`,
+                `${prefixCls}`,
                 {
                     [`${prefixCls}-group`]: this.label && !this.fixed,
+                    [`${this.className}`]: this.className
+                }
+            ]
+        },
+        selectGroupClasses () {
+            return [
+                {
+                    [`${prefixCls}-${this.size}`]: this.size,
+                    [`${prefixCls}-multiple`]: this.multiple,
                     [`${prefixCls}-group-fixed`]: this.label && this.fixed,
                     [`${prefixCls}-group-fixed-focused`]: this.isFocused && this.show && !!this.label && !!this.fixed
                 }
             ]
         },
-        selectClasses () {
-            return [
-                `${prefixCls}`,
-                {
-                    [`${prefixCls}-multiple`]: this.multiple,
-                    [`${prefixCls}-${this.size}`]: this.size,
-                    [`${this.className}`]: this.className
-                }
-            ]
-        },
         classes () {
             return [
-                `${prefixCls}-selection`,
+                `${prefixCls}-main`,
                 {
                     [`${prefixCls}-show`]: this.show, // 旋转小icon
-                    [`${prefixCls}-selection-focused`]: this.isFocused && this.show && (!this.label || !this.fixed),
-                    [`${prefixCls}-selection-disabled`]: this.disabled,
-                    [`${prefixCls}-selection-autowarp`]: this.multiple && !this.autowarp
+                    [`${prefixCls}-focused`]: this.isFocused && this.show && (!this.label || !this.fixed),
+                    [`${prefixCls}-disabled`]: this.disabled,
+                    [`${prefixCls}-autowarp`]: this.multiple && !this.autowarp
                 }
             ]
         },
         showSelectedCls () {
             return [
-                `${prefixCls}-selection-content`,
+                `${prefixCls}-main-content`,
                 {
-                    [`${prefixCls}-selection-placeholder`]: this.localePlaceholder && (!this.showValue || this.multiple)
+                    [`${prefixCls}-main-placeholder`]: this.localePlaceholder && (!this.showValue || this.multiple)
                 }
             ]
         },
-        widthStyle () {
-            return {
-                width: this.width && `${this.width}px`
-            }
-        },
         labelStyles () {
-            return {
-                width: this.labelWidth && `${this.labelWidth}px`
+            const {label, fixed, labelWidth} = this
+            let style = {}
+            if (label && !fixed && labelWidth) {
+                style = {
+                    width: labelWidth && `${labelWidth}px`
+                }
             }
+            return style
+        },
+        selectBoxStyles () {
+            const {label, fixed} = this
+            let style = {}
+            if (!label || (label && fixed)) {
+                style.width = `${this.width}px`
+            }
+            return style
+        },
+        widthStyle () {
+            const {label, fixed} = this
+            let style = {}
+            if (label && !fixed && this.width) {
+                style.width = `${this.width}px`
+            }
+            return style
         },
         inputStyle () {
             let style = {}
@@ -287,25 +314,27 @@ export default {
             return !multiple || ((show && multiple) || !values.length)
         },
         iconShow () {
-            const {clearabled, clearShow, values, disabled} = this
-            return clearabled && clearShow ? !values.length : !disabled
+            const {clearable, clearShow, values, disabled, treeValues} = this
+            return clearable && clearShow ? !(values.length || treeValues.length) : !disabled
         },
         closeIcon () {
-            const {disabled, clearShow, values} = this
-            return !disabled && clearShow && values.length
+            const {disabled, clearShow, values, treeValues} = this
+            return !disabled && clearShow && (values.length || treeValues.length)
         },
         showValue () {
-            const {multiple, values} = this
+            const {multiple, values, treeValues} = this
             if (multiple) {
                 return ''
+            } else if (treeValues.length) {
+                return treeValues[0] ? treeValues[0].name : ''
             } else {
-                return values[0] ? values[0].name : ''
+                return values[0] ? values[0].label : ''
             }
         },
         showContent () {
             // 非筛选时  单选   多选切未选中
-            const {multiple, values, filterabled} = this
-            return !filterabled && (!multiple || (multiple && !values.length))
+            const {multiple, values, filterabled, treeValues} = this
+            return !filterabled && (!multiple || (multiple && !values.length && !treeValues.length))
         },
         localePlaceholder () {
             const {values, placeholder} = this
@@ -313,7 +342,7 @@ export default {
         },
         publicValue () {
             const {multiple, values} = this
-            return multiple ? values.map(option => option.code) : (values[0] || {}).code
+            return multiple ? values.map(option => option.value) : (values[0] || {}).value
         },
         notFoundData () {
             const {filterabled, dropList, loading} = this
@@ -323,11 +352,11 @@ export default {
             return this.disabled || 0
         },
         dropList () {
-            const {options, filterabled, filterFn, query, remoteFn} = this
+            const {options, filterabled, filterFn, query, remoteFn, codeKey, nameKey} = this
             let dropList = options.map(item => {
                 return typeOf(item) === 'object' && {
-                    code: item[this.codeKey],
-                    name: item[this.nameKey],
+                    value: item[codeKey],
+                    label: item[nameKey],
                     disabled: item.disabled || false
                 }
             })
@@ -335,10 +364,18 @@ export default {
                 if (filterFn) {
                     dropList = dropList.filter(item => this.filterFn(query, item))
                 } else {
-                    dropList = dropList.filter(({name}) => name.indexOf(query) > -1)
+                    dropList = dropList.filter(({label}) => label.indexOf(query) > -1)
                 }
             }
             return dropList || []
+        },
+        multipleValues () {
+            return this.treeValues.length ? this.treeValues : this.values
+        },
+        showMultipleIcon () {
+            const {treeValues, multiple} = this
+            if (multiple && treeValues.length) return false
+            return true
         }
     },
     mounted () {
@@ -349,7 +386,6 @@ export default {
                 return this.getOptionData(value)
             }).filter(Boolean)
         }
-
         this.fixedInitDrop()
     },
     methods: {
@@ -370,9 +406,9 @@ export default {
                 if (filterabled) {
                     this.query = ''
                 }
-                let isLive = values.filter(({code}) => code === option.code) || []
+                let isLive = values.filter(({value}) => value === option.value) || []
                 if (isLive.length) { // 如果点击的已存在values中 则过滤
-                    this.values = values.filter(({code}) => code !== option.code)
+                    this.values = values.filter(({value}) => value !== option.value)
                 } else {
                     this.values = values.concat(option)
                 }
@@ -388,33 +424,36 @@ export default {
             if (!multiple && (typeOf(initValue[0]) === 'undefined' || String(initValue[0]).trim() === '')) { initValue = [] }
             return initValue
         },
-        getOptionData (value) {
+        getOptionData (val) {
             const {multiple, dropList} = this
             if (multiple) {
-                let items = dropList.filter(({code}) => value && value.indexOf(code) > -1)
+                let items = dropList.filter(({value}) => val && val.indexOf(value) > -1)
                 return items && items[0]
             } else {
-                let item = dropList.filter(({code}) => code === value)
+                let item = dropList.filter(({value}) => value === val)
                 return item && item[0]
             }
         },
         toggleHeaderFocus ({type}) {
             if (this.disabled) return
             this.isFocused = type === 'focus'
+            this.$emit('on-focus')
         },
         toggleMenu () {
             if (this.disabled) {
                 return false
             }
             this.show = !this.show
-            // if (this.show) { this.broadcastPopperUpdate() }
+            this.$emit('on-click')
+            if (this.show) { this.broadcastPopperUpdate() }
         },
-        removeTag (e) {
+        removeTag (item) {
             const {disabled, values} = this
             if (!disabled) {
-                this.values = values.filter(({code}) => code !== e.code)
+                this.values = values.filter(({value}) => value !== item.value)
                 this.broadcastPopperUpdate()
             }
+            this.$emit('on-clear', item)
         },
         clearValues () {
             this.values = []
@@ -442,10 +481,16 @@ export default {
             } else {
                 this.dropWidth = $el.clientWidth
             }
+            this.$emit('get-drop-width', this.dropWidth)
         },
         broadcastPopperUpdate () {
             this.broadcast(`${prefix}drop`, 'on-update-popper')
+        },
+        showMultipleValues (item) {
+            const {defaultOpt, treeValues} = this
+            return treeValues.length ? item[defaultOpt.nameKey] : item.label
         }
+
     },
     watch: {
         value (val) {
@@ -463,10 +508,10 @@ export default {
             const newValue = JSON.stringify(now)
             const oldValue = JSON.stringify(before)
             const emitInput = newValue !== oldValue && publicValue !== value
-            this.query = values.length > 0 ? (multiple ? '' : values[0].name) : ''
+            this.query = values.length > 0 ? (multiple ? '' : values[0].label) : ''
             if (emitInput) {
                 this.$emit('input', publicValue) // to update v-model
-                this.$emit('on-change', nameInCode ? values : publicValue)
+                this.$emit('on-change', nameInCode ? (multiple ? values : values[0]) : publicValue)
                 this.dispatch('FormItem', 'on-form-change', nameInCode ? values : publicValue)
             }
         },
@@ -487,6 +532,14 @@ export default {
             const {filterabled, remoteFn, query} = this
             if (filterabled && remoteFn && query !== '') {
                 this.remoteFn(query)
+            }
+        },
+        options () {
+            if (!this.remoteFn) {
+                this.values = this.getInitValue().map(value => {
+                    if (typeof value !== 'number' && !value) return null
+                    return this.getOptionData(value)
+                }).filter(Boolean)
             }
         }
     }

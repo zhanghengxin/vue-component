@@ -44,8 +44,23 @@ $css-prefix-button: $css-prefix+'button';
   &-type-#{$type} {
     @include baseColor($color, $borderColor, $bg);
 
+    &.#{$css-prefix-button}-disabled {
+      @include _background($Disabled);
+      @include _borderColor($Disabled);
+      cursor: not-allowed;
+      &:hover {
+        @include _background($Disabled);
+        @include _borderColor($Disabled);
+      }
+  
+      &:focus {
+        @include _background($Disabled);
+      }
+    }
+
     &:hover {
       @include _background($hover);
+      @include _borderColor($hover);
     }
 
     &:focus {
@@ -98,7 +113,7 @@ $css-prefix-button: $css-prefix+'button';
   border: 1px solid transparent;
   white-space: nowrap;
   user-select: none;
-  padding: 5px 15px 6px;
+  padding: 5px 15px 5px;
   font-size: 12px;
   line-height: 1;
   border-radius: 4px;
@@ -109,16 +124,6 @@ $css-prefix-button: $css-prefix+'button';
 
   & span {
     vertical-align: middle;
-  }
-
-  //禁用
-  &-disabled {
-    cursor: not-allowed;
-    opacity: 0.3;
-  }
-
-  &-plain {
-    opacity: 0.7;
   }
 
   //圆角
@@ -135,6 +140,19 @@ $css-prefix-button: $css-prefix+'button';
   }
 
   &-type-default {
+    &.#{$css-prefix-button}-disabled {
+      @include _borderColor($Disabled);
+      color: $Disabled;
+      cursor: not-allowed;
+      &:hover {
+        @include textBorderColor($Disabled, $Disabled);
+      }
+  
+      &:focus {
+        @include textBorderColor($Disabled, $Disabled);
+      }
+    }
+    
     @include baseColor($Content, $Border, $white);
 
     &:hover {

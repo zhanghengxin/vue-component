@@ -170,6 +170,11 @@
 
  <script>
         export default {
+            data () {
+                return {
+                   page:1
+                }
+            },
             methods: {
                 handleChange(page) {
                     alert('当前选中页数为'+ page)
@@ -192,8 +197,10 @@
 | show-elevator     |  是否显示电梯功能 | boolean    |  -  |     false  |
 | show-total     |  是否显示总数 | boolean    |  -  |     false  |
 | show-sizer     |  是否显示切换页数 | boolean    |  -  |     false  |
+| size-options     |  自定义切换页数,当show-sizer开启时生效   | 	 array    |  -  |   [10, 20, 50, 100]    |
 | prev-text     |  自定义上一页的文本   | 	string    |   -  |     -  |
 | next-text     | 自定义下一页的文本   | 	string    |  -  |   -    |
+| placement    | 页数选择框弹出位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
 
 ### events
 | 事件名	      | 说明	    | 返回值 |

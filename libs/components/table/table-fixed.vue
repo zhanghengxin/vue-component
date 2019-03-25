@@ -1,12 +1,14 @@
 <template>
     <div :class="wrapCls" :style="fixedTableStyle">
-        <div>
+        <div v-if="showHeader">
             <table-head
                 :style="fixedTableStyle"
                 :columns="fixedColumns"
                 :header-style="fixedTableStyle"
                 :pre-cls="preCls"
                 :data="data"
+                :column-rows="columnRows"
+                :fixed-column-rows="fixedColumnRows"
                 :draggable="draggable"
                 :resizeable="resizeable"
                 :dynamicable="dynamicable"
@@ -17,6 +19,8 @@
             <table-body
                 :columns="fixedColumns"
                 :data="data"
+                :clone-columns="columns"
+                :fixed="fixed"
                 :body-style="fixedTableStyle"
                 :pre-cls="preCls"
             >
@@ -35,9 +39,13 @@ export default {
         preCls: String,
         bodyStyle: Object,
         fixedColumns: Array,
+        fixedColumnRows: Array,
+        columnRows: Array,
+        columns: Array,
         dynamicable: Boolean,
         resizeable: Boolean,
         draggable: Boolean,
+        showHeader: Boolean,
         data: Array,
         fixed: String
     },

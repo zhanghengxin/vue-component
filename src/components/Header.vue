@@ -4,6 +4,19 @@
             <img src="../assets/logo.png">
             <span>百望 UI</span>
         </div>
+        <b-select
+            v-model="value"
+            style="width:200px;margin: 20px 162px;"
+            :options='options'
+            :filterabled='filterabled'
+            :filterFn='filterFn'
+            @on-change='changePath'
+            placeholder="搜索..."
+            notFoundText='没有相关内容'
+            nameKey='title'
+            codeKey='path'
+            >
+        </b-select>
         <b-button
             class="color-change"
             type="primary"
@@ -14,7 +27,25 @@
 </template>
 
 <script>
+import menuList from '../utils/menu.json'
 export default {
+    data () {
+        return {
+            value: '',
+            filterabled: true
+        }
+    },
+    computed: {
+        options: function () {
+            let routes = []
+            let options = []
+            Object.keys(menuList).forEach((item) => {
+                routes = routes.concat(menuList[item])
+            })
+            this.optionsInit(routes, options)
+            return options
+        }
+    },
     methods: {
         changeColor () {
             if (document.documentElement.getAttribute('data-theme') === 'theme1') {
@@ -22,6 +53,21 @@ export default {
             } else {
                 window.document.documentElement.setAttribute('data-theme', 'theme1')
             }
+        },
+        filterFn (query, item) {
+            return (item.label + item.value).indexOf(query) > -1
+        },
+        changePath (val) {
+            this.$router.push(val)
+        },
+        optionsInit (f, options) {
+            f.map(item => {
+                if (item.items) {
+                    this.optionsInit(item.items, options)
+                } else if (item.title) {
+                    options.push(item)
+                }
+            })
         }
     }
 }
@@ -31,6 +77,15 @@ export default {
     .header {
         width: 100%;
         height: 70px;
+        .b-select-main{
+            border: 0;
+        }
+        .b-select-focused{
+            box-shadow: none !important;
+        }
+        .icon {
+            display: none !important;
+        }
     }
 
     .header .logo {

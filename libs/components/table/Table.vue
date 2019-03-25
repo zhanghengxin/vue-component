@@ -3,9 +3,10 @@
         :class="wrapCls" :style="styles" v-loading="loading" :loading-text="loadingText"
     >
         <div :class="tableCls">
-            <div :class="[preCls + '-header']" ref="header">
+            <div v-if="showHeader" :class="[preCls + '-header']" ref="header">
                 <table-head
                     :columns="cloneColumns"
+                    :column-rows="columnRows"
                     :header-style="headerStyle"
                     :pre-cls="preCls"
                     :data="formatData"
@@ -44,9 +45,13 @@
                 :pre-cls="preCls"
                 fixed="left"
                 ref="leftTable"
+                :column-rows="columnRows"
                 :dynamicable="dynamicable"
                 :data="formatData"
+                :show-header="showHeader"
+                :fixed-column-rows="leftFixedColumnRows"
                 :resizeable="resizeable"
+                :columns="cloneColumns"
                 :draggable="draggable"
                 :fixed-columns="leftFixedColumns"
             >
@@ -58,6 +63,10 @@
                 ref="rightTable"
                 :dynamicable="dynamicable"
                 fixed="right"
+                :fixed-column-rows="rightFixedColumnRows"
+                :column-rows="columnRows"
+                :columns="cloneColumns"
+                :show-header="showHeader"
                 :data="formatData"
                 :draggable="draggable"
                 :resizeable="resizeable"
@@ -105,6 +114,8 @@
                 </li>
             </ul>
         </Modal>
+        <span :class="[preCls + '-right-border']"></span>
+        <span :class="[preCls + '-bottom-border']"></span>
     </div>
 </template>
 
@@ -120,6 +131,7 @@ import Icon from '../icon'
 import Modal from '../modal'
 import Checkbox from '../checkbox'
 import Emitter from '../../mixins/emitter'
+import { getRandomStr, convertToRows, getAllColumns } from './utils'
 
 const preCls = prefix + 'table'
 export default {
@@ -133,6 +145,9 @@ export default {
             preCls: preCls,
             formatData: [],
             cloneColumns: [],
+            columnRows: [],
+            leftFixedColumnRows: [],
+            rightFixedColumnRows: [],
             tableWidth: 0,
             bodyHeight: 0,
             dragStartIndex: '',
@@ -175,6 +190,10 @@ export default {
         resizeable: {
             type: Boolean,
             default: false
+        },
+        showHeader: {
+            type: Boolean,
+            default: true
         },
         draggable: {
             type: Boolean,
@@ -228,8 +247,12 @@ export default {
         }
     },
     created () {
+        const colsWithId = this.makeColumnsId(this.columns, this.showIndex)
+        this.cloneColumns = this.buildColumns(colsWithId)
+        this.columnRows = this.makeColumnRows(false, colsWithId)
+        this.leftFixedColumnRows = this.makeColumnRows('left', colsWithId)
+        this.rightFixedColumnRows = this.makeColumnRows('right', colsWithId)
         this.formatData = this.buildData()
-        this.cloneColumns = this.buildColumns()
         this.$on('selected-change', this.toggleSelect)
         this.$on('selected-all-change', this.selectAll)
         this.$on('sort-change', this.handleSort)
@@ -243,6 +266,9 @@ export default {
         this.$on('drag-drop', this.handleDragDrop)
         this.$on('drag-end', this.handleDragEnd)
         this.$on('context-menu', this.handleContextMenu)
+        this.$on('filiter-reset', this.handleFilterReset)
+        this.$on('filiter-select', this.handleFilterSelect)
+        this.$on('expand-change', this.handleExpand)
     },
     mounted () {
         this.handleResize()
@@ -271,7 +297,8 @@ export default {
         },
         columns: {
             handler () {
-                this.cloneColumns = this.buildColumns()
+                const cols = this.makeColumnsId(this.columns, this.showIndex)
+                this.cloneColumns = this.buildColumns(cols)
                 this.handleResize()
             },
             deep: true
@@ -402,27 +429,20 @@ export default {
             })
             return data
         },
-        buildColumns () {
-            let columns = deepCopy(this.columns)
-            // Clumns in disorder
-            let indexArr = []
-            if (this.showIndex) {
-                indexArr.push({
-                    title: this.indexInfo.title,
-                    key: '_indexNo',
-                    width: this.indexInfo.width,
-                    align: this.indexInfo.align,
-                    fixed: this.indexInfo.fixed
-                })
-            }
+        buildColumns (cols) {
+            let columns = deepCopy(getAllColumns(cols))
+            let indexArr = columns.filter((item) => (item.key === '_indexNo'))
             let fixLeftArr = columns.filter((item) => (item.fixed === 'left'))
             let fixRightArr = columns.filter((item) => (item.fixed === 'right'))
-            let normalArr = columns.filter((item) => (!item.fixed))
+            let normalArr = columns.filter((item) => (!item.fixed && item.key !== '_indexNo'))
             let result = fixLeftArr.concat(indexArr, normalArr, fixRightArr)
-            result.forEach((row, index) => {
+
+            // Clumns in disorder
+            columns.forEach((row, index) => {
                 row._index = index
                 row._sortType = row.sortType || ''
                 row._visible = true
+                row._filterChecked = []
             })
             return result
         },
@@ -618,7 +638,7 @@ export default {
             }
             if (column.sortable) {
                 if (options.type === 'normal') {
-                    this.formatData = this.buildData()
+                    this.formatData = this.makeDataWithFilter()
                 } else {
                     this.formatData = this.sortData(this.formatData, options.type, options.index)
                 }
@@ -647,12 +667,12 @@ export default {
             this.$set(this.formatData[_index], '_isHighlight', true)
         },
         handleClick (_index) {
-            this.$emit('on-row-click', deepCopy(this.data[_index]))
+            this.$emit('on-row-click', deepCopy(this.data[this.formatData[_index]._index]))
             if (!this.highlightRow) return
             this.handleCurrentRow(_index)
         },
         handleDbclick (_index) {
-            this.$emit('on-row-dbclick', deepCopy(this.data[_index]))
+            this.$emit('on-row-dbclick', deepCopy(this.data[this.formatData[_index]._index]))
             if (!this.highlightRow) return
             this.handleCurrentRow(_index)
         },
@@ -705,7 +725,8 @@ export default {
         },
         getDragBorderHeight () {
             let style = {}
-            let height = this.$el.getBoundingClientRect().height - getStyle(this.$refs.header, 'height').replace(/px/, '')
+            let headerHeight = this.$refs.header ? getStyle(this.$refs.header, 'height').replace(/px/, '') : 0
+            let height = this.$el.getBoundingClientRect().height - headerHeight
             if (this.horizontalScroll) {
                 height = height - (this.horizontalScroll ? this.scrollBarWidth : 0)
             }
@@ -713,6 +734,7 @@ export default {
             style.top = getStyle(this.$refs.header, 'height')
             return style
         },
+        // dynamic
         handleContextMenu (event) {
             let tablePosition = this.$el.getBoundingClientRect()
             this.dynamicColumnBoxShow = true
@@ -747,6 +769,74 @@ export default {
                     this.$set(cloneColumns[index], '_visible', status)
                 }
             }
+        },
+        // 过滤数据
+        handleFilterReset (_index) {
+            const index = _index
+            this.$set(this.cloneColumns[index], '_filterChecked', [])
+            let filterData = this.buildData()
+            this.formatData = filterData
+            this.$emit('on-filter-change', this.cloneColumns[index])
+        },
+        handleFilterSelect (option) {
+            this.$set(this.cloneColumns[option.index], '_filterChecked', [option.value])
+            this.handleFilter(option.index)
+        },
+        handleFilter (index) {
+            const column = this.cloneColumns[index]
+            let filterData = this.buildData()
+            this.formatData = this.filterData(filterData, column)
+            this.$emit('on-filter-change', column)
+        },
+        makeDataWithFilter () {
+            let data = this.buildData()
+            this.cloneColumns.forEach(col => {
+                data = this.filterData(data, col)
+            })
+            return data
+        },
+        filterData (data, column) {
+            return data.filter((row) => {
+                let status = !column._filterChecked.length
+                for (let i = 0; i < column._filterChecked.length; i++) {
+                    status = column.filterMethod(column._filterChecked[i], row)
+                    if (status) break
+                }
+                return status
+            })
+        },
+        // expand
+        handleExpand (_index) {
+            let {formatData} = this
+            const status = !formatData[_index]._expanded
+            this.$set(formatData[_index], '_expanded', status)
+            this.$emit('on-expand-change', deepCopy(this.data[_index]), status)
+            if (this.height) {
+                this.$nextTick(() => this.bodyScrollReckon())
+            }
+        },
+        // 多级表头
+        makeColumnsId (columns, showIndex = false) {
+            if (showIndex && columns.filter((item) => (item.key === '_indexNo')).length < 1) {
+                let indexArr = []
+                indexArr.push({
+                    title: this.indexInfo.title,
+                    key: '_indexNo',
+                    width: this.indexInfo.width,
+                    align: this.indexInfo.align,
+                    fixed: this.indexInfo.fixed
+                })
+                columns = columns.concat(indexArr)
+            }
+            return columns.map(item => {
+                if ('children' in item) this.makeColumnsId(item.children)
+                item.__id = getRandomStr(8)
+                return item
+            })
+        },
+        // create a multiple table-head
+        makeColumnRows (fixedType, cols) {
+            return convertToRows(cols, fixedType)
         }
     }
 }

@@ -11,12 +11,6 @@ $css-prefix-option: $css-prefix+'option';
   transition: all $transition-time $ease-in-out;
 }
 
-@mixin selectWidth($width) {
-  .#{$css-prefix-select} {
-    width: $width;
-  }
-}
-
 @mixin selectMockClass($color, $shadow) {
   &-focused {
     @include _borderColor($color);
@@ -34,34 +28,36 @@ $css-prefix-option: $css-prefix+'option';
 
 @mixin size($type, $height, $tagHeight) {
   &-#{$type} {
-    .#{$css-prefix-select}-selection {
-      &-content {
-        height: $height;
-        line-height: $height;
-      }
 
+    .#{$css-prefix-select} {
       &-autowarp {
         max-height: $height + 2px;
         overflow: hidden;
       }
 
-      .#{$css-prefix-select}-input {
-        height: $height;
-      }
+      &-main {
+        &-content {
+          height: $height;
+          line-height: $height;
+        }
 
-      .#{$css-prefix-select}-tag {
-        height: $tagHeight;
-        line-height: $tagHeight - 2px;
+        .#{$css-prefix-select}-input {
+          height: $height;
+        }
 
-        .icon {
-          width: $tagHeight - 2px;
-          height: $tagHeight - 2px;
+        .#{$css-prefix-select}-tag {
+          height: $tagHeight;
           line-height: $tagHeight - 2px;
+
+          .icon {
+            width: $tagHeight - 2px;
+            height: $tagHeight - 2px;
+            line-height: $tagHeight - 2px;
+          }
         }
       }
     }
   }
-
 }
 
 @mixin borderInit($borderColor, $radius) {
@@ -77,104 +73,87 @@ $css-prefix-option: $css-prefix+'option';
 }
 
 //最外层的盒子
-.#{$css-prefix-select}-container {
+.#{$css-prefix-select} {
+  width: 100%;
   font-size: 12px;
-  display: inline-block;
+  display: inline-table;
   vertical-align: middle;
+  position: relative;
 
   //label
-  .#{$css-prefix-select}-label {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-weight: normal;
-    font-size: inherit;
-    color: $Content;
-    text-align: center;
+  &-label {
+    display: table-cell;
+    word-break: keep-all;
     white-space: nowrap;
+    vertical-align: middle;
+    color: $Content;
+    padding: 0 7px;
+    text-align: center;
   }
 
-  &.#{$css-prefix-select}-group {
-    display: table;
-    width: 280px;
-    @include selectWidth(100%);
+  &-group {
+    width: auto;
 
-    .#{$css-prefix-select}-label {
+    .#{$css-prefix-select}-main {
       display: table-cell;
-    }
-
-    .#{$css-prefix-select} {
-      display: inline-block;
+      width: 200px;
     }
   }
 
-  &.#{$css-prefix-select}-group-fixed {
-    display: flex;
-    width: 280px;
+  &-group-fixed {
+    overflow: hidden;
     @include borderInit($Border, 4px);
     @include transitionAll();
     @include selectMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
 
-    .#{$css-prefix-select}-label {
-      padding: 4px 7px;
-      border-right: 1px solid $Border;
-      @include border-left-radius($Background, 4px)
+    .#{$css-prefix-select} {
+      &-label {
+        border-right: 1px solid $Border;
+        @include border-left-radius($Background, 4px)
+      }
+
+      &-main {
+        display: table-cell;
+        border: 0;
+      }
+
+      &-disabled {
+        @include border-left-radius($Disabled, 0);
+        cursor: not-allowed;
+
+        .#{$css-prefix-select}-input {
+          @include border-left-radius($Disabled, 0)
+        }
+      }
     }
-
-    .#{$css-prefix-select}-selection {
-      border: 0;
-    }
-
-    @include selectWidth(100%);
-  }
-}
-
-//select
-.#{$css-prefix-select} {
-  box-sizing: border-box;
-  color: $Content;
-  width: 100%;
-
-  &-arrow {
-    position: absolute;
-    top: 50%;
-    right: 8px;
-    margin-top: -6px;
-    color: $Sub;
-    @include transitionAll();
-  }
-
-  &-show-selection {
-    display: flex;
-    flex-wrap: wrap;
   }
 
   &-multiple {
-    .#{$css-prefix-select}-selection {
-      padding: 0 24px 0 4px;
+    .#{$css-prefix-select} {
+      &-main {
+        padding: 0 24px 0 4px;
+      }
 
-      .#{$css-prefix-select}-input {
+      &-input {
         padding: 0 0 0 4px;
       }
     }
   }
 
-  @include size(large, 34px, 28px);
-  @include size(default, 30px, 24px);
-  @include size(small, 24px, 18px);
 
-
-  &-selection {
-    display: block;
+  //b-select-main
+  &-main {
+    box-sizing: border-box;
+    color: $Content;
     outline: 0;
     user-select: none;
     cursor: pointer;
     position: relative;
     background-color: $white;
+    overflow: hidden;
     width: 100%;
     @include borderInit($Border, 4px);
     @include transitionAll();
-    @include selectMockClass($LightPrimary, 0 0 0 2px rgba($LightPrimary, 0.2));
 
     &-content {
       overflow: hidden;
@@ -188,15 +167,28 @@ $css-prefix-option: $css-prefix+'option';
     &-placeholder {
       color: $SubContent;
     }
+  }
 
-    &-disabled {
-      @include border-left-radius($Disabled, 0);
-      cursor: not-allowed;
+  &-arrow {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    margin-top: -6px;
+    color: $Sub;
+    @include transitionAll();
+  }
 
-      .#{$css-prefix-select}-input {
-        @include border-left-radius($Disabled, 0)
-      }
-    }
+  &-flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &-input {
+    border: 0;
+    width: 100%;
+    border-radius: 4px;
+    padding: 0 24px 0 8px;
+    @include placeholder($SubContent)
   }
 
   &-tag {
@@ -214,12 +206,21 @@ $css-prefix-option: $css-prefix+'option';
     }
   }
 
-  &-input {
-    border: 0;
-    width: 100%;
-    border-radius: 4px;
-    padding: 0 24px 0 8px;
+  &-disabled {
+    background-color: $Disabled;
+    cursor: not-allowed;
+
+    .#{$css-prefix-select}-input {
+      background-color: $Disabled;
+    }
   }
+
+  //type
+  @include size(large, 34px, 28px);
+  @include size(default, 30px, 24px);
+  @include size(small, 24px, 18px);
+  //focused
+  @include selectMockClass($LightPrimary, 0 0 0 2px rgba($LightPrimary, 0.2));
 
   .#{$css-prefix-drop} {
     width: auto;

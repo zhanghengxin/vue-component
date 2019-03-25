@@ -154,4 +154,16 @@
   .test-table-row td {
     background: greenyellow;
   }
+  .b-table {
+    &-expand-cell {
+      border-bottom: none;
+      .expend-table {
+        margin-bottom: 0px;
+        border: none;
+        td {
+          background: $Background;
+        }
+      }
+    }
+  }
 }

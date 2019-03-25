@@ -23,6 +23,7 @@ import { Row, Col } from './components/grid'
 import Card from './components/card'
 import Modal from './components/modal'
 import Tooltip from './components/tooltip'
+import Upload from './components/upload'
 import BackTop from './components/backTop'
 import Dropdown from './components/dropdown'
 import DropdownItem from './components/dropdown-item'
@@ -34,7 +35,7 @@ import Radio from './components/radio'
 import RadioGroup from './components/radioGroup'
 import Form from './components/form'
 import Tag from './components/tag'
-import Tree from './components/tree'
+import Tree from './components/tree/RootTree'
 import Table from './components/table'
 import Progress from './components/progress'
 import Select from './components/select'
@@ -55,6 +56,7 @@ import LoadingBar from './components/loading-bar/'
 import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
+import LabelTree from './components/tree/LabelTree'
 
 const components = [
     Input,
@@ -64,6 +66,7 @@ const components = [
     Drawer,
     Tag,
     Tree,
+    LabelTree,
     Table,
     Icon,
     Message,
@@ -88,6 +91,7 @@ const components = [
     Modal,
     Circle,
     Tooltip,
+    Upload,
     BackTop,
     Form,
     Form.FormItem,

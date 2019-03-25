@@ -26,7 +26,8 @@
                 suffix:true,
                 icon:'chaxun',
                 autosize:true,
-                fixed:true
+                fixed:true,
+                labelWidth:72
             }
         },
         methods:{
@@ -44,11 +45,17 @@
 可使用 v-model 实现数据的双向绑定。<br/>
 可直接设置 width 来设置输入框的宽度，默认 100%。<br/>
 可直接设置 error 来改变输入框的hover focus样式
+可slot设置icon
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value" placeholder="请输入..." :width='200' /></b-input>
-            <b-input v-model="value0" placeholder="请输入..." :width='200' :error='error'/></b-input>
+              <b-input v-model="value" placeholder="请输入..." :width='200' suffix>
+                  <div slot='suffix'>
+                      icon
+                  </div>
+              </b-input>
+              <b-input v-model="value0" placeholder="请输入..." :width='200' error='error'></b-input>
+              <span>{{value}}</div>
         </div>
     </div>
 </div>
@@ -57,8 +64,12 @@
 ```html
 
     <template>
-        <b-input v-model="value" placeholder="请输入..." :width='200' /></b-input>
-        <b-input v-model="value0" placeholder="请输入..." :width='200' :error='error'/></b-input>
+        <b-input v-model="value" placeholder="请输入..." :width='200' suffix>
+            <div slot='suffix'>
+                icon
+            </div>
+        </b-input>
+        <b-input v-model="value0" placeholder="请输入..." :width='200' error='error'></b-input>
         <span>{{value}}</div>
     </template>
     <script>
@@ -66,8 +77,7 @@
             data () {
                 return {
                     value: '',
-                    value0: '',
-                    error:true
+                    value0: ''
                 }
             }
         }
@@ -116,7 +126,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value4" :disabled='disabled'></b-input>
+            <b-input v-model="value4" disabled></b-input>
         </div>
     </div>
 </div>
@@ -125,7 +135,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```html
 
     <template>
-        <b-input v-model="value4" :disabled='disabled'></b-input>
+        <b-input v-model="value4" disabled></b-input>
     </template>
     <script>
         export default {
@@ -144,7 +154,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value5" :clearable='clearable'></b-input>
+            <b-input v-model="value5" clearable></b-input>
         </div>
     </div>
 </div>
@@ -153,13 +163,12 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```html
 
     <template>
-        <b-input v-model="value5" :clearable='clearable'></b-input>
+        <b-input v-model="value5" clearable></b-input>
     </template>
     <script>
         export default {
             data () {
                 return {
-                    clearable: true,
                     value5:''
                 }
             }
@@ -173,8 +182,8 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" :icon='icon' :prefix='prefix'></b-input>
-            <b-input v-model="value7" :icon='icon' :suffix='suffix' :clearable='clearable'></b-input>
+            <b-input v-model="value6" :icon='icon' :prefix='prefix' ></b-input>
+            <b-input v-model="value7" :icon='icon' :suffix='suffix' ></b-input>
         </div>
     </div>
 </div>
@@ -192,9 +201,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
                 return {
                     icon:'chaxun',
                     value6:'',
-                    value7:'',
-                    prefix:true,
-                    suffix:true
+                    value7:''
                 }
             }
         }
@@ -203,14 +210,14 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 :::
 
 ### label属性的两种样式
-通过设置```label```属性 设置带文字描述的input组合组件 <br/>
+通过设置 `label` 属性 设置带文字描述的input组合组件 <br/>
 label文字大小可根据input的size变化<br/>
-通过设置```labelWidth```属性可设置label文字所占的宽度 labelWidth默认36px<br/>
+通过设置 `labelWidth` 属性可设置label文字所占的宽度 labelWidth默认36px 可通过width设置input框```(只设置input框)```的宽度<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" label='姓名' placeholder="请输入..." /></b-input>
-            <b-input v-model="value6" label='密码' type='password' placeholder="请输入..." /></b-input>
+            <b-input v-model="value6" label='姓名' :labelWidth='labelWidth' :width='200' placeholder="请输入..." ></b-input>
+            <b-input v-model="value7" label='密码' :labelWidth='labelWidth' :width='200' type='password' placeholder="请输入..." ></b-input>
         </div>
     </div>
 </div>
@@ -219,17 +226,16 @@ label文字大小可根据input的size变化<br/>
 ```html
 
     <template>
-        <b-input v-model="value6" label='姓名' placeholder="请输入..." /></b-input>
-        <b-input v-model="value6" label='密码' type='password' placeholder="请输入..." /></b-input>
+       <b-input v-model="value6" label='姓名' :labelWidth='labelWidth' :width='200' placeholder="请输入..." ></b-input>
+       <b-input v-model="value7" label='密码' :labelWidth='labelWidth' :width='200' type='password' placeholder="请输入..." ></b-input>
     </template>
     <script>
         export default {
             data () {
                 return {
-                    icon:'chaxun',
                     value6:'',
                     value7:'',
-                    fixed:true
+                    labelWidth:72
                 }
             }
         }
@@ -238,15 +244,14 @@ label文字大小可根据input的size变化<br/>
 :::
 
 <br/>
-通过设置fixed为```true``` 属性可设置带label文字描述的样式 label文字与input的宽度根据自动适应 整体宽度默认280px
+通过设置fixed为```true``` 属性可设置带label文字描述的样式 label文字与input的宽度根据自动适应 整体宽度默认100%
 <br/>
 <br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" label='姓名' :fixed='fixed' placeholder="请输入..." /></b-input>
-            <br/>
-            <b-input v-model="value6" label='密码' :fixed='fixed' :error='error' type='password' placeholder="请输入..." /></b-input>
+            <b-input v-model="value6" label='姓名' width='200' fixed placeholder="请输入..." ></b-input>
+            <b-input v-model="value7" label='密码' width='200' fixed placeholder="请输入..." ></b-input>
         </div>
     </div>
 </div>
@@ -255,18 +260,15 @@ label文字大小可根据input的size变化<br/>
 ```html
 
     <template>
-        <b-input v-model="value6" label='姓名' :fixed="fixed" placeholder="请输入..." /></b-input>
-        <b-input v-model="value6" label='密码' :fixed="fixed" :error='error' type='password' placeholder="请输入..." /></b-input>
+         <b-input v-model="value6" label='姓名' width='200' fixed placeholder="请输入..." ></b-input>
+         <b-input v-model="value7" label='密码' width='200' fixed placeholder="请输入..." ></b-input>
     </template>
     <script>
         export default {
             data () {
                 return {
-                    icon:'chaxun',
                     value6:'',
-                    value7:'',
-                    fixed:true,
-                    error:true
+                    value7:''
                 }
             }
         }
@@ -280,8 +282,8 @@ label文字大小可根据input的size变化<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value8" type="textarea" /></b-input>
-            <b-input v-model="value9" type="textarea" :rows="4" /></b-input>
+            <b-input v-model="value8" type="textarea" ></b-input>
+            <b-input v-model="value9" type="textarea" :rows="4" ></b-input>
             <b-input v-model="value10" type="textarea" :rows="4" disabled></b-input>
         </div>
     </div>
@@ -291,8 +293,8 @@ label文字大小可根据input的size变化<br/>
 ```html
 
     <template>
-        <b-input v-model="value8" type="textarea" /></b-input>
-        <b-input v-model="value9" type="textarea" :rows="4" /></b-input>
+        <b-input v-model="value8" type="textarea" ></b-input>
+        <b-input v-model="value9" type="textarea" :rows="4" ></b-input>
         <b-input v-model="value10" type="textarea" :rows="4" disabled></b-input>
     </template>
     <script>
@@ -314,7 +316,7 @@ label文字大小可根据input的size变化<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value11"  type="textarea" :error='error' :autosize='autosize'></b-input>
+            <b-input v-model="value11"  type="textarea" error :autosize='autosize'></b-input>
             <b-input v-model="value12"  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
         </div>
     </div>
@@ -324,16 +326,15 @@ label文字大小可根据input的size变化<br/>
 ```html
 
     <template>
-        <b-input v-model="value11"  type="textarea" :error='error' :autosize='autosize'></b-input>
+        <b-input v-model="value11"  type="textarea" error :autosize='autosize'></b-input>
         <b-input v-model="value12"  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
     </template>
     <script>
         export default {
             data () {
                 return {
-                    value8: '',
-                    value9: '',
-                    value10: ''
+                    value11: '',
+                    value12: ''
                 }
             }
         }
@@ -377,3 +378,9 @@ label文字大小可根据input的size变化<br/>
 | on-blur   | 输入框失去聚焦时触发 | - |
 | on-keyup   | 原生的 keyup 事件 | event |
 | on-keydown   | 原生的 keydown 事件 | event |
+
+### slot
+| name	      | 说明	    | 返回值 |
+|-------------|---------|----------|
+| prefix    | 需要设置prefix为true    | -  |
+| suffix   | 需要设置suffix为true  | - |

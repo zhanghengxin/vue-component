@@ -3,8 +3,8 @@
     export default {
         data () {
             return {
-                value: '',
-                value0: '',
+                value: '004',
+                value0: '007',
                 value1: '',
                 value2: [],
                 value3: '',
@@ -20,36 +20,38 @@
                 value02: '',
                 value03: '',
                 value04: '',
-                clearabled:true,
+                value05: [],
+                value06: [],
+                clearable:true,
                 disabled:true,
                 autowarp:true,
                 fixed:true,
                 options:[{
-                    name:'增专',
-                    code:'004'
+                    label:'增专',
+                    value:'004'
                 },{
-                    name:'增普',
-                    code:'007'
+                    label:'增普',
+                    value:'007'
                 },{
-                    name:'机动车',
-                    code:'005'
+                    label:'机动车',
+                    value:'005'
                 },{
-                    name:'电子票',
-                    code:'025'
+                    label:'电子票',
+                    value:'025'
                 }],
                 options1:[{
-                    name:'增专',
-                    code:'004'
+                    label:'增专',
+                    value:'004'
                 },{
-                    name:'增普',
-                    code:'007'
+                    label:'增普',
+                    value:'007'
                 },{
-                    name:'机动车',
-                    code:'005',
+                    label:'机动车',
+                    value:'005',
                     disabled:true
                 },{
-                    name:'电子票',
-                    code:'025'
+                    label:'电子票',
+                    value:'025'
                 }],
                 options2:[{
                     label:'增专',
@@ -65,6 +67,8 @@
                     value:'025'
                 }],
                 options3:[],
+                nameInCode:true,
+                options3:[],
                 options4:[],
                 nameKey:'label',
                 codeKey:'value',
@@ -73,19 +77,24 @@
                 loading:false
             }
         },
+        mounted () {
+            setTimeout(_=>{
+                this.options3 = this.options2
+            },1000)
+        },
         methods:{
             changeConsole(e){
                 console.log('e',e)
             },
             filterFn(query,item){
-                return (item.name + item.code).indexOf(query) > -1
+                return (item.label + item.value).indexOf(query) > -1
             },
             remoteFn(query){
                 if (query !== '') {
                     this.loading = true
                     setTimeout(() => {
                         this.loading = false
-                        this.options3 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                        this.options3 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
                     }, 2000)
                 } else {
                     this.options3 = []
@@ -96,7 +105,7 @@
                     this.loading = true
                     setTimeout(() => {
                         this.loading = false
-                        this.options4 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                        this.options4 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
                     }, 2000)
                 } else {
                     this.options4 = []
@@ -111,11 +120,11 @@
 -----
 ### 单选
 可使用 v-model 实现数据的双向绑定。<br/>
-可直接设置 style 来改变输入框的宽度，默认 100%。<br/>
+可直接设置 style 或 width 来改变输入框的宽度，默认 100%。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value" @on-change='changeConsole'  style="width:200px" :options='options'></b-select>
+            <b-select v-model="value" @on-change='changeConsole' :nameInCode='nameInCode'  style="width:200px" :options='options'></b-select>
             <span>{{value}}</span>
         </div>
     </div>
@@ -140,17 +149,17 @@
                 return {
                     value: '',
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -190,17 +199,17 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                     value01: '',
                     value02: '',
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -256,31 +265,31 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                     value2: '',
                     disabled:true,
                     options1:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005',
+                        label:'机动车',
+                        value:'005',
                         disabled:true
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }],
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -298,16 +307,20 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
         <div>
             <b-select 
                 v-model="value3"
+                label='发票类型'
+                width='200'
+                labelWidth='72'
                 :multiple='multiple' 
                 :options='options' 
                 @on-change='changeConsole'
-                style="width:200px" >
+                :nameInCode='nameInCode'>
             </b-select>
             <b-select 
                 v-model="value4" 
-                style="width:200px"
+                label='发票类型'
                 :multiple='multiple' 
-                :options='options' 
+                :options='options'
+                width='200'
                 :autowarp='autowarp'>
             </b-select>
             <span>{{value4}}</span>
@@ -320,17 +333,22 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 
     <template>
         <div>
-            <b-select 
-                v-model="value3" 
+             <b-select 
+                v-model="value3"
+                label='发票类型'
+                width='200'
+                labelWidth='72'
                 :multiple='multiple' 
                 :options='options' 
-                style="width:200px" >
+                @on-change='changeConsole'
+                :nameInCode='nameInCode'>
             </b-select>
             <b-select 
                 v-model="value4" 
-                style="width:200px"
+                label='发票类型'
                 :multiple='multiple' 
-                :options='options' 
+                :options='options'
+                width='200'
                 :autowarp='autowarp'>
             </b-select>
             <span>{{value4}}</span>
@@ -344,17 +362,17 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                     value4: '',
                     autowarp:true,
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -364,7 +382,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 :::
 
 ### 自定义nameKey codeKey
-可直接设置 ```nameKey```\```codeKey``` 的值来从options的各个项目中取值。<br/>
+可直接设置 ```nameKey```、```codeKey``` 的值来从options的各个项目中取值。<br/>
 <div class="example">
     <div class="example-box">
         <div>
@@ -427,7 +445,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value0"  style="width:200px" :clearabled='clearabled' :options='options' ></b-select></b-select>
+            <b-select v-model="value0"  style="width:200px" :clearable='clearable' :options='options' ></b-select></b-select>
             <span>{{value0}}</span>
         </div>
     </div>
@@ -441,7 +459,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
             <b-select 
                 v-model="value0"  
                 style="width:200px" 
-                :clearabled='clearabled' 
+                :clearable='clearable' 
                 :options='options' >
             </b-select>
             <span>{{value0}}</span>
@@ -452,19 +470,19 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
             data () {
                 return {
                     value0: '',
-                    clearabled:true,
+                    clearable:true,
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -529,17 +547,17 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                     value7: [],
                     filterabled:true,
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -548,8 +566,6 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 ```
 :::
 
-<br/>
-<br/>
 可设置```filterFn```函数定义筛选条件。<br/>
 <div class="example">
     <div class="example-box">
@@ -588,23 +604,23 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                     value8: '',
                     filterabled:true,
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             },
             methods:{
                 filterFn(query,item){
-                    return (item.name + item.code).indexOf(query) > -1
+                    return (item.label + item.value).indexOf(query) > -1
                 }
             }
         }
@@ -615,23 +631,39 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 
 ### label样式
 可设置 ```label```，```fixed```设置label的两种样式。<br/>
-fixed为false 的时候可设置labelWidth的值 默认72px<br/>
-fixed为true  默认280px false 默认220px<br/>
+fixed 为false时可设置labelWidth的值 select框的width默认为200<br/>
+可设置通过width来设置带select的样式 fixed为true的时候设置整体 为false的时候仅设置select框的宽度<br/>
 <div class="example">
     <div class="example-box">
         <div>
              <b-select 
                 v-model="value9"  
-                label='姓名'
+                label='发票类型'
                 :fixed='fixed'
-                :disabled='disabled'
+                width='280'
+                :options='options' >
+            </b-select>
+            <b-select 
+                v-model="value10" 
+                label='发票类型'
+                width='217' 
                 :options='options' >
             </b-select>
             <br/>
             <br/>
+             <b-select 
+                v-model="value05"  
+                label='发票类型'
+                :multiple='multiple'
+                :fixed='fixed'
+                width='280'
+                :options='options' >
+            </b-select>
             <b-select 
-                v-model="value10" 
-                label='姓名' 
+                v-model="value06"
+                :multiple='multiple' 
+                label='发票类型'
+                width='217' 
                 :options='options' >
             </b-select>
         </div>
@@ -642,16 +674,35 @@ fixed为true  默认280px false 默认220px<br/>
 ```html
 
     <template>
-        <div>
-            <b-select 
+         <div>
+             <b-select 
                 v-model="value9"  
-                label='姓名'
+                label='发票类型'
                 :fixed='fixed'
+                width='280'
                 :options='options' >
             </b-select>
             <b-select 
                 v-model="value10" 
-                label='姓名' 
+                label='发票类型'
+                width='217' 
+                :options='options' >
+            </b-select>
+            <br/>
+            <br/>
+             <b-select 
+                v-model="value05"  
+                label='发票类型'
+                :multiple='multiple'
+                :fixed='fixed'
+                width='280'
+                :options='options' >
+            </b-select>
+            <b-select 
+                v-model="value06"
+                :multiple='multiple' 
+                label='发票类型'
+                width='217' 
                 :options='options' >
             </b-select>
         </div>
@@ -662,19 +713,21 @@ fixed为true  默认280px false 默认220px<br/>
                 return {
                     value9: '',
                     value10: '',
+                    value05: [],
+                    value06: [],
                     fixed: true,
                     options:[{
-                        name:'增专',
-                        code:'004'
+                        label:'增专',
+                        value:'004'
                     },{
-                        name:'增普',
-                        code:'007'
+                        label:'增普',
+                        value:'007'
                     },{
-                        name:'机动车',
-                        code:'005'
+                        label:'机动车',
+                        value:'005'
                     },{
-                        name:'电子票',
-                        code:'025'
+                        label:'电子票',
+                        value:'025'
                     }]
                 }
             }
@@ -740,17 +793,17 @@ fixed为true  默认280px false 默认220px<br/>
                 value03: '',
                 value04: '',
                 options:[{
-                    name:'增专',
-                    code:'004'
+                    label:'增专',
+                    value:'004'
                 },{
-                    name:'增普',
-                    code:'007'
+                    label:'增普',
+                    value:'007'
                 },{
-                    name:'机动车',
-                    code:'005'
+                    label:'机动车',
+                    value:'005'
                 },{
-                    name:'电子票',
-                    code:'025'
+                    label:'电子票',
+                    value:'025'
                 }],
                 options3:[],
                 options4:[],
@@ -765,7 +818,7 @@ fixed为true  默认280px false 默认220px<br/>
                     this.loading = true
                     setTimeout(() => {
                         this.loading = false
-                        this.options3 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                        this.options3 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
                     }, 2000)
                 } else {
                     this.options3 = []
@@ -776,7 +829,7 @@ fixed为true  默认280px false 默认220px<br/>
                     this.loading = true
                     setTimeout(() => {
                         this.loading = false
-                        this.options4 = [].concat(this.options.filter(item => (item.name + item.code).indexOf(query) > -1))
+                        this.options4 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
                     }, 2000)
                 } else {
                     this.options4 = []
@@ -790,10 +843,9 @@ fixed为true  默认280px false 默认220px<br/>
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |----------|--------|---------- |-------------  |-------- |
-| value    | 指定选中项的 code 值，可以使用 v-model 双向绑定数据。<br/>单选时只接受 String 或 Number，多选时只接受 Array   | String,Number,Array |	-   |     -    |
-| nameInCode | change返回值得类型 <br/>默认false返回单选返回string 多选返回array <br/>true返回[{code:'',name:''}]	|Boolean | `true`、`false` |   false  |
+| value    | 指定选中项的 value 值，可以使用 v-model 双向绑定数据。<br/>单选时只接受 String 或 Number，多选时只接受 Array   | String,Number,Array |	-   |     -    |
+| nameInCode | change返回值得类型 <br/>默认false返回单选返回string 多选返回array <br/>true返回[{value:'',label:''}]	|Boolean | `true`、`false` |   false  |
 | multiple | 是否支持多选	|Boolean | `true`、`false` |   false  |
-| disabled | 是否禁用	|Boolean | `true`、`false` |   false  |
 | disabled | 是否禁用	|Boolean | `true`、`false` |   false  |
 | clearable | 是否可以清空选项	|Boolean | `true`、`false` |   false  |
 | autowarp | 多选的时候是否自动换行	| Boolean | `true`、`false` |   false  |
@@ -801,15 +853,15 @@ fixed为true  默认280px false 默认220px<br/>
 | size | 设置选择器的尺寸 | String  | `small`、`default`、`large` | `default`|
 | placeholder | 选择框默认文字	|String |	-   |     -    |
 | name      | 原生name	| String |	-   |     -    |
-| nameKey      | 要展示的字段的key值	| String |	-   |     name    |
-| codeKey      | 要设为value的字段的key值	| String |	-   |     code    |
+| nameKey      | 要展示的字段的key值	| String |	-   |     label    |
+| codeKey      | 要设为value的字段的key值	| String |	-   |     value    |
 | options      | 传入的下拉列表的数据	| Array |	-   |     -    |
 | className      | 最外层可扩展class	| String |	-   |     -    |
-| width      | 设置select的宽度	| Number |	-   |     -    |
 | filterabled      | 是否支持筛选	| Boolean | `true`、`false` |   false  |
 | notFoundText      | 没有数据的提示	| String | - |   '无匹配数据'  |
 | filterFn      | 筛选函数，filterabled为true时可用	| Function | - |  -  |
 | label      | 设置说明文字 	| String，Number | - |  -  |
+| placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
 | fixed      | 搭配文字的两种样式类型	| Boolean | `true`、`false` |   false  |
 | labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   72  |
 | loading  | 远程加载时的加载状态   | Boolean  |  `true`、`false`  |   false  |
@@ -818,15 +870,15 @@ fixed为true  默认280px false 默认220px<br/>
 ### events
 | 事件名	      | 说明	    | 返回值 |
 |-------------|---------|----------|
-| on-change   | 选中的Option变化时触发，默认返回 [{name,code}] | event |
+| on-change   | 选中的Option变化时触发，默认返回 [{label,value}] | event |
 | on-clear   | 点击清空按钮时触发 | - |
 
 ### options
 | 数据	      | 说明	    |
 |-------------|---------|
 | disabled   | 默认为false  |
-| code   | 默认为为code为key值 可用codeKey修改 |
-| name   | 默认为name为key值 可用nameKey修改 |
+| value   | 默认为为code为key值 可用codeKey修改 |
+| label   | 默认为name为key值 可用nameKey修改 |
 
 ### filterFn
 | 数据	      | 说明	    |

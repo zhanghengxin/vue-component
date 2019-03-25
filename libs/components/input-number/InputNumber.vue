@@ -16,11 +16,14 @@
         :disabled="disabled"
         :readonly="readonly"
         :size="size"
+        :showSuffix="operationShow || !type"
         :suffix="!disabled"
         :prefix="!disabled && !type && !label"
         @on-change="handleChange"
         @on-blur="handleBlur"
         @on-focus="handleFocus"
+        @on-mouseenter="operationShow = true"
+        @on-mouseleave="operationShow = false"
         >
         <template v-if='!disabled && type' slot='suffix'>
             <span @click="up" :class='[prefixCls+`-up`,prefixCls+`-up-border`]'><Icon type='shang'></Icon></span>
@@ -60,8 +63,7 @@ export default {
             default: ''
         },
         labelWidth: {
-            type: Number,
-            default: 36
+            type: Number
         },
         fixed: {
             type: Boolean,
@@ -106,7 +108,8 @@ export default {
     data () {
         return {
             prefixCls,
-            currentValue: 0
+            currentValue: 0,
+            operationShow: false
         }
     },
     created () {
