@@ -51,13 +51,16 @@
                 prefixCls+`-icon-clear`]"
                 @on-click="handleClear">
             </Icon>
-            <label
+            <div
                 ref="label"
                 :class="labelClasses"
                 :style='labelStyles'
                 v-if="label || $slots.label">
                 <slot name="label">{{label}}</slot>
-            </label>
+            </div>
+            <div
+                :class="[prefixCls+`-main`]"
+                :style='inputStyles'>
             <input
                 :id="elementId"
                 :class="inputClasses"
@@ -65,7 +68,6 @@
                 ref="input"
                 :value="currentValue"
                 :name="name"
-                :style='inputStyles'
                 :placeholder="placeholder"
                 :disabled="disabled"
                 :maxlength="maxlength"
@@ -80,6 +82,7 @@
                 @blur="handleBlur"
                 @keyup="handleKeyup"
                 @keydown="handleKeydown"/>
+            </div>
         </template>
         <textarea
             v-else
@@ -223,7 +226,8 @@ export default {
             currentValue: this.value,
             prefixCls: prefixCls,
             textareaStyles: {},
-            labelFocus: false
+            labelFocus: false,
+            inputStyles: {}
         }
     },
     computed: {
@@ -233,8 +237,10 @@ export default {
                 `${prefixCls}-box-${this.size}`,
                 {
                     [`${prefixCls}-error`]: this.error,
+                    [`${prefixCls}-fixed-disabled`]: this.label && this.fixed && this.disabled,
                     [`${prefixCls}-box-clear`]: this.clearable && this.currentValue,
-                    [`${prefixCls}-group`]: this.label && this.fixed,
+                    [`${prefixCls}-group`]: this.label && !this.fixed,
+                    [`${prefixCls}-group-fixed`]: this.label && this.fixed,
                     [`${prefixCls}-box-textarea`]: this.type === 'textarea'
                 }
             ]
@@ -264,35 +270,44 @@ export default {
             ]
         },
         labelStyles () {
-            const {label, fixed, labelWidth} = this
+            const {label, labelWidth} = this
             let style = {}
-            if (label && !fixed && labelWidth) {
+            if (label && labelWidth) {
                 style = {
-                    width: labelWidth && `${labelWidth}px`
+                    width: `${labelWidth}px`
                 }
             }
             return style
         },
         // 整体的input的宽度
         inputBoxStyles () {
-            const {label, fixed, width} = this
             let style = {}
-            if (!label || (label && width && fixed)) {
-                style.width = `${width}px`
-            }
-            return style
-        },
-        // label的时候 fixed为false  input的宽度
-        inputStyles () {
-            const { label, fixed } = this
-            let style = {}
-            if (label && this.width && !fixed) {
-                style.width = `${this.width}px`
-            }
+            style.width = `${this.width}px`
             return style
         }
     },
+    mounted () {
+        if (this.type === 'textarea') {
+            this.resizeTextarea()
+        } else {
+            this.label && this.widthInit()
+        }
+    },
     methods: {
+        widthInit () {
+            const {label, $el} = this
+            let width = ''
+            if (label) {
+                let clientWidth = $el.clientWidth
+                let labelWidth = this.labelWidth || +$el.querySelector(`.${prefixCls}-label`).clientWidth
+                console.log('clientWidth1', clientWidth)
+                console.log('labelWidth1', labelWidth)
+                width = clientWidth - labelWidth - 1
+                this.inputStyles = {
+                    width: width + 'px'
+                }
+            }
+        },
         mouseenterHandle (event) {
             this.$emit('on-mouseenter', event)
         },
@@ -375,9 +390,6 @@ export default {
         value (val) {
             this.setCurrentValue(val)
         }
-    },
-    mounted () {
-        this.resizeTextarea()
     }
 }
 

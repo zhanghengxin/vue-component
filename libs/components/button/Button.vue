@@ -9,25 +9,45 @@
 * @Last Modified time: 2018-11-14 15:32:43
 */
 <template>
-    <button ref="button"
-            :disabled="disabled"
-            @click='handleClick($event)'
-            :class="[bodyCls,customClasses]">
-        <i v-if='loading' class="iconfont icon-loading"></i>
-        <Icon v-if="icon" :type="icon"></Icon>
-        <span>
-            <slot></slot>
-        </span>
+    <a
+        v-if="to"
+        :class="classes"
+        :disabled="disabled"
+        :href="linkUrl"
+        :target="target"
+        @click.exact="handleClickLink($event, false)"
+        @click.ctrl="handleClickLink($event, true)"
+        @click.meta="handleClickLink($event, true)">
+        <svg v-if="loading" class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none"/>
+        </svg>
+        <Icon v-if="icon && !loading" :type="icon"></Icon>
+        <span ref="slot"><slot></slot></span>
+    </a>
+    <button
+        v-else
+        ref="button"
+        :type="htmlType"
+        :class="bodyCls"
+        :disabled="disabled"
+        @click="handleClickLink">
+        <svg v-if="loading" class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none"/>
+        </svg>
+        <Icon v-if="icon && !loading" :type="icon"></Icon>
+        <span ref="slot"><slot></slot></span>
     </button>
 </template>
 
 <script>
 import { prefix, oneOf } from '../../utils/common'
+import mixinsLink from '../../mixins/link'
 import Icon from '../icon'
 
 const prefixCls = prefix + 'button'
 export default {
     name: prefixCls,
+    mixins: [mixinsLink],
     components: {Icon},
     computed: {
         bodyCls () {
@@ -44,9 +64,11 @@ export default {
         }
     },
     props: {
-        disabled: {
-            type: Boolean,
-            default: false
+        type: {
+            validator (value) {
+                return oneOf(value, ['default', 'primary', 'error', 'warning', 'success'])
+            },
+            default: 'default'
         },
         size: {
             validator (value) {
@@ -54,35 +76,19 @@ export default {
             },
             default: 'default'
         },
-        type: {
-            validator (value) {
-                return oneOf(value, ['default', 'primary', 'error', 'warning', 'success'])
-            },
-            default: 'default'
-        },
-        round: {
-            type: Boolean,
-            default: false
-        },
-        plain: {
-            type: Boolean,
-            default: false
-        },
-        loading: {
-            type: Boolean,
-            default: false
-        },
-        circle: {
-            type: Boolean,
-            default: false
-        },
+        disabled: Boolean,
+        round: Boolean,
+        loading: Boolean,
+        circle: Boolean,
         icon: {
             type: String,
             default: ''
         },
-        customClasses: {
-            type: [String, Array],
-            default: ''
+        htmlType: {
+            default: 'button',
+            validator (value) {
+                return oneOf(value, ['button', 'submit', 'reset'])
+            }
         }
     },
     data () {
@@ -95,8 +101,10 @@ export default {
         }
     },
     methods: {
-        handleClick (e) {
-            this.$emit('on-click', e)
+        handleClickLink (event, new_window = false) {
+            this.$emit('on-click', event)
+
+            this.handleCheckClick(event, new_window)
         }
     }
 }
