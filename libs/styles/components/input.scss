@@ -97,7 +97,13 @@ $input-large-font:14px;
 //input基础样式
 .#{$css-prefix-input}-box {
   display: inline-block;
+  vertical-align: middle;
   position: relative;
+  overflow: hidden;
+
+  &-textarea {
+    overflow: inherit;
+  }
 
   //b-input-box：hover 显示clear-icon
   &-clear {
@@ -189,6 +195,14 @@ $input-large-font:14px;
       @include inputIconSize(default, $input-default-size, $input-default-font);
       @include inputIconSize(large, $input-large-size, $input-large-font);
     }
+
+    //Reset height for textarea
+    &-textarea {
+      max-width: 100%;
+      height: auto;
+      min-height: $input-default-size;
+      vertical-align: bottom;
+    }
   }
 
   // error input样式
@@ -196,14 +210,6 @@ $input-large-font:14px;
     .#{$css-prefix-input} {
       @include inputMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
     }
-  }
-
-  //Reset height for textarea
-  textarea.#{$css-prefix-input} {
-    max-width: 100%;
-    height: auto;
-    min-height: $input-default-size;
-    vertical-align: bottom;
   }
 }
 

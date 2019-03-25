@@ -2,8 +2,7 @@
  * Created by gonghuan on 2018/10/9.
  *
  */
-import radio from '&/components/radio'
-import { createTest, createVue, destroyVM } from '../utils'
+import { createVue, destroyVM } from '../utils'
 import {prefix} from '&/utils/common'
 const prefixCls = `${prefix}radio`
 
@@ -13,18 +12,33 @@ describe('radio.vue', () => {
         destroyVM(vm)
     })
     it('checkedValue', () => {
-        vm = createTest(radio, {
-            value: true
+        vm = createVue({
+            template: `
+                <${prefixCls} v-model="test">哈哈</${prefixCls}>
+            `,
+            data () {
+                return {
+                    test: true
+                }
+            }
         }, true)
         let radioElm = vm.$el
-        expect(radioElm.children[0].classList).toContain(`${prefixCls}-checked`)
+        expect(radioElm.children[0].classList[1]).toContain(`${prefixCls}-checked`)
     })
     it('disabled', () => {
-        vm = createTest(radio, {
-            disabled: false
-        }, false)
+        vm = createVue({
+            template: `
+                <${prefixCls} v-model="test" :disabled='disabled'>哈哈</${prefixCls}>
+            `,
+            data () {
+                return {
+                    test: false,
+                    disabled: true
+                }
+            }
+        }, true)
         let radioElm = vm.$el
-        expect(radioElm.children[0].classList).not.toContain(`${prefixCls}-disabled`)
+        expect(radioElm.children[0].classList[1]).toContain(`${prefixCls}-disabled`)
     })
     it('change', done => {
         let result

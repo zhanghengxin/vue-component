@@ -77,7 +77,7 @@ export default {
     .header {
         width: 100%;
         height: 70px;
-        .b-select-selection{
+        .b-select-main{
             border: 0;
         }
         .b-select-focused{
