@@ -29,9 +29,9 @@
                     ></table-cell>
                 </td>
             </table-tr>
-            <tr :key="'expand-'+index" v-if="rowExpanded(row._index)" :class="[preCls + '-expand']">
+            <tr :key="'expand-'+index" v-if="rowExpanded(index)" :class="[preCls + '-expand']">
                 <td :colspan="columns.length" :class="preCls + '-expand-cell'">
-                    <Render :row="row" :render="expandRender" :index="row._index"></Render>
+                    <Render :row="row" :render="expandRender" :index="index"></Render>
                 </td>
             </tr>
         </template>

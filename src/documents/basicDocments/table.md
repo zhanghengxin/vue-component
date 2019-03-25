@@ -23,6 +23,7 @@
 - 拖拽修改列宽
 - 拖拽编辑表格
 - 单元格编辑
+- 多级表头
 
 ### 基础用法
 通过设置`columns`以及`data`来渲染基础的表格
@@ -667,14 +668,14 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border width=1000 :columns='columns7' :data='data6'></b-table>
+           <b-table @on-sort-change="sortChange" border width=1000 :columns='columns7' :data='data6'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-         <b-table border width=1000 :columns='columns7' :data='data6'></b-table>
+         <b-table @on-sort-change="sortChange" border width=1000 :columns='columns7' :data='data6'></b-table>
     </div>
     <script>
         export default {
@@ -752,6 +753,13 @@
                            occupation:'President'
                        }
                    ]
+                }
+            },
+            methods:{
+                sortChange(options){
+                    console.log(options.column,'column')
+                    console.log(options.key,'key')
+                    console.log(options.order,'order')
                 }
             }
     </script>
@@ -1581,7 +1589,8 @@
 ::: code
 ```html
     <div>
-       <b-table show-index border width=1000 :columns='columns11' :data='data11'></b-table>
+        <b-table show-index border width=1000 :columns='columns11' :data='data11'></b-table>
+        <b-table border width=1000 :columns='columns13' :data='data11'></b-table>
     </div>
     <script>
         export default {
@@ -2233,17 +2242,15 @@
     </script>
 
     // render-tabele
-    <template>
-        <b-table
-            class="expend-table"
-            :border="border"
-            :columns='columns'
-            disHover
-            :stripe='stripe'
-            :show-header="showHeader"
-            :data='data'>
-        </b-table>
-    </template>
+    <b-table
+        class="expend-table"
+        :border="border"
+        :columns='columns'
+        disHover
+        :stripe='stripe'
+        :show-header="showHeader"
+        :data='data'>
+    </b-table>
 
     export default {
         name: 'render-table',
@@ -2275,6 +2282,162 @@
             }
         }
     }
+
+```
+:::
+</div>
+
+### 多级表头
+column 设置 children，可以渲染出多级表头<br/>
+注意：不支持在多级表头里面嵌套 fixed 固定列
+
+<div class="example">
+    <div class="example-box">
+        <div>
+             <b-table border width=1000 :columns='columns17' :data='data11'></b-table>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+         <b-table height=200 width=1000 :columns='columns17' :data='data11'></b-table>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    columns17:[
+                        {
+                             title: 'Age',
+                             key: 'age',
+                             width:100,
+                             fixed: 'left',
+                             sortable:true,
+                             filters: [
+                                {
+                                    label: 'Greater than 18',
+                                    value: 1
+                                },
+                                {
+                                    label: 'Less than 18',
+                                    value: 2
+                                }
+                            ],
+                            filterMethod (value, row) {
+                                if (value === 1) {
+                                    return row.age >= 18;
+                                } else if (value === 2) {
+                                    return row.age < 18;
+                                }
+                            }
+                        },
+                        {
+                             title: '测试',
+                             align:'center',
+                             children:[
+                                {
+                                  title: 'Name',
+                                  key: 'name',
+                                  width:200,
+                                  sortable:true
+                                },
+                                {
+                                  title: 'Sex',
+                                  key: 'sex',
+                                  width:200,
+                                  sortable:true
+                                },
+                                {
+                                    title: '合计',
+                                    children:[
+                                      {
+                                        title: 'Hobby',
+                                        key: 'hobby',
+                                        width:100,
+                                        sortable:true
+                                      },
+                                      {
+                                        title: 'id',
+                                        key: 'id',
+                                        width:100
+                                      }
+                                    ]
+                                }
+                             ]
+                        },
+                        {
+                         title: 'Pets',
+                         key: 'pets',
+                         width:100
+                        },
+                        {
+                         title: 'Occupation',
+                         key: 'occupation',
+                         width:100
+                        },
+                        {
+                         title: 'Book',
+                         key: 'book',
+                         width:200
+                        }
+                    ],
+                    data11: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby:'Swimming',
+                            pets:'dog',
+                            occupation:'Doctor',
+                            like:'red',
+                            id:'1',
+                            book:'《贩罪》'
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets:'cat',
+                            hobby:'Swimming',
+                            id:'2',
+                            book:'《霸皇纪》',
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets:'rhizomys',
+                            hobby:'Swimming',
+                            id:'3',
+                            book:'《龙族》',
+                            occupation:'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            sex: '男',
+                            pets:'cat',
+                            hobby:'Swimming',
+                            book:'《卡徒》',
+                            id:'4',
+                            occupation:'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            sex: '男',
+                            book:'《无限道武者路》',
+                            id:'5',
+                            pets:'rhizomys',
+                            hobby:'Thousand-hand Bodhisattva',
+                            occupation:'President'
+                        }
+                    ]
+                }
+            }
+    </script>
 ```
 :::
 </div>
@@ -3239,12 +3402,12 @@
                         width: 40,
                         center:'align',
                         expandRender: (h, params) => {
-                            return h('render-table', {
-                                props: {
-                                    data: params.row.children,
-                                    columns: this.columns16
-                                }
-                            })
+                           return h('render-table', {
+                               props: {
+                                   data: params.row.children,
+                                   columns: this.columns16
+                               }
+                           })
                         }
                     },
                     {
@@ -3305,6 +3468,81 @@
                      width:100
                     }
                 ],
+                columns17:[
+                    {
+                         title: 'Age',
+                         key: 'age',
+                         width:100,
+                         fixed: 'left',
+                         sortable:true,
+                         filters: [
+                            {
+                                label: 'Greater than 18',
+                                value: 1
+                            },
+                            {
+                                label: 'Less than 18',
+                                value: 2
+                            }
+                        ],
+                        filterMethod (value, row) {
+                            if (value === 1) {
+                                return row.age >= 18;
+                            } else if (value === 2) {
+                                return row.age < 18;
+                            }
+                        }
+                    },
+                    {
+                         title: '测试',
+                         align:'center',
+                         children:[
+                            {
+                              title: 'Name',
+                              key: 'name',
+                              width:200,
+                              sortable:true
+                            },
+                            {
+                              title: 'Sex',
+                              key: 'sex',
+                              width:200,
+                              sortable:true
+                            },
+                            {
+                                title: '合计',
+                                children:[
+                                  {
+                                    title: 'Hobby',
+                                    key: 'hobby',
+                                    width:100,
+                                    sortable:true
+                                  },
+                                  {
+                                    title: 'id',
+                                    key: 'id',
+                                    width:100
+                                  }
+                                ]
+                            }
+                         ]
+                    },
+                    {
+                     title: 'Pets',
+                     key: 'pets',
+                     width:100
+                    },
+                    {
+                     title: 'Occupation',
+                     key: 'occupation',
+                     width:100
+                    },
+                    {
+                     title: 'Book',
+                     key: 'book',
+                     width:200
+                    }
+                ],
                 loading:true
             }
         },
@@ -3320,6 +3558,11 @@
             },
             edit (data,index) {
                 this.data5[index].age = new Date()
+            },
+            sortChange(options){
+                console.log(options.column,'column')
+                console.log(options.key,'key')
+                console.log(options.order,'order')
             }
         }
     }
@@ -3366,6 +3609,7 @@
 | filters     |  过滤数据的选项，格式为数组，数组中每项包含 label 和 value 属性，使用过滤，必须同时配置 filterMethod	  |  Array  |-  | -   |
 | filterMethod     |  数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示		  |  Function  | -  | -   |
 | filterMultiple     |  数据过滤的选项是否多选  |  Boolean  | -  | false   |
+| children     |  多级表头配置项，具体见示例  |   Array  | -  | -   |
 
 ### data
 | 属性      | 说明    | 类型      | 可选值       | 默认值       |
@@ -3390,3 +3634,4 @@
 | on-row-dbclick     |  当选中节点时触发   |  `row`: 当前选中的数据  |
 | on-sort-change     |  当选中节点时触发   |  `column`: 当前列数据 <br> `key`: 排序依据的指标 <br> `order`: 排序的顺序，值为 asc 或 desc|
 | on-filter-change	    |  筛选条件发生变化时触发	   |  当前列数据 |
+| on-expand-change	    |  扩展状态改变时触发	   |  `row`: 当前扩展的数据<br> `status`: 展开状态 |

@@ -7,6 +7,8 @@
                 :header-style="fixedTableStyle"
                 :pre-cls="preCls"
                 :data="data"
+                :column-rows="columnRows"
+                :fixed-column-rows="fixedColumnRows"
                 :draggable="draggable"
                 :resizeable="resizeable"
                 :dynamicable="dynamicable"
@@ -37,6 +39,8 @@ export default {
         preCls: String,
         bodyStyle: Object,
         fixedColumns: Array,
+        fixedColumnRows: Array,
+        columnRows: Array,
         columns: Array,
         dynamicable: Boolean,
         resizeable: Boolean,
