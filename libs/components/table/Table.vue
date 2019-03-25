@@ -442,6 +442,7 @@ export default {
                 row._index = index
                 row._sortType = row.sortType || ''
                 row._visible = true
+                row._filterChecked = []
             })
             return result
         },
@@ -637,7 +638,7 @@ export default {
             }
             if (column.sortable) {
                 if (options.type === 'normal') {
-                    this.formatData = this.buildData()
+                    this.formatData = this.makeDataWithFilter()
                 } else {
                     this.formatData = this.sortData(this.formatData, options.type, options.index)
                 }
@@ -786,6 +787,13 @@ export default {
             let filterData = this.buildData()
             this.formatData = this.filterData(filterData, column)
             this.$emit('on-filter-change', column)
+        },
+        makeDataWithFilter () {
+            let data = this.buildData()
+            this.cloneColumns.forEach(col => {
+                data = this.filterData(data, col)
+            })
+            return data
         },
         filterData (data, column) {
             return data.filter((row) => {
