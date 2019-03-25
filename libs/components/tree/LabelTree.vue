@@ -1,7 +1,7 @@
 <template>
-    <Select v-clickoutside="closePopup"
-            @on-click="clickPopup"
+    <Select @on-click="clickPopup"
             @on-clear="clearValues"
+            @on-outside="closePopup"
             :multiple='showCheckbox'
             :label='label'
             :fixed='fixed'
@@ -185,6 +185,7 @@ export default {
                         this.getTreeValues()
                     })
                 }
+                console.log(this.data, 'a')
             }
         }
     },
@@ -200,6 +201,8 @@ export default {
     },
     mounted () {
         if (this.showCheckbox) this.getTreeValues()
+        console.log(this.data, 'asd')
+        console.log(this.defaultOpt, 'aaa')
     },
     methods: {
         clickPopup () {
