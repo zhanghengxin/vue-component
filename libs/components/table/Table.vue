@@ -161,6 +161,7 @@ export default {
             showResizeBorder: false,
             modalShow: false,
             dynamicColumns: [],
+            isAddIndex: false,
             scrollBarWidth: getScrollBarSize()
         }
     },
@@ -299,6 +300,7 @@ export default {
             handler () {
                 const cols = this.makeColumnsId(this.columns, this.showIndex)
                 this.cloneColumns = this.buildColumns(cols)
+                console.log(this.cloneColumns)
                 this.handleResize()
             },
             deep: true
@@ -431,7 +433,7 @@ export default {
         },
         buildColumns (cols) {
             let columns = deepCopy(getAllColumns(cols))
-            let indexArr = columns.filter((item) => (item.key === '_indexNo'))
+            let indexArr = columns.filter((item) => (item.key === '_indexNo' && !item.fixed))
             let fixLeftArr = columns.filter((item) => (item.fixed === 'left'))
             let fixRightArr = columns.filter((item) => (item.fixed === 'right'))
             let normalArr = columns.filter((item) => (!item.fixed && item.key !== '_indexNo'))

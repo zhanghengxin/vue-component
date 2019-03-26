@@ -1,7 +1,7 @@
 <template>
-    <Select v-clickoutside="closePopup"
-            @on-click="clickPopup"
+    <Select @on-click="clickPopup"
             @on-clear="clearValues"
+            @on-outside="closePopup"
             :multiple='showCheckbox'
             :label='label'
             :fixed='fixed'

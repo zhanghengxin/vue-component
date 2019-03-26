@@ -411,6 +411,7 @@ export default {
             }
             this.broadcastPopperUpdate()
             this.show = false
+            this.$emit('on-outside')
         },
         onOptionClick (option) {
             const {multiple, filterabled, values} = this
