@@ -1,6 +1,7 @@
 $css-prefix-tree: $css-prefix + 'tree';
 
 .#{$css-prefix-tree} {
+  font-size: 14px;
   position: relative;
   cursor: default;
   background: #fff;

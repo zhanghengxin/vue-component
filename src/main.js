@@ -4,7 +4,6 @@ import Vue from 'vue'
 import App from './App'
 import codeShow from './components/CodeShow.vue'
 import ColorShow from './components/ColorShow.vue'
-import RenderTable from './components/RenderTable.vue'
 import router from './router'
 import bwUi from '../libs/index'
 
@@ -16,7 +15,6 @@ Vue.use(businessUI)
 Vue.use(bwUi)
 Vue.component('code-show', codeShow)
 Vue.component('color-show', ColorShow)
-Vue.component('render-table', RenderTable)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

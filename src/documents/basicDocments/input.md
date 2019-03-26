@@ -55,7 +55,7 @@
                   </div>
               </b-input>
               <b-input v-model="value0" placeholder="请输入..." :width='200' error='error'></b-input>
-              <span>{{value}}</div>
+              <span>{{value}}</span>
         </div>
     </div>
 </div>
@@ -70,7 +70,7 @@
             </div>
         </b-input>
         <b-input v-model="value0" placeholder="请输入..." :width='200' error='error'></b-input>
-        <span>{{value}}</div>
+        <span>{{value}}</span>
     </template>
     <script>
         export default {
@@ -210,9 +210,8 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 :::
 
 ### label属性的两种样式
-通过设置 `label` 属性 设置带文字描述的input组合组件 <br/>
-label文字大小可根据input的size变化<br/>
-通过设置 `labelWidth` 属性可设置label文字所占的宽度 labelWidth默认36px 可通过width设置input框```(只设置input框)```的宽度<br/>
+通过设置```label```、```fixed```属性 设置带文字描述的input组合组件 <br/>
+可设置通过width来设置select的宽度，labelWidth设置label文字的宽度（不设置labelWidth时，文字宽度默认自适应）
 <div class="example">
     <div class="example-box">
         <div>

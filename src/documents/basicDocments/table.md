@@ -2102,6 +2102,7 @@
     }
     </style>
     <script>
+        import RenderTable from '../../components/RenderTable.vue'
         export default {
             data () {
                 return {
@@ -2171,7 +2172,7 @@
                             width: 40,
                             center:'align',
                             expandRender: (h, params) => {
-                                return h('render-table', {
+                                return h(RenderTable, {
                                     props: {
                                         data: params.row.children,
                                         columns: this.columns16
@@ -2443,6 +2444,7 @@ column 设置 children，可以渲染出多级表头<br/>
 </div>
 
 <script>
+    import RenderTable from '../../components/RenderTable.vue'
     export default {
         data () {
             return {
@@ -3402,7 +3404,7 @@ column 设置 children，可以渲染出多级表头<br/>
                         width: 40,
                         center:'align',
                         expandRender: (h, params) => {
-                           return h('render-table', {
+                           return h(RenderTable, {
                                props: {
                                    data: params.row.children,
                                    columns: this.columns16

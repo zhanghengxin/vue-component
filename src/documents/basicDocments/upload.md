@@ -56,7 +56,7 @@ action指的是上传路径，上传方式默认为post，无法修改 <br>
     “tip”（存放提示）<br>
 <div class='example'>
     <div class='example-box'>
-        <bw-upload
+        <b-upload
             action="//jsonplaceholder.typicode.com/posts/"
             >
             <b-button  size="small" slot="uploadTitle" type="default">
@@ -64,20 +64,20 @@ action指的是上传路径，上传方式默认为post，无法修改 <br>
             上传文件
             </b-button>
             <div slot="tip">这里可以写你的提醒事项：请上传 hkk</div>
-        </bw-upload>
+        </b-upload>
     </div>
 </div>
 
 ::: code
 ```html
-    <bw-upload
+    <b-upload
         action="//jsonplaceholder.typicode.com/posts/"
         >
         <b-button  size="small" slot="uploadTitle" type="default">
         <b-icon type="fasong" size=12></b-icon>
         上传文件
         </b-button>
-    </bw-upload>
+    </b-upload>
 ```
 :::
 
@@ -86,7 +86,7 @@ action指的是上传路径，上传方式默认为post，无法修改 <br>
 使用 “multiple=true” 即可支持多文件上传
 <div class='example'>
     <div class='example-box'>
-        <bw-upload
+        <b-upload
             :multiple=true
             action="//jsonplaceholder.typicode.com/posts/"
             >
@@ -94,13 +94,13 @@ action指的是上传路径，上传方式默认为post，无法修改 <br>
             <b-icon type="fasong" size=12></b-icon>
             上传文件
             </b-button>
-        </bw-upload>
+        </b-upload>
     </div>
 </div>
 
 ::: code
 ```html
-    <bw-upload
+    <b-upload
         :multiple=true
         action="//jsonplaceholder.typicode.com/posts/"
         >
@@ -108,7 +108,7 @@ action指的是上传路径，上传方式默认为post，无法修改 <br>
         <b-icon type="fasong" size=12></b-icon>
         上传文件
         </b-button>
-    </bw-upload>
+    </b-upload>
 ```
 :::
 
@@ -118,7 +118,7 @@ action指的是上传路径，上传方式默认为post，无法修改 <br>
 其中，“status=0” 是未上传。
 <div class='example'>
     <div class='example-box'>
-        <bw-upload
+        <b-upload
             action="//jsonplaceholder.typicode.com/posts/"
         >
             <b-button size="small" slot="uploadTitle" type="default">上传文件</b-button>
@@ -129,7 +129,7 @@ action指的是上传路径，上传方式默认为post，无法修改 <br>
 
 ::: code
 ```html
-    <bw-upload
+    <b-upload
         action="//jsonplaceholder.typicode.com/posts/"
     >
         <b-button size="small" slot="uploadTitle" type="default">上传文件</b-button>
@@ -145,7 +145,7 @@ action指的是上传路径，上传方式默认为post，无法修改 <br>
 需要注意的是，当你使用他们的时候，为了更友好的用户体验，请声明相对应的方法【“format”: onFormatError, “maxSize”: onExceededSize】，示例如下：
 <div class='example'>
     <div class='example-box'>
-        <bw-upload
+        <b-upload
             :multiple=true
             action="//jsonplaceholder.typicode.com/posts/"
             :format="format1"
@@ -157,13 +157,13 @@ action指的是上传路径，上传方式默认为post，无法修改 <br>
             <b-icon type="fasong" size=12></b-icon>
             上传文件
             </b-button>
-        </bw-upload>
+        </b-upload>
     </div>
 </div>
     
 ::: code
 ```html
-    <bw-upload
+    <b-upload
         :multiple=true
         action="//jsonplaceholder.typicode.com/posts/"
         :format="format1"
@@ -175,7 +175,7 @@ action指的是上传路径，上传方式默认为post，无法修改 <br>
         <b-icon type="fasong" size=12></b-icon>
         上传文件
         </b-button>
-    </bw-upload>
+    </b-upload>
     <script>
         export default {
             data () {
@@ -202,27 +202,27 @@ action指的是上传路径，上传方式默认为post，无法修改 <br>
 通过“href” 指定地址， “download” 指定下载名字
 <div class='example'>
     <div class='example-box'>
-        <bw-upload
+        <b-upload
             :multiple=true
             action="//jsonplaceholder.typicode.com/posts/"
             :onExceededSize='onExceededSize'
             :onFormatError='onFormatError'
             >
             <a slot='template' :href="url + 'http://localhost:8081/app.js'" download='index'>点击下载模板</a>
-        </bw-upload>
+        </b-upload>
     </div>
 </div>
 
 ::: code
 ```html
-    <bw-upload
+    <b-upload
         :multiple=true
         action="//jsonplaceholder.typicode.com/posts/"
         :onExceededSize='onExceededSize'
         :onFormatError='onFormatError'
         >
         <a slot='template' :href="url + 'http://localhost:8081/app.js'" download='index'>点击下载模板</a>
-    </bw-upload>
+    </b-upload>
     <script>
         export default {
             data () {
