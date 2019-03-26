@@ -1,0 +1,277 @@
+@import "../common/color";
+
+$icon: "menu-pre-icon";
+$menu-prefix-cls: "#{$css-prefix}menu";
+$select-dropdown-prefix-cls: "#{$menu-prefix-cls}-drop-list";
+$menu-item-prefix-cls: "#{$menu-prefix-cls}-item";
+$menu-item-dot: "#{$menu-prefix-cls}-item-dot";
+$menu-item-disabled: "#{$menu-item-prefix-cls}-disabled";
+$menu-item-un-disabled: "#{$menu-item-prefix-cls}-un-disabled";
+$menu-submenu: "#{$menu-prefix-cls}-submenu";
+$menu-submenu-disabled: "#{$menu-prefix-cls}-submenu-disabled";
+$menu-submenu-un-disabled: "#{$menu-prefix-cls}-submenu-un-disabled";
+$menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu} .#{$select-dropdown-prefix-cls} .#{$menu-item-prefix-cls}";
+
+.#{$menu-dropdown-item-prefix-cls} {
+  padding: 7px 16px 8px;
+}
+
+.#{$menu-prefix-cls} {
+  display: block;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  list-style: none;
+  position: relative;
+
+
+  &-item {
+    display: block;
+    outline: none;
+    list-style: none;
+    font-size: 12px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  /***水平方向的样式开始***/
+  &-horizontal {
+    height: 70px;
+    line-height: 70px;
+    @include _background($Primary);
+
+    .#{$icon} {
+      font-size: 16px !important;
+      vertical-align: text-bottom;
+    }
+  }
+
+  &-horizontal &-item {
+    color: $Content;
+    font-size: 12px;
+    .#{$icon} {
+      margin-right: 4px;
+    }
+  }
+
+  &-horizontal &-item,
+  &-horizontal &-submenu {
+    font-size: 14px;
+    float: left;
+    padding: 0 10px;
+    position: relative;
+    cursor: pointer;
+    z-index: 3;
+  }
+
+  &-horizontal &-submenu {
+    height: 70px;
+    width: auto;
+    color: $white;
+    .#{$menu-submenu}-title {
+      opacity: 0.7;
+      text-align: center;
+    }
+    &-active, &:hover {
+      .#{$menu-submenu}-title {
+        opacity: 1;
+        border-bottom: 4px solid $LightPrimary;
+        box-sizing: border-box;
+        height: inherit;
+      }
+    }
+  }
+
+  &-horizontal > &-item {
+    height: 70px;
+    width: auto;
+    opacity: 0.7;
+    color: $white;
+    text-align: center;
+    &-active, &:hover {
+      opacity: 1;
+      .item-solt {
+        border-bottom: 4px solid $LightPrimary;
+        box-sizing: border-box;
+        display: inline-block;
+        height: 70px;
+      }
+    }
+  }
+
+  &-horizontal > * &-item {
+    &-active, &:hover {
+      @include _color($Primary);
+      @include _background($Background);
+    }
+  }
+
+  &-horizontal &-submenu .#{$select-dropdown-prefix-cls} {
+    min-width: 100%;
+    max-height: none;
+    width: inherit;
+    overflow: auto;
+    margin: 5px 0;
+    padding: 5px 0;
+    background-color: #fff;
+    box-sizing: border-box;
+    position: absolute;
+    top: 45px;
+    border-radius: 4px;
+    box-shadow: 0 0 6px 0 rgba(73, 80, 96, 0.20);
+    .#{$menu-prefix-cls}-item {
+      height: auto;
+      line-height: normal;
+      border-bottom: 0;
+      float: none;
+    }
+  }
+  /***水平方向的样式结束***/
+
+  /***垂直方向的样式开始***/
+  /***第一层开始***/
+  &-vertical > &-item,
+  &-vertical &-submenu-title {
+    @include _background($Background);
+    font-size: 14px;
+    @include _color($Title);
+    padding: 10px 24px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+  }
+  &-vertical .#{$icon} {
+    position: absolute;
+    left: 21px;
+    top: 13px;
+  }
+
+  &-vertical .#{$menu-item-disabled}{
+    background-color: $Disabled !important;
+  }
+
+  &-vertical &-opened > &-submenu-title {
+    font-size: 14px;
+    color: $Title;
+    border-bottom: $Divider 1px solid;
+    font-weight: bold;
+    .#{$icon} {
+      color: $Primary !important
+    }
+  }
+  /***第一层结束***/
+
+  /*****第二层开始****/
+  &-vertical &-submenu {
+    .#{$icon} {
+      font-size: 12px !important;
+    }
+    .menu-arrow {
+      float: right;
+      line-height: 20px;
+      color: $Border;
+    }
+    .#{$menu-item-prefix-cls},
+    .#{$menu-submenu} .#{$menu-submenu}-title {
+      color: $Sub;
+      font-size: 12px;
+      background-color: $Background;
+    }
+    .#{$menu-submenu}.#{$menu-prefix-cls}-opened .#{$menu-submenu}-title {
+      color: $Content;
+    }
+
+    &-nested {
+      padding-left: 20px;
+    }
+
+    .#{$menu-prefix-cls}-item {
+      padding-left: 43px;
+    }
+  }
+
+  &-vertical > &-submenu > .#{$menu-submenu}-title {
+    .#{$icon} {
+      font-size: 14px !important;
+    }
+  }
+  /*****第二层结束****/
+
+  /*****第三层开始****/
+  &-vertical &-submenu &-submenu {
+    .#{$menu-prefix-cls}-item {
+      .item-solt {
+        .#{$menu-item-dot} {
+          display: inline-block;
+          border-radius: 51%;
+          border: $SubContent 3px solid;
+          content: "";
+          margin-right: 13px;
+          margin-bottom: 1px;
+          margin-left: 3px;
+        }
+        .#{$icon} {
+          position: relative;
+          left: 0px;
+          top: 0px;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  /*****第三层结束****/
+
+  &-vertical &-item-group {
+    position: relative;
+    &-title {
+      color: $Sub;
+      font-size: 12px;
+      @include _background($Background);
+      height: 40px;
+      line-height: 40px;
+      padding-left: 28px;
+      border-bottom: $Divider 1px solid;
+      border-top: $Divider 1px solid;
+      .#{$icon} {
+        top:14px;
+      }
+    }
+  }
+
+  &-vertical &-item {
+    padding: 10px 24px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  &-vertical {
+    .#{$menu-item-prefix-cls}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu}-title {
+      &:hover {
+        color: $Primary !important;
+        background-color: rgba(0, 121, 204, 0.10) !important;
+        .item-solt .#{$menu-item-dot} {
+          @include _borderColor($Primary);
+        }
+      }
+    }
+    .#{$menu-item-prefix-cls}.#{$menu-item-un-disabled}.#{$menu-item-prefix-cls}-active {
+      color: $Primary !important;
+      background-color: rgba(0, 121, 204, 0.10) !important;
+      .item-solt .#{$menu-item-dot} {
+        @include _borderColor($Primary);
+
+      }
+    }
+  }
+
+  &-vertical &-submenu-title-icon {
+    float: right;
+    position: relative;
+    top: 4px;
+  }
+
+  /***垂直方向的样式结束***/
+}

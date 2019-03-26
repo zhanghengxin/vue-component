@@ -1,0 +1,118 @@
+$css-prefix-transfer: $css-prefix + 'transfer';
+
+.#{$css-prefix-transfer} {
+  position: relative;
+  line-height: 1.5;
+  &-list {
+    display: inline-block;
+    width: 180px;
+    height: 210px;
+    font-size: 14px;
+    vertical-align: middle;
+    position: relative;
+    padding-top: 35px;
+    &-with-footer {
+      padding-bottom: 35px;
+    }
+    &-header {
+      padding: 8px 16px;
+      @include _color($Content);
+      @include _background($Background);
+      border: 1px solid $Border;
+      border-bottom: 1px solid $Border;
+      border-radius: 6px 6px 0 0;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+      &-title {
+        cursor: pointer;
+      }
+      & > span {
+        padding-left: 4px;
+      }
+      &-count {
+        margin: 0 !important;
+        float: right;
+      }
+    }
+    &-body {
+      height: 100%;
+      border: 1px solid inherit;
+      @include _borderColor($Border);
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      position: relative;
+      overflow: hidden;
+      &-with-search {
+        padding-top: 34px;
+      }
+      &-with-footer {
+        border-radius: 0;
+      }
+    }
+    &-content {
+      height: 100%;
+      padding: 4px 0;
+      overflow: auto;
+      &-item {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin: 0;
+        line-height: normal;
+        padding: 7px 16px;
+        clear: both;
+        @include _color($Content);
+        font-size: 12px;
+        list-style: none;
+        cursor: pointer;
+        transition: background .2s ease-in-out;
+        &:hover {
+          @include _background($Divider);
+        }
+        & > span {
+          padding-left: 4px;
+        }
+      }
+      &-not-found {
+        display: none;
+        text-align: center;
+        @include _color($SubContent);
+      }
+      &-not-found:only-child {
+        margin-top: 4px;
+        display: block;
+      }
+    }
+    &-body-with-search &-content {
+      padding: 6px 0 0;
+    }
+    &-body-search-wrapper {
+      padding: 8px 8px 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    &-search {
+      position: relative;
+    }
+    &-footer {
+      border: 1px solid $Border;
+      border-top: none;
+      border-radius: 0 0 4px $Border;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+  .#{$css-prefix-transfer}-operation {
+    display: inline-block;
+    margin: 0 16px;
+    vertical-align: middle;
+  }
+}

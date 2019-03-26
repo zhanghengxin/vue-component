@@ -1,0 +1,28 @@
+$css-prefix-circle: $css-prefix + 'circle';
+
+.#{$css-prefix-circle}{
+    display: inline-block;
+    &-foreigntext {
+        position: absolute;
+        top:50%;
+        left:50%;
+        width:100%;
+        transform:translate(-50%,-50%);
+        text-align: center;
+    }
+    &-textc{
+        @include _color($Content);
+    }
+    &-strokec{
+        stroke: #eceef2;
+    }
+    &-essco{
+        stroke: $Primary;
+    }
+    &-secco{
+        stroke: $Success;
+    }
+    &-neuco{
+        stroke: $Title;
+    }
+}

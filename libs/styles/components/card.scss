@@ -1,0 +1,52 @@
+$css-prefix-card: $css-prefix + 'card';
+.#{$css-prefix-card}-wrapper {
+    @include _background($white);
+    border-radius: 4px;
+    font-size: 14px;
+    position: relative;
+    &:hover {
+        box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+        @include _borderColor($Border);
+    }
+    &.#{$css-prefix-card}-dis-hover {
+        box-shadow: none;
+    }
+    .#{$css-prefix-card}-header {
+        border-bottom: 1px solid $Border;
+        padding: 14px 16px;
+
+        .#{$css-prefix-card}-header-inner {
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
+            font-size: 14px;
+            @include _color($Title);
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            &.span {
+                vertical-align:middle;
+            }
+        }
+    }
+
+    .#{$css-prefix-card}-body {
+        padding: 16px;
+    }
+
+    .#{$css-prefix-card}-extra {
+        position: absolute;
+        right: 16px;
+        top: 14px;
+    }
+}
+
+.#{$css-prefix-card}-border {
+    border: 1px solid inherit;
+    @include _borderColor($Border);
+}
+
+.#{$css-prefix-card}-shadow {
+    box-shadow: 0 1px 6px rgba(0,0,0,.2);
+}

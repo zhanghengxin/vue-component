@@ -1,0 +1,15 @@
+
+$css-prefix-back-top: $css-prefix + 'back-top';
+
+.#{$css-prefix-back-top}{
+  padding: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.5;
+  @include _background($Primary);
+  @include _color($white);
+  text-align: center;
+  border-radius: 2px;
+  position: fixed;
+}
+

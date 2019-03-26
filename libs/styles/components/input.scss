@@ -1,0 +1,251 @@
+/**
+ * input scss
+ * author ganbowen
+ * created 2018/10/14 17:35:46
+ */
+
+$css-prefix-input: $css-prefix+'input';
+$css-prefix-input-icon: $css-prefix-input+'-icon';
+$input-small-size:24px;
+$input-default-size:32px;
+$input-large-size:40px;
+$input-small-font:12px;
+$input-default-font:12px;
+$input-large-font:14px;
+
+//input 的hover focus 等效果
+@mixin inputMockClass($color, $shadowColor) {
+  &:hover {
+    border-color: $color;
+  }
+
+  &:focus {
+    border-color: $color;
+    box-shadow: $shadowColor;
+  }
+
+  &:disabled {
+    background-color: $Disabled;
+    cursor: not-allowed;
+  }
+
+  &:disabled:hover {
+    border-color: $Border;
+  }
+}
+
+@mixin labelMockClass($color, $shadowColor) {
+  &:hover {
+    border-color: $color;
+  }
+
+  &.focus {
+    border-color: $color;
+    box-shadow: $shadowColor;
+  }
+
+  .#{$css-prefix-input}:focus {
+    box-shadow: none;
+    outline: none;
+    border-color: $Border;
+  }
+}
+
+// input 的icon配合时的padding
+@mixin inputSize($type, $input-size, $input-padding, $input-font-size) {
+  &-#{$type} {
+    .#{$css-prefix-input} {
+      height: $input-size;
+      padding: $input-padding;
+      font-size: $input-font-size;
+
+      &-prefix {
+        padding-left: $input-size + 4px;
+      }
+
+      &-suffix {
+        padding-right: $input-size + 4px;
+      }
+
+      &-label {
+        font-size: $input-font-size;
+      }
+    }
+  }
+}
+
+// icon 的大小
+@mixin inputIconSize($type, $icon-size, $fontSize) {
+  &-#{$type} {
+    .icon {
+      font-size: $fontSize;
+    }
+
+    width: $icon-size;
+    line-height: $icon-size - 2px;
+  }
+}
+
+@mixin borderTrans() {
+  border: 1px solid $Border;
+  border-radius: 4px;
+  transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+//input 组件
+//input基础样式
+.#{$css-prefix-input}-box {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  overflow: hidden;
+
+  &-textarea {
+    overflow: inherit;
+  }
+
+  //b-input-box：hover 显示clear-icon
+  &-clear {
+    &:hover {
+      .#{$css-prefix-input-icon}-clear {
+        display: inline-block;
+      }
+
+      .#{$css-prefix-input}-noclear {
+        display: none;
+      }
+    }
+  }
+
+  @include inputSize(small, $input-small-size, 4px 8px, $input-small-font);
+  @include inputSize(default, $input-default-size, 8px, $input-default-font);
+  @include inputSize(large, $input-large-size, 12px 8px, $input-large-font);
+
+
+
+  .#{$css-prefix-input} {
+    display: table-cell;
+    width: 100%;
+    line-height: 1.5;
+    font-size: 12px;
+    color: $Content;
+    background: $white;
+    cursor: text;
+    outline: none;
+    margin: 0;
+    box-sizing: border-box;
+    vertical-align: middle;
+    @include borderTrans();
+    @include inputMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
+    @include placeholder($SubContent);
+    //去掉IE的默认清空与小眼睛 icon
+
+    //input label样式
+    &-label {
+      display: table-cell;
+      word-break: keep-all;
+      white-space: nowrap;
+      vertical-align: middle;
+      color: #495060;
+      padding: 0 7px;
+      text-align: center;
+      box-sizing: border-box;
+
+      &-box {
+        display: table-cell;
+        text-align: center;
+        background-color: $Background;
+        border-right: 1px solid $Border;
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+        white-space: nowrap;
+        vertical-align: middle;
+      }
+    }
+
+    //icon样式
+    &-icon {
+      position: absolute;
+      top: 1px;
+      z-index: 3;
+      text-align: center;
+      height: calc(100% - 2px);
+
+
+      &-prefix {
+        left: 1px;
+      }
+
+      &-suffix {
+        right: 1px;
+      }
+
+      &-clear {
+        display: none;
+        z-index: 3;
+        color: #666;
+        opacity: .7;
+        cursor: pointer;
+      }
+
+      @include inputIconSize(small, $input-small-size, $input-small-font);
+      @include inputIconSize(default, $input-default-size, $input-default-font);
+      @include inputIconSize(large, $input-large-size, $input-large-font);
+    }
+
+    //Reset height for textarea
+    &-textarea {
+      max-width: 100%;
+      height: auto;
+      min-height: $input-default-size;
+      vertical-align: bottom;
+    }
+  }
+
+  // error input样式
+  &.#{$css-prefix-input}-error {
+    .#{$css-prefix-input} {
+      @include inputMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
+    }
+  }
+}
+
+.#{$css-prefix-input}-fixed-disabled {
+  background: $Disabled;
+  border-color: $Border !important;
+}
+
+.#{$css-prefix-input}-group {
+  .#{$css-prefix-input}-main {
+    display: table-cell;
+  }
+}
+
+// input label组合 固定长度label input的宽度自适应
+.#{$css-prefix-input}-group-fixed {
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  @include borderTrans();
+  @include labelMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
+
+  .#{$css-prefix-input} {
+    border: 0;
+    width: 100%;
+
+    &-main {
+      display: table-cell;
+    }
+  }
+
+  &.#{$css-prefix-input}-error {
+    @include labelMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
+  }
+
+  &.#{$css-prefix-input}-box {
+    @include inputSize(small, $input-small-size - 2, 4px 8px, $input-small-font);
+    @include inputSize(default, $input-default-size - 2, 8px, $input-default-font);
+    @include inputSize(large, $input-large-size - 2, 12px 8px, $input-large-font);
+  }
+}

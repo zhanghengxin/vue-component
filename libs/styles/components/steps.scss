@@ -1,0 +1,328 @@
+/**
+ * @author 靳宏灿
+ * @date 2018/9/10
+ * @Description: steps组件的样式
+*/
+@import "../common/color";
+@import "../common/prefix";
+
+/*********正常情况下的数据**************/
+$normal: 24px; //圆形的高宽
+$normalFontSize: 14px; //字体大小
+$normalContentPaddingLeft: 28px; //contend距离左侧向内缩进距离
+
+/********small类型下的数据**************/
+$small: 18px; //圆形的高宽
+$smallFontSize: 12px; //字体大小
+$smallContentPaddingLeft: 22px; //contend距离左侧向内缩进距离
+
+/*******其他********/
+$marginLength: 5px; //距离下测距离
+$css-prefix-step: $css-prefix + 'step';
+
+$processPointColor: $white;
+$processPointBackgroundColor: $LightPrimary;
+$processPointBorderColor: $LightPrimary;
+$processTailColor: $SubContent;
+$processTitleColor: $Title;
+$processContentColor: $Title;
+
+/********正常的size下steps组件区域的css开始*********/
+.#{$css-prefix-step}-area.#{$css-prefix-step}-area-horizontal {
+  margin-top: $marginLength;
+  margin-bottom: $marginLength;
+  display: block;
+  width: 100%;
+  /************单个step节点的区域的css开始*******************/
+  .#{$css-prefix-step}-item {
+    display: inline-block;
+    position: relative;
+    line-height: $normal;
+    vertical-align: top;
+
+    // step组件的展示区域（线，title，content）
+    .#{$css-prefix-step}-main {
+      display: inline-block;
+      background: $white;
+      position: relative;
+      //步骤条的节点
+      .#{$css-prefix-step}-point {
+        width: $normal;
+        height: $normal;
+        position: relative;
+        line-height: $normal;
+        font-size: $normalFontSize;
+        display: inline-block;
+        border: 1px $LightPrimary solid;
+        border-radius: 50%;
+        text-align: center;
+        vertical-align: middle;
+        z-index: 2;
+        .b-icon {
+          font-size:16px;
+          position: absolute;
+          left: 3px;
+          top: 4px;
+        }
+      }
+      //不带框的图标区域
+      .#{$css-prefix-step}-point.#{$css-prefix-step}-point-icon-area {
+        width: $normal;
+        height: $normal;
+        position: relative;
+        line-height: $normal;
+        font-size: $normalFontSize;
+        border: none;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        z-index: 2;
+        .b-icon {
+          font-size:16px;
+          position: absolute;
+          left: 5px;
+          top: 5px;
+        }
+      }
+      // step的title部分
+      .#{$css-prefix-step}-title {
+        display: inline-block;
+        @include _color($SubContent);
+        text-align: center;
+        z-index: 2;
+      }
+    }
+    //步骤条的线
+    .#{$css-prefix-step}-tail {
+      width: 100%;
+      display: block;
+      position: absolute;
+      left: 0;
+      z-index: 0;
+      top: $normal/2;
+      height: 1px;
+      border-top: 1px $LightPrimary solid;
+    }
+    // step的content部分
+    .#{$css-prefix-step}-content {
+      width: 100%;
+      word-wrap: break-word;
+      padding-left: $normalContentPaddingLeft;
+      font-size: $smallFontSize;
+    }
+  }
+  /************单个step节点的区域的css结束*******************/
+
+}
+
+/***********纵向的steps组件的样式开始************/
+.#{$css-prefix-step}-area.#{$css-prefix-step}-area-vertical {
+  display: inline-block;
+  /************单个step节点的区域的css开始*******************/
+  .#{$css-prefix-step}-item {
+    display: block;
+    position: relative;
+    //步骤条的线
+    .#{$css-prefix-step}-tail {
+      position: absolute;
+      left: 11px;
+      height: 100%;
+      width: 1px;
+      border: 1px $LightPrimary solid;
+      bottom: 0px;
+    }
+    // step组件的展示区域（线，title，content）
+    .#{$css-prefix-step}-main {
+      display: block;
+      height: $normal;
+      //步骤条的节点
+      .#{$css-prefix-step}-point {
+        width: $normal;
+        position: relative;
+        height: $normal;
+        line-height: $normal;
+        font-size: $normalFontSize;
+        border: 1px $LightPrimary solid;
+        border-radius: 50%;
+        text-align: center;
+        display: inline-block;
+        z-index: 5;
+        .b-icon {
+          font-size: 16px;
+          position: absolute;
+          left: 3px;
+          top: 4px;
+        }
+      }
+
+      //不带框的图标区域
+      .#{$css-prefix-step}-point.#{$css-prefix-step}-point-icon-area {
+        width: $normal;
+        height: $normal;
+        position: relative;
+        line-height: $normal;
+        font-size: $normalFontSize;
+        border: none;
+        text-align: center;
+        display: inline-block;
+        z-index: 5;
+        .b-icon {
+          font-size: 16px;
+          position: absolute;
+          left: 5px;
+          top: 5px;
+        }
+      }
+
+      // step的title部分
+      .#{$css-prefix-step}-title {
+        display: inline-block;
+        @include _color($SubContent);
+        font-size: $normalFontSize;
+      }
+    }
+    // step的content部分
+    .#{$css-prefix-step}-content {
+      width: 100%;
+      word-wrap: break-word;
+      padding-left: $normalContentPaddingLeft;
+      font-size: $smallFontSize;
+    }
+  }
+}
+
+/********正常的size下steps组件区域的css结束*********/
+
+/**********steps组件的size为small时的css设置开始*************/
+.#{$css-prefix-step}-area.#{$css-prefix-step}-area-small.#{$css-prefix-step}-area-horizontal,
+.#{$css-prefix-step}-area.#{$css-prefix-step}-area-small.#{$css-prefix-step}-area-vertical {
+  .#{$css-prefix-step}-item {
+    line-height: $normal;
+    //步骤条的节点
+    .#{$css-prefix-step}-point {
+      width: $small;
+      height: $small;
+      font-size: $smallFontSize;
+      line-height: $small;
+      .b-icon {
+        font-size: 14px;
+        position: absolute;
+        left: 1px;
+        top: 1px;
+      }
+    }
+    // step组件的展示区域（线，title，content）
+    .#{$css-prefix-step}-main {
+      // step的title部分
+      .#{$css-prefix-step}-title {
+        font-size: $smallFontSize;
+      }
+    }
+    // step的content部分
+    .#{$css-prefix-step}-content {
+      padding-left: $smallContentPaddingLeft;
+      font-size: $smallFontSize;
+    }
+  }
+}
+
+/**********steps组件的size为small时的css设置结束*************/
+
+/**************steps组件包含content时的样式开始**************/
+.#{$css-prefix-step}-area.#{$css-prefix-step}-area-haveContent {
+  margin-bottom: $marginLength;
+}
+
+/**************steps组件包含content时的样式结束**************/
+
+// 当前节点的css
+$processPointColor: $white;
+$processPointBackgroundColor: $LightPrimary;
+$processPointIconColor: $LightPrimary;
+$processPointBorderColor: $LightPrimary;
+$processTailColor: $SubContent;
+$processTitleColor: $Title;
+$processContentColor: $Title;
+// 等待节点的css
+$waitPointColor: $SubContent;
+$waitPointBackgroundColor: $white;
+$waitPointIconColor: $SubContent;
+$waitPointBorderColor: $SubContent;
+$waitTailColor: $SubContent;
+$waitTitleColor: $SubContent;
+$waitContentColor: $SubContent;
+// 结束节点的css
+$finishPointColor: $white;
+$finishPointBackgroundColor: $LightPrimary;
+$finishPointIconColor: $LightPrimary;
+$finishPointBorderColor: $LightPrimary;
+$finishTailColor: $LightPrimary;
+$finishTitleColor: $Title;
+$finishContentColor: $SubContent;
+// 错误节点的css
+$errorPointColor: $white;
+$errorPointBackgroundColor: $Error;
+$errorPointIconColor: $Error;
+$errorPointBorderColor: $Error;
+$errorTailColor: $SubContent;
+$errorTitleColor: $Error;
+$errorContentColor: $Error;
+// 单点节点的css
+$singlePointColor: $white;
+$singlePointBackgroundColor: $DarkPrimary;
+$singlePointIconColor: $DarkPrimary;
+$singlePointBorderColor: $DarkPrimary;
+$singleTailColor: $DarkPrimary;
+$singleTitleColor: $Title;
+$singleContentColor: $DarkPrimary;
+
+//状态列表
+$statusList: process, wait, finish, error, single;
+//圆点内部文字的颜色list
+$pointColorList: $processPointColor, $waitPointColor, $finishPointColor, $errorPointColor, $singlePointColor;
+//圆点内背景色的list
+$pointBackgroundColorList: $processPointBackgroundColor, $waitPointBackgroundColor, $finishPointBackgroundColor, $errorPointBackgroundColor, $singlePointBackgroundColor;
+//不带圆点的icon的颜色list
+$pointIconColorList: $processPointIconColor, $waitPointIconColor, $finishPointIconColor, $errorPointIconColor, $singlePointIconColor;
+//圆点边框颜色的list
+$pointBorderColorList: $processPointBorderColor, $waitPointBorderColor, $finishPointBorderColor, $errorPointBorderColor, $singlePointBorderColor;
+//连接线的颜色List
+$tailColorList: $processTailColor, $waitTailColor, $finishTailColor, $errorTailColor, $singleTailColor;
+//title的颜色list
+$titleColorList: $processTitleColor, $waitTitleColor, $finishTitleColor, $errorTitleColor, $singleTitleColor;
+//content的颜色list
+$contentColorList: $processContentColor, $waitContentColor, $finishContentColor, $errorContentColor, $singleContentColor;
+
+/************step不同status的css微调开始*******************/
+
+.#{$css-prefix-step}-area, .#{$css-prefix-step}-area.#{$css-prefix-step}-area-vertical, .#{$css-prefix-step}-area.#{$css-prefix-step}-area-horizontal {
+  @for $n from 1 through 5 {
+    .#{$css-prefix-step}-status-#{nth($statusList,$n)} {
+      .#{$css-prefix-step}-tail {
+        border-color: nth($tailColorList, $n);
+      }
+      .#{$css-prefix-step}-main {
+        .#{$css-prefix-step}-title {
+          color: nth($titleColorList, $n);
+        }
+        .#{$css-prefix-step}-point {
+          color: nth($pointColorList, $n);
+          background-color: nth($pointBackgroundColorList, $n);
+          border-color: nth($pointBorderColorList, $n);
+        }
+        .#{$css-prefix-step}-point.#{$css-prefix-step}-point-icon-area {
+          color: nth($pointIconColorList, $n);
+          background-color: #fff;
+          border-color: transparent;
+        }
+      }
+      .#{$css-prefix-step}-content {
+        color: nth($contentColorList, $n);
+      }
+    }
+  }
+}
+
+/************step不同status的css微调结束*******************/
+
+

@@ -1,0 +1,125 @@
+$col-prefix: $css-prefix+"col";
+$row-prefix: $css-prefix+"row";
+// Media queries breakpoints
+// Extra small screen / phone
+$screen-xs: 480px;
+$screen-xs-min: $screen-xs;
+$screen-xs-max: ($screen-xs-min - 1);
+
+// Small screen / tablet
+$screen-sm: 768px;
+$screen-sm-min: $screen-sm;
+$screen-sm-max: ($screen-sm-min - 1);
+
+// Medium screen / desktop
+$screen-md: 992px;
+$screen-md-min: $screen-md;
+$screen-md-max: ($screen-md-min - 1);
+
+// Large screen / wide desktop
+$screen-lg: 1200px;
+$screen-lg-min: $screen-lg;
+$screen-lg-max: ($screen-lg-min - 1);
+
+// External screen / wide desktop
+$screen-xl: 1600px;
+$screen-xl-min: $screen-xl;
+$screen-xl-max: ($screen-xl-min - 1);
+$grid-total: 24;
+
+// row
+.#{$row-prefix} {
+  position: relative;
+  margin-left: 0;
+  margin-right: 0;
+  height: auto;
+  zoom: 1;
+  display: block;
+  @include _clearfix;
+  &-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    &:before,
+    &:after {
+      display: flex;
+    }
+    // x轴原点
+    &-start {
+      justify-content: flex-start;
+    }
+    // x轴居中
+    &-center {
+      justify-content: center;
+    }
+    // x轴反方向
+    &-end {
+      justify-content: flex-end;
+    }
+    // x轴平分
+    &-space-between {
+      justify-content: space-between;
+    }
+    // x轴有间隔地平分
+    &-space-around {
+      justify-content: space-around;
+    }
+    // 顶部对齐
+    &-top {
+      align-items: flex-start;
+    }
+    // 居中对齐
+    &-middle {
+      align-items: center;
+    }
+    // 底部对齐
+    &-bottom {
+      align-items: flex-end;
+    }
+  }
+}
+
+// col
+.#{$col-prefix} {
+  position: relative;
+}
+
+@mixin make-grid($class) {
+  @for $i from 1 through $grid-total {
+    .#{$col-prefix}-span#{$class}-#{$i} {
+      display: block;
+      float: left;
+      width: percentage(($i / $grid-total));
+    }
+    .#{$col-prefix}#{$class}-forward-#{$i} {
+      left: percentage(($i / $grid-total));
+    }
+    .#{$col-prefix}#{$class}-back-#{$i} {
+      right: percentage(($i / $grid-total));
+    }
+    .#{$col-prefix}#{$class}-offset-#{$i} {
+      margin-left: percentage(($i / $grid-total));
+    }
+    .#{$col-prefix}#{$class}-order-#{$i} {
+      order: $i;
+    }
+  }
+}
+
+@include make-grid('');
+@include make-grid(-xs);
+@media (min-width: $screen-sm-min) {
+  @include make-grid(-sm);
+}
+
+@media (min-width: $screen-md-min) {
+  @include make-grid(-md);
+}
+
+@media (min-width: $screen-lg-min) {
+  @include make-grid(-lg);
+}
+
+@media (min-width: $screen-xl-min) {
+  @include make-grid(-xl);
+}

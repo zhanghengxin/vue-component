@@ -1,0 +1,78 @@
+$css-prefix-tag: $css-prefix+'tag';
+@import "../common/color";
+
+.#{$css-prefix-tag} {
+  height: 32px;
+  line-height: 32px;
+  // border: 1px solid #e8eaec ;
+  // color: #515a6e ;
+  // background: #fff ;
+  background-color: hsla(220, 4%, 58%, .1);
+  border-color: hsla(220, 4%, 58%, .2);
+  color: $Sub;
+  padding: 0 12px;
+  display: inline-block;
+  margin: 2px 4px 2px 0;
+  border-radius: 3px;
+  font-size: 12px;
+  vertical-align: middle;
+  opacity: 1;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.#{$css-prefix-tag}-back-blue {
+  background-color: rgba(64, 158, 255, .1);
+  @include _color($Primary);
+  border: 1px solid rgba(58, 64, 71, 0.2);
+}
+
+.#{$css-prefix-tag}-back-green {
+  background-color: rgba(103, 194, 58, .1);
+  border-color: rgba(103, 194, 58, .2);
+  @include _color($Success);
+}
+
+.#{$css-prefix-tag}-back-orange {
+  background-color: rgba(230, 162, 60, .1);
+  border-color: rgba(230, 162, 60, .2);
+  @include _color($Warning);
+
+}
+
+.#{$css-prefix-tag}-back-red {
+  background-color: hsla(0, 87%, 69%, .1);
+  border-color: hsla(0, 87%, 69%, .2);
+  @include _color($Error);
+}
+
+
+
+
+.#{$css-prefix-tag}-inner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background:$Sub;
+  position: relative;
+  top: 1px;
+}
+
+.#{$css-prefix-tag}-red {
+  @include _background($Error);
+}
+
+.#{$css-prefix-tag}-green {
+  @include _background($Success);
+}
+
+.#{$css-prefix-tag}-blue {
+  @include _background($LinkContent);
+
+}
+
+.#{$css-prefix-tag}-orange {
+  @include _background($Warning);
+}

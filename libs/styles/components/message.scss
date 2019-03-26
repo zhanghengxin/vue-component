@@ -1,0 +1,74 @@
+$css-prefix-message: $css-prefix + 'message';
+.#{$css-prefix-message}-fade-enter-active {
+    animation: #{$css-prefix-message}-fade-in 0.3s;
+}
+.#{$css-prefix-message}-fade-leave-active {
+    animation: b-message-fade-out 0.3s;
+}
+@keyframes #{$css-prefix-message}-fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+@keyframes #{$css-prefix-message}-fade-out {
+    0% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.#{$css-prefix-message}-wrapper {
+    .#{$css-prefix-message} {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 8px 16px;
+        font-size: 12px;
+        overflow: hidden;
+        border-radius: 4px;
+        box-sizing: border-box;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        color: rgba(0, 0, 0, 0.65);
+        background: rgba(255, 255, 255, 0.95);
+        pointer-events: all;
+        .#{$css-prefix-message}-img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 5px;
+            line-height: 18px;
+        }
+        .#{$css-prefix-message}-info {
+            @include _color($Primary);
+        }
+        .#{$css-prefix-message}-error {
+            @include _color($Error);
+        }
+        .#{$css-prefix-message}-success {
+            @include _color($Success);
+        }
+        .#{$css-prefix-message}-warning {
+            @include _color($Warning);
+        }
+        .#{$css-prefix-message}-close {
+            border: none;
+            outline: none;
+            background: none;
+            cursor: pointer;
+            font-size: 13px;
+            @include _color(#646464);
+            font-weight: 600;
+            padding-left: 15px;
+            margin-right: -7px;
+        }
+    }
+}
+

@@ -1,0 +1,178 @@
+$css-prefix-invoice: $css-prefix + 'invoice';
+.#{$css-prefix-invoice}-box {
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  position: relative;
+  width: 900px;
+  box-sizing: border-box;
+  padding: 23px 29px;
+  border-radius: 3px;
+  color: $Content;
+  border: 1px solid $Border;
+}
+
+.#{$css-prefix-invoice}-title {
+  width: 350px;
+  margin: 0 auto 10px;
+  padding: 5px 0px 2px;
+  text-align: center;
+  border-bottom: 1px solid $Border;
+  font-size: 18px;
+  i {
+    font-size: 18px;
+    font-weight: normal;
+  }
+  span {
+    display: block;
+    border-bottom: 1px solid $Border;
+    height: 38px;
+    line-height: 38px;
+  }
+}
+
+// car start
+.#{$css-prefix-invoice}-top {
+  width: 100%;
+  border: none;
+  margin: 0;
+  padding: 0;
+  .#{$css-prefix-invoice}-top-td {
+    border: none;
+  }
+  .#{$css-prefix-invoice}-table-clumn {
+    text-align: center;
+    color: $Sub;
+  }
+}
+
+.#{$css-prefix-invoice}-table {
+  width: 100%;
+  border: 1px solid $Border;
+  .#{$css-prefix-invoice}-table-td {
+    line-height: 25px;
+    border: 1px solid $Border;
+    margin: 0 auto;
+    vertical-align: middle;
+  }
+  .#{$css-prefix-invoice}-table-column {
+    text-align: center;
+    color: $Sub;
+  }
+  .#{$css-prefix-invoice}-table-content {
+    text-align: left;
+    padding-left: 10px;
+    color: $Content;
+  }
+  .#{$css-prefix-invoice}-table-name {
+    text-align: left;
+    border: none;
+    vertical-align: top;
+  }
+  .#{$css-prefix-invoice}-table-detail {
+    border-right: 1px solid $Border;
+    line-height: 25px;
+  }
+  .#{$css-prefix-invoice}-table-total {
+    border-right: 1px solid $Border;
+    border-top: 1px solid $Border;
+    line-height: 25px;
+  }
+  .#{$css-prefix-invoice}-table-right {
+    text-align: right;
+    padding-right: 5px;
+    color: $Sub;
+  }
+  .#{$css-prefix-invoice}-table-left {
+    padding-left: 5px;
+    text-align: left;
+    color: $Sub;
+  }
+}
+
+// car end
+
+// normal start
+// 右上角悬浮列表
+.#{$css-prefix-invoice}-ul {
+  position: absolute;
+  text-align: right;
+  right: 30px;
+  top: 16px;
+  line-height: 2;
+  color: $Sub;
+  .#{$css-prefix-invoice}-ul-content {
+    color: $Content;
+  }
+
+}
+
+.#{$css-prefix-invoice}-goods {
+  .#{$css-prefix-invoice}-ul {
+    position: relative;
+    left: 0;
+    top: 0;
+    text-align: left;
+  }
+}
+
+// 发票类型
+.#{$css-prefix-invoice}-type {
+  position: absolute;
+  left: 26px;
+  top: 12px;
+  box-sizing: border-box;
+  padding: 2px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: #e6d8bd;
+  text-align: center;
+  border: 4px solid #e6d8bd;
+  span {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    line-height: 40px;
+    box-sizing: border-box;
+    border: 2px solid #e6d8bd;
+    border-radius: 50%;
+    font-size: 30px;
+  }
+}
+
+// 通行费
+.#{$css-prefix-invoice}-toll-content {
+  position: absolute;
+  top: 55px;
+  left: 90px;
+  color: $Sub;
+  span {
+    color: red;
+  }
+}
+
+// 卷票
+.#{$css-prefix-invoice}-roll-box {
+  width: 500px;
+  margin-left: 150px;
+  padding: 20px;
+  border: 1px dashed $Border;
+  line-height: 30px;
+  color: $Content;
+  .#{$css-prefix-invoice}-table {
+    border: none;
+    .#{$css-prefix-invoice}-table-td {
+      border: none;
+      line-height: 30px;
+    }
+    .#{$css-prefix-invoice}-table-content {
+      text-align: center;
+      padding-left: 0;
+    }
+    .#{$css-prefix-invoice}-table-column {
+      color: $Sub;
+    }
+  }
+}

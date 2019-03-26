@@ -1,0 +1,73 @@
+@import "../common/prefix";
+.#{$css-prefix}collapsebox{
+    border-radius: 3px;
+    border: 1px solid #dcdee2;
+    .#{$css-prefix}collapse-item{
+        border-top: 1px solid inherit;
+        @include _borderColor(#dcdee2);
+    }
+    .#{$css-prefix}collapse-item:first-child{
+        border-top:0
+    }
+    .#{$css-prefix}collapse-item-header{
+        cursor: pointer;
+        height: 45px;
+        line-height: 45px;
+        padding-left: 16px;
+        @include _background($Background);
+    }
+    /* 展开 */
+    .#{$css-prefix}collapse-item-header-active .#{$css-prefix}collapse-item-header{
+        border-bottom: 1px solid inherit;
+        @include _borderColor($Border);
+
+    }
+    .#{$css-prefix}collapse-item-content{
+        color: #515a6e;
+        padding:16px;
+        @include _background(#fff);
+    }
+    
+    // item
+    .#{$css-prefix}collapse-arrow{
+        margin-top: 15px;
+        margin-right: 5px;
+    }
+    .#{$css-prefix}collapse-arrow-right{
+        float: right;
+        margin-right:10px; 
+        transform: rotate(90deg);
+        transition: transform 0.24s,
+    }
+    
+    .#{$css-prefix}collapse-arrow-active-right{
+        display:inline-block;  
+        transform: rotate(0deg);
+    }
+    
+    .#{$css-prefix}collapse-arrow-left{
+        float: left;
+        transform: rotate(-90deg);
+        transition: transform 0.24s,
+    }
+    
+    .#{$css-prefix}collapse-arrow-active-left{
+        display:inline-block;
+        transform: rotate(0deg)
+    }
+
+    .#{$css-prefix}collapse-arrow-hidden{
+        display: none
+    }
+}
+
+.#{$css-prefix}collapsebox-simple{
+    border-left:none;
+    border-right:none;  
+    .#{$css-prefix}collapse-item-header{
+        @include _background(#fff);
+    }
+    .#{$css-prefix}collapse-item-header-active .#{$css-prefix}collapse-item-header{
+        border-bottom:none;
+    }
+}
