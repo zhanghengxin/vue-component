@@ -84,7 +84,7 @@
         },
         methods:{
             changeConsole(e){
-                console.log('e',e)
+                console.log('e1',e)
             },
             filterFn(query,item){
                 return (item.label + item.value).indexOf(query) > -1
@@ -310,7 +310,6 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 width='200'
                 :multiple='multiple' 
                 :options='options' 
-                @on-change='changeConsole'
                 :nameInCode='nameInCode'>
             </b-select>
             <b-select 
@@ -334,7 +333,6 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 v-model="value3"
                 :multiple='multiple' 
                 :options='options' 
-                @on-change='changeConsole'
                 :nameInCode='nameInCode'>
             </b-select>
             <b-select 
