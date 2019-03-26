@@ -1,4 +1,13 @@
 更新日志
+### 0.3.8
+## `2019-03-28`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 table 兼容多级表头后，如果 index是固定列的时候显示不正常的问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.3.7
 ## `2019-03-25`
 <br>
