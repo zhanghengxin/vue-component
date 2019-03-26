@@ -80,7 +80,7 @@ import Icon from '../icon/Icon.vue'
 import bProgress from './progress.vue'
 
 export default {
-    name: 'bwUpload',
+    name: 'b-upload',
     components: {Icon, bProgress},
     props: {
         action: {

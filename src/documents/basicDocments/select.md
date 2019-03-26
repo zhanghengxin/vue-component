@@ -771,22 +771,23 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 
     <template>
         <div>
-           <b-select 
-                v-model="value03"  
+            <b-select
+                v-model="value03"
                 :filterabled='filterabled'
                 :remoteFn='remoteFn'
                 :loading='loading'
                 :options='options3'
                 width='200' >
             </b-select>
-            <b-select 
-                v-model="value04" 
+            <b-select
+                v-model="value04"
                 :filterabled='filterabled'
                 :multiple='multiple'
                 :remoteFn='remoteFnMultiple'
                 :loading='loading'
                 :options='options4'
                 width='200' >
+            </b-select>
         </div>
     </template>
     <script>

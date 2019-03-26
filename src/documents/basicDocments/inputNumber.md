@@ -47,7 +47,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input-number 
+            <b-input-number
                 v-model="value" 
                 style='width:200px'
                 placeholder="请输入..." 
@@ -57,7 +57,7 @@
                 :step='step' 
                 @on-change='changemal'/>
             </b-input-number>
-            <span>{{value}}</div>
+            <span>{{value}}</span>
         </div>
     </div>
 </div>
@@ -75,7 +75,7 @@
             :step='step' 
             @on-change='changemal'/>
         </b-input-number>
-        <span>{{value}}</div>
+        <span>{{value}}</span>
     </template>
     <script>
         export default {

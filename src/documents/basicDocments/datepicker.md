@@ -6,13 +6,13 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker v-model='date'><b-datepicker>
+        <b-datepicker v-model='date'></b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-datepicker v-model='date' ><b-datepicker>
+        <b-datepicker v-model='date'></b-datepicker>
     </div>
     <script>
         export default {
@@ -33,13 +33,13 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker v-model='date1'><b-datepicker>
+        <b-datepicker v-model='date1'></b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-datepicker v-model='date'><b-datepicker>
+        <b-datepicker v-model='date'></b-datepicker>
     </div>
     <script>
         export default {
@@ -88,17 +88,17 @@
             v-model='notSelect' 
             :not-before="notBefore" 
             :not-after="notAfter">
-        <b-datepicker>
+        </b-datepicker>
             <b-datepicker 
             v-model='notSelectRange' 
             range
             :not-before="notBeforeRange" 
             :not-after="notAfterRange">
-        <b-datepicker>
+        </b-datepicker>
         <b-datepicker 
             v-model='disabledDaysTime' 
             :disabled-days='disabledDays'>
-        <b-datepicker>
+        </b-datepicker>
     </div>
     <script>
         const _date = new Date().getTime()
@@ -131,13 +131,13 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker v-model='daterange' range><b-datepicker>
+        <b-datepicker v-model='daterange' range></b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-datepicker v-model='daterange' range><b-datepicker>
+        <b-datepicker v-model='daterange' range></b-datepicker>
     </div>
     <script>
         export default {
@@ -158,13 +158,13 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker v-model='splitPanels' range :split-panels='false'><b-datepicker>
+        <b-datepicker v-model='splitPanels' range :split-panels='false'></b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-datepicker v-model='splitPanels' range :split-panels='false'><b-datepicker>
+        <b-datepicker v-model='splitPanels' range :split-panels='false'></b-datepicker>
     </div>
     <script>
         export default {
@@ -189,7 +189,7 @@
             v-model='year' 
             type='year' 
         format="YYYY">
-    <b-datepicker>
+    </b-datepicker>
     </div>
     
 ::: code
@@ -199,7 +199,7 @@
             v-model='year' 
             type='year' 
             format="YYYY">
-        <b-datepicker>
+        </b-datepicker>
     </div>
     <script>
         export default {
@@ -225,7 +225,7 @@
             type='year'  
             range
             format="YYYY">
-        <b-datepicker>
+        </b-datepicker>
     </div>
     
 ::: code
@@ -236,7 +236,7 @@
             type='year'
             range
             format="YYYY">
-        <b-datepicker>
+        </b-datepicker>
     </div>
     <script>
         export default {
@@ -261,7 +261,7 @@
             v-model='month' 
             type='month'  
             format="YYYY-MM">
-        <b-datepicker>
+        </b-datepicker>
     </div>
     
 ::: code
@@ -271,7 +271,7 @@
             v-model='month' 
             type='month'
             format="YYYY-MM">
-        <b-datepicker>
+        </b-datepicker>
     </div>
     <script>
         export default {
@@ -297,7 +297,7 @@
             type='month'  
             range
             format="YYYY-MM">
-        <b-datepicker>
+        </b-datepicker>
     </div>
     
 ::: code
@@ -308,7 +308,7 @@
             type='month'
             range
             format="YYYY-MM">
-        <b-datepicker>
+        </b-datepicker>
     </div>
     <script>
         export default {
@@ -330,13 +330,13 @@
         <b-datepicker 
             type='time'
             v-model='time'>
-        <b-datepicker>
+        </b-datepicker>
     </div>
     
 ::: code
 ```html
     <div>
-        <b-datepicker v-model='time' type='time'><b-datepicker>
+        <b-datepicker v-model='time' type='time'></b-datepicker>
     </div>
     <script>
         export default {
@@ -357,13 +357,13 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker v-model='daterange' range type='time'><b-datepicker>
+        <b-datepicker v-model='daterange' range type='time'></b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-datepicker v-model='timerange' range type='time'><b-datepicker>
+        <b-datepicker v-model='timerange' range type='time'></b-datepicker>
     </div>
     <script>
         export default {
@@ -382,13 +382,13 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker v-model='datetime' type='datetime'><b-datepicker>
+        <b-datepicker v-model='datetime' type='datetime'></b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-datepicker v-model='datetime' type='datetime'><b-datepicker>
+        <b-datepicker v-model='datetime' type='datetime'></b-datepicker>
     </div>
     <script>
         export default {
@@ -413,7 +413,7 @@
             v-model='datetimerange' 
             range 
             type='datetime'>
-        <b-datepicker>
+        </b-datepicker>
     </div>
 
 ::: code
@@ -423,7 +423,7 @@
             v-model='datetimerange' 
             range
             type='datetime'>
-        <b-datepicker>
+        </b-datepicker>
     </div>
     <script>
         export default {
@@ -447,20 +447,20 @@
         <b-datepicker 
             v-model='shortcutsTime'
             shortcuts>
-        <b-datepicker>
+        </b-datepicker>
     </div>
     <div class='example-box'>
         <b-datepicker 
             v-model='customShortcutsTime'
             :shortcuts='customShortcuts'>
-        <b-datepicker>
+        </b-datepicker>
     </div>
     <div class='example-box'>
         <b-datepicker 
             range
             v-model='customRangeShortcutsTime'
             :shortcuts='customRangeShortcuts'>
-        <b-datepicker>
+        </b-datepicker>
     </div>
     
 ::: code
@@ -469,16 +469,16 @@
         <b-datepicker 
             v-model='shortcutsTime' 
             shortcuts>
-        <b-datepicker>
+        </b-datepicker>
         <b-datepicker 
             v-model='customShortcutsTime'
             :shortcuts='customShortcuts'>
-        <b-datepicker>
+        </b-datepicker>
         <b-datepicker 
             range
             v-model='customRangeShortcutsTime'
             :shortcuts='customRangeShortcuts'>
-        <b-datepicker>
+        </b-datepicker>
     </div>
     <script>
         const _date = new Date().getTime()
@@ -535,7 +535,7 @@
             :shortcuts='labelShorcuts'
             :label='labelText'
             :confirm='confirmed'>
-        <b-datepicker>
+        </b-datepicker>
     </div>
     
 ::: code
@@ -556,7 +556,7 @@
             :shortcuts='shortcuts'
             :fixed='fixed'
             :confirm='confirm'>
-        <b-datepicker>
+        </b-datepicker>
     </div>
     <script>
         export default {

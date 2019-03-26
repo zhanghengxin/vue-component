@@ -55,7 +55,7 @@
                   </div>
               </b-input>
               <b-input v-model="value0" placeholder="请输入..." :width='200' error='error'></b-input>
-              <span>{{value}}</div>
+              <span>{{value}}</span>
         </div>
     </div>
 </div>
@@ -70,7 +70,7 @@
             </div>
         </b-input>
         <b-input v-model="value0" placeholder="请输入..." :width='200' error='error'></b-input>
-        <span>{{value}}</div>
+        <span>{{value}}</span>
     </template>
     <script>
         export default {
