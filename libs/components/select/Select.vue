@@ -546,12 +546,17 @@ export default {
                 this.remoteFn(query)
             }
         },
-        options () {
-            if (!this.remoteFn) {
-                this.values = this.getInitValue().map(value => {
-                    if (typeof value !== 'number' && !value) return null
-                    return this.getOptionData(value)
-                }).filter(Boolean)
+        options (now, before) {
+            const {multiple, value, nameInCode} = this
+            const newValue = JSON.stringify(now)
+            const oldValue = JSON.stringify(before)
+            this.values = this.getInitValue().map(value => {
+                if (typeof value !== 'number' && !value) return null
+                return this.getOptionData(value)
+            }).filter(Boolean)
+            if (newValue !== oldValue) {
+                this.$emit('on-change', nameInCode ? (multiple ? this.values : this.values[0]) : value)
+                this.dispatch('FormItem', 'on-form-change', nameInCode ? this.values : value)
             }
         }
     }
