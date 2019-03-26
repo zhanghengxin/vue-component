@@ -1,6 +1,6 @@
 <script>
 import Picker from '../Picker'
-import { prefix } from '../../../utils/common'
+import { prefix, oneOf } from '../../../utils/common'
 
 export default {
     name: `${prefix}datepicker`,
@@ -8,7 +8,10 @@ export default {
     props: {
         type: {
             type: String,
-            default: 'date'
+            default: 'date',
+            validator (val) {
+                return oneOf(val, ['date', 'year', 'month', 'time', 'datetime'])
+            }
         },
         format: {
             type: String,

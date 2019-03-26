@@ -190,7 +190,10 @@ export default {
         },
         type: {
             type: String,
-            default: 'date'
+            default: 'date',
+            validator (val) {
+                return oneOf(val, ['date', 'year', 'month', 'time', 'datetime'])
+            }
         },
         range: {
             type: Boolean,
@@ -328,7 +331,8 @@ export default {
             return this.range ? p[1] : p[0]
         },
         innerType () {
-            return String(this.type).toLowerCase()
+            const type = String(this.type).toLowerCase()
+            return oneOf(type, ['date', 'year', 'month', 'time', 'datetime']) ? type : 'date'
         },
         innerShortcuts () {
             if (Array.isArray(this.shortcuts)) return this.shortcuts
