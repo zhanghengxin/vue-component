@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { isValidDate, isDateObject, formatDate, nextMonth } from '../../../utils/date'
+import { isValidDate, isDateObject, formatDate } from '../../../utils/date'
 import { TableYear, TableMonth, TableDate, TableTime } from '../base'
 import { prefix } from '../../../utils/common'
 
@@ -243,8 +243,7 @@ export default {
     },
     methods: {
         updateNow (val) {
-            const date = this.panelPosition === 'right' ? nextMonth(new Date()) : new Date()
-            let now = val ? new Date(val) : date
+            let now = val ? new Date(val) : new Date()
             let oldNow = new Date(this.now)
             this.now = now
             if (!this.visible) {
@@ -304,8 +303,8 @@ export default {
         changeYear (year) {
             this.updateNow(new Date(year, this.month))
         },
-        changeMonth (month, year) {
-            this.updateNow(new Date(year || this.year, month))
+        changeMonth (month) {
+            this.updateNow(new Date(this.year, month))
         },
         selectYear (year) {
             this.changeYear(year)
@@ -416,9 +415,9 @@ export default {
 
             this.changeMonth(month + flag)
             if (this.panelPosition === 'left' && !this.splitPanels) {
-                this.$parent.$children[1].changeMonth(month, month === 11 ? this.year : null)
+                this.$parent.$children[1].changeMonth(month + flag)
             } else if (this.panelPosition === 'right' && !this.splitPanels) {
-                this.$parent.$children[0].changeMonth(month, month === 0 ? this.year : null)
+                this.$parent.$children[0].changeMonth(month + flag)
             }
 
             this.$parent.$emit('change-calendar-month', {
@@ -429,22 +428,14 @@ export default {
             })
         },
         changeSplitMonth (month) {
-            if (this.splitPanels || this.$parent.$children.length < 2) return
-            // 当前是左侧 panel, 设置当前月，右侧 + 1
-            // 当前是右侧 panel, 设置当前月，左侧 - 1
-            if (this.panelPosition === 'left') {
-                this.$parent.$children[0].changeMonth(month)
-                this.$parent.$children[1].changeMonth(month + 1, this.year)
-            } else if (this.panelPosition === 'right') {
-                this.$parent.$children[0].changeMonth(month - 1, this.year)
-                this.$parent.$children[1].changeMonth(month)
-            }
+            if (this.splitPanels || this.$parent.$children.length < 2 || !this.panelPosition) return
+            this.$parent.$children[0].changeMonth(month)
+            this.$parent.$children[1].changeMonth(month)
         },
         changeSplitYear (year) {
-            if (this.panelPosition && !this.splitPanels) {
-                this.$parent.$children[0].changeYear(year)
-                this.$parent.$children[1].changeYear(year)
-            }
+            if (this.splitPanels || this.$parent.$children.length < 2 || !this.panelPosition) return
+            this.$parent.$children[0].changeYear(year)
+            this.$parent.$children[1].changeYear(year)
         },
         handleTimeHeader () {
             if (this.type === 'time') return
