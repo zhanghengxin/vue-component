@@ -40,8 +40,6 @@ import Table from './components/table'
 import Progress from './components/progress'
 import Select from './components/select'
 import DatePicker from './components/date-picker'
-import TimePicker from './components/time-picker'
-import DateTimePicker from './components/datetime-picker'
 import Transfer from './components/transfer'
 import Notice from './components/notice'
 import Menu from './components/menu'
@@ -101,8 +99,6 @@ const components = [
     TabPanel,
     Select,
     DatePicker,
-    TimePicker,
-    DateTimePicker,
     Transfer,
     Menu,
     MenuItem,
