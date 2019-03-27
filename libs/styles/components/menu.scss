@@ -39,7 +39,7 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
   &-horizontal {
     height: 70px;
     line-height: 70px;
-    @include _background($Primary);
+    @include _background($LinkContent);
 
     .#{$icon} {
       font-size: 16px !important;
@@ -48,7 +48,7 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
   }
 
   &-horizontal &-item {
-    color: $Content;
+    color: $Title;
     font-size: 12px;
     .#{$icon} {
       margin-right: 4px;
@@ -133,7 +133,7 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
   /***第一层开始***/
   &-vertical > &-item,
   &-vertical &-submenu-title {
-    @include _background($Background);
+    @include _background($white);
     font-size: 14px;
     @include _color($Title);
     padding: 10px 24px;
@@ -145,6 +145,7 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
     position: absolute;
     left: 21px;
     top: 13px;
+    color: $Primary
   }
 
   &-vertical .#{$menu-item-disabled}{
@@ -156,9 +157,9 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
     color: $Title;
     border-bottom: $Divider 1px solid;
     font-weight: bold;
-    .#{$icon} {
-      color: $Primary !important
-    }
+    //.#{$icon} {
+    //  color: $Primary !important
+    //}
   }
   /***第一层结束***/
 
@@ -170,13 +171,13 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
     .menu-arrow {
       float: right;
       line-height: 20px;
-      color: $Border;
+      color: $Title;
     }
     .#{$menu-item-prefix-cls},
     .#{$menu-submenu} .#{$menu-submenu}-title {
-      color: $Sub;
+      color: $Content;
       font-size: 12px;
-      background-color: $Background;
+      @include _background($Background);
     }
     .#{$menu-submenu}.#{$menu-prefix-cls}-opened .#{$menu-submenu}-title {
       color: $Content;
