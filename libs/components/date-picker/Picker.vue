@@ -16,6 +16,10 @@
                     :value="visualValue"
                     :name="name"
                     ref="input"
+                    :label="label"
+                    :fixed="fixed"
+                    :labelWidth="labelWidth"
+                    :width="width"
                     @on-input-change="handleInputChange"
                     @on-focus="handleFocus"
                     @on-blur="handleBlur"
@@ -36,6 +40,7 @@
                 :class="{ [prefixCls + '-transfer']: transfer }"
                 :placement="placement"
                 ref="drop"
+                :label-width="dropLabelWidth"
                 :data-transfer="transfer"
                 v-transfer-dom>
                 <div>
@@ -191,6 +196,22 @@
             options: {
                 type: Object,
                 default: () => ({})
+            },
+            label: {
+                type: String,
+                default: ''
+            },
+            fixed: {
+                type: Boolean,
+                default: false
+            },
+            width: {
+                type: [String, Number],
+                default: null
+            },
+            labelWidth: {
+                type: [String, Number],
+                default: null
             }
         },
         data () {
@@ -215,7 +236,8 @@
                     time: focusedTime, // the values array into [hh, mm, ss],
                     active: false
                 },
-                internalFocus: false
+                internalFocus: false,
+                dropLabelWidth: 0
             }
         },
         computed: {
@@ -613,6 +635,15 @@
             },
             focus () {
                 this.$refs.input.focus()
+            },
+            getLabelWidth () {
+                if (!this.$refs.input || this.fixed) return
+                const { label } = this.$refs.input.$refs
+                let width = label ? label.offsetWidth : 0
+
+                const { shortcuts } = this.options
+                if (shortcuts && shortcuts.length) width += 92
+                this.dropLabelWidth = width
             }
         },
         watch: {
@@ -648,6 +679,11 @@
             if (this.open !== null) this.visible = this.open
             // to handle focus from confirm buttons
             this.$on('focus-input', () => this.focus())
+            this.getLabelWidth()
+            console.log('options', this.options.shortcuts)
+        },
+        updated () {
+            this.getLabelWidth()
         }
     }
 </script>

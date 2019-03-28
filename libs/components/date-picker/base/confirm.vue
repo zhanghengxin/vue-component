@@ -79,7 +79,7 @@
                 if (this.timeDisabled) return
                 this.$emit('on-pick-toggle-time')
                 this.dispatch(`${prefix}datepicker`, 'focus-input')
-                this.dispatch(`${prefix}datepicker`, 'update-popper')
+                this.dispatch(`${prefix}datepicker`, 'on-update-popper')
             },
             handleTab (e) {
                 const tabbables = [...this.$el.children]

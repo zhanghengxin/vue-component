@@ -164,9 +164,9 @@ $link-active-color: shade($link-color, 5%);
 
     &-cells-year, &-cells-month {
         margin-top: 14px;
-        span{
-            width: 40px;
-            height: 28px;
+        span {
+            width: 40px !important;
+            height: 28px !important;
             line-height: 28px;
             margin: 10px 12px;
             border-radius: $btn-border-radius-small;
@@ -291,6 +291,7 @@ $link-active-color: shade($link-color, 5%);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            font-size: 12px;
             &:hover {
                 background: $border-color-split;
             }

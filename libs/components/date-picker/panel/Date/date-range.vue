@@ -15,7 +15,7 @@
                     <span
                         :class="iconBtnCls('prev', '-double')"
                         @click="prevYear('left')">
-                        <Icon type="zuo"></Icon>
+                        <Icon type="zuo1"></Icon>
                     </span>
                     <span
                         v-if="leftPickerTable === 'date-table'"
@@ -33,7 +33,7 @@
                         v-if="splitPanels || leftPickerTable !== 'date-table'"
                         :class="iconBtnCls('next', '-double')"
                         @click="nextYear('left')">
-                        <Icon type="you"></Icon>
+                        <Icon type="you1"></Icon>
                     </span>
                     <span
                         v-if="splitPanels && leftPickerTable === 'date-table'"
@@ -54,11 +54,10 @@
                     :show-week-numbers="showWeekNumbers"
                     :value="preSelecting.left ? [dates[0]] : dates"
                     :focused-date="focusedDate"
-
                     @on-change-range="handleChangeRange"
                     @on-pick="panelPickerHandlers.left"
-                    @on-pick-click="handlePickClick"
-                ></component>
+                    @on-pick-click="handlePickClick">
+                </component>
             </div>
             <div :class="[prefixCls + '-content', prefixCls + '-content-right']" v-show="!isTime">
                 <div :class="[datePrefixCls + '-header']" v-show="currentView !== 'time'">
@@ -66,7 +65,7 @@
                         v-if="splitPanels || rightPickerTable !== 'date-table'"
                         :class="iconBtnCls('prev', '-double')"
                         @click="prevYear('right')">
-                        <Icon type="zuo"></Icon>
+                        <Icon type="zuo1"></Icon>
                     </span>
                     <span
                         v-if="splitPanels && rightPickerTable === 'date-table'"
@@ -83,7 +82,7 @@
                     <span
                         :class="iconBtnCls('next', '-double')"
                         @click="nextYear('right')">
-                        <Icon type="you"></Icon>
+                        <Icon type="you1"></Icon>
                     </span>
                     <span
                         v-if="rightPickerTable === 'date-table'"
@@ -104,7 +103,6 @@
                     :show-week-numbers="showWeekNumbers"
                     :value="preSelecting.right ? [dates[dates.length - 1]] : dates"
                     :focused-date="focusedDate"
-
                     @on-change-range="handleChangeRange"
                     @on-pick="panelPickerHandlers.right"
                     @on-pick-click="handlePickClick">

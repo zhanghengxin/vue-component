@@ -18,7 +18,7 @@ $cursor-disabled: not-allowed;
 .#{$time-picker-prefix-cls} {
     &-cells {
         min-width: $time-picker-cells-width;
-        &-with-seconds{
+        &-with-seconds {
             min-width: $time-picker-cells-width-with-seconds;
         }
 
@@ -40,10 +40,14 @@ $cursor-disabled: not-allowed;
             &:last-child {
                 border-radius: 0 $btn-border-radius $btn-border-radius 0;
             }
+            
             ul {
+                &.#{$time-picker-prefix-cls}-cells-ul {
+                    padding-bottom: 120px;
+                }
                 width: 100%;
                 margin: 0;
-                padding: 0 0 120px 0;
+                padding-bottom: 0 0 120px 0;
                 list-style: none;
                 li {
                     font-size: 12px;

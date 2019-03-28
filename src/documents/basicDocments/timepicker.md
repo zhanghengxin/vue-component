@@ -1,83 +1,44 @@
 # TimePicker 时间选择器
 
-### 基本用法
+### 时间及时间范围
+
+设置属性 `type` 为  time 或 timerange 可以选择时间或时间范围
 
 <div class='example'>
     <div class='example-box'>
-        <b-timepicker 
-            v-model='time'
-            @on-change='handleChangeTime'>
-        </b-timepicker>
+        <b-timepicker label='时间'></b-timepicker>
+        <b-timepicker type='timerange' label='时间范围'></b-timepicker>
     </div>
-    
+
 ::: code
 ```html
     <div>
-        <b-timepicker v-model='time'></b-timepicker>
+        <b-timepicker type='time' label='时间'></b-timepicker>
+        <b-timepicker type='timerange' label='时间范围'></b-timepicker>
     </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    time: '',
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-### 定义分钟步频
-
-<div class='example'>
-    <div class='example-box'>
-        <b-timepicker 
-            v-model='timestemp'
-            :minuteStep='5'>
-        </b-timepicker>
-    </div>
-    
-::: code
-```html
-    <div>
-        <b-timepicker 
-            v-model='time'
-            :minute-step='5'>
-        </b-timepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    time: '',
-                }
-            }
-        }
-    </script>
 ```
 :::
 </div>
 
 ### 默认时间显示
 
-设置 v-model 绑定值 `date: 18:00:01` 默认展示时间
+设置 v-model 绑定值 `time: 16:22:44` 默认展示时间
 
 <div class='example'>
     <div class='example-box'>
-        <b-timepicker v-model='time1'></b-timepicker>
+        <b-timepicker v-model='time'></b-timepicker>
     </div>
 
 ::: code
 ```html
     <div>
         <b-timepicker v-model='time'></b-timepicker>
-    </div> 
+    </div>
     <script>
         export default {
             data () {
                 return {
-                    time: '18:00:01'
+                    time: '16:22:44'
                 }
             }
         }
@@ -86,29 +47,44 @@
 :::
 </div>
 
-### 选择时间范围
+### 时间间隔
 
-设置属性 `range` 为 true 可在一个选择器中选择一个时间范围
+设置属性 `steps`设置时间间隔。数组的三项分别对应小时、分钟、秒。
 
 <div class='example'>
     <div class='example-box'>
-        <b-timepicker v-model='daterange' range></b-timepicker>
+        <b-timepicker :steps="[1, 15, 15]"></b-timepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-timepicker v-model='timerange' range></b-timepicker>
+        <b-timepicker :steps="[1, 15, 15]"></b-timepicker>
     </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    timerange: '',
-                }
-            }
-        }
-    </script>
+```
+:::
+</div>
+
+### 不可选时间 
+
+可以使用 `disabled-hours` `disabled-minutes` `disabled-seconds` 组合禁止用户选择某个时间
+
+<div class='example'>
+    <div class='example-box'>
+        <b-timepicker 
+            :disabled-hours="[1,5,10]"
+            :disabled-minutes="[0,10,20]">
+        </b-timepicker>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-timepicker 
+            :disabled-hours="[1,5,10]"
+            :disabled-minutes="[0,10,20]">
+        </b-timepicker>
+    </div>
 ```
 :::
 </div>
@@ -117,16 +93,7 @@
     export default {
         data () {
             return {
-                time: '',
-                time1: '18:00:01',
-                daterange: '',
-                popup: '',
-                timestemp: 5
-            }
-        },
-        methods: {
-            handleChangeTime(value) {
-                console.log('v', value)
+                time: '16:22:44'
             }
         }
     }
@@ -136,32 +103,25 @@
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | ---- | ---- | ---- | ---- | ---- |
-| value | 日期选择器中的值，使用 v-model 双向绑定数据 | String |
+| value | 时间，可以是 JavaScript 的 Date，例如 new Date()，也可以是标准的时间格式，点击右边查看 注意：value 使用 v-model 时，值是 Date 类型，可以配合 @on-change 使用 | Date |
+| type | 类型 | String  | `date` `daterange` `datetime` `datetimerange` `year` `month` | date |
 | width | input宽度 | Number |
 | label | input前的说明文字 | String |
 | labelWidth | label模式下label的宽度 |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
-| size | input组件的尺寸。 | Boolean  | `small` `default` `large` | default |
-| format | 日期格式化 | String  | | YYYY-MM-DD |
-| dateType | 返回日期格式 | String | `formatdate` `timestamp` `date` | formatdate |
+| size | input组件的尺寸 | Boolean  | `small` `default` `large` | default |
+| format | 时间格式化 | String  | | yyyy-MM-dd |
+| placement | 时间选择器出现的位置 | String | `top` `top-start` `top-end` `bottom` `bottom-start` `bottom-end` `left` `left-start` `left-end` `right` `right-start` `right-end`| bottom-start |
 | clearable | 是否显示清除按钮 | Boolean  | `true` `false` | true |
 | editable | 输入框内是否可编辑 | Boolean  | `true` `false` | true |
 | disabled | 是否可用 | Boolean | `true` `false` | false |
 | confirm | 若为 true 则显示确认按钮且需要确认才更新时间 | Boolean | `true` `false` | false |
-| confirm-text | 确认按钮的名称 | Boolean | | 确认 |
-| placeholder | 默认提示性文字 | String |  | 请选择日期 |
-
-### Slots
-| 事件名 | 说明	| 返回值 |
-| ---- | ---- | ---- |
-| calendar-icon | 图标 | - |
-| header |  |  |
-| footer |  |  |
-
+| placeholder | 默认提示性文字 | String |  | 请选择时间 |
+| steps | 下拉列表的时间间隔，数组的三项分别对应小时、分钟、秒。例如设置为 [1, 15] 时，分钟会显示：00、15、30、45 | Array | | [] |
 
 ### events
 | 事件名 | 说明	| 返回值 |
 | ---- | ---- | ---- |
-| on-change | 日期改变的时候触发 | 选择的日期 |
-| input | 日期改变的时候触发 | 选择的日期 |
-| on-confirm | 点击确认按钮触发，配合 confirm 属性使用 | 选择的日期 |
+| on-change | 时间改变的时候触发 | date |
+| on-ok | 点击确认按钮触发，配合 confirm 属性使用 |
+| on-clear | 在 confirm 模式或 clearable = true 时有效，在清空时间时触发 |
