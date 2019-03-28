@@ -1,5 +1,5 @@
-$date-picker-prefix-cls: "ivu-date-picker";
-$picker-prefix-cls: "ivu-picker";
+$date-picker-prefix-cls: $css-prefix + "date-picker";
+$picker-prefix-cls: $css-prefix + "picker";
 
 $date-picker-cells-width: 196px;
 $date-picker-cells-width-with-weeknumbers: 226px;
@@ -40,19 +40,18 @@ $link-active-color: shade($link-color, 5%);
             display: inline-block;
             width: 24px;
             height: 24px;
-            margin: 2px;
             em {
+                font-size: 12px;
+                border-radius: $btn-border-radius-small;
+                text-align: center;
+                transition: all $transition-time $ease-in-out;
                 display: inline-block;
                 width: 24px;
                 height: 24px;
                 line-height: 24px;
                 margin: 2px;
                 font-style: normal;
-                font-size: 12px;
-                margin: 2px;
-                border-radius: $btn-border-radius-small;
                 text-align: center;
-                transition: all $transition-time $ease-in-out;
             }
         }
         &-header span {
@@ -71,13 +70,12 @@ $link-active-color: shade($link-color, 5%);
                 box-shadow: 0 0 0 1px $Primary inset;
             }
         }
+        span.#{$date-picker-prefix-cls}-cells-cell {
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+        }
         &-cell {
-            span .#{$date-picker-prefix-cls}-cells-cell {
-                width: 28px;
-                height: 28px;
-                cursor: pointer;
-            }
-
             &-prev-month, &-next-month {
                 em {
                     color: $btn-disable-color;

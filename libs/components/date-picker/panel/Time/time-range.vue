@@ -64,8 +64,9 @@
     import Mixin from '../panel-mixin'
     import { initTimeDate, formatDateLabels } from '../../util'
     import lang from '../../../../utils/date'
-    const prefixCls = 'ivu-picker-panel'
-    const timePrefixCls = 'ivu-time-picker'
+    import { prefix } from '../../../../utils/common'
+    const prefixCls = `${prefix}picker-panel`
+    const timePrefixCls = `${prefix}time-picker`
     const capitalize = (str) => str[0].toUpperCase() + str.slice(1)
 
     export default {

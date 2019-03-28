@@ -66,7 +66,7 @@ export default {
     props: {
         type: {
             validator (value) {
-                return oneOf(value, ['default', 'primary', 'error', 'warning', 'success'])
+                return oneOf(value, ['default', 'primary', 'error', 'warning', 'success', 'text'])
             },
             default: 'default'
         },

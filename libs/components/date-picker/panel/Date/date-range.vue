@@ -149,8 +149,10 @@
     import Mixin from '../panel-mixin'
     import DateMixin from './date-panel-mixin'
     import lang from '../../../../utils/date'
-    const prefixCls = 'ivu-picker-panel'
-    const datePrefixCls = 'ivu-date-picker'
+    import { prefix } from '../../../../utils/common'
+    const prefixCls = `${prefix}picker-panel`
+    const datePrefixCls = `${prefix}date-picker`
+
     const dateSorter = (a, b) => {
         if (!a || !b) return 0
         return a.getTime() - b.getTime()

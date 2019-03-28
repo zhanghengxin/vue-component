@@ -1,5 +1,6 @@
-const prefixCls = 'ivu-picker-panel'
-const datePrefixCls = 'ivu-date-picker'
+import { prefix } from '../../../utils/common'
+const prefixCls = `${prefix}picker-panel`
+const datePrefixCls = `${prefix}date-picker`
 
 export default {
     props: {

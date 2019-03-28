@@ -1,10 +1,11 @@
 import Picker from '../Picker'
 import DatePickerPanel from '../panel/Date/date'
 import RangeDatePickerPanel from '../panel/Date/date-range'
-import { oneOf } from '../../../utils/common'
+import { oneOf, prefix } from '../../../utils/common'
+const prefixCls = `${prefix}datepicker`
 
 export default {
-    name: 'CalendarPicker',
+    name: prefixCls,
     mixins: [Picker],
     props: {
         type: {

@@ -20,7 +20,7 @@
         <b-button
             size="small"
             type="primary"
-            @on-click.native="handleSuccess"
+            @click.native="handleSuccess"
             @keydown.enter.native="handleSuccess">
             {{ labels.ok }}
         </b-button>
@@ -30,7 +30,8 @@
     import bButton from '../../button'
     import Emitter from '../../../mixins/emitter'
     import lange from '../../../utils/date'
-    const prefixCls = 'ivu-picker'
+    import { prefix } from '../../../utils/common'
+    const prefixCls = `${prefix}picker`
 
     export default {
         mixins: [ Emitter ],
@@ -77,8 +78,8 @@
             handleToggleTime () {
                 if (this.timeDisabled) return
                 this.$emit('on-pick-toggle-time')
-                this.dispatch('CalendarPicker', 'focus-input')
-                this.dispatch('CalendarPicker', 'update-popper')
+                this.dispatch(`${prefix}datepicker`, 'focus-input')
+                this.dispatch(`${prefix}datepicker`, 'update-popper')
             },
             handleTab (e) {
                 const tabbables = [...this.$el.children]
@@ -86,7 +87,7 @@
                 if (document.activeElement === expectedFocus) {
                     e.preventDefault()
                     e.stopPropagation()
-                    this.dispatch('CalendarPicker', 'focus-input')
+                    this.dispatch(`${prefix}datepicker`, 'focus-input')
                 }
             }
         }

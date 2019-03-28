@@ -95,9 +95,10 @@
     import Mixin from '../panel-mixin'
     import DateMixin from './date-panel-mixin'
     import lang from '../../../../utils/date'
+    import { prefix } from '../../../../utils/common'
     import { siblingMonth, formatDateLabels } from '../../util'
-    const prefixCls = 'ivu-picker-panel'
-    const datePrefixCls = 'ivu-date-picker'
+    const prefixCls = `${prefix}picker-panel`
+    const datePrefixCls = `${prefix}date-picker`
 
     export default {
         name: 'DatePickerPanel',

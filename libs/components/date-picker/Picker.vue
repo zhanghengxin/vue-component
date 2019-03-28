@@ -24,7 +24,8 @@
                     @keydown.native="handleKeydown"
                     @mouseenter.native="handleInputMouseenter"
                     @mouseleave.native="handleInputMouseleave"
-                    :icon="iconType">
+                    :icon="iconType"
+                    suffix>
                 </b-input>
             </slot>
         </div>
@@ -72,12 +73,12 @@
     import Drop from '../select/Dropdown'
     import * as vClickOutside from 'v-click-outside-x'
     import TransferDom from '../../utils/directives/transfer-dom'
-    import { oneOf } from '../../utils/common'
+    import { oneOf, prefix } from '../../utils/common'
     import { DEFAULT_FORMATS, RANGE_SEPARATOR, TYPE_VALUE_RESOLVER_MAP, getDayCountOfMonth } from './util'
     import { findComponentsDownward } from '../../utils/assist'
     import Emitter from '../../mixins/emitter'
-    const prefixCls = 'ivu-date-picker'
-    const pickerPrefixCls = 'ivu-picker'
+    const prefixCls = `${prefix}date-picker`
+    const pickerPrefixCls = `${prefix}picker`
     // eslint-disable-next-line no-mixed-operators
     const isEmptyArray = val => val.reduce((isEmpty, str) => isEmpty && !str || (typeof str === 'string' && str.trim() === ''), true)
     const keyValueMapper = {
@@ -93,7 +94,7 @@
         if (key === 'down') return vertical * -1
     }
     const pulseElement = (el) => {
-        const pulseClass = 'ivu-date-picker-btn-pulse'
+        const pulseClass = `${prefix}date-picker-btn-pulse`
         el.classList.add(pulseClass)
         setTimeout(() => el.classList.remove(pulseClass), 200)
     }
@@ -243,9 +244,9 @@
                 return this.open === null ? this.visible : this.open
             },
             iconType () {
-                let icon = 'ios-calendar-outline'
-                if (this.type === 'time' || this.type === 'timerange') icon = 'ios-clock-outline'
-                if (this.showClose) icon = 'ios-close'
+                let icon = 'rili'
+                // if (this.type === 'time' || this.type === 'timerange') icon = 'ios-clock-outline'
+                if (this.showClose) icon = 'quxiao-guanbi-shanchu'
                 return icon
             },
             transition () {
@@ -291,7 +292,7 @@
                 this.disableClickOutSide = false
             },
             handleFocus (e) {
-                if (this.readonly) return
+                if (this.readonly || (this.showClose && !this.visualValue)) return
                 this.isFocused = true
                 if (e && e.type === 'focus') return // just focus, don't open yet
                 this.visible = true
@@ -446,7 +447,7 @@
                     const position = direction.match(/left|down/) ? 'prev' : 'next'
                     const double = direction.match(/up|down/) ? '-double' : ''
                     // pulse button
-                    const button = this.$refs.drop.$el.querySelector(`.ivu-date-picker-${position}-btn-arrow${double}`)
+                    const button = this.$refs.drop.$el.querySelector(`.${prefix}date-picker-${position}-btn-arrow${double}`)
                     if (button) pulseElement(button)
                     return
                 }

@@ -3,9 +3,11 @@ import TimePickerPanel from '../panel/Time/time'
 import RangeTimePickerPanel from '../panel/Time/time-range'
 import Options from '../time-mixins'
 import { findComponentsDownward } from '../../../utils/assist'
-import { oneOf } from '../../../utils/common'
+import { oneOf, prefix } from '../../../utils/common'
+const prefixCls = `${prefix}timepicker`
 
 export default {
+    name: prefixCls,
     mixins: [Picker, Options],
     components: { TimePickerPanel, RangeTimePickerPanel },
     props: {

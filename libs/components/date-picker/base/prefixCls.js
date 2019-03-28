@@ -1,1 +1,3 @@
-export default 'ivu-date-picker-cells'
+import { prefix } from '../../../utils/common'
+
+export default `${prefix}date-picker-cells`
