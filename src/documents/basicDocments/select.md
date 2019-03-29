@@ -18,8 +18,8 @@
                 value00: '',
                 value01: '',
                 value02: '',
-                value03: '',
-                value04: '',
+                value03: 'Alabama',
+                value04: ['Alabama'],
                 value05: [],
                 value06: [],
                 clearable:true,
@@ -70,16 +70,18 @@
                 nameInCode:true,
                 options3:[],
                 options4:[],
+                options5:[],
                 nameKey:'label',
                 codeKey:'value',
                 multiple:true,
                 filterabled:true,
-                loading:false
+                loading:false,
+                list: ['Alabama', 'Arkansas', 'Connecticut']
             }
         },
         mounted () {
             setTimeout(_=>{
-                this.options3 = this.options2
+                this.options5 = this.options2
             },1000)
         },
         methods:{
@@ -90,26 +92,38 @@
                 return (item.label + item.value).indexOf(query) > -1
             },
             remoteFn(query){
-                if (query !== '') {
-                    this.loading = true
-                    setTimeout(() => {
-                        this.loading = false
-                        this.options3 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
-                    }, 2000)
-                } else {
-                    this.options3 = []
-                }
+                this.loading = true
+                setTimeout(() => {
+                    this.loading = false
+                    const list = this.list.map(item => {
+                        return {
+                            value: item,
+                            label: item
+                        };
+                    });
+                    this.options3 = list.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1);
+                }, 200)
             },
             remoteFnMultiple(query){
-                if (query !== '') {
-                    this.loading = true
-                    setTimeout(() => {
-                        this.loading = false
-                        this.options4 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
-                    }, 2000)
-                } else {
-                    this.options4 = []
-                }
+                setTimeout(() => {
+                    this.loading = false
+                    const list = this.list.map(item => {
+                        return {
+                            value: item,
+                            label: item
+                        };
+                    });
+                    this.options4 = list.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1);
+                }, 200)
+                // if (query !== '') {
+                //     this.loading = true
+                //     setTimeout(() => {
+                //         this.loading = false
+                //         this.options4 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
+                //     }, 200)
+                // } else {
+                //     this.options4 = []
+                // }
             }
         }
     }
@@ -124,7 +138,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value" @on-change='changeConsole' :nameInCode='nameInCode'  style="width:200px" :options='options3'></b-select>
+            <b-select v-model="value" @on-change='changeConsole' :nameInCode='nameInCode'  style="width:200px" :options='options5'></b-select>
             <span>{{value}}</span>
         </div>
     </div>
@@ -620,8 +634,9 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 
 
 ### label样式
-可设置 ```label```，```fixed```设置label的两种样式。<br/>
-可设置通过width来设置select的宽度，labelWidth设置label文字的宽度（不设置labelWidth时，文字宽度默认自适应）
+通过设置```label```、```fixed```属性 设置带文字描述的select组合组件 <br/>
+fixed为false时可设置通过width来设置select框的宽度，labelWidth设置label文字的宽度（不设置labelWidth时，文字宽度默认自适应）
+fixed为true时可设置通过width来设置整体select的宽度，labelWidth设置label文字的宽度（不设置labelWidth时，文字宽度默认自适应）
 <div class="example">
     <div class="example-box">
         <div>
@@ -629,36 +644,31 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 v-model="value9"  
                 label='发票类型'
                 :fixed='fixed'
-                width='280'
-                :disabled='disabled' 
-                labelWidth='100'
+                style='width:200px'
                 :options='options' >
             </b-select>
-            <b-select 
-                v-model="value10" 
-                label='发票类型'
-                :disabled='disabled' 
-                width='280' labelWidth='100'
-                :options='options' >
-            </b-select>
-            <br/>
-            <br/>
             <b-select 
                 v-model="value05"  
                 label='发票类型'
                 :multiple='multiple'
                 :fixed='fixed'
-                :disabled='disabled' 
                 width='280'
                 labelWidth='100'
+                :options='options' >
+            </b-select>
+            <br/>
+            <br/>
+            <b-select 
+                v-model="value10"
+                label='发票类型'
+                width='200'
                 :options='options' >
             </b-select>
             <b-select 
                 v-model="value06"
                 :multiple='multiple' 
                 label='发票类型'
-                :disabled='disabled' 
-                width='280' 
+                width='200' 
                 labelWidth='100'
                 :options='options' >
             </b-select>
@@ -676,35 +686,30 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 label='发票类型'
                 :fixed='fixed'
                 width='280'
-                :disabled='disabled' 
-                labelWidth='100'
                 :options='options' >
             </b-select>
-            <b-select 
-                v-model="value10" 
-                label='发票类型'
-                :disabled='disabled' 
-                width='280' labelWidth='100'
-                :options='options' >
-            </b-select>
-            <br/>
-            <br/>
             <b-select 
                 v-model="value05"  
                 label='发票类型'
                 :multiple='multiple'
                 :fixed='fixed'
-                :disabled='disabled' 
                 width='280'
                 labelWidth='100'
+                :options='options' >
+            </b-select>
+            <br/>
+            <br/>
+            <b-select 
+                v-model="value10"
+                label='发票类型'
+                width='200'
                 :options='options' >
             </b-select>
             <b-select 
                 v-model="value06"
                 :multiple='multiple' 
                 label='发票类型'
-                :disabled='disabled' 
-                width='280' 
+                width='200' 
                 labelWidth='100'
                 :options='options' >
             </b-select>

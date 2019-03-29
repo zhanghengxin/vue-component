@@ -1,5 +1,5 @@
 <template>
-   <div :class='[boxClasses,]'
+   <div :class='[boxClasses]'
         :style='selectBoxStyles'
         v-click-outside="clickOutside">
     <div :class='selectGroupClasses'>
@@ -272,19 +272,13 @@ export default {
             return style
         },
         selectBoxStyles () {
-            // const {label, fixed} = this
+            const {label, fixed} = this
             let style = {}
-            style.width = `${this.width}px`
+            if (!label || (label && fixed)) { //
+                style.width = `${this.width}px`
+            }
             return style
         },
-        // widthStyle () {
-        //     const {label, fixed} = this
-        //     let style = {}
-        //     if (label && !fixed && this.width) {
-        //         style.width = `${this.width}px`
-        //     }
-        //     return style
-        // },
         inputStyle () {
             let style = {}
             const {multiple, values, inputLength} = this
@@ -310,7 +304,7 @@ export default {
         },
         inputShow () {
             const {multiple, show, values} = this
-            return !multiple || ((show && multiple) || !values.length)
+            return !multiple || ((show && multiple) || !values.length) || this.remoteFn
         },
         iconShow () {
             const {clearable, clearShow, values, disabled, treeValues} = this
@@ -380,41 +374,50 @@ export default {
     mounted () {
         this.$on('on-select-selected', this.onOptionClick)
         if (this.options && this.options.length > 0) {
-            this.values = this.getInitValue().map(value => {
-                if (typeof value !== 'number' && !value) return null
-                return this.getOptionData(value)
-            }).filter(Boolean)
+            this.values = this.valuesInit()
         }
-        this.fixedInitDrop()
-        this.label && this.widthInit()
+        this.widthInit()
+        if (this.filterabled && this.remoteFn && this.value) {
+            this.query = this.multiple ? this.value[0] : this.value
+        }
     },
     methods: {
         widthInit () {
-            const {label, $el} = this
+            const {label, fixed, $el} = this
             let width = ''
-            if (label) {
+            if (label && fixed) { //
                 let clientWidth = $el.clientWidth
                 let labelWidth = this.labelWidth || +$el.querySelector(`.${prefixCls}-label`).clientWidth
                 width = clientWidth - labelWidth - 2
                 this.selectWidth = {
                     width: width + 'px'
                 }
-            }
-        },
-        clickOutside () {
-            if (this.filterabled) {
-                if (this.multiple && this.values.length > 0) {
-                    this.query = ''
-                } else if (this.values.length > 0) {
-                    this.query = this.showValue
+            } else {
+                width = this.width || this.$refs.reference.clientWidth
+                this.selectWidth = {
+                    width: width + 'px'
                 }
             }
-            this.broadcastPopperUpdate()
+            this.dropWidth = width
+            this.$emit('get-drop-width', this.dropWidth)
+        },
+        valuesInit () {
+            return this.getInitValue().map(value => {
+                if (typeof value !== 'number' && !value) return null
+                return this.getOptionData(value)
+            }).filter(Boolean)
+        },
+        clickOutside () {
+            const {filterabled, values, multiple, showValue, broadcastPopperUpdate} = this
+            if (filterabled && !multiple && values.length > 0) {
+                this.query = showValue
+            }
+            broadcastPopperUpdate()
             this.show = false
             this.$emit('on-outside')
         },
         onOptionClick (option) {
-            const {multiple, filterabled, values} = this
+            const {multiple, filterabled, values, toggleMenu, broadcastPopperUpdate} = this
             if (multiple) {
                 if (filterabled) {
                     this.query = ''
@@ -426,10 +429,13 @@ export default {
                     this.values = values.concat(option)
                 }
             } else {
+                if (filterabled) {
+                    this.query = option.label
+                }
                 this.values = [option]
-                this.toggleMenu()
+                toggleMenu()
             }
-            this.broadcastPopperUpdate()
+            broadcastPopperUpdate()
         },
         getInitValue () { // []
             const {multiple, value} = this
@@ -484,18 +490,6 @@ export default {
                 this.values = values.slice(0, values.length - 1)
             }
         },
-        fixedInitDrop () {
-            // cmoputed frop width
-            const {label, $el} = this
-            if (label && $el) {
-                let clientWidth = $el.clientWidth
-                let labelWidth = +$el.querySelector(`.${prefixCls}-label`).clientWidth
-                this.dropWidth = clientWidth - labelWidth
-            } else {
-                this.dropWidth = $el.clientWidth
-            }
-            this.$emit('get-drop-width', this.dropWidth)
-        },
         broadcastPopperUpdate () {
             this.broadcast(`${prefix}drop`, 'on-update-popper')
         },
@@ -521,7 +515,9 @@ export default {
             const newValue = JSON.stringify(now)
             const oldValue = JSON.stringify(before)
             const emitInput = newValue !== oldValue && publicValue !== value
-            this.query = values.length > 0 ? (multiple ? '' : values[0].label) : ''
+            if (!this.query) {
+                this.query = values.length > 0 ? (multiple ? '' : values[0].label) : ''
+            }
             if (emitInput) {
                 this.$emit('input', publicValue) // to update v-model
                 this.$emit('on-change', nameInCode ? (multiple ? values : values[0]) : publicValue)
@@ -548,13 +544,21 @@ export default {
             }
         },
         options (now, before) {
-            const {multiple, value, nameInCode} = this
+            const {multiple, value, nameInCode, codeKey} = this
             const newValue = JSON.stringify(now)
             const oldValue = JSON.stringify(before)
-            this.values = this.getInitValue().map(value => {
-                if (typeof value !== 'number' && !value) return null
-                return this.getOptionData(value)
-            }).filter(Boolean)
+            if (multiple && this.values.length > 0) {
+                let values = this.values.concat(this.valuesInit())
+                let unique = {}
+                values.forEach(item => {
+                    unique[item[codeKey]] = item
+                })
+                this.values = Object.keys(unique).map(item => {
+                    return unique[item]
+                })
+            } else {
+                this.values = this.valuesInit()
+            }
             if (newValue !== oldValue) {
                 this.$emit('on-change', nameInCode ? (multiple ? this.values : this.values[0]) : value)
                 this.dispatch('FormItem', 'on-form-change', nameInCode ? this.values : value)

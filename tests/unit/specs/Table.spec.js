@@ -73,7 +73,6 @@ describe('table', () => {
             }
         })
         expect(vm.contains(`.${tableCls}`)).toBe(true)
-        
     })
     it('border', () => {
         vm = mount(TableComponent, {
@@ -212,7 +211,7 @@ describe('table', () => {
         expect(order).toBe('desc')
         done()
     })
-    
+
     it('className&cellClass', () => {
         vm = createVue({
             template: `<${tableCls} :data="data" :columns="columns"></${tableCls}>`,
@@ -246,7 +245,7 @@ describe('table', () => {
         expect(elm.querySelector(`.test-table-columns`)).toBeTruthy()
         expect(elm.querySelector(`.test-table-cell`)).toBeTruthy()
     })
-    
+
     it('highlightRow', done => {
         let result
         vm = createVue({
