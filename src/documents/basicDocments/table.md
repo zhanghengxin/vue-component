@@ -1991,11 +1991,29 @@
                                }
                            }
                         },
-                        {
-                           title: 'Pets',
-                           key: 'pets',
-                           minWidth:100
-                        },
+                       {
+                          title: 'Pets',
+                          key: 'pets',
+                          filters: [
+                              {
+                                  label: 'dog',
+                                  value: 'dog'
+                              },
+                              {
+                                  label: 'rhizomys',
+                                  value: 'rhizomys'
+                              },
+                              {
+                                  label: 'cat',
+                                  value: 'cat'
+                              }
+                          ],
+                          filterMultiple:true,
+                          filterMethod (value, row) {
+                              return row.pets.indexOf(value) > -1;
+                          },
+                          minWidth:100
+                       },
                         {
                            title: 'Like',
                            key: 'like',
@@ -3324,6 +3342,24 @@ column 设置 children，可以渲染出多级表头<br/>
                     {
                        title: 'Pets',
                        key: 'pets',
+                       filters: [
+                           {
+                               label: 'dog',
+                               value: 'dog'
+                           },
+                           {
+                               label: 'rhizomys',
+                               value: 'rhizomys'
+                           },
+                           {
+                               label: 'cat',
+                               value: 'cat'
+                           }
+                       ],
+                       filterMultiple:true,
+                       filterMethod (value, row) {
+                           return row.pets.indexOf(value) > -1;
+                       },
                        minWidth:100
                     },
                     {
@@ -3613,6 +3649,8 @@ column 设置 children，可以渲染出多级表头<br/>
 | filters     |  过滤数据的选项，格式为数组，数组中每项包含 label 和 value 属性，使用过滤，必须同时配置 filterMethod	  |  Array  |-  | -   |
 | filterMethod     |  数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示		  |  Function  | -  | -   |
 | filterMultiple     |  数据过滤的选项是否多选  |  Boolean  | -  | false   |
+| filteredValue     |  在初始化时使用过滤，值为需要过滤的 value 集合	  |  Array  | -  | -   |
+| filterRemote     |  使用远程过滤	  |   Function  | -  | -   |
 | children     |  多级表头配置项，具体见示例  |   Array  | -  | -   |
 
 ### data

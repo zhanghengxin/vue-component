@@ -264,6 +264,7 @@ export default {
         this.$on('drag-end', this.handleDragEnd)
         this.$on('context-menu', this.handleContextMenu)
         this.$on('filiter-reset', this.handleFilterReset)
+        this.$on('filiter-check', this.handleFilter)
         this.$on('filiter-select', this.handleFilterSelect)
         this.$on('expand-change', this.handleExpand)
     },
@@ -443,7 +444,7 @@ export default {
                 if ('filterMultiple' in row) {
                     row._filterMultiple = row.filterMultiple
                 } else {
-                    row._filterMultiple = true
+                    row._filterMultiple = false
                 }
                 if ('sortType' in row) {
                     row._sortType = row.sortType
@@ -786,11 +787,14 @@ export default {
                 }
             }
         },
-        // 过滤数据
+        // filter
         handleFilterReset (_index) {
             const index = _index
             this.$set(this.cloneColumns[index], '_filterChecked', [])
-            this.formatData = this.buildData()
+            this.cloneColumns[index]._filterVisible = false
+            this.cloneColumns[index]._filterChecked = []
+            let filterData = this.makeDataWithSort()
+            this.formatData = this.filterOtherData(filterData, index)
             this.$emit('on-filter-change', this.cloneColumns[index])
         },
         handleFilterSelect (option) {
@@ -802,6 +806,7 @@ export default {
             let filterData = this.makeDataWithSort()
             filterData = this.filterOtherData(filterData, index)
             this.formatData = this.filterData(filterData, column)
+            this.cloneColumns[index]._filterVisible = false
             this.$emit('on-filter-change', column)
         },
         filterOtherData (data, index) {
