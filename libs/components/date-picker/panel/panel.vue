@@ -21,13 +21,13 @@
             <a
                 v-if="panel === 'DATE'"
                 :class="[`${prefix}current-month`]"
-                @click="handleClickMonth">
+                @click="panel = 'MONTH'">
                 {{months[month]}}
             </a>
             <a
                 v-if="panel === 'DATE' || panel === 'MONTH'"
                 :class="[`${prefix}current-year`]"
-                @click="handleClickYear">
+                @click="panel = 'YEAR'">
                 {{`${year} 年`}}
             </a>
             <a
@@ -92,11 +92,11 @@
 
 <script>
 import { isValidDate, isDateObject, formatDate } from '../../../utils/date'
-// import scrollIntoView from '../../../utils/scroll-into-view'
 import { TableYear, TableMonth, TableDate, TableTime } from '../base'
 import { prefix } from '../../../utils/common'
 
 const icon = `${prefix}icon`
+const months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
 
 export default {
     name: `${prefix}panel`,
@@ -166,18 +166,20 @@ export default {
         }
     },
     data () {
-        let _date = new Date()
-        let year = _date.getFullYear()
-        let month = _date.getMonth()
-        let firstYear = Math.floor(year / 10) * 10
+        const _date = new Date()
+        const _year = _date.getFullYear()
+        const _month = _date.getMonth()
+        const _firstYear = Math.floor(_year / 10) * 10
+
         return {
             icon,
             prefix,
-            panel: 'NONE',
+            panel: 'DATE',
             dates: [],
-            year,
-            month,
-            firstYear
+            year: _date,
+            month: _month,
+            firstYear: _firstYear,
+            months
         }
     },
     computed: {
@@ -192,7 +194,7 @@ export default {
                 return new Date(this.year, this.month).getTime()
             },
             set (val) {
-                let _date = new Date(val)
+                const _date = new Date(val)
                 this.year = _date.getFullYear()
                 this.month = _date.getMonth()
             }
@@ -202,15 +204,12 @@ export default {
             let a = /A/.test(this.$parent.format) ? 'A' : 'a'
             return [h, a]
         },
-        months () {
-            return ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
-        },
         yearHeader () {
-            return this.firstYear + ' ~ ' + (this.firstYear + 9)
+            return `${this.firstYear} ~ ${this.firstYear + 9}`
         },
         timeHeader () {
             if (this.type === 'time') {
-                // parent drop, drop's parent picker
+                // TODO: parent drop, drop's parent picker
                 if (this.minuteStep !== 0) return this.$parent.$parent.format.slice(0, 5)
                 return this.$parent.format || 'HH:mm:ss'
             }
@@ -239,7 +238,7 @@ export default {
             handler: 'init'
         },
         panel: {
-            handler: 'handelPanelChange'
+            handler: 'handlePanelChange'
         }
     },
     methods: {
@@ -270,25 +269,14 @@ export default {
                         this.panel = 'DATE'
                 }
             } else {
-                this.panel = 'NONE'
                 this.updateNow(this.value)
             }
         },
-        handelPanelChange (panel, oldPanel) {
+        handlePanelChange (panel, oldPanel) {
             this.$emit('panel-change', panel, oldPanel)
             if (panel === 'YEAR') {
                 this.firstYear = Math.floor(this.year / 10) * 10
             }
-            // else if (panel === 'TIME') {
-            //     this.$nextTick(() => {
-            //         let list = this.$el.querySelectorAll('.b-panel-time .b-time-list')
-            //         for (let i = 0, len = list.length; i < len; i++) {
-            //             let el = list[i]
-            //             console.log('el', el)
-            //             scrollIntoView(el, el.querySelector('.actived'))
-            //         }
-            //     })
-            // }
         },
         selectDate (date) {
             if (this.type === 'datetime') {
@@ -315,15 +303,15 @@ export default {
         changeYear (year) {
             this.updateNow(new Date(year, this.month))
         },
+        changeMonth (month) {
+            this.updateNow(new Date(this.year, month))
+        },
         selectYear (year) {
             this.changeYear(year)
             if (this.type.toLowerCase() === 'year') {
                 return this.selectDate(new Date(this.now))
             }
             this.panel = 'MONTH'
-        },
-        changeMonth (month) {
-            this.updateNow(new Date(this.year, month))
         },
         selectMonth (month) {
             this.changeMonth(month)
@@ -338,7 +326,7 @@ export default {
         pickTime (time) {
             this.$emit('select-time', time, true)
         },
-        // Todo
+        // TODO:
         getCriticalTime (value) {
             if (!value) return null
 
@@ -424,11 +412,12 @@ export default {
         },
         handleIconMonth (flag) {
             let month = this.month
-            if (this.panelPosition && !this.splitPanels) {
-                this.$parent.$children[0].changeMonth(month + flag)
+
+            this.changeMonth(month + flag)
+            if (this.panelPosition === 'left' && !this.splitPanels) {
                 this.$parent.$children[1].changeMonth(month + flag)
-            } else {
-                this.changeMonth(month + flag)
+            } else if (this.panelPosition === 'right' && !this.splitPanels) {
+                this.$parent.$children[0].changeMonth(month + flag)
             }
 
             this.$parent.$emit('change-calendar-month', {
@@ -439,22 +428,14 @@ export default {
             })
         },
         changeSplitMonth (month) {
-            if (this.panelPosition && !this.splitPanels) {
-                this.$parent.$children[0].changeMonth(month)
-                this.$parent.$children[1].changeMonth(month)
-            }
+            if (this.splitPanels || this.$parent.$children.length < 2 || !this.panelPosition) return
+            this.$parent.$children[0].changeMonth(month)
+            this.$parent.$children[1].changeMonth(month)
         },
         changeSplitYear (year) {
-            if (this.panelPosition && !this.splitPanels) {
-                this.$parent.$children[0].changeYear(year)
-                this.$parent.$children[1].changeYear(year)
-            }
-        },
-        handleClickYear () {
-            this.panel = 'YEAR'
-        },
-        handleClickMonth () {
-            this.panel = 'MONTH'
+            if (this.splitPanels || this.$parent.$children.length < 2 || !this.panelPosition) return
+            this.$parent.$children[0].changeYear(year)
+            this.$parent.$children[1].changeYear(year)
         },
         handleTimeHeader () {
             if (this.type === 'time') return

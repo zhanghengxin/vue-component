@@ -12,7 +12,10 @@ export default {
         },
         type: {
             type: String,
-            default: 'time'
+            default: 'time',
+            validator (val) {
+                return val === 'time'
+            }
         }
     }
 }

@@ -63,8 +63,7 @@ export default {
             default: ''
         },
         labelWidth: {
-            type: Number,
-            default: 36
+            type: Number
         },
         fixed: {
             type: Boolean,

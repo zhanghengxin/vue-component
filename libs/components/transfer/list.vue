@@ -139,8 +139,6 @@ export default {
             this.query = val
         },
         showLabel (item) {
-            console.log('item', item, this.renderFormat(item))
-
             return this.renderFormat(item)
         },
         isCheck (item) {
@@ -153,7 +151,6 @@ export default {
             this.$parent.handleCheckedKeys()
         },
         toggleSelectAll (status) {
-            console.log('status', status)
             let keys = status
                 ? this.filterData.filter(data => !data.disabled || this.checkedKeys.indexOf(data.key) > -1).map(data => data.key)
                 : this.filterData.filter(data => data.disabled && this.checkedKeys.indexOf(data.key) > -1).map(data => data.key)

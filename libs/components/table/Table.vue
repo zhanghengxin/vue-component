@@ -161,6 +161,7 @@ export default {
             showResizeBorder: false,
             modalShow: false,
             dynamicColumns: [],
+            isAddIndex: false,
             scrollBarWidth: getScrollBarSize()
         }
     },
@@ -247,12 +248,8 @@ export default {
         }
     },
     created () {
-        const colsWithId = this.makeColumnsId(this.columns, this.showIndex)
-        this.cloneColumns = this.buildColumns(colsWithId)
-        this.columnRows = this.makeColumnRows(false, colsWithId)
-        this.leftFixedColumnRows = this.makeColumnRows('left', colsWithId)
-        this.rightFixedColumnRows = this.makeColumnRows('right', colsWithId)
-        this.formatData = this.buildData()
+        this.buildColumnsData()
+        this.formatData = this.makeDataWithSortAndFilter()
         this.$on('selected-change', this.toggleSelect)
         this.$on('selected-all-change', this.selectAll)
         this.$on('sort-change', this.handleSort)
@@ -267,6 +264,7 @@ export default {
         this.$on('drag-end', this.handleDragEnd)
         this.$on('context-menu', this.handleContextMenu)
         this.$on('filiter-reset', this.handleFilterReset)
+        this.$on('filiter-check', this.handleFilter)
         this.$on('filiter-select', this.handleFilterSelect)
         this.$on('expand-change', this.handleExpand)
     },
@@ -287,7 +285,7 @@ export default {
     watch: {
         data: {
             handler () {
-                this.formatData = this.buildData()
+                this.formatData = this.makeDataWithSortAndFilter()
                 this.handleResize()
             },
             deep: true
@@ -297,8 +295,8 @@ export default {
         },
         columns: {
             handler () {
-                const cols = this.makeColumnsId(this.columns, this.showIndex)
-                this.cloneColumns = this.buildColumns(cols)
+                this.buildColumnsData()
+                this.formatData = this.makeDataWithSortAndFilter()
                 this.handleResize()
             },
             deep: true
@@ -431,7 +429,7 @@ export default {
         },
         buildColumns (cols) {
             let columns = deepCopy(getAllColumns(cols))
-            let indexArr = columns.filter((item) => (item.key === '_indexNo'))
+            let indexArr = columns.filter((item) => (item.key === '_indexNo' && !item.fixed))
             let fixLeftArr = columns.filter((item) => (item.fixed === 'left'))
             let fixRightArr = columns.filter((item) => (item.fixed === 'right'))
             let normalArr = columns.filter((item) => (!item.fixed && item.key !== '_indexNo'))
@@ -440,10 +438,30 @@ export default {
             // Clumns in disorder
             columns.forEach((row, index) => {
                 row._index = index
-                row._sortType = row.sortType || ''
+                row._sortType = 'normal'
                 row._visible = true
+                row._filterChecked = []
+                if ('filterMultiple' in row) {
+                    row._filterMultiple = row.filterMultiple
+                } else {
+                    row._filterMultiple = false
+                }
+                if ('sortType' in row) {
+                    row._sortType = row.sortType
+                }
+                if ('filteredValue' in row) {
+                    row._filterChecked = row.filteredValue
+                    // row._isFiltered = true
+                }
             })
             return result
+        },
+        buildColumnsData () {
+            const colsWithId = this.makeColumnsId(deepCopy(this.columns), this.showIndex)
+            this.cloneColumns = this.buildColumns(colsWithId)
+            this.columnRows = this.makeColumnRows(false, colsWithId)
+            this.leftFixedColumnRows = this.makeColumnRows('left', colsWithId)
+            this.rightFixedColumnRows = this.makeColumnRows('right', colsWithId)
         },
         getColumnsWidth () {
             return this.cloneColumns.map(cell => {
@@ -635,9 +653,9 @@ export default {
             if (column._sortType === options.type) {
                 options.type = 'normal'
             }
-            if (column.sortable) {
+            if (column.sortable !== 'custom') {
                 if (options.type === 'normal') {
-                    this.formatData = this.buildData()
+                    this.formatData = this.makeDataWithFilter()
                 } else {
                     this.formatData = this.sortData(this.formatData, options.type, options.index)
                 }
@@ -769,12 +787,14 @@ export default {
                 }
             }
         },
-        // 过滤数据
+        // filter
         handleFilterReset (_index) {
             const index = _index
             this.$set(this.cloneColumns[index], '_filterChecked', [])
-            let filterData = this.buildData()
-            this.formatData = filterData
+            this.cloneColumns[index]._filterVisible = false
+            this.cloneColumns[index]._filterChecked = []
+            let filterData = this.makeDataWithSort()
+            this.formatData = this.filterOtherData(filterData, index)
             this.$emit('on-filter-change', this.cloneColumns[index])
         },
         handleFilterSelect (option) {
@@ -783,12 +803,59 @@ export default {
         },
         handleFilter (index) {
             const column = this.cloneColumns[index]
-            let filterData = this.buildData()
+            let filterData = this.makeDataWithSort()
+            filterData = this.filterOtherData(filterData, index)
             this.formatData = this.filterData(filterData, column)
+            this.cloneColumns[index]._filterVisible = false
             this.$emit('on-filter-change', column)
+        },
+        filterOtherData (data, index) {
+            let column = this.cloneColumns[index]
+            if (typeof column.filterRemote === 'function') {
+                column.filterRemote.call(this.$parent, column._filterChecked, column.key, column)
+            }
+            this.cloneColumns.forEach((col, colIndex) => {
+                if (colIndex !== index) {
+                    data = this.filterData(data, col)
+                }
+            })
+            return data
+        },
+        makeDataWithSortAndFilter () {
+            let data = this.makeDataWithSort()
+            this.cloneColumns.forEach(col => {
+                data = this.filterData(data, col)
+            })
+            return data
+        },
+        makeDataWithFilter () {
+            let data = this.buildData()
+            this.cloneColumns.forEach(col => {
+                data = this.filterData(data, col)
+            })
+            return data
+        },
+        makeDataWithSort () {
+            let data = this.buildData()
+            let sortType = 'normal'
+            let sortIndex = -1
+            let isCustom = false
+
+            for (let i = 0; i < this.cloneColumns.length; i++) {
+                if (this.cloneColumns[i]._sortType !== 'normal') {
+                    sortType = this.cloneColumns[i]._sortType
+                    sortIndex = i
+                    isCustom = this.cloneColumns[i].sortable === 'custom'
+                    break
+                }
+            }
+            if (sortType !== 'normal' && !isCustom) data = this.sortData(data, sortType, sortIndex)
+            return data
         },
         filterData (data, column) {
             return data.filter((row) => {
+                if (typeof column.filterRemote === 'function') return true
+
                 let status = !column._filterChecked.length
                 for (let i = 0; i < column._filterChecked.length; i++) {
                     status = column.filterMethod(column._filterChecked[i], row)

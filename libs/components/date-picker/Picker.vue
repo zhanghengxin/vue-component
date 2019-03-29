@@ -190,7 +190,10 @@ export default {
         },
         type: {
             type: String,
-            default: 'date'
+            default: 'date',
+            validator (val) {
+                return oneOf(val, ['date', 'year', 'month', 'time', 'datetime'])
+            }
         },
         range: {
             type: Boolean,
@@ -328,7 +331,8 @@ export default {
             return this.range ? p[1] : p[0]
         },
         innerType () {
-            return String(this.type).toLowerCase()
+            const type = String(this.type).toLowerCase()
+            return oneOf(type, ['date', 'year', 'month', 'time', 'datetime']) ? type : 'date'
         },
         innerShortcuts () {
             if (Array.isArray(this.shortcuts)) return this.shortcuts
@@ -338,7 +342,8 @@ export default {
         innnerDateFormat () {
             if (this.dateFormat) return this.dateFormat
             if (this.innerType === 'date') return this.format
-            return this.format.replace(/[Hh]+.*[msSaAZ]|\[.*?\]/g, '').trim() || 'YYYY-MM-DD'
+            if (this.format) return this.format.replace(/[Hh]+.*[msSaAZ]|\[.*?\]/g, '').trim()
+            return 'YYYY-MM-DD'
         }
     },
     mounted () {
@@ -493,6 +498,7 @@ export default {
             }
         },
         getLabelWidth () {
+            if (!this.$refs.reference) return
             const { label } = this.$refs.reference.$refs
             let labelWidth = label ? label.offsetWidth : 0
             if (labelWidth) {

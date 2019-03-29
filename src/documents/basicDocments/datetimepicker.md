@@ -12,7 +12,7 @@
         <b-datetimepicker 
             v-model='date' 
             :shortcuts='short'>
-        <b-datetimepicker>
+        </b-datetimepicker>
     </div>
 
 ::: code
@@ -24,7 +24,7 @@
         <b-datetimepicker 
             v-model='date' 
             :shortcuts='short'>
-        <b-datetimepicker>
+        </b-datetimepicker>
     </div>
     <script>
         export default {
@@ -51,13 +51,13 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-datetimepicker v-model='date1'><b-datetimepicker>
+        <b-datetimepicker v-model='date1'></b-datetimepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-datetimepicker v-model='date'><b-datetimepicker>
+        <b-datetimepicker v-model='date'></b-datetimepicker>
     </div>
     <script>
         export default {
@@ -85,7 +85,7 @@
             v-model='daterange' 
             range 
             :shortcuts='shortcuts'>
-        <b-datetimepicker>
+        </b-datetimepicker>
     </div>
 
 ::: code
@@ -98,7 +98,7 @@
             v-model='daterange' 
             range 
             :shortcuts='shortcuts'>
-        <b-datetimepicker>
+        </b-datetimepicker>
     </div>
     <script>
         export default {

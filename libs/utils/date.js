@@ -185,3 +185,36 @@ export const placeholder = {
     month: ['请选择月份', '请选择月份范围'],
     date: ['请选择日期', '请选择日期范围']
 }
+
+export const getDayCountOfMonth = function (year, month) {
+    if (month === 3 || month === 5 || month === 8 || month === 10) {
+        return 30
+    }
+    if (month === 1) {
+        if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+            return 29
+        } else {
+            return 28
+        }
+    }
+    return 31
+}
+
+export const modifyDate = function (date, y, m, d) {
+    return new Date(y, m, d, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds())
+}
+
+export const changeYearMonthAndClampDate = function (date, year, month) {
+    // clamp date to the number of days in `year`, `month`
+    // eg: (2010-1-31, 2010, 2) => 2010-2-28
+    const monthDate = Math.min(date.getDate(), getDayCountOfMonth(year, month))
+    return modifyDate(date, year, month, monthDate)
+}
+
+export const nextMonth = function (date) {
+    const year = date.getFullYear()
+    const month = date.getMonth()
+    return month === 11
+        ? changeYearMonthAndClampDate(date, year + 1, 0)
+        : changeYearMonthAndClampDate(date, year, month + 1)
+}
