@@ -57,15 +57,15 @@ describe('Select', () => {
         }, true)
         vm.$nextTick(_ => {
             expect(vm.$el.classList.contains(`${Select}`)).toBeTruthy()
-            expect(vm.$el.querySelector(`${prefixCls}-selection-content`).textContent).toBe('增专')
+            expect(vm.$el.querySelector(`${prefixCls}-main-content`).textContent).toBe('增专')
             expect(vm.$el.querySelector(`[type='hidden']`).value).toBe('004')
             expect(vm.$el.querySelector(`.bw-shibai-mian`)).toBeTruthy()
             expect(vm.$el.querySelector(`.b-drop`)).toBeTruthy()
             vm.$el.querySelector(`.bw-shibai-mian`).click()
             vm.$nextTick(_ => {
-                expect(vm.$el.querySelector(`${prefixCls}-selection-content`).textContent).toBe('请选择')
+                expect(vm.$el.querySelector(`${prefixCls}-main-content`).textContent).toBe('请选择')
                 expect(vm.$el.querySelector(`[type='hidden']`).value).toBe('')
-                // expect(vm.value).toBe('')
+                //     expect(vm.value).toBe('')
                 done()
             })
         })

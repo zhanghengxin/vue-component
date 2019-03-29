@@ -39,7 +39,7 @@ $input-large-font:14px;
     border-color: $color;
   }
 
-  &.focus {
+  &:focus {
     border-color: $color;
     box-shadow: $shadowColor;
   }
@@ -60,11 +60,11 @@ $input-large-font:14px;
       font-size: $input-font-size;
 
       &-prefix {
-        padding-left: $input-size + 4px;
+        padding-left: 25px;
       }
 
       &-suffix {
-        padding-right: $input-size + 4px;
+        padding-right: 25px;
       }
 
       &-label {
@@ -81,7 +81,6 @@ $input-large-font:14px;
       font-size: $fontSize;
     }
 
-    width: $icon-size;
     line-height: $icon-size - 2px;
   }
 }
@@ -99,7 +98,6 @@ $input-large-font:14px;
   display: inline-block;
   vertical-align: middle;
   position: relative;
-  overflow: hidden;
 
   &-textarea {
     overflow: inherit;
@@ -121,8 +119,6 @@ $input-large-font:14px;
   @include inputSize(small, $input-small-size, 4px 8px, $input-small-font);
   @include inputSize(default, $input-default-size, 8px, $input-default-font);
   @include inputSize(large, $input-large-size, 12px 8px, $input-large-font);
-
-
 
   .#{$css-prefix-input} {
     display: table-cell;
@@ -172,6 +168,9 @@ $input-large-font:14px;
       text-align: center;
       height: calc(100% - 2px);
 
+      .icon{
+        width: 25px;
+      }
 
       &-prefix {
         left: 1px;
@@ -193,13 +192,17 @@ $input-large-font:14px;
       @include inputIconSize(default, $input-default-size, $input-default-font);
       @include inputIconSize(large, $input-large-size, $input-large-font);
     }
-
+    
     //Reset height for textarea
     &-textarea {
       max-width: 100%;
       height: auto;
       min-height: $input-default-size;
       vertical-align: bottom;
+    }
+
+    &-main{
+      width: 100%;
     }
   }
 
@@ -227,6 +230,7 @@ $input-large-font:14px;
   width: 100%;
   display: inline-block;
   vertical-align: middle;
+  overflow: hidden;
   @include borderTrans();
   @include labelMockClass($LightPrimary, 0 0 0 2px rgba(45, 140, 240, 0.2));
 
@@ -241,6 +245,10 @@ $input-large-font:14px;
 
   &.#{$css-prefix-input}-error {
     @include labelMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
+  }
+
+  &.#{$css-prefix-input}-focused {
+    overflow: auto;
   }
 
   &.#{$css-prefix-input}-box {

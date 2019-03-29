@@ -9,7 +9,7 @@
         @mouseleave="mouseleaveHandle">
         <template v-if="type !== 'textarea'">
             <div
-                v-if="prefix"
+                v-if="prefix || $slots.prefix"
                 :class='[
                 prefixCls+`-icon`,
                 prefixCls+`-icon-`+size,
@@ -24,13 +24,27 @@
             </div>
             <transition name='fade'>
                 <div
-                    v-if="suffix"
+                    v-if="suffix || $slots.suffix || clearable || showPassword"
                     v-show='showSuffix'
                     :class='[
                     prefixCls+`-icon`,
                     prefixCls+`-icon-`+size,
                     prefixCls+`-icon-suffix`]'>
-                    <slot name='suffix'>
+                    <Icon
+                        v-if="clearable && currentValue"
+                        size
+                        type="shibai-mian"
+                        :class="[prefixCls+`-icon-clear`]"
+                        @on-click="handleClear">
+                    </Icon>
+                    <Icon
+                        v-if="showPassword && currentValue"
+                        size
+                        type="suoding-dongjie"
+                        :class="[prefixCls+`-icon-`+size]"
+                        @on-click="handleShowPassword">
+                    </Icon>
+                    <slot name='suffix' v-if='suffix || $slots.suffix'>
                         <Icon
                             size
                             :type="icon"
@@ -40,17 +54,6 @@
                     </slot>
                 </div>
             </transition>
-            <Icon
-                v-if="clearable && currentValue"
-                size
-                type="shibai-mian"
-                :class="[
-                prefixCls+`-icon`,
-                prefixCls+`-icon-`+size,
-                prefixCls+`-icon-suffix`,
-                prefixCls+`-icon-clear`]"
-                @on-click="handleClear">
-            </Icon>
             <div
                 ref="label"
                 :class="labelClasses"
@@ -214,7 +217,7 @@ export default {
             // fixed label的两种样式
             // prefix 前面的icon显示
             // suffix 后面的icon显示
-            props: ['disabled', 'readonly', 'autofocus', 'spellcheck', 'error', 'clearable', 'fixed', 'prefix', 'suffix'],
+            props: ['disabled', 'readonly', 'autofocus', 'spellcheck', 'error', 'clearable', 'showPassword', 'fixed', 'prefix', 'suffix'],
             config: {
                 type: Boolean,
                 default: false
@@ -241,7 +244,8 @@ export default {
                     [`${prefixCls}-box-clear`]: this.clearable && this.currentValue,
                     [`${prefixCls}-group`]: this.label && !this.fixed,
                     [`${prefixCls}-group-fixed`]: this.label && this.fixed,
-                    [`${prefixCls}-box-textarea`]: this.type === 'textarea'
+                    [`${prefixCls}-box-textarea`]: this.type === 'textarea',
+                    [`${prefixCls}-box-focused`]: this.label && this.fixed && this.labelFocus
                 }
             ]
         },
@@ -249,8 +253,8 @@ export default {
             return [
                 `${prefixCls}`,
                 {
-                    [`${prefixCls}-prefix`]: this.prefix,
-                    [`${prefixCls}-suffix`]: this.suffix,
+                    [`${prefixCls}-prefix`]: this.prefix || this.$slots.prefix,
+                    [`${prefixCls}-suffix`]: this.suffix || this.$slots.suffix || this.showPassword,
                     [`${prefixCls}-nobox`]: this.label && !this.fixed
                 }
             ]
@@ -281,8 +285,11 @@ export default {
         },
         // 整体的input的宽度
         inputBoxStyles () {
+            const {label, fixed} = this
             let style = {}
-            style.width = `${this.width}px`
+            if (!label || (label && fixed)) { //
+                style.width = `${this.width}px`
+            }
             return style
         }
     },
@@ -295,18 +302,23 @@ export default {
     },
     methods: {
         widthInit () {
-            const {label, $el} = this
+            const {fixed, label, $el} = this
             let width = ''
-            if (label) {
+            if (label && fixed) {
                 let clientWidth = $el.clientWidth
                 let labelWidth = this.labelWidth || +$el.querySelector(`.${prefixCls}-label`).clientWidth
-                console.log('clientWidth1', clientWidth)
-                console.log('labelWidth1', labelWidth)
                 width = clientWidth - labelWidth - 1
                 this.inputStyles = {
                     width: width + 'px'
                 }
+            } else {
+                this.inputStyles = {
+                    width: this.width + 'px'
+                }
             }
+        },
+        handleShowPassword () {
+            this.type = this.type !== 'password' ? 'password' : 'text'
         },
         mouseenterHandle (event) {
             this.$emit('on-mouseenter', event)
