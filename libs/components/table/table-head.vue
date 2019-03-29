@@ -44,28 +44,52 @@
                                 @on-click="handleSort(rowIndex,index, 'desc')">
                             </Icon>
                         </span>
-                        <Tooltip
+                        <Poptip
                             v-if="isPopperShow(item)"
-                            placement="bottom"
-                            theme="light">
+                            :class="[preCls + '-poptip']"
+                            v-model="getColumn(rowIndex, index)._filterVisible"
+                            placement="bottom">
                             <span :class="[preCls + '-filter']">
                                 <Icon type="shaixuan"></Icon>
                             </span>
-                            <div slot="content" :class="[preCls + '-filter-list']">
+                            <div slot="content" :class="[preCls + '-filter-list']"
+                                 v-if="getColumn(rowIndex, index)._filterMultiple">
+                                <div :class="[preCls + '-filter-list-item']">
+                                    <checkbox-group v-model="getColumn(rowIndex, index)._filterChecked">
+                                        <checkbox v-for="(filter, index) in item.filters" :key="index"
+                                                  :label="filter.value">{{ filter.label }}
+                                        </checkbox>
+                                    </checkbox-group>
+                                </div>
+                                <div :class="[preCls + '-filter-footer']">
+                                    <Button
+                                        size="small"
+                                        :disabled="!getColumn(rowIndex, index)._filterChecked.length"
+                                        @on-click="handleFilter(getColumn(rowIndex, index)._index)">
+                                        筛选
+                                    </Button>
+                                    <Button
+                                        size="small"
+                                        @on-click="filterReset(getColumn(rowIndex, index)._index)">
+                                        重置
+                                    </Button>
+                                </div>
+                            </div>
+                            <div slot="content" :class="[preCls + '-filter-list']" v-else>
                                 <ul :class="[preCls + '-filter-list-single']">
                                     <li
-                                        :class="itemAllClasses(item)"
-                                        @click="filterReset(index)">全部
+                                        :class="itemAllClasses(getColumn(rowIndex, index))"
+                                        @click="filterReset(getColumn(rowIndex, index)._index)">全部
                                     </li>
                                     <li
-                                        :class="itemClasses(item,filter)"
+                                        :class="itemClasses(getColumn(rowIndex, index),filter)"
                                         v-for="(filter,key) in item.filters"
-                                        @click="filterSelect(index, filter.value)"
+                                        @click="filterSelect(getColumn(rowIndex, index)._index, filter.value)"
                                         :key="key">{{ filter.label }}
                                     </li>
                                 </ul>
                             </div>
-                        </Tooltip>
+                        </Poptip>
                     </template>
                 </div>
             </th>
@@ -77,8 +101,10 @@
 <script>
 import tableMixin from './tableMixin'
 import Checkbox from '../checkbox/Checkbox.vue'
-import Tooltip from '../tooltip/Tooltip.vue'
+import Button from '../button/Button.vue'
+import Poptip from '../poptip/Poptip.vue'
 import Icon from '../icon/Icon'
+import CheckboxGroup from '../checkboxGroup'
 import Emitter from '../../mixins/emitter'
 import { findComponentUpward } from '../../utils/assist'
 import { preventDefault } from '../../utils/compatible'
@@ -86,7 +112,7 @@ import { preventDefault } from '../../utils/compatible'
 export default {
     name: 'TableHead',
     mixins: [tableMixin, Emitter],
-    components: {Checkbox, Icon, Tooltip},
+    components: {Checkbox, Icon, Poptip, CheckboxGroup, Button},
     data () {
         return {
             isResizing: false,
@@ -335,6 +361,9 @@ export default {
         },
         filterReset (index) {
             this.dispatch(this.preCls, 'filiter-reset', index)
+        },
+        handleFilter (index) {
+            this.dispatch(this.preCls, 'filiter-check', index)
         },
         filterSelect (index, value) {
             this.dispatch(this.preCls, 'filiter-select', {

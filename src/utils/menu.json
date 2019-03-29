@@ -118,11 +118,6 @@
           "title": "TimePicker 时间选择器",
           "path": "/timepicker",
           "name": "timepicker"
-        },
-        {
-          "title": "DateTimePicker选择器",
-          "path": "/datetimepicker",
-          "name": "datetimepicker"
         }
       ]
     },
@@ -185,6 +180,11 @@
           "title": "Tooltip 文字提示",
           "path": "/tooltip",
           "name": "tooltip"
+        },
+        {
+          "title": "Poptip 气泡提示",
+          "path": "/poptip",
+          "name": "poptip"
         },
         {
           "title": "Tabs 标签页",

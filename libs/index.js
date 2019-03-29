@@ -41,7 +41,6 @@ import Progress from './components/progress'
 import Select from './components/select'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
-import DateTimePicker from './components/datetime-picker'
 import Transfer from './components/transfer'
 import Notice from './components/notice'
 import Menu from './components/menu'
@@ -56,6 +55,7 @@ import LoadingBar from './components/loading-bar/'
 import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
+import Poptip from './components/poptip'
 import LabelTree from './components/tree/LabelTree'
 
 const components = [
@@ -103,7 +103,6 @@ const components = [
     Select,
     DatePicker,
     TimePicker,
-    DateTimePicker,
     Transfer,
     Menu,
     MenuItem,
@@ -114,6 +113,7 @@ const components = [
     Split,
     Anchor,
     AnchorLink,
+    Poptip,
     Affix
 ]
 
