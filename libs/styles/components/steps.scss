@@ -19,6 +19,7 @@ $smallContentPaddingLeft: 22px; //contend距离左侧向内缩进距离
 /*******其他********/
 $marginLength: 5px; //距离下测距离
 $css-prefix-step: $css-prefix + 'step';
+$css-prefix-icon: $css-prefix + 'icon';
 
 $processPointColor: $white;
 $processPointBackgroundColor: $LightPrimary;
@@ -58,7 +59,7 @@ $processContentColor: $Title;
         text-align: center;
         vertical-align: middle;
         z-index: 2;
-        .b-icon {
+        .#{$css-prefix-icon} {
           font-size:16px;
           position: absolute;
           left: 3px;
@@ -77,7 +78,7 @@ $processContentColor: $Title;
         text-align: center;
         vertical-align: middle;
         z-index: 2;
-        .b-icon {
+        .#{$css-prefix-icon} {
           font-size:16px;
           position: absolute;
           left: 5px;
@@ -147,7 +148,7 @@ $processContentColor: $Title;
         text-align: center;
         display: inline-block;
         z-index: 5;
-        .b-icon {
+        .#{$css-prefix-icon} {
           font-size: 16px;
           position: absolute;
           left: 3px;
@@ -166,7 +167,7 @@ $processContentColor: $Title;
         text-align: center;
         display: inline-block;
         z-index: 5;
-        .b-icon {
+        .#{$css-prefix-icon} {
           font-size: 16px;
           position: absolute;
           left: 5px;
@@ -204,7 +205,7 @@ $processContentColor: $Title;
       height: $small;
       font-size: $smallFontSize;
       line-height: $small;
-      .b-icon {
+      .#{$css-prefix-icon} {
         font-size: 14px;
         position: absolute;
         left: 1px;

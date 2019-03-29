@@ -2,15 +2,19 @@
 
 $icon: "menu-pre-icon";
 $menu-prefix-cls: "#{$css-prefix}menu";
+$menu-prefix-cls-light: "#{$menu-prefix-cls}-light";
 $select-dropdown-prefix-cls: "#{$menu-prefix-cls}-drop-list";
-$menu-item-prefix-cls: "#{$menu-prefix-cls}-item";
+$menu-item: "#{$menu-prefix-cls}-item";
+$menu-item-group: "#{$menu-item}-group";
 $menu-item-dot: "#{$menu-prefix-cls}-item-dot";
-$menu-item-disabled: "#{$menu-item-prefix-cls}-disabled";
-$menu-item-un-disabled: "#{$menu-item-prefix-cls}-un-disabled";
+$menu-item-disabled: "#{$menu-item}-disabled";
+$menu-item-un-disabled: "#{$menu-item}-un-disabled";
 $menu-submenu: "#{$menu-prefix-cls}-submenu";
+$menu-submenu-title: "#{$menu-submenu}-title";
 $menu-submenu-disabled: "#{$menu-prefix-cls}-submenu-disabled";
 $menu-submenu-un-disabled: "#{$menu-prefix-cls}-submenu-un-disabled";
-$menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu} .#{$select-dropdown-prefix-cls} .#{$menu-item-prefix-cls}";
+$menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu} .#{$select-dropdown-prefix-cls} .#{$menu-item}";
+$menu-dark:"#{$menu-prefix-cls}-dark";
 
 .#{$menu-dropdown-item-prefix-cls} {
   padding: 7px 16px 8px;
@@ -23,7 +27,9 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
   outline: none;
   list-style: none;
   position: relative;
-
+  z-index:10;
+  background-color: $white;
+  border: $Border 1px solid;
 
   &-item {
     display: block;
@@ -39,7 +45,7 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
   &-horizontal {
     height: 70px;
     line-height: 70px;
-    @include _background($LinkContent);
+    @include _background($Primary);
 
     .#{$icon} {
       font-size: 16px !important;
@@ -48,7 +54,7 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
   }
 
   &-horizontal &-item {
-    color: $Title;
+    color: $Content;
     font-size: 12px;
     .#{$icon} {
       margin-right: 4px;
@@ -65,17 +71,20 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
     z-index: 3;
   }
 
-  &-horizontal &-submenu {
+  &-horizontal > &-item.#{$menu-item-disabled},
+  &-horizontal &-submenu.#{$menu-submenu-disabled} {
+    color: $SubContent
+  }
+
+  &-horizontal .#{$menu-submenu-un-disabled}{
     height: 70px;
     width: auto;
     color: $white;
     .#{$menu-submenu}-title {
-      opacity: 0.7;
       text-align: center;
     }
     &-active, &:hover {
       .#{$menu-submenu}-title {
-        opacity: 1;
         border-bottom: 4px solid $LightPrimary;
         box-sizing: border-box;
         height: inherit;
@@ -83,14 +92,12 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
     }
   }
 
-  &-horizontal > &-item {
+  &-horizontal > .#{$menu-item-un-disabled} {
     height: 70px;
     width: auto;
-    opacity: 0.7;
     color: $white;
     text-align: center;
     &-active, &:hover {
-      opacity: 1;
       .item-solt {
         border-bottom: 4px solid $LightPrimary;
         box-sizing: border-box;
@@ -101,9 +108,12 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
   }
 
   &-horizontal > * &-item {
-    &-active, &:hover {
+    &-active, &-un-disabled:hover {
       @include _color($Primary);
       @include _background($Background);
+    }
+    &-disabled {
+      color: $DisContent
     }
   }
 
@@ -148,18 +158,19 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
     color: $Primary
   }
 
-  &-vertical .#{$menu-item-disabled}{
-    background-color: $Disabled !important;
+  &-vertical {
+    .#{$menu-item-disabled},.#{$menu-submenu-disabled} *{
+      color: $DisContent !important;
+      .#{$menu-item-dot} {
+        border-color: $DisContent !important;
+      }
+    }
   }
 
   &-vertical &-opened > &-submenu-title {
     font-size: 14px;
     color: $Title;
-    border-bottom: $Divider 1px solid;
     font-weight: bold;
-    //.#{$icon} {
-    //  color: $Primary !important
-    //}
   }
   /***第一层结束***/
 
@@ -173,14 +184,19 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
       line-height: 20px;
       color: $Title;
     }
-    .#{$menu-item-prefix-cls},
+    .#{$menu-item},
     .#{$menu-submenu} .#{$menu-submenu}-title {
       color: $Content;
       font-size: 12px;
-      @include _background($Background);
+      background-color: $Background;
     }
-    .#{$menu-submenu}.#{$menu-prefix-cls}-opened .#{$menu-submenu}-title {
-      color: $Content;
+    .#{$menu-submenu}.#{$menu-prefix-cls}-opened,.#{$menu-item-group} {
+      .#{$menu-submenu}-title {
+        color: $Content;
+      }
+      .#{$menu-item}:last-of-type {
+        border-bottom: $Border 1px solid;
+      }
     }
 
     &-nested {
@@ -192,6 +208,19 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
     }
   }
 
+  &-vertical > &-submenu {
+    .#{$menu-submenu}:first-of-type,
+    .#{$menu-item}:first-of-type {
+      border-top: $Border 1px solid;
+    }
+    .#{$menu-submenu},.#{$menu-item-group}{
+      .#{$menu-item}:first-of-type{
+        border-top: unset;
+      }
+    }
+  }
+
+
   &-vertical > &-submenu > .#{$menu-submenu}-title {
     .#{$icon} {
       font-size: 14px !important;
@@ -200,23 +229,26 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
   /*****第二层结束****/
 
   /*****第三层开始****/
-  &-vertical &-submenu &-submenu {
-    .#{$menu-prefix-cls}-item {
-      .item-solt {
-        .#{$menu-item-dot} {
-          display: inline-block;
-          border-radius: 51%;
-          border: $SubContent 3px solid;
-          content: "";
-          margin-right: 13px;
-          margin-bottom: 1px;
-          margin-left: 3px;
-        }
-        .#{$icon} {
-          position: relative;
-          left: 0px;
-          top: 0px;
-          margin-right: 10px;
+  &-vertical &-submenu {
+    .#{$menu-submenu},.#{$menu-item-group}{
+      .#{$menu-prefix-cls}-item {
+        .item-solt {
+          .#{$menu-item-dot} {
+            display: inline-block;
+            border-radius: 51%;
+            border: $SubContent 3px solid;
+            content: "";
+            margin-right: 13px;
+            margin-bottom: 1px;
+            margin-left: 3px;
+          }
+          .#{$icon} {
+            @include _color($SubContent);
+            position: relative;
+            left: 0px;
+            top: 0px;
+            margin-right: 10px;
+          }
         }
       }
     }
@@ -233,10 +265,8 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
       height: 40px;
       line-height: 40px;
       padding-left: 28px;
-      border-bottom: $Divider 1px solid;
-      border-top: $Divider 1px solid;
       .#{$icon} {
-        top:14px;
+        top: 14px;
       }
     }
   }
@@ -249,21 +279,30 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
   }
 
   &-vertical {
-    .#{$menu-item-prefix-cls}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu}-title {
+    .#{$menu-item}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu}-title {
       &:hover {
         color: $Primary !important;
-        background-color: rgba(0, 121, 204, 0.10) !important;
-        .item-solt .#{$menu-item-dot} {
-          @include _borderColor($Primary);
+        @include _background($LightPrimary);
+        .item-solt {
+          .#{$menu-item-dot} {
+            @include _borderColor($Primary);
+          }
+          .#{$icon} {
+            @include _color($Primary);
+          }
         }
       }
     }
-    .#{$menu-item-prefix-cls}.#{$menu-item-un-disabled}.#{$menu-item-prefix-cls}-active {
+    .#{$menu-item}.#{$menu-item-un-disabled}.#{$menu-item}-active {
       color: $Primary !important;
-      background-color: rgba(0, 121, 204, 0.10) !important;
-      .item-solt .#{$menu-item-dot} {
-        @include _borderColor($Primary);
-
+      @include _background($LightPrimary);
+      .item-solt {
+        .#{$menu-item-dot} {
+          @include _borderColor($Primary);
+        }
+        .#{$icon} {
+          @include _color($Primary);
+        }
       }
     }
   }
@@ -276,3 +315,150 @@ $menu-dropdown-item-prefix-cls: "#{$menu-prefix-cls}-horizontal .#{$menu-submenu
 
   /***垂直方向的样式结束***/
 }
+
+//dark主题的样式
+.#{$menu-dark}.#{$menu-prefix-cls}{
+
+  //水平方向的样式
+  &-horizontal {
+    @include _background($Title);
+  }
+
+  &-horizontal .#{$menu-submenu-un-disabled}{
+    &-active, &:hover {
+      .#{$menu-submenu}-title {
+        border-bottom: 4px solid $Divider;
+      }
+    }
+  }
+
+  &-horizontal > .#{$menu-item-un-disabled} {
+    &-active, &:hover {
+      .item-solt {
+        border-bottom: 4px solid $Divider;
+      }
+    }
+  }
+
+  //垂直方向的样式
+  &-vertical{
+    @include _background($Content);
+  }
+
+  /***第一层开始***/
+  &-vertical > .#{$menu-item},
+  &-vertical .#{$menu-submenu-title} {
+    @include _background($Content);
+    @include _color($white);
+  }
+  &-vertical .#{$icon} {
+    @include _color($white);
+  }
+
+  &-vertical {
+    .#{$menu-item-disabled},.#{$menu-submenu-disabled} * {
+      color: $DisContent !important;
+      .#{$menu-item-dot} {
+        border-color: $DisContent !important;
+      }
+      .#{$icon} {
+        color: $DisContent !important;
+      }
+    }
+  }
+
+  &-vertical &-opened > &-submenu-title {
+    color: $Title;
+  }
+  /***第一层结束***/
+
+  /*****第二层开始****/
+  &-vertical .#{$menu-submenu} {
+    .menu-arrow {
+      @include _color($white);
+    }
+    .#{$menu-item},
+    .#{$menu-submenu} .#{$menu-submenu}-title {
+      color: $white;
+      background-color: $Title;
+    }
+    .#{$menu-submenu}.#{$menu-prefix-cls}-opened,.#{$menu-item-group} {
+      .#{$menu-submenu}-title {
+        color: $white;
+      }
+      .#{$menu-item}:last-of-type {
+        border-bottom: unset;
+      }
+    }
+  }
+
+  &-vertical > .#{$menu-submenu} {
+    .#{$menu-submenu}:first-of-type,
+    .#{$menu-item}:first-of-type {
+      border-top: unset;
+    }
+    .#{$menu-submenu},.#{$menu-item-group}{
+      .#{$menu-item}:first-of-type{
+        border-top: unset;
+      }
+    }
+  }
+  /*****第二层结束****/
+
+  /*****第三层开始****/
+  &-vertical .#{$menu-submenu} {
+    .#{$menu-submenu},.#{$menu-item-group}{
+      .#{$menu-prefix-cls}-item {
+        .item-solt {
+          .#{$menu-item-dot} {
+            border: $white 3px solid;
+          }
+          .#{$icon} {
+            @include _color($white);
+          }
+        }
+      }
+    }
+  }
+
+  /*****第三层结束****/
+
+  &-vertical .#{$menu-item-group} {
+    &-title {
+      color: $white;
+      @include _background($Title);
+    }
+  }
+
+  &-vertical {
+    .#{$menu-item}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu}-title {
+      &:hover {
+        color: $white !important;
+        @include _background($LightPrimary);
+        .item-solt {
+          .#{$menu-item-dot} {
+            @include _borderColor($white);
+          }
+          .#{$icon} {
+            @include _color($white);
+          }
+        }
+      }
+    }
+    .#{$menu-item}.#{$menu-item-un-disabled}.#{$menu-item}-active {
+      color: $white !important;
+      @include _background($LightPrimary);
+      .item-solt {
+        .#{$menu-item-dot} {
+          @include _borderColor($white);
+        }
+        .#{$icon} {
+          @include _color($white);
+        }
+      }
+    }
+  }
+}
+
+
+
