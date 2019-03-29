@@ -1,6 +1,28 @@
 更新日志
+### 0.4.0
+## `2019-03-26`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 datepicker 组件时间范围面板联动当月显示=>隔月显示
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 部分组件展示文档不规范调整
+    </b-timeline-item>
+</b-timeline>
+
+### 0.3.9
+## `2019-03-26`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 select 默认值不生效的问题
+    </b-timeline-item>
+</b-timeline>
+
+
 ### 0.3.8
-## `2019-03-28`
+## `2019-03-26`
 <br>
 <b-timeline>
     <b-timeline-item>

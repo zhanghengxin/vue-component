@@ -34,7 +34,7 @@ export default {
             return Math.floor(this.firstYear / 10) * 10
         },
         curYear () {
-            return new Date(this.value || new Date()).getFullYear()
+            return this.value && new Date(this.value).getFullYear()
         }
     },
     methods: {

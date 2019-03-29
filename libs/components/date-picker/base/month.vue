@@ -13,12 +13,13 @@
 
 <script>
 import { prefix } from '../../../utils/common'
+const months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
 
 export default {
     name: `${prefix}table-month`,
     data () {
         return {
-            months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+            months
         }
     },
     props: {
@@ -38,10 +39,10 @@ export default {
             return [`${prefix}panel`, `${prefix}panel-month`]
         },
         curYear () {
-            return new Date(this.value || new Date()).getFullYear()
+            return this.value && new Date(this.value).getFullYear()
         },
         curMonth () {
-            return new Date(this.value || new Date()).getMonth()
+            return this.value && new Date(this.value).getMonth()
         }
     },
     methods: {

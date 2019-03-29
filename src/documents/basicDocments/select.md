@@ -776,22 +776,23 @@ fixed为true时可设置通过width来设置整体select的宽度，labelWidth�
 
     <template>
         <div>
-           <b-select 
-                v-model="value03"  
+            <b-select
+                v-model="value03"
                 :filterabled='filterabled'
                 :remoteFn='remoteFn'
                 :loading='loading'
                 :options='options3'
                 width='200' >
             </b-select>
-            <b-select 
-                v-model="value04" 
+            <b-select
+                v-model="value04"
                 :filterabled='filterabled'
                 :multiple='multiple'
                 :remoteFn='remoteFnMultiple'
                 :loading='loading'
                 :options='options4'
                 width='200' >
+            </b-select>
         </div>
     </template>
     <script>

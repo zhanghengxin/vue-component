@@ -7,13 +7,13 @@
         <b-timepicker 
             v-model='time'
             @on-change='handleChangeTime'>
-        <b-timepicker>
+        </b-timepicker>
     </div>
     
 ::: code
 ```html
     <div>
-        <b-timepicker v-model='time'><b-timepicker>
+        <b-timepicker v-model='time'></b-timepicker>
     </div>
     <script>
         export default {
@@ -35,7 +35,7 @@
         <b-timepicker 
             v-model='timestemp'
             :minuteStep='5'>
-        <b-timepicker>
+        </b-timepicker>
     </div>
     
 ::: code
@@ -43,7 +43,8 @@
     <div>
         <b-timepicker 
             v-model='time'
-            :minute-step='5'><b-timepicker>
+            :minute-step='5'>
+        </b-timepicker>
     </div>
     <script>
         export default {
@@ -64,13 +65,13 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-timepicker v-model='time1'><b-timepicker>
+        <b-timepicker v-model='time1'></b-timepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-timepicker v-model='time'><b-timepicker>
+        <b-timepicker v-model='time'></b-timepicker>
     </div> 
     <script>
         export default {
@@ -91,13 +92,13 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-timepicker v-model='daterange' range><b-timepicker>
+        <b-timepicker v-model='daterange' range></b-timepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-timepicker v-model='timerange' range><b-timepicker>
+        <b-timepicker v-model='timerange' range></b-timepicker>
     </div>
     <script>
         export default {
