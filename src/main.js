@@ -6,7 +6,7 @@ import codeShow from './components/CodeShow.vue'
 import ColorShow from './components/ColorShow.vue'
 import router from './router'
 import bwUi from '../libs/index'
-
+import '@babel/polyfill'
 import '../libs/styles/index.scss'
 import businessUI from '../businessLibs'
 import './assets/scss/index.scss'
