@@ -42,17 +42,4 @@ export function preventDefault (event) {
             clearTimeout(id)
         }
     }
-    if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function (n) {
-            if ('indexOf' in this) {
-                return this['indexOf'](n)
-            }
-            for (var i = 0; i < this.length; i++) {
-                if (n === this[i]) {
-                    return i
-                }
-            }
-            return -1
-        }
-    }
 }())
