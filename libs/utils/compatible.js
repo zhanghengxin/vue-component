@@ -26,21 +26,33 @@ export function preventDefault (event) {
         window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] ||
             window[vendors[x] + 'CancelRequestAnimationFrame']
     }
-    
     if (!window.requestAnimationFrame) {
-        window.requestAnimationFrame = function (callback, element) {
+        window.requestAnimationFrame = function (callback) {
             var currTime = new Date().getTime()
             var timeToCall = Math.max(0, 16 - (currTime - lastTime))
-            var id = window.setTimeout(function () { callback(currTime + timeToCall) },
-                timeToCall)
+            var id = window.setTimeout(function () {
+                callback(currTime + timeToCall)
+            }, timeToCall)
             lastTime = currTime + timeToCall
             return id
         }
     }
-    
     if (!window.cancelAnimationFrame) {
         window.cancelAnimationFrame = function (id) {
             clearTimeout(id)
+        }
+    }
+    if (!Array.prototype.indexOf) {
+        Array.prototype.indexOf = function (n) {
+            if ('indexOf' in this) {
+                return this['indexOf'](n)
+            }
+            for (var i = 0; i < this.length; i++) {
+                if (n === this[i]) {
+                    return i
+                }
+            }
+            return -1
         }
     }
 }())
