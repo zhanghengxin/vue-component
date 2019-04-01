@@ -98,7 +98,8 @@ export default {
             return style
         },
         opened () {
-            return this.rootMenu.openedMenus.indexOf(this.name) > -1
+            return true
+            // return this.rootMenu.openedMenus.indexOf(this.name) > -1
         },
         submenuTitleIcon () {
             return this.opened ? 'shang' : 'xia'
