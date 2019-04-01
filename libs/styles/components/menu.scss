@@ -46,37 +46,6 @@ $select-dropdown: "#{$menu}-drop-list";
     z-index: 1;
     cursor: pointer;
   }
-
-
-  &-vertical {
-    .#{$menu-item}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu}-title {
-      &:hover {
-        color: $Primary !important;
-        @include _background($LightPrimary);
-        .#{$menu-item-solt} {
-          .#{$menu-item-dot} {
-            @include _borderColor($Primary);
-          }
-          .#{$icon} {
-            @include _color($Primary);
-          }
-        }
-      }
-    }
-    .#{$menu-item}.#{$menu-item-un-disabled}.#{$menu-item}-active {
-      color: $Primary !important;
-      @include _background($LightPrimary);
-      .#{$menu-item-solt} {
-        .#{$menu-item-dot} {
-          @include _borderColor($Primary);
-        }
-        .#{$icon} {
-          @include _color($Primary);
-        }
-      }
-    }
-  }
-  /***垂直方向的样式结束***/
 }
 /****menu的样式结束*****/
 
@@ -261,6 +230,34 @@ $select-dropdown: "#{$menu}-drop-list";
     position: relative;
     cursor: pointer;
     z-index: 1;
+  }
+
+  .#{$menu-item}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu-title} {
+    &:hover {
+      color: $Primary !important;
+      @include _background($LightPrimary);
+      .#{$menu-item-solt} {
+        .#{$menu-item-dot} {
+          @include _borderColor($Primary);
+        }
+        .#{$icon} {
+          @include _color($Primary);
+        }
+      }
+    }
+  }
+
+  .#{$menu-item}.#{$menu-item-un-disabled}.#{$menu-item}-active {
+    color: $Primary !important;
+    @include _background($LightPrimary);
+    .#{$menu-item-solt} {
+      .#{$menu-item-dot} {
+        @include _borderColor($Primary);
+      }
+      .#{$icon} {
+        @include _color($Primary);
+      }
+    }
   }
 
 }
