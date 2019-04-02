@@ -2,7 +2,7 @@
  * Created by gaoguoqing on 2019/3/11.
  *
  */
-
+/* eslint-disable */
 function isIe () {
     const inBrowser = typeof window !== 'undefined'
     const UA = inBrowser && window.navigator.userAgent.toLowerCase()
