@@ -663,7 +663,7 @@
 
 排序默认使用升序和降序，也可以通过设置属性 `sortMethod` 指定一个自定义排序函数，接收三个参数 a 、 b 和 type。
 
-通过给某一列设置 sortType 可以在初始化时使用排序。
+通过给某一列设置 `sortType` 可以在初始化时使用排序。
 
 <div class="example">
     <div class="example-box">
@@ -691,6 +691,7 @@
                            title: 'Age',
                            key: 'age',
                            sortable:true,
+                           sortType:'asc',
                            width:300
                        },
                        {
@@ -1990,11 +1991,29 @@
                                }
                            }
                         },
-                        {
-                           title: 'Pets',
-                           key: 'pets',
-                           minWidth:100
-                        },
+                       {
+                          title: 'Pets',
+                          key: 'pets',
+                          filters: [
+                              {
+                                  label: 'dog',
+                                  value: 'dog'
+                              },
+                              {
+                                  label: 'rhizomys',
+                                  value: 'rhizomys'
+                              },
+                              {
+                                  label: 'cat',
+                                  value: 'cat'
+                              }
+                          ],
+                          filterMultiple:true,
+                          filterMethod (value, row) {
+                              return row.pets.indexOf(value) > -1;
+                          },
+                          minWidth:100
+                       },
                         {
                            title: 'Like',
                            key: 'like',
@@ -2776,6 +2795,7 @@ column 设置 children，可以渲染出多级表头<br/>
                     {
                         title: 'Age',
                         key: 'age',
+                        sortType:'asc',
                         sortable:true,
                         width:300
                     },
@@ -3322,6 +3342,24 @@ column 设置 children，可以渲染出多级表头<br/>
                     {
                        title: 'Pets',
                        key: 'pets',
+                       filters: [
+                           {
+                               label: 'dog',
+                               value: 'dog'
+                           },
+                           {
+                               label: 'rhizomys',
+                               value: 'rhizomys'
+                           },
+                           {
+                               label: 'cat',
+                               value: 'cat'
+                           }
+                       ],
+                       filterMultiple:true,
+                       filterMethod (value, row) {
+                           return row.pets.indexOf(value) > -1;
+                       },
                        minWidth:100
                     },
                     {
@@ -3605,12 +3643,14 @@ column 设置 children，可以渲染出多级表头<br/>
 | className     |  列的样式名称		  |  String  |  -    | -    |
 | fixed     |  列是否固定在左侧或者右侧	  |  String  |  `left`、`right`   | -    |
 | render     |  自定义渲染列，使用 Vue 的 Render 函数。详见示例	  |  Function  | -  | -    |
-| sortable     |  对应列是否可以排序	  |  Boolean  | -  | false   |
+| sortable     |  对应列是否可以排序，如果设置为 `custom`，则开启远程排序，需要配合 `on-sort-change` 事件	  |  Boolean / 'custom'  | -  | false   |
 | sortMethod     |  自定义排序使用的方法，当设置 sortable: true 时有效。详见示例	  |  Boolean  | -  | -   |
 | sortType     |  设置初始化排序	  |  Boolean  | `asc`、`desc`  | -   |
 | filters     |  过滤数据的选项，格式为数组，数组中每项包含 label 和 value 属性，使用过滤，必须同时配置 filterMethod	  |  Array  |-  | -   |
 | filterMethod     |  数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示		  |  Function  | -  | -   |
 | filterMultiple     |  数据过滤的选项是否多选  |  Boolean  | -  | false   |
+| filteredValue     |  在初始化时使用过滤，值为需要过滤的 value 集合	  |  Array  | -  | -   |
+| filterRemote     |  使用远程过滤	  |   Function  | -  | -   |
 | children     |  多级表头配置项，具体见示例  |   Array  | -  | -   |
 
 ### data
