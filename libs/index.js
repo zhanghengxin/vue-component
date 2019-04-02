@@ -55,6 +55,7 @@ import LoadingBar from './components/loading-bar/'
 import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
+import Poptip from './components/poptip'
 import LabelTree from './components/tree/LabelTree'
 
 const components = [
@@ -112,6 +113,7 @@ const components = [
     Split,
     Anchor,
     AnchorLink,
+    Poptip,
     Affix
 ]
 

@@ -98,6 +98,7 @@ export default {
             return style
         },
         opened () {
+            // return true
             return this.rootMenu.openedMenus.indexOf(this.name) > -1
         },
         submenuTitleIcon () {

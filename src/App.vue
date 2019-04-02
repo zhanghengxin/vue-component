@@ -71,7 +71,6 @@ export default {
         position: absolute;
         top: 0;
         left: 1400px;
-        z-index: 10000;
     }
 
     .doc {

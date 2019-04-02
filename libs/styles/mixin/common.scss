@@ -16,11 +16,28 @@
   }
 }
 
+@mixin _background_opacity($color, $num) {
+  background-color: transparentize($color,$num);
+
+  [data-theme="theme1"] & {
+    background-color: darken(transparentize($color,$num), 10%);
+  }
+}
+
+
 @mixin _color($color) {
   color: $color;
 
   [data-theme="theme1"] & {
     color: darken($color, 10%);
+  }
+}
+
+@mixin _color_important($color) {
+  color: $color !important;
+
+  [data-theme="theme1"] & {
+    color: darken($color, 10%) !important;
   }
 }
 

@@ -17,7 +17,7 @@ export default {
         },
         theme: {
             validator (value) {
-                return oneOf(value, ['light', 'dark', 'primary'])
+                return oneOf(value, ['light', 'dark'])
             },
             default: 'light'
         },
@@ -58,7 +58,8 @@ export default {
             return [
                 `${prefixCls}`,
                 {
-                    [`${prefixCls}-${this.mode}`]: this.mode
+                    [`${prefixCls}-${this.mode}`]: this.mode,
+                    [`${prefixCls}-${this.theme}`]: this.theme
                 }
             ]
         },
