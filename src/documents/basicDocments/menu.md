@@ -10,7 +10,7 @@
 
 <div class="example">
     <div class="example-box"  >
-        <div style="width:400px;background:#000;">
+        <div style="width:400px;">
             <b-menu
                 :router="false"
                 :accordion="false"
