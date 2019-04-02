@@ -59,7 +59,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-steps current='2'>
+            <b-steps current='1'>
                 <b-step title='已完成' :content='content'></b-step>
                 <b-step title='正进行' :content='content'></b-step>
                 <b-step title='在等待' :content='content'></b-step>
@@ -70,7 +70,7 @@
 ::: code
 ```html
     <div>
-        <b-steps current='2' >
+        <b-steps current='1' >
             <b-step title='已完成' :content='content'></b-step>
             <b-step title='正进行' :content='content'></b-step>
             <b-step title='在等待' :content='content'></b-step>
@@ -94,7 +94,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-steps current='2' :size='size'>
+            <b-steps current='1' :size='size'>
                 <b-step title='已完成' :content='content'></b-step>
                 <b-step title='正进行' :content='content'></b-step>
                 <b-step title='在等待' :content='content'></b-step>
@@ -109,7 +109,7 @@
 ```html
     <div class="example-box">
         <div>
-            <b-steps current='2' :size='size'>
+            <b-steps current='1' :size='size'>
                 <b-step title='已完成' :content='content'></b-step>
                 <b-step title='正进行' :content='content'></b-step>
                 <b-step title='在等待' :content='content'></b-step>
@@ -237,7 +237,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-steps current="2" status="error" direction='vertical' >
+            <b-steps current="2" status="error" direction='vertical' length="500">
                 <b-step title='步骤1' :content='content'></b-step>
                 <b-step title='步骤2' :content='content'></b-step>
                 <b-step title='步骤3' :content='content'></b-step>
@@ -264,7 +264,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-steps current='2' status='error'>
+            <b-steps current='1' status='error'>
                 <b-step title='已完成' :content='content'></b-step>
                 <b-step title='中断' :content='errorContent'></b-step>
                 <b-step title='在等待' :content='content'></b-step>
@@ -276,7 +276,7 @@
 ```html
     <div class="example-box">
         <div>
-             <b-steps current='2' status='error'>
+             <b-steps current='1' status='error'>
                 <b-step title='已完成' :content='content'></b-step>
                 <b-step title='中断' :content='content'></b-step>
                 <b-step title='在等待' :content='content'></b-step>
@@ -293,7 +293,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-steps current='2' >
+            <b-steps current='2' status='error'>
                 <b-step title='单点（已打回）' :content='content' status="single"></b-step>
                 <b-step title='已完成' :content='content'></b-step>
                 <b-step title='中断' :content='errorContent'></b-step>
@@ -306,7 +306,7 @@
 ```html
     <div class="example-box">
        <div>
-           <b-steps current='2' >
+           <b-steps current='2' status='error'>
                <b-step title='单点（已打回）' :content='content' status="single"></b-step>
                <b-step title='已完成' :content='content'></b-step>
                <b-step title='中断' :content='errorContent'></b-step>

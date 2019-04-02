@@ -180,6 +180,7 @@ $processContentColor: $Title;
         display: inline-block;
         @include _color($SubContent);
         font-size: $normalFontSize;
+        vertical-align: super;
       }
     }
     // step的content部分
