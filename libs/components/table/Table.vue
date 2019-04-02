@@ -107,6 +107,7 @@
                     :key="index">
                     <Checkbox
                         :value="column._visible"
+                        manual-change
                         @click.native.prevent="dynamicOrder(column._index,column._visible)"
                     >
                     </Checkbox>
@@ -150,6 +151,7 @@ export default {
             rightFixedColumnRows: [],
             tableWidth: 0,
             bodyHeight: 0,
+            manualChange: true,
             dragStartIndex: '',
             headerHeight: 0,
             dragBorderHeight: {
@@ -406,7 +408,6 @@ export default {
             return style
         },
         normalColumns () {
-            // return this.cloneColumns.filter((cell) => (!cell.fixed))
             if (this.dynamicable) {
                 return this.cloneColumns.filter((cell) => (!cell.fixed))
             } else {
@@ -434,9 +435,8 @@ export default {
             let fixRightArr = columns.filter((item) => (item.fixed === 'right'))
             let normalArr = columns.filter((item) => (!item.fixed && item.key !== '_indexNo'))
             let result = fixLeftArr.concat(indexArr, normalArr, fixRightArr)
-
             // Clumns in disorder
-            columns.forEach((row, index) => {
+            result.forEach((row, index) => {
                 row._index = index
                 row._sortType = 'normal'
                 row._visible = true
@@ -770,15 +770,10 @@ export default {
         },
         dynamicOrder (index, status) {
             if (this.getVisibleNum(!this.dynamicable) < 2 && status) return
-            let cloneColumns
-            if (this.dynamicable) {
-                cloneColumns = this.cloneColumns
-            } else {
-                cloneColumns = this.dynamicColumns
-            }
+            let cloneColumns = this.dynamicable ? this.cloneColumns : this.dynamicColumns
             let isExistFixColumns = cloneColumns.filter((item) => (item.fixed)).length > 0
             this.$set(cloneColumns[index], '_visible', !status)
-            if (isExistFixColumns) {
+            if (isExistFixColumns && status) {
                 let boxWidth = this.$el ? this.$el.offsetWidth : 0
                 let tableWidth = this.getVisibleColumnsWidth(!this.dynamicable)
                 let width = this.bodyHeight === 0 ? tableWidth : tableWidth - (this.showVerticalScrollBar ? this.scrollBarWidth : 0)

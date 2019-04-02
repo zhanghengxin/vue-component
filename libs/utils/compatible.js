@@ -2,18 +2,12 @@
  * Created by gaoguoqing on 2019/3/11.
  *
  */
-/* eslint-disable */
-function isIe () {
-    const inBrowser = typeof window !== 'undefined'
-    const UA = inBrowser && window.navigator.userAgent.toLowerCase()
-    return UA && /msie|trident/.test(UA)
-}
 
 export function preventDefault (event) {
-    if (isIe()) { // 判断IE浏览器
-        window.event.returnValue = false
-    } else {
+    if (event.preventDefault) { // 判断IE浏览器
         event.preventDefault()
+    } else {
+        window.event.returnValue = false
     }
 }
 
