@@ -25,7 +25,7 @@ $menu-submenu-un-disabled: "#{$menu-submenu}-un-disabled";
 
 $select-dropdown: "#{$menu}-drop-list";
 
-/****menu的样式开始*****/
+/****menu的基础样式开始*****/
 .#{$menu} {
   display: block;
   margin: 0;
@@ -47,7 +47,7 @@ $select-dropdown: "#{$menu}-drop-list";
     cursor: pointer;
   }
 }
-/****menu的样式结束*****/
+/****menu的基础样式结束*****/
 
 /***水平方向的样式开始***/
 .#{$menu}.#{$menu-horizontal} {
@@ -141,9 +141,7 @@ $select-dropdown: "#{$menu}-drop-list";
 /***第一层开始***/
 .#{$menu}.#{$menu-vertical}{
   > .#{$menu-item},.#{$menu-submenu-title} {
-    @include _background($white);
     font-size: 14px;
-    @include _color($Title);
     padding: 10px 24px;
     position: relative;
     cursor: pointer;
@@ -191,34 +189,37 @@ $select-dropdown: "#{$menu}-drop-list";
 
   .#{$menu-submenu}  {
     .#{$menu-submenu},.#{$menu-item-group}{
-      .#{$menu-item} {
-        .#{$menu-item-solt} {
-          .#{$menu-item-dot} {
-            display: inline-block;
-            border-radius: 51%;
-            content: "";
-            margin-right: 13px;
-            margin-bottom: 1px;
-            margin-left: 3px;
-          }
-          .#{$icon} {
-            position: relative;
-            left: 0px;
-            top: 0px;
-            margin-right: 10px;
-          }
+      .#{$menu-item} .#{$menu-item-solt}{
+        .#{$menu-item-dot} {
+          display: inline-block;
+          border-radius: 51%;
+          content: "";
+          margin-right: 13px;
+          margin-bottom: 1px;
+          margin-left: 3px;
+        }
+        .#{$icon} {
+          position: relative;
+          left: 0px;
+          top: 0px;
+          margin-right: 10px;
         }
       }
+    }
+    .#{$menu-item-group} .#{$menu-item-group-title}{
+      font-size: 12px;
+      font-weight:normal;
     }
   }
 
   .#{$menu-item-group} {
     position: relative;
     .#{$menu-item-group-title} {
-      font-size: 12px;
       height: 40px;
       line-height: 40px;
       padding-left: 28px;
+      font-weight:bold;
+      font-size: 14px;
       .#{$icon} {
         top: 14px;
       }
@@ -232,34 +233,6 @@ $select-dropdown: "#{$menu}-drop-list";
     z-index: 1;
   }
 
-  .#{$menu-item}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu-title} {
-    &:hover {
-      color: $Primary !important;
-      @include _background($LightPrimary);
-      .#{$menu-item-solt} {
-        .#{$menu-item-dot} {
-          @include _borderColor($Primary);
-        }
-        .#{$icon} {
-          @include _color($Primary);
-        }
-      }
-    }
-  }
-
-  .#{$menu-item}.#{$menu-item-un-disabled}.#{$menu-item}-active {
-    color: $Primary !important;
-    @include _background($LightPrimary);
-    .#{$menu-item-solt} {
-      .#{$menu-item-dot} {
-        @include _borderColor($Primary);
-      }
-      .#{$icon} {
-        @include _color($Primary);
-      }
-    }
-  }
-
 }
 
 /***垂直方向的样式结束***/
@@ -269,8 +242,8 @@ $select-dropdown: "#{$menu}-drop-list";
   //水平方向的样式开始
   &-horizontal {
     @include _background($Primary);
+    @include _color($white);
     > .#{$menu-item-un-disabled} {
-      color: $white;
       &-active, &:hover {
         .#{$menu-item-solt} {
           border-bottom: 4px solid $LightPrimary;
@@ -278,9 +251,8 @@ $select-dropdown: "#{$menu}-drop-list";
       }
     }
     .#{$menu-submenu-un-disabled}{
-      color: $white;
       .#{$menu-item} {
-        color: $Content;
+        @include _color($Content);
       }
       .#{$menu-item-active},.#{$menu-item-un-disabled}:hover{
         @include _color($Primary);
@@ -288,7 +260,7 @@ $select-dropdown: "#{$menu}-drop-list";
       }
 
       .#{$menu-item-disabled}{
-        color: $DisContent
+        @include _color($DisContent);
       }
       &-active, &:hover {
         .#{$menu-submenu}-title {
@@ -300,56 +272,39 @@ $select-dropdown: "#{$menu}-drop-list";
   //水平方向的样式结束
 
   &-vertical{
+    @include _background($white);
     .#{$menu-item} {
-      color: $Content;
+      @include _color($Content);
     }
 
     .#{$icon} {
-      color: $Primary
+      @include _color($Primary);
     }
 
-    .#{$menu-item-disabled},.#{$menu-submenu-disabled} * {
-      color: $DisContent !important;
+    .#{$menu-item-disabled},.#{$menu-submenu-disabled}{
+      @include _color_important($DisContent);
+      .#{$icon} {
+        @include _color_important($DisContent);
+      }
       .#{$menu-item-dot} {
         border-color: $DisContent !important;
       }
     }
 
-    .#{$menu-opened} > .#{$menu-submenu-title} {
-      color: $Title;
-    }
-
     .#{$menu-submenu} {
-      .#{$arrow} {
-        color: $Title;
+      .#{$menu-item},.#{$menu-submenu},.#{$menu-item-group} .#{$menu-item-group-title}{
+        @include _color($Content);
+        @include _background($Background);
       }
-      .#{$menu-item},
-      .#{$menu-submenu} .#{$menu-submenu}-title {
-        color: $Content;
-        background-color: $Background;
-      }
+
       .#{$menu-submenu}.#{$menu-opened},.#{$menu-item-group} {
         .#{$menu-item}:last-of-type {
           border-bottom: $Border 1px solid;
         }
       }
-    }
 
-    > .#{$menu-submenu} {
-      .#{$menu-submenu}:first-of-type,
-      .#{$menu-item}:first-of-type {
-        border-top: $Border 1px solid;
-      }
       .#{$menu-submenu},.#{$menu-item-group}{
-        .#{$menu-item}:first-of-type{
-          border-top: unset;
-        }
-      }
-    }
-
-    .#{$menu-submenu}  {
-      .#{$menu-submenu},.#{$menu-item-group}{
-        .#{$menu-item} .#{$menu-item-solt}{
+        .#{$menu-item}{
           .#{$menu-item-dot} {
             border: $SubContent 3px solid;
           }
@@ -360,9 +315,55 @@ $select-dropdown: "#{$menu}-drop-list";
       }
     }
 
-    .#{$menu-item-group-title} {
-      color: $Sub;
-      @include _background($Background);
+    > .#{$menu-submenu},.#{$menu-item-group} {
+        .#{$menu-submenu}:first-of-type,
+        .#{$menu-item}:first-of-type {
+          border-top: $Border 1px solid;
+      }
+      .#{$menu-submenu},.#{$menu-item-group}{
+        .#{$menu-item} {
+          border-top: unset;
+        }
+      }
+    }
+
+    .#{$menu-item-group}{
+      .#{$menu-item-group-title}{
+        @include _color($Title);
+        @include _background($white);
+      }
+      .#{$menu-item}{
+        @include _color($Content);
+        @include _background($Background);
+      }
+    }
+
+    .#{$menu-item}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu-title} {
+      &:hover {
+        color: $Primary !important;
+        @include _background_opacity($LightPrimary,0.9);
+        .#{$menu-item-solt} {
+          .#{$menu-item-dot} {
+            @include _borderColor($Primary);
+          }
+          .#{$icon} {
+            @include _color($Primary);
+          }
+        }
+      }
+    }
+
+    .#{$menu-item}.#{$menu-item-un-disabled}.#{$menu-item}-active {
+      color: $Primary !important;
+      @include _background_opacity($LightPrimary,0.9);
+      .#{$menu-item-solt} {
+        .#{$menu-item-dot} {
+          @include _borderColor($Primary);
+        }
+        .#{$icon} {
+          @include _color($Primary);
+        }
+      }
     }
   }
 }
@@ -371,104 +372,96 @@ $select-dropdown: "#{$menu}-drop-list";
 /****dark主题的样式start****/
 .#{$menu-dark}.#{$menu}{
 
-  //水平方向的样式
+  //水平方向的样式开始
   &-horizontal {
-    @include _color($white);
     @include _background($Title);
-  }
+    > .#{$menu-item-un-disabled} {
+      @include _color($white);
+      &-active, &:hover {
+        .#{$menu-item-solt} {
+          border-bottom: 4px solid $Divider;
+        }
+      }
+    }
+    .#{$menu-submenu-un-disabled}{
+      @include _color($white);
+      .#{$menu-item} {
+        @include _color($Title);
+      }
+      .#{$menu-item-active},.#{$menu-item-un-disabled}:hover{
+        @include _color($Primary);
+        @include _background($Background);
+      }
 
-  &-horizontal .#{$menu-submenu-un-disabled}{
-    .#{$menu-item-un-disabled}{
-      @include _color($Title);
-    }
-    .#{$menu-item-disabled}{
-      color: $DisContent
-    }
-    &-active, &:hover {
-      .#{$menu-submenu}-title {
-        border-bottom: 4px solid $Divider;
+      .#{$menu-item-disabled}{
+        color: $DisContent
+      }
+      &-active, &:hover {
+        .#{$menu-submenu}-title {
+          border-bottom: 4px solid $Divider;
+        }
       }
     }
   }
+  //水平方向的样式结束
 
-  &-horizontal > .#{$menu-item-un-disabled} {
-    &-active, &:hover {
-      .#{$menu-item-solt} {
-        border-bottom: 4px solid $Divider;
-      }
-    }
-  }
-
-  //垂直方向的样式
   &-vertical{
     @include _background($Content);
-  }
+    .#{$menu-item} {
+      @include _color($white);
+    }
 
-  /***第一层开始***/
-  &-vertical > .#{$menu-item},
-  &-vertical .#{$menu-submenu-title} {
-    @include _background($Content);
-    @include _color($white);
-  }
-  &-vertical .#{$icon} {
-    @include _color($white);
-  }
+    .#{$icon} {
+      @include _color($white);
+    }
 
-  &-vertical {
     .#{$menu-item-disabled},.#{$menu-submenu-disabled} * {
       color: $DisContent !important;
       .#{$menu-item-dot} {
         border-color: $DisContent !important;
       }
-      .#{$icon} {
-        color: $DisContent !important;
-      }
     }
-  }
 
-  &-vertical &-opened > &-submenu-title {
-    color: $Title;
-  }
-  /***第一层结束***/
-
-  /*****第二层开始****/
-  &-vertical .#{$menu-submenu} {
-    .#{$arrow} {
+    .#{$menu-opened} > .#{$menu-submenu-title} {
       @include _color($white);
     }
-    .#{$menu-item},
-    .#{$menu-submenu} .#{$menu-submenu}-title {
-      color: $white;
-      background-color: $Title;
-    }
-    .#{$menu-submenu}.#{$menu}-opened,.#{$menu-item-group} {
-      .#{$menu-submenu}-title {
-        color: $white;
-      }
-      .#{$menu-item}:last-of-type {
-        border-bottom: unset;
-      }
-    }
-  }
 
-  &-vertical > .#{$menu-submenu} {
-    .#{$menu-submenu}:first-of-type,
-    .#{$menu-item}:first-of-type {
-      border-top: unset;
+    .#{$menu-submenu} {
+      @include _color($white);
+      .#{$arrow} {
+        @include _color($white);
+      }
+      .#{$menu-item},
+      .#{$menu-submenu} .#{$menu-submenu}-title,
+      .#{$menu-item-group} .#{$menu-item-group-title}{
+        color: $white;
+        background-color: $Title;
+      }
+      .#{$menu-submenu}.#{$menu-opened},.#{$menu-item-group} {
+        .#{$menu-submenu}-title {
+          color: $white;
+        }
+        .#{$menu-item}:last-of-type {
+          border-bottom: unset;
+        }
+      }
     }
-    .#{$menu-submenu},.#{$menu-item-group}{
-      .#{$menu-item}:first-of-type{
+
+    > .#{$menu-submenu} {
+      .#{$menu-submenu}:first-of-type,
+      .#{$menu-item}:first-of-type {
         border-top: unset;
       }
+      .#{$menu-submenu},.#{$menu-item-group}{
+        .#{$menu-item}:first-of-type{
+          border-top: unset;
+        }
+      }
     }
-  }
-  /*****第二层结束****/
 
-  /*****第三层开始****/
-  &-vertical .#{$menu-submenu} {
-    .#{$menu-submenu},.#{$menu-item-group}{
-      .#{$menu}-item {
-        .#{$menu-item-solt} {
+    .#{$menu-submenu}  {
+      .#{$menu-submenu},.#{$menu-item-group}{
+        .#{$menu-item}{
           .#{$menu-item-dot} {
             border: $white 3px solid;
           }
@@ -476,21 +469,28 @@ $select-dropdown: "#{$menu}-drop-list";
             @include _color($white);
           }
         }
+        .#{$menu-item-disabled}{
+          .#{$menu-item-dot} {
+            border: $DisContent 3px solid;
+          }
+          .#{$icon} {
+            @include _color($DisContent);
+          }
+        }
       }
     }
-  }
 
-  /*****第三层结束****/
-
-  &-vertical .#{$menu-item-group} {
-    &-title {
-      color: $white;
-      @include _background($Title);
+    .#{$menu-item-group}{
+      .#{$menu-item-group-title}{
+        @include _color($white);
+        @include _background($Content);
+      }
+      .#{$menu-item}{
+        @include _background($Title);
+      }
     }
-  }
 
-  &-vertical {
-    .#{$menu-item}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu}-title {
+    .#{$menu-item}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu-title} {
       &:hover {
         color: $white !important;
         @include _background($LightPrimary);
@@ -504,6 +504,7 @@ $select-dropdown: "#{$menu}-drop-list";
         }
       }
     }
+
     .#{$menu-item}.#{$menu-item-un-disabled}.#{$menu-item}-active {
       color: $white !important;
       @include _background($LightPrimary);
