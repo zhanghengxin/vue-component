@@ -11,7 +11,7 @@ export function preventDefault (event) {
     }
 }
 
-(function () {
+(function (d) {
     var lastTime = 0
     var vendors = ['ms', 'moz', 'webkit', 'o']
     for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
@@ -33,6 +33,27 @@ export function preventDefault (event) {
     if (!window.cancelAnimationFrame) {
         window.cancelAnimationFrame = function (id) {
             clearTimeout(id)
+        }
+    }
+    if (!Array.prototype.indexOf) {
+        Array.prototype.indexOf = function (elt /*, from*/) {
+            var len = this.length >>> 0
+            
+            var from = Number(arguments[1]) || 0
+            from = (from < 0)
+                ? Math.ceil(from)
+                : Math.floor(from)
+            if (from < 0) {
+                from += len
+            }
+            
+            for (; from < len; from++) {
+                if (from in this &&
+                    this[from] === elt) {
+                    return from
+                }
+            }
+            return -1
         }
     }
     if (!('classList' in document.documentElement)) {
@@ -77,4 +98,15 @@ export function preventDefault (event) {
             }
         })
     }
-}())
+    if (navigator.userAgent.indexOf('MSIE 9') === -1) return
+    
+    d.addEventListener('selectionchange', function () {
+        var el = d.activeElement
+        
+        if (el.tagName === 'TEXTAREA' || (el.tagName === 'INPUT')) {
+            var ev = d.createEvent('CustomEvent')
+            ev.initCustomEvent('input', true, true, {})
+            el.dispatchEvent(ev)
+        }
+    })
+})(document)
