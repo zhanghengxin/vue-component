@@ -55,7 +55,6 @@ import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
 import Poptip from './components/poptip'
-import LabelTree from './components/tree/LabelTree'
 
 const components = [
     Input,
@@ -66,7 +65,6 @@ const components = [
     Drawer,
     Tag,
     Tree,
-    LabelTree,
     Table,
     Icon,
     Message,
