@@ -38,6 +38,7 @@
                 @click.native="handleTransferClick"
                 v-show="opened"
                 :class="{ [prefixCls + '-transfer']: transfer }"
+                :style="dropStyles"
                 :placement="placement"
                 ref="drop"
                 :label-width="dropLabelWidth"
@@ -237,7 +238,13 @@
                     active: false
                 },
                 internalFocus: false,
-                dropLabelWidth: 0
+                dropLabelWidth: 0,
+                dropStyles: {
+                    width: 'auto',
+                    padding: 0,
+                    overflow: 'visible',
+                    'max-height': 'none'
+                }
             }
         },
         computed: {
