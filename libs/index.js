@@ -62,6 +62,7 @@ const components = [
     InputNumber,
     Page,
     Button,
+    Button.Group,
     Drawer,
     Tag,
     Tree,

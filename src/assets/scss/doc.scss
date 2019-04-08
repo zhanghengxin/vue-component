@@ -71,9 +71,6 @@
   ul, ol {
     list-style-type: circle;
   }
-  a {
-    color: $Primary;
-  }
   .language-bash {
     @include _background($Background);
   }

@@ -12,7 +12,7 @@
         :label="label"
         :labelWidth='labelWidth'
         :fixed="fixed"
-        :class="[prefixCls]"
+        :class="[classes]"
         :disabled="disabled"
         :readonly="readonly"
         :size="size"
@@ -31,10 +31,10 @@
         </template>
         <template v-if='!disabled && !type'>
             <template slot='prefix'>
-                <span @click="up" :class='[prefixCls+`-up`,prefixCls+`-icon`]'>+</span>
+                <span @click="up" :class='[prefixCls+`-up`,prefixCls+`-icon`]'><Icon type='jiahao'></Icon></span>
             </template>
             <template slot='suffix'>
-                <span @click="down" :class='[prefixCls+`-down`,prefixCls+`-icon`]'>-</span>
+                <span @click="down" :class='[prefixCls+`-down`,prefixCls+`-icon`]'><Icon type='jianhao'></Icon></span>
             </template>
         </template>
     </b-input>
@@ -110,6 +110,16 @@ export default {
             prefixCls,
             currentValue: 0,
             operationShow: false
+        }
+    },
+    computed: {
+        classes () {
+            return [
+                 `${prefixCls}`,
+                {
+                    [`${prefixCls}-prefix`]: !this.type
+                }
+            ]
         }
     },
     created () {

@@ -4,83 +4,90 @@
  * created 2019/01/28 16:40:01
  */
 
- $prefix-number: $css-prefix+'input-number';
- $prefix-number-icon: $css-prefix+'input-icon';
- 
- @mixin iconBox() {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   @include _color($Content);
-   user-select: none;
-   line-height: 0;
- 
-   &:hover {
-     @include _color($Primary);
-     cursor: pointer;
-   }
- }
- 
- @mixin icons() {
-   .#{$prefix-number-icon} {
-     $i:0;
-     @each $type in small,default,large{
-       &-#{$type} {
-         .icon {
-           height: 11px + $i;
-           line-height: 11px + $i;
-         }
-       }
-       $i:$i+4;
-     }
-   }
- }
- 
- .#{$prefix-number} {
-   // &:hover{
-   //   .#{$prefix-number-icon}{
-   //       display: block;
-   //       opacity: 1;
-   //       transition: all .3s linear;
-   //   }
-   // }
- 
-   .#{$prefix-number-icon} {
-     // display: none;
-     // opacity: 0;
-     &-suffix {
-       border-left: 1px solid $Border;
-     }
- 
-     &-prefix {
-       border-right: 1px solid $Border;
-     }
-   }
-   @include icons();
- 
-   &-icon {
-     background: $Background;
-     height: 100%;
-     line-height: 1;
-     &.#{$prefix-number}-up{
-         border-top-left-radius: 4px;
-         border-bottom-left-radius: 4px;
-     }
-     &.#{$prefix-number}-down{
-         border-top-right-radius: 4px;
-         border-bottom-right-radius: 4px;
-     }
-   }
- 
-   &-up {
-     @include iconBox();
-     &-border{
-         border-bottom: 1px solid $Border;
-     }
-   }
- 
-   &-down {
-     @include iconBox();
-   }
- }
- 
+$prefix-input: $css-prefix+'input';
+$prefix-number: $prefix-input+'-number';
+$prefix-number-icon: $css-prefix+'input-icon';
+
+@mixin iconBox() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include _color($Content);
+  user-select: none;
+  line-height: 0;
+
+  &:hover {
+    @include _color($Primary);
+    cursor: pointer;
+  }
+}
+
+@mixin icons() {
+  .#{$prefix-number-icon} {
+    $i: 0;
+
+    @each $type in small,
+    default,
+    large {
+      &-#{$type} {
+        .icon {
+          height: 11px + $i;
+          line-height: 11px + $i;
+        }
+      }
+
+      $i:$i+4;
+    }
+  }
+}
+
+.#{$prefix-number} {
+
+  &-prefix {
+    .#{$prefix-input} {
+      padding-left: 30px;
+    }
+  }
+
+  .#{$prefix-number-icon} {
+    &-suffix {
+      border-left: 1px solid $Border;
+    }
+
+    &-prefix {
+      border-right: 1px solid $Border;
+    }
+  }
+
+  @include icons();
+
+
+
+  &-icon {
+    background: $Background;
+    height: 100%;
+    line-height: 1;
+
+    &.#{$prefix-number}-up {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+
+    &.#{$prefix-number}-down {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+  }
+
+  &-up {
+    @include iconBox();
+
+    &-border {
+      border-bottom: 1px solid $Border;
+    }
+  }
+
+  &-down {
+    @include iconBox();
+  }
+}
