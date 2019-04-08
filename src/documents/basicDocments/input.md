@@ -17,6 +17,7 @@
                 value10: '',
                 value11: '',
                 value12: '',
+                value15: '',
                 name:'姓名',
                 pwd:'密码',
                 disabled:true,
@@ -27,7 +28,8 @@
                 icon:'chaxun',
                 autosize:true,
                 fixed:true,
-                labelWidth:72
+                labelWidth:72,
+                placeholder:'请输入数字'
             }
         },
         methods:{
@@ -197,12 +199,12 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 :::
 
 ### icon
-通过添加icon 属性可设置带icon的样式 ```prefix```设置显示在前 ```suffix```设置显示在后。<br/>
+通过添加prefix、suffix属性可设置带前面带icon的样式 ```prefix```设置显示在前 ```suffix```设置显示在后。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" :icon='icon' :prefix='prefix' ></b-input>
-            <b-input v-model="value7" :icon='icon' :suffix='suffix' ></b-input>
+            <b-input v-model="value6" :prefix='icon' ></b-input>
+            <b-input v-model="value7" :suffix='icon' ></b-input>
         </div>
     </div>
 </div>
@@ -211,8 +213,8 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```html
 
     <template>
-        <b-input v-model="value6" :icon='icon' :prefix='prefix' ></b-input>
-        <b-input v-model="value7" :icon='icon' :suffix='suffix' ></b-input>
+        <b-input v-model="value6" :prefix='icon' ></b-input>
+        <b-input v-model="value7" :suffix='icon' ></b-input>
     </template>
     <script>
         export default {
@@ -268,6 +270,36 @@ fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体�
 ```
 :::
 
+
+### label属性的两种样式
+结合 Poptip 组件，实现一个数值输入框，方便内容超长时的全量展现。
+<div class="example">
+    <div class="example-box">
+        <b-poptip trigger="focus" placement='top' :content='value15 || placeholder'>
+            <b-input v-model="value15" prefix="jiaoyi" :placeholder="placeholder" style="width: 120px" />
+        </b-poptip>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+        <b-poptip trigger="focus" placement='top' :content='value15 || "请输入数字"'>
+            <b-input v-model="value15" prefix="jiaoyi" placeholder="请输入数字" style="width: 120px" />
+        </b-poptip>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    value15:'',
+                }
+            }
+        }
+    </script>
+```
+:::
 
 ### textarea
 通过设置属性 type 为 textarea 来使用文本域，用于多行输入。

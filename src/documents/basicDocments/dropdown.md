@@ -47,6 +47,85 @@ export default {
 :::
 
 
+### 对齐方向
+通过设置属性 placement 可以更改下拉菜单出现的方向。
+<div class="example">
+    <div class="example-box">
+		<b-dropdown placement='bottom-start'>
+			<b-button >菜单(左)</b-button>
+			<b-dropdown-menu slot="list">
+				<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
+				<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
+				<b-dropdown-item>试问卷帘人</b-dropdown-item>
+				<b-dropdown-item>却道海棠依旧</b-dropdown-item>
+				<b-dropdown-item>知否，知否？</b-dropdown-item>
+				<b-dropdown-item>应是绿肥红瘦</b-dropdown-item>
+			</b-dropdown-menu>
+		</b-dropdown>
+		<b-dropdown placement='bottom' style='margin-left:20px;'>
+			<b-button >菜单(居中)</b-button>
+			<b-dropdown-menu slot="list">
+				<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
+				<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
+				<b-dropdown-item>试问卷帘人</b-dropdown-item>
+				<b-dropdown-item>却道海棠依旧</b-dropdown-item>
+				<b-dropdown-item>知否，知否？</b-dropdown-item>
+				<b-dropdown-item>应是绿肥红瘦</b-dropdown-item>
+			</b-dropdown-menu>
+		</b-dropdown>
+		<b-dropdown placement='bottom-end' style='margin-left:20px;'>
+			<b-button >菜单(右)</b-button>
+			<b-dropdown-menu slot="list">
+				<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
+				<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
+				<b-dropdown-item>试问卷帘人</b-dropdown-item>
+				<b-dropdown-item>却道海棠依旧</b-dropdown-item>
+				<b-dropdown-item>知否，知否？</b-dropdown-item>
+				<b-dropdown-item>应是绿肥红瘦</b-dropdown-item>
+			</b-dropdown-menu>
+		</b-dropdown>
+    </div>
+</div>
+
+::: code
+```html
+	<b-dropdown placement='bottom-start'>
+		<b-button >菜单(左)</b-button>
+		<b-dropdown-menu slot="list">
+			<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
+			<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
+			<b-dropdown-item>试问卷帘人</b-dropdown-item>
+			<b-dropdown-item>却道海棠依旧</b-dropdown-item>
+			<b-dropdown-item>知否，知否？</b-dropdown-item>
+			<b-dropdown-item>应是绿肥红瘦</b-dropdown-item>
+		</b-dropdown-menu>
+	</b-dropdown>
+	<b-dropdown placement='bottom' style='margin-left:20px;'>
+		<b-button >菜单(居中)</b-button>
+		<b-dropdown-menu slot="list">
+			<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
+			<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
+			<b-dropdown-item>试问卷帘人</b-dropdown-item>
+			<b-dropdown-item>却道海棠依旧</b-dropdown-item>
+			<b-dropdown-item>知否，知否？</b-dropdown-item>
+			<b-dropdown-item>应是绿肥红瘦</b-dropdown-item>
+		</b-dropdown-menu>
+	</b-dropdown>
+	<b-dropdown placement='bottom-end' style='margin-left:20px;'>
+		<b-button >菜单(右)</b-button>
+		<b-dropdown-menu slot="list">
+			<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
+			<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
+			<b-dropdown-item>试问卷帘人</b-dropdown-item>
+			<b-dropdown-item>却道海棠依旧</b-dropdown-item>
+			<b-dropdown-item>知否，知否？</b-dropdown-item>
+			<b-dropdown-item>应是绿肥红瘦</b-dropdown-item>
+		</b-dropdown-menu>
+	</b-dropdown>
+```
+:::
+
+
 ### 触发方式
 通过设置属性 trigger 可以更改触发方式，可选项为 click 、 hover(默认) 或 custom(自定义)。
 <div class="example">
@@ -73,6 +152,17 @@ export default {
 				<b-dropdown-item>应是绿肥红瘦</b-dropdown-item>
 			</b-dropdown-menu>
 		</b-dropdown>
+		<b-dropdown trigger="contextMenu" style='margin-left:20px;'>
+			<b-button >右键触发</b-button>
+			<b-dropdown-menu slot="list">
+				<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
+				<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
+				<b-dropdown-item>试问卷帘人</b-dropdown-item>
+				<b-dropdown-item>却道海棠依旧</b-dropdown-item>
+				<b-dropdown-item>知否，知否？</b-dropdown-item>
+				<b-dropdown-item>应是绿肥红瘦</b-dropdown-item>
+			</b-dropdown-menu>
+		</b-dropdown>
 		<b-dropdown trigger="custom" :show='show' style='margin-left:20px;'>
 			<b-button  @on-click='handClick'>custom触发</b-button>
 			<b-dropdown-menu slot="list">
@@ -88,7 +178,7 @@ export default {
 ::: code
 ```html
 	<b-dropdown>
-		<b-button>hover触发</b-button>
+		<b-button >hover触发</b-button>
 		<b-dropdown-menu slot="list">
 			<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
 			<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
@@ -109,12 +199,28 @@ export default {
 			<b-dropdown-item>应是绿肥红瘦</b-dropdown-item>
 		</b-dropdown-menu>
 	</b-dropdown>
+	<b-dropdown trigger="contextMenu" style='margin-left:20px;'>
+		<b-button >右键触发</b-button>
+		<b-dropdown-menu slot="list">
+			<b-dropdown-item>昨夜雨疏风骤</b-dropdown-item>
+			<b-dropdown-item>浓睡不消残酒</b-dropdown-item>
+			<b-dropdown-item>试问卷帘人</b-dropdown-item>
+			<b-dropdown-item>却道海棠依旧</b-dropdown-item>
+			<b-dropdown-item>知否，知否？</b-dropdown-item>
+			<b-dropdown-item>应是绿肥红瘦</b-dropdown-item>
+		</b-dropdown-menu>
+	</b-dropdown>
 	<b-dropdown trigger="custom" :show='show' style='margin-left:20px;'>
-		<b-button   @on-click='handClick'>custom触发</b-button>
+		<b-button  @on-click='handClick'>custom触发</b-button>
 		<b-dropdown-menu slot="list">
 			<div style='padding:10px;'>
 				<p style='padding:20px 0'>大诗人？</p>
-				<b-button type="primary" size="small" style='float:right;' @on-click='handClick'>不是</b-button>
+				<b-button 
+					type="primary" 
+					size="small" 
+					style='float:right;' 
+					@on-click='handClick'>不是
+				</b-button>
 			</div>
 		</b-dropdown-menu>
 	</b-dropdown>
@@ -135,7 +241,7 @@ export default {
 				<b-dropdown placement="right-start">
 					<b-dropdown-item>
 						雁字回时，月满西楼
-						<b-icon  type="xia" size="14" color="#52b7fc"></b-icon>
+						<b-icon  type="you" size="14"></b-icon>
 					</b-dropdown-item>
 					<b-dropdown-menu slot="list">
 						<b-dropdown-item>花自飘零水自流</b-dropdown-item>
@@ -180,7 +286,7 @@ export default {
 | 参数    |  说明  | 类型   | 可选值 | 默认值     |
 | -----  | -----  | ---   | --- | ---     |
 | placement    | 菜单弹出位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, `right`, `right-start`, `right-end`| bottom-start |
-| trigger      | 触发下拉的方式  | string | `hover`、`click` | hover   |
+| trigger      | 触发下拉的方式  | string | `hover`、`click`、`contextMenu`、`custom` | hover   |
 | show      | 显示与隐藏  | Boolean | `false`、`true` | false   |
 ### b-dropdown Slots
 

@@ -93,6 +93,12 @@ $css-prefix-option: $css-prefix+'option';
     text-align: center;
   }
 
+  &-group-label{
+    font-size: 12px;
+    padding: 5px 10px;
+    color: $SubContent;
+  }
+
   &-group {
     width: auto;
     .#{$css-prefix-select}-main {

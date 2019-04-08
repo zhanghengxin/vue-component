@@ -17,7 +17,7 @@
                 <slot name='prefix'>
                     <Icon
                         size
-                        :type="icon"
+                        :type="prefix+''"
                         @on-click="handleIconClick">
                     </Icon>
                 </slot>
@@ -47,7 +47,7 @@
                     <slot name='suffix' v-if='suffix || $slots.suffix'>
                         <Icon
                             size
-                            :type="icon"
+                            :type="suffix+''"
                             :class="[prefixCls+`-noclear`]"
                             @on-click="handleIconClick">
                         </Icon>
@@ -217,9 +217,19 @@ export default {
             // fixed label的两种样式
             // prefix 前面的icon显示
             // suffix 后面的icon显示
-            props: ['disabled', 'readonly', 'autofocus', 'spellcheck', 'error', 'clearable', 'showPassword', 'fixed', 'prefix', 'suffix'],
+            props: ['disabled', 'readonly', 'autofocus', 'spellcheck', 'error', 'clearable', 'showPassword', 'suffix'],
             config: {
                 type: Boolean,
+                default: false
+            }
+        }),
+         // props type为 Boolean 的配置
+        ...propsInit({
+            // prefix 前面的icon显示
+            // suffix 后面的icon显示
+            props: ['prefix', 'suffix'],
+            config: {
+                type: [Boolean, String],
                 default: false
             }
         })
