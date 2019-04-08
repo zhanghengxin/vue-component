@@ -118,11 +118,6 @@
           "title": "TimePicker 时间选择器",
           "path": "/timepicker",
           "name": "timepicker"
-        },
-        {
-          "title": "DateTimePicker选择器",
-          "path": "/datetimepicker",
-          "name": "datetimepicker"
         }
       ]
     },
