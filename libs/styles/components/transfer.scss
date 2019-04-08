@@ -40,7 +40,7 @@ $css-prefix-transfer: $css-prefix + 'transfer';
     }
     &-body {
       height: 100%;
-      border: 1px solid inherit;
+      border: 1px solid $Border;
       @include _borderColor($Border);
       border-top: none;
       border-radius: 0 0 6px 6px;
