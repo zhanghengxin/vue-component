@@ -18,94 +18,99 @@
         @click.exact="handleClickLink($event, false)"
         @click.ctrl="handleClickLink($event, true)"
         @click.meta="handleClickLink($event, true)">
-        <svg v-if="loading" class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none"/>
-        </svg>
-        <Icon v-if="icon && !loading" :type="icon"></Icon>
-        <span ref="slot"><slot></slot></span>
+        <Icon :class="prefixCls+`-load-loop`" type="tongbu" v-if="loading"></Icon>
+        <Icon :type="icon" v-if="(icon) && !loading"></Icon>
+        <span v-if="showSlot" ref="slot"><slot></slot></span>
     </a>
     <button
         v-else
-        ref="button"
         :type="htmlType"
-        :class="bodyCls"
+        :class="classes"
         :disabled="disabled"
         @click="handleClickLink">
-        <svg v-if="loading" class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none"/>
-        </svg>
-        <Icon v-if="icon && !loading" :type="icon"></Icon>
-        <span ref="slot"><slot></slot></span>
+        <Icon :class="prefixCls+`-load-loop`" type="tongbu" v-if="loading"></Icon>
+        <Icon :type="icon" v-if="(icon) && !loading"></Icon>
+        <span v-if="showSlot" ref="slot"><slot></slot></span>
     </button>
 </template>
-
 <script>
-import { prefix, oneOf } from '../../utils/common'
-import mixinsLink from '../../mixins/link'
-import Icon from '../icon'
+    import Icon from '../icon'
+    import { prefix, oneOf } from '../../utils/common'
+    import mixinsLink from '../../mixins/link'
 
-const prefixCls = prefix + 'button'
-export default {
-    name: prefixCls,
-    mixins: [mixinsLink],
-    components: {Icon},
-    computed: {
-        bodyCls () {
-            return [
-                `${prefixCls}`,
-                `${prefixCls}-size-${this.size}`,
-                `${prefixCls}-type-${this.type} `,
-                {
-                    [`${prefixCls}-round`]: this.round, // 圆角
-                    [`${prefixCls}-circle`]: this.circle, // 圆形
-                    [`${prefixCls}-disabled`]: this.disabled // 禁用
+    const prefixCls = prefix + 'button'
+
+    export default {
+        name: prefixCls,
+        mixins: [ mixinsLink ],
+        components: { Icon },
+        props: {
+            type: {
+                validator (value) {
+                    return oneOf(value, ['default', 'primary', 'dashed', 'text', 'info', 'success', 'warning', 'error'])
+                },
+                default: 'default'
+            },
+            shape: {
+                validator (value) {
+                    return oneOf(value, ['circle', 'circle-outline'])
                 }
-            ]
-        }
-    },
-    props: {
-        type: {
-            validator (value) {
-                return oneOf(value, ['default', 'primary', 'error', 'warning', 'success'])
             },
-            default: 'default'
-        },
-        size: {
-            validator (value) {
-                return oneOf(value, ['default', 'small', 'large'])
+            size: {
+                validator (value) {
+                    return oneOf(value, ['small', 'large', 'default'])
+                },
+                default () {
+                    return 'default'
+                }
             },
-            default: 'default'
-        },
-        disabled: Boolean,
-        round: Boolean,
-        loading: Boolean,
-        circle: Boolean,
-        icon: {
-            type: String,
-            default: ''
-        },
-        htmlType: {
-            default: 'button',
-            validator (value) {
-                return oneOf(value, ['button', 'submit', 'reset'])
+            loading: Boolean,
+            disabled: Boolean,
+            htmlType: {
+                default: 'button',
+                validator (value) {
+                    return oneOf(value, ['button', 'submit', 'reset'])
+                }
+            },
+            icon: {
+                type: String,
+                default: ''
+            },
+            long: {
+                type: Boolean,
+                default: false
             }
-        }
-    },
-    data () {
-        return {}
-    },
-    mounted () {
-        // 是否需要不可点击？
-        if (this.loading) {
-            // this.disabled = true
-        }
-    },
-    methods: {
-        handleClickLink (event, new_window = false) {
-            this.$emit('on-click', event)
-
-            this.handleCheckClick(event, new_window)
+        },
+        data () {
+            return {
+                showSlot: true,
+                prefixCls
+            }
+        },
+        computed: {
+            classes () {
+                return [
+                    `${prefixCls}`,
+                    `${prefixCls}-${this.type}`,
+                    {
+                        [`${prefixCls}-long`]: this.long,
+                        [`${prefixCls}-${this.shape}`]: !!this.shape,
+                        [`${prefixCls}-${this.size}`]: this.size !== 'default',
+                        [`${prefixCls}-loading`]: this.loading != null && this.loading,
+                        [`${prefixCls}-icon-only`]: !this.showSlot && (!!this.icon || this.loading),
+                        [`${prefixCls}-ghost`]: this.ghost
+                    }
+                ]
+            }
+        },
+        methods: {
+            handleClickLink (event, new_window = false) {
+                this.$emit('on-click', event)
+                this.handleCheckClick(event, new_window)
+            }
+        },
+        mounted () {
+            this.showSlot = this.$slots.default !== undefined
         }
     }
-}
 </script>
