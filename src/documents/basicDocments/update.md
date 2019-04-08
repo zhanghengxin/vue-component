@@ -1,4 +1,55 @@
 更新日志
+### 0.4.1
+## `2019-04-08`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        <h3>ie 兼容性处理</h3>
+        <ul>
+            <li>修复 Transfer IE下样式问题</li>
+            <li>修复 notice ie9样式展示问题</li>
+            <li>修复 table 组件 ie9 - 11显示隐藏列功能兼容问题解决 、滚动条显示不正常问题优化</li>
+            <li>修复 Button、Input 样式显示不正常【IE9-11】 </li>
+        </ul>
+    </b-timeline-item>
+    <b-timeline-item>
+    <h3>Datepicker【部分不兼容重构】</h3>
+    <ul>
+        <li>重构 type 和range 合并，由 type 统一控制，type支持date/daterange/datetime/datetimerange/year/month</li>
+        <li>重构 format  日期格式化由原先 YYYY-MM-DD 转化为 yyyy-MM-dd</li>
+        <li>重构 将 shortcuts、disabledDate合并于 options 属性中，详见文档实例</li>
+        <li>新增 支持 multiple 属性，date模式下，可多选日期</li>
+        <li>优化 placeholder 不再支持默认显示</li>
+    </ul>
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 menu、grid、steps的样式和文档调整
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 Button组件的 Round 修改为 shape 按钮形状，可选值为circle或者不设置
+    </b-timeline-item>
+    <b-timeline-item>
+        新增 table 远程过滤、 默认过滤、远程排序
+    </b-timeline-item>
+    <b-timeline-item>
+        新增 Poptip 组件
+    </b-timeline-item>
+    <b-timeline-item>
+        新增 input新增show-password功能
+    </b-timeline-item>
+    <b-timeline-item>
+        新增 button 新增long 开启后，按钮的长度为 100%
+    </b-timeline-item>
+    <b-timeline-item>
+        修复 input，select的label状态width设置框的宽度
+    </b-timeline-item>
+    <b-timeline-item>
+        修复 select远程搜索 bug
+    </b-timeline-item>
+
+</b-timeline>
+
+
 ### 0.4.0
 ## `2019-03-26`
 <br>
