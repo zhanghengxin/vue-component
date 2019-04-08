@@ -182,6 +182,11 @@
           "name": "tooltip"
         },
         {
+          "title": "Poptip 气泡提示",
+          "path": "/poptip",
+          "name": "poptip"
+        },
+        {
           "title": "Tabs 标签页",
           "path": "/tabs",
           "name": "tabs"

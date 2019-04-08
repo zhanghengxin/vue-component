@@ -2,7 +2,6 @@
  * Created by gaoguoqing on 2018/9/5.
  *
  */
-
 import Input from './components/input'
 import InputNumber from './components/input-number'
 import Button from './components/button'
@@ -55,6 +54,7 @@ import LoadingBar from './components/loading-bar/'
 import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
+import Poptip from './components/poptip'
 import LabelTree from './components/tree/LabelTree'
 
 const components = [
@@ -111,6 +111,7 @@ const components = [
     Split,
     Anchor,
     AnchorLink,
+    Poptip,
     Affix
 ]
 
