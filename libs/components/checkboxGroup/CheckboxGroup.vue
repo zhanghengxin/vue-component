@@ -13,8 +13,7 @@ export default {
     name: prefixCls,
     mixins: [Emitter],
     data () {
-        return {
-        }
+        return {}
     },
     props: {
         value: {
@@ -22,9 +21,7 @@ export default {
             default: () => []
         }
     },
-    computed: {
-
-    },
+    computed: {},
     watch: {
         value: {
             handler: function () {
@@ -47,7 +44,7 @@ export default {
                 })
             })
         },
-        change (label, checked) {
+        change (label) {
             let value = this.value
             let index = this.value.indexOf(label)
             if (index < 0) {

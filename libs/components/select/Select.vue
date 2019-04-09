@@ -134,6 +134,7 @@ export default {
             query: '',
             lastRemoteQuery: '',
             dropWidth: null,
+            stylePloyfill: false,
             selectWidth: {}
         }
     },
@@ -242,7 +243,7 @@ export default {
             return [
                 `${prefixCls}`,
                 {
-                    [`${prefixCls}-group`]: this.label && !this.fixed,
+                    [`${prefixCls}-group`]: this.label && !this.fixed && this.stylePloyfill,
                     [`${this.className}`]: this.className
                 }
             ]
@@ -253,7 +254,7 @@ export default {
                     [`${prefixCls}-${this.size}`]: this.size,
                     [`${prefixCls}-fixed-disabled`]: this.label && this.fixed && this.disabled,
                     [`${prefixCls}-multiple`]: this.multiple,
-                    [`${prefixCls}-group-fixed`]: this.label && this.fixed,
+                    [`${prefixCls}-group-fixed`]: this.label && this.fixed && this.stylePloyfill,
                     [`${prefixCls}-group-fixed-focused`]: this.isFocused && this.show && !!this.label && !!this.fixed
                 }
             ]
@@ -418,12 +419,12 @@ export default {
                 }
             }
             this.dropWidth = width
+            this.stylePloyfill = true // 兼容table-cell设置在width之前不生效
             this.$emit('get-drop-width', this.dropWidth)
         },
         valuesInit () {
             return this.getInitValue().map(value => {
                 if (typeof value !== 'number' && !value) return null
-                console.log(value)
                 return this.getOptionData(value)
             }).filter(Boolean)
         },

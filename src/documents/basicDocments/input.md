@@ -271,7 +271,7 @@ fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体�
 :::
 
 
-### label属性的两种样式
+### 输入时tip展示
 结合 Poptip 组件，实现一个数值输入框，方便内容超长时的全量展现。
 <div class="example">
     <div class="example-box">
@@ -391,7 +391,7 @@ fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体�
 | autosize | 自适应内容高度，仅在 textarea 类型下有效，可传入对象，如 { minRows: 2, maxRows: 6 }   | Boolean,Object  |  - |   false  |
 | wrap     | 原生的 wrap 属性，仅在 textarea 下生效   | String  |  `soft`、`hard` |   soft  |
 | label     | input前的说明文字   | String  |  - |   -  |
-| label-width  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   36  |
+| label-width  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   -  |
 | fixed     | input的搭配文字的两种样式类型   | Boolean  |  `true`、`false` |   false  |
 | show-password     | 切换显示隐藏的密码框   | Boolean  |  `true`、`false` |   false  |
 

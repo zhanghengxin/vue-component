@@ -12,7 +12,6 @@
                 v-if="prefix || $slots.prefix"
                 :class='[
                 prefixCls+`-icon`,
-                prefixCls+`-icon-`+size,
                 prefixCls+`-icon-prefix`]'>
                 <slot name='prefix'>
                     <Icon
@@ -28,7 +27,6 @@
                     v-show='showSuffix'
                     :class='[
                     prefixCls+`-icon`,
-                    prefixCls+`-icon-`+size,
                     prefixCls+`-icon-suffix`]'>
                     <Icon
                         v-if="clearable && currentValue"
@@ -41,7 +39,6 @@
                         v-if="showPassword && currentValue"
                         size
                         type="suoding-dongjie"
-                        :class="[prefixCls+`-icon-`+size]"
                         @on-click="handleShowPassword">
                     </Icon>
                     <slot name='suffix' v-if='suffix || $slots.suffix'>
@@ -217,7 +214,7 @@ export default {
             // fixed label的两种样式
             // prefix 前面的icon显示
             // suffix 后面的icon显示
-            props: ['disabled', 'readonly', 'autofocus', 'spellcheck', 'error', 'clearable', 'showPassword', 'suffix'],
+            props: ['disabled', 'readonly', 'autofocus', 'spellcheck', 'error', 'clearable', 'showPassword', 'fixed'],
             config: {
                 type: Boolean,
                 default: false

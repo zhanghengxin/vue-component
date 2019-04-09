@@ -9,12 +9,9 @@ $prefix-number: $prefix-input+'-number';
 $prefix-number-icon: $css-prefix+'input-icon';
 
 @mixin iconBox() {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: inline-block;
   @include _color($Content);
   user-select: none;
-  line-height: 0;
 
   &:hover {
     @include _color($Primary);
@@ -23,48 +20,50 @@ $prefix-number-icon: $css-prefix+'input-icon';
 }
 
 @mixin icons() {
-  .#{$prefix-number-icon} {
-    $i: 0;
+  $i: 0;
 
-    @each $type in small,
-    default,
-    large {
-      &-#{$type} {
-        .icon {
-          height: 11px + $i;
-          line-height: 11px + $i;
-        }
+  @each $type in small,
+  default,
+  large {
+    &.#{$prefix-input}-box-#{$type} {
+      .icon {
+        height: 11px + $i;
+        line-height: 11px + $i;
       }
-
-      $i:$i+4;
     }
+
+    $i:$i+4;
   }
 }
 
 .#{$prefix-number} {
-
+  @include icons();
   &-prefix {
     .#{$prefix-input} {
       padding-left: 30px;
     }
   }
+  &-suffix {
+    .#{$prefix-number-icon}-suffix {
+      line-height: 0 !important;
+    } 
+  }
 
   .#{$prefix-number-icon} {
     &-suffix {
       border-left: 1px solid $Border;
+      background: $Background;
+      width: 25px;
+      font-size: 0;
     }
 
     &-prefix {
       border-right: 1px solid $Border;
+      background: $Background;
     }
   }
 
-  @include icons();
-
-
-
   &-icon {
-    background: $Background;
     height: 100%;
     line-height: 1;
 

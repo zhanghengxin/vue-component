@@ -66,7 +66,7 @@
     display: inline-block;
     vertical-align: middle;
   
-    >.#{$btnClassName} {
+    &>.#{$btnClassName} {
       position: relative;
       float: left;
   
@@ -115,7 +115,7 @@
       &>.#{$btnClassName} {
         @include button-size($btn-padding-small, $btn-font-size, $btn-border-radius-small);
   
-        >.#{$css-prefix-iconfont} {
+        &>.#{$css-prefix-iconfont} {
           font-size: $btn-font-size;
         }
       }
@@ -126,7 +126,7 @@
     display: inline-block;
     vertical-align: middle;
   
-    >.#{$btnClassName} {
+    &>.#{$btnClassName} {
       display: block;
       width: 100%;
       max-width: 100%;
@@ -152,7 +152,7 @@
     //transition: all $transition-time linear;
     transition: color $transition-time linear, background-color $transition-time linear, border $transition-time linear, box-shadow $transition-time linear;
   
-    >.#{$css-prefix-iconfont} {
+    &>.#{$css-prefix-iconfont} {
       line-height: $line-height-base;
       vertical-align: middle;
     }
@@ -163,7 +163,7 @@
       vertical-align: baseline;
     }
   
-    >span {
+    &>span {
       vertical-align: middle;
     }
   
@@ -185,7 +185,7 @@
     &[disabled] {
       cursor: $cursor-disabled;
   
-      >* {
+      &>* {
         pointer-events: none;
       }
     }
@@ -385,7 +385,7 @@
       margin-left: 0px;
     }
   
-    >.#{$btnClassName}:first-child {
+    &>.#{$btnClassName}:first-child {
       margin-top: 0;
   
       &:not(:last-child) {
@@ -394,13 +394,13 @@
       }
     }
   
-    >.#{$btnClassName}:last-child:not(:first-child) {
+    &>.#{$btnClassName}:last-child:not(:first-child) {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
   
     &>&:first-child:not(:last-child) {
-      >.#{$btnClassName}:last-child {
+      &>.#{$btnClassName}:last-child {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
         padding-bottom: 8px;
