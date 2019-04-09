@@ -1,4 +1,20 @@
 更新日志
+
+### 0.4.2
+## `2019-04-09`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 Datapicker适配Input label-width属性
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Datepicker、Notice、Table组件 IE10/9 样式优化
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Loading 展示兼容问题【ie9】、 Modal多层嵌套兼容问题【ie9-10】
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.4.1
 ## `2019-04-08`
 <br>
@@ -7,7 +23,6 @@
         <h3>ie 兼容性处理</h3>
         <ul>
             <li>修复 Transfer IE下样式问题</li>
-            <li>修复 notice ie9样式展示问题</li>
             <li>修复 table 组件 ie9 - 11显示隐藏列功能兼容问题解决 、滚动条显示不正常问题优化</li>
             <li>修复 Button、Input 样式显示不正常【IE9-11】 </li>
         </ul>

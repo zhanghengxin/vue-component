@@ -26,12 +26,6 @@ $link-active-color: shade($link-color, 5%);
     &-rel{
         position: relative;
     }
-    .b-drop {
-        width: auto;
-        padding: 0;
-        overflow: visible;
-        max-height: none;
-    }
     &-cells{
         width: $date-picker-cells-width;
         margin: 10px;

@@ -4,14 +4,14 @@
 			normal(n){
 				this.$Notice({
 					...n,
-					title: "我是大标题",
+					title: "我是标题",
 					content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试"
 				});
 			},
 			success(n){
 				this.$Notice({
 					...n,
-					title: "我是大标题",
+					title: "我是标题",
 					content: "通过修改border-left来控制样式",
 					type: "success"
 				});
@@ -19,7 +19,7 @@
 			warning(n){
 				this.$Notice({
 					...n,
-					title: "我是大标题",
+					title: "我是标题",
 					content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试",
 					type: "warning"
 				});
@@ -27,7 +27,7 @@
 			error(n){
 				this.$Notice({
 					...n,
-					title: "我是大标题",
+					title: "我是标题",
 					content: "我是纯粹凑数的",
 					type: "error"
 				});
@@ -82,27 +82,27 @@
 		methods: {
 			normal(){
 				this.$Notice({
-					title: "我是大标题",
+					title: "我是标题",
 					content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试"
 				});
 			},
 			success(){
 				this.$Notice({
-					title: "我是大标题",
+					title: "我是标题",
 					content: "通过修改border-left来控制样式",
 					type: "success"
 				});
 			},
 			warning(){
 				this.$Notice({
-					title: "我是大标题",
+					title: "我是标题",
 					content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试",
 					type: "warning"
 				});
 			},
 			error(){
 				this.$Notice({
-					title: "我是大标题",
+					title: "我是标题",
 					content: "我是纯粹凑数的",
 					type: "error"
 				});
@@ -111,76 +111,6 @@
     }
    </script>
 ```
-:::
-
-### 小图标
-设置 size 为 ```small``` 显示前面为小图标
-<div class="example">
-	<div class="example-box">
-		<div>
-			<b-button type='primary' @on-click="normal(size)">默认通知</b-button>
-			<b-button type="success" @on-click="success(size)">成功通知</b-button>
-			<b-button type="warning" @on-click="warning(size)">警告警告</b-button>
-			<b-button type="error" @on-click="error(size)">失败通知</b-button>
-		</div>
-	</div>
-</div>
-
-::: code
-```html
-    <div>
-      	<b-button type='primary' @on-click="normal(size)">默认通知</b-button>
-		<b-button type="success" @on-click="success(size)">成功通知</b-button>
-		<b-button type="warning" @on-click="warning(size)">警告警告</b-button>
-		<b-button type="error" @on-click="error(size)">失败通知</b-button>
-   </div>
-   <script>
-		export default {
-			methods: {
-				normal(n){
-					this.$Notice({
-						...n,
-						title: "我是大标题",
-						content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试"
-					});
-				},
-				success(n){
-					this.$Notice({
-						...n,
-						title: "我是大标题",
-						content: "通过修改border-left来控制样式",
-						type: "success"
-					});
-				},
-				warning(n){
-					this.$Notice({
-						...n,
-						title: "我是大标题",
-						content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试",
-						type: "warning"
-					});
-				},
-				error(n){
-					this.$Notice({
-						...n,
-						title: "我是大标题",
-						content: "我是纯粹凑数的",
-						type: "error"
-					});
-				}
-			},
-			data(){
-				return {
-					size:{
-						size:'small'
-					}
-				}
-			}
-		}
-   </script>
-```
-:::
-
 
 ### 图标不显示
 设置 iconVisible 为 ```false``` 隐藏前面为小图标
@@ -209,14 +139,14 @@
 			normal(n){
 				this.$Notice({
 					...n,
-					title: "我是大标题",
+					title: "我是标题",
 					content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试"
 				});
 			},
 			success(n){
 				this.$Notice({
 					...n,
-					title: "我是大标题",
+					title: "我是标题",
 					content: "通过修改border-left来控制样式",
 					type: "success"
 				});
@@ -224,7 +154,7 @@
 			warning(n){
 				this.$Notice({
 					...n,
-					title: "我是大标题",
+					title: "我是标题",
 					content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试",
 					type: "warning"
 				});
@@ -232,7 +162,7 @@
 			error(n){
 				this.$Notice({
 					...n,
-					title: "我是大标题",
+					title: "我是标题",
 					content: "我是纯粹凑数的",
 					type: "error"
 				});
@@ -274,14 +204,14 @@
 				normal(n){
 					this.$Notice({
 						...n,
-						title: "我是大标题",
+						title: "我是标题",
 						content: "换行测试换成测试换成测试换成测试换成测试换行测试换成测试换成测试换成测试换成测试"
 					});
 				},
 				success(n){
 					this.$Notice({
 						...n,
-						title: "我是大标题",
+						title: "我是标题",
 						content: "通过修改border-left来控制样式",
 						type: "success"
 					});
@@ -308,7 +238,6 @@
 | title     | 文本内容   | string  |  -         |    默认为空   |
 | content     | 文本内容   | string  |  -         |    默认为空   |
 | type     |  类型  | string  |     `normal`、`success`、`warning`、`error`    |    默认`normal`   |
-| size     |  是否自动关闭  |  String |    `large`、`small`      |    默认`large`   |
 | duration     |  自动关闭时间  | String/Number  |  -       |    默认`3000`   |
 | autoClose     |  是否自动关闭  |  Boolean |   `false`、`true`      |    默认`true`   |
 | iconVisible     |  是否显示前面的图标  |  Boolean |    `false`、`true`      |    默认`true`   |

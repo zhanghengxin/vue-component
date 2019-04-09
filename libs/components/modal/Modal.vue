@@ -1,9 +1,9 @@
 <template>
     <div v-transfer-dom :data-transfer="transfer">
         <transition :name="transitionNames[1]">
-            <div :class="maskClasses" v-show="visible" v-if="showMask" @click="handleMask"></div>
+            <div :class="maskClasses" :style="wrapStyles" v-show="visible" v-if="showMask" @click="handleMask"></div>
         </transition>
-        <div :class="wrapClasses" :style="{'z-index': zIndex}" @click="handleWrapClick">
+        <div :class="wrapClasses" :style="wrapStyles" @click="handleWrapClick">
             <transition :name="transitionNames[0]" @after-leave="animationFinish">
                 <div :class="classes" :style="mainStyles" v-show="visible">
                     <div :class="contentClasses" ref="content" :style="contentStyles">
@@ -40,6 +40,7 @@ import TransferDom from './directive/transfer-dom'
 import { on, off } from '../../utils/dom'
 import Scrollbar from './mixins/scrollbar'
 import { prefix } from '../../utils/common'
+import { existenceIndex as modalIndex, existenceIncrease as modalIncrease } from '../../utils/existence-queue'
 
 const prefixCls = prefix + 'modal'
 
@@ -141,7 +142,8 @@ export default {
                 dragX: null,
                 dragY: null,
                 dragging: false
-            }
+            },
+            modalIndex: this.handleGetModalIndex()
         }
     },
     computed: {
@@ -158,6 +160,11 @@ export default {
         },
         maskClasses () {
             return `${prefixCls}-mask`
+        },
+        wrapStyles () {
+            return {
+                zIndex: this.modalIndex + this.zIndex
+            }
         },
         classes () {
             return [
@@ -306,6 +313,10 @@ export default {
 
             this.dragData.dragX = distance.x
             this.dragData.dragY = distance.y
+        },
+        handleGetModalIndex () {
+            modalIncrease()
+            return modalIndex
         },
         handleMoveEnd () {
             this.dragData.dragging = false
