@@ -3,6 +3,7 @@
         <li :class="[preCls + '-dynamic-column-item']" v-for="(column,index) in columns" :key="index">
             <Checkbox
                 :value="column._visible"
+                manual-change
                 @click.native.prevent="handleClick(column._index,column._visible)"
             >
             </Checkbox>

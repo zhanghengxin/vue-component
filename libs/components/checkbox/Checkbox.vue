@@ -42,14 +42,21 @@ export default {
             type: [String, Number],
             default: ''
         },
+        manualChange: {
+            type: Boolean,
+            default: false
+        },
         indeterminate: {
             type: Boolean,
             default: false
         }
     },
     watch: {
-        value (checked) {
-            this.checked = checked
+        value: {
+            deep: true,
+            handler (checked) {
+                this.checked = checked
+            }
         }
     },
     computed: {
@@ -80,7 +87,7 @@ export default {
     methods: {
         change (e) {
             if (this.disabled) return
-            this.checked = e.target.checked
+            this.checked = this.manualChange ? this.checked : e.target.checked
             if (this.$parent.$options.name === prefix + 'checkboxGroup') {
                 this.$parent.change(this.label, this.checked)
                 return

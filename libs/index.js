@@ -55,17 +55,16 @@ import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
 import Poptip from './components/poptip'
-import LabelTree from './components/tree/LabelTree'
 
 const components = [
     Input,
     InputNumber,
     Page,
     Button,
+    Button.Group,
     Drawer,
     Tag,
     Tree,
-    LabelTree,
     Table,
     Icon,
     Message,

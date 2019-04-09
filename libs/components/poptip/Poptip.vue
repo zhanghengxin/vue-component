@@ -31,7 +31,8 @@
                             </div>
                         </div>
                         <div :class="[prefixCls + '-footer']">
-                            <b-button type="default" size="small" @click.native="cancel">{{ localeCancelText }}</b-button>
+                            <b-button type="default" size="small" @click.native="cancel">{{ localeCancelText }}
+                            </b-button>
                             <b-button type="primary" size="small" @click.native="ok">{{ localeOkText }}</b-button>
                         </div>
                     </div>
@@ -59,15 +60,14 @@ import Popper from '../../mixins/popper'
 import BButton from '../button/Button.vue'
 import clickOutside from '../../utils/directives/clickOutside'
 import TransferDom from '../../utils/directives/transfer-dom'
-import { oneOf } from '../../utils/common'
+import { oneOf, prefix } from '../../utils/common'
 
+const prefixCls = prefix + 'poptip'
 let transferIndex = 0
 
 function transferIncrease () {
     transferIndex++
 }
-
-const prefixCls = 'b-poptip'
 
 export default {
     name: prefixCls,

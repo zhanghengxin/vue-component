@@ -45,17 +45,12 @@
 可使用 v-model 实现数据的双向绑定。<br/>
 可直接设置 width 来设置输入框的宽度，默认 100%。<br/>
 可直接设置 error 来改变输入框的hover focus样式
-可slot设置icon
 <div class="example">
     <div class="example-box">
         <div>
-              <b-input v-model="value" placeholder="请输入..." :width='200' suffix>
-                  <div slot='suffix'>
-                      icon
-                  </div>
-              </b-input>
-              <b-input v-model="value0" placeholder="请输入..." :width='200' error='error'></b-input>
-              <span>{{value}}</span>
+            <b-input v-model="value" placeholder="请输入..." :width='200'></b-input>
+            <b-input v-model="value0" placeholder="请输入..." :width='200' error='error'></b-input>
+            <span>{{value}}</div>
         </div>
     </div>
 </div>
@@ -64,11 +59,7 @@
 ```html
 
     <template>
-        <b-input v-model="value" placeholder="请输入..." :width='200' suffix>
-            <div slot='suffix'>
-                icon
-            </div>
-        </b-input>
+        <b-input v-model="value" placeholder="请输入..." :width='200'></b-input>
         <b-input v-model="value0" placeholder="请输入..." :width='200' error='error'></b-input>
         <span>{{value}}</span>
     </template>
@@ -150,7 +141,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 :::
 
 ### 清空
-通过添加clearable属性可设置带清空按钮的功能。<br/>
+通过添加```clearable```属性可设置带清空按钮的功能。<br/>
 <div class="example">
     <div class="example-box">
         <div>
@@ -164,6 +155,34 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 
     <template>
         <b-input v-model="value5" clearable></b-input>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    value5:''
+                }
+            }
+        }
+    </script>
+```
+:::
+
+### 密码框
+通过添加```show-password```可得到一个可切换显示隐藏的密码框。<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-input v-model="value5" show-password></b-input>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+        <b-input v-model="value5" show-password></b-input>
     </template>
     <script>
         export default {
@@ -211,12 +230,16 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 
 ### label属性的两种样式
 通过设置```label```、```fixed```属性 设置带文字描述的input组合组件 <br/>
-可设置通过width来设置select的宽度，labelWidth设置label文字的宽度（不设置labelWidth时，文字宽度默认自适应）
+fixed为false时可设置通过width来设置```input框```的宽度，labelWidth设置label文字的宽度（不设置labelWidth时，文字宽度默认自适应）<br/>
+fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体宽度默认100%)，labelWidth设置label文字的宽度（不设置labelWidth时，文字宽度默认自适应）
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" label='姓名' :labelWidth='labelWidth' :width='200' placeholder="请输入..." ></b-input>
+            <b-input v-model="value6" label='姓名' :width='200' placeholder="请输入..." ></b-input>
             <b-input v-model="value7" label='密码' :labelWidth='labelWidth' :width='200' type='password' placeholder="请输入..." ></b-input>
+            <br/> <br/>
+            <b-input v-model="value6" label='姓名' width='200' fixed placeholder="请输入..." ></b-input>
+            <b-input v-model="value7" label='密码' :labelWidth='labelWidth' width='280' fixed placeholder="请输入..." ></b-input>
         </div>
     </div>
 </div>
@@ -225,8 +248,11 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```html
 
     <template>
-       <b-input v-model="value6" label='姓名' :labelWidth='labelWidth' :width='200' placeholder="请输入..." ></b-input>
-       <b-input v-model="value7" label='密码' :labelWidth='labelWidth' :width='200' type='password' placeholder="请输入..." ></b-input>
+        <b-input v-model="value6" label='姓名' :labelWidth='labelWidth' :width='200' placeholder="请输入..." ></b-input>
+        <b-input v-model="value7" label='密码' :labelWidth='labelWidth' :width='200' type='password' placeholder="请输入..." ></b-input>
+        <br/> <br/>
+        <b-input v-model="value6" label='姓名' width='200' fixed placeholder="请输入..." ></b-input>
+        <b-input v-model="value7" label='密码' :labelWidth='labelWidth' width='280' fixed placeholder="请输入..." ></b-input>
     </template>
     <script>
         export default {
@@ -234,7 +260,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
                 return {
                     value6:'',
                     value7:'',
-                    labelWidth:72
+                    labelWidth:'72'
                 }
             }
         }
@@ -242,38 +268,6 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```
 :::
 
-<br/>
-通过设置fixed为```true``` 属性可设置带label文字描述的样式 label文字与input的宽度根据自动适应 整体宽度默认100%
-<br/>
-<br/>
-<div class="example">
-    <div class="example-box">
-        <div>
-            <b-input v-model="value6" label='姓名' width='200' fixed placeholder="请输入..." ></b-input>
-            <b-input v-model="value7" label='密码' width='200' fixed placeholder="请输入..." ></b-input>
-        </div>
-    </div>
-</div>
-
-::: code
-```html
-
-    <template>
-         <b-input v-model="value6" label='姓名' width='200' fixed placeholder="请输入..." ></b-input>
-         <b-input v-model="value7" label='密码' width='200' fixed placeholder="请输入..." ></b-input>
-    </template>
-    <script>
-        export default {
-            data () {
-                return {
-                    value6:'',
-                    value7:''
-                }
-            }
-        }
-    </script>
-```
-:::
 
 ### textarea
 通过设置属性 type 为 textarea 来使用文本域，用于多行输入。
@@ -365,8 +359,9 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 | autosize | 自适应内容高度，仅在 textarea 类型下有效，可传入对象，如 { minRows: 2, maxRows: 6 }   | Boolean,Object  |  - |   false  |
 | wrap     | 原生的 wrap 属性，仅在 textarea 下生效   | String  |  `soft`、`hard` |   soft  |
 | label     | input前的说明文字   | String  |  - |   -  |
-| labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   36  |
+| label-width  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   36  |
 | fixed     | input的搭配文字的两种样式类型   | Boolean  |  `true`、`false` |   false  |
+| show-password     | 切换显示隐藏的密码框   | Boolean  |  `true`、`false` |   false  |
 
 ### events
 | 事件名	      | 说明	    | 返回值 |
@@ -381,5 +376,6 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ### slot
 | name	      | 说明	    | 返回值 |
 |-------------|---------|----------|
-| prefix    | 需要设置prefix为true    | -  |
-| suffix   | 需要设置suffix为true  | - |
+| prefix    | 需要设置设置前面的icon位置的slot    | -  |
+| suffix   | 需要设置设置后面的icon位置的slot  | - |
+| label   | 前置的label文字框  | - |

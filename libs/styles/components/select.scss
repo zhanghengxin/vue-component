@@ -134,6 +134,11 @@ $css-prefix-option: $css-prefix+'option';
         padding: 0 24px 0 4px;
       }
 
+      &-main-flex {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
       &-input {
         padding: 0 0 0 4px;
       }
