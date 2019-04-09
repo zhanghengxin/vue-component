@@ -351,7 +351,7 @@ export default {
             if (tableWidth !== 0) {
                 let width = ''
                 width = tableWidth
-                if (boxWidth && width - 1 < boxWidth) {
+                if (boxWidth && width + 1 < boxWidth) {
                     width = boxWidth - 1
                 } else {
                     width += (this.verticalScroll ? this.scrollBarWidth : 0)
@@ -367,7 +367,7 @@ export default {
             if (tableWidth !== 0) {
                 let width = ''
                 width = tableWidth
-                if (boxWidth && width - 1 < boxWidth) {
+                if (boxWidth && width + 1 < boxWidth) {
                     width = boxWidth - 1 - (this.verticalScroll ? this.scrollBarWidth : 0)
                 }
                 style.width = `${width}px`
