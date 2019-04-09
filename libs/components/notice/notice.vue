@@ -7,11 +7,11 @@
       @mouseleave="createTimer"
     >
         <div :class="[noticeCls[1]+'-icon']">
-            <Icon v-if="iconVisible" :size="size === 'large' ? 32 : 16" :type='iconType'></Icon>
+            <Icon v-if="iconVisible" size="32" :type='iconType'></Icon>
         </div>
-        <div>
-            <h5>{{title}}</h5>
-            <span :class="[prefixCls+'-content']">{{content}}</span>
+        <div :class="[prefixCls+'-body']">
+            <div :class="[prefixCls+'-body-title']">{{title}}</div>
+            <span :class="[prefixCls+'-body-content']">{{content}}</span>
         </div>
         <Icon :class="[prefixCls+'-close']" size='18' type='quxiao-guanbi-shanchu' @on-click="handleClose"></Icon>
     </div>
@@ -45,13 +45,6 @@ export default {
         duration: {
             type: [String, Number],
             default: 3000
-        },
-        size: {
-            type: String,
-            default: 'large',
-            validator: function (value) {
-                return oneOf(value, ['large', 'small'])
-            }
         },
         iconVisible: {
             type: Boolean,
