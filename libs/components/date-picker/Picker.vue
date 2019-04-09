@@ -18,7 +18,7 @@
                     ref="input"
                     :label="label"
                     :fixed="fixed"
-                    :labelWidth="labelWidth"
+                    :label-width="labelWidth"
                     :width="width"
                     @on-input-change="handleInputChange"
                     @on-focus="handleFocus"
@@ -208,7 +208,7 @@
             },
             width: {
                 type: [String, Number],
-                default: null
+                default: 160
             },
             labelWidth: {
                 type: [String, Number],

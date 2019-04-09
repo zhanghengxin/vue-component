@@ -237,14 +237,14 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker type='datetime' label='日期时间' fixed></b-datepicker>
+        <b-datepicker type='datetime' label='日期时间' fixed width='220'></b-datepicker>
         <b-datepicker type='datetimerange' label='日期时间范围'></b-datepicker>
     </div>
     
 ::: code
 ```html
     <div>
-        <b-datepicker type='datetime' label='日期时间'></b-datepicker>
+        <b-datepicker type='datetime' label='日期时间' fixed width='220'></b-datepicker>
         <b-datepicker type='datetimerange' label='日期时间范围'></b-datepicker>
     </div>
 ```
@@ -340,7 +340,7 @@
 | type | 类型 | String  | `date` `daterange` `datetime` `datetimerange` `year` `month` | date |
 | width | input宽度 | Number |
 | label | input前的说明文字 | String |
-| labelWidth | label模式下label的宽度 |
+| label-width | input前的说明文字的宽度 fixed为false时有效 |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
 | size | input组件的尺寸 | Boolean  | `small` `default` `large` | default |
 | format | 日期格式化 | String  | | yyyy-MM-dd |

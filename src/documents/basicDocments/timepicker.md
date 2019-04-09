@@ -107,7 +107,7 @@
 | type | 类型 | String  | `date` `daterange` `datetime` `datetimerange` `year` `month` | date |
 | width | input宽度 | Number |
 | label | input前的说明文字 | String |
-| labelWidth | label模式下label的宽度 |
+| label-width | input前的说明文字的宽度 fixed为false时有效 |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
 | size | input组件的尺寸 | Boolean  | `small` `default` `large` | default |
 | format | 时间格式化 | String  | | yyyy-MM-dd |
