@@ -5,6 +5,7 @@
 
 import Vue from 'vue'
 import MessageTemplate from './Message.vue'
+import { prefix } from '../../utils/common'
 
 const MessageConstructor = Vue.extend(MessageTemplate)
 const instances = []
@@ -15,7 +16,7 @@ function Message (options) {
     let close = options.onClose
     if (!msgCon) {
         msgCon = document.createElement('div')
-        msgCon.className = 'b-message-container'
+        msgCon.className = `${prefix}message-container`
         document.body.appendChild(msgCon)
     }
     msgCon.style.zIndex = options.zIndex ? options.zIndex : 1010
@@ -25,7 +26,7 @@ function Message (options) {
     msgCon.style.left = 0
     msgCon.style.textAlign = 'center'
     let id = count++
-    let {duration} = options
+    let { duration } = options
     options.onClose = function () {
         Message.close(id, duration, close)
     }
@@ -52,19 +53,19 @@ Message.close = function (id, duration, close) {
         }
     }
     setTimeout(function () {
-        if (!instances.length && msgCon) {
+        if (instances.length === 0 && msgCon) {
             msgCon.remove()
             msgCon = null
         }
-    }, duration)
+    }, 3000)
 }
 
 const types = ['info', 'success', 'error', 'warning']
 
 types.forEach(type => {
     Message[type] = function (options) {
-        options = typeof options === 'string' ? {message: options} : options
-        return Message({...options, type})
+        options = typeof options === 'string' ? { message: options } : options
+        return Message({ ...options, type })
     }
 })
 
