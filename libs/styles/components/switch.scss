@@ -1,88 +1,194 @@
-$switch-prefix-cls: "#{$css-prefix}switch";
-$switch-checked-prefix-cls: "#{$switch-prefix-cls}-checked";
-$switch-disabled-prefix-cls: "#{$switch-prefix-cls}-disabled";
-$switch-large-prefix-cls: "#{$switch-prefix-cls}-large";
-$switch-small-prefix-cls: "#{$switch-prefix-cls}-small";
+$switch-prefix-cls: $css-prefix + "switch";
+$font-size-small: 12px;
+$transition-time: .2s;
+$cursor-disabled: not-allowed;
 
 .#{$switch-prefix-cls} {
+  box-sizing: border-box;
   display: inline-block;
   width: 44px;
   height: 22px;
   line-height: 20px;
   border-radius: 22px;
   vertical-align: middle;
-  border: 1px solid $Border;
-  @include _background($Border);
+  border: 1px solid #ccc;
+  background-color: #ccc;
   position: relative;
   cursor: pointer;
   user-select: none;
-  transition: all .2s ease-in-out;
+  transition: all $transition-time  ease-in-out;
+
+  &-loading {
+    opacity: .4;
+  }
+
+  &-inner {
+    color: #fff;
+    font-size: $font-size-small;
+    position: absolute;
+    left: 23px;
+
+    i {
+      width: 12px;
+      height: 12px;
+      text-align: center;
+      position: relative;
+      top: -1px;
+    }
+  }
+
   &:after {
-    content: "";
+    content: '';
     width: 18px;
     height: 18px;
     border-radius: 18px;
     background-color: $white;
     position: absolute;
-    left: 2px;
-    top: 2px;
+    left: 1px;
+    top: 1px;
     cursor: pointer;
-    transition: left .2s ease-in-out, width .2s ease-in-out
+    transition: left $transition-time ease-in-out, width $transition-time ease-in-out;
   }
-}
 
-.#{$switch-checked-prefix-cls} {
-  @include _background($Primary);
-  border: 1px solid $Primary;
-  &:after {
-    left: 22px;
+  &:active:after {
+      width: 26px;
   }
-  .#{$switch-prefix-cls}-inner {
-    left: 7px !important;
-  }
-}
 
-.#{$switch-disabled-prefix-cls} {
-  cursor: not-allowed;
-  @include _background($Disabled);
-  border-color: $Disabled;
-  &:after {
-    @include _background($DisContent);
+  &:before {
+    content: '';
+    display: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: transparent;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    z-index: 1;
+    border: 1px solid $Primary;
+    border-color: transparent transparent transparent $Primary;
+    animation: switch-loading 1s linear;
+    animation-iteration-count: infinite;
   }
-}
+  &-loading:before {
+    box-sizing: border-box;
+    display: block;
+  }
 
-.#{$switch-large-prefix-cls} {
-  width: 56px;
-  .#{$switch-prefix-cls}-inner {
-    left: 35px;
+  &:focus {
+    box-shadow: 0 0 0 2px rgba($Primary, 0.2);
+    outline: 0;
   }
-  &.#{$switch-checked-prefix-cls} {
-    &:after {
-      left: 35px;
-    }
-  }
-}
 
-.#{$switch-small-prefix-cls} {
-  width: 26px;
-  height: 16px;
-  &:after {
-    width: 12px;
-    height: 12px;
+  &:focus:hover {
+    box-shadow: none;
   }
-  &.#{$switch-checked-prefix-cls} {
+
+  &-small {
+    width: 28px;
+    height: 16px;
+    line-height: 14px;
     &:after {
       width: 12px;
       height: 12px;
-      left: 12px;
+    }
+    &:active:after {
+      width: 14px;
+    }
+    &:before {
+      width: 10px;
+      height: 10px;
+      left: 2px;
+      top: 2px;
+    }
+  }
+
+  &-small.#{$switch-prefix-cls}-checked:after {
+    left: 13px;
+  }
+  &-small.#{$switch-prefix-cls}-checked:before {
+    left: 14px;
+  }
+  &-small:active.#{$switch-prefix-cls}-checked:after {
+    left: 11px;
+  }
+
+  &-large {
+    width: 56px;
+    &:active:after {
+      width: 26px;
+    }
+  }
+
+  &-large:active:after {
+    width: 30px;
+  }
+
+  &-large.#{$switch-prefix-cls}-checked:after {
+    left: 35px;
+  }
+  &-large.#{$switch-prefix-cls}-checked:before {
+    left: 37px;
+  }
+
+  &-large:active.#{$switch-prefix-cls}-checked:after {
+    left: 23px;
+  }
+
+  &-checked {
+    border-color: $Primary;
+    background-color: $Primary;
+
+    .#{$switch-prefix-cls}-inner {
+      left: 7px;
+    }
+
+    &:after {
+      left: 23px;
+    }
+    &:before {
+      left: 25px;
+    }
+
+    &:active:after {
+      left: 15px;
+    }
+  }
+
+  &-disabled {
+    cursor: $cursor-disabled;
+    opacity: .4;
+
+    &:after {
+      background: $white;
+      cursor: not-allowed;
+    }
+
+    .#{$switch-prefix-cls}-inner {
+      color: $white;
+    }
+  }
+
+  &-disabled.#{$switch-prefix-cls}-checked {
+    border-color: $Primary;
+    background-color: $Primary;
+    opacity: .4;
+    
+    &:after {
+      background: $white;
+    }
+
+    .#{$switch-prefix-cls}-inner {
+      color: $white;
     }
   }
 }
 
-.#{$switch-prefix-cls}-inner {
-  color: $white;
-  font-size: 12px;
-  position: absolute;
-  left: 23px;
-  top: 1px;
+@keyframes switch-loading {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
