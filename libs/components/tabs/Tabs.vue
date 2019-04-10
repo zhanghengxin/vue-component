@@ -1,23 +1,23 @@
 <template>
-    <div :class="[prefixCls,classes]">
-        <div :class="prefixCls+'-bar'" ref="tabHeaderItem">
-            <div @click="handleChange(index)" v-for="(item,index) in navList" :key="index" :class="tabCls(item)">
+    <div :class="classes">
+        <div :class="tabsBarCls">
+            <div @click="handleChange(index)"  v-for="(item,index) in navList" :key="index" :class="tabCls(item)">
                 <Icon v-if="item.icon !== ''" :type="item.icon"></Icon>
                 <span>{{item.label}}</span>
-                <Icon v-if="showClose(item)" type="quxiao-guanbi-shanchu" @click.native.stop="handleRemove(index)"
-                      :class="prefixCls+'-icon'"></Icon>
+                <Icon v-if="showClose(item)" :class="tabsCloseIcon" type="quxiao-guanbi-shanchu" @click.native.stop="handleRemove(index)"></Icon>
             </div>
         </div>
-        <div :class="prefixCls+'-content'">
+        <div :class="tabsContent">
             <slot></slot>
         </div>
     </div>
 </template>
 <script>
-import { prefix } from '../../utils/common'
+import { TABS, TABPANEL } from './common'
+import { oneOf } from '../../utils/common'
 import Icon from '../icon/Icon.vue'
 
-const prefixCls = prefix + 'tabs'
+const prefixCls = TABS
 export default {
     name: prefixCls,
     props: {
@@ -26,10 +26,16 @@ export default {
         },
         type: {
             type: String,
-            default: 'card'
+            validator (value) {
+                return oneOf(value, ['line', 'card'])
+            },
+            default: 'line'
         },
         size: {
             type: String,
+            validator (value) {
+                return oneOf(value, ['small', 'default'])
+            },
             default: 'default'
         },
         closable: {
@@ -40,7 +46,6 @@ export default {
     components: {Icon},
     data () {
         return {
-            prefixCls: prefixCls,
             currentValue: this.value,
             navList: [],
             activeKey: this.value
@@ -57,13 +62,20 @@ export default {
     computed: {
         classes () {
             return [
+                `${prefixCls}`,
                 {
-                    card: this.type === 'card',
-                    [`${prefixCls}-line`]: this.type === 'line',
-                    [`${prefixCls}-lineActive`]: this.type === 'line'
-
+                    [`${prefixCls}-${this.type}`]: this.type
                 }
             ]
+        },
+        tabsBarCls () {
+            return `${prefixCls}-bar`
+        },
+        tabsContent () {
+            return `${prefixCls}-content`
+        },
+        tabsCloseIcon () {
+            return `${prefixCls}-close-icon`
         }
     },
     methods: {
@@ -73,33 +85,13 @@ export default {
                 {
                     [`${prefixCls}-disabled`]: item.disabled,
                     [`${prefixCls}-active`]: item.name === this.currentValue,
-                    [`${prefixCls}-lineActive`]: this.type === 'line' && item.name === this.currentValue,
-                    [`${prefixCls}-mini`]: this.size === 'small' && this.type === 'line',
-                    [`${prefixCls}-line`]: this.type === 'line',
-                    [`${prefixCls}-lineActive`]: this.type === 'line'
+                    [`${prefixCls}-mini`]: this.type === 'line' && this.size === 'small',
+                    [`${prefixCls}-${this.type}`]: this.type
                 }
             ]
         },
         getTabs () {
-            return this.$children.filter(item => item.$options.name === 'b-tabsPanel')
-        },
-        updateNav () {
-            this.navList = []
-            this.getTabs().forEach((pane, index) => {
-                this.navList.push({
-                    label: pane.label,
-                    name: pane.name || index,
-                    disabled: pane.disabled,
-                    icon: pane.icon || '',
-                    closable: pane.closable
-                })
-                if (!pane.name) pane.name = index
-                if (index === 0) {
-                    if (!this.currentValue) this.currentValue = pane.name || index
-                }
-            })
-            this.updateStatus()
-            // this.updateBar();
+            return this.$children.filter(item => item.$options.name === TABPANEL)
         },
         showClose (item) {
             if (this.type === 'card') {
@@ -136,8 +128,25 @@ export default {
             this.$emit('on-tab-remove', tab.currentName)
             this.updateNav()
         },
+        updateNav () {
+            this.navList = []
+            this.getTabs().forEach((pane, index) => {
+                let {label, name, disabled, icon = '', closable} = pane
+                this.navList.push({
+                    label,
+                    name: name || index,
+                    disabled,
+                    icon,
+                    closable
+                })
+                if (!name) pane.name = index
+                if (index === 0) {
+                    if (!this.currentValue) this.currentValue = name || index
+                }
+            })
+            this.updateStatus()
+        },
         updateStatus () {
-            // debuggger
             const tabs = this.getTabs()
             var _this = this
             tabs.forEach(function (tab) {
@@ -145,7 +154,6 @@ export default {
             })
         },
         handleChange (index) {
-            // debugger
             var nav = this.navList[index]
             var name = nav.name
             if (nav.disabled) return
@@ -153,28 +161,6 @@ export default {
             this.$emit('input', name)
             this.$emit('on-click', name)
         }
-    },
-    mounted () {
-        // let self = this // 外层新建变量引用this
-        // this.$slots.default.forEach((components) => { // 循环default内的内容
-        //     if (components.tag && components.componentOptions) { // 如果子元素tag键&&componentOptions有内容。
-        //         self.navList.push(components.componentOptions.propsData)
-        //         // 在components.componentOptions这个键内 有propsDate这个属性。我们可以通过这个属性拿到子组件的props值
-        //     }
-        // })
-        // this.$nextTick(() => { // 避免data未更新
-        //    // this.activeTab = { // 给activeTab赋初始值
-        //        // index: 0, // 默认选中第一个
-        //         //name: this.navList[0].name // 寻找tabList第一个元素 还有他的名字
-        //     //}
-        //     this.currentValue = this.navList[0].name
-        // })
-        // setTimeout(() => {
-        //     this.$nextTick(() => { // 避免data未更新
-        //         this._initScroll()
-        //     }
-        //     )
-        // }, 20)
     }
 }
 </script>

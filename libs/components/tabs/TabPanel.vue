@@ -1,18 +1,19 @@
 <template>
-    <div v-show="show">
-        <slot></slot>
+    <div v-if="show">
+        <slot> </slot>
     </div>
 </template>
 
 <script>
-import { prefix } from '../../utils/common'
+import { TABPANEL } from './common'
 
-const prefixCls = prefix + 'tabsPanel'
+const prefixCls = TABPANEL
 export default {
     name: prefixCls,
     data () {
         return {
-            show: true,
+            show: false,
+            ifDestory: false,
             currentName: this.name
         }
     },

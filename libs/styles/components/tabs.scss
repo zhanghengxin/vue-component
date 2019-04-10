@@ -1,75 +1,113 @@
+@import "../common/color";
 $css-prefix-tabs: $css-prefix + 'tabs';
 .#{$css-prefix-tabs} {
   font-size: 14px;
-  /* color: #657180 */
 }
 
-.#{$css-prefix-tabs}-bar:after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 1px;
-  @include _background($SubContent);
-  margin-top: -1px;
+.#{$css-prefix-tabs}-bar{
+  border-bottom: 1px solid $Border;
 }
 
 .#{$css-prefix-tabs}-tab {
   display: inline-block;
   padding: 4px 16px;
-  margin-right: 6px;
+  margin-left: 12px;
   background: $white;
-  border: 1px solid inherit;
-  @include _borderColor($SubContent);
-  border-radius: 2px;
+  border-radius: 3px 3px 0px 0px ;
   cursor: pointer;
+  @include _color($Title);
   position: relative;
+  &:hover{
+    @include _color($Primary);
+  }
 }
 
-.#{$css-prefix-tabs}-active {
+.#{$css-prefix-tabs}-tab.#{$css-prefix-tabs}-active {
   @include _color($Primary);
-  border-top: 1px solid $Primary;
-  border-bottom: 1px solid $white;
-}
-
-.#{$css-prefix-tabs}-active:before {
-  content: '';
-  display: block;
-  height: 1px;
-  @include _background($Primary);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  border-bottom: 1px solid $Primary;
 }
 
 .#{$css-prefix-tabs}-content {
   padding: 8px 0;
 }
 
-.#{$css-prefix-tabs}-disabled {
+.#{$css-prefix-tabs}-tab.#{$css-prefix-tabs}-disabled {
   pointer-events: none;
-  @include _color($Disabled);
+  @include _color($DisContent);
 
 }
 
 .#{$css-prefix-tabs}-line {
-  border: 0px;
-  border-bottom: 1px solid $SubContent;
 
-}
-
-.#{$css-prefix-tabs}-lineActive:before {
-  content: '';
-  display: block;
-  height: 2px;
-  /* background: #3399ff; */
-  position: absolute;
-  top: 26px;
-  left: 0;
-  right: 0;
 }
 
 .#{$css-prefix-tabs}-mini {
-  font-size: 10px;
+  font-size: 12px;
 }
 
+
+.#{$css-prefix-tabs}-card {
+  .#{$css-prefix-tabs}-tab{
+    @include _background_opacity($Divider,0.5);
+    border:1px solid $Border;
+    margin-bottom: -1px;
+
+    .#{$css-prefix-tabs}-close-icon{
+      @include _color($DisContent);
+      width:0px;
+      margin-right: -5px;
+      margin-left: 5px;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out ;
+    }
+
+    &.#{$css-prefix-tabs}-active{
+      @include _background($white);
+      border:1px solid $Primary;
+      border-bottom-color: $white;
+      .#{$css-prefix-tabs}-close-icon{
+        width:15px;
+      }
+    }
+
+    &:hover{
+      .#{$css-prefix-tabs}-close-icon{
+        width:15px;
+      }
+    }
+  }
+
+}
+
+//-close-icon
+
+//.#{$css-prefix-tabs}-bar:after {
+//  content: '';
+//  display: block;
+//  width: 100%;
+//  height: 1px;
+//  @include _background($SubContent);
+//  margin-top: -1px;
+//}
+
+//.#{$css-prefix-tabs}-line.#{$css-prefix-tabs}-active:before {
+//  content: '';
+//  display: block;
+//  height: 2px;
+//  /* background: #3399ff; */
+//  position: absolute;
+//  top: 26px;
+//  left: 0;
+//  right: 0;
+//}
+
+//.#{$css-prefix-tabs}-active:before {
+//  content: '';
+//  display: block;
+//  height: 1px;
+//  @include _background($Primary);
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//  right: 0;
+//}
