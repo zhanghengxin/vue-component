@@ -74,7 +74,7 @@
                 :minlength="minlength"
                 :readonly="readonly"
                 :autofocus="autofocus"
-                :type="type"
+                :type="currentType"
                 :autocomplete="autocomplete"
                 @change="handleChange"
                 @input="handleInput"
@@ -102,7 +102,7 @@
             :rows="rows"
             :wrap="wrap"
             :autosize="autosize"
-            :type="type"
+            :type="currentType"
             @change="handleChange"
             @input="handleInput"
             @focus="handleFocus"
@@ -237,7 +237,8 @@ export default {
             prefixCls: prefixCls,
             textareaStyles: {},
             labelFocus: false,
-            inputStyles: {}
+            inputStyles: {},
+            currentType: this.type
         }
     },
     computed: {
@@ -325,7 +326,7 @@ export default {
             }
         },
         handleShowPassword () {
-            this.type = this.type !== 'password' ? 'password' : 'text'
+            this.currentType = this.currentType !== 'password' ? 'password' : 'text'
         },
         mouseenterHandle (event) {
             this.$emit('on-mouseenter', event)
