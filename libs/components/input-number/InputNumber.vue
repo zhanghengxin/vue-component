@@ -117,7 +117,8 @@ export default {
             return [
                  `${prefixCls}`,
                 {
-                    [`${prefixCls}-prefix`]: !this.type
+                    [`${prefixCls}-prefix`]: !this.type,
+                    [`${prefixCls}-suffix`]: this.type
                 }
             ]
         }

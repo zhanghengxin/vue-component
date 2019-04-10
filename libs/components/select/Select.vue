@@ -72,7 +72,7 @@
                     <ul v-if='notFoundData'>
                         <li :class='[prefix+`option`]'>{{notFoundText}}</li>
                     </ul>
-                    <ul v-if='(dropList.length > 0) && !loading'>
+                    <ul v-if='(dropList.length > 0) && !loading && !group'>
                         <Option
                             v-for='item in dropList'
                             :key='item.value'
@@ -82,6 +82,22 @@
                             :multiple='multiple'
                             :publicValue='publicValue'>
                         </Option>
+                    </ul>
+                    <ul v-if='(dropList.length > 0) && !loading && group'>
+                        <li v-for='s in dropList' :key='s.label'>
+                            <p :class='[prefixCls+`-group-label`]'>{{s.label}}</p>
+                            <ul>
+                                <Option
+                                    v-for='item in s.options'
+                                    :key='item.value'
+                                    :value='item.value'
+                                    :label='item.label'
+                                    :disabled='item.disabled'
+                                    :multiple='multiple'
+                                    :publicValue='publicValue'>
+                                </Option>
+                            </ul>
+                        </li>
                     </ul>
                     <ul v-if='loading'>
                         <li :class='[prefix+`option`]'>{{loadingText}}</li>
@@ -118,6 +134,7 @@ export default {
             query: '',
             lastRemoteQuery: '',
             dropWidth: null,
+            stylePloyfill: false,
             selectWidth: {}
         }
     },
@@ -193,7 +210,7 @@ export default {
             // filterabled 筛选
             // loading loading
             // fixed label的两种样式
-            props: ['nameInCode', 'multiple', 'clearable', 'disabled', 'autowarp', 'filterabled', 'loading', 'fixed'],
+            props: ['nameInCode', 'multiple', 'clearable', 'disabled', 'autowarp', 'filterabled', 'loading', 'fixed', 'group'],
             config: {
                 type: Boolean,
                 default: false
@@ -226,7 +243,7 @@ export default {
             return [
                 `${prefixCls}`,
                 {
-                    [`${prefixCls}-group`]: this.label && !this.fixed,
+                    [`${prefixCls}-group`]: this.label && !this.fixed && this.stylePloyfill,
                     [`${this.className}`]: this.className
                 }
             ]
@@ -237,7 +254,7 @@ export default {
                     [`${prefixCls}-${this.size}`]: this.size,
                     [`${prefixCls}-fixed-disabled`]: this.label && this.fixed && this.disabled,
                     [`${prefixCls}-multiple`]: this.multiple,
-                    [`${prefixCls}-group-fixed`]: this.label && this.fixed,
+                    [`${prefixCls}-group-fixed`]: this.label && this.fixed && this.stylePloyfill,
                     [`${prefixCls}-group-fixed-focused`]: this.isFocused && this.show && !!this.label && !!this.fixed
                 }
             ]
@@ -345,8 +362,11 @@ export default {
             return this.disabled || 0
         },
         dropList () {
-            const {options, filterabled, filterFn, query, remoteFn, codeKey, nameKey} = this
+            const {options, filterabled, query, remoteFn, codeKey, nameKey, group} = this
             let dropList = options.map(item => {
+                if (group) {
+                    return item
+                }
                 return typeOf(item) === 'object' && {
                     value: item[codeKey],
                     label: item[nameKey],
@@ -354,10 +374,10 @@ export default {
                 }
             })
             if (filterabled && !remoteFn) {
-                if (filterFn) {
-                    dropList = dropList.filter(item => this.filterFn(query, item))
+                if (group) {
+                    dropList = this.filterOption(dropList, query)
                 } else {
-                    dropList = dropList.filter(({label}) => label.indexOf(query) > -1)
+                    dropList = dropList.filter(item => this.filterOptionFn(query, item))
                 }
             }
             return dropList || []
@@ -399,6 +419,7 @@ export default {
                 }
             }
             this.dropWidth = width
+            this.stylePloyfill = true // 兼容table-cell设置在width之前不生效
             this.$emit('get-drop-width', this.dropWidth)
         },
         valuesInit () {
@@ -444,13 +465,31 @@ export default {
             return initValue
         },
         getOptionData (val) {
-            const {multiple, dropList} = this
-            if (multiple) {
-                let items = dropList.filter(({value}) => val && val.indexOf(value) > -1)
-                return items && items[0]
+            const {group, dropList} = this
+            let item = []
+            if (group) {
+                let list = dropList.filter((item) => item.options.filter(({value}) => value === val).length > 0)
+                const options = list[0] && list[0].options
+                item = options && options.filter(({value}) => value === val)
             } else {
-                let item = dropList.filter(({value}) => value === val)
-                return item && item[0]
+                item = dropList.filter(({value}) => value === val)
+            }
+            return item && item[0]
+        },
+        filterOption (dropList, query) {
+            let list = dropList.filter((item) => item.options.filter((item) => this.filterOptionFn(query, item)).length > 0)
+            list = JSON.parse(JSON.stringify(list))
+            return list.map((item) => {
+                item.options = item.options.filter(item => this.filterOptionFn(query, item))
+                return item
+            })
+        },
+        filterOptionFn (query, item) {
+            const {filterFn} = this
+            if (filterFn) {
+                return this.filterFn(query, item)
+            } else {
+                return item.label.indexOf(query) > -1
             }
         },
         toggleHeaderFocus ({type}) {
@@ -489,6 +528,7 @@ export default {
             if (!query && multiple) {
                 this.values = values.slice(0, values.length - 1)
             }
+            this.broadcastPopperUpdate()
         },
         broadcastPopperUpdate () {
             this.broadcast(`${prefix}drop`, 'on-update-popper')

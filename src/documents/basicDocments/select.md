@@ -3,12 +3,12 @@
     export default {
         data () {
             return {
-                value: '004',
+                value: 'Shanghai',
                 value0: '007',
                 value1: '',
                 value2: [],
                 value3: '',
-                value4: '',
+                value4: ['004','007'],
                 value5: '',
                 value6: '004',
                 value7: ['004','007'],
@@ -22,6 +22,8 @@
                 value04: ['Alabama'],
                 value05: [],
                 value06: [],
+                value13: '',
+                value14: '',
                 clearable:true,
                 disabled:true,
                 autowarp:true,
@@ -34,7 +36,7 @@
                     value:'007'
                 },{
                     label:'机动车',
-                    value:'005'
+                    value:'0073'
                 },{
                     label:'电子票',
                     value:'025'
@@ -71,12 +73,39 @@
                 options3:[],
                 options4:[],
                 options5:[],
+                options6: [{
+                    label: '热门城市',
+                    options: [{
+                            value: 'Shanghai',
+                            label: '上海'
+                        }, {
+                            value: 'Beijing',
+                            label: '北京'
+                        }]
+                    }, {
+                    label: '城市名',
+                    options: [{
+                            value: 'Chengdu',
+                            label: '成都'
+                        }, {
+                            value: 'Shenzhen',
+                            label: '深圳'
+                        }, {
+                            value: 'Guangzhou',
+                            label: '广州'
+                        }, {
+                            value: 'Dalian',
+                            label: '大连'
+                        }]
+                    }
+                ],
                 nameKey:'label',
                 codeKey:'value',
                 multiple:true,
                 filterabled:true,
                 loading:false,
-                list: ['Alabama', 'Arkansas', 'Connecticut']
+                list: ['Alabama', 'Arkansas', 'Connecticut'],
+                group:true
             }
         },
         mounted () {
@@ -115,15 +144,6 @@
                     });
                     this.options4 = list.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1);
                 }, 200)
-                // if (query !== '') {
-                //     this.loading = true
-                //     setTimeout(() => {
-                //         this.loading = false
-                //         this.options4 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
-                //     }, 200)
-                // } else {
-                //     this.options4 = []
-                // }
             }
         }
     }
@@ -138,7 +158,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value" @on-change='changeConsole' :nameInCode='nameInCode'  style="width:200px" :options='options5'></b-select>
+            <b-select v-model="value" :group='group' style="width:200px" :options='options6'></b-select>
             <span>{{value}}</span>
         </div>
     </div>
@@ -765,6 +785,108 @@ fixed为true时可设置通过width来设置整体select的宽度，labelWidth�
                 :remoteFn='remoteFnMultiple'
                 :loading='loading'
                 :options='options4'
+                width='200' >
+            </b-select>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+        <div>
+            <b-select
+                v-model="value03"
+                :filterabled='filterabled'
+                :remoteFn='remoteFn'
+                :loading='loading'
+                :options='options3'
+                width='200' >
+            </b-select>
+            <b-select
+                v-model="value04"
+                :filterabled='filterabled'
+                :multiple='multiple'
+                :remoteFn='remoteFnMultiple'
+                :loading='loading'
+                :options='options4'
+                width='200' >
+            </b-select>
+        </div>
+    </template>
+    <script>
+        export default {
+           data () {
+            return {
+                value03: '',
+                value04: '',
+                options:[{
+                    label:'增专',
+                    value:'004'
+                },{
+                    label:'增普',
+                    value:'007'
+                },{
+                    label:'机动车',
+                    value:'005'
+                },{
+                    label:'电子票',
+                    value:'025'
+                }],
+                options3:[],
+                options4:[],
+                multiple:true,
+                filterabled:true,
+                loading:false
+            }
+        },
+        methods:{
+            remoteFn(query){
+                if (query !== '') {
+                    this.loading = true
+                    setTimeout(() => {
+                        this.loading = false
+                        this.options3 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
+                    }, 2000)
+                } else {
+                    this.options3 = []
+                }
+            },
+            remoteFnMultiple(query){
+                if (query !== '') {
+                    this.loading = true
+                    setTimeout(() => {
+                        this.loading = false
+                        this.options4 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
+                    }, 2000)
+                } else {
+                    this.options4 = []
+                }
+            }
+        }
+        }
+    </script>
+```
+:::
+
+
+### 分组
+设置 ```group```可以设置select的分组<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-select 
+                v-model="value13"  
+                :group='group'
+                :options='options6'
+                width='200' >
+            </b-select>
+            <b-select 
+                v-model="value14" 
+                :multiple='multiple'
+                :group='group'
+                :options='options6'
                 width='200' >
             </b-select>
         </div>

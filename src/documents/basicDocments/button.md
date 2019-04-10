@@ -17,13 +17,13 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-button>default</b-button>
-            <b-button type="primary">primary</b-button>
-            <b-button type="info">info</b-button>
-            <b-button type="success">success</b-button>
-            <b-button type="warning">warning</b-button>
-            <b-button type="error">error</b-button>
-            <b-button type="text">text</b-button>
+            <b-button>Default</b-button>
+            <b-button type="primary">Primary</b-button>
+            <b-button type="info">Info</b-button>
+            <b-button type="success">Success</b-button>
+            <b-button type="warning">Warning</b-button>
+            <b-button type="error">Error</b-button>
+            <b-button type="text">Text</b-button>
         </div>
     </div>
 </div>
