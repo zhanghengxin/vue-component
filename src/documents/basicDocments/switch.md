@@ -59,7 +59,7 @@
 
 <div class="example">
     <div class="example-box">
-        <b-switch size="large"></b-switch>
+        <b-switch size="large" :value='true'></b-switch>
             &nbsp;&nbsp;
         <b-switch size="default"></b-switch>
             &nbsp;&nbsp;
@@ -68,13 +68,14 @@
 
 ::: code
 ```html
-        <b-switch size="large"></b-switch>
+        <b-switch size="large" :value='true'></b-switch>
         <b-switch size="default"></b-switch>
         <b-switch size="small"></b-switch>
 ```
 :::
 </div>
 -----
+
 ### 文字和图标
 
 <div class="example">
@@ -103,12 +104,29 @@
 ```
 :::
 </div>
+
+### 加载中
+
+<div class="example">
+    <div class="example-box">
+        <b-switch :value='true' loading></b-switch>
+        <b-switch :value='false' loading size='small'></b-switch>
+    </div>
+
+::: code
+```html
+     <b-switch loading :value='true'></b-switch>
+```
+:::
+</div>
+
 <script>
 export default {
         data () {
             return {
                 switch1: false,
-                disabled: true
+                disabled: true,
+                switch2: false
             }
         },
         methods: {
@@ -130,7 +148,7 @@ export default {
 | disabled | 禁用开关| Boolean| --- | false |
 | true-value   | 开关选中的值 | Boolean| ----   | true   |
 | false-value   | 开关不选中的值 | Boolean| ----   | false   |
-
+| loading | 加载中的开关 | Boolean | | false |
 ### Slots
 | name | 说明 |
 | ---- | ---- |

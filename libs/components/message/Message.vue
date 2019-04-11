@@ -18,7 +18,10 @@
                     :class="[prefixCls+'-img',fsColor]"
                     :type="imgSrc">
                 </Icon>
-                <span :class="[prefixCls+'-content']">{{message}}</span>
+                <span :class="[prefixCls+'-content']" v-html="message"></span>
+                <span :class="[prefixCls+'-content']">
+                    <render-cell :render="renderFunc"></render-cell>
+                </span>
                 <button
                     v-if="showClose"
                     :class="[prefixCls+'-close']"
@@ -31,13 +34,14 @@
 </template>
 
 <script>
+import renderCell from './render'
 import { prefix } from '../../utils/common'
 import Icon from '../icon'
 
 const prefixCls = prefix + 'message'
 export default {
     name: prefixCls,
-    components: {Icon},
+    components: { Icon, renderCell },
     data () {
         return {
             show: false,
@@ -50,7 +54,8 @@ export default {
             type: 'info',
             duration: 3000,
             showClose: false,
-            prefixCls
+            prefixCls,
+            render: function () {}
         }
     },
     computed: {
@@ -71,6 +76,9 @@ export default {
                 warning: prefixCls + '-warning'
             }
             return colors[this.type]
+        },
+        renderFunc () {
+            return this.render || function () {}
         }
     },
     mounted () {

@@ -1,9 +1,10 @@
 <template>
     <span
+        tabindex="0"
         :class="switchClass"
         @click="toggle"
         @keydown.space="toggle">
-        <input type="hidden" :value="currentValue">
+        <input type="hidden" :name="name" :value="currentValue">
         <span :class="innerClasses">
             <slot name="open" v-if="currentValue === trueValue"></slot>
             <slot name="close" v-if="currentValue === falseValue"></slot>
@@ -13,11 +14,13 @@
 
 <script>
 import { oneOf, prefix } from '../../utils/common.js'
+import Emitter from '../../mixins/emitter'
 
 const prefixCls = `${prefix}switch`
 
 export default {
     name: prefixCls,
+    mixins: [ Emitter ],
     data () {
         return {
             currentValue: this.value
@@ -44,6 +47,11 @@ export default {
             validator (value) {
                 return oneOf(value, ['large', 'small', 'default'])
             }
+        },
+        name: String,
+        loading: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -53,7 +61,8 @@ export default {
                 {
                     [`${prefixCls}-checked`]: this.currentValue === this.trueValue,
                     [`${prefixCls}-disabled`]: this.disabled,
-                    [`${prefixCls}-${this.size}`]: !!this.size
+                    [`${prefixCls}-${this.size}`]: !!this.size,
+                    [`${prefixCls}-loading`]: this.loading
                 }
             ]
         },
@@ -64,7 +73,7 @@ export default {
     methods: {
         toggle (event) {
             event.preventDefault()
-            if (this.disabled) {
+            if (this.disabled || this.loading) {
                 return false
             }
             this.$emit('on-click', this.currentValue)
@@ -72,6 +81,7 @@ export default {
             this.currentValue = checked
             this.$emit('input', checked)
             this.$emit('on-change', checked)
+            this.dispatch('FormItem', 'on-form-change', checked)
         }
     },
     watch: {

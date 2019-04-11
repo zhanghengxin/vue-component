@@ -372,6 +372,9 @@ export default {
             this.textareaStyles = calcTextareaHeight(this.$refs.textarea, minRows, maxRows)
         },
         handleIconClick (e) {
+            e && e.preventDefault()
+            e && e.stopPropagation()
+
             this.$emit('on-click', e)
         },
         handleClear () {
