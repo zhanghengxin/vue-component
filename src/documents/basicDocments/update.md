@@ -1,5 +1,23 @@
 ### 更新日志
 
+### 0.4.4
+## `2019-04-11`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 select远程搜索，删除条件后显示不正常问题
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 menu的内部方法引用作调整
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 去掉全局通用utils冗余代码、无效方法、部分组件文档错误优化等
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 图标库更新显示和隐藏图标
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.4.3
 ## `2019-04-11`
 <br>
