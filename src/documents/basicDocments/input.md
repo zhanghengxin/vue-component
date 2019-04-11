@@ -384,9 +384,8 @@ fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体�
 | clearable | 是否显示清空按钮   | Boolean  | `true`、`false` | false  |
 | spellcheck | 是否拼写检查   | Boolean  | `true`、`false` | false  |
 | autofocus | 自动获取焦点   | Boolean  | `true`、`false` |   false  |
-| icon     | icon的名称class   | String  |  详见icon组件 |   -  |
-| prefix     | icon的在前面   | Boolean  |  `true`、`false` |  false   |
-| suffix     | icon的在后面   | Boolean  |  `true`、`false` |  false   |
+| prefix     | 输入框头部图标   | Boolean,String  |  - |  -   |
+| suffix     | 输入框尾部图标   | Boolean,String  |  - |  -   |
 | rows     | 文本域默认行数，仅在 textarea 类型下有效   | Number  |  - |   2  |
 | autosize | 自适应内容高度，仅在 textarea 类型下有效，可传入对象，如 { minRows: 2, maxRows: 6 }   | Boolean,Object  |  - |   false  |
 | wrap     | 原生的 wrap 属性，仅在 textarea 下生效   | String  |  `soft`、`hard` |   soft  |

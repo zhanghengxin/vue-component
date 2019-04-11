@@ -406,13 +406,13 @@ export default {
             const {label, fixed, $el} = this
             let width = ''
             if (label && fixed) { //
-                let clientWidth = $el.clientWidth
+                let clientWidth = parseInt($el.style.width)
                 let labelWidth = this.labelWidth || +$el.querySelector(`.${prefixCls}-label`).clientWidth
                 width = clientWidth - labelWidth - 2
                 this.selectWidth = {
                     width: width + 'px'
                 }
-            } else {
+            } else if (label) {
                 width = this.width || this.$refs.reference.clientWidth
                 this.selectWidth = {
                     width: width + 'px'
@@ -421,6 +421,18 @@ export default {
             this.dropWidth = width
             this.stylePloyfill = true // 兼容table-cell设置在width之前不生效
             this.$emit('get-drop-width', this.dropWidth)
+        },
+        dropWidthInit () {
+            const {label, fixed, $el} = this
+            let width = $el.clientWidth
+            if (label && fixed) { //
+                let clientWidth = $el.clientWidth
+                let labelWidth = this.labelWidth || +$el.querySelector(`.${prefixCls}-label`).clientWidth
+                width = clientWidth - labelWidth - 2
+            } else if (label) {
+                width = this.width || this.$refs.reference.clientWidth
+            }
+            this.dropWidth = width
         },
         valuesInit () {
             return this.getInitValue().map(value => {
@@ -503,7 +515,10 @@ export default {
             }
             this.show = !this.show
             this.$emit('on-click')
-            if (this.show) { this.broadcastPopperUpdate() }
+            if (this.show) {
+                this.broadcastPopperUpdate()
+                this.dropWidthInit()
+            }
         },
         removeTag (item) {
             const {disabled, values} = this
