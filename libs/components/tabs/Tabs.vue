@@ -7,7 +7,7 @@
                 <Icon v-if="showClose(item)" :class="tabsCloseIcon" type="quxiao-guanbi-shanchu" @click.native.stop="handleRemove(index)"></Icon>
             </div>
         </div>
-        <div :class="tabsContent">
+        <div :class="tabsContent" :style="contentStyle">
             <slot></slot>
         </div>
     </div>
@@ -41,6 +41,10 @@ export default {
         closable: {
             type: Boolean,
             default: false
+        },
+        animated: {
+            type: Boolean,
+            default: true
         }
     },
     components: {Icon},
@@ -55,7 +59,8 @@ export default {
         value: function (val) {
             this.currentvalue = val
         },
-        currentValue: function () {
+        currentValue: function (val) {
+            this.activeKey = val
             this.updateStatus()
         }
     },
@@ -72,7 +77,24 @@ export default {
             return `${prefixCls}-bar`
         },
         tabsContent () {
-            return `${prefixCls}-content`
+            return [
+                `${prefixCls}-content`,
+                {
+                    [`${prefixCls}-animated`]: this.animated
+                }
+            ]
+        },
+        contentStyle () {
+            const x = this.getTabIndex(this.activeKey)
+            const p = x === 0 ? '0%' : `-${x}00%`
+
+            let style = {}
+            if (x > -1) {
+                style = {
+                    transform: `translateX(${p}) translateZ(0px)`
+                }
+            }
+            return style
         },
         tabsCloseIcon () {
             return `${prefixCls}-close-icon`
@@ -147,11 +169,11 @@ export default {
             this.updateStatus()
         },
         updateStatus () {
-            const tabs = this.getTabs()
-            var _this = this
-            tabs.forEach(function (tab) {
-                tab.show = (tab.name === _this.currentValue)
-            })
+            // const tabs = this.getTabs()
+            // var _this = this
+            // tabs.forEach(function (tab) {
+            //     tab.show = (tab.name === _this.currentValue || _this.animated)
+            // })
         },
         handleChange (index) {
             var nav = this.navList[index]
@@ -160,6 +182,9 @@ export default {
             this.currentValue = name
             this.$emit('input', name)
             this.$emit('on-click', name)
+        },
+        getTabIndex (name) {
+            return this.navList.findIndex(nav => nav.name === name)
         }
     }
 }
