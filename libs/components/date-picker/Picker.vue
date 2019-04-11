@@ -20,6 +20,7 @@
                     :fixed="fixed"
                     :label-width="labelWidth"
                     :width="width"
+                    :suffix="iconType"
                     @on-input-change="handleInputChange"
                     @on-focus="handleFocus"
                     @on-blur="handleBlur"
@@ -27,9 +28,7 @@
                     @click.native="handleFocus"
                     @keydown.native="handleKeydown"
                     @mouseenter.native="handleInputMouseenter"
-                    @mouseleave.native="handleInputMouseleave"
-                    :icon="iconType"
-                    suffix>
+                    @mouseleave.native="handleInputMouseleave">
                 </b-input>
             </slot>
         </div>
@@ -321,10 +320,12 @@
                 this.disableClickOutSide = false
             },
             handleFocus (e) {
-                if (this.readonly || (this.showClose && !this.visualValue)) return
+                if (this.readonly) return
                 this.isFocused = true
                 if (e && e.type === 'focus') return // just focus, don't open yet
-                this.visible = true
+                if (!this.disabled) {
+                    this.visible = true
+                }
             },
             handleBlur (e) {
                 if (this.internalFocus) {
@@ -687,7 +688,6 @@
             // to handle focus from confirm buttons
             this.$on('focus-input', () => this.focus())
             this.getLabelWidth()
-            console.log('options', this.options.shortcuts)
         },
         updated () {
             this.getLabelWidth()
