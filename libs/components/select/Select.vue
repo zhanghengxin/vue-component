@@ -570,7 +570,7 @@ export default {
             const newValue = JSON.stringify(now)
             const oldValue = JSON.stringify(before)
             const emitInput = newValue !== oldValue && publicValue !== value
-            if (!this.query) {
+            if (!this.query && !this.remoteFn) {
                 this.query = values.length > 0 ? (multiple ? '' : values[0].label) : ''
             }
             if (emitInput) {
