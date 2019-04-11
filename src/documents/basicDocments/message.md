@@ -39,6 +39,17 @@
                             message: this.message,
                             duration: 5000
                         })
+                    },
+                    handleClickRender() {
+                        this.$Message({
+                            render: h => {
+                                return h('span', [
+                                    'This is created by ',
+                                    h('a', 'render'),
+                                    ' function'
+                                ])
+                            }
+                        })
                     }
                 }
             }
@@ -235,6 +246,47 @@
                     this.$Message({
                         message: this.message,
                         showClose: true
+                    })
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
+### 自定义 Render 函数
+
+<div class="example">
+    <div class="example-box">
+        <div style='margin-bottom: 10px'>
+            <b-button
+                @on-click="handleClickRender">
+                信息
+            </b-button>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-button
+            @on-click="handleClick">
+            信息
+        </b-button>
+    </div>
+    <script>
+        export default {
+            methods: {
+                handleClick() {
+                    this.$Message({
+                        render: h => {
+                            return h('span', [
+                                'This is created by ',
+                                h('a', 'render'),
+                                ' function'
+                            ])
+                        }
                     })
                 }
             }
