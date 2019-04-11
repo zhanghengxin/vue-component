@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import { prefix, oneOf, findComponentDownward, findBrothersComponents } from '../../utils/common'
+import { prefix, oneOf } from '../../utils/common'
+import { findComponentDownward, findBrothersComponents } from '../../utils/assist'
 
 const prefixCls = prefix + 'row'
 

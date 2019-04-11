@@ -5,7 +5,6 @@ import Vue from 'vue'
 const isServer = Vue.prototype.$isServer
 const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.)) /g // eslint-disable-line
 const MOZ_HACK_REGEXP = /^moz([A-Z])/
-const ieVersion = isServer ? 0 : Number(document.documentMode)
 const trim = function (string) {
     return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '')
 }
@@ -79,24 +78,6 @@ export function getStyle (element, styleName) {
     }
 }
 
-export function setStyle (element, styleName, value) {
-    if (!element || !styleName) return
-    if (typeof styleName === 'object') {
-        for (var prop in styleName) {
-            if (styleName.hasOwnProperty(prop)) {
-                setStyle(element, prop, styleName[prop])
-            }
-        }
-    } else {
-        styleName = camelCase(styleName)
-        if (styleName === 'opacity' && ieVersion < 9) {
-            element.style.filter = isNaN(value) ? '' : 'alpha(opacity=' + value * 100 + ')'
-        } else {
-            element.style[styleName] = value
-        }
-    }
-}
-
 export const on = (() => {
     if (!isServer && document.addEventListener) {
         return function (element, event, handler) {
@@ -108,6 +89,23 @@ export const on = (() => {
         return function (element, event, handler) {
             if (element && event && handler) {
                 element.attachEvent('on' + event, handler)
+            }
+        }
+    }
+})()
+
+/* istanbul ignore next */
+export const off = (() => {
+    if (!isServer && document.removeEventListener) {
+        return function (element, event, handler) {
+            if (element && event) {
+                element.removeEventListener(event, handler, false)
+            }
+        }
+    } else {
+        return function (element, event, handler) {
+            if (element && event) {
+                element.detachEvent('on' + event, handler)
             }
         }
     }
@@ -143,23 +141,6 @@ export function getScrollBarSize (fresh) {
     }
     return cached
 }
-
-/* istanbul ignore next */
-export const off = (() => {
-    if (!isServer && document.removeEventListener) {
-        return function (element, event, handler) {
-            if (element && event) {
-                element.removeEventListener(event, handler, false)
-            }
-        }
-    } else {
-        return function (element, event, handler) {
-            if (element && event) {
-                element.detachEvent('on' + event, handler)
-            }
-        }
-    }
-})()
 
 // an element contain another element
 export const containsElement = (root, el) => {

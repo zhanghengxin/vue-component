@@ -26,6 +26,16 @@ export function findComponentUpwards (context, componentName) {
     return parents
 }
 
+// Find brothers components
+export function findBrothersComponents (context, componentName, exceptSelf = true) {
+    let res = context.$parent.$children.filter(item => {
+        return item.$options.name === componentName
+    })
+    let index = res.findIndex(item => item._uid === context._uid)
+    if (exceptSelf) res.splice(index, 1)
+    return res
+}
+
 // Find component downward
 export function findComponentDownward (context, componentName) {
     const childrens = context.$children
@@ -43,6 +53,21 @@ export function findComponentDownward (context, componentName) {
         }
     }
     return children
+}
+
+export function merge (target) {
+    for (let i = 1, j = arguments.length; i < j; i++) {
+        let source = arguments[i] || {}
+        for (let prop in source) {
+            if (source.hasOwnProperty(prop)) {
+                let value = source[prop]
+                if (value !== undefined) {
+                    target[prop] = value
+                }
+            }
+        }
+    }
+    return target
 }
 
 // Find components downward
@@ -101,6 +126,7 @@ export function firstUpperCase (str) {
 export function scrollTop (el, from = 0, to, duration = 500, endCallback) {
     const difference = Math.abs(from - to)
     const step = Math.ceil(difference / duration * 50)
+    
     function scroll (start, end, step) {
         if (start === end) {
             endCallback && endCallback()
@@ -117,6 +143,7 @@ export function scrollTop (el, from = 0, to, duration = 500, endCallback) {
         }
         window.requestAnimationFrame(() => scroll(d, end, step))
     }
+    
     scroll(from, to, step)
 }
 

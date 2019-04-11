@@ -1,4 +1,4 @@
-# b-tooltip 文字提示
+# Tooltip 文字提示
 &nbsp;
 ## 概述
 <br>
@@ -280,7 +280,7 @@ export default {
     }
 </style>
 
-### Tooltip props
+### props
 | 参数      | 说明    | 类型        | 默认值   |
 |---------- |-------- |---------- |-------------  |
 | content   | 显示的内容                               | String        | -      |
@@ -294,13 +294,13 @@ export default {
 | transfer  | 是否将弹层放置于 body 内                            | Boolean         | false   |
 | options   | 自定义 popper.js 的配置项，具体配置见 <a href="https://popper.js.org/popper-documentation.html" target="_blank">popper.js 文档</a> | Object    | |
 
-### Tooltip events
+### events
 | 事件名          | 说明              | 返回值 |
 | -------------- | ---------------- | -- |
 | on-popper-show | 在提示框显示时触发  | 无 |
 | on-popper-hide | 在提示框消失时触发  | 无 |
 
-### Tooltip slot
+### slot
 | 名称      | 说明    |
 | ---------- | ------- |
 | 无         | 主体内容                                               |

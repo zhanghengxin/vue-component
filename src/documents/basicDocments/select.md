@@ -158,7 +158,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value" :group='group' style="width:200px" :options='options6'></b-select>
+            <b-select v-model="value" :group='group' width='200' :options='options6'></b-select>   
             <span>{{value}}</span>
         </div>
     </div>

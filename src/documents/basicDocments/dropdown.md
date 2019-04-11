@@ -281,21 +281,21 @@ export default {
 ```
 :::
 
-### b-dropdown Props
+### Dropdown Props
 
 | 参数    |  说明  | 类型   | 可选值 | 默认值     |
 | -----  | -----  | ---   | --- | ---     |
 | placement    | 菜单弹出位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, `right`, `right-start`, `right-end`| bottom-start |
 | trigger      | 触发下拉的方式  | string | `hover`、`click`、`contextMenu`、`custom` | hover   |
 | show      | 显示与隐藏  | Boolean | `false`、`true` | false   |
-### b-dropdown Slots
+### Dropdown Slots
 
 | name | 说明                                           |
 | ---- | ---------------------------------------------- |
 |      | 触发下拉列表的元素，可以是自定义的元素或者组件 |
 | list | 下拉列表， 通常是 `<b-dropdown-menu>` 组件     |
 
-### b-dropdown Events
+### Dropdown Events
 
 | 事件名称       | 说明                     | 回调参数说明                    |
 | -------------- | ------------------------ | ------------------------------- |
@@ -303,7 +303,7 @@ export default {
 | on-click | 点击菜单项时触发    |  b-dropdown-item 的 name      |
 | on-clickoutside | 点击外部关闭下拉菜单时触发  |  event     |
 
-### b-dropdown-item Props
+### Dropdown-item Props
 
 | 参数     | 说明           | 类型                   | 可选值 | 默认值 |
 | -------- | -------------- | ---------------------- | ------ | ------ |

@@ -1,4 +1,22 @@
-更新日志
+### 更新日志
+
+### 0.4.3
+## `2019-04-11`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 Datepicker clear事件bug修复
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Input的showpassword显示不正常问题
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 Switch支持loading效果
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 Message支持render功能
+    </b-timeline-item>
+</b-timeline>
 
 ### 0.4.2
 ## `2019-04-09`
@@ -6,6 +24,12 @@
 <b-timeline>
     <b-timeline-item>
     优化 Datapicker适配Input label-width属性
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 Select组件分组功能
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 input的icon属性去掉 由prefix、suffix代替传入icon的type【不兼容更新，详细请看文档】
     </b-timeline-item>
     <b-timeline-item>
     修复 Datepicker、Notice、Table组件 IE10/9 样式优化

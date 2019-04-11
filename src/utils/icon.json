@@ -598,5 +598,13 @@
   {
     "name": "纳税申报",
     "className": "nashuishenbao"
+  },
+  {
+    "name": "显示",
+    "className": "xianshi"
+  },
+  {
+    "name": "隐藏",
+    "className": "yincang"
   }
 ]

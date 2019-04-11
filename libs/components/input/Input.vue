@@ -169,11 +169,6 @@ export default {
                 return !this.size || this.size === '' ? 'default' : this.size
             }
         },
-        // icon属性
-        icon: {
-            type: String,
-            default: ''
-        },
         // textarea
         rows: {
             type: [Number, String],
@@ -227,7 +222,7 @@ export default {
             props: ['prefix', 'suffix'],
             config: {
                 type: [Boolean, String],
-                default: false
+                default: ''
             }
         })
     },
@@ -313,7 +308,7 @@ export default {
             const {fixed, label, $el} = this
             let width = ''
             if (label && fixed) {
-                let clientWidth = $el.clientWidth
+                let clientWidth = parseInt($el.style.width)
                 let labelWidth = this.labelWidth || +$el.querySelector(`.${prefixCls}-label`).clientWidth
                 width = clientWidth - labelWidth - 1
                 this.inputStyles = {
