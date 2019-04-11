@@ -1,4 +1,4 @@
-import { prefix } from '&/utils/common'
+import { prefix } from '../../utils/common'
 
 function capitalize (str) {
     str = (str + '').charAt(0).toUpperCase() + str.substring(1)

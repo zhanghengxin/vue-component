@@ -119,7 +119,7 @@ $select-dropdown: "#{$menu}-drop-list";
     background-color: #fff;
     box-sizing: border-box;
     position: absolute;
-    top: 45px;
+    //top: 45px;
     border-radius: 4px;
     box-shadow: 0 0 6px 0 rgba(73, 80, 96, 0.20);
     .#{$menu-item} {
