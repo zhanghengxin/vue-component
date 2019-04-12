@@ -18,7 +18,7 @@
                 @dragend.stop="handleEndDrop($event)"
                 @drop.stop="handleDrop($event,index)"
                 @mousemove="mousemoveHandler($event)"
-                @mousedown="mousedownHandler($event,index)"
+                @mousedown="mousedownHandler($event,rowIndex,index)"
                 @mouseleave="mouseleaveHandler"
             >
                 <div :class="cellCls(item)">
@@ -226,7 +226,7 @@ export default {
                     this.isResizing = true
                     preventDefault(event)
                 } else {
-                    if (this.draggable) {
+                    if (this.draggable && this.columnRows.length < 2) {
                         bodyStyle.cursor = 'pointer'
                     } else {
                         bodyStyle.cursor = ''
@@ -241,10 +241,12 @@ export default {
         mouseleaveHandler () {
             document.body.style.cursor = ''
         },
-        mousedownHandler (e, index) {
+        mousedownHandler (e, rowindex, _index) {
             if (this.dynamicable) this.rightClick(e)
             if (!this.isResizing) return
             this.isResizing = true
+            if (!this.getColumn(rowindex, _index)) return
+            let index = this.getColumn(rowindex, _index)._index
             const table = findComponentUpward(this, this.preCls).$el
             const cellMinWidth = 80
             // document.onselectstart = function () { return false }
@@ -301,7 +303,7 @@ export default {
             document.addEventListener('mouseup', handleMouseUp)
         },
         handleDragStart (event, index) {
-            if (!this.draggable || this.isResizing) preventDefault(event)
+            if (!this.draggable || this.isResizing || this.columnRows.length > 1) preventDefault(event)
             try {
                 // setData is required for draggable to work in FireFox
                 // the content has to be '' so dragging a node out of the tree won't open a new tab in FireFox
@@ -310,7 +312,7 @@ export default {
             this.dispatch(this.preCls, 'drag-start', this.columns[index]._index)
         },
         handleDragOver (event) {
-            if (!this.draggable) return false
+            if (!this.draggable || this.columnRows.length > 1) return false
             const table = findComponentUpward(this, this.preCls).$el
             const tableLeft = table.getBoundingClientRect().left
             const tableWidth = table.getBoundingClientRect().width
@@ -326,11 +328,11 @@ export default {
             preventDefault(event)
         },
         handleEndDrop () {
-            if (!this.draggable) return false
+            if (!this.draggable || this.columnRows.length > 1) return false
             this.dispatch(this.preCls, 'drag-end', '')
         },
         handleDrop (event, index) {
-            if (!this.draggable) return false
+            if (!this.draggable || this.columnRows.length > 1) return false
             this.dispatch(this.preCls, 'drag-drop', this.columns[index]._index)
         },
         rightClick (event) {

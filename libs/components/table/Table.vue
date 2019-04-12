@@ -9,6 +9,7 @@
                     :column-rows="columnRows"
                     :header-style="headerStyle"
                     :pre-cls="preCls"
+                    ref="thead"
                     :data="formatData"
                     :resizeable="resizeable"
                     :dynamicable="dynamicable"
@@ -695,7 +696,7 @@ export default {
         },
         handleMouse (options) {
             let tableWidth = this.$el.offsetWidth
-            let bodyWidth = this.$refs.body.$el.offsetWidth
+            let bodyWidth = this.$refs.body.$el.offsetWidth || this.$refs.thead.$el.offsetWidth
             let scrollWidth = this.verticalScroll ? this.scrollBarWidth : 0
             if (options.isMouseUp) {
                 let deltaX
