@@ -1,5 +1,23 @@
 ### 更新日志
 
+### 0.4.5
+## `2019-04-12`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 table 当 data无数据时，拖拽和排序表格错位问题
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 modal 删除图标 修复
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 page 电梯以及下拉显示优化
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 table 添加多级表头拖拽编辑支持
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.4.4
 ## `2019-04-11`
 <br>
