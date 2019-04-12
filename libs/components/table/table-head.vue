@@ -17,7 +17,7 @@
                 @dragover.stop="handleDragOver($event)"
                 @dragend.stop="handleEndDrop($event)"
                 @drop.stop="handleDrop($event,index)"
-                @mousemove="mousemoveHandler($event)"
+                @mousemove="mousemoveHandler($event,rowIndex,index)"
                 @mousedown="mousedownHandler($event,rowIndex,index)"
                 @mouseleave="mouseleaveHandler"
             >
@@ -209,7 +209,7 @@ export default {
                 type: type
             })
         },
-        mousemoveHandler (e) {
+        mousemoveHandler (e, rowIndex, index) {
             if (!this.resizeable) {
                 this.isResizing = false
                 return false
@@ -221,7 +221,7 @@ export default {
             }
             if (target) {
                 let rect = target.getBoundingClientRect()
-                if (rect.width > 12 && rect.right - e.pageX < 10) {
+                if (rect.width > 12 && rect.right - e.pageX < 10 && this.getColumn(rowIndex, index)) {
                     bodyStyle.cursor = 'col-resize'
                     this.isResizing = true
                     preventDefault(event)

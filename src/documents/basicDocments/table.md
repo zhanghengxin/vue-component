@@ -2314,14 +2314,14 @@ column 设置 children，可以渲染出多级表头<br/>
 <div class="example">
     <div class="example-box">
         <div>
-             <b-table border width=1000 :columns='columns17' :data='data11'></b-table>
+             <b-table resizeable border width=1000 :columns='columns17' :data='data11'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-         <b-table height=200 width=1000 :columns='columns17' :data='data11'></b-table>
+         <b-table resizeable height=200 width=1000 :columns='columns17' :data='data11'></b-table>
     </div>
     <script>
         export default {
