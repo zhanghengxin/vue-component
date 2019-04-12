@@ -9,7 +9,7 @@
                     <div :class="contentClasses" ref="content" :style="contentStyles">
                         <a :class="[prefixCls + '-close']" v-if="closable" @click="close">
                             <slot name="close">
-                                <b-icon type="quxiao"></b-icon>
+                                <Icon type="quxiao-guanbi-shanchu"></Icon>
                             </slot>
                         </a>
                         <div :class="[prefixCls + '-header']" @mousedown="handleMoveStart" v-if="showHead">
@@ -35,7 +35,7 @@
 </template>
 <script>
 import Button from '../button'
-import BIcon from '../icon'
+import Icon from '../icon'
 import TransferDom from './directive/transfer-dom'
 import { on, off } from '../../utils/dom'
 import Scrollbar from './mixins/scrollbar'
@@ -47,7 +47,7 @@ const prefixCls = prefix + 'modal'
 export default {
     name: prefixCls,
     mixins: [Scrollbar],
-    components: {Button, BIcon},
+    components: {Button, Icon},
     directives: {TransferDom},
     props: {
         value: {
