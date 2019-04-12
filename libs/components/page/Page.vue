@@ -119,6 +119,14 @@
                 <Icon v-else type="you"></Icon>
             </a>
         </li>
+        <select-drop
+            v-if="showSizer"
+            v-model="currentSize"
+            @on-change="sizeChange"
+            width="95"
+            :placement='placement'
+            :options="options">
+        </select-drop>
         <div v-if="showElevator" :class="elevatorCls">
             前往
             <input
@@ -132,14 +140,6 @@
             >
             页
         </div>
-        <select-drop
-            v-if="showSizer"
-            v-model="currentSize"
-            @on-change="sizeChange"
-            width="95"
-            :placement='placement'
-            :options="options">
-        </select-drop>
     </ul>
 </template>
 <script>
