@@ -1,6 +1,7 @@
 <template>
     <div :class="classes">
-        <div :class="tabsBarCls">
+        <div :class="tabsBarCls" ref="nav">
+            <div :class="tabsInkBar" :style="inkBarStyle"></div>
             <div @click="handleChange(index)"  v-for="(item,index) in navList" :key="index" :class="tabCls(item)">
                 <Icon v-if="item.icon !== ''" :type="item.icon"></Icon>
                 <span>{{item.label}}</span>
@@ -52,6 +53,8 @@ export default {
         return {
             currentValue: this.value,
             navList: [],
+            barWidth: 0,
+            barOffset: 0,
             activeKey: this.value
         }
     },
@@ -62,6 +65,7 @@ export default {
         currentValue: function (val) {
             this.activeKey = val
             this.updateStatus()
+            this.updateBar()
         }
     },
     computed: {
@@ -69,7 +73,8 @@ export default {
             return [
                 `${prefixCls}`,
                 {
-                    [`${prefixCls}-${this.type}`]: this.type
+                    [`${prefixCls}-${this.type}`]: this.type,
+                    [`${prefixCls}-animated`]: this.animated
                 }
             ]
         },
@@ -78,10 +83,7 @@ export default {
         },
         tabsContent () {
             return [
-                `${prefixCls}-content`,
-                {
-                    [`${prefixCls}-animated`]: this.animated
-                }
+                `${prefixCls}-content`
             ]
         },
         contentStyle () {
@@ -98,6 +100,18 @@ export default {
         },
         tabsCloseIcon () {
             return `${prefixCls}-close-icon`
+        },
+        inkBarStyle () {
+            let style = {
+                visibility: 'hidden',
+                width: `${this.barWidth}px`
+            }
+            if (this.type === 'line') style.visibility = 'visible'
+            style.transform = `translate3d(${this.barOffset}px, 0px, 0px)`
+            return style
+        },
+        tabsInkBar () {
+            return `${prefixCls}-ink-bar`
         }
     },
     methods: {
@@ -167,6 +181,26 @@ export default {
                 }
             })
             this.updateStatus()
+            this.updateBar()
+        },
+        updateBar () {
+            this.$nextTick(() => {
+                const index = this.getTabIndex(this.activeKey)
+                if (!this.$refs.nav) return
+                const prevTabs = this.$refs.nav.querySelectorAll(`.${prefixCls}-tab`)
+                const tab = prevTabs[index]
+                this.barWidth = tab ? parseFloat(tab.offsetWidth) : 0
+                const gutter = 12
+                if (index > 0) {
+                    let offset = 0
+                    for (let i = 0; i < index; i++) {
+                        offset += parseFloat(prevTabs[i].offsetWidth) + gutter
+                    }
+                    this.barOffset = offset + gutter
+                } else {
+                    this.barOffset = gutter
+                }
+            })
         },
         updateStatus () {
             // const tabs = this.getTabs()

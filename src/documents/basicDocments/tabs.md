@@ -6,7 +6,7 @@
 提供平级的区域将大块内容进行收纳和展现，保持界面整洁。
 ### 基础用法
 
-基础样式，line类型
+基础样式，```line```类型
 
 <div class="example">
     <div class="example-box">
@@ -76,7 +76,7 @@
 -----
 ### 图标功能
 
-通过设置属性icon，可以展示一个图标。
+通过设置属性```icon```，可以展示一个图标。
 
 <div class="example">
     <div class="example-box">
@@ -112,7 +112,7 @@
 
 ### 迷你型
 
-设置属性 size 为 small 可以显示为迷你型，只在 type 为 line 时有效。
+设置属性 ```size``` 为 ```small``` 可以显示为迷你型，只在 ```type``` 为 ```line``` 时有效。
 
 <div class="example">
     <div class="example-box">
@@ -143,7 +143,7 @@
 
 ### 卡片样式
 
-设置属性 type 为 card 可以显示卡片样式，常用于容器顶部。
+设置属性 ```type``` 为 ```card``` 可以显示卡片样式，常用于容器顶部。
 
 <div class="example">
     <div class="example-box">
@@ -267,15 +267,93 @@
 :::
 </div>
 
+### 禁用动画
+
+通过设置属性 ```animated``` 为 ```false``` 可以禁用动画。
+
+```card```类型
+
+<br />
+
+<div class="example">
+    <div class="example-box">
+        <b-tabs value ="0" type="card" @on-click="onClick" :animated="false">
+            <b-tabsPanel label="标签一" name="0" >
+                标签一的内容
+            </b-tabsPanel>
+            <b-tabsPanel label="标签二" name="1">
+                标签二的内容
+            </b-tabsPanel>
+            <b-tabsPanel label="标签三" name="2" disabled>
+                标签三的内容
+            </b-tabsPanel>
+        </b-tabs>
+    </div>
+
+::: code
+```html
+        <b-tabs value ="0" type="card" @on-click="onClick" :animated="false">
+            <b-tabsPanel label="标签一" name="0" >
+                标签一的内容
+            </b-tabsPanel>
+            <b-tabsPanel label="标签二" name="1">
+                标签二的内容
+            </b-tabsPanel>
+            <b-tabsPanel label="标签三" name="2" disabled>
+                标签三的内容
+            </b-tabsPanel>
+        </b-tabs>
+```
+:::
+</div>
+
+```line```类型
+
+<br />
+
+<div class="example">
+    <div class="example-box">
+        <b-tabs value ="0" @on-click="onClick" :animated="false">
+            <b-tabsPanel label="标签一" name="0" >
+                标签一的内容
+            </b-tabsPanel>
+            <b-tabsPanel label="标签二" name="1">
+                标签二的内容
+            </b-tabsPanel>
+            <b-tabsPanel label="标签三" name="2" disabled>
+                标签三的内容
+            </b-tabsPanel>
+        </b-tabs>
+    </div>
+
+::: code
+```html
+        <b-tabs value ="0" @on-click="onClick" :animated="false">
+            <b-tabsPanel label="标签一" name="0" >
+                标签一的内容
+            </b-tabsPanel>
+            <b-tabsPanel label="标签二" name="1">
+                标签二的内容
+            </b-tabsPanel>
+            <b-tabsPanel label="标签三" name="2" disabled>
+                标签三的内容
+            </b-tabsPanel>
+        </b-tabs>
+```
+:::
+</div>
+
+
 
 
 ### Tabs Props
 | 参数 | 说明 | 类型 | 可选值 |默认值 |
 | ---- | ---- | ---- | ---- | ---- |
 | value | 当前激活 tab 面板的 name，可以使用 v-model 双向绑定数据  | String  | --- |默认为第一项的 name |
-| type | 页签的基本样式，可选值为 line 和 card  | String  | --- |card |
+| type | 页签的基本样式，可选值为 line 和 card  | String  | --- |line |
 | size | 尺寸，可选值为 default 和 small，仅在 type="line" 时有效  | String  | --- |default |
 | closable | 是否可以关闭页签，仅在 type="card" 时有效  | Boolean  | --- |false |
+| animated | 是否开启动画  | Boolean  | --- |true |
 
 ### Tabs events
 | 事件 | 说明 | 返回值 | 
