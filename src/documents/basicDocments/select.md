@@ -8,7 +8,7 @@
                 value1: '',
                 value2: [],
                 value3: '',
-                value4: '',
+                value4: ['004','007'],
                 value5: '',
                 value6: '004',
                 value7: ['004','007'],
@@ -19,9 +19,11 @@
                 value01: '',
                 value02: '',
                 value03: '',
-                value04: '',
+                value04: ['004'],
                 value05: [],
                 value06: [],
+                value13: '',
+                value14: '',
                 clearable:true,
                 disabled:true,
                 autowarp:true,
@@ -34,7 +36,7 @@
                     value:'007'
                 },{
                     label:'机动车',
-                    value:'005'
+                    value:'0073'
                 },{
                     label:'电子票',
                     value:'025'
@@ -70,16 +72,44 @@
                 nameInCode:true,
                 options3:[],
                 options4:[],
+                options5:[],
+                options6: [{
+                    label: '热门城市',
+                    options: [{
+                            value: 'Shanghai',
+                            label: '上海'
+                        }, {
+                            value: 'Beijing',
+                            label: '北京'
+                        }]
+                    }, {
+                    label: '城市名',
+                    options: [{
+                            value: 'Chengdu',
+                            label: '成都'
+                        }, {
+                            value: 'Shenzhen',
+                            label: '深圳'
+                        }, {
+                            value: 'Guangzhou',
+                            label: '广州'
+                        }, {
+                            value: 'Dalian',
+                            label: '大连'
+                        }]
+                    }
+                ],
                 nameKey:'label',
                 codeKey:'value',
                 multiple:true,
                 filterabled:true,
-                loading:false
+                loading:false,
+                group:true
             }
         },
         mounted () {
             setTimeout(_=>{
-                this.options3 = this.options2
+                this.options5 = this.options2
             },1000)
         },
         methods:{
@@ -95,7 +125,7 @@
                     setTimeout(() => {
                         this.loading = false
                         this.options3 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
-                    }, 2000)
+                    }, 1000)
                 } else {
                     this.options3 = []
                 }
@@ -106,7 +136,7 @@
                     setTimeout(() => {
                         this.loading = false
                         this.options4 = [].concat(this.options.filter(item => (item.label + item.value).indexOf(query) > -1))
-                    }, 2000)
+                    }, 1000)
                 } else {
                     this.options4 = []
                 }
@@ -124,7 +154,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value" @on-change='changeConsole' :nameInCode='nameInCode'  style="width:200px" :options='options3'></b-select>
+            <b-select v-model="value" width='200' :options='options5' @on-change='changeConsole'></b-select>   
             <span>{{value}}</span>
         </div>
     </div>
@@ -138,7 +168,7 @@
             <b-select 
                 v-model="value"  
                 style="width:200px" 
-                :options='options' >
+                :options='options6' >
             </b-select>
             <span>{{value}}</span>
         </div>
@@ -148,7 +178,8 @@
             data () {
                 return {
                     value: '',
-                    options:[{
+                    options5: [],
+                    options2:[{
                         label:'增专',
                         value:'004'
                     },{
@@ -162,7 +193,12 @@
                         value:'025'
                     }]
                 }
-            }
+            },
+            mounted () {
+                setTimeout(_=>{
+                    this.options5 = this.options2
+                },1000)
+            },
         }
     </script>
 ```
@@ -620,8 +656,9 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 
 
 ### label样式
-可设置 ```label```，```fixed```设置label的两种样式。<br/>
-可设置通过width来设置select的宽度，labelWidth设置label文字的宽度（不设置labelWidth时，文字宽度默认自适应）
+通过设置```label```、```fixed```属性 设置带文字描述的select组合组件 <br/>
+fixed为false时可设置通过width来设置select框的宽度，labelWidth设置label文字的宽度（不设置labelWidth时，文字宽度默认自适应）
+fixed为true时可设置通过width来设置整体select的宽度，labelWidth设置label文字的宽度（不设置labelWidth时，文字宽度默认自适应）
 <div class="example">
     <div class="example-box">
         <div>
@@ -629,36 +666,31 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 v-model="value9"  
                 label='发票类型'
                 :fixed='fixed'
-                width='280'
-                :disabled='disabled' 
-                labelWidth='100'
+                style='width:200px'
                 :options='options' >
             </b-select>
-            <b-select 
-                v-model="value10" 
-                label='发票类型'
-                :disabled='disabled' 
-                width='280' labelWidth='100'
-                :options='options' >
-            </b-select>
-            <br/>
-            <br/>
             <b-select 
                 v-model="value05"  
                 label='发票类型'
                 :multiple='multiple'
                 :fixed='fixed'
-                :disabled='disabled' 
                 width='280'
                 labelWidth='100'
+                :options='options' >
+            </b-select>
+            <br/>
+            <br/>
+            <b-select 
+                v-model="value10"
+                label='发票类型'
+                width='200'
                 :options='options' >
             </b-select>
             <b-select 
                 v-model="value06"
                 :multiple='multiple' 
                 label='发票类型'
-                :disabled='disabled' 
-                width='280' 
+                width='200' 
                 labelWidth='100'
                 :options='options' >
             </b-select>
@@ -676,35 +708,30 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 label='发票类型'
                 :fixed='fixed'
                 width='280'
-                :disabled='disabled' 
-                labelWidth='100'
                 :options='options' >
             </b-select>
-            <b-select 
-                v-model="value10" 
-                label='发票类型'
-                :disabled='disabled' 
-                width='280' labelWidth='100'
-                :options='options' >
-            </b-select>
-            <br/>
-            <br/>
             <b-select 
                 v-model="value05"  
                 label='发票类型'
                 :multiple='multiple'
                 :fixed='fixed'
-                :disabled='disabled' 
                 width='280'
                 labelWidth='100'
+                :options='options' >
+            </b-select>
+            <br/>
+            <br/>
+            <b-select 
+                v-model="value10"
+                label='发票类型'
+                width='200'
                 :options='options' >
             </b-select>
             <b-select 
                 v-model="value06"
                 :multiple='multiple' 
                 label='发票类型'
-                :disabled='disabled' 
-                width='280' 
+                width='200' 
                 labelWidth='100'
                 :options='options' >
             </b-select>
@@ -840,7 +867,91 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 }
             }
         }
+    }
+    </script>
+```
+:::
+
+
+### 分组
+设置 ```group```可以设置select的分组<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-select 
+                v-model="value13"  
+                :group='group'
+                :options='options6'
+                width='200' >
+            </b-select>
+            <b-select 
+                v-model="value14" 
+                :multiple='multiple'
+                :group='group'
+                :options='options6'
+                width='200' >
+            </b-select>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+        <div>
+            <b-select 
+                v-model="value13"  
+                :group='group'
+                :options='options6'
+                width='200' >
+            </b-select>
+            <b-select 
+                v-model="value14" 
+                :multiple='multiple'
+                :group='group'
+                :options='options6'
+                width='200' >
+            </b-select>
+        </div>
+    </template>
+    <script>
+        export default {
+            data () {
+            return {
+                value13: '',
+                value14: '',
+                group: true,
+                multiple:true,
+                options6: [{
+                    label: '热门城市',
+                    options: [{
+                            value: 'Shanghai',
+                            label: '上海'
+                        }, {
+                            value: 'Beijing',
+                            label: '北京'
+                        }]
+                    }, {
+                    label: '城市名',
+                    options: [{
+                            value: 'Chengdu',
+                            label: '成都'
+                        }, {
+                            value: 'Shenzhen',
+                            label: '深圳'
+                        }, {
+                            value: 'Guangzhou',
+                            label: '广州'
+                        }, {
+                            value: 'Dalian',
+                            label: '大连'
+                        }]
+                    }
+                ]
+            }
         }
+    }
     </script>
 ```
 :::

@@ -28,7 +28,7 @@
 import Drop from '../select/Dropdown'
 import clickOutside from '../../utils/directives/clickOutside'
 import Emitter from '../../mixins/emitter'
-import { findComponentUpward } from '../../utils/utils'
+import { findComponentUpward } from '../../utils/assist'
 import { prefix } from '../../utils/common'
 const prefixCls = prefix + 'dropdown'
 

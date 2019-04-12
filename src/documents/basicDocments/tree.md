@@ -564,8 +564,8 @@ Render 函数的第二个参数，包含三个字段：
 <div class="example">
     <div class="example-box">
         <div>
-            <b-tree label='单选' width='250' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
-            <b-tree fixed label='单选' width='250' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+            <b-tree label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+            <b-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
             <b-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
             <b-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
         </div>
@@ -574,8 +574,8 @@ Render 函数的第二个参数，包含三个字段：
 ::: code
 ```html
     <div>
-        <b-tree label='单选' width='250' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
-        <b-tree fixed label='单选' width='250' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+        <b-tree label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+        <b-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
         <b-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
         <b-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
     </div>

@@ -38,7 +38,7 @@ export default {
             let style = {}
             if (this.width) {
                 style.minWidth = `${this.width}px`
-                style.maxWidth = `${this.width + 100}px`
+                style.maxWidth = `${100 + +this.width}px`
             }
             return style
         },

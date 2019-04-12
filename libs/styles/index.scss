@@ -4,8 +4,8 @@ article, aside, blockquote, body, button, dd, details, div, dl, dt, fieldset, fi
 }
 
 @import "./common/prefix";
-@import "./mixin/common";
 @import "./common/color";
+@import "./mixin/index";
 @import "./iconfont/iconfont";
 @import './animation/index';
 //全局组件库样式

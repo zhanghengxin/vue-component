@@ -1,256 +1,321 @@
-$css-prefix-picker: $css-prefix + 'datepicker';
-$css-prefix-calendar: $css-prefix + 'calendar';
-$css-prefix-panel: $css-prefix + 'panel';
-$css-prefix-date: $css-prefix + 'date';
-$css-prefix-time: $css-prefix + 'time';
-$css-prefix-shortcuts: $css-prefix + 'shortcuts';
-$css-prefix-range: $css-prefix + 'range';
-$css-prefix-icon: $css-prefix + 'icon';
+$date-picker-prefix-cls: $css-prefix + "date-picker";
+$picker-prefix-cls: $css-prefix + "picker";
 
-$inrange: #DCF1FE;
-$bgFont: #ccc;
+$date-picker-cells-width: 196px;
+$date-picker-cells-width-with-weeknumbers: 226px;
+$btn-border-radius-small: 3px;
+$transition-time: .2s;
+$ease-in-out: ease-in-out;
+$btn-disable-color: #bbbec4;
+$date-picker-cell-hover-bg: #e1f0fe;
+$cursor-disabled: not-allowed;
+$background-color-base: #f7f7f7;
+$btn-disable-bg: $background-color-base;
+$border-color-split: #e9eaec;
+$border-radius-small: 4px;
+$zindex-transfer: 1060;
+$table-thead-bg: #f8f8f9;
+$btn-padding-large: 6px 15px 7px 15px;
+$link-color: #2D8cF0;
+$link-hover-color: tint($link-color, 20%);
+$link-active-color: shade($link-color, 5%);
 
-.#{$css-prefix-picker} {
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  position: relative;
-  display: inline-block;
-  color: $Sub;
-  &.disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-}
-
-.#{$css-prefix-picker}-range {
-  width: 320px;
-}
-
-.#{$css-prefix-picker}-popup {
-  max-height: none;
-  background-color: $white;
-
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  z-index: 1000;
-  border-radius: 4px;
-  overflow: hidden;
-  .#{$css-prefix-picker}-popup-content {
-    display: flex;
-    flex-direction: row;
-  }
-}
-
-.#{$css-prefix-range}-wrapper {
-  width: 248px * 2;
-  overflow: hidden;
-}
-
-.#{$css-prefix-shortcuts}-wrapper {
-  padding-top: 10px;
-  width: 93px;
-  text-align: left;
-  background-color: $Background;
-  font-size: 18px;
-  .#{$css-prefix-shortcuts} {
-    display: block;
-    line-height: 24px;
-    background: none;
-    outline: none;
-    border: 0;
-    color: inherit;
-    margin: 0;
-    margin-left: 10px;
-    padding: 0;
-    white-space: nowrap;
-    cursor: pointer;
-    &:hover {
-      color: mix(#fff, $Primary, 20%);
+.#{$date-picker-prefix-cls} {
+    display: inline-block;
+    line-height: normal;
+    &-rel{
+        position: relative;
     }
-  }
-}
-
-.#{$css-prefix-picker}-footer {
-  padding: 4px;
-  clear: both;
-  text-align: right;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  .#{$css-prefix-picker}-datetime {
-    color: $Primary;
-    line-height: 24px;
-    font-size: 12px;
-    float: left;
-    margin-left: 12px;
-  }
-}
-
-.#{$css-prefix-calendar} {
-  float: left;
-  color: $Sub;
-  padding: 6px 12px;
-  background-color: $white;
-
-  .#{$css-prefix-calendar}-header {
-    padding: 0 4px;
-    height: 34px;
-    line-height: 34px;
-    text-align: center;
-    overflow: hidden;
-    > a {
-      color: inherit;
-      text-decoration: none;
-      cursor: pointer;
-      &:hover {
-        color: mix(#fff, $Primary, 20%);
-      }
+    &-cells{
+        width: $date-picker-cells-width;
+        margin: 10px;
+        white-space: normal;
+        span {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            em {
+                font-size: 12px;
+                border-radius: $btn-border-radius-small;
+                text-align: center;
+                transition: all $transition-time $ease-in-out;
+                display: inline-block;
+                width: 24px;
+                height: 24px;
+                line-height: 24px;
+                margin: 2px;
+                font-style: normal;
+                text-align: center;
+            }
+        }
+        &-header span {
+            line-height: 24px;
+            text-align: center;
+            margin: 2px;
+            color: $btn-disable-color;
+        }
+        &-cell:hover {
+            em {
+                background: $date-picker-cell-hover-bg;
+            }
+        }
+        &-focused{
+            em {
+                box-shadow: 0 0 0 1px $Primary inset;
+            }
+        }
+        span.#{$date-picker-prefix-cls}-cells-cell {
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+        }
+        &-cell {
+            &-prev-month, &-next-month {
+                em {
+                    color: $btn-disable-color;
+                }
+                &:hover{
+                    em {
+                        background: transparent;
+                    }
+                }
+            }
+            span &-week-label,
+            span &-week-label:hover,
+            span &-disabled,
+            span &-disabled:hover {
+                cursor: $cursor-disabled;
+                color: $btn-disable-color;
+                em {
+                    color: inherit;
+                    background: inherit;
+                }
+            }
+            span &-disabled, span &-disabled:hover {
+                background: $btn-disable-bg;
+            }
+            &-today {
+                em {
+                    position: relative;
+                    &:after{
+                        content: '';
+                        display: block;
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                        background: $Primary;
+                        position: absolute;
+                        top: 1px;
+                        right: 1px;
+                    }
+                }
+            }
+            &-range {
+                position: relative;
+                em {
+                    position: relative;
+                    z-index: 1;
+                }
+                &:before {
+                    content: '';
+                    display: block;
+                    background: $date-picker-cell-hover-bg;
+                    border-radius: 0;
+                    border: 0;
+                    position: absolute;
+                    top: 2px;
+                    bottom: 2px;
+                    left: 0;
+                    right: 0;
+                }
+            }
+            &-selected, &-selected:hover {
+                em {
+                    background: $Primary;
+                    color: #fff;
+                }
+            }
+            span &-disabled &-selected {
+                em {
+                  background: $btn-disable-color;
+                  color: $btn-disable-bg;
+              }
+            }
+            &-today &-selected
+            {
+                em {
+                    &:after {
+                        background: #fff;
+                    }
+                }
+            }
+        }
     }
-    @at-root {
-      .#{$css-prefix-icon}-last-month,
-      .#{$css-prefix-icon}-next-month {
-        padding: 0 6px;
-        font-size: 20px;
-        line-height: 30px;
-        color: $bgFont !important;
-      }
-      .#{$css-prefix-icon}-last-month {
+
+    &-cells-show-week-numbers {
+        width: $date-picker-cells-width-with-weeknumbers;
+    }
+
+    &-cells-year, &-cells-month {
+        margin-top: 14px;
+        span {
+            width: 40px !important;
+            height: 28px !important;
+            line-height: 28px;
+            margin: 10px 12px;
+            border-radius: $btn-border-radius-small;
+            em {
+                width: 40px;
+                height: 28px;
+                line-height: 28px;
+                margin: 0;
+            }
+        }
+        .#{$date-picker-prefix-cls}-cells-cell-focused {
+            background-color: tint($Primary, 80%);
+        }
+    }
+
+    &-header {
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        border-bottom: 1px solid $border-color-split;
+        &-label {
+            cursor: pointer;
+            transition: color $transition-time $ease-in-out;
+            &:hover{
+                color: $Primary;
+            }
+        }
+    }
+    &-btn-pulse {
+        background-color: tint($Primary, 80%) !important;
+        border-radius: $border-radius-small;
+        transition: background-color $transition-time $ease-in-out;
+    }
+    &-prev-btn {
         float: left;
-      }
-      .#{$css-prefix-icon}-next-month {
+        &-arrow-double {
+            margin-left: 10px;
+        }
+    }
+    &-next-btn {
         float: right;
-      }
-      .#{$css-prefix-icon}-last-year {
-        @extend .#{$css-prefix-icon}-last-month
-      }
-      .#{$css-prefix-icon}-next-year {
-        @extend .#{$css-prefix-icon}-next-month
-      }
-    }
-  }
-
-  .#{$css-prefix-calendar}-content {
-    width: 32px * 7;
-    height: 32px * 7;
-    .cell {
-      vertical-align: middle;
-      cursor: pointer;
-      border-radius: 4px;
-      &:hover {
-        background-color: $inrange;
-      }
-      &.actived {
-        color: $white !important;
-        background-color: $Primary;
-      }
-      &.inrange {
-        background-color: $inrange;
-        border-radius: 0;
-      }
-      &.disabled {
-        cursor: not-allowed;
-        color: $bgFont;
-        background-color: $Background;
-        border-radius: 0;
-      }  
-    }
-  }
-
-  .#{$css-prefix-panel} {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-  }
-
-  .#{$css-prefix-panel}-date {
-    table-layout: fixed;
-    border-collapse: collapse;
-    border-spacing: 0;
-    .#{$css-prefix-date}-header, .#{$css-prefix-date}-body {
-      font-size: 12px;
-      width: 32px;
-      height: 32px;
-      line-height: 32px;
-      padding: 0;
-      overflow: hidden;
-      text-align: center;
-      border: none;
+        &-arrow-double {
+            margin-right: 10px;
+        }
     }
 
-    .#{$css-prefix-date}-header {
-      color: $DisContent;
+    &-with-range {
+        .#{$picker-prefix-cls}-panel {
+            &-body {
+                min-width: ($date-picker-cells-width + 20px) * 2;
+            }
+            &-content {
+                float: left;
+            }
+        }
+        .#{$picker-prefix-cls}-cells-show-week-numbers {
+            min-width: ($date-picker-cells-width-with-weeknumbers + 20px) * 2;
+        }
+
     }
 
-    .#{$css-prefix-date}-body {
-      border: 0;
-      color: $Content;
-      &.today {
-        color: mix($white, $Primary, 10%);
-      }
-      &.last-month,
-      &.next-month {
-        color: #ddd;
-      }
-    }
-  }
-
-  .#{$css-prefix-panel}-year {
-    padding: 7px 0;
-    .cell {
-      display: inline-block;
-      width: 40%;
-      margin: 1px 5%;
-      line-height: 40px;
-    }
-  }
-
-  .#{$css-prefix-panel}-month {
-    .cell {
-      display: inline-block;
-      width: 30%;
-      line-height: 40px;
-      margin: 8px 1.5%;
-    }
-  }
-
-  .#{$css-prefix-time}-list {
-    box-sizing: border-box;
-    position: relative; // 定位 offsetParent
-    float: left;
-    margin: 0;
-    list-style: none;
-    width: 100%;
-    height: 100%;
-    border-top: 1px solid rgba(0,0,0,.05);
-    border-left: 1px solid rgba(0,0,0,.05);
-    overflow-y: auto;
-    .#{$css-prefix-time}-picker-item {
-      display: block;
-      text-align: left;
-      padding-left: 10px;
-    }
-    &:first-child {
-      border-left: 0;
-    }
-    .cell {
-      width: 100%;
-      font-size: 12px;
-      height: 30px;
-      line-height: 30px;
-      &:last-child {
-        margin-bottom: 192px;
-      }
-    }
-    /* 滚动条滑块 */
-    &::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.05);
-      border-radius: 10px;
-      box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
+    &-with-week-numbers {
+        .#{$picker-prefix-cls}-panel {
+            &-body-date {
+                min-width: ($date-picker-cells-width-with-weeknumbers + 20px) * 2;
+            }
+        }
     }
 
-    &:hover::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.2);
+    &-transfer {
+        z-index: $zindex-transfer;
+        max-height: none;
+        width: auto;
     }
-  }
+
+    &-focused input {
+        border-color: tint($Primary, 20%);
+        outline: 0;
+        box-shadow: 0 0 0 2px fade($Primary, 20%);
+    }
+}
+
+.#{$picker-prefix-cls} {
+    &-panel {
+        &-icon-btn {
+            display: inline-block;
+            width: 20px;
+            height: 24px;
+            line-height: 26px;
+            margin-top: 4px;
+            text-align: center;
+            cursor: pointer;
+            color: $btn-disable-color;
+            transition: color $transition-time $ease-in-out;
+            &:hover {
+                color: $Primary;
+            }
+            i {
+                font-size: 14px;
+            }
+        }
+
+        &-body-wrapper &-with-sidebar {
+            padding-left: 92px;
+        }
+        &-sidebar {
+            width: 92px;
+            float: left;
+            margin-left: -92px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            background: $table-thead-bg;
+            border-right: 1px solid $border-color-split;
+            border-radius: $border-radius-small 0 0 $border-radius-small;
+            overflow: auto;
+        }
+        &-shortcut {
+            padding: $btn-padding-large;
+            transition: all $transition-time $ease-in-out;
+            cursor: pointer;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 12px;
+            &:hover {
+                background: $border-color-split;
+            }
+        }
+        &-body {
+            float: left;
+        }
+    }
+
+    &-confirm{
+        border-top: 1px solid $border-color-split;
+        text-align: right;
+        padding: 8px;
+        clear: both;
+        & > span{
+            color: $link-color;
+            cursor: pointer;
+            user-select: none;
+            float: left;
+            padding: 2px 0;
+            transition: all $transition-time $ease-in-out;
+            &:hover{
+                color: $link-hover-color;
+            }
+            &:active{
+                color: $link-active-color;
+            }
+        }
+        &-time{
+            float: left;
+        }
+    }
 }

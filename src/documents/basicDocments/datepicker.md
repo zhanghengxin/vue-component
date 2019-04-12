@@ -1,39 +1,32 @@
 # DatePicker 日期选择器
 
-### 基本用法
+### 日期及日期范围
 
-设置属性 `type` 为 date 显示选择单日
+设置属性 `type` 为  date 或 daterange 可以选择日期或日期范围
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker v-model='date'></b-datepicker>
+        <b-datepicker label='日期'></b-datepicker>
+        <b-datepicker type='daterange' label='日期范围'></b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-datepicker v-model='date'></b-datepicker>
+        <b-datepicker type='date' label='日期'></b-datepicker>
+        <b-datepicker type='daterange' label='日期范围'></b-datepicker>
     </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    date: '',
-                }
-            }
-        }
-    </script>
 ```
 :::
 </div>
 
 ### 默认日期显示
 
-设置 v-model 绑定值 `date: 2018-11-24` 默认展示时间
+设置 v-model 绑定值 `date: 2019-03-28` 默认展示时间
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker v-model='date1'></b-datepicker>
+        <b-datepicker v-model='date'></b-datepicker>
     </div>
 
 ::: code
@@ -45,7 +38,7 @@
         export default {
             data () {
                 return {
-                    date: '2018-11-24'
+                    date: '2019-03-28'
                 }
             }
         }
@@ -54,600 +47,286 @@
 :::
 </div>
 
-### 不可选日期
+### 面板不联动
 
-设置属性 `not-before`、`not-after`、`disabled-days` 设定不可选日期
+设置属性 `split-panels` 为 true 左右两面板在切换年、月时不联动
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker 
-            v-model='notSelect' 
-            :not-before="new Date()" 
-            :not-after="new Date(new Date().getTime() + 3600 * 24 * 1000)">
-        <b-datepicker>
+        <b-datepicker type='daterange' split-panels></b-datepicker>
     </div>
-    <div class='example-box'>
-        <b-datepicker 
-            v-model='notSelectRange' 
-            range
-            :not-before="new Date()" 
-            :not-after="new Date(new Date().getTime() + 3600 * 24 * 1000 * 30)">
-        <b-datepicker>
-    </div>
-    <div class='example-box'>
-        <b-datepicker 
-            v-model='disabledDaysTime' 
-            :disabled-days='disabledDays'>
-        <b-datepicker>
-    </div>
-    
+
 ::: code
 ```html
     <div>
-        <b-datepicker 
-            v-model='notSelect' 
-            :not-before="notBefore" 
-            :not-after="notAfter">
-        </b-datepicker>
-            <b-datepicker 
-            v-model='notSelectRange' 
-            range
-            :not-before="notBeforeRange" 
-            :not-after="notAfterRange">
-        </b-datepicker>
-        <b-datepicker 
-            v-model='disabledDaysTime' 
-            :disabled-days='disabledDays'>
-        </b-datepicker>
+        <b-datepicker type='daterange' split-panels></b-datepicker>
     </div>
-    <script>
-        const _date = new Date().getTime()
-        const nextDate = new Date(_date + (3600 * 1000 * 24))
-        const preDate = new Date(_date - (3600 * 1000 * 24))
-        const nextMonth = new Date(_date + (3600 * 1000 * 24 * 30))
-
-        export default {
-            data () {
-                return {
-                    notSelect: '',
-                    notSelectRange: '',
-                    disabledDaysTime: '',
-                    notBefore: new Date(),
-                    notAfter: nextDate,
-                    notBefore: new Date(),
-                    notAfter: nextMonth,
-                    disabledDays: [preDate, new Date(), nextDate]
-                }
-            }
-        }
-    </script>
 ```
 :::
 </div>
 
-### 选择日期范围
+### 日期多选
 
-设置属性 `range` 为 true 可在一个选择器中选择一个日期范围
+设置属性 `multiple` 为 true 可选择多个日期
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker v-model='daterange' range></b-datepicker>
+        <b-datepicker type='date' multiple width='300'></b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-datepicker v-model='daterange' range></b-datepicker>
+        <b-datepicker type='date' multiple></b-datepicker>
     </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    daterange: '',
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-### 面板联动
-
-设置属性 `split-panels` 为 false 可在一个选择器中选择一个日期范围
-
-<div class='example'>
-    <div class='example-box'>
-        <b-datepicker v-model='splitPanels' range :split-panels='false'></b-datepicker>
-    </div>
-
-::: code
-```html
-    <div>
-        <b-datepicker v-model='splitPanels' range :split-panels='false'></b-datepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    splitPanels: '',
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-### 选择年份
-
-设置属性 `type` 为 year 显示选择年份，搭配 `format` 使用
-
-<div class='example'>
-    <div class='example-box'>
-        <b-datepicker 
-            v-model='year' 
-            type='year' 
-        format="YYYY">
-    </b-datepicker>
-    </div>
-    
-::: code
-```html
-    <div>
-        <b-datepicker 
-            v-model='year' 
-            type='year' 
-            format="YYYY">
-        </b-datepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    year: '',
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-### 选择年份范围
-
-设置属性 `range` 设置选择年份范围
-
-<div class='example'>
-    <div class='example-box'>
-        <b-datepicker 
-            v-model='yearRange' 
-            type='year'  
-            range
-            format="YYYY">
-        </b-datepicker>
-    </div>
-    
-::: code
-```html
-    <div>
-        <b-datepicker 
-            v-model='year' 
-            type='year'
-            range
-            format="YYYY">
-        </b-datepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    year: ''
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-### 选择月份
-
-设置属性 `type` 为 month 显示选择月份，搭配 `format` 使用
-
-<div class='example'>
-    <div class='example-box'>
-        <b-datepicker 
-            v-model='month' 
-            type='month'  
-            format="YYYY-MM">
-        </b-datepicker>
-    </div>
-    
-::: code
-```html
-    <div>
-        <b-datepicker 
-            v-model='month' 
-            type='month'
-            format="YYYY-MM">
-        </b-datepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    month: ''
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-### 选择月份范围
-
-设置属性 `range` 设置选择月份范围
-
-<div class='example'>
-    <div class='example-box'>
-        <b-datepicker 
-            v-model='monthRange' 
-            type='month'  
-            range
-            format="YYYY-MM">
-        </b-datepicker>
-    </div>
-    
-::: code
-```html
-    <div>
-        <b-datepicker 
-            v-model='month' 
-            type='month'
-            range
-            format="YYYY-MM">
-        </b-datepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    month: ''
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-### 选择时间
-
-<div class='example'>
-    <div class='example-box'>
-        <b-datepicker 
-            type='time'
-            v-model='time'>
-        </b-datepicker>
-    </div>
-    
-::: code
-```html
-    <div>
-        <b-datepicker v-model='time' type='time'></b-datepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    time: '',
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-### 选择时间范围
-
-设置属性 `range` 为 true 可在一个选择器中选择一个时间范围
-
-<div class='example'>
-    <div class='example-box'>
-        <b-datepicker v-model='daterange' range type='time'></b-datepicker>
-    </div>
-
-::: code
-```html
-    <div>
-        <b-datepicker v-model='timerange' range type='time'></b-datepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    timerange: '',
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-### 选择日期时间
-
-<div class='example'>
-    <div class='example-box'>
-        <b-datepicker v-model='datetime' type='datetime'></b-datepicker>
-    </div>
-
-::: code
-```html
-    <div>
-        <b-datepicker v-model='datetime' type='datetime'></b-datepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    datetime: ''
-                }
-            }
-        }
-    </script>
-```
-:::
-</div>
-
-### 选择日期时间范围
-
-设置属性 `range` 为 true 可在一个选择器中选择一个日期时间范围
-
-<div class='example'>
-    <div class='example-box'>
-        <b-datepicker 
-            v-model='datetimerange' 
-            range 
-            type='datetime'>
-        </b-datepicker>
-    </div>
-
-::: code
-```html
-    <div>
-        <b-datepicker 
-            v-model='datetimerange' 
-            range
-            type='datetime'>
-        </b-datepicker>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    datetimerange: '',
-                }
-            }
-        }
-    </script>
 ```
 :::
 </div>
 
 ### 快捷方式
 
-设置属性 `shortcuts` 显示快捷方式
+设置属性 options 对象中的 shortcuts 可以设置快捷选项
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker 
-            v-model='shortcutsTime'
-            shortcuts>
-        </b-datepicker>
+        <b-datepicker type='date' :options="dateOptions" label='日期快捷方式'></b-datepicker>
+        <b-datepicker type='daterange' :options="dateRangeOptions" label='日期范围快捷方式'></b-datepicker>
     </div>
-    <div class='example-box'>
-        <b-datepicker 
-            v-model='customShortcutsTime'
-            :shortcuts='customShortcuts'>
-        </b-datepicker>
-    </div>
-    <div class='example-box'>
-        <b-datepicker 
-            range
-            v-model='customRangeShortcutsTime'
-            :shortcuts='customRangeShortcuts'>
-        </b-datepicker>
-    </div>
-    
+
 ::: code
 ```html
     <div>
-        <b-datepicker 
-            v-model='shortcutsTime' 
-            shortcuts>
-        </b-datepicker>
-        <b-datepicker 
-            v-model='customShortcutsTime'
-            :shortcuts='customShortcuts'>
-        </b-datepicker>
-        <b-datepicker 
-            range
-            v-model='customRangeShortcutsTime'
-            :shortcuts='customRangeShortcuts'>
-        </b-datepicker>
+        <b-datepicker type='date' :options="dateOptions" label='日期快捷方式'></b-datepicker>
+        <b-datepicker type='daterange' :options="dateRangeOptions" label='日期范围快捷方式'></b-datepicker>
     </div>
     <script>
-        const _date = new Date().getTime()
-        const nextDate = new Date(_date + (3600 * 1000 * 24))
         export default {
-            data () {
-                return {
-                    shortcutsTime: '',
-                    customShortcutsTime: '',
-                    customRangeShortcutsTime: '',
-                    customRangeShortcuts: [
-                        {
-                            text: '最近两天',
-                            start: new Date(),
-                            end: nextDate
-                        }
-                    ],
-                    customShortcuts: [
+        data () {
+            return {
+                dateOptions: {
+                    shortcuts: [
                         {
                             text: '今天',
-                            date: new Date()
+                            value () {
+                                return new Date();
+                            },
+                            onClick: (picker) => {
+                                this.$Message.info('Click today');
+                            }
                         },
                         {
-                            text: '明天',
-                            date: nextDate
+                            text: '昨天',
+                            value () {
+                                const date = new Date();
+                                date.setTime(date.getTime() - 3600 * 1000 * 24);
+                                return date;
+                            },
+                            onClick: (picker) => {
+                                this.$Message.info('Click yesterday');
+                            }
+                        },
+                        {
+                            text: '一周前',
+                            value () {
+                                const date = new Date();
+                                date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                                return date;
+                            },
+                            onClick: (picker) => {
+                                this.$Message.info('Click a week ago');
+                            }
+                        }
+                    ]
+                },
+                dateRangeOptions: {
+                    shortcuts: [
+                        {
+                            text: '1 week',
+                            value () {
+                                const end = new Date();
+                                const start = new Date();
+                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                                return [start, end];
+                            }
+                        },
+                        {
+                            text: '1 month',
+                            value () {
+                                const end = new Date();
+                                const start = new Date();
+                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                                return [start, end];
+                            }
+                        },
+                        {
+                            text: '3 months',
+                            value () {
+                                const end = new Date();
+                                const start = new Date();
+                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                                return [start, end];
+                            }
                         }
                     ]
                 }
-            },
+            }
         }
+    }
     </script>
 ```
 :::
 </div>
 
-### 定义输入框格式
+### 起始日期
 
-设置属性 `labelText` 来显示 label 的内容
+设置属性 `start-date` 后，可以将默认显示的日期面板设置为指定日期
 
 <div class='example'>
     <div class='example-box'>
-        <div style='margin-bottom: 10px'>
-            切换Label属性：<b-switch @on-change="handleChangeLabel"></b-switch>
-        </div>
-        <div style='margin-bottom: 10px'>
-            切换快捷方式：<b-switch @on-change="handleChangeLabelCuts"></b-switch>
-        </div>
-        <div style='margin-bottom: 10px'>
-            切换确认按钮：<b-switch @on-change="handleChangeButton"></b-switch>
-        </div>
-        <b-datepicker 
-            v-model='label'
-            :fixed='fixed'
-            :shortcuts='labelShorcuts'
-            :label='labelText'
-            :confirm='confirmed'>
-        </b-datepicker>
+        <b-datepicker :start-date="new Date(2019, 1, 14)"></b-datepicker>
     </div>
     
 ::: code
 ```html
     <div>
-        <div style='margin-bottom: 10px'>
-            切换Label属性：<b-switch @on-change="handleChange"></b-switch>
-        </div>
-        <div style='margin-bottom: 10px'>
-            切换快捷方式：<b-switch @on-change="handleChangeLabelCuts"></b-switch>
-        </div>
-        <div style='margin-bottom: 10px'>
-            切换确认按钮：<b-switch @on-change="handleChangeButton"></b-switch>
-        </div>
-        <b-datepicker 
-            v-model='date'
-            :label='labelText'
-            :shortcuts='shortcuts'
-            :fixed='fixed'
-            :confirm='confirm'>
-        </b-datepicker>
+        <b-datepicker :start-date="new Date(2019, 1, 14)"></b-datepicker>
     </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    date: '',
-                    fixed: false,
-                    shortcuts: false,
-                    confirm: false,
-                    labelText: '发布日期'
-                }
-            },
-            methods: {
-                handleChange(val) {
-                    this.fixed = val
-                },
-                handleChangeLabelCuts(val) {
-                    this.shortcuts = val
-                },
-                handleChangeButton(val) {
-                    this.confirm = val
-                }
-            }
-        }
-    </script>
+```
+:::
+</div>
+
+### 选择年份
+
+设置属性 `type` 为 year 显示选择年份
+
+<div class='example'>
+    <div class='example-box'>
+        <b-datepicker type='year'></b-datepicker>
+    </div>
+    
+::: code
+```html
+    <div>
+        <b-datepicker type='year'></b-datepicker>
+    </div>
+```
+:::
+</div>
+
+### 选择月份
+
+设置属性 `type` 为 month 显示选择月份
+
+<div class='example'>
+    <div class='example-box'>
+        <b-datepicker type='month'></b-datepicker>
+    </div>
+    
+::: code
+```html
+    <div>
+        <b-datepicker type='month'></b-datepicker>
+    </div>
+```
+:::
+</div>
+
+### 日期时间选择
+
+设置属性 `type` 为 datetime 或 datetimerange 可以选择时间
+
+<div class='example'>
+    <div class='example-box'>
+        <b-datepicker type='datetime' label='日期时间' fixed width='220'></b-datepicker>
+        <b-datepicker type='datetimerange' label='日期时间范围'></b-datepicker>
+    </div>
+    
+::: code
+```html
+    <div>
+        <b-datepicker type='datetime' label='日期时间' fixed width='220'></b-datepicker>
+        <b-datepicker type='datetimerange' label='日期时间范围'></b-datepicker>
+    </div>
 ```
 :::
 </div>
 
 <script>
-    const _date = new Date().getTime()
-    const nextDate = new Date(_date + (3600 * 1000 * 24))
-    const preDate = new Date(_date - (3600 * 24 * 1000))
     export default {
         data () {
             return {
-                date: '',
-                short: false,
-                date1: '2018-11-24',
-                year: '',
-                yearRange: '',
-                month: '',
-                monthRange: '',
-                daterange: '',
-                shortcutsTime: '',
-                customShortcutsTime: '',
-                customShortcuts: [
-                    {
-                        text: '今天',
-                        date: new Date()
-                    },
-                    {
-                        text: '明天',
-                        date: nextDate
-                    }
-                ],
-                customRangeShortcutsTime: '',
-                customRangeShortcuts: [
-                    {
-                        text: '最近两天',
-                        date: [new Date(), nextDate]
-                    }
-                ],
-                shortcuts: false,
-                popup: '',
-                time: '',
-                label: '',
-                fixed: false,
-                labelText: '发布日期',
-                labelShorcuts: false,
-                confirmed: false,
-                notSelect: '',
-                notSelectRange: '',
-                disabledDaysTime: '',
-                disabledDays: [preDate, new Date(), nextDate],
-                splitPanels: '',
-                time: '',
-                datetime: '',
-                timerange: '',
-                datetimerange: ''
+                date: '2019-03-28',
+                dateOptions: {
+                    shortcuts: [
+                        {
+                            text: '今天',
+                            value () {
+                                return new Date();
+                            },
+                            onClick: (picker) => {
+                                this.$Message.info('今天');
+                            }
+                        },
+                        {
+                            text: '昨天',
+                            value () {
+                                const date = new Date();
+                                date.setTime(date.getTime() - 3600 * 1000 * 24);
+                                return date;
+                            },
+                            onClick: (picker) => {
+                                this.$Message.info('昨天');
+                            }
+                        },
+                        {
+                            text: '一周前',
+                            value () {
+                                const date = new Date();
+                                date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                                return date;
+                            },
+                            onClick: (picker) => {
+                                this.$Message.info('一周前');
+                            }
+                        }
+                    ]
+                },
+                dateRangeOptions: {
+                    shortcuts: [
+                        {
+                            text: '一周',
+                            value () {
+                                const end = new Date();
+                                const start = new Date();
+                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                                return [start, end];
+                            }
+                        },
+                        {
+                            text: '一个月',
+                            value () {
+                                const end = new Date();
+                                const start = new Date();
+                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                                return [start, end];
+                            }
+                        },
+                        {
+                            text: '三个月',
+                            value () {
+                                const end = new Date();
+                                const start = new Date();
+                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                                return [start, end];
+                            }
+                        }
+                    ]
+                }
             }
         },
         methods: {
-            handleChangeLabel(val) {
-                this.fixed = val
-            },
-            handleChangeLabelCuts(val) {
-                this.labelShorcuts = val
-            },
-            handleChangeButton(val) {
-                this.confirmed = val
+            handleChangeDate(val) {
+                console.log(val)
             }
         }
     }
@@ -657,40 +336,36 @@
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | ---- | ---- | ---- | ---- | ---- |
-| value | 日期选择器中的值，使用 v-model 双向绑定数据 | String |
-| type | 类型 | String  | `date` `year` `month` `time` `datetime` | date |
+| value | 日期，可以是 JavaScript 的 Date，例如 new Date()，也可以是标准的日期格式，点击右边查看 注意：value 使用 v-model 时，值是 Date 类型，可以配合 @on-change 使用 | Date |
+| type | 类型 | String  | `date` `daterange` `datetime` `datetimerange` `year` `month` | date |
 | width | input宽度 | Number |
 | label | input前的说明文字 | String |
-| labelWidth | label模式下label的宽度 |
+| label-width | input前的说明文字的宽度 fixed为false时有效 |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
 | size | input组件的尺寸 | Boolean  | `small` `default` `large` | default |
-| range | 日期选择中选择一个时间范围 | Boolean  | `true` `false` | false |
-| format | 日期格式化 | String  | | YYYY-MM-DD |
-| dateType | 返回日期格式 | String | `formatdate` `timestamp` `date` | formatdate |
+| format | 日期格式化 | String  | | yyyy-MM-dd |
+| placement | 日期选择器出现的位置 | String | `top` `top-start` `top-end` `bottom` `bottom-start` `bottom-end` `left` `left-start` `left-end` `right` `right-start` `right-end`| bottom-start |
 | clearable | 是否显示清除按钮 | Boolean  | `true` `false` | true |
 | editable | 输入框内是否可编辑 | Boolean  | `true` `false` | true |
 | disabled | 是否可用 | Boolean | `true` `false` | false |
 | confirm | 若为 true 则显示确认按钮且需要确认才更新时间 | Boolean | `true` `false` | false |
-| confirm-text | 确认按钮的名称 | Boolean | | 确认 |
 | placeholder | 默认提示性文字 | String |  | 请选择日期 |
-| shortcuts | 今天、昨天、一周前，最近一周、最近一个月、最近三个月 | Boolean/Array |  | false |
-| not-before | 禁止选择这个时间之前的时间 | String/Date | | false |
-| not-after |禁止选择这个时间之后的时间 | String/Date | | false |
-| disabled-days | 自定义禁止的日期 | Array/function |  | [] |
-| first-day-of-week | 日历星期几开头 | Number |  | 7 |
-| split-panels | 面板是否联动，当 rang 为 true 时可用| Boolean | `true` `false` | true |
+| split-panels | 面板是否联动，仅在 daterange 和 datetimerange 下可用 | Boolean | `true` `false` | false |
+| time-picker-options | 可以在 type 为 datetime 和 datetimerange 下，配置 TimePicker 的属性，比如时间间隔 steps：:time-picker-options="{steps: [1, 10, 10]}" | Object | | {} |
+| show-week-numbers | 开启后，可以显示星期数 | Boolean | `true` `false` | false |
+| multiple | 可以选择多个日期，仅在 date 下可用 | Boolean | `true` `false` | false |
+| options | 选择器额外配置，比如不可选日期与快捷选项，具体项详见下表 | Object |
 
+### options 
 
-### Slots
-| 事件名 | 说明	| 返回值 |
+| 属性 | 说明 | 类型 |
 | ---- | ---- | ---- |
-| shortcuts |  |  |
-| footer |  |  |
-
+| shortcuts | 设置快捷选项，每项内容：`text: String`：显示的文案 `value: Function`：返回指定的日期，如需自己控制逻辑，可不设置，并使用 onClick 回调 `onClick: Function`：点击时的回调，参数为当前日期选择器的 Vue 实例，当需要自定义复杂操作时，可以使用 | Boolean/Array |  | false |
+| disabledDate | 设置不可选择的日期，参数为当前的日期，需要返回 Boolean 是否禁用这天 | Function |
 
 ### events
 | 事件名 | 说明	| 返回值 |
 | ---- | ---- | ---- |
-| on-change | 日期改变的时候触发 | 选择的日期 |
-| input | 日期改变的时候触发 | 选择的日期 |
-| on-confirm | 点击确认按钮触发，配合 confirm 属性使用 | 选择的日期 |
+| on-change | 日期改变的时候触发 | date |
+| on-ok | 点击确认按钮触发，配合 confirm 属性使用 |
+| on-clear | 在 confirm 模式或 clearable = true 时有效，在清空日期时触发 |

@@ -163,6 +163,7 @@
 
 ### flex栅格排列布局
 可以通过设置 `order`在`col`组件上设置栅格顺序。
+`暂不支持 ie9`
 <div class="example">
     <div class="example-box">
         <p>子元素向左排列</p>
@@ -247,6 +248,7 @@
 
 ### flex栅格对齐排序
 可以通过设置 `order`在`col`组件上设置栅格顺序。
+`暂不支持 ie9`
 <div class="example">
     <div class="example-box">
           <p>顶部对齐</p>
@@ -304,6 +306,7 @@
 
 ### flex栅格排序
 可以通过设置 `order`在`col`组件上设置栅格顺序。
+`暂不支持 ie9`
 <div class="example">
     <div class="example-box">
        <b-row type="flex">

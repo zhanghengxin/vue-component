@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import loadingVue from './Loading.vue'
 import { addClass, removeClass, getStyle } from '../../../utils/dom'
-import merge from '../../../utils/merge'
+import { merge } from '../../../utils/assist'
 import { prefix } from '../../../utils/common'
+
 const prefixCls = prefix + 'loading'
 
 const LoadingConstructor = Vue.extend(loadingVue)
@@ -71,13 +72,11 @@ const Loading = (options = {}) => {
     if (options.fullscreen && fullscreenLoading) {
         return fullscreenLoading
     }
-
     let parent = options.body ? document.body : options.target
     let instance = new LoadingConstructor({
         el: document.createElement('div'),
         data: options
     })
-
     addStyle(options, parent, instance)
     if (instance.originalPosition !== 'absolute' && instance.originalPosition !== 'fixed') {
         addClass(parent, `${prefixCls}-parent-relative`)

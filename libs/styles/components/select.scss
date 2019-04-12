@@ -93,8 +93,15 @@ $css-prefix-option: $css-prefix+'option';
     text-align: center;
   }
 
+  &-group-label {
+    font-size: 12px;
+    padding: 5px 10px;
+    color: $SubContent;
+  }
+
   &-group {
     width: auto;
+
     .#{$css-prefix-select}-main {
       display: table-cell;
     }
@@ -134,10 +141,16 @@ $css-prefix-option: $css-prefix+'option';
         padding: 0 24px 0 4px;
       }
 
+      &-main-flex {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
       &-input {
         padding: 0 0 0 4px;
       }
-      &-main-placeholder{
+
+      &-main-placeholder {
         padding-left: 4px;
       }
     }
@@ -170,6 +183,12 @@ $css-prefix-option: $css-prefix+'option';
 
     &-placeholder {
       color: $SubContent;
+    }
+
+    input::-ms-clear,
+    input::-ms-reveal,
+    input::-o-clear {
+      display: none;
     }
   }
 
@@ -219,7 +238,7 @@ $css-prefix-option: $css-prefix+'option';
     }
   }
 
-  &-fixed-disabled{
+  &-fixed-disabled {
     background: $Disabled;
     border-color: $Border !important;
   }
