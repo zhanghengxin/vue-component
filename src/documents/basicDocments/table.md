@@ -3730,6 +3730,13 @@ column 设置 children，可以渲染出多级表头<br/>
 | _rowspan     |  某一列的合并单元格,详见合并行、列  |  Object  |  -    | -    |
 | _disableExpand     |   某一行禁用扩展功能  |   Boolean  |  -    | false    |
 
+
+### slot
+| 属性      | 说明    |
+| ---------- | -------- |
+| header     |  表头  |
+| footer     |  页脚  |
+
 ### events
 | 方法名	      | 说明	    | 参数 |
 |---------- |-------- |---------- |
