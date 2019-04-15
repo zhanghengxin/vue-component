@@ -201,6 +201,72 @@
 :::
 </div>
 
+### 自定义表头和表尾
+通过设置`border`来设置携带边框的表格
+<div class="example">
+    <div class="example-box">
+        <div>
+           <b-table border :columns='columns1' :data='data1'>
+                <span class='example-render' slot='header'>自定义表头</span>
+                <span class='example-render' slot='footer'>自定义页脚</span>
+           </b-table>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+         <b-table border :columns='columns1' :data='data1'>
+             <span class='example-render' slot='header'>自定义表头</span>
+             <span class='example-render' slot='footer'>自定义页脚</span>
+         </b-table>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                     columns1: [
+                          {
+                              title: 'Name',
+                              key: 'name',
+                              width:200
+                          },
+                          {
+                              title: 'Age',
+                              key: 'age'
+                          },
+                          {
+                              title: 'Sex',
+                              key: 'sex',
+                          }
+                     ],
+                     data1: [
+                          {
+                              name: '欧阳',
+                              age: 12,
+                              sex: '男'
+                          },
+                          {
+                              name: '青蛙',
+                              age: 18,
+                              sex: '男'
+                          },
+                          {
+                              name: '警长',
+                              age: 28,
+                              sex: '男'
+                          }
+                     ]
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
+
+
 ### 固定表头
 设置属性 `height` 给表格指定高度，会自动固定表头，设置`width` 会固定表格宽度。
 <div class="example">
