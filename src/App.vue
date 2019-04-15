@@ -56,7 +56,7 @@ export default {
     .content {
         width: 1400px;
         padding: 0;
-        margin: 0 auto;
+        margin: 70px auto 0px;
         box-shadow: rgba(223, 225, 230, 0.5) 0px 4px 30px 0px;
         height: auto;
         position: relative;
