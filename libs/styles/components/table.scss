@@ -231,7 +231,7 @@ $prefix-table: $css-prefix + 'table';
             padding: 8px 0 0;
             &-item {
                 padding: 0 12px 8px;
-                & label>span{
+                & label > span {
                     margin-right: 5px;
                 }
             }
@@ -246,16 +246,16 @@ $prefix-table: $css-prefix + 'table';
             & button:last-child {
                 float: right;
             }
-            & .#{$css-prefix}button{
+            & .#{$css-prefix}button {
                 border: none;
-                &:hover{
+                &:hover {
                     border: none;
                 }
             }
         }
     }
     &-poptip {
-        .#{$css-prefix}poptip-popper{
+        .#{$css-prefix}poptip-popper {
             min-width: 0;
         }
         .#{$css-prefix}poptip-body {
@@ -288,5 +288,10 @@ $prefix-table: $css-prefix + 'table';
         height: 1px;
         left: 0;
         bottom: 0;
+    }
+    &-footer, &-title {
+        height: 45px;
+        line-height: 45px;
+        border-bottom: 1px solid $Border;
     }
 }
