@@ -1,141 +1,256 @@
-$css-prefix-drawer: $css-prefix+'drawer';
-@import "../common/color";
+$drawer-prefix-cls: $css-prefix + "drawer";
+$zindex-drawer: 1000;
+$zindex-modal: 1000;
+$border-color-split: #e8eaec;
+$font-size-base: 14px;
+$font-size-small: 12px;
+$title-color: #17233d;
 
-@mixin base-drawer() {
-  position: fixed;
-  border-radius: 4px;
-  background-color: $white;
-  z-index: 100;
+@mixin content-header() {
+    border-bottom: 1px solid $border-color-split;
+    padding: 14px 16px;
+    line-height: 1;
+
+    p, &-inner {
+        display: inline-block;
+        width: 100%;
+        height: 20px;
+        line-height: 20px;
+        font-size: $font-size-base;
+        color: $title-color;
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    p i, p span {
+        vertical-align: middle;
+    }
 }
 
-@mixin base-animation($direction) {
-  &-enter-active {
-    animation-name: $direction + '-in';
-    animation-duration: 0.3s;
-  }
-
-  &-leave-active {
-    animation-name: $direction + '-out';
-    animation-duration: 0.3s;
-  }
+@mixin content-close() {
+    font-size: $font-size-small;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    overflow: hidden;
+    cursor: pointer;
 }
 
-@mixin xy-animation($direction, $positionFrom, $positionTo) {
-  @keyframes #{$direction}-in {
-    0% {
-      transform: $positionFrom;
-    }
-
-    100% {
-      transform: $positionTo;
-    }
-  }
-
-  @keyframes #{$direction}-out {
-    0% {
-      transform: $positionTo;
-    }
-
-    100% {
-      transform: $positionFrom;
-    }
-  }
-}
-
-@mixin y-animation($direction, $position) {
-  @keyframes #{$direction}-in {
-    0% {
-      transform: translateY($position);
-    }
-
-    100% {
-      transform: translateY(0%);
-    }
-  }
-
-  @keyframes #{$direction}-out {
-    0% {
-      transform: translateY(0%);
-    }
-
-    100% {
-      transform: translateY($position);
-    }
-  }
-}
-
-
-
-.#{$css-prefix-drawer} {
-  padding: 16px 24px;
-  border-radius: 4px 4px 0 0;
-  background: $white;
-  color: $Sub;
-  border-bottom: 1px solid $white;
-
-  &-root {
+@mixin mask() {
     position: fixed;
     top: 0;
-    overflow: auto
-  }
-  
-  &-title {
-    padding: 16px 24px;
-    border-radius: 4px 4px 0 0;
-    color: $Title;
-    border-bottom: 1px solid inherit;
-    @include _borderColor($Border);
-  }
-  
-  &-body {
-    padding: 24px;
-    font-size: 14px;
-    line-height: 1.5;
-    word-wrap: break-word;
-  }
-  
-  &-mask {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    background-color: $Sub;
-    opacity: 0.3;
-  }
-
-  &-top {
-    min-height: 256px;
-    width: 100%;
-    top: 0;
-    @include base-drawer();
-    @include base-animation(top);
-  }
-
-  &-left {
-    min-width: 256px;
-    height: 100%;
-    left: 0;
-    @include base-drawer();
-    @include base-animation(left);
-  }
-
-  &-bottom {
-    min-height: 256px;
-    width: 100%;
     bottom: 0;
-    @include base-drawer();
-    @include base-animation(bottom);
-  }
-
-  &-right {
-    min-width: 256px;
-    height: 100%;
+    left: 0;
     right: 0;
-    @include base-drawer();
-    @include base-animation(right);
-  }
+    background-color: rgba(55, 55, 55, 0.6);
+    height: 100%;
+    z-index: $zindex-modal;
+
+    &-hidden {
+        display: none;
+    }
 }
 
-@include xy-animation(right, translateX(100%),translateX(0%));
-@include xy-animation(left, translateX(-100%),translateX(0%));
-@include xy-animation(top, translateY(-100%),translateY(0%));
-@include xy-animation(bottom, translateY(100%),translateY(0%));
+@mixin move-motion($className, $keyframeName) {
+    @include make-motion($className, $keyframeName);
+    .#{$className}-enter-active, .#{$className}-appear {
+        opacity: 0;
+        animation-timing-function: ease-in-out;
+    }
+    .#{$className}-leave-active {
+        animation-timing-function: ease-in-out;
+    }
+}
+
+@include move-motion(move-left, bMoveLeft);
+@include move-motion(move-right, bMoveRight);
+
+.#{$drawer-prefix-cls} {
+    width: auto;
+    height: 100%;
+    position: fixed;
+    top: 0;
+
+    &-inner {
+        position: absolute;
+    }
+
+    &-left {
+        left: 0;
+    }
+    &-right {
+        right: 0;
+    }
+
+    &-hidden {
+        display: none !important;
+    }
+
+    &-wrap {
+        position: fixed;
+        overflow: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: $zindex-drawer;
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+
+        &-inner {
+            position: absolute;
+            overflow: hidden;
+        }
+
+        &-dragging {
+            user-select: none;
+        }
+    }
+
+    &-wrap * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    &-mask {
+        @include mask();
+        &-inner {
+            position: absolute;
+        }
+    }
+
+    &-content {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        background-color: #fff;
+        border: 0;
+        background-clip: padding-box;
+        box-shadow: 0 4px 12px rgba(0,0,0,.15);
+
+        &-no-mask {
+            pointer-events: auto;
+        }
+    }
+
+    &-header {
+        @include content-header();
+    }
+
+    &-close {
+        z-index: 1;
+        @include content-close();
+    }
+
+    &-body {
+        width: 100%;
+        height: calc(100% - 51px);
+        padding: 16px;
+        font-size: 12px;
+        line-height: 1.5;
+        word-wrap: break-word;
+        position: absolute;
+        overflow: auto;
+    }
+
+    &-no-header &-body {
+        height: 100%;
+    }
+
+    &-no-mask{
+        pointer-events: none;
+
+        .#{$drawer-prefix-cls}-drag {
+            pointer-events: auto;
+        }
+    }
+
+    &-drag {
+        top: 0;
+        height: 100%;
+        width: 0;
+        position: absolute;
+        &-left {
+            right: 0;
+        }
+        &-move-trigger {
+            width: 8px;
+            height: 100px;
+            line-height: 100px;
+            position: absolute;
+            top: 50%;
+            background: rgb(243, 243, 243);
+            transform: translate(-50%, -50%);
+            border-radius: 4px / 6px;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, .2);
+            cursor: col-resize;
+
+            &-point {
+                display: inline-block;
+                width: 50%;
+                transform: translateX(50%);
+                
+                i {
+                    display: block;
+                    border-bottom: 1px solid rgb(192, 192, 192);
+                    padding-bottom: 2px;
+                }
+            }
+        }
+    }
+}
+
+@keyframes bMoveLeftIn {
+    0% {
+        transform-origin: 0 0;
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform-origin: 0 0;
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes bMoveLeftOut {
+    0% {
+        transform-origin: 0 0;
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    100% {
+        transform-origin: 0 0;
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes bMoveRightIn {
+    0% {
+        opacity: 0;
+        transform-origin: 0 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 0 0;
+        transform: translateX(0%);
+    }
+}
+
+@keyframes bMoveRightOut {
+    0% {
+        transform-origin: 0 0;
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    100% {
+        transform-origin: 0 0;
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
