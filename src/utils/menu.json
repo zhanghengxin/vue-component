@@ -273,6 +273,11 @@
           "title": "Anchor 锚点",
           "path": "/anchor",
           "name": "anchor"
+        },
+        {
+          "title": "Badge 徽标",
+          "path": "/badge",
+          "name": "badge"
         }
       ]
     }

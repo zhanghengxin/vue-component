@@ -55,6 +55,7 @@ import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
 import Poptip from './components/poptip'
+import Badge from './components/badge'
 
 const components = [
     Input,
@@ -111,7 +112,8 @@ const components = [
     Anchor,
     AnchorLink,
     Poptip,
-    Affix
+    Affix,
+    Badge
 ]
 
 const install = function (Vue) {
