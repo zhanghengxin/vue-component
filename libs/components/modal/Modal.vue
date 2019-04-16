@@ -9,7 +9,7 @@
                     <div :class="contentClasses" ref="content" :style="contentStyles">
                         <a :class="[prefixCls + '-close']" v-if="closable" @click="close">
                             <slot name="close">
-                                <b-icon type="quxiao"></b-icon>
+                                <b-icon type="quxiao-guanbi-shanchu"></b-icon>
                             </slot>
                         </a>
                         <div :class="[prefixCls + '-header']" @mousedown="handleMoveStart" v-if="showHead">

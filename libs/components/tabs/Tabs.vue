@@ -46,7 +46,8 @@ export default {
         animated: {
             type: Boolean,
             default: true
-        }
+        },
+        beforeRemove: Function
     },
     components: {Icon},
     data () {
@@ -141,6 +142,21 @@ export default {
             }
         },
         handleRemove (index) {
+            if (!this.beforeRemove) {
+                return this.handleRemoveTab(index)
+            }
+
+            const before = this.beforeRemove(index)
+
+            if (before && before.then) {
+                before.then(() => {
+                    this.handleRemoveTab(index)
+                })
+            } else {
+                this.handleRemoveTab(index)
+            }
+        },
+        handleRemoveTab (index) {
             const tabs = this.getTabs()
             const tab = tabs[index]
             tab.$destroy()

@@ -354,6 +354,7 @@
 | size | 尺寸，可选值为 default 和 small，仅在 type="line" 时有效  | String  | --- |default |
 | closable | 是否可以关闭页签，仅在 type="card" 时有效  | Boolean  | --- |false |
 | animated | 是否开启动画  | Boolean  | --- |true |
+| before-remove | 关闭前的函数，返回 ```Promise``` 可阻止标签关闭,回调函数的默认值为tab的index  | Function  | --- | --- |
 
 ### Tabs events
 | 事件 | 说明 | 返回值 | 
