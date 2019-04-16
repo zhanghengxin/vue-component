@@ -5,6 +5,15 @@
 <br>
 <b-timeline>
     <b-timeline-item>
+    新增 Badge 徽标组件
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 Drawer添加可拖拽功能
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 Table组件支持自定义页脚和表头
+    </b-timeline-item>
+    <b-timeline-item>
     修复 Menu、Form、Button、Steps、Tabs、grid 等组件的按需引入不正常的问题
     </b-timeline-item>
     <b-timeline-item>
