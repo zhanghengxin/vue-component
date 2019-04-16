@@ -1,5 +1,17 @@
 ### 更新日志
 
+### 0.4.6
+## `2019-04-16`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 Menu、Form、Button、Steps、Tabs、grid 等组件的按需引入不正常的问题
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Breadcrumb 组件的文档错误修改
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.4.5
 ## `2019-04-12`
 <br>

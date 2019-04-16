@@ -55,7 +55,7 @@ export function findComponentDownward (context, componentName) {
     return children
 }
 
-export function merge (target) {
+export function merge (target) {x
     for (let i = 1, j = arguments.length; i < j; i++) {
         let source = arguments[i] || {}
         for (let prop in source) {
