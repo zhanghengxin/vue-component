@@ -75,14 +75,14 @@
     </style>
     <template>
         <b-breadcrumb separator=">">
-            <b-breadcrumbItem to="/">Home</b-breadcrumbItem>
-            <b-breadcrumbItem to="/breadcrumb">Libs</b-breadcrumbItem>
-            <b-breadcrumbItem>Breadcrumb</b-breadcrumbItem>
+            <b-breadcrumb-item to="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item to="/breadcrumb">Libs</b-breadcrumb-item>
+            <b-breadcrumb-item>Breadcrumb</b-breadcrumb-item>
         </b-breadcrumb>
         <b-breadcrumb separator="<b class='demo-breadcrumb-separator'>\</b>">
-            <b-breadcrumbItem to="/">Home</b-breadcrumbItem>
-            <b-breadcrumbItem to="/breadcrumb">Libs</b-breadcrumbItem>
-            <b-breadcrumbItem>Breadcrumb</b-breadcrumbItem>
+            <b-breadcrumb-item to="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item to="/breadcrumb">Libs</b-breadcrumb-item>
+            <b-breadcrumb-item>Breadcrumb</b-breadcrumb-item>
         </b-breadcrumb>
     </template>
     <script>

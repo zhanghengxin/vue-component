@@ -16,8 +16,8 @@ import Message from './components/message'
 import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
 import Circle from './components/circle'
-import { Steps, Step } from './components/steps'
-import { Tabs, TabPanel } from './components/tabs'
+import Steps from './components/steps'
+import Tabs from './components/tabs'
 import { Row, Col } from './components/grid'
 import Card from './components/card'
 import Modal from './components/modal'
@@ -50,7 +50,7 @@ import Timeline from './components/timeline'
 import TimelineItem from './components/timeline-item'
 import Split from './components/split'
 import Loading from './components/loading'
-import LoadingBar from './components/loading-bar/'
+import LoadingBar from './components/loading-bar'
 import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
@@ -75,7 +75,7 @@ const components = [
     Carousel,
     CarouselItem,
     Steps,
-    Step,
+    Steps.step,
     Card,
     Row,
     Col,
@@ -96,7 +96,7 @@ const components = [
     Switch,
     Progress,
     Tabs,
-    TabPanel,
+    Tabs.panel,
     Select,
     DatePicker,
     TimePicker,
