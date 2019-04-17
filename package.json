@@ -10,8 +10,8 @@
     "unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "js-calendar": "^1.2.3",
     "babel-polyfill": "^6.26.0",
+    "js-calendar": "^1.2.3",
     "markdown-it": "^8.4.2",
     "markdown-it-container": "^2.0.0",
     "v-click-outside-x": "^4.0.2",

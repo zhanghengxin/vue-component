@@ -1,43 +1,49 @@
 $css-prefix-progress: $css-prefix+'progress';
 .#{$css-prefix-progress}-box {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .#{$css-prefix-progress}-left {
-  background-color: rgb(238, 233, 233);
-  display: flex;
-  align-items: flex-end;
+    background-color: rgb(238, 233, 233);
+    display: flex;
+    align-items: flex-end;
 }
 
 .#{$css-prefix-progress}-right {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  padding-left: 6px
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 6px;
+    &-success{
+        color: green;
+    }
+    &-exception{
+        color: red;
+    }
 }
 
 .#{$css-prefix-progress}-statusPic {
-  width: 15px;
-  height: 15px;
+    width: 15px;
+    height: 15px;
 }
 
 .#{$css-prefix-progress}-progress {
-  transition: all .2s linear;
+    transition: all .2s linear;
 }
 
 .#{$css-prefix-progress}-success {
-  @include _background($Success);
+    @include _background($Success);
 
 }
 
 .#{$css-prefix-progress}-exception {
-  @include _background($Error);
+    @include _background($Error);
 }
 
 .#{$css-prefix-progress}-primary {
-  @include _background($Primary);
+    @include _background($Primary);
 }
