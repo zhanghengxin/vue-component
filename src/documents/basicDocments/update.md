@@ -1,5 +1,38 @@
 ### 更新日志
 
+### 0.4.7
+## `2019-04-18`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 Spin组件，区分 Loading 组件【标签引入、自定义内容】
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 Form表单的验证 input、select error样式添加
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 Tag 组件 支持 name 属性
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 Icon 组件 loading 图标
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Select没有下拉框数据时展示没有数据时的提示
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Card修改border属性为bordered，测试用例修改
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Switch 的 value、trueValue、falseValue 新增支持 String、Number 等数据格式
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Progress 图标引入由图片改成icon
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Dropdown默认展开位置placement 属性为 bottom
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.4.6
 ## `2019-04-16`
 <br>
