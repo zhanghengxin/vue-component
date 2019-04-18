@@ -3,6 +3,6 @@
  *
  */
 
-import Step from '../step/Step.vue'
+import Step from '../steps/Step.vue'
 
 export default Step
