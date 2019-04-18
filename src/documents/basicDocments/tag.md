@@ -150,10 +150,11 @@
 | color     | 圆点颜色   | string    |   `blue`、`green`  、`orange` 、`red` |       |
 | closeable     | 是否可以关闭   | boolean    |    |     false  |
 | type     | 标签带圆点   | string    |  `dots`  |       |
+| name     |  当前标签的名称，使用 v-for，并支持关闭时，会比较有用	   | string、number    |    |       |
 
 
 ### events 
 | 事件名	      | 说明	    | 返回值 |
 |---------- |-------- |---------- |
-| on-close     | 关闭时触发   |event
-| on-click | 点击标签触发 | event
+| on-close     | 关闭时触发   |event , name
+| on-click | 点击标签触发 | event , name

@@ -14,7 +14,7 @@
 
 使用`span` 属性计算每个`col`组件的尺寸。
 <div class="example">
-    <div class="example-box">
+    <div class="example-box grid-example">
         <b-row>
             <b-col span=6>col-6</b-col>
             <b-col span=6>col-6</b-col>
@@ -60,7 +60,7 @@
 
 使用`interval` 属性添加到`row`组件上，给子组件`col`添加间距。
 <div class="example">
-    <div class="example-box">
+    <div class="example-box grid-example">
         <div class="example-box-row-interval">
             <b-row interval= 20 >
                 <b-col span="6">
@@ -120,7 +120,7 @@
 ### 栅格排序
 可以通过设置 `forward` 和 `back`属性在`col`组件上设置栅格顺序。
 <div class="example">
-    <div class="example-box">
+    <div class="example-box grid-example">
         <b-row>
             <b-col span="11" forward=13>col-11 | push-13</b-col>
             <b-col span="13" back=11>col-13 | pull-11</b-col>
@@ -142,7 +142,7 @@
 ### 左右偏移
 可以通过设置 `offset`在`col`组件上设置栅格左右偏移距离。
 <div class="example">
-    <div class="example-box">
+    <div class="example-box grid-example">
         <b-row>
             <b-col span="10" offset="4">col-10 | offset-4</b-col>
             <b-col span="6" offset="4">col-6 | pull-4</b-col>
@@ -165,7 +165,7 @@
 可以通过设置 `order`在`col`组件上设置栅格顺序。
 `暂不支持 ie9`
 <div class="example">
-    <div class="example-box">
+    <div class="example-box grid-example">
         <p>子元素向左排列</p>
         <b-row type="flex" justify="start">
             <b-col span="4">col-4</b-col>
@@ -250,7 +250,7 @@
 可以通过设置 `order`在`col`组件上设置栅格顺序。
 `暂不支持 ie9`
 <div class="example">
-    <div class="example-box">
+    <div class="example-box grid-example">
           <p>顶部对齐</p>
           <b-row type="flex" justify="center" align="top">
               <b-col span="6"><p style="height: 80px">col-4</p></b-col>
@@ -308,7 +308,7 @@
 可以通过设置 `order`在`col`组件上设置栅格顺序。
 `暂不支持 ie9`
 <div class="example">
-    <div class="example-box">
+    <div class="example-box grid-example">
        <b-row type="flex">
            <b-col span="6" order="4">1 | order-4</b-col>
            <b-col span="6" order="3">2 | order-3</b-col>
@@ -335,7 +335,7 @@
 ### 响应式布局
 参考 [Bootstrap](https://v4.bootcss.com/docs/4.0/layout/overview/) 的响应式设计，五个响应尺寸：xs sm md lg xl。<br>可以调整浏览器尺寸来查看效果。
 <div class="example">
-    <div class="example-box">
+    <div class="example-box grid-example">
         <b-row>
            <b-col :xs="1" :sm="4" :md="6" :lg="8" :xl='3'>b-col</b-col>
            <b-col :xs="1" :sm="4" :md="12" :lg="8" :xl='3'>b-col</b-col>

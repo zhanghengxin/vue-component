@@ -55,6 +55,7 @@ import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
 import Poptip from './components/poptip'
+import Spin from './components/spin'
 import Badge from './components/badge'
 
 const components = [
@@ -113,6 +114,7 @@ const components = [
     AnchorLink,
     Poptip,
     Affix,
+    Spin,
     Badge
 ]
 
@@ -122,6 +124,7 @@ const install = function (Vue) {
     Vue.prototype.$Message = Message
     Vue.prototype.$Modal = Modal
     Vue.prototype.$Notice = Notice
+    Vue.prototype.$Spin = Spin
     Vue.use(Loading.directive)
     Vue.prototype.$Loading = Loading.service
     Vue.prototype.$LoadingBar = LoadingBar

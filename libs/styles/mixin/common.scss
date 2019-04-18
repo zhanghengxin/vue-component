@@ -1,74 +1,78 @@
 @mixin _clearfix {
-  &:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-  }
+    &:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
 }
 
 @mixin _background($color) {
-  background-color: $color;
+    background-color: $color;
 
-  [data-theme="theme1"] & {
-    background-color: darken($color, 10%);
-  }
+    [data-theme="theme1"] & {
+        background-color: darken($color, 10%);
+    }
 }
 
 @mixin _background_opacity($color, $num) {
-  background-color: transparentize($color,$num);
+    background-color: transparentize($color, $num);
 
-  [data-theme="theme1"] & {
-    background-color: darken(transparentize($color,$num), 10%);
-  }
+    [data-theme="theme1"] & {
+        background-color: darken(transparentize($color, $num), 10%);
+    }
 }
 
-
 @mixin _color($color) {
-  color: $color;
+    color: $color;
 
-  [data-theme="theme1"] & {
-    color: darken($color, 10%);
-  }
+    [data-theme="theme1"] & {
+        color: darken($color, 10%);
+    }
+}
+
+@mixin _square($size) {
+    height: $size;
+    width: $size;
 }
 
 @mixin _color_important($color) {
-  color: $color !important;
+    color: $color !important;
 
-  [data-theme="theme1"] & {
-    color: darken($color, 10%) !important;
-  }
+    [data-theme="theme1"] & {
+        color: darken($color, 10%) !important;
+    }
 }
 
 @mixin _borderColor($color) {
-  border-color: $color;
+    border-color: $color;
 
-  [data-theme="theme1"] & {
-    border-color: darken($color, 10%);
-  }
+    [data-theme="theme1"] & {
+        border-color: darken($color, 10%);
+    }
 }
 
 @mixin placeholder($color) {
 
-  // Firefox
-  &::-moz-placeholder {
-    color: $color;
-    opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
-  }
+    // Firefox
+    &::-moz-placeholder {
+        color: $color;
+        opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+    }
 
-  // Internet Explorer 10+
-  &:-ms-input-placeholder {
-    color: $color;
-  }
+    // Internet Explorer 10+
+    &:-ms-input-placeholder {
+        color: $color;
+    }
 
-  // Safari and Chrome
-  &::-webkit-input-placeholder {
-    color: $color;
-  }
+    // Safari and Chrome
+    &::-webkit-input-placeholder {
+        color: $color;
+    }
 
-  &::-ms-clear,
-  &::-ms-reveal {
-    display: none;
-  }
+    &::-ms-clear,
+    &::-ms-reveal {
+        display: none;
+    }
 }

@@ -89,8 +89,6 @@ margin: 0 auto;
   line-height: 100px;
   margin: 10px 0;
   color:#333;
-  -webkit-transition: font-size 0.25s ease-out 0s;
-  -moz-transition: font-size 0.25s ease-out 0s;
   transition: font-size 0.25s ease-out 0s;
 
 }
