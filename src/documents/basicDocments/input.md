@@ -85,9 +85,9 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value1" size="large" @on-change='changemal' placeholder="large" ></b-input>
-            <b-input v-model="value2" size="default" placeholder="default" ></b-input>
-            <b-input v-model="value3" size="small" placeholder="small" ></b-input>
+            <b-input v-model="value1" size="large" @on-change='changemal' :width='200' placeholder="large" ></b-input>
+            <b-input v-model="value2" size="default" :width='200' placeholder="default" ></b-input>
+            <b-input v-model="value3" size="small" :width='200' placeholder="small" ></b-input>
         </div>
     </div>
 </div>
@@ -96,9 +96,9 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```html
 
     <template>
-        <b-input v-model="value1" size="large" placeholder="large" ></b-input>
-        <b-input v-model="value2" size="default" placeholder="default" ></b-input>
-        <b-input v-model="value3" size="small" placeholder="small" ></b-input>
+        <b-input v-model="value1" size="large" @on-change='changemal' :width='200' placeholder="large"  ></b-input>
+        <b-input v-model="value2" size="default" :width='200' placeholder="default" ></b-input>
+        <b-input v-model="value3" size="small" :width='200' placeholder="small" ></b-input>
     </template>
     <script>
         export default {
@@ -119,7 +119,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value4" disabled></b-input>
+            <b-input v-model="value4" :width='200' disabled></b-input>
         </div>
     </div>
 </div>
@@ -128,7 +128,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```html
 
     <template>
-        <b-input v-model="value4" disabled></b-input>
+        <b-input v-model="value4"  :width='200' disabled></b-input>
     </template>
     <script>
         export default {
@@ -147,7 +147,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value5" clearable></b-input>
+            <b-input v-model="value5"  :width='200' clearable></b-input>
         </div>
     </div>
 </div>
@@ -156,7 +156,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```html
 
     <template>
-        <b-input v-model="value5" clearable></b-input>
+        <b-input v-model="value5"  :width='200' clearable></b-input>
     </template>
     <script>
         export default {
@@ -175,7 +175,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value5" show-password></b-input>
+            <b-input v-model="value5"  :width='200' show-password></b-input>
         </div>
     </div>
 </div>
@@ -184,7 +184,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```html
 
     <template>
-        <b-input v-model="value5" show-password></b-input>
+        <b-input v-model="value5"  :width='200' show-password></b-input>
     </template>
     <script>
         export default {
@@ -203,8 +203,8 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value6" :prefix='icon' ></b-input>
-            <b-input v-model="value7" :suffix='icon' ></b-input>
+            <b-input v-model="value6"  :width='200' :prefix='icon' ></b-input>
+            <b-input v-model="value7"  :width='200' :suffix='icon' ></b-input>
         </div>
     </div>
 </div>
@@ -213,8 +213,8 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```html
 
     <template>
-        <b-input v-model="value6" :prefix='icon' ></b-input>
-        <b-input v-model="value7" :suffix='icon' ></b-input>
+        <b-input v-model="value6"  :width='200' :prefix='icon' ></b-input>
+        <b-input v-model="value7"  :width='200' :suffix='icon' ></b-input>
     </template>
     <script>
         export default {
@@ -307,9 +307,9 @@ fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体�
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value8" type="textarea" ></b-input>
-            <b-input v-model="value9" type="textarea" :rows="4" ></b-input>
-            <b-input v-model="value10" type="textarea" :rows="4" disabled></b-input>
+            <b-input v-model="value8" :width='200' type="textarea" ></b-input>
+            <b-input v-model="value9" :width='200' type="textarea" :rows="4" ></b-input>
+            <b-input v-model="value10" :width='200' type="textarea" :rows="4" disabled></b-input>
         </div>
     </div>
 </div>
@@ -318,9 +318,9 @@ fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体�
 ```html
 
     <template>
-        <b-input v-model="value8" type="textarea" ></b-input>
-        <b-input v-model="value9" type="textarea" :rows="4" ></b-input>
-        <b-input v-model="value10" type="textarea" :rows="4" disabled></b-input>
+        <b-input v-model="value8" :width='200' type="textarea" ></b-input>
+        <b-input v-model="value9" :width='200' type="textarea" :rows="4" ></b-input>
+        <b-input v-model="value10" :width='200' type="textarea" :rows="4" disabled></b-input>
     </template>
     <script>
         export default {
@@ -341,8 +341,8 @@ fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体�
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value11"  type="textarea" error :autosize='autosize'></b-input>
-            <b-input v-model="value12"  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
+            <b-input v-model="value11" :width='200'  type="textarea" error :autosize='autosize'></b-input>
+            <b-input v-model="value12" :width='200'  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
         </div>
     </div>
 </div>
@@ -351,8 +351,8 @@ fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体�
 ```html
 
     <template>
-        <b-input v-model="value11"  type="textarea" error :autosize='autosize'></b-input>
-        <b-input v-model="value12"  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
+        <b-input v-model="value11" :width='200'  type="textarea" error :autosize='autosize'></b-input>
+        <b-input v-model="value12" :width='200'  type="textarea" :autosize="{minRows: 2,maxRows: 5}"></b-input>
     </template>
     <script>
         export default {

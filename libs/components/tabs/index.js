@@ -1,4 +1,5 @@
 import Tabs from './Tabs.vue'
 import TabPanel from './TabPanel.vue'
 
-export {Tabs, TabPanel}
+Tabs.panel = TabPanel
+export default Tabs

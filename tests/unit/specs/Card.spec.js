@@ -52,9 +52,9 @@ describe('Card', () => {
         expect(vm.find(`.${bCard}-extra`).text()).toBe('今晚打老虎，你来不来')
     })
 
-    it('border', () => {
+    it('bordered', () => {
         vm = createTest(Card, {
-            border: true,
+            bordered: true,
             shadow: false
         })
         expect(vm.$el.classList).toContain(`${bCard}-border`)

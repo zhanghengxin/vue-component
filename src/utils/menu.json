@@ -270,9 +270,19 @@
           "name": "loading"
         },
         {
+          "title": "Spin 加载中",
+          "path": "/spin",
+          "name": "spin"
+        },
+        {
           "title": "Anchor 锚点",
           "path": "/anchor",
           "name": "anchor"
+        },
+        {
+          "title": "Badge 徽标",
+          "path": "/badge",
+          "name": "badge"
         }
       ]
     }

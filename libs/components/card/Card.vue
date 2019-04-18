@@ -45,7 +45,7 @@ export default {
             type: Number,
             default: 16
         },
-        border: {
+        bordered: {
             type: Boolean,
             default: true
         },
@@ -63,7 +63,7 @@ export default {
             return [
                 `${prefixCls}-wrapper`,
                 {
-                    [`${prefixCls}-border`]: this.border && !this.shadow,
+                    [`${prefixCls}-border`]: this.bordered && !this.shadow,
                     [`${prefixCls}-dis-hover`]: this.disHover,
                     [`${prefixCls}-shadow`]: this.shadow
                 }

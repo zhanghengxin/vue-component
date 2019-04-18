@@ -8,80 +8,46 @@
         @mouseenter="mouseenterHandle"
         @mouseleave="mouseleaveHandle">
         <template v-if="type !== 'textarea'">
-            <div
-                v-if="prefix || $slots.prefix"
-                :class='[
-                prefixCls+`-icon`,
-                prefixCls+`-icon-prefix`]'>
+            <div v-if="prefix || $slots.prefix" :class='[prefixCls+`-icon`,prefixCls+`-icon-prefix`]'>
                 <slot name='prefix'>
-                    <Icon
-                        size
-                        :type="prefix+''"
-                        @on-click="handleIconClick">
-                    </Icon>
+                    <Icon size :type="prefix+''" @on-click="handleIconClick"></Icon>
                 </slot>
             </div>
             <transition name='fade'>
-                <div
-                    v-if="suffix || $slots.suffix || clearable || showPassword"
-                    v-show='showSuffix'
-                    :class='[
-                    prefixCls+`-icon`,
-                    prefixCls+`-icon-suffix`]'>
-                    <Icon
-                        v-if="clearable && currentValue"
-                        size
-                        type="shibai-mian"
-                        :class="[prefixCls+`-icon-clear`]"
-                        @on-click="handleClear">
-                    </Icon>
-                    <Icon
-                        v-if="showPassword && currentValue"
-                        size
-                        type="suoding-dongjie"
-                        @on-click="handleShowPassword">
-                    </Icon>
+                <div v-if="suffix || $slots.suffix || clearable || showPassword"
+                    v-show='showSuffix' :class='[prefixCls+`-icon`,prefixCls+`-icon-suffix`]'>
+                    <Icon size v-if="clearable && currentValue" type="shibai-mian" :class="[prefixCls+`-icon-clear`]" @on-click="handleClear"></Icon>
+                    <Icon size v-if="showPassword && currentValue" type="suoding-dongjie" @on-click="handleShowPassword"></Icon>
                     <slot name='suffix' v-if='suffix || $slots.suffix'>
-                        <Icon
-                            size
-                            :type="suffix+''"
-                            :class="[prefixCls+`-noclear`]"
-                            @on-click="handleIconClick">
-                        </Icon>
+                        <Icon size :type="suffix+''" :class="[prefixCls+`-noclear`]" @on-click="handleIconClick"></Icon>
                     </slot>
                 </div>
             </transition>
-            <div
-                ref="label"
-                :class="labelClasses"
-                :style='labelStyles'
-                v-if="label || $slots.label">
+            <div ref="label" :class="labelClasses" :style='labelStyles' v-if="label || $slots.label">
                 <slot name="label">{{label}}</slot>
             </div>
-            <div
-                :class="[prefixCls+`-main`]"
-                :style='inputStyles'>
-            <input
-                :id="elementId"
-                :class="inputClasses"
-                :spellcheck="spellcheck"
-                ref="input"
-                :value="currentValue"
-                :name="name"
-                :placeholder="placeholder"
-                :disabled="disabled"
-                :maxlength="maxlength"
-                :minlength="minlength"
-                :readonly="readonly"
-                :autofocus="autofocus"
-                :type="currentType"
-                :autocomplete="autocomplete"
-                @change="handleChange"
-                @input="handleInput"
-                @focus="handleFocus"
-                @blur="handleBlur"
-                @keyup="handleKeyup"
-                @keydown="handleKeydown"/>
+            <div :class="[prefixCls+`-main`]" :style='inputStyles'>
+                <input
+                    :id="elementId"
+                    :class="inputClasses"
+                    :spellcheck="spellcheck"
+                    ref="input"
+                    :value="currentValue"
+                    :name="name"
+                    :placeholder="placeholder"
+                    :disabled="disabled"
+                    :maxlength="maxlength"
+                    :minlength="minlength"
+                    :readonly="readonly"
+                    :autofocus="autofocus"
+                    :type="currentType"
+                    :autocomplete="autocomplete"
+                    @change="handleChange"
+                    @input="handleInput"
+                    @focus="handleFocus"
+                    @blur="handleBlur"
+                    @keyup="handleKeyup"
+                    @keydown="handleKeydown"/>
             </div>
         </template>
         <textarea
@@ -131,15 +97,25 @@ export default {
         elementId: {
             type: String
         },
+        type: {
+            validator (value) {
+                return oneOf(value, ['text', 'textarea', 'password', 'url', 'email', 'date', 'number', 'tel'])
+            },
+            default: 'text'
+        },
         value: {
             type: [String, Number],
             default: ''
         },
-        type: {
-            validator (value) {
-                return oneOf(value, ['text', 'textarea', 'password', 'url', 'email'])
+         // 样式属性
+        size: {
+            // default: 'default',
+            validator: function (value) {
+                return ['large', 'small', 'default'].indexOf(value) !== -1
             },
-            default: 'text'
+            default () {
+                return !this.size || this.size === '' ? 'default' : this.size
+            }
         },
         placeholder: {
             type: String,
@@ -157,16 +133,6 @@ export default {
             default: 'off',
             validator (value) {
                 return oneOf(value, ['off', 'on'])
-            }
-        },
-        // 样式属性
-        size: {
-            // default: 'default',
-            validator: function (value) {
-                return ['large', 'small', 'default'].indexOf(value) !== -1
-            },
-            default () {
-                return !this.size || this.size === '' ? 'default' : this.size
             }
         },
         // textarea

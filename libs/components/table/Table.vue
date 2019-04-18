@@ -3,12 +3,16 @@
         :class="wrapCls" :style="styles" v-loading="loading" :loading-text="loadingText"
     >
         <div :class="tableCls">
+            <div :class="[preCls + '-title']" v-if="showSlotHeader" ref="title">
+                <slot name="header"></slot>
+            </div>
             <div v-if="showHeader" :class="[preCls + '-header']" ref="header">
                 <table-head
                     :columns="cloneColumns"
                     :column-rows="columnRows"
                     :header-style="headerStyle"
                     :pre-cls="preCls"
+                    ref="thead"
                     :data="formatData"
                     :resizeable="resizeable"
                     :dynamicable="dynamicable"
@@ -117,6 +121,10 @@
         </Modal>
         <span :class="[preCls + '-right-border']"></span>
         <span :class="[preCls + '-bottom-border']"></span>
+        <div :class="[preCls + '-footer']" v-if="showSlotFooter" ref="footer">
+            <slot name="footer"></slot>
+        </div>
+
     </div>
 </template>
 
@@ -152,6 +160,8 @@ export default {
             tableWidth: 0,
             bodyHeight: 0,
             manualChange: true,
+            showSlotHeader: true,
+            showSlotFooter: true,
             dragStartIndex: '',
             headerHeight: 0,
             dragBorderHeight: {
@@ -269,6 +279,8 @@ export default {
         this.$on('filiter-check', this.handleFilter)
         this.$on('filiter-select', this.handleFilterSelect)
         this.$on('expand-change', this.handleExpand)
+        this.showSlotHeader = this.$slots.header !== undefined
+        this.showSlotFooter = this.$slots.footer !== undefined
     },
     mounted () {
         this.handleResize()
@@ -695,7 +707,7 @@ export default {
         },
         handleMouse (options) {
             let tableWidth = this.$el.offsetWidth
-            let bodyWidth = this.$refs.body.$el.offsetWidth
+            let bodyWidth = this.$refs.body.$el.offsetWidth || this.$refs.thead.$el.offsetWidth
             let scrollWidth = this.verticalScroll ? this.scrollBarWidth : 0
             if (options.isMouseUp) {
                 let deltaX

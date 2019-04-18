@@ -6,6 +6,7 @@
 
 $css-prefix-select: $css-prefix+'select';
 $css-prefix-option: $css-prefix+'option';
+$css-prefix-form-item: $css-prefix + 'form-item';
 
 @mixin transitionAll() {
   transition: all $transition-time $ease-in-out;
@@ -255,6 +256,14 @@ $css-prefix-option: $css-prefix+'option';
   }
 }
 
+.#{$css-prefix-form-item}{
+  &-error{
+    .#{$css-prefix-select},.#{$css-prefix-select}-group-fixed {
+      @include selectMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
+    }
+  }
+}
+
 //option
 .#{$css-prefix-option} {
   margin: 0;
@@ -278,6 +287,13 @@ $css-prefix-option: $css-prefix+'option';
   &-selected:hover {
     @include _background($Info);
     color: $white;
+  }
+
+  &-tip{
+    font-weight: 400;
+    font-size: 14px !important;
+    text-align: center;
+    color: $SubContent;
   }
 
   &-selected-multiple {

@@ -6,6 +6,7 @@
 
 $css-prefix-input: $css-prefix+'input';
 $css-prefix-input-icon: $css-prefix-input+'-icon';
+$css-prefix-form-item: $css-prefix + 'form-item';
 $input-small-size:24px;
 $input-default-size:32px;
 $input-large-size:40px;
@@ -95,6 +96,7 @@ $input-large-font:14px;
   display: inline-block;
   vertical-align: middle;
   position: relative;
+  width: 100%;
 
   &-textarea {
     overflow: inherit;
@@ -112,6 +114,15 @@ $input-large-font:14px;
       }
     }
   }
+  // .#{$css-prefix-input} {
+  //   &-perpend{
+  //     display: table-cell;
+  //   }
+  //   &-append{
+  //     display: table-cell;
+  //   }
+  // }
+
 
   @include inputSize(small, $input-small-size, 1px 7px, $input-small-font);
   @include inputSize(default, $input-default-size, 4px 7px, $input-default-font);
@@ -223,6 +234,7 @@ $input-large-font:14px;
 }
 
 .#{$css-prefix-input}-group {
+  width: auto;
   .#{$css-prefix-input}-main {
     display: table-cell;
   }
@@ -263,5 +275,13 @@ $input-large-font:14px;
     @include inputSize(small, $input-small-size - 2, 1px 7px, $input-small-font);
     @include inputSize(default, $input-default-size - 2, 4px 7px, $input-default-font);
     @include inputSize(large, $input-large-size - 2, 7px 7px, $input-large-font);
+  }
+}
+
+.#{$css-prefix-form-item}{
+  &-error{
+    .#{$css-prefix-input},.#{$css-prefix-input}-group-fixed {
+      @include inputMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
+    }
   }
 }

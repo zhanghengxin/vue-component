@@ -7,7 +7,7 @@
 
 <div class="example">
     <div class="example-box">
-        <div style='margin-bottom: 10px;'>
+        <div>
             <b-button
                 @on-click="handleClick">
                 信息
@@ -89,7 +89,7 @@
 
 <div class="example">
     <div class="example-box">
-        <div style='margin-bottom: 10px;'>
+        <div >
             <b-button
                 @on-click="handleClick('info')">
                 信息
@@ -175,7 +175,7 @@
 
 <div class="example">
     <div class="example-box">
-        <div style='margin-bottom: 10px;'>
+        <div >
             <b-button
                 @on-click="handleClickDruation">
                 信息
@@ -218,7 +218,7 @@
 
 <div class="example">
     <div class="example-box">
-        <div style='margin-bottom: 10px'>
+        <div>
             <b-button
                 @on-click="handleClickShowClose">
                 信息
@@ -259,7 +259,7 @@
 
 <div class="example">
     <div class="example-box">
-        <div style='margin-bottom: 10px'>
+        <div>
             <b-button
                 @on-click="handleClickRender">
                 信息

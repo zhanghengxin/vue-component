@@ -154,7 +154,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value" width='200' :options='options5' @on-change='changeConsole'></b-select>   
+            <b-select v-model="value" width='200' :options='options3' @on-change='changeConsole'></b-select>   
             <span>{{value}}</span>
         </div>
     </div>

@@ -606,5 +606,9 @@
   {
     "name": "隐藏",
     "className": "yincang"
+  } ,
+  {
+    "name": "加载",
+    "className": "loading"
   }
 ]

@@ -16,8 +16,8 @@ import Message from './components/message'
 import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
 import Circle from './components/circle'
-import { Steps, Step } from './components/steps'
-import { Tabs, TabPanel } from './components/tabs'
+import Steps from './components/steps'
+import Tabs from './components/tabs'
 import { Row, Col } from './components/grid'
 import Card from './components/card'
 import Modal from './components/modal'
@@ -29,9 +29,9 @@ import DropdownItem from './components/dropdown-item'
 import DropdownMenu from './components/dropdown-menu'
 import Switch from './components/switch'
 import Checkbox from './components/checkbox'
-import CheckboxGroup from './components/checkboxGroup'
+import CheckboxGroup from './components/checkbox-group'
 import Radio from './components/radio'
-import RadioGroup from './components/radioGroup'
+import RadioGroup from './components/radio-group'
 import Form from './components/form'
 import Tag from './components/tag'
 import Tree from './components/tree/RootTree'
@@ -50,11 +50,13 @@ import Timeline from './components/timeline'
 import TimelineItem from './components/timeline-item'
 import Split from './components/split'
 import Loading from './components/loading'
-import LoadingBar from './components/loading-bar/'
+import LoadingBar from './components/loading-bar'
 import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
 import Poptip from './components/poptip'
+import Spin from './components/spin'
+import Badge from './components/badge'
 
 const components = [
     Input,
@@ -75,7 +77,7 @@ const components = [
     Carousel,
     CarouselItem,
     Steps,
-    Step,
+    Steps.step,
     Card,
     Row,
     Col,
@@ -96,7 +98,7 @@ const components = [
     Switch,
     Progress,
     Tabs,
-    TabPanel,
+    Tabs.panel,
     Select,
     DatePicker,
     TimePicker,
@@ -111,7 +113,9 @@ const components = [
     Anchor,
     AnchorLink,
     Poptip,
-    Affix
+    Affix,
+    Spin,
+    Badge
 ]
 
 const install = function (Vue) {
@@ -120,6 +124,7 @@ const install = function (Vue) {
     Vue.prototype.$Message = Message
     Vue.prototype.$Modal = Modal
     Vue.prototype.$Notice = Notice
+    Vue.prototype.$Spin = Spin
     Vue.use(Loading.directive)
     Vue.prototype.$Loading = Loading.service
     Vue.prototype.$LoadingBar = LoadingBar

@@ -35,7 +35,6 @@
 </template>
 <script>
 import Button from '../button'
-import BIcon from '../icon'
 import TransferDom from './directive/transfer-dom'
 import { on, off } from '../../utils/dom'
 import Scrollbar from './mixins/scrollbar'
@@ -47,7 +46,7 @@ const prefixCls = prefix + 'modal'
 export default {
     name: prefixCls,
     mixins: [Scrollbar],
-    components: {Button, BIcon},
+    components: {Button},
     directives: {TransferDom},
     props: {
         value: {

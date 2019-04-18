@@ -15,7 +15,7 @@
             notFoundText='没有相关内容'
             nameKey='title'
             codeKey='path'
-            >
+        >
         </b-select>
         <b-button
             class="color-change"
@@ -28,6 +28,7 @@
 
 <script>
 import menuList from '../utils/menu.json'
+
 export default {
     data () {
         return {
@@ -58,7 +59,13 @@ export default {
             return (item.label + item.value).indexOf(query) > -1
         },
         changePath (val) {
-            this.$router.push(val)
+            document.documentElement.scrollTop = 0
+            if (val) {
+                this.$router.push(val)
+            }
+            this.$nextTick(_ => {
+                this.value = ''
+            })
         },
         optionsInit (f, options) {
             f.map(item => {
@@ -77,15 +84,20 @@ export default {
     .header {
         width: 100%;
         height: 70px;
-        .b-select-main{
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 1000;
+        .b-select-main {
             border: 0;
         }
-        .b-select-focused{
+        .b-select-focused {
             box-shadow: none !important;
         }
         .icon {
             display: none !important;
         }
+        background: white;
     }
 
     .header .logo {
