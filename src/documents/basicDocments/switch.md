@@ -143,12 +143,13 @@ export default {
 ### Props
 | 参数 | 说明 | 类型 | 可选值 |默认值 |
 | ---- | ---- | ---- | ---- | ---- |
-| value | 指定当前选中的状态   | Boolean  | --- |false |
+| value | 指定当前选中的状态   | Boolean、Number、String  | --- |false |
 | size | 开关的尺寸 | string | `small`、`default`、`large` | default |
 | disabled | 禁用开关| Boolean| --- | false |
-| true-value   | 开关选中的值 | Boolean| ----   | true   |
-| false-value   | 开关不选中的值 | Boolean| ----   | false   |
+| true-value   | 开关选中的值 | Boolean、Number、String| ----   | true   |
+| false-value   | 开关不选中的值 | Boolean、Number、String| ----   | false   |
 | loading | 加载中的开关 | Boolean | | false |
+
 ### Slots
 | name | 说明 |
 | ---- | ---- |

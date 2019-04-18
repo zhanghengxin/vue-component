@@ -224,14 +224,12 @@
 </div>
 
 ### props
-
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | ---- | ---- | ---- | ---- | ---- |
 | size | 可选择的尺寸 | String  | `large`,`small`或者不填 |  |
 | fix | 是否固定，需要父级有relative或absolute | Boolean | `false`,`true` | false|
 
 ### slot
-
 | 参数 | 说明 |
 | ---- | ---- |
 | 无 | 自定义 Spin 的内容，设置slot后，默认的样式不生效 |

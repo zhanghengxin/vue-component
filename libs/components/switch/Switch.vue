@@ -20,7 +20,7 @@ const prefixCls = `${prefix}switch`
 
 export default {
     name: prefixCls,
-    mixins: [ Emitter ],
+    mixins: [Emitter],
     data () {
         return {
             currentValue: this.value
@@ -28,7 +28,7 @@ export default {
     },
     props: {
         value: {
-            type: Boolean,
+            type: [String, Number, Boolean],
             default: false
         },
         disabled: {
@@ -36,11 +36,11 @@ export default {
             default: false
         },
         trueValue: {
-            type: Boolean,
+            type: [String, Number, Boolean],
             default: true
         },
         falseValue: {
-            type: Boolean,
+            type: [String, Number, Boolean],
             default: false
         },
         size: {
