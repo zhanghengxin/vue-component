@@ -14,7 +14,7 @@
                             h('b-icon', {
                                 'class': 'spin-icon-loading',
                                 props: {
-                                    type: 'chushihua',
+                                    type: 'loading',
                                     size: 18
                                 }
                             })
@@ -118,8 +118,8 @@
                 </b-col>
                 <b-col class="demo-spin-col" span="12">
                     <b-spin fix>
-                        <b-icon type="chushihua" size=18 class="spin-icon-loading"></b-icon>
-                        <div>Loding...</div>
+                        <b-icon type="loading" size=18 class="spin-icon-loading"></b-icon>
+                        <div>Loding</div>
                     </b-spin>
                 </b-col>
             </b-row>
@@ -131,11 +131,11 @@
     <div>
        <b-row>
           <b-col class="demo-spin-col" span="12">
-              <b-spin fix>加载中...</b-spin>
+              <b-spin fix>Loding...</b-spin>
           </b-col>
           <b-col class="demo-spin-col" span="12">
               <b-spin fix>
-                  <b-icon type="chushihua" size=18 class="spin-icon-loading"></b-icon>
+                  <b-icon type="loading" size=18 class="spin-icon-loading"></b-icon>
                   <div>Loading</div>
               </b-spin>
           </b-col>
@@ -195,7 +195,7 @@
                                 h('b-icon', {
                                     'class': 'spin-icon-loading',
                                     props: {
-                                        type: 'chushihua',
+                                        type: 'loading',
                                         size: 18
                                     }
                                 })
