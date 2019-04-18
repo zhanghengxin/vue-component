@@ -119,11 +119,7 @@
                 let statusList = Common.statusList
                 switch (true) {
                     case +current === index :
-                        if (status) {
-                            seg[childrenStatus] = status
-                        } else {
-                            seg[childrenStatus] = statusList[1]
-                        }
+                        seg[childrenStatus] = statusList[1] || status
                         break
                     case +current > index:
                         seg[childrenStatus] = statusList[2]
