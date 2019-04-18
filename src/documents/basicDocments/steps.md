@@ -12,6 +12,9 @@
 
 <div class="example-box">
     <script>
+    //| lineType     | 线条类型   | String    |  ```line```、 ```zonal```(带状的)   |     ```line```  |
+     // | shapeType     | 布局的形状   | String    |  ```line```、 ```circle``` 、 ```curve```（弯曲的）  |     ```line```  |
+     // | angle     | 距上一个节点的角度   | Number    |    |   0  |
          export default {
              methods: {
                  handleClick() {
@@ -384,8 +387,6 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | size     | 尺寸   | String  |  ```normal```、```small```         |    ```normal```   |
-| lineType     | 线条类型   | String    |  ```line```、 ```zonal```(带状的)   |     ```line```  |
-| shapeType     | 布局的形状   | String    |  ```line```、 ```circle``` 、 ```curve```（弯曲的）  |     ```line```  |
 | current     | 当前步骤，从 0 开始计数   | Number    |  0～n  |     0  |
 | length     | steps组件的总长度   | Number    |    |     |
 | status     | 当前步骤的状态   | String    |  可选值为```wait```、```process```、```finish```、```error```、```single```[孤立值]  |   ```process```  |
@@ -398,7 +399,6 @@
 | title     | 标题   | String    |    |   -  |
 | content     | 详细介绍   | String    |    |   -  |
 | icon     | 图标   | String    |    |   -  |
-| angle     | 距上一个节点的角度   | Number    |    |   0  |
 | value     | 当前节点的value值   | String    |    |   -  |
 
 
