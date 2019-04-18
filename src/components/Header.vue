@@ -60,7 +60,12 @@ export default {
         },
         changePath (val) {
             document.documentElement.scrollTop = 0
-            this.$router.push(val)
+            if (val) {
+                this.$router.push(val)
+            }
+            this.$nextTick(_ => {
+                this.value = ''
+            })
         },
         optionsInit (f, options) {
             f.map(item => {
