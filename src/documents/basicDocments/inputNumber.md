@@ -203,7 +203,7 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ### label属性的两种样式
 通过设置```label```属性 设置带文字描述的input组合组件 <br/>
 label文字大小可根据input的size变化<br/>
-通过设置```labelWidth```属性可设置label文字所占的宽度 labelWidth默认36px<br/>
+通过设置```labelWidth```属性可设置label文字所占的宽度 labelWidth默认自适应<br/>
 <div class="example">
     <div class="example-box">
         <div>
@@ -241,7 +241,7 @@ label文字大小可根据input的size变化<br/>
 :::
 
 <br/>
-通过设置fixed为```true``` 属性可设置带label文字描述的样式 label文字与input的宽度根据自动适应 整体宽度默认280px
+通过设置fixed为```true``` 属性可设置带label文字描述的样式 label文字与input的宽度根据自动适应 整体宽度默认100%
 <br/>
 <br/>
 <div class="example">
@@ -295,7 +295,7 @@ label文字大小可根据input的size变化<br/>
 | step |  每次改变的步伐，可以是小数   | Number  | - |  1  |
 | icon     | icon的名称class   | String  |  详见icon组件 |   -  |
 | label     | input前的说明文字   | String  |  - |   -  |
-| labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   36  |
+| labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   —  |
 | fixed     | input的搭配文字的两种样式类型   | Boolean  |  `true`、`false` |   false  |
 
 ### events

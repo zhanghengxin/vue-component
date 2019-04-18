@@ -78,7 +78,7 @@
 
 <div class='example' style='background: #ccc;'>
     <div class='example-box'>
-        <b-card title='我是卡片' icon='yonghuzhongxin' :border='false'>
+        <b-card title='我是卡片' icon='yonghuzhongxin' :bordered='false'>
             <div>哈哈哈，我是 Body!</div>
         </b-card>
     </div>
@@ -86,7 +86,7 @@
 ::: code
 
 ```html
-    <b-card title='我是卡片' icon='yonghuzhongxin' :border='false'>
+    <b-card title='我是卡片' icon='yonghuzhongxin' :bordered='false'>
         <div>哈哈哈，我是 Body!</div>
     </b-card>
 ```
@@ -140,7 +140,7 @@
 | ---- | ---- | ---- | ---- | ---- |
 | title | 标题 | string  |  |  |
 | icon | 标题前的图标, 参考 icon 图标 | string |  |
-| border | 是否显示border | boolean | `true`、`false` | true |
+| bordered | 是否显示border | boolean | `true`、`false` | true |
 | shadow | 卡片阴影 | boolean | `true`、`false` | false |
 | disHover | 禁用鼠标悬停显示阴影 | boolean | `true`、`false` | false |
 

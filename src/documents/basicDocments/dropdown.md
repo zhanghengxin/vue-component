@@ -285,7 +285,7 @@ export default {
 
 | 参数    |  说明  | 类型   | 可选值 | 默认值     |
 | -----  | -----  | ---   | --- | ---     |
-| placement    | 菜单弹出位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, `right`, `right-start`, `right-end`| bottom-start |
+| placement    | 菜单弹出位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, `right`, `right-start`, `right-end`| bottom |
 | trigger      | 触发下拉的方式  | string | `hover`、`click`、`contextMenu`、`custom` | hover   |
 | show      | 显示与隐藏  | Boolean | `false`、`true` | false   |
 ### Dropdown Slots

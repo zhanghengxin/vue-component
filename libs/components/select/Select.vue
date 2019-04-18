@@ -70,7 +70,7 @@
                     :placement='placement'
                 >
                     <ul v-if='notFoundData'>
-                        <li :class='[prefix+`option`]'>{{notFoundText}}</li>
+                        <li :class='[prefix+`option-tip`,]'>{{notFoundText}}</li>
                     </ul>
                     <ul v-if='(dropList.length > 0) && !loading && !group'>
                         <Option
@@ -100,7 +100,7 @@
                         </li>
                     </ul>
                     <ul v-if='loading'>
-                        <li :class='[prefix+`option`]'>{{loadingText}}</li>
+                        <li :class='[prefix+`option-tip`]'>{{loadingText}}</li>
                     </ul>
                 </Drop>
             </transition>
@@ -355,8 +355,8 @@ export default {
             return multiple ? values.map(option => option.value) : (values[0] || {}).value
         },
         notFoundData () {
-            const {filterabled, dropList, loading} = this
-            return dropList && dropList.length === 0 && filterabled && !loading
+            const {dropList, loading} = this
+            return dropList && dropList.length === 0 && !loading
         },
         tabindex () {
             return this.disabled || 0
@@ -559,6 +559,7 @@ export default {
             let {publicValue, getInitValue, getOptionData} = this
             if (val === '') {
                 this.values = []
+                this.query = ''
             } else if (JSON.stringify(val) !== JSON.stringify(publicValue)) {
                 this.$nextTick(() => {
                     this.values = getInitValue().map(getOptionData).filter(Boolean)

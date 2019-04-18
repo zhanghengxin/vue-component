@@ -54,7 +54,7 @@ export default {
             validator (value) {
                 return ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end'].indexOf(value) !== -1
             },
-            default: 'bottom-start'
+            default: 'bottom'
         },
         show: {
             type: Boolean,
