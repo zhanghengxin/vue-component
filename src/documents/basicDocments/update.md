@@ -1,5 +1,23 @@
 ### 更新日志
 
+### 0.4.8
+## `2019-04-22`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 step组件状态的判定优先级规则优化（现在由current判定状态的优先级高于在steps组件上设置的status的优先级）
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 progress 优化参数设置
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 tree 和 label-tree 分离,解决不支持默认 render的问题
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 steps 组件按需引入优化
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.4.7
 ## `2019-04-18`
 <br>
