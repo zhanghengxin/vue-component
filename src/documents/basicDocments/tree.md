@@ -374,14 +374,14 @@ Render 函数的第二个参数，包含三个字段：
 <div class="example">
     <div class="example-box">
         <div>
-            <b-tree :data='data7' :render='renderContent'></b-tree>
+            <b-tree :data='data6' :render='renderContent'></b-tree>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-         <b-tree :data='data7' :render='renderContent'></b-tree>
+         <b-tree :data='data6' :render='renderContent'></b-tree>
     </div>
     <script>
         export default {
@@ -418,7 +418,7 @@ Render 函数的第二个参数，包含三个字段：
                               }
                           ]
                       }
-                   ],
+                   ]
                 }
             },
             methods: {
@@ -428,6 +428,14 @@ Render 函数的第二个参数，包含三个字段：
                     const parent = root.find(el => el.nodeKey === parentKey).node;
                     const index = parent.children.indexOf(data);
                     parent.children.splice(index, 1);
+                },
+                append (data) {
+                    const children = data.children || [];
+                    children.push({
+                        name: '添加数据',
+                        expand: true
+                    });
+                    this.$set(data, 'children', children);
                 },
                 renderContent (h, { root, node, data }) {
                     return h('span', {
@@ -564,20 +572,20 @@ Render 函数的第二个参数，包含三个字段：
 <div class="example">
     <div class="example-box">
         <div>
-            <b-tree label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
-            <b-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
-            <b-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
-            <b-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+            <b-label-tree label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
+            <b-label-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
+            <b-label-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-label-tree>
+            <b-label-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-tree label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
-        <b-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
-        <b-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-tree>
-        <b-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-tree>
+        <b-label-tree label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
+        <b-label-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
+        <b-label-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-label-tree>
+        <b-label-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
     </div>
     <script>
         export default {
@@ -1036,6 +1044,7 @@ export default {
                 ])
             ]);
         },
+
     }
 }
 </script>

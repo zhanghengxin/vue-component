@@ -9,7 +9,7 @@
                 <slot>
                     <div v-if="percent">{{value}}%</div>
                     <div v-else>
-                        <img :class='statusPicStyle' :src='imgSrc'>
+                        <Icon :type="statusIcon"></Icon>
                     </div>
                 </slot>
             </div>
@@ -18,14 +18,17 @@
 </template>
 <script>
 import { prefix } from '../../utils/common'
+import Icon from '../icon'
 
 const prefixCls = prefix + 'progress'
 
 export default {
     name: prefixCls,
+    components: {Icon},
     data () {
         return {
-            prefixCls
+            prefixCls,
+            currentStatus: this.status
         }
     },
     props: {
@@ -55,8 +58,10 @@ export default {
             default: ' '
         }
     },
-    updated () {
-        console.log(this.$el)
+    watch: {
+        status (val) {
+            this.currentStatus = val
+        }
     },
     computed: {
         value () {
@@ -65,17 +70,20 @@ export default {
         ishowText () {
             return this.showText
         },
-        imgSrc () {
-            let src
-            if (this.status === 'Success' || this.value === 100) {
-                src = require('@/assets/image/gouM.png')
-            } else if (this.status === 'Exception') {
-                src = require('@/assets/image/cuoM.png')
+        statusIcon () {
+            let type = ''
+            switch (this.currentStatus) {
+                case 'wrong':
+                    type = 'shibai'
+                    break
+                case 'success':
+                    type = 'chenggong'
+                    break
             }
-            return src
+            return type
         },
         percent () {
-            return this.status !== 'Success' && this.status !== 'Exception' && this.value !== 100
+            return this.currentStatus !== 'success' && this.currentStatus !== 'wrong' && this.value !== 100
         },
         outbox () {
             return this.vertical ? {height: '100%', display: 'inline-block'} : {width: '100%', display: 'inline-block'}
@@ -84,7 +92,10 @@ export default {
             return `${prefixCls}-left`
         },
         rightStyle () {
-            return `${prefixCls}-right`
+            return [
+                `${prefixCls}-right`,
+                `${prefixCls}-right-${this.currentStatus}`
+            ]
         },
         progressStyle () {
             return `${prefixCls}-progress`
@@ -97,8 +108,8 @@ export default {
         },
         progress () {
             return {
-                'width': this.vertical ? this.strokeWidth + 'px' : (this.value === 100 || this.status === 'Success' ? '100%' : this.percentage + '%'),
-                'height': this.vertical ? (this.value === 100 || this.status === 'Success' ? '100%' : this.percentage + '%') : this.strokeWidth + 'px',
+                'width': this.vertical ? this.strokeWidth + 'px' : (this.value === 100 || this.currentStatus === 'success' ? '100%' : this.percentage + '%'),
+                'height': this.vertical ? (this.value === 100 || this.currentStatus === 'success' ? '100%' : this.percentage + '%') : this.strokeWidth + 'px',
                 'borderRadius': this.strokeWidth / 2 + 'px'
             }
         },
@@ -108,7 +119,7 @@ export default {
             } : {}
         },
         bgStyle () {
-            return this.status === 'Success' || this.value === 100 ? `${prefixCls}-success` : (this.status === 'Exception' ? `${prefixCls}-exception` : (this.color ? `${prefixCls}-primary` : ''))
+            return this.currentStatus === 'success' || this.value === 100 ? `${prefixCls}-success` : (this.currentStatus === 'wrong' ? `${prefixCls}-wrong` : (this.color ? `${prefixCls}-primary` : ''))
         },
         left () {
             return {

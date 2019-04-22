@@ -1,0 +1,62 @@
+// Text
+$title-color: #17233d;
+$text-color: fade(#000, 65%);
+
+//  Font size
+$font-size-small: 12px;
+$font-size-base: 14px;
+$font-size-large: 16px;
+
+// Zindex
+$zindex-before:1;
+$zindex-after:1;
+$zindex-icon-close:1;
+$zindex-menu-item:1;
+$zindex-icon:1;
+$zindex-step:3;
+$zindex-step-point:5;
+$zindex-table-border: 5;
+$zindex-spin: 8;
+$zindex-badge: 10;
+$zindex-affix: 10;
+$zindex-fixed: 20;
+$zindex-table-dynamic: 100;
+$zindex-menu: 900;
+$zindex-dropdown: 950;
+$zindex-modal: 1000;
+$zindex-modal-mask: 1000;
+$zindex-notice: 1200;
+$zindex-loadingbar: 2000;
+$zindex-loading: 2000;
+$zindex-spin-fullscreen: 2010;
+//@zindex-spin            : 8;
+//@zindex-affix           : 10;
+//@zindex-back-top        : 10;
+//@zindex-select          : 900;
+//@zindex-modal           : 1000;
+//@zindex-drawer          : 1000;
+//@zindex-message         : 1010;
+//@zindex-notification    : 1010;
+//@zindex-tooltip         : 1060;
+//@zindex-transfer        : 1060;
+//@zindex-loading-bar     : 2000;
+//@zindex-spin-fullscreen : 2010;
+// Border
+$border-radius-base: 4px;
+// $border-color-base      : hsv(0, 0, 85%);
+$border-color-split: #e8eaec;
+$border-color-base: #dcdee2; // outside
+
+// Animation
+$animation-time: .3s;
+$transition-time: .2s;
+$ease-in-out: ease-in-out;
+
+// Legend
+$legend-color: #999;
+
+// Color
+$primary-color: #1890ff;
+$success-color: #52c41a;
+$error-color: #f5222d;
+$warning-color: #faad14;

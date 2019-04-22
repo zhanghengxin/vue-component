@@ -43,6 +43,7 @@ export default {
             type: String,
             default: ''
         },
+        name: [String, Number],
         backcolor: {
             type: String,
             default: ''
@@ -65,10 +66,10 @@ export default {
     methods: {
         close (event) {
             this.show = false
-            this.$emit('on-close', event)
+            this.$emit('on-close', event, this.name)
         },
         handleClick (e) {
-            this.$emit('on-click', e)
+            this.$emit('on-click', e, this.name)
         }
     }
 }

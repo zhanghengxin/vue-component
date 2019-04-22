@@ -46,7 +46,7 @@ export default {
         return {
             show: false,
             timer: null,
-            zIndex: 80,
+            zIndex: 1800,
             closed: false,
             closeImg: '',
             onClose: null,

@@ -28,7 +28,7 @@ $Subsidiary: #808695;
         font-size: 12px;
         white-space: nowrap;
         transform-origin: -10% center;
-        z-index: 10;
+        z-index: $zindex-badge;
         box-shadow: 0 0 0 1px #fff;
 
         a, a:hover {
@@ -73,7 +73,7 @@ $Subsidiary: #808695;
         width: 8px;
         border-radius: 100%;
         background: $Error;
-        z-index: 10;
+        z-index: $zindex-badge;
         box-shadow: 0 0 0 1px #fff;
     }
 

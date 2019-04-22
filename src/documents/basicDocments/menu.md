@@ -17,58 +17,60 @@
                 trigger="click"
                 active-name="2-1"
             >
-                <b-menu-item name="1" icon="chaobaoshuiguanli">处理中心1</b-menu-item>
-                <b-submenu name="2" icon="caiji">
-                    <template slot="title">
-                        处理中心2
-                    </template>
-                    <b-menu-item name="2-1" :disabled="true">处理中心2-1</b-menu-item>
-                    <b-menu-item name="2-2">处理中心2-2</b-menu-item>
-                </b-submenu>
-                <b-submenu name="3" icon="baobiao">
-                    <template slot="title">
-                        处理中心3
-                    </template>
-                    <b-submenu name="3-1" >
+                <div>
+                    <b-menu-item name="1" icon="chaobaoshuiguanli">处理中心1</b-menu-item>
+                    <b-submenu name="2" icon="caiji">
                         <template slot="title">
-                            处理中心3-1
+                            处理中心2
                         </template>
-                        <b-menu-item name="3-1-1" >处理中心3-1-1</b-menu-item>
-                        <b-menu-item name="3-1-2" icon="caiji" >处理中心3-1-2</b-menu-item>
-                        <b-menu-item name="3-1-3" :disabled="true">处理中心3-1-3</b-menu-item>
+                        <b-menu-item name="2-1" :disabled="true">处理中心2-1</b-menu-item>
+                        <b-menu-item name="2-2">处理中心2-2</b-menu-item>
                     </b-submenu>
-                    <b-menu-item name="3-2" >处理中心3-2</b-menu-item>
-                    <b-submenu name="3-3" >
+                    <b-submenu name="3" icon="baobiao">
                         <template slot="title">
-                            处理中心3-3
+                            处理中心3
                         </template>
-                        <b-menu-item name="3-3-1" >处理中心3-3-1</b-menu-item>
-                        <b-menu-item name="3-3-2" >处理中心3-3-2</b-menu-item>
-                        <b-menu-item name="3-3-3" icon="caiji" :disabled="true">处理中心3-3-3</b-menu-item>
+                        <b-submenu name="3-1" >
+                            <template slot="title">
+                                处理中心3-1
+                            </template>
+                            <b-menu-item name="3-1-1" >处理中心3-1-1</b-menu-item>
+                            <b-menu-item name="3-1-2" icon="caiji" >处理中心3-1-2</b-menu-item>
+                            <b-menu-item name="3-1-3" :disabled="true">处理中心3-1-3</b-menu-item>
+                        </b-submenu>
+                        <b-menu-item name="3-2" >处理中心3-2</b-menu-item>
+                        <b-submenu name="3-3" >
+                            <template slot="title">
+                                处理中心3-3
+                            </template>
+                            <b-menu-item name="3-3-1" >处理中心3-3-1</b-menu-item>
+                            <b-menu-item name="3-3-2" >处理中心3-3-2</b-menu-item>
+                            <b-menu-item name="3-3-3" icon="caiji" :disabled="true">处理中心3-3-3</b-menu-item>
+                        </b-submenu>
+                        <b-menu-group title="处理中心3-4" >
+                            <b-menu-item name="3-4-1" >处理中心3-4-1</b-menu-item>
+                            <b-menu-item name="3-4-2" >处理中心3-4-2</b-menu-item>
+                        </b-menu-group>
+                        <b-menu-item name="3-5" :disabled="true" >处理中心3-5</b-menu-item>
+                        <b-menu-group title="处理中心3-6" >
+                              <b-menu-item name="3-6-1" :disabled="true">处理中心3-6-1</b-menu-item>
+                              <b-menu-item name="3-6-2" >处理中心3-6-2</b-menu-item>
+                          </b-menu-group>
                     </b-submenu>
-                    <b-menu-group title="处理中心3-4" >
-                        <b-menu-item name="3-4-1" >处理中心3-4-1</b-menu-item>
-                        <b-menu-item name="3-4-2" >处理中心3-4-2</b-menu-item>
-                    </b-menu-group>
-                    <b-menu-item name="3-5" :disabled="true" >处理中心3-5</b-menu-item>
-                    <b-menu-group title="处理中心3-6" >
-                          <b-menu-item name="3-6-1" :disabled="true">处理中心3-6-1</b-menu-item>
-                          <b-menu-item name="3-6-2" >处理中心3-6-2</b-menu-item>
+                    <b-submenu name="4" icon="baobiao" :disabled="true">
+                        <template slot="title">
+                            处理中心4
+                        </template>
+                     </b-submenu>
+                     <b-menu-group title="处理中心5" >
+                         <b-menu-item name="5-1" >处理中心5-1</b-menu-item>
+                         <b-menu-item name="5-2" >处理中心5-2</b-menu-item>
+                     </b-menu-group>
+                     <b-menu-group title="处理中心6" >
+                          <b-menu-item name="6-1" :disabled="true">处理中心6-1</b-menu-item>
+                          <b-menu-item name="6-2" >处理中心6-2</b-menu-item>
                       </b-menu-group>
-                </b-submenu>
-                <b-submenu name="4" icon="baobiao" :disabled="true">
-                    <template slot="title">
-                        处理中心4
-                    </template>
-                 </b-submenu>
-                 <b-menu-group title="处理中心5" >
-                     <b-menu-item name="5-1" >处理中心5-1</b-menu-item>
-                     <b-menu-item name="5-2" >处理中心5-2</b-menu-item>
-                 </b-menu-group>
-                 <b-menu-group title="处理中心6" >
-                      <b-menu-item name="6-1" :disabled="true">处理中心6-1</b-menu-item>
-                      <b-menu-item name="6-2" >处理中心6-2</b-menu-item>
-                  </b-menu-group>
+                </div>
             </b-menu>
         </div>
     </div>
@@ -155,29 +157,31 @@
                 trigger="hover"
                 :accordion="true"
             >
-                <b-menu-item name="1" icon="chaobaoshuiguanli" route="guide">指向项目介绍页面</b-menu-item>
-                <b-submenu name="2" icon="caiji">
-                    <template slot="title">
-                        处理中心2
-                    </template>
-                    <b-menu-item name="2-1" :disabled="true">处理中心2-1</b-menu-item>
-                    <b-menu-item name="2-2">处理中心2-2</b-menu-item>
-                </b-submenu>
-                <b-submenu name="3" icon="baobiao">
-                    <template slot="title">
-                        处理中心3
-                    </template>
-                    <b-menu-item name="3-2">处理中心3-2</b-menu-item>
-                    <b-menu-item name="3-5" :disabled="true">处理中心3-5</b-menu-item>
-                </b-submenu>
-                <b-menu-item name="4"  :disabled="true">测试disabled</b-menu-item>
-                <b-submenu name="5" icon="baobiao" :disabled="true">
-                    <template slot="title">
-                        处理中心5
-                    </template>
-                    <b-menu-item name="5-1">处理中心5-1</b-menu-item>
-                    <b-menu-item name="5-2" :disabled="true">处理中心5-2</b-menu-item>
-                </b-submenu>
+               <div>
+                   <b-menu-item name="1" icon="chaobaoshuiguanli" route="guide">指向项目介绍页面</b-menu-item>
+                   <b-submenu name="2" icon="caiji">
+                       <template slot="title">
+                           处理中心2
+                       </template>
+                       <b-menu-item name="2-1" :disabled="true">处理中心2-1</b-menu-item>
+                       <b-menu-item name="2-2">处理中心2-2</b-menu-item>
+                   </b-submenu>
+                   <b-submenu name="3" icon="baobiao">
+                       <template slot="title">
+                           处理中心3
+                       </template>
+                       <b-menu-item name="3-2">处理中心3-2</b-menu-item>
+                       <b-menu-item name="3-5" :disabled="true">处理中心3-5</b-menu-item>
+                   </b-submenu>
+                   <b-menu-item name="4"  :disabled="true">测试disabled</b-menu-item>
+                   <b-submenu name="5" icon="baobiao" :disabled="true">
+                       <template slot="title">
+                           处理中心5
+                       </template>
+                       <b-menu-item name="5-1">处理中心5-1</b-menu-item>
+                       <b-menu-item name="5-2" :disabled="true">处理中心5-2</b-menu-item>
+                   </b-submenu>
+               </div>
             </b-menu>
         </div>
     </div>
@@ -315,29 +319,31 @@
                 theme="dark"
                 :accordion="true"
             >
-                <b-menu-item name="1" icon="chaobaoshuiguanli" route="guide">指向项目介绍页面</b-menu-item>
-                <b-submenu name="2" icon="caiji">
-                    <template slot="title">
-                        处理中心2
-                    </template>
-                    <b-menu-item name="2-1" :disabled="true">处理中心2-1</b-menu-item>
-                    <b-menu-item name="2-2">处理中心2-2</b-menu-item>
-                </b-submenu>
-                <b-submenu name="3" icon="baobiao">
-                    <template slot="title">
-                        处理中心3
-                    </template>
-                    <b-menu-item name="3-2">处理中心3-2</b-menu-item>
-                    <b-menu-item name="3-5" :disabled="true">处理中心3-5</b-menu-item>
-                </b-submenu>
-                <b-menu-item name="4"  :disabled="true">测试disabled</b-menu-item>
-                <b-submenu name="5" icon="baobiao" :disabled="true">
-                    <template slot="title">
-                        处理中心5
-                    </template>
-                    <b-menu-item name="5-1">处理中心5-1</b-menu-item>
-                    <b-menu-item name="5-2" :disabled="true">处理中心5-2</b-menu-item>
-                </b-submenu>
+                <div>
+                    <b-menu-item name="1" icon="chaobaoshuiguanli" route="guide">指向项目介绍页面</b-menu-item>
+                    <b-submenu name="2" icon="caiji">
+                        <template slot="title">
+                            处理中心2
+                        </template>
+                        <b-menu-item name="2-1" :disabled="true">处理中心2-1</b-menu-item>
+                        <b-menu-item name="2-2">处理中心2-2</b-menu-item>
+                    </b-submenu>
+                    <b-submenu name="3" icon="baobiao">
+                        <template slot="title">
+                            处理中心3
+                        </template>
+                        <b-menu-item name="3-2">处理中心3-2</b-menu-item>
+                        <b-menu-item name="3-5" :disabled="true">处理中心3-5</b-menu-item>
+                    </b-submenu>
+                    <b-menu-item name="4"  :disabled="true">测试disabled</b-menu-item>
+                    <b-submenu name="5" icon="baobiao" :disabled="true">
+                        <template slot="title">
+                            处理中心5
+                        </template>
+                        <b-menu-item name="5-1">处理中心5-1</b-menu-item>
+                        <b-menu-item name="5-2" :disabled="true">处理中心5-2</b-menu-item>
+                    </b-submenu>
+                </div>
             </b-menu>
         </div>
     </div>
@@ -391,58 +397,60 @@
                 active-name="2-1"
                 theme="dark"
             >
-                <b-menu-item name="1" icon="chaobaoshuiguanli">处理中心1</b-menu-item>
-                <b-submenu name="2" icon="caiji">
-                    <template slot="title">
-                        处理中心2
-                    </template>
-                    <b-menu-item name="2-1" :disabled="true">处理中心2-1</b-menu-item>
-                    <b-menu-item name="2-2">处理中心2-2</b-menu-item>
-                </b-submenu>
-                <b-submenu name="3" icon="baobiao">
-                    <template slot="title">
-                        处理中心3
-                    </template>
-                    <b-submenu name="3-1" >
+                <div>
+                    <b-menu-item name="1" icon="chaobaoshuiguanli">处理中心1</b-menu-item>
+                    <b-submenu name="2" icon="caiji">
                         <template slot="title">
-                            处理中心3-1
+                            处理中心2
                         </template>
-                        <b-menu-item name="3-1-1" >处理中心3-1-1</b-menu-item>
-                        <b-menu-item name="3-1-2" icon="caiji" >处理中心3-1-2</b-menu-item>
-                        <b-menu-item name="3-1-3" :disabled="true">处理中心3-1-3</b-menu-item>
+                        <b-menu-item name="2-1" :disabled="true">处理中心2-1</b-menu-item>
+                        <b-menu-item name="2-2">处理中心2-2</b-menu-item>
                     </b-submenu>
-                    <b-menu-item name="3-2" >处理中心3-2</b-menu-item>
-                    <b-submenu name="3-3" >
+                    <b-submenu name="3" icon="baobiao">
                         <template slot="title">
-                            处理中心3-3
+                            处理中心3
                         </template>
-                        <b-menu-item name="3-3-1" >处理中心3-3-1</b-menu-item>
-                        <b-menu-item name="3-3-2" >处理中心3-3-2</b-menu-item>
-                        <b-menu-item name="3-3-3" icon="caiji" :disabled="true">处理中心3-3-3</b-menu-item>
+                        <b-submenu name="3-1" >
+                            <template slot="title">
+                                处理中心3-1
+                            </template>
+                            <b-menu-item name="3-1-1" >处理中心3-1-1</b-menu-item>
+                            <b-menu-item name="3-1-2" icon="caiji" >处理中心3-1-2</b-menu-item>
+                            <b-menu-item name="3-1-3" :disabled="true">处理中心3-1-3</b-menu-item>
+                        </b-submenu>
+                        <b-menu-item name="3-2" >处理中心3-2</b-menu-item>
+                        <b-submenu name="3-3" >
+                            <template slot="title">
+                                处理中心3-3
+                            </template>
+                            <b-menu-item name="3-3-1" >处理中心3-3-1</b-menu-item>
+                            <b-menu-item name="3-3-2" >处理中心3-3-2</b-menu-item>
+                            <b-menu-item name="3-3-3" icon="caiji" :disabled="true">处理中心3-3-3</b-menu-item>
+                        </b-submenu>
+                        <b-menu-group title="处理中心3-4" >
+                            <b-menu-item name="3-4-1" >处理中心3-4-1</b-menu-item>
+                            <b-menu-item name="3-4-2" >处理中心3-4-2</b-menu-item>
+                        </b-menu-group>
+                        <b-menu-item name="3-5" :disabled="true" >处理中心3-5</b-menu-item>
+                        <b-menu-group title="处理中心3-6" >
+                              <b-menu-item name="3-6-1" :disabled="true">处理中心3-6-1</b-menu-item>
+                              <b-menu-item name="3-6-2" >处理中心3-6-2</b-menu-item>
+                          </b-menu-group>
                     </b-submenu>
-                    <b-menu-group title="处理中心3-4" >
-                        <b-menu-item name="3-4-1" >处理中心3-4-1</b-menu-item>
-                        <b-menu-item name="3-4-2" >处理中心3-4-2</b-menu-item>
-                    </b-menu-group>
-                    <b-menu-item name="3-5" :disabled="true" >处理中心3-5</b-menu-item>
-                    <b-menu-group title="处理中心3-6" >
-                          <b-menu-item name="3-6-1" :disabled="true">处理中心3-6-1</b-menu-item>
-                          <b-menu-item name="3-6-2" >处理中心3-6-2</b-menu-item>
+                    <b-submenu name="4" icon="baobiao" :disabled="true">
+                        <template slot="title">
+                            处理中心4
+                        </template>
+                     </b-submenu>
+                     <b-menu-group title="处理中心5" >
+                         <b-menu-item name="5-1" >处理中心5-1</b-menu-item>
+                         <b-menu-item name="5-2" >处理中心5-2</b-menu-item>
+                     </b-menu-group>
+                     <b-menu-group title="处理中心6" >
+                          <b-menu-item name="6-1" :disabled="true">处理中心6-1</b-menu-item>
+                          <b-menu-item name="6-2" >处理中心6-2</b-menu-item>
                       </b-menu-group>
-                </b-submenu>
-                <b-submenu name="4" icon="baobiao" :disabled="true">
-                    <template slot="title">
-                        处理中心4
-                    </template>
-                 </b-submenu>
-                 <b-menu-group title="处理中心5" >
-                     <b-menu-item name="5-1" >处理中心5-1</b-menu-item>
-                     <b-menu-item name="5-2" >处理中心5-2</b-menu-item>
-                 </b-menu-group>
-                 <b-menu-group title="处理中心6" >
-                      <b-menu-item name="6-1" :disabled="true">处理中心6-1</b-menu-item>
-                      <b-menu-item name="6-2" >处理中心6-2</b-menu-item>
-                  </b-menu-group>
+                </div>
             </b-menu>
         </div>
     </div>
@@ -531,8 +539,8 @@
 ### Menu events
 | 事件名	      | 说明	    | 返回值 |
 |---------- |-------- |---------- |
-| select     | 选择菜单（MenuItem）时触发  | menuItem 的信息 |
-| open-change     | 当 展开/收起 子菜单时触发  | 当前展开的 Submenu 的 name 值数组 |
+| on-select     | 选择菜单（MenuItem）时触发  | menuItem 的信息 |
+| on-open-change     | 当 展开/收起 子菜单时触发  | 当前展开的 Submenu 的 name 值数组 |
 
 ### Menu methods
 | 方法名	      | 说明	    | 参数 |

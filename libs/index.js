@@ -34,7 +34,7 @@ import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
 import Form from './components/form'
 import Tag from './components/tag'
-import Tree from './components/tree/RootTree'
+import Tree from './components/tree'
 import Table from './components/table'
 import Progress from './components/progress'
 import Select from './components/select'
@@ -55,7 +55,9 @@ import Anchor from './components/anchor'
 import AnchorLink from './components/anchor-link'
 import Affix from './components/affix'
 import Poptip from './components/poptip'
+import Spin from './components/spin'
 import Badge from './components/badge'
+import LabelTree from './components/label-tree'
 
 const components = [
     Input,
@@ -104,6 +106,7 @@ const components = [
     Transfer,
     Menu,
     MenuItem,
+    LabelTree,
     Submenu,
     MenuGroup,
     Timeline,
@@ -113,6 +116,7 @@ const components = [
     AnchorLink,
     Poptip,
     Affix,
+    Spin,
     Badge
 ]
 
@@ -122,6 +126,7 @@ const install = function (Vue) {
     Vue.prototype.$Message = Message
     Vue.prototype.$Modal = Modal
     Vue.prototype.$Notice = Notice
+    Vue.prototype.$Spin = Spin
     Vue.use(Loading.directive)
     Vue.prototype.$Loading = Loading.service
     Vue.prototype.$LoadingBar = LoadingBar

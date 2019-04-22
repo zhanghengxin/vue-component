@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "js-calendar": "^1.2.3",
-    "babel-polyfill": "^6.26.0",
     "markdown-it": "^8.4.2",
     "markdown-it-container": "^2.0.0",
     "v-click-outside-x": "^4.0.2",
@@ -30,6 +29,7 @@
     "async-validator": "^1.10.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-polyfill": "^6.26.0",
     "babel-jest": "^23.6.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
