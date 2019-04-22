@@ -115,9 +115,10 @@
 | 参数      | 说明    | 类型       | 默认值   |
 |---------- |-------- |---------- |-------- |
 | value     | 只在单独使用时有效。可以使用 v-model 双向绑定数据   | Boolean    |    false   |
-| label     | 只在组合使用时有效。指定当前选项的 value 值，组合会自动判断是否选中   | string    |   -  |
-| label     | 只在组合使用时有效。指定当前选项的 value 值，组合会自动判断是否选中   | string    |   -  |
-| manual-change     | 是否手动控制改变 value 值   | boolean    |    |     false  |
+| label     | 只在组合使用时有效。指定当前选项的 value 值，组合会自动判断是否选中   | String    |   -  |
+| indeterminate     | 设置 indeterminate 状态，只负责样式控制  | Boolean    |   false  |
+| manual-change     | 是否手动控制改变 value 值   | Boolean    |       false  |
+| disabled     | 是否禁用当前项   | boolean    |   Boolean  |     false  |
 
 ### checkbox events
 | 事件名	      | 说明	    | 返回值 |
