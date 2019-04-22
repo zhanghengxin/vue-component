@@ -531,8 +531,8 @@
 ### Menu events
 | 事件名	      | 说明	    | 返回值 |
 |---------- |-------- |---------- |
-| select     | 选择菜单（MenuItem）时触发  | menuItem 的信息 |
-| open-change     | 当 展开/收起 子菜单时触发  | 当前展开的 Submenu 的 name 值数组 |
+| on-select     | 选择菜单（MenuItem）时触发  | menuItem 的信息 |
+| on-open-change     | 当 展开/收起 子菜单时触发  | 当前展开的 Submenu 的 name 值数组 |
 
 ### Menu methods
 | 方法名	      | 说明	    | 参数 |

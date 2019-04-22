@@ -8,6 +8,7 @@ $menu-horizontal:"#{$menu}-horizontal";
 $menu-vertical:"#{$menu}-vertical";
 $menu-dark:"#{$menu}-dark";//dark主题
 $menu-light: "#{$menu}-light";//默认light主题
+$menu-primary: "#{$menu}-primary";//默认主题,同light
 
 $menu-item: "#{$menu}-item";
 $menu-item-solt: "item-solt";
@@ -236,6 +237,138 @@ $select-dropdown: "#{$menu}-drop-list";
 }
 
 /***垂直方向的样式结束***/
+
+/***primary主题的样式start***/
+.#{$menu-primary}.#{$menu}{
+  //水平方向的样式开始
+  &-horizontal {
+    @include _background($Primary);
+    @include _color($white);
+    > .#{$menu-item-un-disabled} {
+      &-active, &:hover {
+        .#{$menu-item-solt} {
+          border-bottom: 4px solid $LightPrimary;
+        }
+      }
+    }
+    .#{$menu-submenu-un-disabled}{
+      .#{$menu-item} {
+        @include _color($Content);
+      }
+      .#{$menu-item-active},.#{$menu-item-un-disabled}:hover{
+        @include _color($Primary);
+        @include _background($Background);
+      }
+
+      .#{$menu-item-disabled}{
+        @include _color($DisContent);
+      }
+      &-active, &:hover {
+        .#{$menu-submenu}-title {
+          border-bottom: 4px solid $LightPrimary;
+        }
+      }
+    }
+  }
+  //水平方向的样式结束
+
+  &-vertical{
+    @include _background($white);
+    .#{$menu-item} {
+      @include _color($Content);
+    }
+
+    .#{$icon} {
+      @include _color($Primary);
+    }
+
+    .#{$menu-item-disabled},.#{$menu-submenu-disabled}{
+      @include _color_important($DisContent);
+      .#{$icon} {
+        @include _color_important($DisContent);
+      }
+      .#{$menu-item-dot} {
+        border-color: $DisContent !important;
+      }
+    }
+
+    .#{$menu-submenu} {
+      .#{$menu-item},.#{$menu-submenu},.#{$menu-item-group} .#{$menu-item-group-title}{
+        @include _color($Content);
+        @include _background($Background);
+      }
+
+      .#{$menu-submenu}.#{$menu-opened},.#{$menu-item-group} {
+        .#{$menu-item}:last-of-type {
+          border-bottom: $Border 1px solid;
+        }
+      }
+
+      .#{$menu-submenu},.#{$menu-item-group}{
+        .#{$menu-item}{
+          .#{$menu-item-dot} {
+            border: $SubContent 3px solid;
+          }
+          .#{$icon} {
+            @include _color($SubContent);
+          }
+        }
+      }
+    }
+
+    > .#{$menu-submenu},.#{$menu-item-group} {
+        .#{$menu-submenu}:first-of-type,
+        .#{$menu-item}:first-of-type {
+          border-top: $Border 1px solid;
+      }
+      .#{$menu-submenu},.#{$menu-item-group}{
+        .#{$menu-item} {
+          border-top: unset;
+        }
+      }
+    }
+
+    .#{$menu-item-group}{
+      .#{$menu-item-group-title}{
+        @include _color($Title);
+        @include _background($white);
+      }
+      .#{$menu-item}{
+        @include _color($Content);
+        @include _background($Background);
+      }
+    }
+
+    .#{$menu-item}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu-title} {
+      &:hover {
+        color: $Primary !important;
+        @include _background_opacity($LightPrimary,0.9);
+        .#{$menu-item-solt} {
+          .#{$menu-item-dot} {
+            @include _borderColor($Primary);
+          }
+          .#{$icon} {
+            @include _color($Primary);
+          }
+        }
+      }
+    }
+
+    .#{$menu-item}.#{$menu-item-un-disabled}.#{$menu-item}-active {
+      color: $Primary !important;
+      @include _background_opacity($LightPrimary,0.9);
+      .#{$menu-item-solt} {
+        .#{$menu-item-dot} {
+          @include _borderColor($Primary);
+        }
+        .#{$icon} {
+          @include _color($Primary);
+        }
+      }
+    }
+  }
+}
+/***primary主题的样式end***/
 
 /***light主题的样式start***/
 .#{$menu-light}.#{$menu}{
