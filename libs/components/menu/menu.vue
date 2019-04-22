@@ -17,7 +17,7 @@ export default {
         },
         theme: {
             validator (value) {
-                return oneOf(value, ['light', 'dark'])
+                return oneOf(value, ['light', 'dark', 'primary'])
             },
             default: 'light'
         },
@@ -138,7 +138,7 @@ export default {
             } else {
                 this.openMenu(name, namePath)
             }
-            this.$emit('open-change', name, namePath)
+            this.$emit('on-open-change', name, namePath)
         },
         handleItemClick (item) {
             // debugger
@@ -146,7 +146,7 @@ export default {
             const oldActiveName = this.currentActiveName
             this.currentActiveName = name
 
-            this.$emit('select', name, namePath, item)
+            this.$emit('on-select', name, namePath, item)
 
             if (this.mode === 'horizontal' || this.collapse) {
                 this.openedMenus = []
