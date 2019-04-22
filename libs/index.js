@@ -34,7 +34,7 @@ import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
 import Form from './components/form'
 import Tag from './components/tag'
-import Tree from './components/tree/RootTree'
+import Tree from './components/tree'
 import Table from './components/table'
 import Progress from './components/progress'
 import Select from './components/select'
@@ -57,6 +57,7 @@ import Affix from './components/affix'
 import Poptip from './components/poptip'
 import Spin from './components/spin'
 import Badge from './components/badge'
+import LabelTree from './components/label-tree'
 
 const components = [
     Input,
@@ -105,6 +106,7 @@ const components = [
     Transfer,
     Menu,
     MenuItem,
+    LabelTree,
     Submenu,
     MenuGroup,
     Timeline,
