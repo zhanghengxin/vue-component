@@ -29,7 +29,6 @@
                         :key="key"
                         :draggable="draggable"
                         :data="item"
-                        :render="render"
                         :show-checkbox="showCheckbox"
                         :default-opt="defaultOpt">
                     </tree-node>

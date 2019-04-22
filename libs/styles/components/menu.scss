@@ -34,7 +34,7 @@ $select-dropdown: "#{$menu}-drop-list";
   outline: none;
   list-style: none;
   position: relative;
-  z-index: 10;
+  z-index: $zindex-menu;
   background-color: $white;
   border: $Border 1px solid;
 
@@ -44,7 +44,7 @@ $select-dropdown: "#{$menu}-drop-list";
     list-style: none;
     font-size: 12px;
     position: relative;
-    z-index: 1;
+    z-index: $zindex-menu-item;
     cursor: pointer;
   }
 }
@@ -92,7 +92,7 @@ $select-dropdown: "#{$menu}-drop-list";
   //第一层
   .#{$menu-item}, .#{$menu-submenu} {
     float: left;
-    z-index: 3;
+    z-index: $zindex-menu-item;
     cursor: pointer;
     position: relative;
 
@@ -142,7 +142,7 @@ $select-dropdown: "#{$menu}-drop-list";
     padding: 10px 24px;
     position: relative;
     cursor: pointer;
-    z-index: 1;
+    z-index: $zindex-menu-item;
   }
 
   .#{$icon} {
@@ -221,7 +221,7 @@ $select-dropdown: "#{$menu}-drop-list";
     padding: 10px 24px;
     position: relative;
     cursor: pointer;
-    z-index: 1;
+    z-index: $zindex-menu-item;
   }
 
 }

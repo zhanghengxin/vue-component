@@ -58,7 +58,7 @@ $processContentColor: $Title;
         border-radius: 50%;
         text-align: center;
         vertical-align: middle;
-        z-index: 2;
+        z-index: $zindex-step;
         .#{$css-prefix-icon} {
           font-size:16px;
           position: absolute;
@@ -77,7 +77,7 @@ $processContentColor: $Title;
         display: inline-block;
         text-align: center;
         vertical-align: middle;
-        z-index: 2;
+        z-index: $zindex-step;
         .#{$css-prefix-icon} {
           font-size:16px;
           position: absolute;
@@ -90,7 +90,7 @@ $processContentColor: $Title;
         display: inline-block;
         @include _color($SubContent);
         text-align: center;
-        z-index: 2;
+        z-index: $zindex-step;
       }
     }
     //步骤条的线
@@ -147,7 +147,7 @@ $processContentColor: $Title;
         border-radius: 50%;
         text-align: center;
         display: inline-block;
-        z-index: 5;
+        z-index: $zindex-step-point;
         .#{$css-prefix-icon} {
           font-size: 16px;
           position: absolute;
@@ -166,7 +166,7 @@ $processContentColor: $Title;
         border: none;
         text-align: center;
         display: inline-block;
-        z-index: 5;
+        z-index: $zindex-step-point;
         .#{$css-prefix-icon} {
           font-size: 16px;
           position: absolute;

@@ -6,7 +6,7 @@ $css-prefix-loading-bar: $css-prefix + 'loading-bar';
     top: 0;
     left: 0;
     right: 0;
-    z-index: 20;
+    z-index: $zindex-loadingbar;
 
     &-inner {
         transition: width 0.2s linear;

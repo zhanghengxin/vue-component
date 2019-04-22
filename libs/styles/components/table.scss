@@ -42,14 +42,14 @@ $prefix-table: $css-prefix + 'table';
         height: 1px;
         left: 0;
         bottom: 0;
-        z-index: 1;
+        z-index: $zindex-before;
     }
     &:after {
         width: 1px;
         height: 100%;
         top: 0;
         right: 0;
-        z-index: 3;
+        z-index: $zindex-after;
     }
     th, td {
         min-width: 0;
@@ -123,7 +123,7 @@ $prefix-table: $css-prefix + 'table';
     &-fixed-body {
         overflow: hidden;
         position: relative;
-        z-index: 3;
+        z-index: $zindex-fixed;
     }
     &-fixed-left {
         left: 0;
@@ -176,7 +176,7 @@ $prefix-table: $css-prefix + 'table';
     }
     &-resize-border {
         position: absolute;
-        z-index: 5;
+        z-index: $zindex-fixed;
         width: 1px;
         height: 100%;
         border-left: 1px dashed $Border;
@@ -185,7 +185,7 @@ $prefix-table: $css-prefix + 'table';
     &-dynamic {
         &-column {
             position: absolute;
-            z-index: 5;
+            z-index: $zindex-table-dynamic;
             top: 0;
             background: white;
             box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 6px;
@@ -212,7 +212,7 @@ $prefix-table: $css-prefix + 'table';
             right: 0;
             font-size: 16px;
             cursor: pointer;
-            z-index: 100;
+            z-index: $zindex-table-dynamic;
         }
     }
     &-filter {
@@ -273,7 +273,7 @@ $prefix-table: $css-prefix + 'table';
         }
     }
     &-right-border, &-bottom-border {
-        z-index: 3;
+        z-index: $zindex-table-border;
         background-color: $Border;
         position: absolute;
     }
