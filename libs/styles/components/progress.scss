@@ -21,7 +21,7 @@ $css-prefix-progress: $css-prefix+'progress';
     &-success{
         color: green;
     }
-    &-exception{
+    &-wrong{
         color: red;
     }
 }
@@ -40,7 +40,7 @@ $css-prefix-progress: $css-prefix+'progress';
 
 }
 
-.#{$css-prefix-progress}-exception {
+.#{$css-prefix-progress}-wrong {
     @include _background($Error);
 }
 

@@ -23,12 +23,12 @@
 
 ### 设置状态
 Progress 组件可通过属性```status```设置成功和异常状态。
-状态选项```success``` 、```exception```
+状态选项```success``` 、```wrong```
 
 <div class="example">
     <div class="example-box">
         <div style="width:500px">
-            <b-progress :percentage='50' status="exception"></b-progress>
+            <b-progress :percentage='50' status="wrong"></b-progress>
             <b-progress :percentage='30' status="success"></b-progress>
         </div>
     </div>
@@ -36,7 +36,7 @@ Progress 组件可通过属性```status```设置成功和异常状态。
 ::: code
 ```html
     <div style="width:500px">
-        <b-progress :percentage='50' status="exception"></b-progress>
+        <b-progress :percentage='50' status="wrong"></b-progress>
         <b-progress :percentage='30' status="success"></b-progress>
     </div>
 ```
@@ -229,7 +229,7 @@ Progress 组件可通过 ```strokeWidth``` 设置线条宽度
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | percentage     | 值 （必填）  | number  |         |    0   |
-| status     | 状态   | string    |   `success` 、`exception`|     无  |
+| status     | 状态   | string    |   `success` 、`wrong`、`active`|     无  |
 | color     | 颜色   | string    |    |     #0079CC  |
 | vertical     | 是否纵向   | boolean    |    |     false  |
 | showText     | 是否显示标注   | boolean    |    |     true  |
