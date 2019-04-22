@@ -409,4 +409,6 @@ fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体�
 |-------------|---------|----------|
 | prefix    | 需要设置设置前面的icon位置的slot    | -  |
 | suffix   | 需要设置设置后面的icon位置的slot  | - |
+| prepend   | 设置前面位置的slot label的fixed样式 不与label同时设置  | - |
+| append   | 设置后面位置的slot label的fixed样式 不与label同时设置  | - |
 | label   | 前置的label文字框  | - |

@@ -43,7 +43,7 @@ $css-prefix-card: $css-prefix + 'card';
 }
 
 .#{$css-prefix-card}-border {
-    border: 1px solid inherit;
+    border: 1px solid transparent;
     @include _borderColor($Border);
 }
 
