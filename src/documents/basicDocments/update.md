@@ -1,5 +1,23 @@
 ### 更新日志
 
+### 0.4.9
+## `2019-04-22`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 Input - append prepend slot方式
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 menu合并代码，本次合并，优化了menu的css，兼容了primary主题风格，事件的名字添加on前缀
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Card的border样式bug
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Tree - render显示不正常的问题，统一全局 zIndex的顺序问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.4.8
 ## `2019-04-22`
 <br>
@@ -11,7 +29,7 @@
     优化 progress 优化参数设置
     </b-timeline-item>
     <b-timeline-item>
-    修复 tree 和 label-tree 分离,解决不支持默认 render的问题
+    修复 tree 和 label-tree 分离
     </b-timeline-item>
     <b-timeline-item>
     修复 steps 组件按需引入优化
