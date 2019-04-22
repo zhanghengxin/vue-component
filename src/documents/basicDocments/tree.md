@@ -374,14 +374,14 @@ Render 函数的第二个参数，包含三个字段：
 <div class="example">
     <div class="example-box">
         <div>
-            <b-tree :data='data7' :render='renderContent'></b-tree>
+            <b-tree :data='data6' :render='renderContent'></b-tree>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-         <b-tree :data='data7' :render='renderContent'></b-tree>
+         <b-tree :data='data6' :render='renderContent'></b-tree>
     </div>
     <script>
         export default {
@@ -418,7 +418,7 @@ Render 函数的第二个参数，包含三个字段：
                               }
                           ]
                       }
-                   ],
+                   ]
                 }
             },
             methods: {
@@ -428,6 +428,14 @@ Render 函数的第二个参数，包含三个字段：
                     const parent = root.find(el => el.nodeKey === parentKey).node;
                     const index = parent.children.indexOf(data);
                     parent.children.splice(index, 1);
+                },
+                append (data) {
+                    const children = data.children || [];
+                    children.push({
+                        name: '添加数据',
+                        expand: true
+                    });
+                    this.$set(data, 'children', children);
                 },
                 renderContent (h, { root, node, data }) {
                     return h('span', {

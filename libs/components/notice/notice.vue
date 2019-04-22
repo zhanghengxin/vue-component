@@ -62,7 +62,7 @@ export default {
     computed: {
         noticeCls () {
             return [
-                `${prefixCls}-notice`,
+                `${prefixCls}`,
                 `${this.prefixCls}-${this.type}`
             ]
         },

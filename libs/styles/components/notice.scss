@@ -1,23 +1,22 @@
 $css-prefix-notice: $css-prefix+'notice';
 
 @mixin type($type, $color) {
-  &-#{$type} {
-    border-left: solid 4px $color;
+    &-#{$type} {
+        border-left: solid 4px $color;
 
-    &-icon {
-      position: absolute;
-      left: 12px;
-      top: 12px;
-      color: $color;
+        &-icon {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            color: $color;
+        }
     }
-  }
 }
 
 .#{$css-prefix-notice} {
-  &-notice {
     position: fixed;
     width: 340px;
-    z-index: 20;
+    z-index: $zindex-notice;
     background-color: $white;
     @include _color($Content);
     align-items: center;
@@ -25,61 +24,58 @@ $css-prefix-notice: $css-prefix+'notice';
     border-radius: 4px;
     box-shadow: 0 0 6px 0 rgba(73, 80, 96, 0.20);
     transition: all .3s;
-  }
+    &-body {
+        margin-left: 56px;
 
-  &-body {
-    margin-left: 56px;
+        &-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
 
-    &-title {
-      font-size: 14px;
-      font-weight: 600;
+        &-content {
+            padding: 0;
+            font-size: 12px;
+            word-wrap: break-word;
+        }
     }
 
-    &-content {
-      padding: 0;
-      font-size: 12px;
-      word-wrap: break-word;
-    }
-  }
-  
+    &-close {
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        cursor: pointer;
 
-  &-close {
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    cursor: pointer;
-
-    &:hover {
-      opacity: .8;
-    }
-  }
-
-  @include type(normal, $Primary);
-  @include type(success, $Success);
-  @include type(warning, $Warning);
-  @include type(error, $Error);
-
-  &-fade {
-    position: absolute;
-    left: 0;
-    right: 0;
-
-    &-enter-active {
-      transition: all 1.2s ease;
+        &:hover {
+            opacity: .8;
+        }
     }
 
-    &-leave-active {
-      transition: all .1s cubic-bezier(2.0, 0.5, 0.8, 1.0);
-    }
+    @include type(normal, $Primary);
+    @include type(success, $Success);
+    @include type(warning, $Warning);
+    @include type(error, $Error);
 
-    &-enter,
-    &.slide-#{$css-prefix-notice}-fade-leave-to {
-      left: 0;
-      right: 0;
-      transform: translateX(50px);
-      opacity: 0;
+    &-fade {
+        position: absolute;
+        left: 0;
+        right: 0;
+
+        &-enter-active {
+            transition: all 1.2s ease;
+        }
+
+        &-leave-active {
+            transition: all .1s cubic-bezier(2.0, 0.5, 0.8, 1.0);
+        }
+
+        &-enter,
+        &.slide-#{$css-prefix-notice}-fade-leave-to {
+            left: 0;
+            right: 0;
+            transform: translateX(50px);
+            opacity: 0;
+        }
     }
-  }
 }
