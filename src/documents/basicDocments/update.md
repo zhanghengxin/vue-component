@@ -1,5 +1,20 @@
 ### 更新日志
 
+### 0.5.1
+## `2019-04-23`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 Tree className支持，hover 支持, getSelectedNodes 公用 API等
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Carousel 轮播图重构
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Menu的样式进行优化，避免了外界css的影响
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.5.0
 ## `2019-04-23`
 <br>

@@ -1066,6 +1066,7 @@ export default {
 | render     |  自定义渲染内容，见示例	 | 	Function    |  -  |    -    |
 | label      | 开启 label 模式，设置说明文字 	| String，Number | - |  -  |
 | fixed      | 开启 `label` 模式时生效，搭配文字的两种样式类型	| Boolean | - |   false  |
+| className      | 给 item-name 附加的 class	| String | - |   -  |
 | width | 开启 `label` 模式时生效,自定义宽度	| Number |	-   |     -   |
 | placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
 | labelWidth | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
