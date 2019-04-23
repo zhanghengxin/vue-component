@@ -1,294 +1,327 @@
-/**
-* 走马灯组件 b-carousel
-* Created by hanshuai on 2018/9/10.
-*/
-
 <template>
-    <div :class="[prefixCls]" :style="animationStyle">
-        <div
-            v-if="animation=='fade'"
-            :class="[prefixCls + '-wrapper']"
-            :style="animationStyle"
-            @mouseover="mouseOver"
-            @mouseleave="mouseLeave"
-            ref="wrapper">
-            <slot/>
-        </div>
-        <div
-            v-if="animation=='slide'"
-            :class="[prefixCls + '-wrapper']"
-            :style="[animationStyle, slideStyle]"
-            ref="wrapper">
+    <div :class="classes">
+        <button type="button" :class="arrowClasses" class="left" @click="arrowEvent(-1)">
+            <Icon type="zuo"></Icon>
+        </button>
+        <div :class="[prefixCls + '-list']">
             <div
-                :class="[prefixCls + '-scroll']"
-                :style="scrollStyle"
-                ref="scroll">
-                <slot/>
+                :class="[prefixCls + '-track', showCopyTrack ? '' : 'higher']"
+                :style="trackStyles"
+                ref="originTrack"
+            >
+                <slot></slot>
             </div>
+            <div
+                :class="[prefixCls + '-track', showCopyTrack ? 'higher' : '']"
+                :style="copyTrackStyles"
+                ref="copyTrack"
+                v-if="loop"
+            ></div>
         </div>
-        <ul
-            :class="[prefixCls + '-control']"
-            v-if="pointer">
-            <li
-                :class="{'active':index===active}"
-                v-for="(item,index) in pages"
-                :key="index"
-                @click="handleClickPointer(index)">
-            </li>
-        </ul>
-        <ul
-            :class="[prefixCls + '-direction']"
-            v-if="arrow">
-            <li
-                :class="[prefixCls + '-prev', { disable: previous }]"
-                @click="slideControl(-1)">
-            </li>
-            <li
-                :class="[prefixCls + '-next', { disable: next }]"
-                @click="slideControl(1)">
-            </li>
+        <button type="button" :class="arrowClasses" class="right" @click="arrowEvent(1)">
+            <Icon type="you"></Icon>
+        </button>
+        <ul :class="dotsClasses">
+            <template v-for="(n, index) in slides.length">
+                <li
+                    :key="index"
+                    :class="[n - 1 === currentIndex ? prefixCls + '-active' : '']"
+                    @click="dotsEvent('click', n - 1)"
+                    @mouseover="dotsEvent('hover', n - 1)"
+                >
+                    <button type="button" :class="[radiusDot ? 'radius' : '']"></button>
+                </li>
+            </template>
         </ul>
     </div>
 </template>
 <script>
-import { oneOf, prefix } from '../../utils/common.js'
-
-const prefixCls = prefix + 'carousel'
+import Icon from '../icon'
+import { getStyle } from '../../utils/assist'
+import { oneOf, prefix } from '../../utils//common'
+import { on, off } from '../../utils/dom'
+const prefixCls = `${prefix}carousel`
 
 export default {
     name: prefixCls,
-    data () {
-        return {
-            prefixCls,
-            timer: null, // 定时器
-            active: this.current,
-            previous: !this.loop, // 上下可点击，循环时就一直是false
-            next: false,
-            pages: 0, // 共有多少页
-            conWidth: '', // 组件宽度
-            moveWidth: '' // 每次移动的宽
-        }
-    },
+    components: { Icon },
     props: {
-        height: {
-            type: Number,
-            default: 360
-        },
-        // 目前支持 fade 和 slide 两种
-        animation: {
+        arrow: {
             type: String,
-            default: 'fade',
+            default: 'hover',
             validator (value) {
-                return oneOf(value, ['fade', 'slide'])
+                return oneOf(value, ['hover', 'always', 'never'])
             }
         },
-        // 停留时间，毫秒
-        interval: {
+        autoplay: {
+            type: Boolean,
+            default: false
+        },
+        autoplaySpeed: {
             type: Number,
-            default: 3000
+            default: 2000
         },
-        // 是否自动播放
-        auto: {
-            type: Boolean,
-            default: true
-        },
-        // 鼠标划过时暂停
-        hoverPause: {
-            type: Boolean,
-            default: true
-        },
-        // 循环播放
         loop: {
-            Boolean,
-            default: true
+            type: Boolean,
+            default: false
         },
-        // 当前显示第几个，默认第一个
-        current: {
+        easing: {
+            type: String,
+            default: 'ease'
+        },
+        dots: {
+            type: String,
+            default: 'inside',
+            validator (value) {
+                return oneOf(value, ['inside', 'outside', 'none'])
+            }
+        },
+        radiusDot: {
+            type: Boolean,
+            default: false
+        },
+        trigger: {
+            type: String,
+            default: 'click',
+            validator (value) {
+                return oneOf(value, ['click', 'hover'])
+            }
+        },
+        value: {
             type: Number,
             default: 0
         },
-        // 下方点控制
-        pointer: {
-            type: Boolean,
-            default: true
-        },
-        // 箭头控制
-        arrow: {
-            type: Boolean,
-            default: true
-        },
-        // 动画过渡时间，单位毫秒
-        speed: {
-            type: Number,
-            default: 300
-        },
-        after: {
-            type: Function,
-            default: function () {}
-        }, // 加载完成
-        slideAfter: {
-            type: Function,
-            default: function (val) {}
-        } // 滑动结束
+        height: {
+            type: [String, Number],
+            default: 'auto',
+            validator (value) {
+                return value === 'auto' || Object.prototype.toString.call(value) === '[object Number]'
+            }
+        }
+    },
+    data () {
+        return {
+            prefixCls: prefixCls,
+            listWidth: 0,
+            trackWidth: 0,
+            trackOffset: 0,
+            trackCopyOffset: 0,
+            showCopyTrack: false,
+            slides: [],
+            slideInstances: [],
+            timer: null,
+            ready: false,
+            currentIndex: this.value,
+            trackIndex: this.value,
+            copyTrackIndex: this.value,
+            hideTrackPos: -1 // 默认左滑
+        }
     },
     computed: {
-        animationStyle () {
+        classes () {
+            return [
+                `${prefixCls}`
+            ]
+        },
+        trackStyles () {
             return {
-                height: this.height + 'px'
+                width: `${this.trackWidth}px`,
+                transform: `translate3d(${-this.trackOffset}px, 0px, 0px)`,
+                transition: `transform 500ms ${this.easing}`
             }
         },
-        slideStyle () {
+        copyTrackStyles () {
             return {
-                width: this.conWidth + 'px'
-            }
-        },
-        scrollStyle () {
-            return {
+                width: `${this.trackWidth}px`,
+                transform: `translate3d(${-this.trackCopyOffset}px, 0px, 0px)`,
+                transition: `transform 0.5s ${this.easing}`,
                 position: 'absolute',
-                width: this.conWidth + 'px',
-                overflow: 'hidden',
-                height: this.height + 'px'
+                top: 0
             }
-        }
-    },
-    mounted () {
-        if (this.animation === 'fade') {
-            this.controlFade(true, this.active)
-        }
-        this.$nextTick(() => {
-            this.pages = this.$children.length
-            this.conWidth = this.getWidth(this.$refs.wrapper)
-            if (this.animation === 'slide') {
-                this.resetItemPosition()
-            }
-            // 自动轮播
-            this.autoPlay()
-            // 加载完成
-            this.after()
-        })
-    },
-    watch: {
-        active (val, oldVal) {
-            if (this.animation === 'fade') {
-                this.controlFade(false, oldVal)
-                this.controlFade(true, val)
-            } else if (this.animation === 'slide') {
-                this.resetItemPosition()
-            }
-            this.slideAfter(val)
+        },
+        arrowClasses () {
+            return [
+                `${prefixCls}-arrow`,
+                `${prefixCls}-arrow-${this.arrow}`
+            ]
+        },
+        dotsClasses () {
+            return [
+                `${prefixCls}-dots`,
+                `${prefixCls}-dots-${this.dots}`
+            ]
         }
     },
     methods: {
-        // 自动播放
-        autoPlay () {
-            if (this.auto) {
-                clearInterval(this.timer)
-                this.timer = setInterval(() => {
-                    this.slideControl(1)
-                }, this.interval)
-            }
-        },
-        // 鼠标划过，自动暂停
-        mouseOver () {
-            if (this.hoverPause) {
-                clearInterval(this.timer)
-            }
-        },
-        // 鼠标离开、继续滑动
-        mouseLeave () {
-            this.autoPlay()
-        },
-        // 切换当前内容
-        slideControl (i) {
-            clearInterval(this.timer)
-            if (i > 0) {
-                this.previous = false
-                if (this.active < this.pages - 1) {
-                    this.active += i
-                } else {
-                    if (this.loop) {
-                        this.active = 0
-                    } else {
-                        this.next = true
-                    }
-                }
-            } else {
-                this.next = false
-                if (this.active > 0) {
-                    this.active += i
-                } else {
-                    if (this.loop) {
-                        this.active = this.pages - 1
-                    } else {
-                        this.previous = true
-                    }
+        // find option component
+        findChild (cb) {
+            const find = function (child) {
+                const name = child.$options.componentName
+                if (name) {
+                    cb(child)
+                } else if (child.$children.length) {
+                    child.$children.forEach((innerChild) => {
+                        find(innerChild, cb)
+                    })
                 }
             }
-            this.autoPlay()
-        },
-        // 控制样式 fade
-        controlFade (show, index) {
-            let el = this.$children[index].$el
-            if (show) {
-                el.style.opacity = 1
-                el.style.zIndex = 1
+            if (this.slideInstances.length || !this.$children) {
+                this.slideInstances.forEach((child) => {
+                    find(child)
+                })
             } else {
-                el.style.opacity = 0
-                el.style.zIndex = 0
+                this.$children.forEach((child) => {
+                    find(child)
+                })
             }
         },
-        // 控制样式 slide
-        resetItemPosition () {
-            this.$children.forEach((item, index) => {
-                this.translateItem(item, index, this.active)
+        // copy trackDom
+        initCopyTrackDom () {
+            this.$nextTick(() => {
+                this.$refs.copyTrack.innerHTML = this.$refs.originTrack.innerHTML
             })
         },
-        translateItem (item, index, activeIndex) {
-            let parentWidth = this.conWidth
-            let length = this.$children.length
-            if (index !== activeIndex && length > 2) {
-                index = this.resetIndex(index, activeIndex, length)
-            }
-            item.translate = parentWidth * (index - activeIndex)
+        updateSlides (init) {
+            let slides = []
+            let index = 1
+            this.findChild((child) => {
+                slides.push({
+                    $el: child.$el
+                })
+                child.index = index++
+                if (init) {
+                    this.slideInstances.push(child)
+                }
+            })
+            this.slides = slides
+            this.updatePos()
         },
-        resetIndex (index, activeIndex, length) {
-            if (activeIndex === 0 && index === length - 1) {
-                return -1
-            } else if (activeIndex === length - 1 && index === 0) {
-                return length
-            } else if (index < activeIndex - 1 && activeIndex - index >= length / 2) {
-                return length + 1
-            } else if (index > activeIndex + 1 && index - activeIndex >= length / 2) {
-                return -2
-            }
-            return index
+        updatePos () {
+            this.findChild((child) => {
+                child.width = this.listWidth
+                child.height = typeof this.height === 'number' ? `${this.height}px` : this.height
+            })
+            this.trackWidth = (this.slides.length || 0) * this.listWidth
         },
-        // 点击下方导航
-        handleClickPointer (i) {
-            clearInterval(this.timer)
-            let current = 0
-            if (i > this.active) {
-                current = i - this.active
-            } else if (i === this.active) {
-                return
+        // use when slot changed
+        slotChange () {
+            this.$nextTick(() => {
+                this.slides = []
+                this.slideInstances = []
+                this.updateSlides(true, true)
+                this.updatePos()
+                this.updateOffset()
+            })
+        },
+        handleResize () {
+            this.listWidth = parseInt(getStyle(this.$el, 'width'))
+            this.updatePos()
+            this.updateOffset()
+        },
+        updateTrackPos (index) {
+            if (this.showCopyTrack) {
+                this.trackIndex = index
             } else {
-                current = i - this.active
+                this.copyTrackIndex = index
             }
-            this.slideControl(current)
-            this.autoPlay()
         },
-        getWidth (elements) {
-            // 处理两个特殊 window document
-            if (elements === window) {
-                return document.documentElement.clientWidth || document.body.clientWidth
-            } else if (elements === document) {
-                return document.documentElement.scrollWidth || document.body.scrollWidth
-            } else if (typeof elements === 'object') {
-                return elements.offsetWidth
-            } else if (typeof elements === 'string') {
-                return document.getElementById(elements).offsetWidth
+        updateTrackIndex (index) {
+            if (this.showCopyTrack) {
+                this.copyTrackIndex = index
+            } else {
+                this.trackIndex = index
             }
+        },
+        add (offset) {
+            // 获取单个轨道的图片数
+            let slidesLen = this.slides.length
+            // 如果是无缝滚动，需要初始化双轨道位置
+            if (this.loop) {
+                if (offset > 0) {
+                    // 初始化左滑轨道位置
+                    this.hideTrackPos = -1
+                } else {
+                    // 初始化右滑轨道位置
+                    this.hideTrackPos = slidesLen
+                }
+                this.updateTrackPos(this.hideTrackPos)
+            }
+            // 获取当前展示图片的索引值
+            const oldIndex = this.showCopyTrack ? this.copyTrackIndex : this.trackIndex
+            let index = oldIndex + offset
+            while (index < 0) index += slidesLen
+            if (((offset > 0 && index === slidesLen) || (offset < 0 && index === slidesLen - 1)) && this.loop) {
+                // 极限值（左滑：当前索引为总图片张数， 右滑：当前索引为总图片张数 - 1）切换轨道
+                this.showCopyTrack = !this.showCopyTrack
+                this.trackIndex += offset
+                this.copyTrackIndex += offset
+            } else {
+                if (!this.loop) index = index % this.slides.length
+                this.updateTrackIndex(index)
+            }
+            this.currentIndex = index === this.slides.length ? 0 : index
+            this.$emit('on-change', oldIndex, this.currentIndex)
+            this.$emit('input', this.currentIndex)
+        },
+        arrowEvent (offset) {
+            this.setAutoplay()
+            this.add(offset)
+        },
+        dotsEvent (event, n) {
+            let curIndex = this.showCopyTrack ? this.copyTrackIndex : this.trackIndex
+            if (event === this.trigger && curIndex !== n) {
+                this.updateTrackIndex(n)
+                this.$emit('input', n)
+                // Reset autoplay timer when trigger be activated
+                this.setAutoplay()
+            }
+        },
+        setAutoplay () {
+            window.clearInterval(this.timer)
+            if (this.autoplay) {
+                this.timer = setInterval(() => {
+                    this.add(1)
+                }, this.autoplaySpeed)
+            }
+        },
+        updateOffset () {
+            this.$nextTick(() => {
+                /* hack: revise copyTrack offset (1px) */
+                let ofs = this.copyTrackIndex > 0 ? -1 : 1
+                this.trackOffset = this.trackIndex * this.listWidth
+                this.trackCopyOffset = this.copyTrackIndex * this.listWidth + ofs
+            })
         }
+    },
+    watch: {
+        autoplay () {
+            this.setAutoplay()
+        },
+        autoplaySpeed () {
+            this.setAutoplay()
+        },
+        trackIndex () {
+            this.updateOffset()
+        },
+        copyTrackIndex () {
+            this.updateOffset()
+        },
+        height () {
+            this.updatePos()
+        },
+        value (val) {
+            this.updateTrackIndex(val)
+            this.setAutoplay()
+        }
+    },
+    mounted () {
+        this.updateSlides(true)
+        this.handleResize()
+        this.setAutoplay()
+        on(window, 'resize', this.handleResize)
+    },
+    beforeDestroy () {
+        off(window, 'resize', this.handleResize)
     }
 }
 </script>
