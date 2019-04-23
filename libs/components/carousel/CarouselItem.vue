@@ -1,50 +1,49 @@
-/**
-* 走马灯组件 b-carousel-item
-* Created by hanshuai on 2018/9/10.
-*/
-
 <template>
-    <div
-        :class="[wrapperCls, { 'is-active': translate === 0 && $parent.animation === 'slide' }]"
-        :style="style"
-        :current="$parent.active">
+    <div :class="prefixCls" :style="styles">
         <slot></slot>
     </div>
 </template>
 <script>
 import { prefix } from '../../utils/common'
-
-const prefixCls = `${prefix}carousel`
+const prefixCls = `${prefix}carousel-item`
 
 export default {
-    name: `${prefixCls}-item`,
+    componentName: prefixCls,
+    name: prefixCls,
     data () {
         return {
-            prefixCls,
-            translate: 0
+            prefixCls: prefixCls,
+            width: 0,
+            height: 'auto',
+            left: 0
         }
     },
     computed: {
-        wrapperCls () {
-            if (this.$parent.animation === 'slide') return `${prefixCls}-slide`
-            return `${prefixCls}-fade`
-        },
-        style () {
-            let {animation, speed} = this.$parent
-            let style
-            if (animation === 'fade') {
-                style = {
-                    opacity: 0,
-                    transition: `opacity ${speed / 500}s `
-                }
-            } else if (animation === 'slide') {
-                style = {
-                    transform: `translateX(${this.translate}px)`,
-                    transition: `transform ${speed / 1000}s ease`
-                }
+        styles () {
+            return {
+                width: `${this.width}px`,
+                height: `${this.height}`,
+                left: `${this.left}px`
             }
-            return style
         }
+    },
+    mounted () {
+        this.$parent.slotChange()
+    },
+    watch: {
+        width (val) {
+            if (val && this.$parent.loop) {
+                this.$parent.initCopyTrackDom()
+            }
+        },
+        height (val) {
+            if (val && this.$parent.loop) {
+                this.$parent.initCopyTrackDom()
+            }
+        }
+    },
+    beforeDestroy () {
+        this.$parent.slotChange()
     }
 }
 </script>
