@@ -50,7 +50,9 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value" placeholder="请输入..." :width='200'></b-input>
+            <b-input v-model="value" placeholder="请输入..." :width='200'>
+                <template slot="prepend">发票号码</template>
+            </b-input>
             <b-input v-model="value0" placeholder="请输入..." :width='200' error='error'></b-input>
             <span>{{value}}</div>
         </div>
