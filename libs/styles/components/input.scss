@@ -135,10 +135,12 @@ $input-large-font:14px;
       background-color: $Background;
       padding: 0 7px;
       vertical-align: middle;
+      white-space: nowrap;
       :first-child{
         border: none !important;
         border-top-right-radius:0 !important; 
         border-bottom-right-radius:0 !important; 
+        white-space: nowrap;
       }
     }
     &-append{
@@ -150,10 +152,12 @@ $input-large-font:14px;
       background-color: $Background;
       padding: 0 7px;
       vertical-align: middle;
+      white-space: nowrap;
       :first-child{
         border: none !important;
         border-top-left-radius:0 !important; 
         border-bottom-left-radius:0 !important; 
+        white-space: nowrap;
       }
     }
   }
