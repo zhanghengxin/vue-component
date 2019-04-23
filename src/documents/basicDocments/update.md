@@ -1,5 +1,14 @@
 ### 更新日志
 
+### 0.5.0
+## `2019-04-23`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 修改input的prepend、append换行问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.4.9
 ## `2019-04-22`
 <br>
@@ -8,7 +17,7 @@
     新增 Input - append prepend slot方式
     </b-timeline-item>
     <b-timeline-item>
-    优化 menu合并代码，本次合并，优化了menu的css，兼容了primary主题风格，事件的名字添加on前缀
+    优化 Menu 兼容了primary主题风格，事件的名字添加on前缀
     </b-timeline-item>
     <b-timeline-item>
     修复 Card的border样式bug
