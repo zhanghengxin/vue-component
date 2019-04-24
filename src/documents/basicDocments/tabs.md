@@ -440,7 +440,44 @@
      </b-tabs>
 ```
 :::
+</div>
 
+### 附加内容功能
+
+设置`slot` `extra`可以在组件右侧添加内容
+
+<div class="example">
+    <div class="example-box">
+        <b-tabs value ="0" >
+            <b-button size="small" slot="extra">附加按钮</b-button>
+            <b-tabPane label="标签一" name="0" >
+                标签一的内容
+            </b-tabPane>
+            <b-tabPane label="标签二" name="1">
+                标签二的内容
+            </b-tabPane>
+            <b-tabPane label="标签三" name="2">
+                标签三的内容
+            </b-tabPane>
+        </b-tabs>
+    </div>
+
+::: code
+```html
+     <b-tabs value ="0" >
+         <b-button size="small" slot="extra">附加按钮</b-button>
+         <b-tabPane label="标签一" name="0" >
+             标签一的内容
+         </b-tabPane>
+         <b-tabPane label="标签二" name="1">
+             标签二的内容
+         </b-tabPane>
+         <b-tabPane label="标签三" name="2">
+             标签三的内容
+         </b-tabPane>
+     </b-tabs>
+```
+:::
 </div>
 
 

@@ -1,6 +1,7 @@
 <template>
     <div :class="classes">
         <div :class="tabsBarCls" ref="nav">
+            <div :class="tabsExtraCls" v-if="showExtra"><slot name="extra"></slot></div>
             <div :class="tabsInkBar" :style="inkBarStyle"></div>
             <div @click="handleChange(index)"  v-for="(item,index) in navList" :key="index" :class="tabCls(item)">
                 <Icon v-if="item.icon !== ''" :type="item.icon"></Icon>
@@ -76,6 +77,7 @@ export default {
             navList: [],
             barWidth: 0,
             barOffset: 0,
+            showExtra: false,
             activeKey: this.value
         }
     },
@@ -91,6 +93,7 @@ export default {
         }
     },
     mounted () {
+        this.showExtra = this.$slots.extra !== undefined
         this.autoFocus()
     },
     computed: {
@@ -105,6 +108,9 @@ export default {
         },
         tabsBarCls () {
             return `${prefixCls}-bar`
+        },
+        tabsExtraCls () {
+            return `${prefixCls}-extra`
         },
         tabsContent () {
             return [

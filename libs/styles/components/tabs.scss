@@ -1,6 +1,7 @@
 @import "../common/color";
 $tabs: $css-prefix + 'tabs';
 $tabPanel: $css-prefix + 'tab-pane';
+$tabExtra: $css-prefix + 'tabs-extra';
 //tabs区域
 .#{$tabs} {
   font-size: 14px;
@@ -107,4 +108,10 @@ $tabPanel: $css-prefix + 'tab-pane';
   .#{$tabs}-content,.#{$tabs}-ink-bar{
     transition: all 0.3s ease-in-out ;
   }
+}
+
+//extra区域的样式
+.#{$tabExtra}{
+  float: right;
+  margin-left: 5px;
 }
