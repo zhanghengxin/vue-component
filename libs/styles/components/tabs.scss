@@ -29,7 +29,8 @@ $tabExtra: $css-prefix + 'tabs-extra';
 .#{$tabs}-tab {
   display: inline-block;
   padding: 4px 16px;
-  margin-left: 12px;
+  //margin-left: 12px;
+  border:1px solid transparent;
   background: $white;
   border-radius: 3px 3px 0px 0px ;
   cursor: pointer;
@@ -37,6 +38,10 @@ $tabExtra: $css-prefix + 'tabs-extra';
   position: relative;
   &:hover{
     @include _color($Primary);
+  }
+
+  & + .#{$tabs}-tab{
+    margin-left: 6px;
   }
 }
 

@@ -260,15 +260,15 @@ export default {
                 const prevTabs = this.$refs.nav.querySelectorAll(`.${prefixCls}-tab`)
                 const tab = prevTabs[index]
                 this.barWidth = tab ? parseFloat(tab.offsetWidth) : 0
-                const gutter = 12
+                const gutter = 6
                 if (index > 0) {
                     let offset = 0
                     for (let i = 0; i < index; i++) {
                         offset += parseFloat(prevTabs[i].offsetWidth) + gutter
                     }
-                    this.barOffset = offset + gutter
+                    this.barOffset = offset
                 } else {
-                    this.barOffset = gutter
+                    this.barOffset = 0
                 }
             })
         },
