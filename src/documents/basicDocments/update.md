@@ -1,5 +1,23 @@
 ### 更新日志
 
+### 0.5.2
+## `2019-04-24`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 Tabs组件添加capture-focus，name，extra，tab，index功能
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Select支持option slot方式传入
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Notice、Message 兼容 iview 使用方式，重写Notice组件动画,全局配置功能添加，z-index优先级调整
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Notice 结构，解决 notice 多次渲染布局异常以及 dom 没有及时销毁的性能问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.5.1
 ## `2019-04-23`
 <br>
