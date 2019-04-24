@@ -150,11 +150,15 @@
 -----
 ### 单选
 可使用 v-model 实现数据的双向绑定。<br/>
+可使用 slot与options传值两种方式。<br/>
 可直接设置 style 或 width 来改变输入框的宽度，默认 100%。<br/>
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value" width='200' :options='options3' @on-change='changeConsole'></b-select>   
+            <b-select v-model="value" width='200' @on-change='changeConsole'>
+                <b-option v-for='item in options5' :value='item.value' :label='item.label' :key='item.value'></b-option>
+            </b-select>   
+            <b-select v-model="value" width='200' :options='options5' @on-change='changeConsole'></b-select>   
             <span>{{value}}</span>
         </div>
     </div>
@@ -165,11 +169,10 @@
 
     <template>
         <div>
-            <b-select 
-                v-model="value"  
-                style="width:200px" 
-                :options='options6' >
-            </b-select>
+            <b-select v-model="value" width='200' @on-change='changeConsole'>
+                <b-option v-for='item in options5' :value='item.value' :label='item.label' :key='item.value'></b-option>
+            </b-select>   
+            <b-select v-model="value" width='200' :options='options5' @on-change='changeConsole'></b-select>   
             <span>{{value}}</span>
         </div>
     </template>
@@ -599,10 +602,10 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
             <b-select 
                 v-model="value8" 
                 style="width:200px"
-                :options='options' 
                 :filterabled='filterabled'
                 :filterFn='filterFn'
                 >
+                <b-option v-for='item in options' :value='item.value' :label='item.label' :key='item.value'></b-option>
             </b-select>
         </div>
     </div>
@@ -777,8 +780,8 @@ fixed为true时可设置通过width来设置整体select的宽度，labelWidth�
                 :filterabled='filterabled'
                 :remoteFn='remoteFn'
                 :loading='loading'
-                :options='options3'
                 width='200' >
+                <b-option v-for='item in options3' :value='item.value' :label='item.label' :key='item.value'></b-option>
             </b-select>
             <b-select 
                 v-model="value04" 
@@ -981,6 +984,7 @@ fixed为true时可设置通过width来设置整体select的宽度，labelWidth�
 | labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   72  |
 | loading  | 远程加载时的加载状态   | Boolean  |  `true`、`false`  |   false  |
 | remoteFn  | 远程加载时搜索的方法   | Function  |  -  |   -  |
+| group  | 设置select的下拉框分组   | Boolean  |  `true`、`false`  |   false  |
 
 ### events
 | 事件名	      | 说明	    | 返回值 |
@@ -989,11 +993,17 @@ fixed为true时可设置通过width来设置整体select的宽度，labelWidth�
 | on-clear   | 点击清空按钮时触发 | - |
 
 ### options
-| 数据	      | 说明	    |
-|-------------|---------|
-| disabled   | 默认为false  |
-| value   | 默认为为code为key值 可用codeKey修改 |
-| label   | 默认为name为key值 可用nameKey修改 |
+| 数据	      | 说明	    | 数据结构  |
+|-------------|---------|---------|
+| disabled   | 默认为false  | [{label:'',value:''}] |
+| value   | 默认为为code为key值 可用codeKey修改 | [{label:'',value:''}]|
+| label   | 默认为name为key值 可用nameKey修改 | [{label:'',value:''}]|
+
+###Group分组的options数据结构
+| group状态	      | 说明	    | 数据结构  |
+|-------------|---------|---------|
+| false   | 下拉框不分组  | [{label:'',value:''}] |
+| true   | 下拉框分组 | [{label:'',options:[{label:'',value:''}]}]分组例子中的代码|
 
 ### filterFn
 | 数据	      | 说明	    |
