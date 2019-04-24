@@ -8,17 +8,29 @@
                 <Icon v-if="showClose(item)" :class="tabsCloseIcon" type="quxiao-guanbi-shanchu" @click.native.stop="handleRemove(index)"></Icon>
             </div>
         </div>
-        <div :class="tabsContent" :style="contentStyle">
+        <div :class="tabsContent" :style="contentStyle" ref="panes">
             <slot></slot>
         </div>
     </div>
 </template>
 <script>
-import { TABS, TABPANEL } from './common'
+import { TABS, TABPANEL, TABPANELCSS } from './common'
 import { oneOf } from '../../utils/common'
+import { findComponentsDownward } from '../../utils/assist'
 import Icon from '../icon/Icon.vue'
 
 const prefixCls = TABS
+const focusFirst = (element, root) => {
+    try { element.focus() } catch (err) {} // eslint-disable-line no-empty
+
+    if (document.activeElement === element && element !== root) return true
+
+    const candidates = element.children
+    for (let candidate of candidates) {
+        if (focusFirst(candidate, root)) return true
+    }
+    return false
+}
 export default {
     name: prefixCls,
     props: {
@@ -47,7 +59,15 @@ export default {
             type: Boolean,
             default: true
         },
-        beforeRemove: Function
+        beforeRemove: Function,
+        // Tabs 嵌套时，用 name 区分层级
+        name: {
+            type: String
+        },
+        captureFocus: {
+            type: Boolean,
+            default: false
+        }
     },
     components: {Icon},
     data () {
@@ -65,9 +85,13 @@ export default {
         },
         currentValue: function (val) {
             this.activeKey = val
-            this.updateStatus()
+            // this.updateStatus()
             this.updateBar()
+            this.autoFocus()
         }
+    },
+    mounted () {
+        this.autoFocus()
     },
     computed: {
         classes () {
@@ -107,7 +131,11 @@ export default {
                 visibility: 'hidden',
                 width: `${this.barWidth}px`
             }
-            if (this.type === 'line') style.visibility = 'visible'
+            if (this.type === 'line') {
+                style.visibility = 'visible'
+            } else {
+                style.visibility = 'hidden'
+            }
             style.transform = `translate3d(${this.barOffset}px, 0px, 0px)`
             return style
         },
@@ -128,7 +156,27 @@ export default {
             ]
         },
         getTabs () {
-            return this.$children.filter(item => item.$options.name === TABPANEL)
+            // return this.$children.filter(item => item.$options.name === TABPANEL)
+            const AllTabPanes = findComponentsDownward(this, TABPANEL)
+            const TabPanes = []
+
+            AllTabPanes.forEach(item => {
+                if (item.tab && this.name) {
+                    if (item.tab === this.name) {
+                        TabPanes.push(item)
+                    }
+                } else {
+                    TabPanes.push(item)
+                }
+            })
+
+            // 在 TabPane 使用 v-if 时，并不会按照预先的顺序渲染，这时可设置 index，并从小到大排序
+            TabPanes.sort((a, b) => {
+                if (a.index && b.index) {
+                    return a.index > b.index ? 1 : -1
+                }
+            })
+            return TabPanes
         },
         showClose (item) {
             if (this.type === 'card') {
@@ -196,7 +244,7 @@ export default {
                     if (!this.currentValue) this.currentValue = name || index
                 }
             })
-            this.updateStatus()
+            // this.updateStatus()
             this.updateBar()
         },
         updateBar () {
@@ -218,13 +266,13 @@ export default {
                 }
             })
         },
-        updateStatus () {
+        // updateStatus () {
             // const tabs = this.getTabs()
             // var _this = this
             // tabs.forEach(function (tab) {
             //     tab.show = (tab.name === _this.currentValue || _this.animated)
             // })
-        },
+        // },
         handleChange (index) {
             var nav = this.navList[index]
             var name = nav.name
@@ -232,6 +280,14 @@ export default {
             this.currentValue = name
             this.$emit('input', name)
             this.$emit('on-click', name)
+        },
+        autoFocus () {
+            const index = this.getTabIndex(this.activeKey);
+            [...this.$refs.panes.querySelectorAll(`.${TABPANELCSS}`)].forEach((el, i) => {
+                if (index === i) {
+                    if (this.captureFocus) setTimeout(() => focusFirst(el, el), 300)
+                }
+            })
         },
         getTabIndex (name) {
             return this.navList.findIndex(nav => nav.name === name)
