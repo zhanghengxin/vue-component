@@ -1,4 +1,3 @@
-
 import Vue from 'vue'
 import Component from './notice.vue'
 
@@ -6,6 +5,10 @@ const NoticeConstructor = Vue.extend(Component)
 
 const instances = []
 let seed = 1
+const defaults = {
+    duration: 3,
+    top: 16
+}
 
 const removeInstance = (instance) => {
     if (!instance) return
@@ -21,6 +24,7 @@ const removeInstance = (instance) => {
 
 const notice = (options) => {
     if (Vue.prototype.$isServer) return
+    if (!options.duration) options.duration = defaults.duration
     const instance = new NoticeConstructor({
         propsData: {
             ...options
@@ -33,7 +37,7 @@ const notice = (options) => {
     instance.vm.visible = true
     let verticalOffset = 0
     instances.forEach(item => {
-        verticalOffset += item.$el.offsetHeight + 16
+        verticalOffset += item.$el.offsetHeight + defaults.top
     })
     verticalOffset += 16
     instance.verticalOffset = verticalOffset
@@ -48,5 +52,20 @@ const notice = (options) => {
     })
     return instance.vm
 }
+const types = ['info', 'success', 'error', 'warning']
 
+types.forEach(type => {
+    notice[type] = function (options) {
+        options = typeof options === 'string' ? {content: options} : options
+        return notice({...options, type})
+    }
+})
+notice.config = function (options) {
+    if (options.duration || options.duration === 0) {
+        defaults.duration = options.duration
+    }
+    if (options.top || options.top === 0) {
+        defaults.top = options.top
+    }
+}
 export default notice

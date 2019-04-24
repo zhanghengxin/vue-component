@@ -52,7 +52,7 @@ $css-prefix-notice: $css-prefix+'notice';
         }
     }
 
-    @include type(normal, $Primary);
+    @include type(info, $Primary);
     @include type(success, $Success);
     @include type(warning, $Warning);
     @include type(error, $Error);
