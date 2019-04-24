@@ -24,8 +24,7 @@
                     handleClick(type) {
                         this.$Message({
                             message: this.message,
-                            type,
-                            duration: 1500
+                            type
                         })
                     },
                     handleClickShowClose() {
@@ -37,7 +36,7 @@
                     handleClickDruation() {
                         this.$Message({
                             message: this.message,
-                            duration: 5000
+                            duration: 5
                         })
                     },
                     handleClickRender() {
@@ -203,7 +202,7 @@
                 handleClick() {
                     this.$Message({
                         message: this.message,
-                        duration: 5000
+                        duration: 5
                     })
                 }
             }

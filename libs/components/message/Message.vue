@@ -41,7 +41,7 @@ import Icon from '../icon'
 const prefixCls = prefix + 'message'
 export default {
     name: prefixCls,
-    components: { Icon, renderCell },
+    components: {Icon, renderCell},
     data () {
         return {
             show: false,
@@ -52,7 +52,7 @@ export default {
             onClose: null,
             message: '',
             type: 'info',
-            duration: 3000,
+            duration: 3,
             showClose: false,
             prefixCls,
             render: function () {}
@@ -110,7 +110,7 @@ export default {
                 if (!this.closed) {
                     this.close()
                 }
-            }, this.duration)
+            }, this.duration * 1000)
         },
         leave () {
             clearTimeout(this.timer)
