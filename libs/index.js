@@ -38,6 +38,7 @@ import Tree from './components/tree'
 import Table from './components/table'
 import Progress from './components/progress'
 import Select from './components/select'
+import Option from './components/option'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
 import Transfer from './components/transfer'
@@ -101,6 +102,7 @@ const components = [
     Tabs,
     Tabs.panel,
     Select,
+    Option,
     DatePicker,
     TimePicker,
     Transfer,
