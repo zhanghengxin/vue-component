@@ -7,6 +7,7 @@
             v-for="(item, index) in rootData"
             :key="index"
             :data="item"
+            :class-name="className"
             :draggable="draggable"
             :show-checkbox="showCheckbox"
             :default-opt="defaultOpt"
@@ -140,10 +141,7 @@ export default {
     computed: {
         wrapCls () {
             return [
-                `${prefixCls}`,
-                {
-                    [`${this.className}`]: !!this.className
-                }
+                `${prefixCls}`
             ]
         }
     },
@@ -155,6 +153,10 @@ export default {
         getIndeterminateNodes () {
             const indeterminateKey = this.defaultOpt.indeterminateKey
             return this.dataList.filter(obj => (obj.node[indeterminateKey])).map(obj => obj.node)
+        },
+        getSelectedNodes () {
+            const selectedKey = this.defaultOpt.selectedKey
+            return this.dataList.filter(obj => (obj.node[selectedKey])).map(obj => obj.node)
         },
         // 原数据格式化
         formatTreeData () {
@@ -236,7 +238,7 @@ export default {
             const selectedIndex = this.dataList.findIndex(obj => obj.node.selected)
             if (selectedIndex >= 0 && selectedIndex !== nodeKey) this.$set(this.dataList[selectedIndex].node, selectedKey, false)
             this.$set(node, selectedKey, !node.selected)
-            this.$emit('on-select', {data: node})
+            this.$emit('on-select', {data: node, selectedNodes: this.getSelectedNodes()})
         },
         // 选中
         handleCheck ({checked, nodeKey}) {

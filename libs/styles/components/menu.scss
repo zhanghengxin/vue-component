@@ -37,6 +37,7 @@ $select-dropdown: "#{$menu}-drop-list";
   z-index: $zindex-menu;
   background-color: $white;
   border: $Border 1px solid;
+  box-sizing: content-box;
 
   .#{$menu-item} {
     display: block;
@@ -153,7 +154,6 @@ $select-dropdown: "#{$menu}-drop-list";
 
   .#{$menu-opened} .#{$menu-submenu-title} {
     font-size: 14px;
-    font-weight: bold;
   }
 
   .#{$menu-submenu} {

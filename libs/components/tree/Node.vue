@@ -28,6 +28,7 @@
                         v-for="(item, key) in children"
                         :key="key"
                         :draggable="draggable"
+                        :class-name="className"
                         :data="item"
                         :show-checkbox="showCheckbox"
                         :default-opt="defaultOpt">
@@ -75,6 +76,9 @@ export default {
             type: Boolean,
             default: false
         },
+        className: {
+            type: String
+        },
         draggable: {
             type: Boolean,
             default: false
@@ -107,6 +111,7 @@ export default {
                 `${prefixCls}-name`,
                 {
                     [`${prefixCls}-name-selected`]: this.data[this.defaultOpt.selectedKey],
+                    [`${this.className}`]: !!this.className,
                     [`${prefixCls}-name-draggable`]: this.draggable
 
                 }

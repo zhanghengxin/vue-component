@@ -9,11 +9,16 @@ import { prefix } from '../../utils/common'
 
 const MessageConstructor = Vue.extend(MessageTemplate)
 const instances = []
+const defaults = {
+    duration: 3,
+    top: 15
+}
 let count = 1
 let msgCon = null
 
 function Message (options) {
     let close = options.onClose
+    if (!options.duration) options.duration = defaults.duration
     if (!msgCon) {
         msgCon = document.createElement('div')
         msgCon.className = `${prefix}message-container`
@@ -22,11 +27,11 @@ function Message (options) {
     msgCon.style.zIndex = options.zIndex ? options.zIndex : 1010
     msgCon.style.position = 'fixed'
     msgCon.style.width = '100%'
-    msgCon.style.top = 0
+    msgCon.style.top = defaults.top + 'px'
     msgCon.style.left = 0
     msgCon.style.textAlign = 'center'
-    let id = count++
-    let { duration } = options
+    let id = `b-message-${count++}`
+    let {duration} = options
     options.onClose = function () {
         Message.close(id, duration, close)
     }
@@ -41,7 +46,7 @@ function Message (options) {
     return instance
 }
 
-Message.close = function (id, duration, close) {
+Message.close = function (id, close) {
     for (let i = 0; i < instances.length; i++) {
         if (id === instances[i].id) {
             if (typeof close === 'function') {
@@ -64,9 +69,17 @@ const types = ['info', 'success', 'error', 'warning']
 
 types.forEach(type => {
     Message[type] = function (options) {
-        options = typeof options === 'string' ? { message: options } : options
-        return Message({ ...options, type })
+        options = typeof options === 'string' ? {message: options} : options
+        return Message({...options, type})
     }
 })
 
+Message.config = function (options) {
+    if (options.duration || options.duration === 0) {
+        defaults.duration = options.duration
+    }
+    if (options.top || options.top === 0) {
+        defaults.top = options.top
+    }
+}
 export default Message
