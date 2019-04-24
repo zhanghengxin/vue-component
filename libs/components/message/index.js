@@ -78,5 +78,8 @@ Message.config = function (options) {
     if (options.duration || options.duration === 0) {
         defaults.duration = options.duration
     }
+    if (options.top || options.top === 0) {
+        defaults.top = options.top
+    }
 }
 export default Message
