@@ -3,68 +3,68 @@ $css-prefix-drop: $css-prefix+'drop';
 $css-prefix-tree: $css-prefix+'label-tree';
 
 .#{$css-prefix-tree} {
-  .#{$css-prefix+'tree'} {
-    min-height: 32px;
-  }
+    .#{$css-prefix+'tree'} {
+        min-height: 32px;
+    }
 }
 
 .#{$dropdown-prefix-cls} {
-  cursor: pointer;
-  display: inline-block;
-  font-size: 12px;
-
-  &-menu {
-    min-width: 100px;
-  }
-
-  .#{$css-prefix-drop} {
-    max-height: none;
-    overflow: visible;
-  }
-
-  &-item {
-    margin: 0;
-    line-height: normal;
-    padding: 7px 16px;
-    clear: both;
-    color: #515a6e;
-    white-space: nowrap;
-    list-style: none;
     cursor: pointer;
-    transition: background .2s ease-in-out;
+    display: inline-block;
+    font-size: 12px;
 
-    &-disabled {
-      color: $Disabled !important;
-      cursor: not-allowed;
+    &-menu {
+        min-width: 100px;
     }
 
-    &-divided {
-      border-top: 1px solid $Border;
+    .#{$css-prefix-drop} {
+        max-height: none;
+        overflow: visible;
     }
 
-    &-selected {
-      @include _background($Background);
-      @include _color($Primary);
-    }
+    &-item {
+        margin: 0;
+        line-height: normal;
+        padding: 7px 16px;
+        clear: both;
+        color: #515a6e;
+        white-space: nowrap;
+        list-style: none;
+        cursor: pointer;
+        transition: background .2s ease-in-out;
 
-    &:focus,
-    &:not(&-disabled):hover {
-      @include _background($Background);
-      @include _color($Primary);
+        &-disabled {
+            color: $Disabled !important;
+            cursor: not-allowed;
+        }
+
+        &-divided {
+            border-top: 1px solid $Border;
+        }
+
+        &-selected {
+            @include _background($Background);
+            @include _color($Primary);
+        }
+
+        &:focus,
+        &:not(&-disabled):hover {
+            @include _background($Background);
+            @include _color($Primary);
+        }
     }
-  }
 }
 
 .#{$css-prefix-drop} {
-  width: inherit;
-  max-height: 200px;
-  overflow: auto;
-  margin: 5px 0;
-  padding: 5px 0;
-  background-color: $white;
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
-  position: absolute;
-  z-index: 900;
+    width: inherit;
+    max-height: 200px;
+    overflow: auto;
+    margin: 5px 0;
+    padding: 5px 0;
+    background-color: $white;
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+    position: absolute;
+    z-index: $zindex-dropdown;
 }

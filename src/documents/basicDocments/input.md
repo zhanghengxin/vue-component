@@ -50,7 +50,9 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model="value" placeholder="请输入..." :width='200'></b-input>
+            <b-input v-model="value" placeholder="请输入..." :width='200'>
+                <template slot="prepend">发票号码</template>
+            </b-input>
             <b-input v-model="value0" placeholder="请输入..." :width='200' error='error'></b-input>
             <span>{{value}}</div>
         </div>
@@ -409,4 +411,6 @@ fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体�
 |-------------|---------|----------|
 | prefix    | 需要设置设置前面的icon位置的slot    | -  |
 | suffix   | 需要设置设置后面的icon位置的slot  | - |
+| prepend   | 设置前面位置的slot label的fixed样式 不与label同时设置  | - |
+| append   | 设置后面位置的slot label的fixed样式 不与label同时设置  | - |
 | label   | 前置的label文字框  | - |

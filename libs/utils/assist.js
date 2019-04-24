@@ -1,5 +1,5 @@
 // Find components upward
-export function findComponentUpward (context, componentName, componentNames) {
+export function findComponentUpward(context, componentName, componentNames) {
     if (typeof componentName === 'string') {
         componentNames = [componentName]
     } else {
@@ -14,7 +14,7 @@ export function findComponentUpward (context, componentName, componentNames) {
     return parent
 }
 
-export function findComponentUpwards (context, componentName) {
+export function findComponentUpwards(context, componentName) {
     let parent = context.$parent
     let name = parent.$options.name
     let parents = []
@@ -27,7 +27,7 @@ export function findComponentUpwards (context, componentName) {
 }
 
 // Find brothers components
-export function findBrothersComponents (context, componentName, exceptSelf = true) {
+export function findBrothersComponents(context, componentName, exceptSelf = true) {
     let res = context.$parent.$children.filter(item => {
         return item.$options.name === componentName
     })
@@ -37,7 +37,7 @@ export function findBrothersComponents (context, componentName, exceptSelf = tru
 }
 
 // Find component downward
-export function findComponentDownward (context, componentName) {
+export function findComponentDownward(context, componentName) {
     const childrens = context.$children
     let children = null
     if (childrens.length) {
@@ -55,7 +55,8 @@ export function findComponentDownward (context, componentName) {
     return children
 }
 
-export function merge (target) {x
+export function merge(target) {
+    x
     for (let i = 1, j = arguments.length; i < j; i++) {
         let source = arguments[i] || {}
         for (let prop in source) {
@@ -71,7 +72,7 @@ export function merge (target) {x
 }
 
 // Find components downward
-export function findComponentsDownward (context, componentName) {
+export function findComponentsDownward(context, componentName) {
     return context.$children.reduce((components, child) => {
         if (child.$options.name === componentName) components.push(child)
         const foundChilds = findComponentsDownward(child, componentName)
@@ -79,7 +80,7 @@ export function findComponentsDownward (context, componentName) {
     }, [])
 }
 
-export function typeOf (obj) {
+export function typeOf(obj) {
     const toString = Object.prototype.toString
     const map = {
         '[object Boolean]': 'boolean',
@@ -97,7 +98,7 @@ export function typeOf (obj) {
 }
 
 // deepCopy
-export function deepCopy (data) {
+export function deepCopy(data) {
     const t = typeOf(data)
     let o
     if (t === 'array') {
@@ -119,15 +120,15 @@ export function deepCopy (data) {
     return o
 }
 
-export function firstUpperCase (str) {
+export function firstUpperCase(str) {
     return str.toString()[0].toUpperCase() + str.toString().slice(1)
 }
 
-export function scrollTop (el, from = 0, to, duration = 500, endCallback) {
+export function scrollTop(el, from = 0, to, duration = 500, endCallback) {
     const difference = Math.abs(from - to)
     const step = Math.ceil(difference / duration * 50)
-    
-    function scroll (start, end, step) {
+
+    function scroll(start, end, step) {
         if (start === end) {
             endCallback && endCallback()
             return
@@ -143,8 +144,31 @@ export function scrollTop (el, from = 0, to, duration = 500, endCallback) {
         }
         window.requestAnimationFrame(() => scroll(d, end, step))
     }
-    
+
     scroll(from, to, step)
 }
 
 export const sharpMatcherRegx = /#([^#]+)$/
+
+const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
+const MOZ_HACK_REGEXP = /^moz([A-Z])/;
+
+function camelCase(name) {
+    return name.replace(SPECIAL_CHARS_REGEXP, function (_, separator, letter, offset) {
+        return offset ? letter.toUpperCase() : letter;
+    }).replace(MOZ_HACK_REGEXP, 'Moz$1');
+}
+// getStyle
+export function getStyle(element, styleName) {
+    if (!element || !styleName) return null;
+    styleName = camelCase(styleName);
+    if (styleName === 'float') {
+        styleName = 'cssFloat';
+    }
+    try {
+        const computed = document.defaultView.getComputedStyle(element, '');
+        return element.style[styleName] || computed ? computed[styleName] : null;
+    } catch (e) {
+        return element.style[styleName];
+    }
+}

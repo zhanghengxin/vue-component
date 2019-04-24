@@ -1,25 +1,29 @@
 <template>
-  <transition :name="prefixCls+'-fade'" @after-leave="afterLeave" @after-enter="afterEnter">
-    <div :class="noticeCls"
-      :style="style"
-      v-show="visible"
-      @mouseenter="clearTimer"
-      @mouseleave="createTimer"
-    >
-        <div :class="[noticeCls[1]+'-icon']">
-            <Icon v-if="iconVisible" size="32" :type='iconType'></Icon>
+    <transition name="move-notice" @after-leave="afterLeave" @after-enter="afterEnter">
+        <div
+            v-show="visible"
+            :class="[prefixCls+'-wrapper']">
+            <div :class="noticeCls"
+                 @mouseenter="clearTimer"
+                 @mouseleave="createTimer"
+            >
+                <div :class="[noticeCls[1]+'-icon']">
+                    <Icon v-if="iconShow" size="32" :type='iconType'></Icon>
+                </div>
+                <div :class="[prefixCls+'-body']">
+                    <div :class="[prefixCls+'-body-title']">{{title}}</div>
+                    <span :class="[prefixCls+'-body-content']">{{content||desc}}</span>
+                </div>
+                <Icon :class="[prefixCls+'-close']" size='18' type='quxiao-guanbi-shanchu'
+                      @on-click="handleClose"></Icon>
+            </div>
         </div>
-        <div :class="[prefixCls+'-body']">
-            <div :class="[prefixCls+'-body-title']">{{title}}</div>
-            <span :class="[prefixCls+'-body-content']">{{content}}</span>
-        </div>
-        <Icon :class="[prefixCls+'-close']" size='18' type='quxiao-guanbi-shanchu' @on-click="handleClose"></Icon>
-    </div>
-  </transition>
+    </transition>
 </template>
 <script>
 import Icon from '../icon'
 import { prefix, oneOf } from '../../utils/common'
+
 const prefixCls = prefix + 'notice'
 export default {
     name: prefixCls,
@@ -28,14 +32,17 @@ export default {
         content: {
             type: [String, Number]
         },
+        desc: {
+            type: [String, Number]
+        },
         title: {
             type: [String, Number]
         },
         type: {
             type: String,
-            default: 'normal',
+            default: 'info',
             validator: function (value) {
-                return oneOf(value, ['error', 'normal', 'warning', 'success'])
+                return oneOf(value, ['error', 'info', 'warning', 'success'])
             }
         },
         autoClose: {
@@ -44,9 +51,9 @@ export default {
         },
         duration: {
             type: [String, Number],
-            default: 3000
+            default: 3
         },
-        iconVisible: {
+        iconShow: {
             type: Boolean,
             default: true
         }
@@ -56,27 +63,21 @@ export default {
             prefixCls: prefixCls,
             verticalOffset: 0,
             height: 0,
+            closed: false,
             visible: false
         }
     },
     computed: {
         noticeCls () {
             return [
-                `${prefixCls}-notice`,
+                `${prefixCls}`,
                 `${this.prefixCls}-${this.type}`
             ]
-        },
-        style () {
-            return {
-                position: 'fixed',
-                right: '20px',
-                top: `${this.verticalOffset}px`
-            }
         },
         iconType () {
             const iconType = {
                 warning: 'yichang-mian',
-                normal: 'xinxi-yiban-mian',
+                info: 'xinxi-yiban-mian',
                 error: 'shibai-mian',
                 success: 'chenggong-mian'
             }
@@ -86,20 +87,33 @@ export default {
     mounted () {
         this.createTimer()
     },
+    watch: {
+        closed (val) {
+            this.visible = false
+            this.$el.addEventListener('animationend', this.destroyElement)
+        }
+    },
     methods: {
         handleClose (e) {
             e.preventDefault()
-            this.$emit('close')
+            this.closed = true
+            this.$emit('on-close')
         },
         afterLeave () {
-            this.$emit('closed')
+            this.closed = true
+            this.$emit('on-close')
         },
         createTimer () {
             if (this.duration && this.autoClose) {
                 this.timer = setTimeout(() => {
-                    this.visible = false
-                }, this.duration)
+                    this.closed = true
+                }, this.duration * 1000)
             }
+        },
+        destroyElement () {
+            this.$el.removeEventListener('transitionend', this.destroyElement)
+            this.$destroy(true)
+            this.$el.parentNode.removeChild(this.$el)
         },
         clearTimer () {
             if (this.timer) {

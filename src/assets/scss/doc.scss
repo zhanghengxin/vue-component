@@ -11,6 +11,14 @@
     .hljs-attribute {
         color: $Error;
     }
+    pre{
+        width: 100%;
+    }
+    .language-js {
+        display: block;
+        padding: 10px;
+        background: $Divider;
+    }
     .hljs-number {
         color: $Success;
     }

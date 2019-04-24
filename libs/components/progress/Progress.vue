@@ -73,7 +73,7 @@ export default {
         statusIcon () {
             let type = ''
             switch (this.currentStatus) {
-                case 'exception':
+                case 'wrong':
                     type = 'shibai'
                     break
                 case 'success':
@@ -83,7 +83,7 @@ export default {
             return type
         },
         percent () {
-            return this.currentStatus !== 'success' && this.currentStatus !== 'exception' && this.value !== 100
+            return this.currentStatus !== 'success' && this.currentStatus !== 'wrong' && this.value !== 100
         },
         outbox () {
             return this.vertical ? {height: '100%', display: 'inline-block'} : {width: '100%', display: 'inline-block'}
@@ -119,7 +119,7 @@ export default {
             } : {}
         },
         bgStyle () {
-            return this.currentStatus === 'success' || this.value === 100 ? `${prefixCls}-success` : (this.currentStatus === 'exception' ? `${prefixCls}-exception` : (this.color ? `${prefixCls}-primary` : ''))
+            return this.currentStatus === 'success' || this.value === 100 ? `${prefixCls}-success` : (this.currentStatus === 'wrong' ? `${prefixCls}-wrong` : (this.color ? `${prefixCls}-primary` : ''))
         },
         left () {
             return {

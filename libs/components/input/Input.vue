@@ -8,46 +8,52 @@
         @mouseenter="mouseenterHandle"
         @mouseleave="mouseleaveHandle">
         <template v-if="type !== 'textarea'">
-            <div v-if="prefix || $slots.prefix" :class='[prefixCls+`-icon`,prefixCls+`-icon-prefix`]'>
-                <slot name='prefix'>
-                    <Icon size :type="prefix+''" @on-click="handleIconClick"></Icon>
-                </slot>
-            </div>
-            <transition name='fade'>
-                <div v-if="suffix || $slots.suffix || clearable || showPassword"
-                    v-show='showSuffix' :class='[prefixCls+`-icon`,prefixCls+`-icon-suffix`]'>
-                    <Icon size v-if="clearable && currentValue" type="shibai-mian" :class="[prefixCls+`-icon-clear`]" @on-click="handleClear"></Icon>
-                    <Icon size v-if="showPassword && currentValue" type="suoding-dongjie" @on-click="handleShowPassword"></Icon>
-                    <slot name='suffix' v-if='suffix || $slots.suffix'>
-                        <Icon size :type="suffix+''" :class="[prefixCls+`-noclear`]" @on-click="handleIconClick"></Icon>
-                    </slot>
-                </div>
-            </transition>
             <div ref="label" :class="labelClasses" :style='labelStyles' v-if="label || $slots.label">
                 <slot name="label">{{label}}</slot>
             </div>
+            <div ref="prepend" :class="[prefixCls+`-prepend`]" v-if="$slots.prepend && !label && !$slots.label">
+                <slot name="prepend"></slot>
+            </div>
             <div :class="[prefixCls+`-main`]" :style='inputStyles'>
+                <div v-if="prefix || $slots.prefix" :class='[prefixCls+`-icon`,prefixCls+`-icon-prefix`]'>
+                    <slot name='prefix'>
+                        <Icon size :type="prefix+''" @on-click="handleIconClick"></Icon>
+                    </slot>
+                </div>
+                <transition name='fade'>
+                    <div v-if="suffix || $slots.suffix || clearable || showPassword"
+                        v-show='showSuffix' :class='[prefixCls+`-icon`,prefixCls+`-icon-suffix`]'>
+                        <Icon size v-if="clearable && currentValue" type="shibai-mian" :class="[prefixCls+`-icon-clear`]" @on-click="handleClear"></Icon>
+                        <Icon size v-if="showPassword && currentValue" type="suoding-dongjie" @on-click="handleShowPassword"></Icon>
+                        <slot name='suffix' v-if='suffix || $slots.suffix'>
+                            <Icon size :type="suffix+''" :class="[prefixCls+`-noclear`]" @on-click="handleIconClick"></Icon>
+                        </slot>
+                    </div>
+                </transition>
                 <input
-                    :id="elementId"
-                    :class="inputClasses"
-                    :spellcheck="spellcheck"
-                    ref="input"
-                    :value="currentValue"
-                    :name="name"
-                    :placeholder="placeholder"
-                    :disabled="disabled"
-                    :maxlength="maxlength"
-                    :minlength="minlength"
-                    :readonly="readonly"
-                    :autofocus="autofocus"
-                    :type="currentType"
-                    :autocomplete="autocomplete"
-                    @change="handleChange"
-                    @input="handleInput"
-                    @focus="handleFocus"
-                    @blur="handleBlur"
-                    @keyup="handleKeyup"
-                    @keydown="handleKeydown"/>
+                :id="elementId"
+                :class="inputClasses"
+                :spellcheck="spellcheck"
+                ref="input"
+                :value="currentValue"
+                :name="name"
+                :placeholder="placeholder"
+                :disabled="disabled"
+                :maxlength="maxlength"
+                :minlength="minlength"
+                :readonly="readonly"
+                :autofocus="autofocus"
+                :type="currentType"
+                :autocomplete="autocomplete"
+                @change="handleChange"
+                @input="handleInput"
+                @focus="handleFocus"
+                @blur="handleBlur"
+                @keyup="handleKeyup"
+                @keydown="handleKeydown"/>
+            </div>
+            <div ref="append" :class="[prefixCls+`-append`]" v-if="$slots.append && !label && !$slots.label">
+                <slot name="append"></slot>
             </div>
         </template>
         <textarea
@@ -212,7 +218,7 @@ export default {
                     [`${prefixCls}-fixed-disabled`]: this.label && this.fixed && this.disabled,
                     [`${prefixCls}-box-clear`]: this.clearable && this.currentValue,
                     [`${prefixCls}-group`]: this.label && !this.fixed,
-                    [`${prefixCls}-group-fixed`]: this.label && this.fixed,
+                    [`${prefixCls}-group-fixed`]: (this.label && this.fixed) || ((this.$slots.append || this.$slots.prepend) && !this.label && !this.$slots.label),
                     [`${prefixCls}-box-textarea`]: this.type === 'textarea',
                     [`${prefixCls}-box-focused`]: this.label && this.fixed && this.labelFocus
                 }
@@ -243,9 +249,9 @@ export default {
             ]
         },
         labelStyles () {
-            const {label, labelWidth} = this
+            const {label, $slots, labelWidth} = this
             let style = {}
-            if (label && labelWidth) {
+            if ((label || $slots.label) && labelWidth) {
                 style = {
                     width: `${labelWidth}px`
                 }

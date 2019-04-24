@@ -88,7 +88,7 @@ $icon-prefix-cls: "#{$css-prefix}icon";
     }
 
     &-close {
-        z-index: 1;
+        z-index: $zindex-icon-close;
         // .content-close(1px, 31px);
         font-size: $font-size-large;
         position: absolute;

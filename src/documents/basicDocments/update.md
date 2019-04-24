@@ -1,5 +1,65 @@
 ### 更新日志
 
+### 0.5.1
+## `2019-04-23`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 Tree className支持，hover 支持, getSelectedNodes 公用 API等
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Carousel 轮播图重构
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Menu的样式进行优化，避免了外界css的影响
+    </b-timeline-item>
+</b-timeline>
+
+### 0.5.0
+## `2019-04-23`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 修改input的prepend、append换行问题
+    </b-timeline-item>
+</b-timeline>
+
+### 0.4.9
+## `2019-04-22`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 Input - append prepend slot方式
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Menu 兼容了primary主题风格，事件的名字添加on前缀
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Card的border样式bug
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Tree - render显示不正常的问题，统一全局 zIndex的顺序问题
+    </b-timeline-item>
+</b-timeline>
+
+### 0.4.8
+## `2019-04-22`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 step组件状态的判定优先级规则优化（现在由current判定状态的优先级高于在steps组件上设置的status的优先级）
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 progress 优化参数设置
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 tree 和 label-tree 分离
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 steps 组件按需引入优化
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.4.7
 ## `2019-04-18`
 <br>

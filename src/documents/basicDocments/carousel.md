@@ -4,92 +4,118 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-carousel>
-            <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
+        <b-carousel v-model="value1" loop style='width: 1028px'>
+            <b-carousel-item>
+                <div class="carousel">1</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">2</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">3</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">4</div>
+            </b-carousel-item>
         </b-carousel>
     </div>
 
 ::: code
 ```html
-    <b-carousel>
-        <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
-    </b-carousel>
-```
-:::
-</div>
-
-### 动画
-
-使用```animation``` 属性来定义 Carousel 的动画
-
-<div class='example'>
-    <div class='example-box'>
-        <b-carousel animation='slide'>
-            <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
-        </b-carousel>
-    </div>
-
-::: code
-```html
-    <b-carousel animation='slide'>
-        <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
-    </b-carousel>
-```
-:::
-</div>
-
-### 当前显示
-
-使用```current``` 属性来定义 Carousel 当前显示的页面
-
-使用```auto``` 属性来定义 Carousle 是否自动轮播
-
-<div class='example'>
-    <div class='example-box'>
-        <b-carousel :current='2' :auto='false'>
-            <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
-        </b-carousel>
-    </div>
-
-::: code
-```html
-    <b-carousel :current='current' :auto='auto'>
-        <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
+    <b-carousel v-model="value1" loop>
+        <b-carousel-item>
+            <div class="carousel">1</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">2</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">3</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">4</div>
+        </b-carousel-item>
     </b-carousel>
     <script>
         export default {
             data () {
                 return {
-                    current: 2,
-                    auto: false
+                    value1: 0
                 }
             }
         }
     </script>
+    <style>
+        .carousel {
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            color: #fff;
+            font-size: 60px;
+            background: #ccc;
+        }
+    </style>
+```
+:::
+</div>
+
+### 自动切换
+
+使用```autoplay``` 属性来定义 Carousel 的自动切换
+
+<div class='example'>
+    <div class='example-box'>
+        <b-carousel v-model="value2" loop autoplay style='width: 1028px'>
+            <b-carousel-item>
+                <div class="carousel">1</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">2</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">3</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">4</div>
+            </b-carousel-item>
+        </b-carousel>
+    </div>
+
+::: code
+```html
+    <b-carousel v-model="value2" loop autoplay>
+        <b-carousel-item>
+            <div class="carousel">1</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">2</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">3</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">4</div>
+        </b-carousel-item>
+    </b-carousel>
+    <script>
+        export default {
+            data () {
+                return {
+                    value2: 0
+                }
+            }
+        }
+    </script>
+    <style>
+        .carousel {
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            color: #fff;
+            font-size: 60px;
+            background: #ccc;
+        }
+    </style>
 ```
 :::
 </div>
@@ -100,128 +126,223 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-carousel :arrow='false'>
-            <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
+        <b-carousel v-model="value3" loop arrow='always' style='width: 1028px'>
+            <b-carousel-item>
+                <div class="carousel">1</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">2</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">3</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">4</div>
+            </b-carousel-item>
         </b-carousel>
     </div>
 
 ::: code
 ```html
-    <b-carousel :arrow='arrow'>
-        <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
+    <b-carousel v-model="value3" loop arrow='always'>
+        <b-carousel-item>
+            <div class="carousel">1</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">2</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">3</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">4</div>
+        </b-carousel-item>
     </b-carousel>
     <script>
         export default {
             data () {
                 return {
-                    arrow: false
+                    value3: 0
                 }
             }
         }
     </script>
+    <style>
+        .carousel {
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            color: #fff;
+            font-size: 60px;
+            background: #ccc;
+        }
+    </style>
 ```
 :::
 </div>
 
 ### 指示器
 
-使用```pointer``` 属性来定义 Carousel 指示器是否显示
+使用```dots``` 属性来定义 Carousel 指示器显示位置
 
 <div class='example'>
     <div class='example-box'>
-        <b-carousel :pointer='false'>
-            <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
+        <b-carousel v-model="value4" loop dots='outside' style='width: 1028px'>
+            <b-carousel-item>
+                <div class="carousel">1</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">2</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">3</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">4</div>
+            </b-carousel-item>
         </b-carousel>
     </div>
 
 ::: code
 ```html
-    <b-carousel :pointer='pointer'>
-        <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
+    <b-carousel v-model="value4" loop dots='outside'>
+        <b-carousel-item>
+            <div class="carousel">1</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">2</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">3</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">4</div>
+        </b-carousel-item>
     </b-carousel>
     <script>
         export default {
             data () {
                 return {
-                    pointer: false
+                    value4: 0
                 }
             }
         }
     </script>
+    <style>
+        .carousel {
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            color: #fff;
+            font-size: 60px;
+            background: #ccc;
+        }
+    </style>
 ```
 :::
 </div>
 
-### 循环播放
+### 圆形指示器
 
-使用```loop``` 属性来定义 Carousel 是否循环播放
+使用```radius-dot``` 属性来定义 Carousel 显示圆形指示器
 
 <div class='example'>
     <div class='example-box'>
-        <b-carousel :loop='false'>
-            <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-            <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
+        <b-carousel v-model="value5" loop radius-dot style='width: 1028px'>
+            <b-carousel-item>
+                <div class="carousel">1</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">2</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">3</div>
+            </b-carousel-item>
+            <b-carousel-item>
+                <div class="carousel">4</div>
+            </b-carousel-item>
         </b-carousel>
     </div>
 
 ::: code
 ```html
-    <b-carousel :loop='loop'>
-        <b-carousel-item><div class='carousel-example'>1</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>2</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>3</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>4</div></b-carousel-item>
-        <b-carousel-item><div class='carousel-example'>5</div></b-carousel-item>
+     <b-carousel v-model="value5" loop radius-dot>
+        <b-carousel-item>
+            <div class="carousel">1</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">2</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">3</div>
+        </b-carousel-item>
+        <b-carousel-item>
+            <div class="carousel">4</div>
+        </b-carousel-item>
     </b-carousel>
     <script>
         export default {
             data () {
                 return {
-                    loop: false
+                    value5: 0
                 }
             }
         }
     </script>
+    <style>
+        .carousel {
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            color: #fff;
+            font-size: 60px;
+            background: #ccc;
+        }
+    </style>
 ```
 :::
 </div>
+<script>
+export default {
+    data () {
+        return {
+            value1: 0,
+            value2: 0,
+            value3: 0,
+            value4: 0,
+            value5: 0
+        }
+    }
+}
+</script>
+<style>
+    .carousel {
+        width: 100%;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        color: #fff;
+        font-size: 60px;
+        background: #ccc;
+    }
+</style>
 
 ### props
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | ---- | ---- | ---- | ---- | ---- |
-| height | 高度   | number  |  | 360 |
-| animation | 类型 | string | `fade`、`slide` | fade |
-| speed | 过渡时间 | number |  | 300 |
-| interval | 停留时间 | number |  | 3000 |
-| auto | 自动播放 | boolean | `true`、`false` | true |
-| loop | 循环播放 | boolean | `true`、`false` | true |
-| current | 当前显示 | number |  | 0 |
-| pointer | 指示器 | boolean | `true`、`false` | true |
-| arrow | 切换箭头 | boolean | `true`、`false` | true |
-| hoverPause | 鼠标划过时暂停 | boolean | `true`、`false` | true |
+| value | 幻灯片的索引，从 0 开始，可以使用 v-model 双向绑定数据 | Number |  | 0 |
+| height | 走马灯的高度，可填 auto 或具体高度数值，单位 px | String/Number  |  | auto |
+| autoplay-speed | 过渡时间，时间为 ms | Number |  | 2000 |
+| autoplay | 自动播放 | Boolean | `true`、`false` | true |
+| dots | 指示器的位置 | String | `inside` `outside` `none`  | inside |
+| loop | 循环播放 | Boolean | `true` `false` | true |
+| radius-dot | 是否显示圆形指示器 | Boolean | `true`、`false` | false |
+| arrow | 切换箭头的显示时机 | String | `houver` `always` `never` | hover |
+| trigger | 指示器的触发方式 | String | `click` `hover` | click|
+| easing | 动画效果 | String |  | ease|
+
 
 ### events
 | 事件名 | 说明	| 返回值 |
 | ---- | ---- | ---- |
-| after | 加载完成后 | - |
-| slideAfter | 滑动结束 | index |
-
+| on-change | 幻灯片切换时触发，目前激活的幻灯片的索引，原幻灯片的索引 | oldValue, value |

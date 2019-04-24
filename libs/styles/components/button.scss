@@ -2,172 +2,178 @@ $btn-prefix-cls: $css-prefix+"button";
 $btn-font-weight: normal;
 $line-height-base: 1.5;
 
-$css-prefix-iconfont : b-icon;
-$cursor-disabled : not-allowed;
-$font-size-base : 14px;
-$background-color-base : #f7f7f7; // base
+$css-prefix-iconfont: b-icon;
+$cursor-disabled: not-allowed;
+$font-size-base: 14px;
+$background-color-base: #f7f7f7; // base
 
 // Button
-$btn-font-weight : normal;
-$btn-padding-base : 5px 15px 6px;
-$btn-padding-large : 6px 15px 6px 15px;
-$btn-padding-small : 1px 7px 2px;
-$btn-padding-base-icon : 5px 15px 6px;
-$btn-padding-large-icon : 6px 15px 6px 15px;
-$btn-padding-small-icon : 1px 7px 2px;
-$btn-font-size : 12px;
-$btn-font-size-large : 14px;
-$btn-border-radius : 4px;
+$btn-font-weight: normal;
+$btn-padding-base: 5px 15px 6px;
+$btn-padding-large: 6px 15px 6px 15px;
+$btn-padding-small: 1px 7px 2px;
+$btn-padding-base-icon: 5px 15px 6px;
+$btn-padding-large-icon: 6px 15px 6px 15px;
+$btn-padding-small-icon: 1px 7px 2px;
+$btn-font-size: 12px;
+$btn-font-size-large: 14px;
+$btn-border-radius: 4px;
 $btn-border-radius-small: 3px;
-$btn-group-border : darken($Primary, 5%);
-$btn-disable-color : #c5c8ce;
-$btn-disable-bg : $background-color-base;
-$btn-disable-border : $Border;
-$btn-default-color : $Content;
-$btn-default-bg : #fff;
-$btn-default-border : $Border;
+$btn-group-border: darken($Primary, 5%);
+$btn-disable-color: #c5c8ce;
+$btn-disable-bg: $background-color-base;
+$btn-disable-border: $Border;
+$btn-default-color: $Content;
+$btn-default-bg: #fff;
+$btn-default-border: $Border;
 $btn-Primary: #fff;
-$btn-primary-bg : $Primary;
-$btn-ghost-color : $Content;
-$btn-ghost-bg : #fff;
-$btn-ghost-border : $Border;
-$btn-circle-size : 32px;
-$btn-circle-size-large : 36px;
-$btn-circle-size-small : 24px;
+$btn-primary-bg: $Primary;
+$btn-ghost-color: $Content;
+$btn-ghost-bg: #fff;
+$btn-ghost-border: $Border;
+$btn-circle-size: 32px;
+$btn-circle-size-large: 36px;
+$btn-circle-size-small: 24px;
 
 .#{$btn-prefix-cls} {
-  @include btn();
-  @include btn-default();
+    @include btn();
+    @include btn-default();
 
-  &-long {
-    width: 100%;
-  }
-
-  &>.#{css-prefix}icon+span,
-  &>span+.#{css-prefix}-icon {
-    margin-left: 4px;
-  }
-
-  &-primary {
-    @include btn-primary();
-
-    .#{$btn-prefix-cls}-group:not(.#{$btn-prefix-cls}-group-vertical) &:not(:first-child):not(:last-child) {
-      border-right-color: $btn-group-border;
-      border-left-color: $btn-group-border;
+    &-long {
+        width: 100%;
     }
 
-    .#{$btn-prefix-cls}-group:not(.#{$btn-prefix-cls}-group-vertical) &:first-child {
-      &:not(:last-child) {
-        border-right-color: $btn-group-border;
+    & > .#{css-prefix}icon + span,
+    & > span + .#{css-prefix}-icon {
+        margin-left: 4px;
+    }
 
-        &[disabled] {
-          border-right-color: $btn-default-border;
+    &-primary {
+        @include btn-primary();
+
+        .#{$btn-prefix-cls}-group:not(.#{$btn-prefix-cls}-group-vertical) &:not(:first-child):not(:last-child) {
+            border-right-color: $btn-group-border;
+            border-left-color: $btn-group-border;
         }
-      }
-    }
 
-    .#{$btn-prefix-cls}-group:not(.#{$btn-prefix-cls}-group-vertical) &:last-child:not(:first-child),
-    .#{$btn-prefix-cls}-group:not(.#{$btn-prefix-cls}-group-vertical) &+.#{$btn-prefix-cls} {
-      border-left-color: $btn-group-border;
+        .#{$btn-prefix-cls}-group:not(.#{$btn-prefix-cls}-group-vertical) &:first-child {
+            &:not(:last-child) {
+                border-right-color: $btn-group-border;
 
-      &[disabled] {
-        border-left-color: $btn-default-border;
-      }
-    }
-
-    .#{$btn-prefix-cls}-group-vertical &:not(:first-child):not(:last-child) {
-      border-top-color: $btn-group-border;
-      border-bottom-color: $btn-group-border;
-    }
-
-    .#{$btn-prefix-cls}-group-vertical &:first-child {
-      &:not(:last-child) {
-        border-bottom-color: $btn-group-border;
-
-        &[disabled] {
-          border-top-color: $btn-default-border;
+                &[disabled] {
+                    border-right-color: $btn-default-border;
+                }
+            }
         }
-      }
+
+        .#{$btn-prefix-cls}-group:not(.#{$btn-prefix-cls}-group-vertical) &:last-child:not(:first-child),
+        .#{$btn-prefix-cls}-group:not(.#{$btn-prefix-cls}-group-vertical) & + .#{$btn-prefix-cls} {
+            border-left-color: $btn-group-border;
+
+            &[disabled] {
+                border-left-color: $btn-default-border;
+            }
+        }
+
+        .#{$btn-prefix-cls}-group-vertical &:not(:first-child):not(:last-child) {
+            border-top-color: $btn-group-border;
+            border-bottom-color: $btn-group-border;
+        }
+
+        .#{$btn-prefix-cls}-group-vertical &:first-child {
+            &:not(:last-child) {
+                border-bottom-color: $btn-group-border;
+
+                &[disabled] {
+                    border-top-color: $btn-default-border;
+                }
+            }
+        }
+
+        .#{$btn-prefix-cls}-group-vertical &:last-child:not(:first-child),
+        .#{$btn-prefix-cls}-group-vertical & + .#{$btn-prefix-cls} {
+            border-top-color: $btn-group-border;
+
+            &[disabled] {
+                border-bottom-color: $btn-default-border;
+            }
+        }
     }
 
-    .#{$btn-prefix-cls}-group-vertical &:last-child:not(:first-child),
-    .#{$btn-prefix-cls}-group-vertical &+.#{$btn-prefix-cls} {
-      border-top-color: $btn-group-border;
-
-      &[disabled] {
-        border-bottom-color: $btn-default-border;
-      }
+    &-text {
+        @include btn-text();
     }
-  }
 
-  &-text {
-    @include btn-text();
-  }
+    &-success {
+        @include btn-color($Success);
+    }
 
-  &-success {
-    @include btn-color($Success);
-  }
+    &-warning {
+        @include btn-color($Warning);
+    }
 
-  &-warning {
-    @include btn-color($Warning);
-  }
+    &-error {
+        @include btn-color($Error);
+    }
 
-  &-error {
-    @include btn-color($Error);
-  }
+    &-info {
+        @include btn-color($DarkPrimary);
+    }
 
-  &-info {
-    @include btn-color($DarkPrimary);
-  }
-
-  &-circle,
-  &-circle-outline {
-    @include btn-circle($btn-prefix-cls);
-  }
-
-  &:before {
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    bottom: -1px;
-    right: -1px;
-    background: #fff;
-    opacity: 0.35;
-    content: '';
-    border-radius: inherit;
-    z-index: 1;
-    transition: opacity $transition-time;
-    pointer-events: none;
-    display: none;
-  }
-
-  $prefix:&;
-
-  &#{$prefix}-loading {
-    pointer-events: none;
-    position: relative;
+    &-circle,
+    &-circle-outline {
+        @include btn-circle($btn-prefix-cls);
+    }
 
     &:before {
-      display: block;
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        bottom: -1px;
+        right: -1px;
+        background: #fff;
+        opacity: 0.35;
+        content: '';
+        border-radius: inherit;
+        z-index: $zindex-before;
+        transition: opacity $transition-time;
+        pointer-events: none;
+        display: none;
     }
-  }
 
-  &-group {
-    @include btn-group($btn-prefix-cls);
-  }
+    $prefix: &;
 
-  &-group-vertical {
-    @include btn-group-vertical($btn-prefix-cls);
-	}
-	
+    &#{$prefix}-loading {
+        pointer-events: none;
+        position: relative;
+
+        &:before {
+            display: block;
+        }
+    }
+
+    &-group {
+        @include btn-group($btn-prefix-cls);
+    }
+
+    &-group-vertical {
+        @include btn-group-vertical($btn-prefix-cls);
+    }
+
 }
 
-.#{$btn-prefix-cls}-load-loop{
-	animation: ani-load-loop 1s linear infinite;
+.#{$btn-prefix-cls}-load-loop {
+    animation: ani-load-loop 1s linear infinite;
 }
 
 @keyframes ani-load-loop {
-	from { transform: rotate(0deg);}
-	50%  { transform: rotate(180deg);}
-	to   { transform: rotate(360deg);}
+    from {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
