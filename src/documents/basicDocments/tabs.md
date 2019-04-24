@@ -501,7 +501,14 @@
 |on-tab-remove|tab 被关闭时触发|name|
 |on-click|tab 被点击时触发|name|
 
-### TabPane Slots
+
+### Tabs Slot
+| 名称 | 说明  |
+| ---- | ---- |
+|extra|附加内容|
+
+
+### TabPane Props
 | 参数 | 说明 | 类型 | 可选值 |默认值 |
 | ---- | ---- | ---- | ---- | ---- |
 | name | 用于标识当前面板，对应 value，默认为其索引值  | String  | --- |--|
