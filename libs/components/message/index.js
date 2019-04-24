@@ -30,7 +30,7 @@ function Message (options) {
     msgCon.style.top = defaults.top + 'px'
     msgCon.style.left = 0
     msgCon.style.textAlign = 'center'
-    let id = count++
+    let id = `b-message-${count++}`
     let {duration} = options
     options.onClose = function () {
         Message.close(id, duration, close)

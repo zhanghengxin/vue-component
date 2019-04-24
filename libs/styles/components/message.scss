@@ -27,6 +27,7 @@ $css-prefix-message: $css-prefix + 'message';
 }
 
 .#{$css-prefix-message}-wrapper {
+    margin-bottom: 5px;
     .#{$css-prefix-message} {
         display: inline-block;
         padding: 8px 16px;

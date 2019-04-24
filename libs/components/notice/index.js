@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Component from './notice.vue'
+import { prefix } from '../../utils/common'
 
 const NoticeConstructor = Vue.extend(Component)
+let noticeList = null
 
 const instances = []
 let seed = 1
@@ -30,17 +32,18 @@ const notice = (options) => {
             ...options
         }
     })
-    const id = `b-notice_${seed++}`
+    if (!noticeList) {
+        noticeList = document.createElement('div')
+        noticeList.className = `${prefix}notice-container`
+        document.body.appendChild(noticeList)
+    }
+    noticeList.style.top = defaults.top + 'px'
+    noticeList.style.right = 0
+    const id = `b-notice-${seed++}`
     instance.id = id
     instance.vm = instance.$mount()
-    document.body.appendChild(instance.vm.$el)
     instance.vm.visible = true
-    let verticalOffset = 0
-    instances.forEach(item => {
-        verticalOffset += item.$el.offsetHeight + defaults.top
-    })
-    verticalOffset += 16
-    instance.verticalOffset = verticalOffset
+    noticeList.appendChild(instance.vm.$el)
     instances.push(instance)
     instance.vm.$on('closed', () => {
         removeInstance(instance)
@@ -60,6 +63,24 @@ types.forEach(type => {
         return notice({...options, type})
     }
 })
+notice.close = function (id, close) {
+    for (let i = 0; i < instances.length; i++) {
+        if (id === instances[i].id) {
+            if (typeof close === 'function') {
+                close(instances[i])
+            }
+            instances[i] = null
+            instances.splice(i, 1)
+            break
+        }
+    }
+    setTimeout(function () {
+        if (instances.length === 0 && noticeList) {
+            noticeList.remove()
+            noticeList = null
+        }
+    }, 3000)
+}
 notice.config = function (options) {
     if (options.duration || options.duration === 0) {
         defaults.duration = options.duration

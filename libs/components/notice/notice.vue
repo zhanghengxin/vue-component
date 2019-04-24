@@ -1,19 +1,22 @@
 <template>
     <transition name="move-notice" @after-leave="afterLeave" @after-enter="afterEnter">
-        <div :class="noticeCls"
-             :style="style"
-             v-show="visible"
-             @mouseenter="clearTimer"
-             @mouseleave="createTimer"
-        >
-            <div :class="[noticeCls[1]+'-icon']">
-                <Icon v-if="iconShow" size="32" :type='iconType'></Icon>
+        <div
+            v-show="visible"
+            :class="[prefixCls+'-wrapper']">
+            <div :class="noticeCls"
+                 @mouseenter="clearTimer"
+                 @mouseleave="createTimer"
+            >
+                <div :class="[noticeCls[1]+'-icon']">
+                    <Icon v-if="iconShow" size="32" :type='iconType'></Icon>
+                </div>
+                <div :class="[prefixCls+'-body']">
+                    <div :class="[prefixCls+'-body-title']">{{title}}</div>
+                    <span :class="[prefixCls+'-body-content']">{{content||desc}}</span>
+                </div>
+                <Icon :class="[prefixCls+'-close']" size='18' type='quxiao-guanbi-shanchu'
+                      @on-click="handleClose"></Icon>
             </div>
-            <div :class="[prefixCls+'-body']">
-                <div :class="[prefixCls+'-body-title']">{{title}}</div>
-                <span :class="[prefixCls+'-body-content']">{{content||desc}}</span>
-            </div>
-            <Icon :class="[prefixCls+'-close']" size='18' type='quxiao-guanbi-shanchu' @on-click="handleClose"></Icon>
         </div>
     </transition>
 </template>
@@ -60,6 +63,7 @@ export default {
             prefixCls: prefixCls,
             verticalOffset: 0,
             height: 0,
+            closed: false,
             visible: false
         }
     },
@@ -69,13 +73,6 @@ export default {
                 `${prefixCls}`,
                 `${this.prefixCls}-${this.type}`
             ]
-        },
-        style () {
-            return {
-                position: 'fixed',
-                right: '20px',
-                top: `${this.verticalOffset}px`
-            }
         },
         iconType () {
             const iconType = {
@@ -90,20 +87,33 @@ export default {
     mounted () {
         this.createTimer()
     },
+    watch: {
+        closed (val) {
+            this.visible = false
+            this.$el.addEventListener('animationend', this.destroyElement)
+        }
+    },
     methods: {
         handleClose (e) {
             e.preventDefault()
+            this.closed = true
             this.$emit('on-close')
         },
         afterLeave () {
+            this.closed = true
             this.$emit('on-close')
         },
         createTimer () {
             if (this.duration && this.autoClose) {
                 this.timer = setTimeout(() => {
-                    this.visible = false
+                    this.closed = true
                 }, this.duration * 1000)
             }
+        },
+        destroyElement () {
+            this.$el.removeEventListener('transitionend', this.destroyElement)
+            this.$destroy(true)
+            this.$el.parentNode.removeChild(this.$el)
         },
         clearTimer () {
             if (this.timer) {
