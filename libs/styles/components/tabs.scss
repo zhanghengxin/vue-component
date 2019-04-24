@@ -1,75 +1,117 @@
-$css-prefix-tabs: $css-prefix + 'tabs';
-.#{$css-prefix-tabs} {
+@import "../common/color";
+$tabs: $css-prefix + 'tabs';
+$tabPanel: $css-prefix + 'tab-pane';
+$tabExtra: $css-prefix + 'tabs-extra';
+//tabs区域
+.#{$tabs} {
   font-size: 14px;
-  /* color: #657180 */
+  overflow: hidden;
+  position:relative;
 }
 
-.#{$css-prefix-tabs}-bar:after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 1px;
-  @include _background($SubContent);
-  margin-top: -1px;
+//选项卡区域
+.#{$tabs}-bar{
+  border-bottom: 1px solid $Border;
+  position:relative;
 }
 
-.#{$css-prefix-tabs}-tab {
+//选项卡区域的蓝色底边
+.#{$tabs}-ink-bar{
+  width:60px;
+  height:2px;
+  border:1px solid $Primary;
+  position:absolute;
+  bottom: 0px;
+  z-index: 2;
+}
+
+//选项卡
+.#{$tabs}-tab {
   display: inline-block;
   padding: 4px 16px;
-  margin-right: 6px;
+  margin-left: 12px;
   background: $white;
-  border: 1px solid inherit;
-  @include _borderColor($SubContent);
-  border-radius: 2px;
+  border-radius: 3px 3px 0px 0px ;
   cursor: pointer;
+  @include _color($Title);
   position: relative;
+  &:hover{
+    @include _color($Primary);
+  }
 }
 
-.#{$css-prefix-tabs}-active {
+//激活状态
+.#{$tabs}-tab.#{$tabs}-active {
   @include _color($Primary);
-  border-top: 1px solid $Primary;
-  border-bottom: 1px solid $white;
 }
 
-.#{$css-prefix-tabs}-active:before {
-  content: '';
-  display: block;
-  height: 1px;
-  @include _background($Primary);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.#{$css-prefix-tabs}-content {
+//排布tabs
+.#{$tabs}-content {
   padding: 8px 0;
+  display: flex;
+  flex-direction: row;
+  .#{$tabPanel}{
+    width:100%;
+    flex-shrink: 0;
+  }
 }
 
-.#{$css-prefix-tabs}-disabled {
+//禁用状态
+.#{$tabs}-tab.#{$tabs}-disabled {
   pointer-events: none;
-  @include _color($Disabled);
+  @include _color($DisContent);
 
 }
 
-.#{$css-prefix-tabs}-line {
-  border: 0px;
-  border-bottom: 1px solid $SubContent;
+//迷你型
+.#{$tabs}-mini {
+  font-size: 12px;
+}
+
+
+//卡片型的样式
+.#{$tabs}-card  > .#{$tabs}-bar{
+  .#{$tabs}-tab{
+    @include _background_opacity($Divider,0.5);
+    border:1px solid $Border;
+    margin-bottom: -1px;
+
+    .#{$tabs}-close-icon{
+      @include _color($DisContent);
+      width:0px;
+      margin-right: -5px;
+      margin-left: 5px;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out ;
+    }
+
+    &.#{$tabs}-active{
+      @include _background($white);
+      border:1px solid $Primary;
+      border-bottom-color: $white;
+      .#{$tabs}-close-icon{
+        width:15px;
+      }
+    }
+
+    &:hover{
+      .#{$tabs}-close-icon{
+        width:15px;
+      }
+    }
+  }
 
 }
 
-.#{$css-prefix-tabs}-lineActive:before {
-  content: '';
-  display: block;
-  height: 2px;
-  /* background: #3399ff; */
-  position: absolute;
-  top: 26px;
-  left: 0;
-  right: 0;
+//动画效果
+.#{$tabs}-animated {
+  .#{$tabs}-content,.#{$tabs}-ink-bar{
+    transition: all 0.3s ease-in-out ;
+  }
 }
 
-.#{$css-prefix-tabs}-mini {
-  font-size: 10px;
+//extra区域的样式
+.#{$tabExtra}{
+  float: right;
+  margin-left: 5px;
 }
-
