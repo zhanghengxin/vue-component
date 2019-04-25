@@ -13,7 +13,7 @@
             placeholder=""
             @get-drop-width="getDropWidth"
             :options='options'>
-        <transition name="slide">
+        <transition name="slide" slot="tree">
             <Drop
                 :placement='placement'
                 v-show="popupVisible">

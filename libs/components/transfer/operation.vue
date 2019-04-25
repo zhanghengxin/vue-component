@@ -1,31 +1,31 @@
 <template>
     <div :class="prefixCls">
-        <b-button
+        <Button
             type="primary"
             size="small"
             icon="zuo"
             :disabled="!rightActive"
             @click.native="moveToLeft">
             {{ operations[0] }}
-        </b-button>
-        <b-button
+        </Button>
+        <Button
             type="primary"
             size="small"
             icon="you"
             :disabled="!leftActive"
             @click.native="moveToRight">
             {{ operations[1] }}
-        </b-button>
+        </Button>
     </div>
 </template>
 <script>
-import bButton from '../button/Button'
+import Button from '../button/Button'
 import { prefix } from '../../utils/common'
 const prefixCls = `${prefix}transfer-operation`
 
 export default {
     name: prefixCls,
-    components: { bButton },
+    components: { Button },
     props: {
         operations: Array,
         leftActive: Boolean,

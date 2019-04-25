@@ -1,11 +1,11 @@
 <template>
     <div :class="wrapperCls">
         <div :class="headerCls">
-            <b-checkbox
+            <Checkbox
                 :value="checkedAll"
                 :disabled="checkedAllDisabled"
                 @on-change="toggleSelectAll">
-            </b-checkbox>
+            </Checkbox>
             <span
                 :class="prefixCls + '-header-title'"
                 @click="toggleSelectAll(!checkedAll)">
@@ -18,12 +18,12 @@
         </div>
         <div :class="bodyCls">
             <div v-if="filterable" :class="prefixCls + '-body-search-wrapper'">
-                <b-search
+                <Search
                     :query="query"
                     @on-query-clear="handleQueryClear"
                     @on-query-change="handleQueryChange"
                     :placeholder="filterPlaceholder">
-                </b-search>
+                </Search>
             </div>
             <ul :class="prefixCls + '-content'">
                 <li
@@ -31,10 +31,10 @@
                     v-for="(item, index) in filterData"
                     :class="itemCls(item)"
                     @click.prevent="select(item)">
-                    <b-checkbox
+                    <Checkbox
                         :value="isCheck(item)"
                         :disabled="item.disabled">
-                    </b-checkbox>
+                    </Checkbox>
                     <span v-html="showLabel(item)"></span>
                 </li>
                 <li :class="prefixCls + '-content-not-found'">{{ notFoundText }}</li>
@@ -47,15 +47,14 @@
 </template>
 
 <script>
-import bCheckbox from '../checkbox/Checkbox'
-import bSearch from './search'
+import Checkbox from '../checkbox/Checkbox'
+import Search from './search'
 import { prefix } from '../../utils/common'
 
 const prefixCls = `${prefix}transfer-list`
-
 export default {
     name: prefixCls,
-    components: {bSearch, bCheckbox},
+    components: {Search, Checkbox},
     props: {
         data: Array,
         renderFormat: Function,

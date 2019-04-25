@@ -9,7 +9,7 @@
                     <div :class="contentClasses" ref="content" :style="contentStyles">
                         <a :class="[prefixCls + '-close']" v-if="closable" @click="close">
                             <slot name="close">
-                                <b-icon type="quxiao-guanbi-shanchu"></b-icon>
+                                <Icon type="quxiao-guanbi-shanchu"></Icon>
                             </slot>
                         </a>
                         <div :class="[prefixCls + '-header']" @mousedown="handleMoveStart" v-if="showHead">
@@ -23,8 +23,7 @@
                         <div :class="[prefixCls + '-footer']" v-if="!footerHide">
                             <slot name="footer">
                                 <Button @click.native="cancel">{{ localeCancelText }}</Button>
-                                <Button type="primary" :loading="buttonLoading" @click.native="ok">{{ localeOkText }}
-                                </Button>
+                                <Button type="primary" :loading="buttonLoading" @click.native="ok">{{ localeOkText }}</Button>
                             </slot>
                         </div>
                     </div>
@@ -35,6 +34,7 @@
 </template>
 <script>
 import Button from '../button'
+import Icon from '../icon'
 import TransferDom from './directive/transfer-dom'
 import { on, off } from '../../utils/dom'
 import Scrollbar from './mixins/scrollbar'
@@ -46,7 +46,7 @@ const prefixCls = prefix + 'modal'
 export default {
     name: prefixCls,
     mixins: [Scrollbar],
-    components: {Button},
+    components: {Button, Icon},
     directives: {TransferDom},
     props: {
         value: {

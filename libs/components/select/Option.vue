@@ -7,19 +7,21 @@
         @touchstart.prevent
     >
         <slot>{{ labelText }}
-            <b-icon type='queding' v-if='showSelected'/>
+            <Icon type='queding' v-if='showSelected'/>
         </slot>
     </li>
 </template>
 <script>
 import Emitter from '../../mixins/emitter'
 import { prefix } from '../../utils/common'
+import Icon from '../icon'
 
 const prefixCls = prefix + 'option'
 
 export default {
     name: prefixCls,
     mixins: [Emitter],
+    components: {Icon},
     props: {
         value: {
             type: [String, Number],
