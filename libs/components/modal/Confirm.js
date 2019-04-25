@@ -63,7 +63,6 @@ BModal.Instance = (params = {}) => {
                     })
                 ])
             }
-            
             // render content
             let bodyRender
             if (this.render) {
@@ -85,7 +84,6 @@ BModal.Instance = (params = {}) => {
                     })
                 ])
             }
-            
             // render footer
             let footerVNodes = []
             let footerRender
@@ -113,7 +111,6 @@ BModal.Instance = (params = {}) => {
                     class: `${prefixCls}-footer`
                 }
             }, footerVNodes)
-            
             return h(BModal, {
                 props: Object.assign({}, params, {
                     width: this.width,
@@ -216,18 +213,13 @@ BModal.Instance = (params = {}) => {
         show (props) {
             modal.$parent.showCancel = props.showCancel ? props.showCancel : true
             modal.$parent.iconType = props.icon
-            
             modal.$parent.iconName = iconNameStore[props.icon]
-            
             if (props.content) {
                 modal.$parent.body = props.content
                 delete props.content
             }
-            
             Object.assign(modal.$parent, props)
-            
             modal.$parent.onRemove = props.onRemove
-            
             modal.visible = true
         },
         remove () {
