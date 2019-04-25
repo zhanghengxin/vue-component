@@ -1,5 +1,17 @@
 ### 更新日志
 
+### 0.5.3
+## `2019-04-25`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修改 select的 error样式
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 全局不正常的引用组件的方式
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.5.2
 ## `2019-04-24`
 <br>
