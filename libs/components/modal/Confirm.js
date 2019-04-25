@@ -196,7 +196,6 @@ BModal.Instance = (params = {}) => {
             onRemove () {}
         }
     })
-    
     const component = Instance.$mount()
     document.body.appendChild(component.$el)
     const modal = Instance.$children[0]
@@ -208,7 +207,6 @@ BModal.Instance = (params = {}) => {
         error: 'shibai',
         confirm: 'yiban'
     }
-    
     return {
         show (props) {
             modal.$parent.showCancel = props.showCancel ? props.showCancel : true
