@@ -156,7 +156,7 @@
     <div class="example-box">
         <div>
             <b-select v-model="value" width='200' @on-change='changeConsole'>
-                <b-option v-for='item in options5' :value='item.value' :label='item.label' :key='item.value'></b-option>
+                <b-option v-for='item in options5' :value='item.value' v-text='item.label' :key='item.value'></b-option>
             </b-select>   
             <b-select v-model="value" width='200' :options='options5' @on-change='changeConsole'></b-select>   
             <span>{{value}}</span>
@@ -604,8 +604,8 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
                 style="width:200px"
                 :filterabled='filterabled'
                 :filterFn='filterFn'
+                :options='options'
                 >
-                <b-option v-for='item in options' :value='item.value' :label='item.label' :key='item.value'></b-option>
             </b-select>
         </div>
     </div>
