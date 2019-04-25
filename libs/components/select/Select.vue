@@ -122,6 +122,19 @@ import Icon from '../icon'
 import FunctionalOptions from './functional-options.vue'
 
 const prefixCls = prefix + 'select'
+const findChildrenText = (componentOptions = {}, cData = {}) => {
+    let text = ''
+    let children = componentOptions.children
+    text += (cData.domProps && cData.domProps.textContent) || ''
+    if (!children) return text
+    for (let vnode of children) {
+        const cOptions = vnode.componentOptions
+        const cData = vnode.data
+        text += vnode.text || ''
+        text += findChildrenText(cOptions, cData)
+    }
+    return text
+}
 
 export default {
     name: prefixCls,
@@ -298,7 +311,7 @@ export default {
         selectBoxStyles () {
             const {label, fixed} = this
             let style = {}
-            if (!label || (label && fixed)) { //
+            if (!label || (label && fixed)) {
                 style.width = `${this.width}px`
             }
             return style
@@ -399,16 +412,7 @@ export default {
         }
     },
     mounted () {
-        if (!this.selectOptions) {
-            const selectOptions = []
-            const slotOptions = (this.slotOptions || [])
-            for (let option of slotOptions) {
-                const cOptions = option.componentOptions
-                if (!cOptions) continue
-                selectOptions.push(cOptions.propsData)
-            }
-            this.selectOptions = selectOptions
-        }
+        this.selectOptionsInit()
         this.$on('on-select-selected', this.onOptionClick)
         if (this.selectOptions && this.selectOptions.length > 0) {
             this.values = this.valuesInit()
@@ -421,15 +425,29 @@ export default {
     methods: {
         updateSlotOptions () {
             this.slotOptions = this.$slots.default
+            this.selectOptionsInit()
+        },
+        selectOptionsInit () {
             const selectOptions = []
             if (this.slotOptions) {
                 for (let option of this.slotOptions) {
                     const cOptions = option.componentOptions
+                    const cData = option.data
                     if (!cOptions) continue
-                    selectOptions.push(cOptions.propsData)
+                    let label = ''
+                    if (cOptions.propsData.label === undefined) {
+                        // 兼容v-text 兼容 {{}}传递label数据
+                        label = findChildrenText(cOptions, cData)
+                        selectOptions.push({
+                            value: cOptions.propsData.value,
+                            label
+                        })
+                    } else {
+                        selectOptions.push(cOptions.propsData)
+                    }
                 }
+                this.selectOptions = selectOptions
             }
-            this.selectOptions = selectOptions
         },
         widthInit () {
             const {label, fixed, $el} = this
