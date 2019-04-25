@@ -11,8 +11,9 @@ $css-prefix-page: $css-prefix + 'page';
       color: $LightPrimary;
     }
   }
-  .#{$css-prefix}select-container {
+  .#{$css-prefix}select {
     vertical-align: middle;
+    position: relative;
   }
 }
 
