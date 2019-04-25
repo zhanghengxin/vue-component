@@ -31,9 +31,9 @@
                             </div>
                         </div>
                         <div :class="[prefixCls + '-footer']">
-                            <b-button type="default" size="small" @click.native="cancel">{{ localeCancelText }}
-                            </b-button>
-                            <b-button type="primary" size="small" @click.native="ok">{{ localeOkText }}</b-button>
+                            <Button type="default" size="small" @click.native="cancel">{{ localeCancelText }}
+                            </Button>
+                            <Button type="primary" size="small" @click.native="ok">{{ localeOkText }}</Button>
                         </div>
                     </div>
                     <div :class="[prefixCls + '-inner']" v-if="!confirm">
@@ -57,7 +57,7 @@
 </template>
 <script>
 import Popper from '../../mixins/popper'
-import BButton from '../button/Button.vue'
+import Button from '../button/Button.vue'
 import clickOutside from '../../utils/directives/clickOutside'
 import TransferDom from '../../utils/directives/transfer-dom'
 import { oneOf, prefix } from '../../utils/common'
@@ -73,7 +73,7 @@ export default {
     name: prefixCls,
     mixins: [Popper],
     directives: {clickOutside, TransferDom},
-    components: {BButton},
+    components: {Button},
     props: {
         trigger: {
             validator (value) {

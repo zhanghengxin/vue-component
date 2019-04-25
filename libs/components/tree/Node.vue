@@ -1,5 +1,5 @@
 <template>
-    <transition name="gradual">
+    <transition name="slide">
         <ul
             :class="wrapCls"
             v-show="!data.invisible"

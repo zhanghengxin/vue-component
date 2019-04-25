@@ -1,16 +1,16 @@
 /*
- * @Author: hanshuai
- * @Date: 2018-09-21 14:44:29
- * @Last Modified by: hanshuai
- * @Last Modified time: 2018-11-26 18:58:57
- */
+* @Author: hanshuai
+* @Date: 2018-09-21 14:44:29
+* @Last Modified by: hanshuai
+* @Last Modified time: 2018-11-26 18:58:57
+*/
 
 <template>
     <div :class="wrapperCls">
         <div :class="headerCls" v-if="showHeader">
             <slot name="title">
                 <div :class="headerInnerCls" v-if="title">
-                    <b-icon v-if="icon" :type='icon'></b-icon>
+                    <Icon v-if="icon" :type='icon'></Icon>
                     <span>{{title}}</span>
                 </div>
             </slot>
@@ -26,11 +26,13 @@
 
 <script>
 import { prefix } from '../../utils/common'
+import Icon from '../icon'
 
 const prefixCls = prefix + 'card'
 
 export default {
     name: prefixCls,
+    components: {Icon},
     data () {
         return {
             prefixCls,

@@ -1,23 +1,37 @@
 <template>
-    <div :class="[prefixCls,classes]">
-        <div :class="prefixCls+'-bar'" ref="tabHeaderItem">
-            <div @click="handleChange(index)" v-for="(item,index) in navList" :key="index" :class="tabCls(item)">
+    <div :class="classes">
+        <div :class="tabsBarCls" ref="nav">
+            <div :class="tabsExtraCls" v-if="showExtra"><slot name="extra"></slot></div>
+            <div :class="tabsInkBar" :style="inkBarStyle"></div>
+            <div @click="handleChange(index)"  v-for="(item,index) in navList" :key="index" :class="tabCls(item)">
                 <Icon v-if="item.icon !== ''" :type="item.icon"></Icon>
                 <span>{{item.label}}</span>
-                <Icon v-if="showClose(item)" type="quxiao-guanbi-shanchu" @click.native.stop="handleRemove(index)"
-                      :class="prefixCls+'-icon'"></Icon>
+                <Icon v-if="showClose(item)" :class="tabsCloseIcon" type="quxiao-guanbi-shanchu" @click.native.stop="handleRemove(index)"></Icon>
             </div>
         </div>
-        <div :class="prefixCls+'-content'">
+        <div :class="tabsContent" :style="contentStyle" ref="panes">
             <slot></slot>
         </div>
     </div>
 </template>
 <script>
-import { prefix } from '../../utils/common'
+import { TABS, TABPANEL, TABPANELCSS } from './common'
+import { oneOf } from '../../utils/common'
+import { findComponentsDownward } from '../../utils/assist'
 import Icon from '../icon/Icon.vue'
 
-const prefixCls = prefix + 'tabs'
+const prefixCls = TABS
+const focusFirst = (element, root) => {
+    try { element.focus() } catch (err) {} // eslint-disable-line no-empty
+
+    if (document.activeElement === element && element !== root) return true
+
+    const candidates = element.children
+    for (let candidate of candidates) {
+        if (focusFirst(candidate, root)) return true
+    }
+    return false
+}
 export default {
     name: prefixCls,
     props: {
@@ -26,13 +40,32 @@ export default {
         },
         type: {
             type: String,
-            default: 'card'
+            validator (value) {
+                return oneOf(value, ['line', 'card'])
+            },
+            default: 'line'
         },
         size: {
             type: String,
+            validator (value) {
+                return oneOf(value, ['small', 'default'])
+            },
             default: 'default'
         },
         closable: {
+            type: Boolean,
+            default: false
+        },
+        animated: {
+            type: Boolean,
+            default: true
+        },
+        beforeRemove: Function,
+        // Tabs 嵌套时，用 name 区分层级
+        name: {
+            type: String
+        },
+        captureFocus: {
             type: Boolean,
             default: false
         }
@@ -40,9 +73,11 @@ export default {
     components: {Icon},
     data () {
         return {
-            prefixCls: prefixCls,
             currentValue: this.value,
             navList: [],
+            barWidth: 0,
+            barOffset: 0,
+            showExtra: false,
             activeKey: this.value
         }
     },
@@ -50,20 +85,68 @@ export default {
         value: function (val) {
             this.currentvalue = val
         },
-        currentValue: function () {
-            this.updateStatus()
+        currentValue: function (val) {
+            this.activeKey = val
+            // this.updateStatus()
+            this.updateBar()
+            this.autoFocus()
         }
+    },
+    mounted () {
+        this.showExtra = this.$slots.extra !== undefined
+        this.autoFocus()
     },
     computed: {
         classes () {
             return [
+                `${prefixCls}`,
                 {
-                    card: this.type === 'card',
-                    [`${prefixCls}-line`]: this.type === 'line',
-                    [`${prefixCls}-lineActive`]: this.type === 'line'
-
+                    [`${prefixCls}-${this.type}`]: this.type,
+                    [`${prefixCls}-animated`]: this.animated
                 }
             ]
+        },
+        tabsBarCls () {
+            return `${prefixCls}-bar`
+        },
+        tabsExtraCls () {
+            return `${prefixCls}-extra`
+        },
+        tabsContent () {
+            return [
+                `${prefixCls}-content`
+            ]
+        },
+        contentStyle () {
+            const x = this.getTabIndex(this.activeKey)
+            const p = x === 0 ? '0%' : `-${x}00%`
+
+            let style = {}
+            if (x > -1) {
+                style = {
+                    transform: `translateX(${p}) translateZ(0px)`
+                }
+            }
+            return style
+        },
+        tabsCloseIcon () {
+            return `${prefixCls}-close-icon`
+        },
+        inkBarStyle () {
+            let style = {
+                visibility: 'hidden',
+                width: `${this.barWidth}px`
+            }
+            if (this.type === 'line') {
+                style.visibility = 'visible'
+            } else {
+                style.visibility = 'hidden'
+            }
+            style.transform = `translate3d(${this.barOffset}px, 0px, 0px)`
+            return style
+        },
+        tabsInkBar () {
+            return `${prefixCls}-ink-bar`
         }
     },
     methods: {
@@ -73,33 +156,33 @@ export default {
                 {
                     [`${prefixCls}-disabled`]: item.disabled,
                     [`${prefixCls}-active`]: item.name === this.currentValue,
-                    [`${prefixCls}-lineActive`]: this.type === 'line' && item.name === this.currentValue,
-                    [`${prefixCls}-mini`]: this.size === 'small' && this.type === 'line',
-                    [`${prefixCls}-line`]: this.type === 'line',
-                    [`${prefixCls}-lineActive`]: this.type === 'line'
+                    [`${prefixCls}-mini`]: this.type === 'line' && this.size === 'small',
+                    [`${prefixCls}-${this.type}`]: this.type
                 }
             ]
         },
         getTabs () {
-            return this.$children.filter(item => item.$options.name === 'b-tabsPanel')
-        },
-        updateNav () {
-            this.navList = []
-            this.getTabs().forEach((pane, index) => {
-                this.navList.push({
-                    label: pane.label,
-                    name: pane.name || index,
-                    disabled: pane.disabled,
-                    icon: pane.icon || '',
-                    closable: pane.closable
-                })
-                if (!pane.name) pane.name = index
-                if (index === 0) {
-                    if (!this.currentValue) this.currentValue = pane.name || index
+            // return this.$children.filter(item => item.$options.name === TABPANEL)
+            const AllTabPanes = findComponentsDownward(this, TABPANEL)
+            const TabPanes = []
+
+            AllTabPanes.forEach(item => {
+                if (item.tab && this.name) {
+                    if (item.tab === this.name) {
+                        TabPanes.push(item)
+                    }
+                } else {
+                    TabPanes.push(item)
                 }
             })
-            this.updateStatus()
-            // this.updateBar();
+
+            // 在 TabPane 使用 v-if 时，并不会按照预先的顺序渲染，这时可设置 index，并从小到大排序
+            TabPanes.sort((a, b) => {
+                if (a.index && b.index) {
+                    return a.index > b.index ? 1 : -1
+                }
+            })
+            return TabPanes
         },
         showClose (item) {
             if (this.type === 'card') {
@@ -113,6 +196,21 @@ export default {
             }
         },
         handleRemove (index) {
+            if (!this.beforeRemove) {
+                return this.handleRemoveTab(index)
+            }
+
+            const before = this.beforeRemove(index)
+
+            if (before && before.then) {
+                before.then(() => {
+                    this.handleRemoveTab(index)
+                })
+            } else {
+                this.handleRemoveTab(index)
+            }
+        },
+        handleRemoveTab (index) {
             const tabs = this.getTabs()
             const tab = tabs[index]
             tab.$destroy()
@@ -136,45 +234,70 @@ export default {
             this.$emit('on-tab-remove', tab.currentName)
             this.updateNav()
         },
-        updateStatus () {
-            // debuggger
-            const tabs = this.getTabs()
-            var _this = this
-            tabs.forEach(function (tab) {
-                tab.show = (tab.name === _this.currentValue)
+        updateNav () {
+            this.navList = []
+            this.getTabs().forEach((pane, index) => {
+                let {label, name, disabled, icon = '', closable} = pane
+                this.navList.push({
+                    label,
+                    name: name || index,
+                    disabled,
+                    icon,
+                    closable
+                })
+                if (!name) pane.name = index
+                if (index === 0) {
+                    if (!this.currentValue) this.currentValue = name || index
+                }
+            })
+            // this.updateStatus()
+            this.updateBar()
+        },
+        updateBar () {
+            this.$nextTick(() => {
+                const index = this.getTabIndex(this.activeKey)
+                if (!this.$refs.nav) return
+                const prevTabs = this.$refs.nav.querySelectorAll(`.${prefixCls}-tab`)
+                const tab = prevTabs[index]
+                this.barWidth = tab ? parseFloat(tab.offsetWidth) : 0
+                const gutter = 6
+                if (index > 0) {
+                    let offset = 0
+                    for (let i = 0; i < index; i++) {
+                        offset += parseFloat(prevTabs[i].offsetWidth) + gutter
+                    }
+                    this.barOffset = offset
+                } else {
+                    this.barOffset = 0
+                }
             })
         },
+        // updateStatus () {
+            // const tabs = this.getTabs()
+            // var _this = this
+            // tabs.forEach(function (tab) {
+            //     tab.show = (tab.name === _this.currentValue || _this.animated)
+            // })
+        // },
         handleChange (index) {
-            // debugger
             var nav = this.navList[index]
             var name = nav.name
             if (nav.disabled) return
             this.currentValue = name
             this.$emit('input', name)
             this.$emit('on-click', name)
+        },
+        autoFocus () {
+            const index = this.getTabIndex(this.activeKey);
+            [...this.$refs.panes.querySelectorAll(`.${TABPANELCSS}`)].forEach((el, i) => {
+                if (index === i) {
+                    if (this.captureFocus) setTimeout(() => focusFirst(el, el), 300)
+                }
+            })
+        },
+        getTabIndex (name) {
+            return this.navList.findIndex(nav => nav.name === name)
         }
-    },
-    mounted () {
-        // let self = this // 外层新建变量引用this
-        // this.$slots.default.forEach((components) => { // 循环default内的内容
-        //     if (components.tag && components.componentOptions) { // 如果子元素tag键&&componentOptions有内容。
-        //         self.navList.push(components.componentOptions.propsData)
-        //         // 在components.componentOptions这个键内 有propsDate这个属性。我们可以通过这个属性拿到子组件的props值
-        //     }
-        // })
-        // this.$nextTick(() => { // 避免data未更新
-        //    // this.activeTab = { // 给activeTab赋初始值
-        //        // index: 0, // 默认选中第一个
-        //         //name: this.navList[0].name // 寻找tabList第一个元素 还有他的名字
-        //     //}
-        //     this.currentValue = this.navList[0].name
-        // })
-        // setTimeout(() => {
-        //     this.$nextTick(() => { // 避免data未更新
-        //         this._initScroll()
-        //     }
-        //     )
-        // }, 20)
     }
 }
 </script>

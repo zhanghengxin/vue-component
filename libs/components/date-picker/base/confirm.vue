@@ -2,7 +2,7 @@
     <div
         :class="[prefixCls + '-confirm']"
         @keydown.tab.capture="handleTab">
-        <b-button
+        <Button
             :class="timeClasses"
             size="small"
             type="text"
@@ -10,24 +10,24 @@
             v-if="showTime"
             @on-click="handleToggleTime">
             {{ labels.time }}
-        </b-button>
-        <b-button
+        </Button>
+        <Button
             size="small"
             @click.native="handleClear"
             @keydown.enter.native="handleClear">
             {{ labels.clear }}
-        </b-button>
-        <b-button
+        </Button>
+        <Button
             size="small"
             type="primary"
             @click.native="handleSuccess"
             @keydown.enter.native="handleSuccess">
             {{ labels.ok }}
-        </b-button>
+        </Button>
     </div>
 </template>
 <script>
-    import bButton from '../../button'
+    import Button from '../../button'
     import Emitter from '../../../mixins/emitter'
     import lange from '../../../utils/date'
     import { prefix } from '../../../utils/common'
@@ -35,7 +35,7 @@
 
     export default {
         mixins: [ Emitter ],
-        components: { bButton },
+        components: { Button },
         props: {
             showTime: {
                 type: Boolean,
