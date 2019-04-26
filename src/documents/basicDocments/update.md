@@ -5,10 +5,16 @@
 <br>
 <b-timeline>
     <b-timeline-item>
-    优化 Tabpane 的按需引入方式
+    新增 select-tree，适配销项的需求
     </b-timeline-item>
     <b-timeline-item>
-    优化 Options的slot 传值
+    重构 InputNumber
+    </b-timeline-item>
+    <b-timeline-item>
+    修复  Tabs的样式bug,name为空时做处理
+    </b-timeline-item>
+    <b-timeline-item>
+    修复  Select的定位问题修复
     </b-timeline-item>
 </b-timeline>
 
