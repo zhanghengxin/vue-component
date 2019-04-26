@@ -19,7 +19,7 @@
             @mouseenter="clearShow = clearable && true"
             @mouseleave="clearShow = clearable && false">
             <input type="hidden" :name="name" :value="publicValue">
-            <div :class='[`${prefixCls}-main-flex`]'>
+            <div :class='[`${prefixCls}-main-flex`]' :style='[selectWidth]'>
                 <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
                 <template v-if='multiple'>
                     <div
