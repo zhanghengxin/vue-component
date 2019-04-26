@@ -9,28 +9,37 @@
             :default-opt="defaultOpt"
             clearable
             :width="width"
+            style="position: relative"
             :label-width="labelWidth"
-            placeholder=""
             @get-drop-width="getDropWidth"
             :options='options'>
         <transition name="slide" slot="tree">
             <Drop
                 :placement='placement'
                 v-show="popupVisible">
-                <div :class="wrapCls" :style="wrapSty">
+                <div :style="wrapSty">
                     <b-input
                         v-model='filterText'
                         ref="reference"
-                        prefix
+                        suffix="chaxun"
+                        :placeholder="placeholder"
                         :width="dropWidth"
-                        clearable
-                        v-if="filter"
-                        icon="chaxun">
+                        @on-enter="handleClick"
+                        @on-click="handleClick"
+                        v-if="filterable">
                     </b-input>
+                    <Checkbox
+                        v-if="showAllcheckbox"
+                        :class="prefixCls+'-checkbox'"
+                        :value="allCheckText!=='全选'"
+                        :label="allCheckText"
+                        @on-change="allCheckClick">
+                    </Checkbox>
                     <Tree
-                        :filter-text="filterText"
+                        :filter-text="treeFilterText"
                         :filter-method="filterMethod"
                         :data='data'
+                        ref="tree"
                         :draggable='draggable'
                         :accordion='accordion'
                         :loading='loading'
@@ -56,19 +65,20 @@ import Tree from './Tree.vue'
 import Drop from '../select/Dropdown'
 import BInput from '../input'
 import Select from '../select/Select'
-import clickoutside from '../../utils/directives/clickOutside'
+import Checkbox from '../checkbox/Checkbox.vue'
 
-const prefixCls = prefix + 'label-tree'
+const prefixCls = prefix + 'select-tree'
 export default {
     name: prefixCls,
-    directives: {clickoutside},
     components: {
-        Tree, Drop, Select, BInput
+        Tree, Drop, Select, BInput, Checkbox
     },
     data () {
         return {
             prefixCls: prefixCls,
             filterText: '',
+            treeFilterText: '',
+            allCheck: false,
             values: [],
             dropWidth: '',
             options: [],
@@ -151,13 +161,21 @@ export default {
             default: false
         },
         // labeltions
-        filter: {
+        filterable: {
             type: Boolean,
             default: false
         },
         label: {
             type: String,
             default: ''
+        },
+        fixed: {
+            type: Boolean,
+            default: false
+        },
+        placeholder: {
+            type: String,
+            default: '输入关键字进行搜索'
         },
         labelWidth: {
             type: [String, Number],
@@ -167,7 +185,11 @@ export default {
             type: [String, Number],
             default: 200
         },
-        fixed: {
+        autoFilter: { // open auto-filter
+            type: Boolean,
+            default: false
+        },
+        showAllcheck: {
             type: Boolean,
             default: false
         },
@@ -180,22 +202,34 @@ export default {
         data: {
             deep: true,
             handler () {
-                if (this.showCheckbox) {
-                    this.$nextTick(() => {
-                        this.getTreeValues()
-                    })
-                }
+                this.$nextTick(() => {
+                    this.getTreeValues()
+                })
             }
+        },
+        filterText () {
+            if (this.autoFilter) this.treeFilterText = this.filterText
         }
     },
     computed: {
-        wrapCls () {
-            return prefixCls
-        },
         wrapSty () {
             return {
                 width: this.dropWidth && `${this.dropWidth}px`
             }
+        },
+        allCheckText () {
+            let status = true
+            this.data.forEach((item) => {
+                if (!item[this.defaultOpt.checkedKey]) status = false
+            })
+            return status ? '取消全选' : '全选'
+        },
+        showAllcheckbox () {
+            let status = true
+            this.data.forEach((item) => {
+                if (item.invisible) status = false
+            })
+            return this.showAllcheck && this.showCheckbox && status
         }
     },
     mounted () {
@@ -208,9 +242,25 @@ export default {
         closePopup () {
             this.popupVisible = false
         },
+        allCheckClick (status) {
+            let changes
+            this.data.forEach((item) => {
+                changes = {
+                    checked: status,
+                    nodeKey: item.nodeKey
+                }
+                this.$refs.tree.handleCheck(changes)
+            })
+            this.$emit('on-all-check', status)
+        },
         handleCheck (options) {
             this.values = options.checkedNodes
             this.$emit('on-check', options)
+        },
+        handleClick (e, value) {
+            if (!this.autoFilter) {
+                this.treeFilterText = value
+            }
         },
         handleSelect (options) {
             const {defaultOpt} = this
@@ -246,10 +296,7 @@ export default {
             }
         },
         getTreeValues () {
-            this.values = []
-            this.data.forEach((item) => {
-                this.downTraversal(item)
-            })
+            this.values = this.showCheckbox ? this.$refs.tree.getCheckedNodes() : this.$refs.tree.getSelectedNodes()
         },
         downTraversal (node, options) {
             const {defaultOpt} = this
@@ -263,22 +310,6 @@ export default {
                     if (node[defaultOpt.idKey] === options.id) {
                         this.$set(node, checkedKey, false)
                         node.checked = false
-                    }
-                }
-            } else {
-                if (this.showCheckbox) {
-                    if (node[checkedKey]) {
-                        this.values.push({
-                            name: node[defaultOpt.nameKey],
-                            id: node[defaultOpt.idKey]
-                        })
-                    }
-                } else {
-                    if (node[selectedKey]) {
-                        this.values.push({
-                            name: node[defaultOpt.nameKey],
-                            id: node[defaultOpt.idKey]
-                        })
                     }
                 }
             }

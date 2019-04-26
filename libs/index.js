@@ -58,7 +58,7 @@ import Affix from './components/affix'
 import Poptip from './components/poptip'
 import Spin from './components/spin'
 import Badge from './components/badge'
-import LabelTree from './components/label-tree'
+import SelectTree from './components/select-tree'
 
 const components = [
     Input,
@@ -108,7 +108,7 @@ const components = [
     Transfer,
     Menu,
     MenuItem,
-    LabelTree,
+    SelectTree,
     Submenu,
     MenuGroup,
     Timeline,

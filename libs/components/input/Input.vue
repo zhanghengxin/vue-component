@@ -1,12 +1,12 @@
 /**
- * input 组件
- * @author ganbowen
- * @created 2018/09/18 20:05:54
- */
+* input 组件
+* @author ganbowen
+* @created 2018/09/18 20:05:54
+*/
 <template>
     <div :class="boxClasses" :style='inputBoxStyles'
-        @mouseenter="mouseenterHandle"
-        @mouseleave="mouseleaveHandle">
+         @mouseenter="mouseenterHandle"
+         @mouseleave="mouseleaveHandle">
         <template v-if="type !== 'textarea'">
             <div ref="label" :class="labelClasses" :style='labelStyles' v-if="label || $slots.label">
                 <slot name="label">{{label}}</slot>
@@ -22,35 +22,38 @@
                 </div>
                 <transition name='fade'>
                     <div v-if="suffix || $slots.suffix || clearable || showPassword"
-                        v-show='showSuffix' :class='[prefixCls+`-icon`,prefixCls+`-icon-suffix`]'>
-                        <Icon size v-if="clearable && currentValue" type="shibai-mian" :class="[prefixCls+`-icon-clear`]" @on-click="handleClear"></Icon>
-                        <Icon size v-if="showPassword && currentValue" type="suoding-dongjie" @on-click="handleShowPassword"></Icon>
+                         v-show='showSuffix' :class='[prefixCls+`-icon`,prefixCls+`-icon-suffix`]'>
+                        <Icon size v-if="clearable && currentValue" type="shibai-mian"
+                              :class="[prefixCls+`-icon-clear`]" @on-click="handleClear"></Icon>
+                        <Icon size v-if="showPassword && currentValue" type="suoding-dongjie"
+                              @on-click="handleShowPassword"></Icon>
                         <slot name='suffix' v-if='suffix || $slots.suffix'>
-                            <Icon size :type="suffix+''" :class="[prefixCls+`-noclear`]" @on-click="handleIconClick"></Icon>
+                            <Icon size :type="suffix+''" :class="[prefixCls+`-noclear`]"
+                                  @on-click="handleIconClick"></Icon>
                         </slot>
                     </div>
                 </transition>
                 <input
-                :id="elementId"
-                :class="inputClasses"
-                :spellcheck="spellcheck"
-                ref="input"
-                :value="currentValue"
-                :name="name"
-                :placeholder="placeholder"
-                :disabled="disabled"
-                :maxlength="maxlength"
-                :minlength="minlength"
-                :readonly="readonly"
-                :autofocus="autofocus"
-                :type="currentType"
-                :autocomplete="autocomplete"
-                @change="handleChange"
-                @input="handleInput"
-                @focus="handleFocus"
-                @blur="handleBlur"
-                @keyup="handleKeyup"
-                @keydown="handleKeydown"/>
+                    :id="elementId"
+                    :class="inputClasses"
+                    :spellcheck="spellcheck"
+                    ref="input"
+                    :value="currentValue"
+                    :name="name"
+                    :placeholder="placeholder"
+                    :disabled="disabled"
+                    :maxlength="maxlength"
+                    :minlength="minlength"
+                    :readonly="readonly"
+                    :autofocus="autofocus"
+                    :type="currentType"
+                    :autocomplete="autocomplete"
+                    @change="handleChange"
+                    @input="handleInput"
+                    @focus="handleFocus"
+                    @blur="handleBlur"
+                    @keyup="handleKeyup"
+                    @keydown="handleKeydown"/>
             </div>
             <div ref="append" :class="[prefixCls+`-append`]" v-if="$slots.append && !label && !$slots.label">
                 <slot name="append"></slot>
@@ -113,7 +116,7 @@ export default {
             type: [String, Number],
             default: ''
         },
-         // 样式属性
+        // 样式属性
         size: {
             // default: 'default',
             validator: function (value) {
@@ -187,7 +190,7 @@ export default {
                 default: false
             }
         }),
-         // props type为 Boolean 的配置
+        // props type为 Boolean 的配置
         ...propsInit({
             // prefix 前面的icon显示
             // suffix 后面的icon显示
@@ -319,6 +322,9 @@ export default {
             this.$emit('on-keyup', event)
         },
         handleKeydown (event) {
+            if (event.keyCode === 13) {
+                this.$emit('on-enter', event, this.currentValue)
+            }
             this.$emit('on-keydown', event)
         },
         handleInput (event) {
@@ -346,11 +352,10 @@ export default {
         handleIconClick (e) {
             e && e.preventDefault()
             e && e.stopPropagation()
-
-            this.$emit('on-click', e)
+            this.$emit('on-click', e, this.currentValue)
         },
         handleClear () {
-            const e = { target: { value: '' } }
+            const e = {target: {value: ''}}
             this.$emit('input', '')
             this.setCurrentValue('')
             this.$emit('on-change', e)

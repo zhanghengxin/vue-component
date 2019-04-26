@@ -1,5 +1,17 @@
 ### 更新日志
 
+### 0.5.5
+## `2019-04-26`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 Tabpane 的按需引入方式
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Options的slot 传值
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.5.4
 ## `2019-04-25`
 <br>
