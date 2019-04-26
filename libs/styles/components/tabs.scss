@@ -58,6 +58,7 @@ $tabExtra: $css-prefix + 'tabs-extra';
   .#{$tabPanel}{
     width:100%;
     flex-shrink: 0;
+    overflow: hidden;
   }
 }
 
