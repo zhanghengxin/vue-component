@@ -294,7 +294,8 @@ export default {
             return [
                 `${prefixCls}-main-content`,
                 {
-                    [`${prefixCls}-main-placeholder`]: this.localePlaceholder && (!this.showValue || this.multiple)
+                    [`${prefixCls}-main-placeholder`]: this.localePlaceholder && (!this.showValue || this.multiple),
+                     [`${prefixCls}-filterabled`]: !this.filterabled && this.multiple
                 }
             ]
         },

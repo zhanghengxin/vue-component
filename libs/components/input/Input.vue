@@ -128,7 +128,7 @@ export default {
         },
         placeholder: {
             type: String,
-            default: '请输入...'
+            default: ''
         },
         showSuffix: {
             type: Boolean,
