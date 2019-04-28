@@ -138,21 +138,12 @@ $css-prefix-form-item: $css-prefix+'form-item';
 
   &-multiple {
     .#{$css-prefix-select} {
-      &-main {
-        padding: 0 24px 0 4px;
-      }
-
       &-main-flex {
         display: flex;
         flex-wrap: wrap;
-        width: 100% !important;
+        padding-left: 4px;
       }
-
       &-input {
-        padding: 0 0 0 4px;
-      }
-
-      &-main-placeholder {
         padding-left: 4px;
       }
     }
@@ -174,15 +165,19 @@ $css-prefix-form-item: $css-prefix+'form-item';
     @include borderInit($Border, 4px);
     @include transitionAll();
 
+    &-flex{
+      padding-left: 8px;
+      padding-right: 24px;
+    }
+
     &-content {
-      width: calc(100% - 30px);
+      width: 100%;
+      box-sizing: border-box;
       display: inline-block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       vertical-align: middle;
-      padding-left: 8px;
-      padding-right: 24px;
     }
 
     &-placeholder {
@@ -194,6 +189,10 @@ $css-prefix-form-item: $css-prefix+'form-item';
     input::-o-clear {
       display: none;
     }
+  }
+
+  &-filterabled{
+    padding-left: 4px;
   }
 
   &-arrow {
@@ -209,7 +208,7 @@ $css-prefix-form-item: $css-prefix+'form-item';
     border: 0;
     width: 100%;
     border-radius: 4px;
-    padding: 0 24px 0 8px;
+    padding: 0;
     @include placeholder($SubContent)
   }
 
