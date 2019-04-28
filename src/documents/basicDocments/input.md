@@ -375,7 +375,7 @@ fixed为true时可设置通过width来设置 ```整体input``` 的宽度(整体�
 | value    | 绑定的值，可使用 v-model 双向绑定   | String,Number  | - |   -  |
 | width    | 设置输入框的宽度   | String,Number  | - |   -  |
 | type     | 输入框类型   | String  | `text`、`password`、`textarea`、`url`、`email` |   -  |
-| placeholder | 占位文本   | String  | - |   请输入..  |
+| placeholder | 占位文本   | String  | - |   -  |
 | disabled | 设置输入框为禁用状态   | Boolean  | `true`、`false` |   false  |
 | readonly | 设置输入框为只读   | Boolean  | `true`、`false` |   false  |
 | error | 设置输入框为error状态   | Boolean  | `true`、`false` |   false  |
