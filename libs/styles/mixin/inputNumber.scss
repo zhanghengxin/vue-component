@@ -1,0 +1,93 @@
+@mixin hover($color) {
+  border-color: lighten($color, 20%);
+}
+
+@mixin hover-error() {
+  border-color: $Error;
+}
+
+@mixin active($color) {
+  border-color: lighten($color, 20%);
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba($color, 0.2);
+}
+
+@mixin active-error() {
+  border-color: $Error;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba($Error, 0.2);
+}
+
+@mixin disabled() {
+  background-color: $input-disabled-bg;
+  opacity: 1;
+  cursor: $cursor-disabled;
+  color: #ccc;
+
+  &:hover {
+    border-color: $Border;
+  }
+}
+
+@mixin input-large() {
+  font-size: $font-size-base;
+  padding: $input-padding-vertical-large $input-padding-horizontal;
+  height: $input-height-large;
+}
+
+@mixin input-small() {
+  padding: $input-padding-vertical-small $input-padding-horizontal;
+  height: $input-height-small;
+  border-radius: $btn-border-radius-small;
+}
+
+@mixin input() {
+  display: inline-block;
+  width: 100%;
+  height: $input-height-base;
+  line-height: $line-height-base;
+  padding: $input-padding-vertical-base $input-padding-horizontal;
+  font-size: $font-size-small;
+  border: 1px solid $Border;
+  border-radius:$btn-border-radius;
+  color: $Content;
+  background-color: $input-bg;
+  background-image: none;
+  position: relative;
+  cursor: text;
+  @include placeholder($SubContent);
+  transition: border .2s ease-in-out, background .2s ease-in-out, box-shadow .2s ease-in-out;
+  &:hover{
+    @include hover($Primary);
+  }
+
+  &:focus {
+    @include active($Primary);
+  }
+
+  &[disabled],
+  fieldset[disabled] & {
+    @include disabled();
+  }
+
+  // Size
+  &-large {
+    @include input-large();
+  }
+
+  &-small {
+    @include input-small();
+  }
+}
+
+@mixin input-error() {
+  border: 1px solid $Error;
+
+  &:hover {
+    @include hover-error;
+  }
+
+  &:focus {
+    @include active-error;
+  }
+}

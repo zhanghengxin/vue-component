@@ -13,6 +13,9 @@
             :default-opt="defaultOpt"
         >
         </tree-node>
+        <transition name="fade">
+            <div v-show="showTip" :class="[prefixCls + '-tip']">暂无数据</div>
+        </transition>
     </div>
 </template>
 
@@ -143,12 +146,18 @@ export default {
             return [
                 `${prefixCls}`
             ]
+        },
+        showTip () {
+            return !this.getVisibleNodes().length
         }
     },
     methods: {
         getCheckedNodes () {
             const checkedKey = this.defaultOpt.checkedKey
             return this.dataList.filter(obj => obj.node[checkedKey]).map(obj => obj.node)
+        },
+        getVisibleNodes () {
+            return this.dataList.filter(obj => (!obj.node.invisible)).map(obj => obj.node)
         },
         getIndeterminateNodes () {
             const indeterminateKey = this.defaultOpt.indeterminateKey
@@ -292,6 +301,7 @@ export default {
             }
             this.$emit('on-expand', {data: node})
         },
+        // 模糊检索
         filterTreeData (value) {
             const defaultOpt = this.defaultOpt
             const _this = this

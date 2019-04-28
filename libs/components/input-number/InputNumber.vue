@@ -1,190 +1,337 @@
-/**
- *
- * @author ganbowen
- * description inputNumber
- * @created 2019/01/28 15:52:54
- *
- */
 <template>
-    <b-input
-        ref='input'
-        :value="currentValue"
-        :label="label"
-        :labelWidth='labelWidth'
-        :fixed="fixed"
-        :class="[classes]"
-        :disabled="disabled"
-        :readonly="readonly"
-        :size="size"
-        :showSuffix="operationShow || !type"
-        :suffix="!disabled"
-        :prefix="!disabled && !type && !label"
-        @on-change="handleChange"
-        @on-blur="handleBlur"
-        @on-focus="handleFocus"
-        @on-mouseenter="operationShow = true"
-        @on-mouseleave="operationShow = false"
-        >
-        <template v-if='!disabled && type' slot='suffix'>
-            <span @click="up" :class='[prefixCls+`-up`,prefixCls+`-up-border`]'><Icon type='shang'></Icon></span>
-            <span @click="down" :class='[prefixCls+`-down`]'><Icon type='xia'></Icon></span>
-        </template>
-        <template v-if='!disabled && !type'>
-            <template slot='prefix'>
-                <span @click="up" :class='[prefixCls+`-up`,prefixCls+`-icon`]'><Icon type='jiahao'></Icon></span>
-            </template>
-            <template slot='suffix'>
-                <span @click="down" :class='[prefixCls+`-down`,prefixCls+`-icon`]'><Icon type='jianhao'></Icon></span>
-            </template>
-        </template>
-    </b-input>
+    <div :class="wrapClasses">
+        <div :class="handlerClasses">
+            <a
+                @click="up"
+                :class="upClasses">
+                <Icon
+                    type='shang'
+                    :class="innerUpClasses">
+                </Icon>
+            </a>
+            <a
+                @click="down"
+                :class="downClasses">
+                <Icon
+                    type='xia'
+                    :class="innerDownClasses">
+                </Icon>
+            </a>
+        </div>
+        <div :class="inputWrapClasses">
+            <input
+                :id="elementId"
+                :class="inputClasses"
+                :disabled="disabled"
+                autocomplete="off"
+                spellcheck="false"
+                :autofocus="autofocus"
+                @focus="focus"
+                @blur="blur"
+                @keydown.stop="keyDown"
+                @input="change"
+                @mouseup="preventDefault"
+                @change="change"
+                :readonly="readonly || !editable"
+                :name="name"
+                :value="formatterValue"
+                :placeholder="placeholder">
+        </div>
+    </div>
 </template>
-
 <script>
-import { prefix } from '../../utils/common'
-import { add } from './utlis.js'
-import bInput from '../input'
-import Icon from '../icon'
-import Emitter from '../../mixins/emitter'
-
-const prefixCls = prefix + 'input-number'
-export default {
-    name: prefixCls,
-    mixins: [ Emitter ],
-    components: { bInput, Icon },
-    props: {
-        step: {
-            type: Number,
-            default: 1
-        },
-        value: {},
-        label: {
-            type: [String, Number],
-            default: ''
-        },
-        labelWidth: {
-            type: Number
-        },
-        fixed: {
-            type: Boolean,
-            default: false
-        },
-        type: {
-            type: Boolean,
-            default: true
-        },
-        placeholder: {
-            type: [String, Number],
-            default: ''
-        },
-        max: {
-            type: Number,
-            default: Infinity
-        },
-        min: {
-            type: Number,
-            default: -Infinity
-        },
-        readonly: {
-            type: Boolean,
-            default: false
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
-        precision: {
-            type: Number
-        },
-        size: {
-            validator: function (value) {
-                return ['large', 'small', 'default'].indexOf(value) !== -1
+    import { prefix, oneOf } from '../../utils/common'
+    import { findComponentUpward } from '../../utils/assist'
+    import Emitter from '../../mixins/emitter'
+    import Icon from '../icon'
+    const prefixCls = prefix + 'input-number'
+    function addNum (num1, num2) {
+        let sq1, sq2, m
+        try {
+            sq1 = num1.toString().split('.')[1].length
+        } catch (e) {
+            sq1 = 0
+        }
+        try {
+            sq2 = num2.toString().split('.')[1].length
+        } catch (e) {
+            sq2 = 0
+        }
+        m = Math.pow(10, Math.max(sq1, sq2))
+        return (Math.round(num1 * m) + Math.round(num2 * m)) / m
+    }
+    export default {
+        name: prefixCls,
+        mixins: [ Emitter ],
+        components: {Icon},
+        props: {
+            max: {
+                type: Number,
+                default: Infinity
             },
-            default () {
-                return !this.size || this.size === '' ? 'default' : this.size
-            }
-        }
-    },
-    data () {
-        return {
-            prefixCls,
-            currentValue: 0,
-            operationShow: false
-        }
-    },
-    computed: {
-        classes () {
-            return [
-                 `${prefixCls}`,
-                {
-                    [`${prefixCls}-prefix`]: !this.type,
-                    [`${prefixCls}-suffix`]: this.type
+            min: {
+                type: Number,
+                default: -Infinity
+            },
+            step: {
+                type: Number,
+                default: 1
+            },
+            activeChange: {
+                type: Boolean,
+                default: true
+            },
+            value: {
+                type: [Number, String],
+                default: 1
+            },
+            size: {
+                validator (value) {
+                    return oneOf(value, ['small', 'large', 'default'])
+                },
+                default () {
+                    return !this.size || this.size === '' ? 'default' : this.size
                 }
-            ]
-        }
-    },
-    created () {
-        this.setCurrentValue(this.value)
-    },
-    methods: {
-        up () {
-            const { step, currentValue, max, min } = this
-            let current = add(currentValue, step)
-            if (current > max) current = max
-            if (current < min) current = min
-            this.setCurrentValue(current)
-        },
-        down () {
-            const { step, currentValue, max, min } = this
-            let current = add(currentValue, -step)
-            if (current > max) current = max
-            if (current < min) current = min
-            this.setCurrentValue(current)
-        },
-        toPrecision (num, precision) {
-            if (precision === undefined) precision = this.numPrecision
-            return parseFloat(Number(num)).toFixed(precision)
-        },
-        setCurrentValue (newVal) {
-            const oldVal = this.currentValue
-            if (newVal >= this.max) newVal = this.max
-            if (newVal <= this.min) newVal = this.min
-            if (oldVal === newVal) {
-                this.$refs.input.setCurrentValue(this.currentValue)
-                return
+            },
+            disabled: {
+                type: Boolean,
+                default: false
+            },
+            autofocus: {
+                type: Boolean,
+                default: false
+            },
+            readonly: {
+                type: Boolean,
+                default: false
+            },
+            editable: {
+                type: Boolean,
+                default: true
+            },
+            name: {
+                type: String
+            },
+            precision: {
+                type: Number
+            },
+            elementId: {
+                type: String
+            },
+            formatter: {
+                type: Function
+            },
+            parser: {
+                type: Function
+            },
+            placeholder: {
+                type: String,
+                default: ''
             }
-            if (typeof newVal === 'number' && this.precision !== undefined) {
-                newVal = this.toPrecision(newVal, this.precision)
+        },
+        data () {
+            return {
+                focused: false,
+                upDisabled: false,
+                downDisabled: false,
+                currentValue: this.value
             }
-            this.$emit('input', newVal)
-            this.$emit('on-change', newVal)
-            this.currentValue = newVal
         },
-        handleBlur (event) {
-            this.$emit('blur', event)
-            this.$refs.input.setCurrentValue(this.currentValue)
-        },
-        handleFocus (event) {
-            this.$emit('focus', event)
-        },
-        handleChange (e) {
-            let value = e.target.value
-            const newVal = value === '' ? undefined : Number(value)
-            if (!isNaN(newVal) || value === '') {
-                this.setCurrentValue(newVal)
+        computed: {
+            wrapClasses () {
+                return [
+                    `${prefixCls}`,
+                    {
+                        [`${prefixCls}-${this.size}`]: !!this.size,
+                        [`${prefixCls}-disabled`]: this.disabled,
+                        [`${prefixCls}-focused`]: this.focused
+                    }
+                ]
+            },
+            handlerClasses () {
+                return `${prefixCls}-handler-wrap`
+            },
+            upClasses () {
+                return [
+                    `${prefixCls}-handler`,
+                    `${prefixCls}-handler-up`,
+                    {
+                        [`${prefixCls}-handler-up-disabled`]: this.upDisabled
+                    }
+                ]
+            },
+            innerUpClasses () {
+                return `${prefixCls}-handler-up-inner`
+            },
+            downClasses () {
+                return [
+                    `${prefixCls}-handler`,
+                    `${prefixCls}-handler-down`,
+                    {
+                        [`${prefixCls}-handler-down-disabled`]: this.downDisabled
+                    }
+                ]
+            },
+            innerDownClasses () {
+                return `${prefixCls}-handler-down-inner`
+            },
+            inputWrapClasses () {
+                return `${prefixCls}-input-wrap`
+            },
+            inputClasses () {
+                return `${prefixCls}-input`
+            },
+            precisionValue () {
+                // can not display 1.0
+                if (!this.currentValue) return this.currentValue
+                return this.precision ? this.currentValue.toFixed(this.precision) : this.currentValue
+            },
+            formatterValue () {
+                if (this.formatter && this.precisionValue !== null) {
+                    return this.formatter(this.precisionValue)
+                } else {
+                    return this.precisionValue
+                }
             }
-        }
-    },
-    watch: {
-        currentValue (val) {
-            this.$emit('input', val)
         },
-        value (val) {
-            this.setCurrentValue(val)
+        methods: {
+            preventDefault (e) {
+                e.preventDefault()
+            },
+            up (e) {
+                const targetVal = Number(e.target.value)
+                if (this.upDisabled && isNaN(targetVal)) {
+                    return false
+                }
+                this.changeStep('up', e)
+            },
+            down (e) {
+                const targetVal = Number(e.target.value)
+                if (this.downDisabled && isNaN(targetVal)) {
+                    return false
+                }
+                this.changeStep('down', e)
+            },
+            changeStep (type, e) {
+                if (this.disabled || this.readonly) {
+                    return false
+                }
+                const targetVal = Number(e.target.value)
+                let val = Number(this.currentValue)
+                const step = Number(this.step)
+                if (isNaN(val)) {
+                    return false
+                }
+                // input a number, and key up or down
+                if (!isNaN(targetVal)) {
+                    if (type === 'up') {
+                        if (addNum(targetVal, step) <= this.max) {
+                            val = targetVal
+                        } else {
+                            return false
+                        }
+                    } else if (type === 'down') {
+                        if (addNum(targetVal, -step) >= this.min) {
+                            val = targetVal
+                        } else {
+                            return false
+                        }
+                    }
+                }
+                if (type === 'up') {
+                    val = addNum(val, step)
+                } else if (type === 'down') {
+                    val = addNum(val, -step)
+                }
+                this.setValue(val)
+            },
+            setValue (val) {
+                // 如果 step 是小数，且没有设置 precision，是有问题的
+                if (val && !isNaN(this.precision)) val = Number(Number(val).toFixed(this.precision))
+                const {min, max} = this
+                if (val !== null) {
+                    if (val > max) {
+                        val = max
+                    } else if (val < min) {
+                        val = min
+                    }
+                }
+                this.$nextTick(() => {
+                    this.currentValue = val
+                    this.$emit('input', val)
+                    this.$emit('on-change', val)
+                    this.dispatch('FormItem', 'on-form-change', val)
+                })
+            },
+            focus (event) {
+                this.focused = true
+                this.$emit('on-focus', event)
+            },
+            blur () {
+                this.focused = false
+                this.$emit('on-blur')
+                if (!findComponentUpward(this, ['DatePicker', 'TimePicker', 'Cascader', 'Search'])) {
+                    this.dispatch('FormItem', 'on-form-blur', this.currentValue)
+                }
+            },
+            keyDown (e) {
+                if (e.keyCode === 38) {
+                    e.preventDefault()
+                    this.up(e)
+                } else if (e.keyCode === 40) {
+                    e.preventDefault()
+                    this.down(e)
+                }
+            },
+            change (event) {
+                if (event.type === 'change') return
+                if (event.type === 'input' && !this.activeChange) return
+                let val = event.target.value.trim()
+                if (this.parser) {
+                    val = this.parser(val)
+                }
+                const isEmptyString = val.length === 0
+                if (isEmptyString) {
+                    this.setValue(null)
+                    return
+                }
+                if (event.type === 'input' && val.match(/^-?\.?$|\.$/)) return
+                val = Number(val)
+                if (!isNaN(val)) {
+                    this.currentValue = val
+                    this.setValue(val)
+                } else {
+                    event.target.value = this.currentValue
+                }
+            },
+            changeVal (val) {
+                val = Number(val)
+                if (!isNaN(val)) {
+                    const step = this.step
+                    this.upDisabled = val + step > this.max
+                    this.downDisabled = val - step < this.min
+                } else {
+                    this.upDisabled = true
+                    this.downDisabled = true
+                }
+            }
+        },
+        mounted () {
+            this.changeVal(this.currentValue)
+        },
+        watch: {
+            value (val) {
+                this.currentValue = val
+            },
+            currentValue (val) {
+                this.changeVal(val)
+            },
+            min () {
+                this.changeVal(this.currentValue)
+            },
+            max () {
+                this.changeVal(this.currentValue)
+            }
         }
     }
-}
 </script>
-
-<style lang="scss">
-</style>

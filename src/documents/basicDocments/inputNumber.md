@@ -10,8 +10,9 @@
                 value3: '',
                 value4: '',
                 value5: '',
-                value6: '',
+                value6: 12,
                 value7: '',
+                value8: 2,
                 step:0.01,
                 max:10,
                 min:0,
@@ -40,21 +41,16 @@
 -----
 ### 基础用法
 可使用 v-model 实现数据的双向绑定。<br/>
-可通过 precision 设置保留的小数位数<br/>
 可通过 max min 设置可输入的数据的范围<br/>
-可通过 step 设置改变的步伐 默认 1<br/>
-可通过 style 设置输入框的宽度，默认 100%。<br/>
+可以通过输入、鼠标点击或键盘的上下键来改变数值大小。<br/>
 <div class="example">
     <div class="example-box">
         <div>
             <b-input-number
                 v-model="value" 
-                style='width:200px'
                 placeholder="请输入..." 
-                :precision='precision' 
                 :max='max' 
                 :min='min' 
-                :step='step' 
                 @on-change='changemal'/>
             </b-input-number>
             <span>{{value}}</span>
@@ -65,14 +61,11 @@
 ::: code
 ```html
     <template>
-        <b-input-number 
+        <b-input-number
             v-model="value" 
-            style='width:200px'
             placeholder="请输入..." 
-            :precision='precision' 
             :max='max' 
             :min='min' 
-            :step='step' 
             @on-change='changemal'/>
         </b-input-number>
         <span>{{value}}</span>
@@ -82,11 +75,8 @@
             data () {
                 return {
                     value: '',
-                    value0: '',
                     max:10,
-                    min:0,
-                    precision:2,
-                    error:true
+                    min:0
                 }
             }
         }
@@ -94,17 +84,14 @@
 ```
 :::
 
-### 两种样式
-设置type 为 false 显示两端的计数器
+### step属性精度
+通过设置step属性控制每次改变的精度。
 <div class="example">
     <div class="example-box">
         <div>
             <b-input-number 
                 v-model="value7" 
-                style='width:200px'
-                placeholder="请输入..." 
-                :type='type'
-                :step='step' />
+                :max="10" :min="1" :step="1.2" />
             </b-input-number>
             <span>{{value7}}</div>
         </div>
@@ -114,12 +101,9 @@
 ::: code
 ```html
     <template>
-        <b-input-number 
+         <b-input-number 
             v-model="value7" 
-            style='width:200px'
-            placeholder="请输入..." 
-            :type='type'
-            :step='step' />
+            :max="10" :min="1" :step="1.2" />
         </b-input-number>
         <span>{{value7}}</div>
     </template>
@@ -127,8 +111,7 @@
         export default {
             data () {
                 return {
-                    value7: '',
-                    type:false
+                    value7: ''
                 }
             }
         }
@@ -200,17 +183,94 @@ Input 组件可以在不同场景下选择合适的尺寸。<br/>
 ```
 :::
 
-### label属性的两种样式
-通过设置```label```属性 设置带文字描述的input组合组件 <br/>
-label文字大小可根据input的size变化<br/>
-通过设置```labelWidth```属性可设置label文字所占的宽度 labelWidth默认自适应<br/>
+
+### 格式化展示
+通过 formatter 格式化数字，以展示具有具体含义的数据，往往需要配合 parser 一起使用。<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-input-number
+                :max="10000"
+                v-model="value4"
+                :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
+                :parser="value => value.replace(/$s?|(,*)/g, '')"></b-input-number>
+            <b-input-number
+                :max="100"
+                v-model="value4"
+                :formatter="value => `${value}%`"
+                :parser="value => value.replace('%', '')"></b-input-number>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+
+    <template>
+         <b-input-number
+            :max="10000"
+            v-model="value4"
+            :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
+            :parser="value => value.replace(/$s?|(,*)/g, '')"></b-input-number>
+        <b-input-number
+            :max="100"
+            v-model="value4"
+            :formatter="value => `${value}%`"
+            :parser="value => value.replace('%', '')"></b-input-number>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    value4: ''
+                }
+            }
+        }
+    </script>
+```
+:::
+
+### 只读
+通过设置readonly属性开启只读。<br/>
 <div class="example">
     <div class="example-box">
         <div>
             <b-input-number 
                 v-model="value6" 
-                label='价格' 
-                placeholder="请输入..." />
+                readonly />
+            </b-input-number>
+        </div>
+    </div>
+</div>
+
+::: code
+```html
+    <template>
+         <b-input-number 
+            v-model="value6" 
+            readonly />
+        </b-input-number>
+    </template>
+    <script>
+        export default {
+            data () {
+                return {
+                    value6:12
+                }
+            }
+        }
+    </script>
+```
+:::
+
+### 不可编辑
+通过设置editable属性控制是否能编辑。<br/>
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-input-number 
+                v-model="value8" 
+                :editable="false" />
             </b-input-number>
         </div>
     </div>
@@ -220,59 +280,15 @@ label文字大小可根据input的size变化<br/>
 ```html
     <template>
         <b-input-number 
-            v-model="value6" 
-            label='价格'
-            placeholder="请输入..." />
+            v-model="value8" 
+            :editable="false" />
         </b-input-number>
     </template>
     <script>
         export default {
             data () {
                 return {
-                    icon:'chaxun',
-                    value6:'',
-                    value7:'',
-                    fixed:true
-                }
-            }
-        }
-    </script>
-```
-:::
-
-<br/>
-通过设置fixed为```true``` 属性可设置带label文字描述的样式 label文字与input的宽度根据自动适应 整体宽度默认100%
-<br/>
-<br/>
-<div class="example">
-    <div class="example-box">
-        <div>
-            <b-input-number 
-                v-model="value6" 
-                label='价格' 
-                :fixed='fixed' 
-                placeholder="请输入..." />
-            </b-input-number>
-        </div>
-    </div>
-</div>
-
-::: code
-```html
-    <template>
-        <b-input-number
-            v-model="value6" 
-            label='价格' 
-            :fixed='fixed' 
-            placeholder="请输入..." />
-        </b-input-number>
-    </template>
-    <script>
-        export default {
-            data () {
-                return {
-                    value6:'',
-                    fixed:true,
+                    value8:''
                 }
             }
         }
@@ -284,23 +300,24 @@ label文字大小可根据input的size变化<br/>
 ### props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |----------|--------|---------- |-------------  |-------- |
-| value    | 绑定的值，可使用 v-model 双向绑定   | String,Number  | - |   -  |
-| type     | 计数器的类型 是否在两端   | Boolean  | `true`、`false` |   false  |
-| placeholder | 占位文本   | String  | - |   请输入..  |
-| disabled | 设置输入框为禁用状态   | Boolean  | `true`、`false` |   false  |
-| readonly | 设置输入框为只读   | Boolean  | `true`、`false` |   false  |
-| size | 设置输入框的尺寸   | String  | `small`、`default`、`large` |   default  |
 | max | 最大输入  | Number  | - |   -  |
 | min | 最大输入   | Number  | - |   -  |
+| value    | 绑定的值，可使用 v-model 双向绑定   | String,Number  | - |   -  |
 | step |  每次改变的步伐，可以是小数   | Number  | - |  1  |
-| icon     | icon的名称class   | String  |  详见icon组件 |   -  |
-| label     | input前的说明文字   | String  |  - |   -  |
-| labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   —  |
-| fixed     | input的搭配文字的两种样式类型   | Boolean  |  `true`、`false` |   false  |
+| size | 设置输入框的尺寸   | String  | `small`、`default`、`large` |   default  |
+| disabled | 设置输入框为禁用状态   | Boolean  | `true`、`false` |   false  |
+| placeholder | 占位文本   | String  | - |   请输入..  |
+| formatter | 指定输入框展示值的格式   | Function  | - |   -  |
+| parser | 指定从 formatter 里转换回数字的方式，和 formatter 搭配使用   | Function  | - |   -  |
+| readonly | 设置输入框为只读   | Boolean  | `true`、`false` |   false  |
+| editable     | 是否可编辑	   | Boolean  |  `true`、`false` |   false  |
+| precision     | 数值精度	   | Number  |  - |   -  |
+| element-id  | 给表单元素设置 id   | String  |  -  |   —  |
+| active-change     | 是否实时响应数据，设置为 false 时，只会在失焦时更改数据   | Boolean  |  `true`、`false` |   true  |
 
 ### events
 | 事件名	      | 说明	    | 返回值 |
 |-------------|---------|----------|
-| on-change   | 数据改变时触发 | event |
+| on-change   | 数据改变时触发 | 当前值 |
 | on-focus   | 输入框聚焦时触发 | - |
 | on-blur   | 输入框失去聚焦时触发 | - |

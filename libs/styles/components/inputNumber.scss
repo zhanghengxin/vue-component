@@ -1,92 +1,222 @@
-/**
- * inputNumber style
- * author ganbowen
- * created 2019/01/28 16:40:01
- */
+$input-number-prefix-cls: $css-prefix+'input-number';
+$css-prefix-form-item: $css-prefix+'form-item';
 
-$prefix-input: $css-prefix+'input';
-$prefix-number: $prefix-input+'-number';
-$prefix-number-icon: $css-prefix+'input-icon';
+$btn-border-radius : 4px;
+$input-height-base : 32px;
+$input-height-large : 36px;
+$input-height-small : 24px;
+$input-padding-horizontal : 7px;
+$input-padding-vertical-base : 4px;
+$input-padding-vertical-small: 1px;
+$input-padding-vertical-large: 6px;
+$input-bg : #fff;
+$input-group-bg : #f8f8f9;
+$input-disabled-bg : #f3f3f3;
 
-@mixin iconBox() {
-  display: inline-block;
-  @include _color($Content);
-  user-select: none;
+@mixin handler-disabled() {
+  opacity: 0.72;
+  color: #ccc !important;
+  cursor: not-allowed;
+}
 
-  &:hover {
-    @include _color($Primary);
+.#{$input-number-prefix-cls} {
+  $radius-wrap: 0 $btn-border-radius $btn-border-radius 0;
+  @include input();
+  margin: 0;
+  padding: 0;
+  width: 80px;
+  height: $input-height-base;
+  line-height: $input-height-base;
+  vertical-align: middle;
+  border: 1px solid $border-color-base;
+  border-radius: $btn-border-radius;
+  overflow: hidden;
+  cursor: default;
+
+  &-handler-wrap {
+    width: 22px;
+    height: 100%;
+    border-left: 1px solid $border-color-base;
+    border-radius: $radius-wrap;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.2 ease-in-out;
+  }
+
+  &:hover &-handler-wrap {
+    opacity: 1;
+  }
+
+  &-handler-up {
+    cursor: pointer;
+
+    &-inner {
+      top: 1px;
+    }
+  }
+
+  &-handler-down {
+    border-top: 1px solid $border-color-base;
+    top: -1px;
     cursor: pointer;
   }
-}
 
-@mixin icons() {
-  $i: 0;
+  &-handler {
+    display: block;
+    width: 100%;
+    height: $input-height-base / 2;
+    line-height: 0;
+    text-align: center;
+    overflow: hidden;
+    color: #999;
+    position: relative;
 
-  @each $type in small,
-  default,
-  large {
-    &.#{$prefix-input}-box-#{$type} {
-      .icon {
-        height: 11px + $i;
-        line-height: 11px + $i;
-      }
+    &:hover &-up-inner,
+    &:hover &-down-inner {
+      color: lighten($Primary, 0.2);
+    }
+  }
+
+  &-handler-up-inner,
+  &-handler-down-inner {
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+    font-size: 14px;
+    color: #999;
+    user-select: none;
+    position: absolute;
+    right: 5px;
+    transition: all 0.2 linear;
+  }
+
+  &:hover {
+    @include hover($Primary);
+  }
+
+  &-focused {
+    @include active($Primary);
+  }
+
+  &-disabled {
+    @include disabled();
+  }
+
+  &-input-wrap {
+    overflow: hidden;
+    height: $input-height-base;
+  }
+
+  &-input {
+    width: 100%;
+    height: $input-height-base;
+    line-height: $input-height-base;
+    padding: 0 7px;
+    text-align: left;
+    outline: 0;
+    -moz-appearance: textfield;
+    color: #666;
+    border: 0;
+    border-radius: $btn-border-radius;
+    transition: all 0.2 linear;
+
+    &[disabled] {
+      @include disabled();
     }
 
-    $i:$i+4;
+    &::placeholder {
+      color: $SubContent;
+    }
+  }
+
+  &-large {
+    padding: 0;
+
+    .#{$input-number-prefix-cls}-input-wrap {
+      height: $input-height-large;
+    }
+
+    .#{$input-number-prefix-cls}-handler {
+      height: $input-height-large / 2;
+    }
+
+    input {
+      height: $input-height-large;
+      line-height: $input-height-large;
+    }
+
+    .#{$input-number-prefix-cls}-handler-up-inner {
+      top: 2px;
+    }
+
+    .#{$input-number-prefix-cls}-handler-down-inner {
+      bottom: 2px;
+    }
+  }
+
+  &-small {
+    padding: 0;
+
+    .#{$input-number-prefix-cls}-input-wrap {
+      height: $input-height-small;
+    }
+
+    .#{$input-number-prefix-cls}-handler {
+      height: $input-height-small / 2;
+    }
+
+    input {
+      height: $input-height-small;
+      line-height: $input-height-small;
+      margin-top: -1px;
+      vertical-align: top;
+    }
+
+    .#{$input-number-prefix-cls}-handler-up-inner {
+      top: -1px;
+    }
+
+    .#{$input-number-prefix-cls}-handler-down-inner {
+      bottom: -1px;
+    }
+  }
+
+  &-handler-down-disabled,
+  &-handler-up-disabled,
+  &-disabled {
+
+    .#{$input-number-prefix-cls}-handler-down-inner,
+    .#{$input-number-prefix-cls}-handler-up-inner {
+      @include handler-disabled();
+    }
+  }
+
+  &-disabled {
+    .#{$input-number-prefix-cls}-input {
+      opacity: 0.72;
+      cursor: not-allowed;
+      background-color: #f3f3f3;
+    }
+
+    .#{$input-number-prefix-cls}-handler-wrap {
+      display: none;
+    }
+
+    .#{$input-number-prefix-cls}-handler {
+      @include handler-disabled();
+    }
   }
 }
 
-.#{$prefix-number} {
-  @include icons();
-  &-prefix {
-    .#{$prefix-input} {
-      padding-left: 30px;
+.#{$css-prefix-form-item}-error {
+  .#{$input-number-prefix-cls} {
+    @include input-error();
+
+    &-focused {
+      @include active-error();
     }
-  }
-  &-suffix {
-    .#{$prefix-number-icon}-suffix {
-      line-height: 0 !important;
-    } 
-  }
-
-  .#{$prefix-number-icon} {
-    &-suffix {
-      border-left: 1px solid $Border;
-      background: $Background;
-      width: 25px;
-      font-size: 0;
-    }
-
-    &-prefix {
-      border-right: 1px solid $Border;
-      background: $Background;
-    }
-  }
-
-  &-icon {
-    height: 100%;
-    line-height: 1;
-
-    &.#{$prefix-number}-up {
-      border-top-left-radius: 4px;
-      border-bottom-left-radius: 4px;
-    }
-
-    &.#{$prefix-number}-down {
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
-    }
-  }
-
-  &-up {
-    @include iconBox();
-
-    &-border {
-      border-bottom: 1px solid $Border;
-    }
-  }
-
-  &-down {
-    @include iconBox();
   }
 }
