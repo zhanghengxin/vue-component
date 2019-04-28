@@ -21,6 +21,9 @@ $prefix-table: $css-prefix + 'table';
             }
         }
     }
+    table {
+        table-layout: fixed;
+    }
     &-tip {
         overflow-x: auto;
         overflow-y: hidden;
