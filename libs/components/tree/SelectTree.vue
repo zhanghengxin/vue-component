@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { prefix } from '../../utils/common'
+import { prefix, propsInit } from '../../utils/common'
 import Tree from './Tree.vue'
 import Drop from '../select/Dropdown'
 import BInput from '../input'
@@ -95,9 +95,11 @@ export default {
                 return []
             }
         },
-        showCheckbox: {
-            type: Boolean,
-            default: false
+        defaultValues: {
+            type: Array,
+            default () {
+                return []
+            }
         },
         defaultOpt: {
             type: Object,
@@ -113,10 +115,6 @@ export default {
                     idKey: 'id'
                 }
             }
-        },
-        accordion: {
-            type: Boolean,
-            default: false
         },
         checkboxOptions: { // 多选级联配置
             type: Object,
@@ -135,18 +133,6 @@ export default {
                 }
             }
         },
-        loading: {
-            type: Boolean,
-            default: false
-        },
-        draggable: {
-            type: Boolean,
-            default: false
-        },
-        clearable: {
-            type: Boolean,
-            default: false
-        },
         loadMethod: {
             type: Function
         },
@@ -160,39 +146,28 @@ export default {
             type: [Function, Boolean],
             default: false
         },
-        // labeltions
-        filterable: {
-            type: Boolean,
-            default: false
-        },
-        label: {
-            type: String,
-            default: ''
-        },
-        fixed: {
-            type: Boolean,
-            default: false
-        },
         placeholder: {
             type: String,
             default: '输入关键字进行搜索'
         },
-        labelWidth: {
-            type: [String, Number],
-            default: 72
-        },
-        width: {
-            type: [String, Number],
-            default: 200
-        },
-        autoFilter: { // open auto-filter
-            type: Boolean,
-            default: false
-        },
-        showAllcheck: {
-            type: Boolean,
-            default: false
-        },
+        // props type为Boolean的配置
+        ...propsInit({
+            props: ['showCheckbox', 'showAllcheck', 'autoFilter', 'fixed', 'filterable', 'clearable', 'draggable', 'loading', 'accordion'],
+            config: {
+                type: Boolean,
+                default: false
+            }
+        }),
+        // props type为[Number, String]的配置
+        ...propsInit({
+            // label label样式的文字描述
+            // width input的宽度
+            // labelWidth label样式的文字的宽度
+            props: ['label', 'width', 'labelWidth'],
+            config: {
+                type: [Number, String]
+            }
+        }),
         placement: {
             type: String,
             default: 'bottom-start'
@@ -209,6 +184,12 @@ export default {
         },
         filterText () {
             if (this.autoFilter) this.treeFilterText = this.filterText
+        },
+        defaultValues: {
+            deep: true,
+            handler () {
+                this.defaultRebuild()
+            }
         }
     },
     computed: {
@@ -234,6 +215,7 @@ export default {
     },
     mounted () {
         if (this.showCheckbox) this.getTreeValues()
+        this.defaultRebuild()
     },
     methods: {
         clickPopup () {
@@ -241,6 +223,22 @@ export default {
         },
         closePopup () {
             this.popupVisible = false
+        },
+        defaultRebuild () {
+            let {idKey} = this.defaultOpt
+            let arr = this.defaultValues
+            let data = this.$refs.tree.indexArrCreate()
+            if (arr.length) {
+                if (this.showCheckbox) {
+                    let nodeKeys = data.filter(item => arr.includes(item.node[idKey])).map(item => item.nodeKey)
+                    nodeKeys.forEach(item => {
+                        this.$refs.tree.handleCheck({checked: true, nodeKey: item})
+                    })
+                } else {
+                    let [node] = data.filter(item => (item.node[idKey] === arr[0]))
+                    this.$refs.tree.handleSelect(node.nodeKey)
+                }
+            }
         },
         allCheckClick (status) {
             let changes
@@ -276,24 +274,14 @@ export default {
         handleExpand (options) {
             this.$emit('on-expand', options)
         },
-        clearValues (item) {
-            const {defaultOpt, data} = this
-            if (item) {
-                data.forEach((node) => {
-                    this.downTraversal(node, {
-                        isCheckedCancel: true,
-                        id: item[defaultOpt.idKey]
-                    })
+        clearValues () {
+            const {data} = this
+            data.forEach((node) => {
+                this.downTraversal(node, {
+                    isSelectCancel: true,
+                    id: this.values[0].id
                 })
-            } else {
-                data.forEach((node) => {
-                    this.downTraversal(node, {
-                        isSelectCancel: true,
-                        id: this.values[0].id
-                    })
-                })
-                this.values = []
-            }
+            })
         },
         getTreeValues () {
             this.values = this.showCheckbox ? this.$refs.tree.getCheckedNodes() : this.$refs.tree.getSelectedNodes()
@@ -302,16 +290,8 @@ export default {
             const {defaultOpt} = this
             const childrenKey = defaultOpt.childrenKey
             const selectedKey = defaultOpt.selectedKey
-            const checkedKey = defaultOpt.checkedKey
             if (options && options.isSelectCancel) {
                 if (node[defaultOpt.idKey] === options.id) this.$set(node, selectedKey, false)
-            } else if (options && options.isCheckedCancel) {
-                if (node[defaultOpt.checkedKey]) {
-                    if (node[defaultOpt.idKey] === options.id) {
-                        this.$set(node, checkedKey, false)
-                        node.checked = false
-                    }
-                }
             }
             if (node[childrenKey]) {
                 node[childrenKey].forEach(child => {

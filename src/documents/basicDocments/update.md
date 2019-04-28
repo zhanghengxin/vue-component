@@ -11,10 +11,10 @@
     重构 InputNumber
     </b-timeline-item>
     <b-timeline-item>
-    修复  Tabs的样式bug,name为空时做处理
+    修复 Tabs的样式bug,name为空时做处理
     </b-timeline-item>
     <b-timeline-item>
-    修复  Select的定位问题修复
+    修复 Select的定位问题修复
     </b-timeline-item>
 </b-timeline>
 

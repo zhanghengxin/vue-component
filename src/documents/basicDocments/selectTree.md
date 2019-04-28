@@ -16,7 +16,7 @@
 ```html
     <div>
         <b-select-tree label='单选' width='200' :data='data1'></b-select-tree>
-        <b-select-tree fixed label='复选' width='250' :data='data1'></b-select-tree>
+        <b-select-tree show-checkbox label='复选' width='250' :data='data1'></b-select-tree>
     </div>
     <script>
         export default {
@@ -72,8 +72,8 @@
 ::: code
 ```html
     <div>
-        <b-select-tree label='单选' width='200' :data='data2'></b-select-tree>
-        <b-select-tree fixed label='单选' width='200' :data='data2'></b-select-tree>
+        <b-select-tree label='无边框' width='200' :data='data2'></b-select-tree>
+        <b-select-tree fixed label='边框' width='300' :data='data2'></b-select-tree>
     </div>
     <script>
         export default {
@@ -130,8 +130,8 @@
 ::: code
 ```html
     <div>
-        <b-select-tree fixed label='复选' filterable width='250' :data='data4' show-checkbox></b-select-tree>
-        <b-select-tree fixed auto-filter label='模糊检索' width='250' filterable :data='data4'></b-select-tree>
+        <b-select-tree fixed label='复选' filterable width='250' :data='data3' show-checkbox></b-select-tree>
+        <b-select-tree fixed auto-filter label='模糊检索' width='250' filterable :data='data3'></b-select-tree>
     </div>
     <script>
         export default {
@@ -182,7 +182,7 @@
 ::: code
 ```html
     <div>
-        <b-select-tree fixed label='复选' filterable width='250' :data='data4' show-checkbox></b-select-tree>
+        <b-select-tree show-allcheck fixed label='复选' filterable width='250' :data='data4' show-checkbox></b-select-tree>
     </div>
     <script>
         export default {
@@ -234,40 +234,47 @@
 ::: code
 ```html
     <div>
-        <b-select-tree fixed label='复选' filterable width='250' :data='data5' show-checkbox></b-select-tree>
+        <b-select-tree :checkbox-options='checkboxOptions' fixed label='复选'  width='250' :data='data5' show-checkbox></b-select-tree>
+        <span><b-checkbox @on-change='handleChange'>是否级联父级数据</b-checkbox></span>
     </div>
     <script>
         export default {
             data () {
                 return {
-                     data4:[
+                    data5:[
                         {
-                           name: 'root',
-                           expand: true,
-                           id:1,
-                           children: [
-                               {
-                                   name: 'parent1',
-                                   checked:true,
-                                   id:2,
-                                   children: [
-                                       {
-                                           id:3,
-                                           name: 'leaf1'
-                                       },
-                                       {
-                                           id:4,
-                                           name: 'leaf2'
-                                       }
-                                   ]
-                               }
-                           ]
-                        }
+                            name: 'root',
+                            expand: true,
+                            id:1,
+                            children: [
+                                {
+                                    name: 'parent1',
+                                    checked:true,
+                                    id:2,
+                                    children: [
+                                        {
+                                            id:3,
+                                            name: 'leaf1'
+                                        },
+                                        {
+                                            id:4,
+                                            name: 'leaf2'
+                                        }
+                                    ]
+                                }
+                            ]
+                         }
                     ],
                     checkboxOptions: { // 多选级联配置
                         parent: false, // 是否影响父级节点
                         children: false // 是否影响子级节点
                     }
+                }
+            },
+            methods: {
+                handleChange (status){
+                    this.checkboxOptions.parent = status
+                    this.checkboxOptions.children = status
                 }
             }
         }
@@ -276,7 +283,98 @@
 :::
 </div>
 
+### 默认选中
+设置 `defaltValues`默认选中数据
 
+<div class="example">
+    <div class="example-box">
+        <div>
+           <b-select-tree :default-values='defaltValues' fixed label='复选'  width='250' :data='data6' show-checkbox></b-select-tree>
+           <b-select-tree :default-values='selectValues' fixed label='单选'  width='250' :data='data7'></b-select-tree>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-select-tree :default-values='defaltValues' fixed label='复选'  width='250' :data='data6' show-checkbox></b-select-tree>
+        <b-select-tree :default-values='selectValues' fixed label='单选'  width='250' :data='data7'></b-select-tree>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    data6:[
+                       {
+                           name: 'root',
+                           expand: true,
+                           id:1,
+                           children: [
+                               {
+                                   name: 'parent1',
+                                   id:2,
+                                   expand: true,
+                                   children: [
+                                       {
+                                           id:3,
+                                           name: 'leaf1'
+                                       },
+                                       {
+                                           id:4,
+                                           name: 'leaf2'
+                                       },
+                                       {
+                                           id:5,
+                                           name: 'leaf3'
+                                       }
+                                   ]
+                               }
+                           ]
+                        }
+                    ],
+                    data7:[
+                       {
+                           name: 'root',
+                           expand: true,
+                           id:1,
+                           children: [
+                               {
+                                   name: 'parent1',
+                                   id:2,
+                                   expand: true,
+                                   children: [
+                                       {
+                                           id:3,
+                                           name: 'leaf1'
+                                       },
+                                       {
+                                           id:4,
+                                           name: 'leaf2'
+                                       },
+                                       {
+                                           id:5,
+                                           name: 'leaf3'
+                                       }
+                                   ]
+                               }
+                           ]
+                        }
+                    ],
+                    defaltValues:[4,5],
+                    selectValues:[4]
+                }
+            },
+            methods: {
+                handleChange (status){
+                    this.checkboxOptions.parent = status
+                    this.checkboxOptions.children = status
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
 
 <script>
 export default {
@@ -408,10 +506,68 @@ export default {
                    ]
                 }
             ],
+            data6:[
+               {
+                   name: 'root',
+                   expand: true,
+                   id:1,
+                   children: [
+                       {
+                           name: 'parent1',
+                           id:2,
+                           expand: true,
+                           children: [
+                               {
+                                   id:3,
+                                   name: 'leaf1'
+                               },
+                               {
+                                   id:4,
+                                   name: 'leaf2'
+                               },
+                               {
+                                   id:5,
+                                   name: 'leaf3'
+                               }
+                           ]
+                       }
+                   ]
+                }
+            ],
+            data7:[
+               {
+                   name: 'root',
+                   expand: true,
+                   id:1,
+                   children: [
+                       {
+                           name: 'parent1',
+                           id:2,
+                           expand: true,
+                           children: [
+                               {
+                                   id:3,
+                                   name: 'leaf1'
+                               },
+                               {
+                                   id:4,
+                                   name: 'leaf2'
+                               },
+                               {
+                                   id:5,
+                                   name: 'leaf3'
+                               }
+                           ]
+                       }
+                   ]
+                }
+            ],
             checkboxOptions: { // 多选级联配置
                 parent: false, // 是否影响父级节点
                 children: false // 是否影响子级节点
-            }
+            },
+            defaltValues:[4,5],
+            selectValues:[4]
         }
     },
     methods: {
@@ -444,7 +600,8 @@ export default {
 | width | 开启 `label` 模式时生效,自定义宽度	| Number |	-   |     -   |
 | show-allcheck |  是否开启组件的全选模式	| Boolean |	-   |     false   |
 | placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
-| labelWidth | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
+| labelWidth | 自定义说明文字的宽度	| Number、String |	-   |     -   |
+| defaltValues | 默认选中的数据	| Array |	-   |     []   |
 
 ### children
 | 属性      | 说明    | 类型      | 默认值       |

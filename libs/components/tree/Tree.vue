@@ -301,6 +301,7 @@ export default {
             }
             this.$emit('on-expand', {data: node})
         },
+        // 模糊检索
         filterTreeData (value) {
             const defaultOpt = this.defaultOpt
             const _this = this

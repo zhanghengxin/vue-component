@@ -981,7 +981,7 @@ fixed为true时可设置通过width来设置整体select的宽度，labelWidth�
 | label      | 设置说明文字 	| String，Number | - |  -  |
 | placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
 | fixed      | 搭配文字的两种样式类型	| Boolean | `true`、`false` |   false  |
-| labelWidth  | input前的说明文字的宽度 fixed为false时有效   | Number  |  -  |   72  |
+| labelWidth  | input前的说明文字的宽度   | Number  |  -  |   72  |
 | loading  | 远程加载时的加载状态   | Boolean  |  `true`、`false`  |   false  |
 | remoteFn  | 远程加载时搜索的方法   | Function  |  -  |   -  |
 | group  | 设置select的下拉框分组   | Boolean  |  `true`、`false`  |   false  |
