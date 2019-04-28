@@ -1,5 +1,20 @@
 ### 更新日志
 
+### 0.5.6
+## `2019-04-27`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 SelectTree 添加默认选中功能
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Select选项超长时的样式显示、去掉input的placeholder
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Table 表头样式 以及 Menu 组件 z-index 顺序
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.5.5
 ## `2019-04-26`
 <br>
