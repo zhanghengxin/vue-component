@@ -271,7 +271,7 @@ $select-dropdown: "#{$menu}-drop-list";
     }
 
     .#{$icon} {
-      @include _color($Primary);
+      @include _color($Content);
     }
 
     .#{$menu-item-disabled}, .#{$menu-submenu-disabled} {
@@ -334,13 +334,13 @@ $select-dropdown: "#{$menu}-drop-list";
     .#{$menu-item}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu-title} {
       &:hover {
         color: $Primary !important;
+        .#{$icon} {
+          @include _color($Primary);
+        }
         @include _background_opacity($LightPrimary, 0.9);
         .#{$menu-item-solt} {
           .#{$menu-item-dot} {
             @include _borderColor($Primary);
-          }
-          .#{$icon} {
-            @include _color($Primary);
           }
         }
       }
@@ -405,7 +405,7 @@ $select-dropdown: "#{$menu}-drop-list";
     }
 
     .#{$icon} {
-      @include _color($Primary);
+      @include _color($Content);
     }
 
     .#{$menu-item-disabled}, .#{$menu-submenu-disabled} {
@@ -468,13 +468,13 @@ $select-dropdown: "#{$menu}-drop-list";
     .#{$menu-item}.#{$menu-item-un-disabled}, .#{$menu-submenu}.#{$menu-submenu-un-disabled} > .#{$menu-submenu-title} {
       &:hover {
         color: $Primary !important;
+        .#{$icon} {
+          @include _color($Primary);
+        }
         @include _background_opacity($LightPrimary, 0.9);
         .#{$menu-item-solt} {
           .#{$menu-item-dot} {
             @include _borderColor($Primary);
-          }
-          .#{$icon} {
-            @include _color($Primary);
           }
         }
       }
