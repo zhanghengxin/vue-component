@@ -1,5 +1,104 @@
 ### 更新日志
 
+### 0.5.6
+## `2019-04-27`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 SelectTree 添加默认选中功能
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Select选项超长时的样式显示、去掉input的placeholder
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Table 表头样式 以及 Menu 组件 z-index 顺序
+    </b-timeline-item>
+</b-timeline>
+
+### 0.5.5
+## `2019-04-26`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 select-tree，适配销项的需求
+    </b-timeline-item>
+    <b-timeline-item>
+    重构 InputNumber
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Tabs的样式bug,name为空时做处理
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Select的定位问题修复
+    </b-timeline-item>
+</b-timeline>
+
+### 0.5.4
+## `2019-04-25`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 Tabpane 的按需引入方式
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Options的slot 传值
+    </b-timeline-item>
+</b-timeline>
+
+### 0.5.3
+## `2019-04-25`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修改 select的 error样式
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 全局不正常的引用组件的方式
+    </b-timeline-item>
+</b-timeline>
+
+### 0.5.2
+## `2019-04-24`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 Tabs组件添加capture-focus，name，extra，tab，index功能
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Select支持option slot方式传入
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Notice、Message 兼容 iview 使用方式，重写Notice组件动画,全局配置功能添加，z-index优先级调整
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Notice 结构，解决 notice 多次渲染布局异常以及 dom 没有及时销毁的性能问题
+    </b-timeline-item>
+</b-timeline>
+
+### 0.5.1
+## `2019-04-23`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 Tree className支持，hover 支持, getSelectedNodes 公用 API等
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Carousel 轮播图重构
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Menu的样式进行优化，避免了外界css的影响
+    </b-timeline-item>
+</b-timeline>
+
+### 0.5.0
+## `2019-04-23`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 修改input的prepend、append换行问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.4.9
 ## `2019-04-22`
 <br>
@@ -8,7 +107,7 @@
     新增 Input - append prepend slot方式
     </b-timeline-item>
     <b-timeline-item>
-    优化 menu合并代码，本次合并，优化了menu的css，兼容了primary主题风格，事件的名字添加on前缀
+    优化 Menu 兼容了primary主题风格，事件的名字添加on前缀
     </b-timeline-item>
     <b-timeline-item>
     修复 Card的border样式bug

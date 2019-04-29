@@ -10,14 +10,14 @@
             @click="handleClick"
             :style="paddingStyle"
         >
-            <b-icon
+            <Icon
                 :type="icon"
                 size="14"
                 class="menu-pre-icon"
                 v-show="icon">
-            </b-icon>
+            </Icon>
             <slot name="title"></slot>
-            <b-icon :type="submenuTitleIcon" class="menu-arrow"></b-icon>
+            <Icon :type="submenuTitleIcon" class="menu-arrow"></Icon>
         </div>
         <transition name='gradual' v-if="mode === 'vertical'">
             <ul v-show="opened">
@@ -34,7 +34,7 @@
 <script>
 import { MENU, SUBMENU } from './base'
 import { prefix } from '../../utils/common'
-import BIcon from '../icon'
+import Icon from '../icon'
 import mixin from './menu-mixin'
 import Emitter from '../../mixins/emitter'
 
@@ -44,7 +44,7 @@ export default {
     name: SUBMENU,
     componentName: SUBMENU,
     components: {
-        BIcon
+        Icon
     },
     data () {
         return {

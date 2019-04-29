@@ -19,7 +19,7 @@
             @mouseenter="clearShow = clearable && true"
             @mouseleave="clearShow = clearable && false">
             <input type="hidden" :name="name" :value="publicValue">
-            <div :class='[`${prefixCls}-main-flex`]'>
+            <div :class='[`${prefixCls}-main-flex`]' :style='[selectWidth]'>
                 <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
                 <template v-if='multiple'>
                     <div
@@ -62,7 +62,7 @@
             </Icon>
         </div>
     </div>
-        <slot>
+        <slot name='tree'>
             <transition name='slide'>
                 <Drop
                     v-show='show'
@@ -105,6 +105,10 @@
                 </Drop>
             </transition>
         </slot>
+        <functional-options
+            :slot-update-hook="updateSlotOptions"
+            :slot-options="slotOptions"
+        ></functional-options>
     </div>
 </template>
 <script>
@@ -115,14 +119,28 @@ import clickOutside from '../../utils/directives/clickOutside'
 import { typeOf } from '../../utils/assist'
 import { prefix, propsInit } from '../../utils/common'
 import Icon from '../icon'
+import FunctionalOptions from './functional-options.vue'
 
 const prefixCls = prefix + 'select'
+const findChildrenText = (componentOptions = {}, cData = {}) => {
+    let text = ''
+    let children = componentOptions.children
+    text += (cData.domProps && cData.domProps.textContent) || ''
+    if (!children) return text
+    for (let vnode of children) {
+        const cOptions = vnode.componentOptions
+        const cData = vnode.data
+        text += vnode.text || ''
+        text += findChildrenText(cOptions, cData)
+    }
+    return text
+}
 
 export default {
     name: prefixCls,
     mixins: [Emitter],
     directives: {clickOutside},
-    components: {Drop, Option, Icon},
+    components: {FunctionalOptions, Drop, Option, Icon},
     data () {
         return {
             prefix,
@@ -135,7 +153,9 @@ export default {
             lastRemoteQuery: '',
             dropWidth: null,
             stylePloyfill: false,
-            selectWidth: {}
+            selectWidth: {},
+            slotOptions: this.$slots.default,
+            selectOptions: this.options
         }
     },
     props: {
@@ -274,7 +294,8 @@ export default {
             return [
                 `${prefixCls}-main-content`,
                 {
-                    [`${prefixCls}-main-placeholder`]: this.localePlaceholder && (!this.showValue || this.multiple)
+                    [`${prefixCls}-main-placeholder`]: this.localePlaceholder && (!this.showValue || this.multiple),
+                     [`${prefixCls}-filterabled`]: !this.filterabled && this.multiple
                 }
             ]
         },
@@ -291,7 +312,7 @@ export default {
         selectBoxStyles () {
             const {label, fixed} = this
             let style = {}
-            if (!label || (label && fixed)) { //
+            if (!label || (label && fixed)) {
                 style.width = `${this.width}px`
             }
             return style
@@ -362,8 +383,8 @@ export default {
             return this.disabled || 0
         },
         dropList () {
-            const {options, filterabled, query, remoteFn, codeKey, nameKey, group} = this
-            let dropList = options.map(item => {
+            const {selectOptions, filterabled, query, remoteFn, codeKey, nameKey, group} = this
+            let dropList = (selectOptions || []).map(item => {
                 if (group) {
                     return item
                 }
@@ -392,8 +413,9 @@ export default {
         }
     },
     mounted () {
+        this.selectOptionsInit()
         this.$on('on-select-selected', this.onOptionClick)
-        if (this.options && this.options.length > 0) {
+        if (this.selectOptions && this.selectOptions.length > 0) {
             this.values = this.valuesInit()
         }
         this.widthInit()
@@ -402,6 +424,32 @@ export default {
         }
     },
     methods: {
+        updateSlotOptions () {
+            this.slotOptions = this.$slots.default
+            this.selectOptionsInit()
+        },
+        selectOptionsInit () {
+            const selectOptions = []
+            if (this.slotOptions) {
+                for (let option of this.slotOptions) {
+                    const cOptions = option.componentOptions
+                    const cData = option.data
+                    if (!cOptions) continue
+                    let label = ''
+                    if (cOptions.propsData.label === undefined) {
+                        // 兼容v-text 兼容 {{}}传递label数据
+                        label = findChildrenText(cOptions, cData)
+                        selectOptions.push({
+                            value: cOptions.propsData.value,
+                            label
+                        })
+                    } else {
+                        selectOptions.push(cOptions.propsData)
+                    }
+                }
+                this.selectOptions = selectOptions
+            }
+        },
         widthInit () {
             const {label, fixed, $el} = this
             let width = ''
@@ -591,7 +639,7 @@ export default {
                     this.$el.querySelector(`[type='text']`).focus()
                 })
             }
-            this.broadcast(`${prefix}drop`, this.show ? 'on-update-popper' : 'on-destroy-popper')
+            // this.broadcast(`${prefix}drop`, this.show ? 'on-update-popper' : 'on-destroy-popper')
         },
         query () {
             const {filterabled, remoteFn, query} = this
@@ -599,7 +647,7 @@ export default {
                 this.remoteFn(query)
             }
         },
-        options (now, before) {
+        selectOptions (now, before) {
             const {multiple, value, nameInCode, codeKey} = this
             const newValue = JSON.stringify(now)
             const oldValue = JSON.stringify(before)
@@ -619,6 +667,9 @@ export default {
                 this.$emit('on-change', nameInCode ? (multiple ? this.values : this.values[0]) : value)
                 this.dispatch('FormItem', 'on-form-change', nameInCode ? this.values : value)
             }
+        },
+        options (now, before) {
+            this.selectOptions = now
         }
     }
 }

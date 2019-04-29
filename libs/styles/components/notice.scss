@@ -1,22 +1,32 @@
 $css-prefix-notice: $css-prefix+'notice';
 
-@mixin type($type, $color) {
-    &-#{$type} {
-        border-left: solid 4px $color;
+.#{$css-prefix-notice} {
+    @mixin type($type, $color) {
+        &-#{$type} {
+            border-left: solid 4px $color;
 
-        &-icon {
-            position: absolute;
-            left: 12px;
-            top: 12px;
-            color: $color;
+            &-icon {
+                position: absolute;
+                left: 12px;
+                top: 12px;
+                color: $color;
+            }
         }
     }
-}
-
-.#{$css-prefix-notice} {
-    position: fixed;
-    width: 340px;
-    z-index: $zindex-notice;
+    @include type(success, $Success);
+    @include type(warning, $Warning);
+    @include type(error, $Error);
+    @include type(info, $Primary);
+    position: relative;
+    &-wrapper {
+        margin-bottom: 5px;
+    }
+    &-container {
+        position: fixed;
+        width: 335px;
+        margin-right: 24px;
+        z-index: $zindex-notice;
+    }
     background-color: $white;
     @include _color($Content);
     align-items: center;
@@ -52,30 +62,5 @@ $css-prefix-notice: $css-prefix+'notice';
         }
     }
 
-    @include type(normal, $Primary);
-    @include type(success, $Success);
-    @include type(warning, $Warning);
-    @include type(error, $Error);
-
-    &-fade {
-        position: absolute;
-        left: 0;
-        right: 0;
-
-        &-enter-active {
-            transition: all 1.2s ease;
-        }
-
-        &-leave-active {
-            transition: all .1s cubic-bezier(2.0, 0.5, 0.8, 1.0);
-        }
-
-        &-enter,
-        &.slide-#{$css-prefix-notice}-fade-leave-to {
-            left: 0;
-            right: 0;
-            transform: translateX(50px);
-            opacity: 0;
-        }
-    }
 }
+

@@ -1,55 +1,71 @@
 $css-prefix-tree: $css-prefix + 'tree';
+$css-prefix-select-tree: $css-prefix + 'select-tree';
 
 .#{$css-prefix-tree} {
-  font-size: 14px;
-  position: relative;
-  cursor: default;
-  background: #fff;
-  @include _color($Content);
-  & &-children {
-    margin: 0;
-    padding: 0 0 0 10px;
-    li {
-      list-style: none;
-      margin: 6px 0;
-      padding: 0;
-      white-space: nowrap;
-      outline: 0;
+    font-size: 14px;
+    position: relative;
+    cursor: default;
+    background: #fff;
+    @include _color($Content);
+    & &-children {
+        margin: 0;
+        padding: 0 0 0 10px;
+        li {
+            list-style: none;
+            margin: 6px 0;
+            padding: 0;
+            white-space: nowrap;
+            outline: 0;
+
+        }
     }
-  }
-  &-arrow {
-    cursor: pointer;
-    width: 12px;
-    text-align: center;
-    display: inline-block;
-    @include _color($Sub);
-  }
-  &-name {
-    display: inline-block;
-    margin: 0;
-    padding: 0 4px;
-    border-radius: 3px;
-    cursor: pointer;
-    vertical-align: top;
-    transition: all .2s ease-in-out;
-  }
-  &-name-selected {
-    @include _color($Primary);
-    @include _background(transparentize($Primary, 0.9));
-  }
-  &-loop {
-    animation: load-loop 1s linear infinite
-  }
+    &-arrow {
+        cursor: pointer;
+        width: 12px;
+        text-align: center;
+        display: inline-block;
+        @include _color($Sub);
+    }
+    &-name {
+        display: inline-block;
+        margin: 0;
+        padding: 0 4px;
+        border-radius: 3px;
+        cursor: pointer;
+        vertical-align: top;
+        transition: all .2s ease-in-out;
+        &:hover {
+            @include _background(transparentize($Primary, 0.9));
+        }
+    }
+    &-name-selected {
+        @include _color($Primary);
+        @include _background(transparentize($Primary, 0.9));
+    }
+    &-loop {
+        animation: load-loop 1s linear infinite
+    }
+    &-tip {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 5px;
+    }
+}
+
+.#{$css-prefix-select-tree} {
+    &-checkbox {
+        margin:5px 0 0 5px;
+    }
 }
 
 @keyframes load-loop {
-  from {
-    transform: rotate(0)
-  }
-  50% {
-    transform: rotate(180deg)
-  }
-  to {
-    transform: rotate(360deg)
-  }
+    from {
+        transform: rotate(0)
+    }
+    50% {
+        transform: rotate(180deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
 }

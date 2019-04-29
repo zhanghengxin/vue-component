@@ -6,7 +6,7 @@
 
 $css-prefix-select: $css-prefix+'select';
 $css-prefix-option: $css-prefix+'option';
-$css-prefix-form-item: $css-prefix + 'form-item';
+$css-prefix-form-item: $css-prefix+'form-item';
 
 @mixin transitionAll() {
   transition: all $transition-time $ease-in-out;
@@ -80,7 +80,7 @@ $css-prefix-form-item: $css-prefix + 'form-item';
   font-size: 0;
   display: inline-block;
   vertical-align: middle;
-  position: relative;
+  line-height: normal;
 
   //label
   &-label {
@@ -138,20 +138,12 @@ $css-prefix-form-item: $css-prefix + 'form-item';
 
   &-multiple {
     .#{$css-prefix-select} {
-      &-main {
-        padding: 0 24px 0 4px;
-      }
-
       &-main-flex {
         display: flex;
         flex-wrap: wrap;
+        padding-left: 4px;
       }
-
       &-input {
-        padding: 0 0 0 4px;
-      }
-
-      &-main-placeholder {
         padding-left: 4px;
       }
     }
@@ -173,13 +165,19 @@ $css-prefix-form-item: $css-prefix + 'form-item';
     @include borderInit($Border, 4px);
     @include transitionAll();
 
+    &-flex{
+      padding-left: 8px;
+      padding-right: 24px;
+    }
+
     &-content {
+      width: 100%;
+      box-sizing: border-box;
+      display: inline-block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       vertical-align: middle;
-      padding-left: 8px;
-      padding-right: 24px;
     }
 
     &-placeholder {
@@ -193,6 +191,10 @@ $css-prefix-form-item: $css-prefix + 'form-item';
     }
   }
 
+  &-filterabled{
+    padding-left: 4px;
+  }
+
   &-arrow {
     position: absolute;
     top: 50%;
@@ -202,16 +204,11 @@ $css-prefix-form-item: $css-prefix + 'form-item';
     @include transitionAll();
   }
 
-  &-flex {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
   &-input {
     border: 0;
     width: 100%;
     border-radius: 4px;
-    padding: 0 24px 0 8px;
+    padding: 0;
     @include placeholder($SubContent)
   }
 
@@ -256,11 +253,17 @@ $css-prefix-form-item: $css-prefix + 'form-item';
   }
 }
 
-.#{$css-prefix-form-item}{
-  &-error{
-    .#{$css-prefix-select},.#{$css-prefix-select}-group-fixed {
-      @include selectMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
+.#{$css-prefix-form-item} {
+  &-error {
+
+    .#{$css-prefix-select}-main,
+    .#{$css-prefix-select}-group-fixed {
       border-color: $Error;
+    }
+
+    .#{$css-prefix-select},
+    .#{$css-prefix-select}-group-fixed {
+      @include selectMockClass($Error, 0 0 0 2px rgba(244, 67, 54, 0.2));
     }
   }
 }
@@ -290,7 +293,7 @@ $css-prefix-form-item: $css-prefix + 'form-item';
     color: $white;
   }
 
-  &-tip{
+  &-tip {
     font-weight: 400;
     font-size: 14px !important;
     text-align: center;

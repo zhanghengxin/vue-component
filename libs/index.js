@@ -38,6 +38,7 @@ import Tree from './components/tree'
 import Table from './components/table'
 import Progress from './components/progress'
 import Select from './components/select'
+import Option from './components/option'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
 import Transfer from './components/transfer'
@@ -57,7 +58,7 @@ import Affix from './components/affix'
 import Poptip from './components/poptip'
 import Spin from './components/spin'
 import Badge from './components/badge'
-import LabelTree from './components/label-tree'
+import SelectTree from './components/select-tree'
 
 const components = [
     Input,
@@ -101,12 +102,13 @@ const components = [
     Tabs,
     Tabs.panel,
     Select,
+    Option,
     DatePicker,
     TimePicker,
     Transfer,
     Menu,
     MenuItem,
-    LabelTree,
+    SelectTree,
     Submenu,
     MenuGroup,
     Timeline,

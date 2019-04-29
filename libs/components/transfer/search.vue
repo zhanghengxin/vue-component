@@ -11,13 +11,13 @@
     </div>
 </template>
 <script>
-import bInput from '../input/Input'
+import BInput from '../input/Input'
 import { prefix, oneOf } from '../../utils/common'
 const prefixCls = `${prefix}transfer-search`
 
 export default {
     name: prefixCls,
-    components: { bInput },
+    components: { BInput },
     props: {
         placeholder: String,
         query: String,

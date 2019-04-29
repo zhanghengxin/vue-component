@@ -6,7 +6,7 @@
             </div>
             <div :style="{ left: `${offset}%` }" :class="triggerCls" @mousedown="handleMousedown">
                 <slot name="trigger">
-                    <b-trigger mode="vertical"></b-trigger>
+                    <Trigger mode="vertical"></Trigger>
                 </slot>
             </div>
             <div :style="{ left: `${offset}%` }" :class="paneCls" class="right-pane">
@@ -19,7 +19,7 @@
             </div>
             <div :style="{ top: `${offset}%` }" :class="triggerCls" @mousedown="handleMousedown">
                 <slot name="trigger">
-                    <b-trigger mode="horizontal"></b-trigger>
+                    <Trigger mode="horizontal"></Trigger>
                 </slot>
             </div>
             <div :style="{ top: `${offset}%` }" :class="paneCls" class="bottom-pane">
@@ -32,13 +32,13 @@
 <script>
 import { oneOf, prefix } from '../../utils/common'
 import { on, off } from '../../utils/dom'
-import BTrigger from './Trigger'
+import Trigger from './Trigger'
 const prefixCls = `${prefix}split`
 const defaultHeight = '40px'
 
 export default {
     name: prefixCls,
-    components: { BTrigger },
+    components: { Trigger },
     props: {
         value: {
             type: [Number, String],

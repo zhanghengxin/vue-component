@@ -1,18 +1,18 @@
 /*
- * --------------------------------------------------------------------------- *
- *
- * @Author: yanghao
- * @Date: 2018-09-14 15:17:37
- * @Last Modified by: yanghao
- * @Last Modified time: 2018-12-03 16:43:19
- *
- * --------------------------------------------------------------------------- *
- */
+* --------------------------------------------------------------------------- *
+*
+* @Author: yanghao
+* @Date: 2018-09-14 15:17:37
+* @Last Modified by: yanghao
+* @Last Modified time: 2018-12-03 16:43:19
+*
+* --------------------------------------------------------------------------- *
+*/
 
 <template>
-    <div :class="classtype" >
+    <div :class="classtype">
         <div :class="header" @click="handleChange">
-            <b-icon type="xia" size=12 :class="arrow" ></b-icon>
+            <Icon type="xia" size=12 :class="arrow"></Icon>
             <slot name="title"></slot>
         </div>
         <CollapseTransition>
@@ -25,10 +25,12 @@
 
 <script>
 import CollapseTransition from './collapse-transition'
+import Icon from '../icon'
 import { prefix } from '../../utils/common'
+
 export default {
     name: `${prefix}collapse-item`,
-    components: {CollapseTransition},
+    components: {CollapseTransition, Icon},
     props: {
         name: {
             type: String

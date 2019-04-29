@@ -565,119 +565,6 @@ Render 函数的第二个参数，包含三个字段：
 :::
 </div>
 
-### 自定义输入框格式
-- 可设置 `label`，`fixed`设置`label`的两种样式。
-- 可设置 `show-checkbox`开启多选模式
-
-<div class="example">
-    <div class="example-box">
-        <div>
-            <b-label-tree label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
-            <b-label-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
-            <b-label-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-label-tree>
-            <b-label-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
-        </div>
-    </div>
-
-::: code
-```html
-    <div>
-        <b-label-tree label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
-        <b-label-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
-        <b-label-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-label-tree>
-        <b-label-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
-    </div>
-    <script>
-        export default {
-            data () {
-                return {
-                    data3:[
-                    {
-                         name: 'root',
-                         expand: true,
-                         id:1,
-                         children: [
-                             {
-                                 name: 'parent1',
-                                 checked:true,
-                                 disabled:true,
-                                 id:2,
-                                 children: [
-                                     {
-                                         id:3,
-                                         name: 'leaf 1-1-1'
-                                     },
-                                     {
-                                         id:4,
-                                         name: 'leaf 1-1-2'
-                                     }
-                                 ]
-                             },
-                             {
-                                 id:5,
-                                 name: 'parent2',
-                                 children: [
-                                     {
-                                         id:6,
-                                         name: 'leaf 1-2-1'
-                                     },
-                                     {
-                                         id:7,
-                                         name: 'leaf 1-2-2',
-                                         children: [
-                                            {
-                                                id:8,
-                                                name: 'parent 1-2-2-1',
-                                                children: [
-                                                    {
-                                                        id:10,
-                                                        name: 'leaf 1-2-2-1-1'
-                                                    },
-                                                    {
-                                                        id:11,
-                                                        name: 'leaf 1-2-2-1-2'
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                id:9,
-                                                name: 'parent 1-2-2-1',
-                                                children: [
-                                                    {
-                                                        id:12,
-                                                        name: 'leaf 1-2-2-1-1'
-                                                    },
-                                                    {
-                                                        id:13,
-                                                        name: 'leaf 1-2-2-1-2'
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                     }
-                                 ]
-                             }
-                         ]
-                      }
-                    ],
-                    checkboxOptions: {
-                        parent: true,
-                        children: true
-                    }
-                }
-            },
-            methods:{
-                handleChecked (options){
-                    console.log(`选中获取的数据:`,options)
-                }
-            }
-
-        }
-    </script>
-```
-:::
-</div>
-
 <script>
 export default {
     data () {
@@ -1064,11 +951,8 @@ export default {
 | defaultOpt     | 各种选中效果的配置项，具体配置见下文   | 	Object    |  -  |   -    |
 | draggable     |  是否开启节点拖拽编辑 | 	Boolean    |  -  |    fasle    |
 | render     |  自定义渲染内容，见示例	 | 	Function    |  -  |    -    |
-| label      | 开启 label 模式，设置说明文字 	| String，Number | - |  -  |
-| fixed      | 开启 `label` 模式时生效，搭配文字的两种样式类型	| Boolean | - |   false  |
-| width | 开启 `label` 模式时生效,自定义宽度	| Number |	-   |     -   |
-| placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
-| labelWidth | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
+| className      | 给 item-name 附加的 class	| String | - |   -  |
+
 
 ### children
 | 属性      | 说明    | 类型      | 默认值       |
@@ -1090,7 +974,6 @@ export default {
 | checkedKey     |  勾选属性配置项Key值  |  String  |  checked    |
 | expandKey     |  展开属性配置项Key值  |  String  |  expand   |
 | selectedKey     |  选中属性配置项Key值  |  String  |  selected   |
-| idKey     |  选中数据唯一标识配置项Key值【当开启label时有效】  |  String  |   id   |
 
 ### accordionOptions
 | 属性      | 说明    | 类型      | 默认值       |
