@@ -96,8 +96,10 @@
             }
         },
         mounted () {
-            this.showExtra = this.$slots.extra !== undefined
-            this.autoFocus()
+            this.initTabs()
+        },
+        updated () {
+            this.initTabs()
         },
         computed: {
             classes () {
@@ -153,6 +155,11 @@
             }
         },
         methods: {
+            initTabs () {
+                this.showExtra = this.$slots.extra !== undefined
+                this.updateBar()
+                this.autoFocus()
+            },
             tabCls (item) {
                 return [
                     `${prefixCls}-tab`,

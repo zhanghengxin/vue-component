@@ -52,7 +52,7 @@ $tabExtra: $css-prefix + 'tabs-extra';
 
 //排布tabs
 .#{$tabs}-content {
-  padding: 8px 0;
+  //padding: 8px 0;
   display: flex;
   flex-direction: row;
   .#{$tabPanel}{
