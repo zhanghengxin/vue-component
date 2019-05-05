@@ -1,0 +1,67 @@
+$css-prefix-cascader: $css-prefix + 'cascader';
+
+.#{$css-prefix-cascader} {
+    &-arrow {
+        @include _iconArrow;
+    }
+    &-rel {
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        &-focused {
+            & .#{$css-prefix-cascader}-arrow {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    &-menu {
+        display: inline-block;
+        min-width: 100px;
+        height: 180px;
+        margin: 0;
+        padding: 5px 0;
+        vertical-align: top;
+        list-style: none;
+        border-right: 1px solid $Border;
+        overflow: auto;
+        &-item {
+            position: relative;
+            margin: 0;
+            line-height: normal;
+            padding: 7px 16px;
+            clear: both;
+            color: $Content;
+            font-size: 12px;
+            white-space: nowrap;
+            list-style: none;
+            cursor: pointer;
+            transition: background .2s ease-in-out;
+            & i {
+                @include _iconArrow;
+            }
+            &-active, &:hover {
+                background-color: $Background;
+            }
+            &-disabled {
+                color: $Disabled;
+                background: white !important;
+                cursor: not-allowed;
+            }
+        }
+    }
+    &-loop {
+        @include _loop;
+    }
+    & .#{$css-prefix}drop {
+        width: auto;
+        padding: 0;
+        white-space: nowrap;
+        overflow: visible;
+    }
+    &-disabled {
+        & .#{$css-prefix}input {
+            cursor: not-allowed;
+        }
+    }
+
+}
