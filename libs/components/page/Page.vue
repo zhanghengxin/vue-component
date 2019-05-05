@@ -43,6 +43,7 @@
         <li
             v-if="currentPage > 5"
             @click="fastPrev"
+            title="向前5页"
             :class="[prefixCls + '-item-jump-prev']">
             <a :class="[prefixCls + '-arrow']">
                 <Icon type="gengduo"></Icon>
@@ -99,6 +100,7 @@
         <li
             v-if="pageCount - currentPage >= 5"
             @click="fastNext"
+            title="向后5页"
             :class="[prefixCls + '-item-jump-next']">
             <a :class="[prefixCls + '-arrow']">
                 <Icon type="gengduo"></Icon>

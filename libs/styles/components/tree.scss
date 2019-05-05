@@ -1,4 +1,5 @@
 $css-prefix-tree: $css-prefix + 'tree';
+$css-prefix-select-tree: $css-prefix + 'select-tree';
 
 .#{$css-prefix-tree} {
     font-size: 14px;
@@ -43,6 +44,17 @@ $css-prefix-tree: $css-prefix + 'tree';
     }
     &-loop {
         animation: load-loop 1s linear infinite
+    }
+    &-tip {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 5px;
+    }
+}
+
+.#{$css-prefix-select-tree} {
+    &-checkbox {
+        margin:5px 0 0 5px;
     }
 }
 

@@ -658,7 +658,7 @@ export default {
                     this.$el.querySelector(`[type='text']`).focus()
                 })
             }
-            this.broadcast(`${prefix}drop`, this.show ? 'on-update-popper' : 'on-destroy-popper')
+            // this.broadcast(`${prefix}drop`, this.show ? 'on-update-popper' : 'on-destroy-popper')
         },
         query () {
             const {filterabled, remoteFn, query} = this

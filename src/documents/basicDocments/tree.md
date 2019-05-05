@@ -565,6 +565,7 @@ Render 函数的第二个参数，包含三个字段：
 :::
 </div>
 
+<<<<<<< HEAD
 ### 自定义输入框格式
 - 可设置 `label`，`fixed`设置`label`的两种样式。
 - 可设置 `show-checkbox`开启多选模式
@@ -678,6 +679,8 @@ Render 函数的第二个参数，包含三个字段：
 :::
 </div>
 
+=======
+>>>>>>> develop
 <script>
 export default {
     data () {
@@ -1064,13 +1067,12 @@ export default {
 | defaultOpt     | 各种选中效果的配置项，具体配置见下文   | 	Object    |  -  |   -    |
 | draggable     |  是否开启节点拖拽编辑 | 	Boolean    |  -  |    fasle    |
 | render     |  自定义渲染内容，见示例	 | 	Function    |  -  |    -    |
-| label      | 开启 label 模式，设置说明文字 	| String，Number | - |  -  |
-| fixed      | 开启 `label` 模式时生效，搭配文字的两种样式类型	| Boolean | - |   false  |
 | className      | 给 item-name 附加的 class	| String | - |   -  |
 | width | 开启 `label` 模式时生效,自定义宽度	| Number |	-   |     -   |
 | placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
 | labelWidth | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
 | transfer     |  是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果 | Boolean    |  -  |     false  |
+
 
 ### children
 | 属性      | 说明    | 类型      | 默认值       |
@@ -1092,7 +1094,6 @@ export default {
 | checkedKey     |  勾选属性配置项Key值  |  String  |  checked    |
 | expandKey     |  展开属性配置项Key值  |  String  |  expand   |
 | selectedKey     |  选中属性配置项Key值  |  String  |  selected   |
-| idKey     |  选中数据唯一标识配置项Key值【当开启label时有效】  |  String  |   id   |
 
 ### accordionOptions
 | 属性      | 说明    | 类型      | 默认值       |

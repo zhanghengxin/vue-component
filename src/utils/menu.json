@@ -148,6 +148,11 @@
           "name": "tree"
         },
         {
+          "title": "SelectTree 树形控件",
+          "path": "/selectTree",
+          "name": "selectTree"
+        },
+        {
           "title": "Card 卡片",
           "path": "/card",
           "name": "card"
