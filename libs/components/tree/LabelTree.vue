@@ -16,7 +16,12 @@
         <transition name="slide" slot="tree">
             <Drop
                 :placement='placement'
-                v-show="popupVisible">
+                v-show="popupVisible"
+                :class='dropTransferCls'
+                ref="dropdown"
+                :data-transfer="transfer"
+                :transfer="transfer"
+                v-transfer-dom>
                 <div :class="wrapCls" :style="wrapSty">
                     <b-input
                         v-model='filterText'
@@ -57,11 +62,12 @@ import Drop from '../select/Dropdown'
 import BInput from '../input'
 import Select from '../select/Select'
 import clickoutside from '../../utils/directives/clickOutside'
+import TransferDom from '../../utils/directives/transfer-dom'
 
 const prefixCls = prefix + 'label-tree'
 export default {
     name: prefixCls,
-    directives: {clickoutside},
+    directives: {clickoutside, TransferDom},
     components: {
         Tree, Drop, Select, BInput
     },
@@ -174,6 +180,10 @@ export default {
         placement: {
             type: String,
             default: 'bottom-start'
+        },
+        transfer: {
+            type: Boolean,
+            default: false
         }
     },
     watch: {
@@ -196,6 +206,11 @@ export default {
             return {
                 width: this.dropWidth && `${this.dropWidth}px`
             }
+        },
+        dropTransferCls () {
+            return {
+                [prefix + 'drop-transfer']: this.transfer
+            }
         }
     },
     mounted () {
@@ -206,6 +221,12 @@ export default {
             this.popupVisible = !this.popupVisible
         },
         closePopup () {
+            if (this.transfer) {
+                const {$el} = this.$refs.dropdown
+                if ($el === event.target || $el.contains(event.target)) {
+                    return
+                }
+            }
             this.popupVisible = false
         },
         handleCheck (options) {

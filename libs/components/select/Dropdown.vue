@@ -7,6 +7,7 @@
 
 import { prefix } from '../../utils/common'
 import Vue from 'vue'
+import { existenceIndex, existenceIncrease } from '../../utils/existence-queue'
 
 const isServer = Vue.prototype.$isServer
 const Popper = isServer ? function () {} : require('popper.js/dist/umd/popper.js')
@@ -31,6 +32,9 @@ export default {
         },
         className: {
             type: String
+        },
+        transfer: {
+            type: Boolean
         }
     },
     computed: {
@@ -38,8 +42,9 @@ export default {
             let style = {}
             if (this.width) {
                 style.minWidth = `${this.width}px`
-                style.maxWidth = `${100 + +this.width}px`
+                // style.maxWidth = `${100 + +this.width}px`
             }
+            if (this.transfer) style['z-index'] = 1060 + this.tIndex
             return style
         },
         classes () {
@@ -49,6 +54,13 @@ export default {
                     [`${this.className}`]: this.className
                 }
             ]
+        }
+    },
+    data () {
+        return {
+            popper: null,
+            popperStatus: false,
+            tIndex: this.handleGetIndex()
         }
     },
     methods: {
@@ -84,9 +96,7 @@ export default {
                     })
                 })
             }
-            // if (this.$parent.$options.name === `${prefix}select`) {
-            //     this.width = this.$parent.$el.querySelector(`.${prefix}select-selection`).clientWidth
-            // }
+            this.tIndex = this.handleGetIndex()
         },
         destroy () {
             if (this.popper) {
@@ -108,6 +118,10 @@ export default {
             if (!leftOrRight) {
                 this.popper.popper.style.transformOrigin = placementStart === 'bottom' || (placementStart !== 'top' && placementEnd === 'start') ? 'center top' : 'center bottom'
             }
+        },
+        handleGetIndex () {
+            existenceIncrease()
+            return existenceIndex
         }
     },
     created () {

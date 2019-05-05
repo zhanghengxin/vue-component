@@ -155,7 +155,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-select v-model="value" width='200' @on-change='changeConsole'>
+            <b-select v-model="value" width='200' :transfer='true' @on-change='changeConsole'>
                 <b-option v-for='item in options5' :value='item.value' v-text='item.label' :key='item.value'></b-option>
             </b-select>   
             <b-select v-model="value" width='200' :options='options5' @on-change='changeConsole'></b-select>   
@@ -169,8 +169,8 @@
 
     <template>
         <div>
-            <b-select v-model="value" width='200' @on-change='changeConsole'>
-                <b-option v-for='item in options5' :value='item.value' :label='item.label' :key='item.value'></b-option>
+            <b-select v-model="value" width='200' :transfer='true' @on-change='changeConsole'>
+                <b-option v-for='item in options5' :value='item.value' v-text='item.label' :key='item.value'></b-option>
             </b-select>   
             <b-select v-model="value" width='200' :options='options5' @on-change='changeConsole'></b-select>   
             <span>{{value}}</span>
@@ -347,6 +347,7 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
             <b-select 
                 v-model="value3"
                 width='200'
+                :transfer='true'
                 :multiple='multiple' 
                 :options='options' 
                 :nameInCode='nameInCode'>
@@ -368,8 +369,10 @@ Select 组件可以在不同场景下选择合适的尺寸。<br/>
 
     <template>
         <div>
-             <b-select 
+            <b-select 
                 v-model="value3"
+                width='200'
+                :transfer='true'
                 :multiple='multiple' 
                 :options='options' 
                 :nameInCode='nameInCode'>
@@ -985,6 +988,7 @@ fixed为true时可设置通过width来设置整体select的宽度，labelWidth�
 | loading  | 远程加载时的加载状态   | Boolean  |  `true`、`false`  |   false  |
 | remoteFn  | 远程加载时搜索的方法   | Function  |  -  |   -  |
 | group  | 设置select的下拉框分组   | Boolean  |  `true`、`false`  |   false  |
+| transfer     |  是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果 | Boolean    |  -  |     false  |
 
 ### events
 | 事件名	      | 说明	    | 返回值 |

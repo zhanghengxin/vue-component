@@ -572,7 +572,7 @@ Render 函数的第二个参数，包含三个字段：
 <div class="example">
     <div class="example-box">
         <div>
-            <b-label-tree label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
+            <b-label-tree label='单选' width='200' :data='data3' :transfer='true' :checkboxOptions='checkboxOptions'></b-label-tree>
             <b-label-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
             <b-label-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-label-tree>
             <b-label-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
@@ -582,7 +582,7 @@ Render 函数的第二个参数，包含三个字段：
 ::: code
 ```html
     <div>
-        <b-label-tree label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
+        <b-label-tree label='单选' width='200' :data='data3' :transfer='true' :checkboxOptions='checkboxOptions'></b-label-tree>
         <b-label-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
         <b-label-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-label-tree>
         <b-label-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
@@ -1070,6 +1070,7 @@ export default {
 | width | 开启 `label` 模式时生效,自定义宽度	| Number |	-   |     -   |
 | placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
 | labelWidth | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
+| transfer     |  是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果 | Boolean    |  -  |     false  |
 
 ### children
 | 属性      | 说明    | 类型      | 默认值       |
