@@ -1,7 +1,8 @@
 <template>
    <div :class='[boxClasses]'
         :style='selectBoxStyles'
-        v-click-outside="clickOutside">
+        v-click-outside="clickOutside"
+        >
     <div :class='selectGroupClasses'>
         <div v-if='label'
              :class='[prefixCls+`-label`]'
@@ -66,8 +67,13 @@
             <transition name='slide'>
                 <Drop
                     v-show='show'
+                    :class='dropTransferCls'
                     :width='dropWidth'
                     :placement='placement'
+                    ref="dropdown"
+                    :data-transfer="transfer"
+                    :transfer="transfer"
+                    v-transfer-dom
                 >
                     <ul v-if='notFoundData'>
                         <li :class='[prefix+`option-tip`,]'>{{notFoundText}}</li>
@@ -116,6 +122,7 @@ import Drop from './Dropdown'
 import Option from './Option'
 import Emitter from '../../mixins/emitter'
 import clickOutside from '../../utils/directives/clickOutside'
+import TransferDom from '../../utils/directives/transfer-dom'
 import { typeOf } from '../../utils/assist'
 import { prefix, propsInit } from '../../utils/common'
 import Icon from '../icon'
@@ -139,7 +146,7 @@ const findChildrenText = (componentOptions = {}, cData = {}) => {
 export default {
     name: prefixCls,
     mixins: [Emitter],
-    directives: {clickOutside},
+    directives: {clickOutside, TransferDom},
     components: {FunctionalOptions, Drop, Option, Icon},
     data () {
         return {
@@ -230,7 +237,8 @@ export default {
             // filterabled 筛选
             // loading loading
             // fixed label的两种样式
-            props: ['nameInCode', 'multiple', 'clearable', 'disabled', 'autowarp', 'filterabled', 'loading', 'fixed', 'group'],
+            // transfer 是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果
+            props: ['nameInCode', 'multiple', 'clearable', 'disabled', 'autowarp', 'filterabled', 'loading', 'fixed', 'group', 'transfer'],
             config: {
                 type: Boolean,
                 default: false
@@ -299,6 +307,11 @@ export default {
                 }
             ]
         },
+        dropTransferCls () {
+            return {
+                [prefix + 'drop-transfer']: this.transfer
+            }
+        },
         labelStyles () {
             const {label, labelWidth} = this
             let style = {}
@@ -310,10 +323,10 @@ export default {
             return style
         },
         selectBoxStyles () {
-            const {label, fixed} = this
+            const {label, fixed, width} = this
             let style = {}
-            if (!label || (label && fixed)) {
-                style.width = `${this.width}px`
+            if ((!label || (label && fixed)) && width) {
+                style.width = `${width}px`
             }
             return style
         },
@@ -454,7 +467,7 @@ export default {
             const {label, fixed, $el} = this
             let width = ''
             if (label && fixed) { //
-                let clientWidth = parseInt($el.style.width)
+                let clientWidth = parseInt($el.style.width) || parseInt($el.clientWidth)
                 let labelWidth = this.labelWidth || +$el.querySelector(`.${prefixCls}-label`).clientWidth
                 width = clientWidth - labelWidth - 2
                 this.selectWidth = {
@@ -490,6 +503,12 @@ export default {
         },
         clickOutside () {
             const {filterabled, values, multiple, showValue, broadcastPopperUpdate} = this
+            if (this.transfer) {
+                const {$el} = this.$refs.dropdown
+                if ($el === event.target || $el.contains(event.target)) {
+                    return
+                }
+            }
             if (filterabled && !multiple && values.length > 0) {
                 this.query = showValue
             }

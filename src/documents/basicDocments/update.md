@@ -1,5 +1,17 @@
 ### 更新日志
 
+### 0.5.7
+## `2019-05-05`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 Dropdown、Select、Page、Labeltree 添加transfer属性
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 menu的样式做优化、icon颜色处理、Timepicker文档修改
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.5.6
 ## `2019-04-27`
 <br>

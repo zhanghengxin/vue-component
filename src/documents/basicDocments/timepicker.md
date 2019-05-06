@@ -104,13 +104,13 @@
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | ---- | ---- | ---- | ---- | ---- |
 | value | 时间，可以是 JavaScript 的 Date，例如 new Date()，也可以是标准的时间格式，点击右边查看 注意：value 使用 v-model 时，值是 Date 类型，可以配合 @on-change 使用 | Date |
-| type | 类型 | String  | `date` `daterange` `datetime` `datetimerange` `year` `month` | date |
+| type | 类型 | String  | `time` `timerange` | time |
 | width | input宽度 | Number |
 | label | input前的说明文字 | String |
 | label-width | input前的说明文字的宽度 fixed为false时有效 |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
 | size | input组件的尺寸 | Boolean  | `small` `default` `large` | default |
-| format | 时间格式化 | String  | | yyyy-MM-dd |
+| format | 时间格式化 | String  | | HH:mm:ss |
 | placement | 时间选择器出现的位置 | String | `top` `top-start` `top-end` `bottom` `bottom-start` `bottom-end` `left` `left-start` `left-end` `right` `right-start` `right-end`| bottom-start |
 | clearable | 是否显示清除按钮 | Boolean  | `true` `false` | true |
 | editable | 输入框内是否可编辑 | Boolean  | `true` `false` | true |
