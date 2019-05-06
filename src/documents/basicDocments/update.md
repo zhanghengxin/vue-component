@@ -1,5 +1,17 @@
 ### 更新日志
 
+### 0.5.8
+## `2019-05-06`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 Cascader 级联选择器组件
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Tabs组件部分样式
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.5.7
 ## `2019-05-05`
 <br>
