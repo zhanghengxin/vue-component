@@ -2,7 +2,7 @@
     <li :class="classes">
         {{ data.label }}
         <Icon type="you" v-if="showArrow"/>
-        <Icon :class="[prefixCls +'loop']" type="chushihua" v-if="showLoading"/>
+        <Icon :class="[prefixCls +'-loop']" type="chushihua" v-if="showLoading"/>
     </li>
 </template>
 <script>
