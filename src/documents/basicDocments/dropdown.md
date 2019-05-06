@@ -20,7 +20,7 @@ export default {
 本例还展示了禁用项和分隔线。<br/>
 <div class="example">
 	<div class="example-box">
-		<b-dropdown>
+		<b-dropdown :transfer='true'>
 			<span>别唐国顿 <b-icon type="xia" size="14" color="#52b7fc"></b-icon></span>
 			<b-dropdown-menu slot="list">
 				<b-dropdown-item>海天龙战血玄黄</b-dropdown-item>
@@ -288,6 +288,7 @@ export default {
 | placement    | 菜单弹出位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, `right`, `right-start`, `right-end`| bottom |
 | trigger      | 触发下拉的方式  | string | `hover`、`click`、`contextMenu`、`custom` | hover   |
 | show      | 显示与隐藏  | Boolean | `false`、`true` | false   |
+| transfer     |  是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果 | Boolean    |  -  |     false  |
 ### Dropdown Slots
 
 | name | 说明                                           |

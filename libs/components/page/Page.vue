@@ -126,6 +126,7 @@
             v-model="currentSize"
             @on-change="sizeChange"
             width="95"
+            :transfer='transfer'
             :placement='placement'
             :options="options">
         </select-drop>
@@ -201,6 +202,10 @@ export default {
             type: String
         },
         mini: {
+            type: Boolean,
+            default: false
+        },
+        transfer: {
             type: Boolean,
             default: false
         },

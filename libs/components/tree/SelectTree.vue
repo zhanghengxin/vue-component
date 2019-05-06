@@ -16,7 +16,12 @@
         <transition name="slide" slot="tree">
             <Drop
                 :placement='placement'
-                v-show="popupVisible">
+                v-show="popupVisible"
+                :class='dropTransferCls'
+                ref="dropdown"
+                :data-transfer="transfer"
+                :transfer="transfer"
+                v-transfer-dom>
                 <div :style="wrapSty">
                     <b-input
                         v-model='filterText'
@@ -65,11 +70,14 @@ import Tree from './Tree.vue'
 import Drop from '../select/Dropdown'
 import BInput from '../input'
 import Select from '../select/Select'
+import clickoutside from '../../utils/directives/clickOutside'
+import TransferDom from '../../utils/directives/transfer-dom'
 import Checkbox from '../checkbox/Checkbox.vue'
 
 const prefixCls = prefix + 'select-tree'
 export default {
     name: prefixCls,
+    directives: {clickoutside, TransferDom},
     components: {
         Tree, Drop, Select, BInput, Checkbox
     },
@@ -171,6 +179,10 @@ export default {
         placement: {
             type: String,
             default: 'bottom-start'
+        },
+        transfer: {
+            type: Boolean,
+            default: false
         }
     },
     watch: {
@@ -198,6 +210,11 @@ export default {
                 width: this.dropWidth && `${this.dropWidth}px`
             }
         },
+        dropTransferCls () {
+            return {
+                [prefix + 'drop-transfer']: this.transfer
+            }
+        },
         allCheckText () {
             let status = true
             this.data.forEach((item) => {
@@ -222,6 +239,12 @@ export default {
             this.popupVisible = !this.popupVisible
         },
         closePopup () {
+            if (this.transfer) {
+                const {$el} = this.$refs.dropdown
+                if ($el === event.target || $el.contains(event.target)) {
+                    return
+                }
+            }
             this.popupVisible = false
         },
         defaultRebuild () {

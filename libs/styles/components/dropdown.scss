@@ -30,6 +30,7 @@ $css-prefix-tree: $css-prefix+'label-tree';
         color: #515a6e;
         white-space: nowrap;
         list-style: none;
+        font-size: 12px;
         cursor: pointer;
         transition: background .2s ease-in-out;
 
@@ -67,4 +68,7 @@ $css-prefix-tree: $css-prefix+'label-tree';
     box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
     position: absolute;
     z-index: $zindex-dropdown;
+    &-transfer{
+        width: auto;
+    }
 }
