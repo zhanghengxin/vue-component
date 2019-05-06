@@ -58,6 +58,7 @@ import Affix from './components/affix'
 import Poptip from './components/poptip'
 import Spin from './components/spin'
 import Badge from './components/badge'
+import Cascader from './components/cascader'
 import SelectTree from './components/select-tree'
 
 const components = [
@@ -119,6 +120,7 @@ const components = [
     Poptip,
     Affix,
     Spin,
+    Cascader,
     Badge
 ]
 
