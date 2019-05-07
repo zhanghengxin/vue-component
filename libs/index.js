@@ -59,6 +59,7 @@ import Poptip from './components/poptip'
 import Spin from './components/spin'
 import Badge from './components/badge'
 import SelectTree from './components/select-tree'
+import AutoComplete from './components/auto-complete'
 
 const components = [
     Input,
@@ -119,7 +120,8 @@ const components = [
     Poptip,
     Affix,
     Spin,
-    Badge
+    Badge,
+    AutoComplete
 ]
 
 const install = function (Vue) {
