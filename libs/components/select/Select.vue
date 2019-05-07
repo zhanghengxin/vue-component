@@ -43,6 +43,7 @@
                     :style="inputStyle"
                     autocomplete="off"
                     spellcheck="false"
+                    @blur='onInputBlur'
                     @keydown.exact="slideDropAndSetInput"
                     @focus="onInputFocus"
                     @keydown.delete="handleInputDelete"
@@ -50,7 +51,7 @@
             </div>
             <Icon
                 type='xia'
-                v-if='!disabled'
+                v-if='!disabled && !autoComplete'
                 v-show='iconShow'
                 :class="[prefixCls+`-arrow`]">
             </Icon>
@@ -66,7 +67,7 @@
         <slot name='tree'>
             <transition name='slide'>
                 <Drop
-                    v-show='show'
+                    v-show='dropShow'
                     :class='dropTransferCls'
                     :width='dropWidth'
                     :placement='placement'
@@ -238,7 +239,8 @@ export default {
             // loading loading
             // fixed label的两种样式
             // transfer 是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果
-            props: ['nameInCode', 'multiple', 'clearable', 'disabled', 'autowarp', 'filterabled', 'loading', 'fixed', 'group', 'transfer'],
+            // auto-complete 在auto-comoplete中使用select
+            props: ['nameInCode', 'multiple', 'clearable', 'disabled', 'autowarp', 'filterabled', 'loading', 'fixed', 'group', 'transfer', 'autoComplete'],
             config: {
                 type: Boolean,
                 default: false
@@ -353,6 +355,13 @@ export default {
                 return inputWidth
             }
         },
+        dropShow () {
+            if (this.autoComplete) {
+                return this.show && this.dropList.length
+            } else {
+                return this.show
+            }
+        },
         inputShow () {
             const {multiple, show, values} = this
             return !multiple || ((show && multiple) || !values.length) || this.remoteFn
@@ -362,8 +371,8 @@ export default {
             return clearable && clearShow ? !(values.length || treeValues.length) : !disabled
         },
         closeIcon () {
-            const {disabled, clearShow, values, treeValues} = this
-            return !disabled && clearShow && (values.length || treeValues.length)
+            const {disabled, clearShow, values, treeValues, autoComplete, query} = this
+            return !disabled && clearShow && (values.length || treeValues.length || (autoComplete && query !== ''))
         },
         showValue () {
             const {multiple, values, treeValues} = this
@@ -461,6 +470,8 @@ export default {
                     }
                 }
                 this.selectOptions = selectOptions
+            } else if (this.autoComplete) {
+                this.selectOptions = []
             }
         },
         widthInit () {
@@ -597,13 +608,18 @@ export default {
         },
         clearValues () {
             this.values = []
+            this.query = ''
             this.$emit('on-clear')
         },
         slideDropAndSetInput () {
             this.show = true
         },
-        onInputFocus () {
+        onInputFocus (event) {
             this.isFocused = true
+            if (this.autoComplete) { this.$emit('on-focus', event) }
+        },
+        onInputBlur (event) {
+            if (this.autoComplete) { this.$emit('on-blur', event) }
         },
         handleInputDelete () {
             const {query, values, multiple} = this
@@ -661,8 +677,11 @@ export default {
             // this.broadcast(`${prefix}drop`, this.show ? 'on-update-popper' : 'on-destroy-popper')
         },
         query () {
-            const {filterabled, remoteFn, query} = this
-            if (filterabled && remoteFn && query !== '') {
+            const {filterabled, remoteFn, query, autoComplete} = this
+             if (autoComplete && this.query === '') {
+                this.values = []
+            }
+            if ((filterabled && remoteFn && query !== '') || autoComplete) {
                 this.remoteFn(query)
             }
         },

@@ -60,6 +60,7 @@ import Spin from './components/spin'
 import Badge from './components/badge'
 import Cascader from './components/cascader'
 import SelectTree from './components/select-tree'
+import AutoComplete from './components/auto-complete'
 
 const components = [
     Input,
@@ -120,8 +121,9 @@ const components = [
     Poptip,
     Affix,
     Spin,
-    Cascader,
-    Badge
+    Badge,
+    AutoComplete,
+    Cascader
 ]
 
 const install = function (Vue) {
