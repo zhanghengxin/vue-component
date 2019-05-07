@@ -10,7 +10,7 @@
                 :name="name"
                 :value="currentValue"
                 type="hidden">
-            <Icon :type="arrowType" :custom="customArrowType" :size="arrowSize" :class="arrowClasses"></Icon>
+            <Icon :type="arrowType" :size="arrowSize" :class="arrowClasses"></Icon>
             <div
                 ref="input"
                 :tabindex="disabled ? undefined : 0"
@@ -24,7 +24,7 @@
                     <div
                         v-show="value === '' && !visible"
                         :class="[prefixCls + '-color-empty']">
-                        <i :class="[iconPrefixCls, iconPrefixCls + '-ios-close']"></i>
+                        <i :class="[iconPrefixCls,'iconfont',  'bw-quxiao-guanbi-shanchu']"></i>
                     </div>
                     <div
                         v-show="value || visible"
@@ -126,7 +126,7 @@ import Alpha from './alpha.vue'
 import bInput from '../input'
 import bButton from '../button'
 import Icon from '../icon'
-import {oneOf} from '../../utils/common'
+import {oneOf, prefix} from '../../utils/common'
 import Emitter from '../../mixins/emitter'
 import Prefixes from './prefixMixin'
 import {changeColor, toRGBAString} from './utils'
@@ -147,7 +147,7 @@ import {changeColor, toRGBAString} from './utils'
 // import {changeColor, toRGBAString} from './utils'
 
 export default {
-    name: 'ColorPicker',
+    name: `${prefix}color-picker`,
 
     components: {Drop, RecommendColors, Saturation, Hue, Alpha, bInput, Icon, bButton},
 
@@ -368,37 +368,12 @@ export default {
         },
         // 3.4.0, global setting customArrow 有值时，arrow 赋值空
         arrowType () {
-            let type = 'ios-arrow-down'
-
-            if (this.$IVIEW) {
-                if (this.$IVIEW.colorPicker.customArrow) {
-                    type = ''
-                } else if (this.$IVIEW.colorPicker.arrow) {
-                    type = this.$IVIEW.colorPicker.arrow
-                }
-            }
-            return type
-        },
-        // 3.4.0, global setting
-        customArrowType () {
-            let type = ''
-
-            if (this.$IVIEW) {
-                if (this.$IVIEW.colorPicker.customArrow) {
-                    type = this.$IVIEW.colorPicker.customArrow
-                }
-            }
+            let type = 'xia'
             return type
         },
         // 3.4.0, global setting
         arrowSize () {
-            let size = ''
-
-            if (this.$IVIEW) {
-                if (this.$IVIEW.colorPicker.arrowSize) {
-                    size = this.$IVIEW.colorPicker.arrowSize
-                }
-            }
+            let size = '12'
             return size
         }
     },
