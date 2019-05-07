@@ -1,5 +1,14 @@
 ### 更新日志
 
+### 0.5.9
+## `2019-05-07`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 ColorPicker、AutoComplete 组件
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.5.8
 ## `2019-05-06`
 <br>
