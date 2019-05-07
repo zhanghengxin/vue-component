@@ -11,7 +11,7 @@
     .hljs-attribute {
         color: $Error;
     }
-    pre{
+    pre {
         width: 100%;
     }
     .language-js {
@@ -189,5 +189,10 @@
             display: block;
             text-align: center;
         }
+    }
+    .b-cascader {
+        width: 200px;
+        display: inline-block;
+        margin-right: 10px;
     }
 }

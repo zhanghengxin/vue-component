@@ -249,6 +249,11 @@
           "name": "timeline"
         },
         {
+          "title": "Cascader级联选择",
+          "path": "/cascader",
+          "name": "cascader"
+        },
+        {
           "title": "Dropdown下拉",
           "path": "/dropdown",
           "name": "dropdown"

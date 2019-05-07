@@ -9,7 +9,6 @@
             :default-opt="defaultOpt"
             clearable
             :width="width"
-            style="position: relative"
             :label-width="labelWidth"
             @get-drop-width="getDropWidth"
             :options='options'>

@@ -13,6 +13,7 @@ $tabExtra: $css-prefix + 'tabs-extra';
 .#{$tabs}-bar{
   border-bottom: 1px solid $Border;
   position:relative;
+  margin-bottom: 16px;
 }
 
 //选项卡区域的蓝色底边

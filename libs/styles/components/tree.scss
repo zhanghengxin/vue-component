@@ -43,7 +43,7 @@ $css-prefix-select-tree: $css-prefix + 'select-tree';
         @include _background(transparentize($Primary, 0.9));
     }
     &-loop {
-        animation: load-loop 1s linear infinite
+        @include _loop;
     }
     &-tip {
         font-size: 12px;
@@ -54,18 +54,7 @@ $css-prefix-select-tree: $css-prefix + 'select-tree';
 
 .#{$css-prefix-select-tree} {
     &-checkbox {
-        margin:5px 0 0 5px;
+        margin: 5px 0 0 5px;
     }
 }
 
-@keyframes load-loop {
-    from {
-        transform: rotate(0)
-    }
-    50% {
-        transform: rotate(180deg)
-    }
-    to {
-        transform: rotate(360deg)
-    }
-}
