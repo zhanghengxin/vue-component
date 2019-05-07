@@ -61,6 +61,7 @@ import Badge from './components/badge'
 import Cascader from './components/cascader'
 import SelectTree from './components/select-tree'
 import AutoComplete from './components/auto-complete'
+import ColorPicker from './components/color-picker'
 
 const components = [
     Input,
@@ -123,7 +124,8 @@ const components = [
     Spin,
     Badge,
     AutoComplete,
-    Cascader
+    Cascader,
+    ColorPicker
 ]
 
 const install = function (Vue) {

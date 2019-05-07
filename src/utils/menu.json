@@ -298,6 +298,11 @@
           "title": "Badge 徽标",
           "path": "/badge",
           "name": "badge"
+        },
+        {
+          "title": "colorPicker 颜色选择器",
+          "path": "/colorPicker",
+          "name": "colorPicker"
         }
       ]
     }
