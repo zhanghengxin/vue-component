@@ -76,3 +76,28 @@
         display: none;
     }
 }
+
+@mixin _iconArrow() {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    margin-top: -6px;
+    color: $Sub;
+    transition: all .2s ease-in-out;
+}
+
+@mixin _loop() {
+    animation: load-loop 1s linear infinite
+}
+
+@keyframes load-loop {
+    from {
+        transform: rotate(0)
+    }
+    50% {
+        transform: rotate(180deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}

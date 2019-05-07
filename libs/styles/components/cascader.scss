@@ -1,0 +1,133 @@
+$css-prefix-cascader: $css-prefix + 'cascader';
+$css-prefix-select-item: $css-prefix + 'select';
+
+.#{$css-prefix-cascader} {
+    &-arrow {
+        @include _iconArrow;
+    }
+    &-rel {
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        &-focused {
+            & .#{$css-prefix-cascader}-arrow {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    &-size-small &-label {
+        line-height: 24px;
+    }
+    &-size-large &-label {
+        line-height: 40px;
+    }
+    .#{$css-prefix-select-item} {
+        &-item {
+            margin: 0;
+            line-height: normal;
+            padding: 7px 16px;
+            clear: both;
+            color: $Sub;
+            font-size: 12px !important;
+            white-space: nowrap;
+            list-style: none;
+            cursor: pointer;
+            transition: background .2s ease-in-out;
+        }
+        &-dropdown-list {
+            max-height: 190px;
+            box-sizing: border-box;
+            overflow: auto;
+            min-width: 100%;
+            list-style: none;
+            span {
+                color: $Error;
+            }
+        }
+    }
+    &-menu {
+        display: inline-block;
+        min-width: 100px;
+        height: 180px;
+        margin: 0;
+        padding: 5px 0;
+        vertical-align: top;
+        list-style: none;
+        border-right: 1px solid $Border;
+        overflow: auto;
+        &-item {
+            position: relative;
+            margin: 0;
+            line-height: normal;
+            padding: 7px 16px;
+            clear: both;
+            color: $Content;
+            font-size: 12px;
+            white-space: nowrap;
+            list-style: none;
+            cursor: pointer;
+            transition: background .2s ease-in-out;
+            & i {
+                @include _iconArrow;
+            }
+            &-active {
+                color: $Primary;
+            }
+            &-active, &:hover {
+                background-color: $Background;
+            }
+            &-disabled {
+                color: $Disabled;
+                background: white !important;
+                cursor: not-allowed;
+            }
+        }
+    }
+    &-loop {
+        @include _loop;
+    }
+    & .#{$css-prefix}drop {
+        width: auto;
+        padding: 0;
+        white-space: nowrap;
+        overflow: visible;
+    }
+    &-disabled {
+        & .#{$css-prefix}input {
+            cursor: not-allowed;
+        }
+    }
+
+    &-label {
+        width: 100%;
+        height: 100%;
+        line-height: 32px;
+        padding: 0 7px;
+        box-sizing: border-box;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        cursor: pointer;
+        font-size: 12px;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+}
+
+.#{$css-prefix-cascader}-not-found {
+    .#{$css-prefix}drop {
+        width: inherit;
+    }
+    & &-tip {
+        padding: 5px 0;
+        text-align: center;
+        color: $Sub;
+        & li {
+            list-style: none;
+            margin-bottom: 0;
+        }
+    }
+}
+

@@ -16,8 +16,12 @@
                 ref='drop'
                 v-show='currentShow'
                 :placement='placement'
+                :class='dropTransferCls'
                 @mouseenter.native='handleMouseenter'
-                @mouseleave.native='handleMouseleave'>
+                @mouseleave.native='handleMouseleave'
+                :data-transfer="transfer"
+                :transfer="transfer"
+                v-transfer-dom>
                 <slot name="list"></slot>
             </Drop>
         </transition>
@@ -27,6 +31,7 @@
 <script>
 import Drop from '../select/Dropdown'
 import clickOutside from '../../utils/directives/clickOutside'
+import TransferDom from '../../utils/directives/transfer-dom'
 import Emitter from '../../mixins/emitter'
 import { findComponentUpward } from '../../utils/assist'
 import { prefix } from '../../utils/common'
@@ -34,7 +39,7 @@ const prefixCls = prefix + 'dropdown'
 
 export default {
     name: prefixCls,
-    directives: { clickOutside },
+    directives: { clickOutside, TransferDom },
     mixins: [ Emitter ],
     components: { Drop },
     data () {
@@ -59,6 +64,17 @@ export default {
         show: {
             type: Boolean,
             default: false
+        },
+        transfer: {
+            type: Boolean,
+            default: false
+        }
+    },
+     computed: {
+        dropTransferCls () {
+            return {
+                [prefix + 'drop-transfer']: this.transfer
+            }
         }
     },
     watch: {

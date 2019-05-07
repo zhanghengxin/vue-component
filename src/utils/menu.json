@@ -97,6 +97,11 @@
           "name": "select"
         },
         {
+          "title": "AutoComplete 自动完成",
+          "path": "/autoComplete",
+          "name": "autoComplete"
+        },
+        {
           "title": "Switch 开关",
           "path": "/switch",
           "name": "switch"
@@ -242,6 +247,11 @@
           "title": "Timeline 时间轴",
           "path": "/timeline",
           "name": "timeline"
+        },
+        {
+          "title": "Cascader级联选择",
+          "path": "/cascader",
+          "name": "cascader"
         },
         {
           "title": "Dropdown下拉",

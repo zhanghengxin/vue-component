@@ -197,6 +197,7 @@
 | show-elevator     |  是否显示电梯功能 | boolean    |  -  |     false  |
 | show-total     |  是否显示总数 | boolean    |  -  |     false  |
 | show-sizer     |  是否显示切换页数 | boolean    |  -  |     false  |
+| transfer     |  是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果 | boolean    |  -  |     false  |
 | size-options     |  自定义切换页数,当show-sizer开启时生效   | 	 array    |  -  |   [10, 20, 50, 100]    |
 | prev-text     |  自定义上一页的文本   | 	string    |   -  |     -  |
 | next-text     | 自定义下一页的文本   | 	string    |  -  |   -    |

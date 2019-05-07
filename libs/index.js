@@ -58,7 +58,9 @@ import Affix from './components/affix'
 import Poptip from './components/poptip'
 import Spin from './components/spin'
 import Badge from './components/badge'
+import Cascader from './components/cascader'
 import SelectTree from './components/select-tree'
+import AutoComplete from './components/auto-complete'
 import ColorPicker from './components/color-picker'
 
 const components = [
@@ -121,6 +123,8 @@ const components = [
     Affix,
     Spin,
     Badge,
+    AutoComplete,
+    Cascader,
     ColorPicker
 ]
 

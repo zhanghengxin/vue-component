@@ -1,7 +1,8 @@
 <template>
    <div :class='[boxClasses]'
         :style='selectBoxStyles'
-        v-click-outside="clickOutside">
+        v-click-outside="clickOutside"
+        >
     <div :class='selectGroupClasses'>
         <div v-if='label'
              :class='[prefixCls+`-label`]'
@@ -42,6 +43,7 @@
                     :style="inputStyle"
                     autocomplete="off"
                     spellcheck="false"
+                    @blur='onInputBlur'
                     @keydown.exact="slideDropAndSetInput"
                     @focus="onInputFocus"
                     @keydown.delete="handleInputDelete"
@@ -49,7 +51,7 @@
             </div>
             <Icon
                 type='xia'
-                v-if='!disabled'
+                v-if='!disabled && !autoComplete'
                 v-show='iconShow'
                 :class="[prefixCls+`-arrow`]">
             </Icon>
@@ -65,9 +67,14 @@
         <slot name='tree'>
             <transition name='slide'>
                 <Drop
-                    v-show='show'
+                    v-show='dropShow'
+                    :class='dropTransferCls'
                     :width='dropWidth'
                     :placement='placement'
+                    ref="dropdown"
+                    :data-transfer="transfer"
+                    :transfer="transfer"
+                    v-transfer-dom
                 >
                     <ul v-if='notFoundData'>
                         <li :class='[prefix+`option-tip`,]'>{{notFoundText}}</li>
@@ -116,6 +123,7 @@ import Drop from './Dropdown'
 import Option from './Option'
 import Emitter from '../../mixins/emitter'
 import clickOutside from '../../utils/directives/clickOutside'
+import TransferDom from '../../utils/directives/transfer-dom'
 import { typeOf } from '../../utils/assist'
 import { prefix, propsInit } from '../../utils/common'
 import Icon from '../icon'
@@ -139,7 +147,7 @@ const findChildrenText = (componentOptions = {}, cData = {}) => {
 export default {
     name: prefixCls,
     mixins: [Emitter],
-    directives: {clickOutside},
+    directives: {clickOutside, TransferDom},
     components: {FunctionalOptions, Drop, Option, Icon},
     data () {
         return {
@@ -230,7 +238,9 @@ export default {
             // filterabled 筛选
             // loading loading
             // fixed label的两种样式
-            props: ['nameInCode', 'multiple', 'clearable', 'disabled', 'autowarp', 'filterabled', 'loading', 'fixed', 'group'],
+            // transfer 是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果
+            // auto-complete 在auto-comoplete中使用select
+            props: ['nameInCode', 'multiple', 'clearable', 'disabled', 'autowarp', 'filterabled', 'loading', 'fixed', 'group', 'transfer', 'autoComplete'],
             config: {
                 type: Boolean,
                 default: false
@@ -299,6 +309,11 @@ export default {
                 }
             ]
         },
+        dropTransferCls () {
+            return {
+                [prefix + 'drop-transfer']: this.transfer
+            }
+        },
         labelStyles () {
             const {label, labelWidth} = this
             let style = {}
@@ -310,10 +325,10 @@ export default {
             return style
         },
         selectBoxStyles () {
-            const {label, fixed} = this
+            const {label, fixed, width} = this
             let style = {}
-            if (!label || (label && fixed)) {
-                style.width = `${this.width}px`
+            if ((!label || (label && fixed)) && width) {
+                style.width = `${width}px`
             }
             return style
         },
@@ -340,6 +355,13 @@ export default {
                 return inputWidth
             }
         },
+        dropShow () {
+            if (this.autoComplete) {
+                return this.show && this.dropList.length
+            } else {
+                return this.show
+            }
+        },
         inputShow () {
             const {multiple, show, values} = this
             return !multiple || ((show && multiple) || !values.length) || this.remoteFn
@@ -349,8 +371,8 @@ export default {
             return clearable && clearShow ? !(values.length || treeValues.length) : !disabled
         },
         closeIcon () {
-            const {disabled, clearShow, values, treeValues} = this
-            return !disabled && clearShow && (values.length || treeValues.length)
+            const {disabled, clearShow, values, treeValues, autoComplete, query} = this
+            return !disabled && clearShow && (values.length || treeValues.length || (autoComplete && query !== ''))
         },
         showValue () {
             const {multiple, values, treeValues} = this
@@ -448,13 +470,15 @@ export default {
                     }
                 }
                 this.selectOptions = selectOptions
+            } else if (this.autoComplete) {
+                this.selectOptions = []
             }
         },
         widthInit () {
             const {label, fixed, $el} = this
             let width = ''
             if (label && fixed) { //
-                let clientWidth = parseInt($el.style.width)
+                let clientWidth = parseInt($el.style.width) || parseInt($el.clientWidth)
                 let labelWidth = this.labelWidth || +$el.querySelector(`.${prefixCls}-label`).clientWidth
                 width = clientWidth - labelWidth - 2
                 this.selectWidth = {
@@ -490,6 +514,12 @@ export default {
         },
         clickOutside () {
             const {filterabled, values, multiple, showValue, broadcastPopperUpdate} = this
+            if (this.transfer) {
+                const {$el} = this.$refs.dropdown
+                if ($el === event.target || $el.contains(event.target)) {
+                    return
+                }
+            }
             if (filterabled && !multiple && values.length > 0) {
                 this.query = showValue
             }
@@ -578,13 +608,18 @@ export default {
         },
         clearValues () {
             this.values = []
+            this.query = ''
             this.$emit('on-clear')
         },
         slideDropAndSetInput () {
             this.show = true
         },
-        onInputFocus () {
+        onInputFocus (event) {
             this.isFocused = true
+            if (this.autoComplete) { this.$emit('on-focus', event) }
+        },
+        onInputBlur (event) {
+            if (this.autoComplete) { this.$emit('on-blur', event) }
         },
         handleInputDelete () {
             const {query, values, multiple} = this
@@ -642,8 +677,11 @@ export default {
             // this.broadcast(`${prefix}drop`, this.show ? 'on-update-popper' : 'on-destroy-popper')
         },
         query () {
-            const {filterabled, remoteFn, query} = this
-            if (filterabled && remoteFn && query !== '') {
+            const {filterabled, remoteFn, query, autoComplete} = this
+             if (autoComplete && this.query === '') {
+                this.values = []
+            }
+            if ((filterabled && remoteFn && query !== '') || autoComplete) {
                 this.remoteFn(query)
             }
         },

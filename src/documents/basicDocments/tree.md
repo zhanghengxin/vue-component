@@ -565,6 +565,122 @@ Render 函数的第二个参数，包含三个字段：
 :::
 </div>
 
+<<<<<<< HEAD
+### 自定义输入框格式
+- 可设置 `label`，`fixed`设置`label`的两种样式。
+- 可设置 `show-checkbox`开启多选模式
+
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-label-tree label='单选' width='200' :data='data3' :transfer='true' :checkboxOptions='checkboxOptions'></b-label-tree>
+            <b-label-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
+            <b-label-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-label-tree>
+            <b-label-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-label-tree label='单选' width='200' :data='data3' :transfer='true' :checkboxOptions='checkboxOptions'></b-label-tree>
+        <b-label-tree fixed label='单选' width='200' :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
+        <b-label-tree fixed label='复选' width='250' :data='data3' show-checkbox :checkboxOptions='checkboxOptions'></b-label-tree>
+        <b-label-tree fixed label='模糊检索' width='250' filter :data='data3' :checkboxOptions='checkboxOptions'></b-label-tree>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    data3:[
+                    {
+                         name: 'root',
+                         expand: true,
+                         id:1,
+                         children: [
+                             {
+                                 name: 'parent1',
+                                 checked:true,
+                                 disabled:true,
+                                 id:2,
+                                 children: [
+                                     {
+                                         id:3,
+                                         name: 'leaf 1-1-1'
+                                     },
+                                     {
+                                         id:4,
+                                         name: 'leaf 1-1-2'
+                                     }
+                                 ]
+                             },
+                             {
+                                 id:5,
+                                 name: 'parent2',
+                                 children: [
+                                     {
+                                         id:6,
+                                         name: 'leaf 1-2-1'
+                                     },
+                                     {
+                                         id:7,
+                                         name: 'leaf 1-2-2',
+                                         children: [
+                                            {
+                                                id:8,
+                                                name: 'parent 1-2-2-1',
+                                                children: [
+                                                    {
+                                                        id:10,
+                                                        name: 'leaf 1-2-2-1-1'
+                                                    },
+                                                    {
+                                                        id:11,
+                                                        name: 'leaf 1-2-2-1-2'
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                id:9,
+                                                name: 'parent 1-2-2-1',
+                                                children: [
+                                                    {
+                                                        id:12,
+                                                        name: 'leaf 1-2-2-1-1'
+                                                    },
+                                                    {
+                                                        id:13,
+                                                        name: 'leaf 1-2-2-1-2'
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                     }
+                                 ]
+                             }
+                         ]
+                      }
+                    ],
+                    checkboxOptions: {
+                        parent: true,
+                        children: true
+                    }
+                }
+            },
+            methods:{
+                handleChecked (options){
+                    console.log(`选中获取的数据:`,options)
+                }
+            }
+
+        }
+    </script>
+```
+:::
+</div>
+
+=======
+>>>>>>> develop
 <script>
 export default {
     data () {
@@ -952,6 +1068,10 @@ export default {
 | draggable     |  是否开启节点拖拽编辑 | 	Boolean    |  -  |    fasle    |
 | render     |  自定义渲染内容，见示例	 | 	Function    |  -  |    -    |
 | className      | 给 item-name 附加的 class	| String | - |   -  |
+| width | 开启 `label` 模式时生效,自定义宽度	| Number |	-   |     -   |
+| placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
+| labelWidth | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
+| transfer     |  是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果 | Boolean    |  -  |     false  |
 
 
 ### children
