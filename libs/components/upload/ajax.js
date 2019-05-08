@@ -41,9 +41,8 @@ function getBody (xhr) {
  * @param {*} option
  */
 export default function upload (option) {
-    if (typeof XMLHttpRequest === 'undefined') {
-        return
-    }
+    if (typeof XMLHttpRequest === 'undefined') return
+
     const xhr = new XMLHttpRequest()
     const action = option.action
 
@@ -55,6 +54,7 @@ export default function upload (option) {
             option.onProgress(e)
         }
     }
+
     const formData = new FormData()
     if (option.data) {
         Object.keys(option.data).map(key => {
@@ -62,26 +62,31 @@ export default function upload (option) {
         })
     }
     formData.append(option.filename, option.file)
+
     xhr.onerror = function error (e) {
         option.onError(e)
-        // xhr.onload(e)
     }
+
     xhr.onload = function onload () {
         if (xhr.status < 200 || xhr.status >= 300) {
-            // console.log('xhr 错误', xhr, action, option, xhr)
             return option.onError(getError(action, option, xhr), getBody(xhr))
         }
         option.onSuccess(getBody(xhr))
     }
+
     xhr.open('post', action, true)
+
     if (option.withCredentials && 'withCredentials' in xhr) {
         xhr.withCredentials = true
     }
+
     const headers = option.headers || {}
+
     for (let item in headers) {
         if (headers.hasOwnProperty(item) || headers[item] !== null) {
             xhr.setRequestHeader(item, headers[item])
         }
     }
+
     xhr.send(formData)
 }
