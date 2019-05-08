@@ -1,4 +1,12 @@
 ### 更新日志
+### 0.6.0
+## `2019-05-08`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    重构 Upload组件
+    </b-timeline-item>
+</b-timeline>
 
 ### 0.5.9
 ## `2019-05-07`
