@@ -43,6 +43,7 @@ $zindex-spin-fullscreen: 2010;
 //@zindex-spin-fullscreen : 2010;
 // Border
 $border-radius-base: 4px;
+$border-radius-small: 4px;
 // $border-color-base      : hsv(0, 0, 85%);
 $border-color-split: #e8eaec;
 $border-color-base: #dcdee2; // outside
@@ -60,3 +61,6 @@ $primary-color: #1890ff;
 $success-color: #52c41a;
 $error-color: #f5222d;
 $warning-color: #faad14;
+
+// Input
+$input-disabled-bg: #f3f3f3;
