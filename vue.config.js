@@ -81,9 +81,9 @@ module.exports = {
         let plugins = [
             new UglifyJsPlugin({
                 uglifyOptions: {
+                    warnings: false,// 在UglifyJs删除没有用到的代码时不输出警告
                     compress: {
-                        warnings: false,// 在UglifyJs删除没有用到的代码时不输出警告
-                        drop_console: false,// 是否删除 console.log
+                        drop_console: true,// 是否删除 console.log
                         drop_debugger: true,// 是否删除 debugger
                         collapse_vars: true// 内嵌定义了但是只用到一次的变量
                     },

@@ -97,6 +97,11 @@
           "name": "select"
         },
         {
+          "title": "AutoComplete 自动完成",
+          "path": "/autoComplete",
+          "name": "autoComplete"
+        },
+        {
           "title": "Switch 开关",
           "path": "/switch",
           "name": "switch"
@@ -293,6 +298,11 @@
           "title": "Badge 徽标",
           "path": "/badge",
           "name": "badge"
+        },
+        {
+          "title": "colorPicker 颜色选择器",
+          "path": "/colorPicker",
+          "name": "colorPicker"
         }
       ]
     }

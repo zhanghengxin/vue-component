@@ -13,6 +13,7 @@
     "js-calendar": "^1.2.3",
     "markdown-it": "^8.4.2",
     "markdown-it-container": "^2.0.0",
+    "tinycolor2": "^1.4.1",
     "v-click-outside-x": "^4.0.2",
     "vue": "^2.6.0",
     "vue-loader": "^14.2.2",
