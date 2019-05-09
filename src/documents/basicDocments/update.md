@@ -1,4 +1,20 @@
 ### 更新日志
+
+### 0.6.1
+## `2019-05-09`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 SelectTree 组件添加清除数据事件，可清除数据属性 支持
+    </b-timeline-item>
+    <b-timeline-item>
+    新增 Table 支持导出以及拖拽列宽、拖拽编辑 等事件添
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Datepicker width属性 适配修改
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.6.0
 ## `2019-05-08`
 <br>
