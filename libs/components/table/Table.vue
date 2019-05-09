@@ -138,6 +138,8 @@ import tableFixed from './table-fixed'
 import dynamicColumn from './dynamic-column'
 import Icon from '../icon'
 import Modal from '../modal'
+import CsvTable from '../../utils/csv'
+import Exports from './export'
 import Checkbox from '../checkbox'
 import Emitter from '../../mixins/emitter'
 import { getRandomStr, convertToRows, getAllColumns } from './utils'
@@ -163,6 +165,7 @@ export default {
             showSlotHeader: true,
             showSlotFooter: true,
             dragStartIndex: '',
+            allColumns: [],
             headerHeight: 0,
             dragBorderHeight: {
                 height: '100%'
@@ -470,6 +473,7 @@ export default {
         },
         buildColumnsData () {
             const colsWithId = this.makeColumnsId(deepCopy(this.columns), this.showIndex)
+            this.allColumns = getAllColumns(colsWithId)
             this.cloneColumns = this.buildColumns(colsWithId)
             this.columnRows = this.makeColumnRows(false, colsWithId)
             this.leftFixedColumnRows = this.makeColumnRows('left', colsWithId)
@@ -479,6 +483,33 @@ export default {
             return this.cloneColumns.map(cell => {
                 return cell._width
             }).reduce((a, b) => a + b, 0)
+        },
+        exportCsv (params) {
+            if (params.filename) {
+                if (params.filename.indexOf('.csv') === -1) {
+                    params.filename += '.csv'
+                }
+            } else {
+                params.filename = 'table.csv'
+            }
+            let columns = []
+            let datas = []
+            if (params.columns && params.data) {
+                columns = params.columns
+                datas = params.data
+            } else {
+                columns = this.allColumns
+                if (!('original' in params)) params.original = true
+                datas = params.original ? this.data : this.formatData
+            }
+            let noHeader = false
+            if ('noHeader' in params) noHeader = params.noHeader
+            const data = CsvTable(columns, datas, params, noHeader)
+            if (params.callback) {
+                params.callback(data)
+            } else {
+                Exports.download(params.filename, data)
+            }
         },
         getVisibleColumnsWidth (isDynamicColumns = false) {
             let cloneColumns = isDynamicColumns ? this.dynamicColumns : this.cloneColumns
@@ -719,6 +750,11 @@ export default {
                     deltaX = tableWidth - bodyWidth - scrollWidth - 1
                 }
                 this.$set(this.cloneColumns[options.index], 'width', this.cloneColumns[options.index]._width + deltaX)
+                this.$emit('on-resizeable-change', {
+                    columns: deepCopy(this.cloneColumns),
+                    index: options.index,
+                    column: this.cloneColumns[options.index]
+                })
                 this.handleResize()
             } else {
                 this.showResizeBorder = true
@@ -747,6 +783,9 @@ export default {
             cloneColumns[afterIndex].fixed = cacheObj.fixed
             cloneColumns[afterIndex]._index = cacheObj._index
             cloneColumns[beforeIndex] = cloneColumns.splice(afterIndex, 1, cloneColumns[beforeIndex])[0]
+            this.$emit('on-draggable-change', {
+                columns: deepCopy(this.cloneColumns)
+            })
         },
         handleDragDrop (index) {
             if (this.dragStartIndex === '') return
@@ -775,6 +814,9 @@ export default {
         },
         dynamicSave () {
             this.cloneColumns = deepCopy(this.dynamicColumns)
+            this.$emit('on-dynamic-save', {
+                columns: deepCopy(this.cloneColumns)
+            })
         },
         getVisibleNum (isDynamicColumns = false) {
             let cloneColumns = isDynamicColumns ? this.dynamicColumns : this.cloneColumns

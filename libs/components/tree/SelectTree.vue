@@ -7,7 +7,7 @@
             :fixed='fixed'
             :tree-values="values"
             :default-opt="defaultOpt"
-            clearable
+            :clearable="clearable"
             :width="width"
             :label-width="labelWidth"
             @get-drop-width="getDropWidth"
@@ -159,12 +159,16 @@ export default {
         },
         // props type为Boolean的配置
         ...propsInit({
-            props: ['showCheckbox', 'showAllcheck', 'autoFilter', 'fixed', 'filterable', 'clearable', 'draggable', 'loading', 'accordion'],
+            props: ['showCheckbox', 'showAllcheck', 'autoFilter', 'fixed', 'filterable', 'draggable', 'loading', 'accordion', 'transfer'],
             config: {
                 type: Boolean,
                 default: false
             }
         }),
+        clearable: {
+            type: Boolean,
+            default: true
+        },
         // props type为[Number, String]的配置
         ...propsInit({
             // label label样式的文字描述
@@ -178,10 +182,6 @@ export default {
         placement: {
             type: String,
             default: 'bottom-start'
-        },
-        transfer: {
-            type: Boolean,
-            default: false
         }
     },
     watch: {
@@ -304,6 +304,7 @@ export default {
                     id: this.values[0].id
                 })
             })
+            this.$emit('on-clear')
         },
         getTreeValues () {
             this.values = this.showCheckbox ? this.$refs.tree.getCheckedNodes() : this.$refs.tree.getSelectedNodes()

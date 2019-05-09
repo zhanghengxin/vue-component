@@ -77,7 +77,7 @@ module.exports = {
                 '&': resolve('libs')
             }
         }
-        //删除console插件
+        // 删除console插件
         let plugins = [
             new UglifyJsPlugin({
                 uglifyOptions: {
@@ -96,7 +96,7 @@ module.exports = {
                 parallel: true
             })
         ]
-        //只有打包生产环境才需要将console删除
+        // 只有打包生产环境才需要将console删除
         if (isProduction) {
             config.plugins = [...config.plugins, ...plugins]
         }

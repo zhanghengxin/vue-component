@@ -2528,6 +2528,138 @@ column 设置 children，可以渲染出多级表头<br/>
 :::
 </div>
 
+### 导出
+- 支持IE9~IE11、Edge、Chrome、Safari、Firefox 全系列浏览器。
+- IE9、Safari 需要手动修改后缀名为 .csv。
+- IE9暂时只支持英文，中文会显示为乱码。
+
+<div class="example">
+    <div class="example-box">
+        <div>
+             <b-table border ref="table" width=1000 :columns='columns18' :data='data18'></b-table>
+             <b-button type="primary" size="large" @on-click="exportData(1)">导出全部数据</b-button>
+             <b-button type="primary" size="large" @on-click="exportData(2)">导出排序和过滤的数据</b-button>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+            <b-table border ref="table" width=1000 :columns='columns18' :data='data18'></b-table>
+            <b-button type="primary" size="large" @on-click="exportData(1)">导出全部数据</b-button>
+            <b-button type="primary" size="large" @on-click="exportData(2)">导出排序和过滤的数据</b-button>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    columns18: [
+                        {
+                           title: 'Name',
+                           key: 'name',
+                           width:150
+                        },
+                        {
+                           title: 'Age',
+                           key: 'age',
+                           width:100,
+                           sortable:true,
+                           filters: [
+                               {
+                                   label: 'Greater than 18',
+                                   value: 1
+                               },
+                               {
+                                   label: 'Less than 18',
+                                   value: 2
+                               }
+                           ],
+                           filterMethod (value, row) {
+                               if (value === 1) {
+                                   return row.age >= 18;
+                               } else if (value === 2) {
+                                   return row.age < 18;
+                               }
+                           }
+                        },
+                        {
+                           title: 'Pets',
+                           key: 'pets',
+                           filters: [
+                               {
+                                   label: 'dog',
+                                   value: 'dog'
+                               },
+                               {
+                                   label: 'rhizomys',
+                                   value: 'rhizomys'
+                               },
+                               {
+                                   label: 'cat',
+                                   value: 'cat'
+                               }
+                           ],
+                           filterMultiple:true,
+                           filterMethod (value, row) {
+                               return row.pets.indexOf(value) > -1;
+                           },
+                           minWidth:100
+                        },
+                        {
+                           title: 'Like',
+                           key: 'like',
+                           maxWidth:100
+                        },
+                        {
+                           title: 'Book',
+                           key: 'book'
+                        }
+                    ],
+                    data18: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            pets:'dog',
+                            like:'red',
+                            book:'《贩罪》'
+                        },
+                        {
+                            name: '青蛙',
+                            like: 'blue',
+                            age: 22,
+                            pets:'cat',
+                            book:'《霸皇纪》',
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            like: 'green',
+                            pets:'rhizomys',
+                            book:'《龙族》',
+                        },
+                        {
+                            name: '球形闪电',
+                            like: 'pet',
+                            pets:'cat',
+                            book:'《卡徒》',
+                            occupation:'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            book:'《无限道武者路》',
+                            pets:'rhizomys',
+                            like:'book'
+                        }
+                    ]
+                }
+            }
+    </script>
+```
+:::
+</div>
+
+
 <script>
     import RenderTable from '../../components/RenderTable.vue'
     export default {
@@ -3649,6 +3781,105 @@ column 设置 children，可以渲染出多级表头<br/>
                      width:200
                     }
                 ],
+                columns18: [
+                    {
+                       title: 'Name',
+                       key: 'name',
+                       width:150
+                    },
+                    {
+                       title: 'Age',
+                       key: 'age',
+                       width:100,
+                       sortable:true,
+                       filters: [
+                           {
+                               label: 'Greater than 18',
+                               value: 1
+                           },
+                           {
+                               label: 'Less than 18',
+                               value: 2
+                           }
+                       ],
+                       filterMethod (value, row) {
+                           if (value === 1) {
+                               return row.age >= 18;
+                           } else if (value === 2) {
+                               return row.age < 18;
+                           }
+                       }
+                    },
+                    {
+                       title: 'Pets',
+                       key: 'pets',
+                       filters: [
+                           {
+                               label: 'dog',
+                               value: 'dog'
+                           },
+                           {
+                               label: 'rhizomys',
+                               value: 'rhizomys'
+                           },
+                           {
+                               label: 'cat',
+                               value: 'cat'
+                           }
+                       ],
+                       filterMultiple:true,
+                       filterMethod (value, row) {
+                           return row.pets.indexOf(value) > -1;
+                       },
+                       minWidth:100
+                    },
+                    {
+                       title: 'Like',
+                       key: 'like',
+                       maxWidth:100
+                    },
+                    {
+                       title: 'Book',
+                       key: 'book'
+                    }
+                ],
+                data18: [
+                    {
+                        name: '欧阳',
+                        age: 12,
+                        pets:'dog',
+                        like:'red',
+                        book:'《贩罪》'
+                    },
+                    {
+                        name: '青蛙',
+                        like: 'blue',
+                        age: 22,
+                        pets:'cat',
+                        book:'《霸皇纪》',
+                    },
+                    {
+                        name: '警长',
+                        age: 18,
+                        like: 'green',
+                        pets:'rhizomys',
+                        book:'《龙族》',
+                    },
+                    {
+                        name: '球形闪电',
+                        like: 'pet',
+                        pets:'cat',
+                        book:'《卡徒》',
+                        occupation:'Bodyguard'
+                    },
+                    {
+                        name: '会长',
+                        age: 38,
+                        book:'《无限道武者路》',
+                        pets:'rhizomys',
+                        like:'book'
+                    }
+                ],
                 loading:true
             }
         },
@@ -3669,12 +3900,24 @@ column 设置 children，可以渲染出多级表头<br/>
                 console.log(options.column,'column')
                 console.log(options.key,'key')
                 console.log(options.order,'order')
+            },
+            exportData (type) {
+                if (type === 1) {
+                    this.$refs.table.exportCsv({
+                        filename: 'The original data'
+                    })
+                } else {
+                    this.$refs.table.exportCsv({
+                        filename: 'Sorting and filtering data',
+                        original: false
+                    })
+                }
             }
         }
     }
 </script>
 
-### props
+### Table props
 | 参数      | 说明    | 类型      | 默认值   |
 |---------- |-------- |---------- |------------- |-------- |
 | data     |  显示的结构化数据，特殊配置项具体项见下文  | Array  |    [ ]   |
@@ -3695,6 +3938,11 @@ column 设置 children，可以渲染出多级表头<br/>
 | loading-text     |  	加载数据时显示的文本	  |  Number / String  |    -   |
 | disHover     |  	关闭 hover 模式	  |  Boolean  |     false   |
 | show-header     |  	 是否显示表头	  |  Boolean  |      true   |
+
+### Table methods
+| 方法名	      | 说明	    | 参数 |
+|---------- |-------- |---------- |
+| exportCsv     |   将数据导出为 .csv 文件  |  `filename`: 文件名，默认为 table.csv<br>`original`: 是否导出为原始数据，默认为 true <br>`noHeader`: 不显示表头，默认为 false <br>`columns`: 自定义导出的列数据 <br>`data`: 自定义导出的行数据 <br>`callback`: 添加此函数后，不会下载，而是返回数据<br>`separator`: 数据分隔符，默认是逗号(,) <br>`quoted`: 每项数据是否加引号，默认为 false|
 
 ### columns
 | 属性      | 说明    | 类型      | 可选值       | 默认值       |
@@ -3749,3 +3997,6 @@ column 设置 children，可以渲染出多级表头<br/>
 | on-sort-change     |  当选中节点时触发   |  `column`: 当前列数据 <br> `key`: 排序依据的指标 <br> `order`: 排序的顺序，值为 asc 或 desc|
 | on-filter-change	    |  筛选条件发生变化时触发	   |  当前列数据 |
 | on-expand-change	    |  扩展状态改变时触发	   |  `row`: 当前扩展的数据<br> `status`: 展开状态 |
+| on-dynamic-save	    |  显示隐藏列弹层版本保存时触发	   |  `columns`:  修改状态后的数据 |
+| on-draggable-change	    |  拖拽编辑保存时触发	   |  `columns`:  修改状态后的数据 |
+| on-resizeable-change	    |  拖拽列宽保存时触发	   |  `columns`:  修改状态后的数据<br> `index`: 当前修改点下标 <br> `column`: 当前编辑列column|
