@@ -6,15 +6,15 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker label='日期'></b-datepicker>
-        <b-datepicker type='daterange' label='日期范围'></b-datepicker>
+        <b-datepicker label='日期' width='160'></b-datepicker>
+        <b-datepicker type='daterange' label='日期范围' width='160'></b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-datepicker type='date' label='日期'></b-datepicker>
-        <b-datepicker type='daterange' label='日期范围'></b-datepicker>
+        <b-datepicker type='date' label='日期' width='160'></b-datepicker>
+        <b-datepicker type='daterange' label='日期范围' width='160'></b-datepicker>
     </div>
 ```
 :::
@@ -89,15 +89,15 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-datepicker type='date' :options="dateOptions" label='日期快捷方式'></b-datepicker>
-        <b-datepicker type='daterange' :options="dateRangeOptions" label='日期范围快捷方式'></b-datepicker>
+        <b-datepicker type='date' :options="dateOptions" label='日期快捷方式' width='160'></b-datepicker>
+        <b-datepicker type='daterange' :options="dateRangeOptions" label='日期范围快捷方式' width='160'></b-datepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-datepicker type='date' :options="dateOptions" label='日期快捷方式'></b-datepicker>
-        <b-datepicker type='daterange' :options="dateRangeOptions" label='日期范围快捷方式'></b-datepicker>
+        <b-datepicker type='date' :options="dateOptions" label='日期快捷方式' width='160'></b-datepicker>
+        <b-datepicker type='daterange' :options="dateRangeOptions" label='日期范围快捷方式' width='160'></b-datepicker>
     </div>
     <script>
         export default {
@@ -238,14 +238,14 @@
 <div class='example'>
     <div class='example-box'>
         <b-datepicker type='datetime' label='日期时间' fixed width='220'></b-datepicker>
-        <b-datepicker type='datetimerange' label='日期时间范围'></b-datepicker>
+        <b-datepicker type='datetimerange' label='日期时间范围' width='160'></b-datepicker>
     </div>
     
 ::: code
 ```html
     <div>
         <b-datepicker type='datetime' label='日期时间' fixed width='220'></b-datepicker>
-        <b-datepicker type='datetimerange' label='日期时间范围'></b-datepicker>
+        <b-datepicker type='datetimerange' label='日期时间范围' width='160'></b-datepicker>
     </div>
 ```
 :::
@@ -338,7 +338,7 @@
 | ---- | ---- | ---- | ---- | ---- |
 | value | 日期，可以是 JavaScript 的 Date，例如 new Date()，也可以是标准的日期格式，点击右边查看 注意：value 使用 v-model 时，值是 Date 类型，可以配合 @on-change 使用 | Date |
 | type | 类型 | String  | `date` `daterange` `datetime` `datetimerange` `year` `month` | date |
-| width | input宽度 | Number |
+| width | input宽度, 默认为原生 input 框默认宽度，label 模式下，需设置 width 宽度 | Number |
 | label | input前的说明文字 | String |
 | label-width | input前的说明文字的宽度 fixed为false时有效 |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
