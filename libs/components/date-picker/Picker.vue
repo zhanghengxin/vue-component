@@ -205,10 +205,7 @@
                 type: Boolean,
                 default: false
             },
-            width: {
-                type: [String, Number],
-                default: 160
-            },
+            width: [String, Number],
             labelWidth: {
                 type: [String, Number],
                 default: null

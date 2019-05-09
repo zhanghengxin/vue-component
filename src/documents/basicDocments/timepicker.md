@@ -6,15 +6,15 @@
 
 <div class='example'>
     <div class='example-box'>
-        <b-timepicker label='时间'></b-timepicker>
-        <b-timepicker type='timerange' label='时间范围'></b-timepicker>
+        <b-timepicker label='时间' width='160'></b-timepicker>
+        <b-timepicker type='timerange' label='时间范围' width='160'></b-timepicker>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-timepicker type='time' label='时间'></b-timepicker>
-        <b-timepicker type='timerange' label='时间范围'></b-timepicker>
+        <b-timepicker type='time' label='时间' width='160'></b-timepicker>
+        <b-timepicker type='timerange' label='时间范围' width='160'></b-timepicker>
     </div>
 ```
 :::
@@ -105,7 +105,7 @@
 | ---- | ---- | ---- | ---- | ---- |
 | value | 时间，可以是 JavaScript 的 Date，例如 new Date()，也可以是标准的时间格式，点击右边查看 注意：value 使用 v-model 时，值是 Date 类型，可以配合 @on-change 使用 | Date |
 | type | 类型 | String  | `time` `timerange` | time |
-| width | input宽度 | Number |
+| width | input宽度, 默认为原生 input 框默认宽度，label 模式下，需设置 width 宽度 | Number |
 | label | input前的说明文字 | String |
 | label-width | input前的说明文字的宽度 fixed为false时有效 |
 | fixed | input的搭配文字的两种样式类型 | Boolean  | `true`、`false` | false |
@@ -120,7 +120,7 @@
 | steps | 下拉列表的时间间隔，数组的三项分别对应小时、分钟、秒。例如设置为 [1, 15] 时，分钟会显示：00、15、30、45 | Array | | [] |
 
 ### events
-| 事件名 | 说明	| 返回值 |
+| 事件名 | 说明  | 返回值 |
 | ---- | ---- | ---- |
 | on-change | 时间改变的时候触发 | date |
 | on-ok | 点击确认按钮触发，配合 confirm 属性使用 |
