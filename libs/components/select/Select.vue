@@ -639,11 +639,12 @@ export default {
     },
     watch: {
         value (val) {
-            let {publicValue, getInitValue, getOptionData} = this
+            let {publicValue, getInitValue, getOptionData, autoComplete} = this
             if (val === '') {
                 this.values = []
                 this.query = ''
             } else if (JSON.stringify(val) !== JSON.stringify(publicValue)) {
+                if (autoComplete) { this.query = val }
                 this.$nextTick(() => {
                     this.values = getInitValue().map(getOptionData).filter(Boolean)
                 })
@@ -705,6 +706,7 @@ export default {
                 this.$emit('on-change', nameInCode ? (multiple ? this.values : this.values[0]) : value)
                 this.dispatch('FormItem', 'on-form-change', nameInCode ? this.values : value)
             }
+            this.broadcastPopperUpdate()
         },
         options (now, before) {
             this.selectOptions = now

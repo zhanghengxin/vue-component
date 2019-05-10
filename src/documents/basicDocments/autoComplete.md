@@ -3,7 +3,7 @@
     export default {
         data () {
             return {
-                value: '',
+                value: '123',
                 options1:[],
                 value1: '',
                 data2: [],
@@ -20,11 +20,13 @@
                 ]
             },
             handleSearch2 (value) {
-                this.data2 = !value || value.indexOf('@') >= 0 ? [] : [
-                    value + '@qq.com',
-                    value + '@sina.com',
-                    value + '@163.com'
-                ];
+                setTimeout(_=>{
+                    this.data2 = !value || value.indexOf('@') >= 0 ? [] : [
+                        value + '@qq.com',
+                        value + '@sina.com',
+                        value + '@163.com'
+                    ];
+                },200)
             },
             filterMethod (value, option) {
                 return option.toUpperCase().indexOf(value.toUpperCase()) !== -1;
