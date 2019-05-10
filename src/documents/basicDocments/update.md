@@ -1,4 +1,12 @@
 ### 更新日志
+### 0.6.2
+## `2019-05-10`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 AutoComplete搜索时options中的label长度变化 drop的位置
+    </b-timeline-item>
+</b-timeline>
 
 ### 0.6.1
 ## `2019-05-09`
