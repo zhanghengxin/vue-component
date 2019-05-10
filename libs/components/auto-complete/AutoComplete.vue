@@ -55,7 +55,8 @@
                 default: false
             },
             placeholder: {
-                type: String
+                type: String,
+                default: ''
             },
             size: {
                 validator (value) {
@@ -99,7 +100,6 @@
         computed: {
             filteredData () {
                 if (this.filterMethod) {
-                    console.log('12314')
                     return this.data.filter(item => this.filterMethod(this.currentValue, item))
                 } else {
                     return this.data
