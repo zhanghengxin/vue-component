@@ -5,6 +5,7 @@
         :label="label"
         :disabled="disabled"
         :clearable="clearable"
+        :className='prefixCls'
         :placeholder="placeholder"
         :size="size"
         :placement="placement"
@@ -93,6 +94,7 @@
         },
         data () {
             return {
+                prefixCls,
                 currentValue: this.value,
                 disableEmitChange: false // for Form reset
             }

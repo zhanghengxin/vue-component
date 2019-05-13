@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <transition name="transition-drop">
+        <transition name="slide">
             <Drop
                 v-transfer-dom
                 v-show="visible"

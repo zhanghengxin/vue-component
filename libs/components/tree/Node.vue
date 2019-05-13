@@ -1,8 +1,7 @@
 <template>
-    <transition name="fade">
+    <collapse-transition :appear="appear">
         <ul
             :class="wrapCls"
-            v-show="!data.invisible"
             @dragstart.stop="handleDragStart"
             @dragover.stop="handleDragOver"
             @drop.stop="handleDrop"
@@ -28,6 +27,7 @@
                         v-for="(item, key) in children"
                         :key="key"
                         :draggable="draggable"
+                        :appear='appearByClickArrow'
                         :class-name="className"
                         :data="item"
                         :show-checkbox="showCheckbox"
@@ -36,13 +36,14 @@
                 </template>
             </li>
         </ul>
-    </transition>
+    </collapse-transition>
 </template>
 <script>
 import { findComponentUpwards, findComponentUpward } from '../../utils/assist'
 import Render from './render'
 import Checkbox from '../checkbox/Checkbox.vue'
 import Icon from '../icon/Icon.vue'
+import CollapseTransition from '../base/collapse-transition'
 import { prefix } from '../../utils/common'
 import Emitter from '../../mixins/emitter'
 
@@ -50,7 +51,7 @@ const prefixCls = prefix + 'tree'
 
 export default {
     name: 'tree-node',
-    components: {Checkbox, Icon, Render},
+    components: {Checkbox, Icon, Render, CollapseTransition},
     mixins: [Emitter],
     props: {
         data: {
@@ -82,11 +83,16 @@ export default {
         draggable: {
             type: Boolean,
             default: false
+        },
+        appear: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
         return {
-            prefixCls: prefixCls
+            prefixCls: prefixCls,
+            appearByClickArrow: false
         }
     },
     computed: {
@@ -149,6 +155,7 @@ export default {
         expanded () {
             const data = this.data
             const defaultOpt = this.defaultOpt
+            this.appearByClickArrow = true
             // if (data[defaultOpt.disabledKey]) return // 禁用
             if (data[defaultOpt.childrenKey] && data[defaultOpt.childrenKey].length) {
                 this.$set(this.data, defaultOpt.expandKey, !this.data[defaultOpt.expandKey])

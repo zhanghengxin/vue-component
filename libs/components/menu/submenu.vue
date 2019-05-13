@@ -19,11 +19,11 @@
             <slot name="title"></slot>
             <Icon :type="submenuTitleIcon" class="menu-arrow"></Icon>
         </div>
-        <transition name='gradual' v-if="mode === 'vertical'">
+        <collapse-transition name='gradual' v-if="mode === 'vertical'">
             <ul v-show="opened">
                 <slot></slot>
             </ul>
-        </transition>
+        </collapse-transition>
         <transition name='gradual' v-else>
             <ul :class="[prefixCls +'-drop-list']" v-show="opened">
                 <slot></slot>
@@ -37,6 +37,7 @@ import { prefix } from '../../utils/common'
 import Icon from '../icon'
 import mixin from './menu-mixin'
 import Emitter from '../../mixins/emitter'
+import CollapseTransition from '../base/collapse-transition'
 
 const prefixCls = `${prefix}menu`
 
@@ -44,7 +45,7 @@ export default {
     name: SUBMENU,
     componentName: SUBMENU,
     components: {
-        Icon
+        Icon, CollapseTransition
     },
     data () {
         return {
