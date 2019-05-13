@@ -1,0 +1,8 @@
+$css-prefix-complete: $css-prefix + 'auto-complete';
+$css-prefix-select: $css-prefix + 'select';
+
+.#{$css-prefix-complete}{
+    .#{$css-prefix-select}-main-flex{
+        padding-right: 8px; 
+    }
+}

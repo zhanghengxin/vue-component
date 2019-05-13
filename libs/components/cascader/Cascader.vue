@@ -3,8 +3,9 @@
         @mouseenter="clearShow = clearable && true"
         @mouseleave="clearShow = clearable && false"
         :class="classes"
-        v-click-outside="handleClose">
-        <div @click="handClick" :class="relClasses">
+        v-click-outside="handleClose"
+        ref="reference">
+        <div @click="handClick" :class="relClasses" >
             <slot>
                 <b-input
                     :disabled="disabled"
@@ -36,10 +37,12 @@
             <Drop
                 ref="drop"
                 v-show="show"
+                :data-transfer="transfer"
                 :transfer="transfer"
                 v-transfer-dom>
                 <div>
                     <Caspanel
+                        ref="caspanel"
                         v-show="!filterable || (filterable && query === '')"
                         :trigger="trigger"
                         :change-on-select="changeOnSelect"
@@ -76,7 +79,7 @@ import BInput from '../input'
 import Icon from '../icon'
 import Emitter from '../../mixins/emitter'
 import Caspanel from './caspanel'
-import Drop from '../../components/select/Dropdown'
+import Drop from '../select/Dropdown'
 
 const prefixCls = prefix + 'cascader'
 const selectPrefixCls = prefix + 'select'
@@ -241,7 +244,7 @@ export default {
                 if (this.transfer) {
                     this.$refs.drop.update()
                 }
-                this.broadcast('Drop', 'on-update-popper')
+                this.broadcast(`${prefix}drop`, 'on-update-popper')
             } else {
                 if (this.filterable) {
                     this.query = ''
@@ -250,7 +253,7 @@ export default {
                 if (this.transfer) {
                     this.$refs.drop.destroy()
                 }
-                this.broadcast('Drop', 'on-destroy-popper')
+                this.broadcast(`${prefix}drop`, 'on-destroy-popper')
             }
             this.$emit('on-visible-change', status)
         },

@@ -72,6 +72,7 @@ export default {
                 })
             } else {
                 this.$nextTick(() => {
+                    // console.log('this.$parent.$refs.reference', this.$parent.$refs.reference)
                     if (!this.$parent.$refs.reference) return
                     this.popper = new Popper(this.$parent.$refs.reference, this.$el, {
                         placement: this.placement,

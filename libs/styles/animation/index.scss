@@ -34,3 +34,7 @@ $ease-in-out            : ease-in-out;
 @import "gradual";
 @import "zoomInTop";
 @import "move";
+
+.collapse-transition {
+    transition: $animation-time height ease-in-out, $animation-time padding-top ease-in-out, $animation-time padding-bottom ease-in-out;
+}

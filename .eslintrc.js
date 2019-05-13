@@ -8,7 +8,7 @@ module.exports = {
         '@vue/standard'
     ],
     rules: {
-        'no-console': 'error',
+        'no-console': 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         // allow async-await
         'generator-star-spacing': 'off',
