@@ -154,7 +154,9 @@ export default {
             if (this.router) {
                 this.routeToItem(item, (error) => {
                     this.currentActiveName = oldActiveName
-                    if (error) console.error(error)
+                    if (error) {
+                        throw new Error(error)
+                    }
                 })
             }
         },
@@ -178,8 +180,8 @@ export default {
             let route = item.route || item.name
             try {
                 this.$router.push(route, () => {}, onError)
-            } catch (e) {
-                console.error(e)
+            } catch (err) {
+                throw new Error(err)
             }
         }
     },
