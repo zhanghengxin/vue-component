@@ -11,6 +11,7 @@
                 :fixed-column-rows="fixedColumnRows"
                 :draggable="draggable"
                 :resizeable="resizeable"
+                :clone-columns="columns"
                 :dynamicable="dynamicable"
                 :fixed="fixed">
             </table-head>

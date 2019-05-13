@@ -122,6 +122,7 @@ export default {
     props: {
         columns: Array,
         columnRows: Array,
+        cloneColumns: Array,
         fixedColumnRows: Array,
         fixed: String,
         preCls: String,
@@ -256,7 +257,7 @@ export default {
                 target = target.parentNode
             }
             let startX = e.pageX
-            let columns = this.columns
+            let columns = this.fixed ? this.cloneColumns : this.columns
             let columnsWidth = columns[index]._width
             let x = table.getBoundingClientRect().left
             let tableWidth = table.getBoundingClientRect().width
@@ -294,6 +295,7 @@ export default {
                     deltaX: deltaX,
                     index: columns[index]._index
                 })
+                console.log(3123)
                 document.removeEventListener('mousemove', handleMouseMove)
                 document.removeEventListener('mouseup', handleMouseUp)
                 document.removeEventListener('mousedown', handleMouseDown)

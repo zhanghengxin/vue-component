@@ -1,4 +1,20 @@
 ### 更新日志
+
+### 0.6.3
+## `2019-05-13`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 Table悬浮列不能正常拖拽的 bug
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 添加color-picker、cascader、tree、menu的动画效果、修改autocomplete的padding
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 提交menu的样式调整，横向的menu的border取消添加
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.6.2
 ## `2019-05-10`
 <br>
