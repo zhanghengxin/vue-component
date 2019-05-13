@@ -55,7 +55,7 @@
         mixins: [Emitter],
         data () {
             return {
-                index: 1, // step所属序号
+                index: 1, // step所属序号,从1开始计数
                 length: '',
                 size: 'normal',
                 direction: '', // step的方向
@@ -86,7 +86,8 @@
             checkIndexAndSingle () {
                 let status = this.status || this.stepsStatus
                 if (status === 'single' && !!this.label) {
-                    console.error(`单点状态（status='single'）的step必须放在第一个位置！`)
+                    // console.error(`单点状态（status='single'）的step必须放在第一个位置！`)
+                    throw new Error(`单点状态（status='single'）的step必须放在第一个位置！`)
                 }
             },
             // 对单击事件处理并且向外抛出属性
@@ -153,12 +154,11 @@
             ifShowTail () {
                 return (this.status || this.stepsStatus) !== 'single' && !this.theLast
             },
+            // 展示的序号标记
             label () {
                 let str = ''
                 if ((this.status || this.stepsStatus) !== 'single') {
                     str = this.index
-                } else {
-                    str = ''
                 }
                 return str
             }

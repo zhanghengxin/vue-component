@@ -36,7 +36,6 @@ $select-dropdown: "#{$menu}-drop-list";
   position: relative;
   z-index: $zindex-menu;
   background-color: $white;
-  border: $Border 1px solid;
   box-sizing: content-box;
 
   .#{$menu-item} {
@@ -138,6 +137,7 @@ $select-dropdown: "#{$menu}-drop-list";
 /***垂直方向的样式开始***/
 /***第一层开始***/
 .#{$menu}.#{$menu-vertical} {
+  border: $Border 1px solid;
   .#{$menu-item}, .#{$menu-submenu-title} {
     font-size: 14px;
     padding: 10px 24px;
