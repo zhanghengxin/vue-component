@@ -1479,9 +1479,9 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-table dynamicable border width=1000 :columns='columns3' :data='data3'></b-table>
+            <b-table dynamicable resizeable draggable border width=1000 :columns='columns3' :data='data3'></b-table>
             <br/>
-            <b-table dynamicable border width=1000 :columns='columns2' :data='data2'></b-table>
+            <b-table dynamicable resizeable draggable border width=1000 :columns='columns2' :data='data2'></b-table>
             <br/>
             <p>弹层版本</p>
             <b-table style="margin-top:10px" dynamicallocation border width=1000 :columns='columns3' :data='data3'></b-table>
@@ -2380,7 +2380,7 @@ column 设置 children，可以渲染出多级表头<br/>
 <div class="example">
     <div class="example-box">
         <div>
-             <b-table resizeable border width=1000 :columns='columns17' :data='data11'></b-table>
+             <b-table dynamicable  resizeable border width=1000 :columns='columns17' :data='data11'></b-table>
         </div>
     </div>
 

@@ -65,7 +65,7 @@ export default {
             let width = 0
             this.fixedColumns.forEach((col) => {
                 if (col.fixed && col.fixed === this.fixed) {
-                    width += col._width
+                    width += parseInt(col._width)
                 }
             })
             if (this.fixed === 'right') {
