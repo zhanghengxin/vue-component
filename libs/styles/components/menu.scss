@@ -235,7 +235,7 @@ $select-dropdown: "#{$menu}-drop-list";
     @include _background($Primary);
     @include _color($white);
     .#{$menu-item-un-disabled} {
-      &-active, &:hover {
+      &.#{$menu-item-active}, &:hover {
         box-sizing: border-box;
         border-bottom: 4px solid $LightPrimary;
       }
@@ -369,7 +369,7 @@ $select-dropdown: "#{$menu}-drop-list";
     @include _background($Primary);
     @include _color($white);
     .#{$menu-item-un-disabled} {
-      &-active, &:hover {
+      &.#{$menu-item-active}, &:hover {
         box-sizing: border-box;
         border-bottom: 4px solid $LightPrimary;
       }
@@ -505,7 +505,7 @@ $select-dropdown: "#{$menu}-drop-list";
     @include _background($Title);
     .#{$menu-item-un-disabled} {
       @include _color($white);
-      &-active, &:hover {
+      &.#{$menu-item-active}, &:hover {
         border-bottom: 4px solid $Divider;
         box-sizing: border-box;
       }
