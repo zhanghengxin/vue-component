@@ -1,5 +1,17 @@
 ### 更新日志
 
+### 0.6.4
+## `2019-05-15`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 table-width 支持字符串、拖拽和调整列宽支持显示隐藏列模式
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 menu的样式部分优化
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.6.3
 ## `2019-05-13`
 <br>
