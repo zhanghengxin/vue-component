@@ -696,9 +696,8 @@ export default {
 ### events
 | 方法名	      | 说明	    | 参数 |
 |---------- |-------- |---------- |
-| on-select     |  当选中节点时触发   |  options  |
-| on-check     |  当勾选/取消节点时触发   |  options  |
-| on-expand     |  当展开/收起节点时触发   |  options  |
 | on-all-check     |  点击全选时触发   |   status  |
 | on-clear     |  清除数据时触发   |   -  |
-
+| on-select     |  当选中节点时触发   |  options【Object】 : <br> `data`:  当前选中的数据<br> `getSelectedNodes`:  当前选中的数据集合<br> |
+| on-check     |  当勾选/取消节点时触发   |  options【Object】 : <br> `checkedNodes`:  当前选中的数据<br> `indeterminateNodes`:  当前半选节点集合<br>`checkedNodes`:  当前选中节点集合 |
+| on-expand     |  当展开/收起节点时触发   |  options【Object】 : <br> `data`:  当前选中的数据 |

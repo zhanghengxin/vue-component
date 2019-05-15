@@ -1,5 +1,17 @@
 ### 更新日志
 
+### 0.6.5
+## `2019-05-15`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 table 支持clearCurrentRowAPI 以及on-current-change事件
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 tree 的模糊检索 bug 修复，API完善
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.6.4
 ## `2019-05-15`
 <br>

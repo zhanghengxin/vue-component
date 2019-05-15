@@ -34,6 +34,7 @@
     "babel-polyfill": "^6.26.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "iview": "^3.4.1",
     "node-sass": "^4.9.0",
     "popper.js": "^1.14.6",
     "sass-loader": "^7.0.1",

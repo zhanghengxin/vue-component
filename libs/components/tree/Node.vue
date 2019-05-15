@@ -1,6 +1,7 @@
 <template>
     <collapse-transition :appear="appear">
         <ul
+            v-show="!data.invisible"
             :class="wrapCls"
             @dragstart.stop="handleDragStart"
             @dragover.stop="handleDragOver"
