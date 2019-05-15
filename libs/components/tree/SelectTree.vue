@@ -5,6 +5,7 @@
             :multiple='showCheckbox'
             :label='label'
             :fixed='fixed'
+            :disabled='disabled'
             :tree-values="values"
             :default-opt="defaultOpt"
             :clearable="clearable"
@@ -159,7 +160,7 @@ export default {
         },
         // props type为Boolean的配置
         ...propsInit({
-            props: ['showCheckbox', 'showAllcheck', 'autoFilter', 'fixed', 'filterable', 'draggable', 'loading', 'accordion', 'transfer'],
+            props: ['showCheckbox', 'showAllcheck', 'autoFilter', 'fixed', 'filterable', 'draggable', 'loading', 'accordion', 'transfer', 'disabled'],
             config: {
                 type: Boolean,
                 default: false
