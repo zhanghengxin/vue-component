@@ -547,6 +547,7 @@
 ### Menu props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
+| theme   | menu主题   | String  |  ```primary```、```light```、```dark``` , ```primary```和```light``` 风格相同      |    ```primary```   |
 | mode   | 菜单方向   | String  |  ```horizontal```、```vertical```         |    ```horizontal```   |
 | active-name  | 激活菜单的 name 值   | String / Number  |          |      |
 | open-names   | 展开的 Submenu 的 name 集合 | Array  |          |   []   |
