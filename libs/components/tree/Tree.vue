@@ -250,7 +250,7 @@ export default {
             this.$emit('on-select', {data: node, selectedNodes: this.getSelectedNodes()})
         },
         // 选中
-        handleCheck ({checked, nodeKey}) {
+        handleCheck ({checked, nodeKey, isFormat = false}) {
             const defaultOpt = this.defaultOpt
             const node = this.dataList[nodeKey].node
             this.$set(node, defaultOpt.checkedKey, checked)
@@ -268,7 +268,7 @@ export default {
                 currentNode: node
             }
             options.checkedAndIndeterminateNodes = options.checkedNodes.concat(options.indeterminateNodes)
-            this.$emit('on-check', options)
+            if (!isFormat) this.$emit('on-check', options)
         },
         // 展开/关闭
         handleExpand (options) {
