@@ -1,5 +1,14 @@
 ### 更新日志
 
+### 0.6.6
+## `2019-05-16`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 SelectTree on-check 多次触发问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.6.5
 ## `2019-05-15`
 <br>
