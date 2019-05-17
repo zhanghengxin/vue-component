@@ -45,6 +45,7 @@
                         :filter-method="filterMethod"
                         :data='data'
                         ref="tree"
+                        :default-checked-values="defaultValues"
                         :draggable='draggable'
                         :accordion='accordion'
                         :loading='loading'
@@ -196,13 +197,14 @@ export default {
         },
         filterText () {
             if (this.autoFilter) this.treeFilterText = this.filterText
-        },
-        defaultValues: {
-            deep: true,
-            handler () {
-                this.defaultRebuild()
-            }
         }
+        // ,
+        // defaultValues: {
+        //     deep: true,
+        //     handler () {
+        //         this.defaultRebuild()
+        //     }
+        // }
     },
     computed: {
         wrapSty () {
@@ -232,7 +234,6 @@ export default {
     },
     mounted () {
         if (this.showCheckbox) this.getTreeValues()
-        this.defaultRebuild()
     },
     methods: {
         clickPopup () {
@@ -246,22 +247,6 @@ export default {
                 }
             }
             this.popupVisible = false
-        },
-        defaultRebuild () {
-            let {idKey} = this.defaultOpt
-            let arr = this.defaultValues
-            let data = this.$refs.tree.indexArrCreate()
-            if (arr.length) {
-                if (this.showCheckbox) {
-                    let nodeKeys = data.filter(item => arr.includes(item.node[idKey])).map(item => item.nodeKey)
-                    nodeKeys.forEach(item => {
-                        this.$refs.tree.handleCheck({checked: true, nodeKey: item, isFormat: true})
-                    })
-                } else {
-                    let [node] = data.filter(item => (item.node[idKey] === arr[0]))
-                    this.$refs.tree.handleSelect(node.nodeKey, true)
-                }
-            }
         },
         allCheckClick (status) {
             let changes
