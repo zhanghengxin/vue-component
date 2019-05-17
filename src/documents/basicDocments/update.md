@@ -1,5 +1,17 @@
 ### 更新日志
 
+### 0.6.7
+## `2019-05-17`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 Tree 解决模糊检索顶点特殊处理以及综合应用文档更新
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Tree 修复单选多次触发的问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.6.6
 ## `2019-05-16`
 <br>
