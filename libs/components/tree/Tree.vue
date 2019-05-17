@@ -241,13 +241,13 @@ export default {
             }
         },
         // 单选
-        handleSelect (nodeKey) {
+        handleSelect (nodeKey, isFormat = false) {
             const selectedKey = this.defaultOpt.selectedKey
             const node = this.dataList[nodeKey].node
             const selectedIndex = this.dataList.findIndex(obj => obj.node.selected)
             if (selectedIndex >= 0 && selectedIndex !== nodeKey) this.$set(this.dataList[selectedIndex].node, selectedKey, false)
             this.$set(node, selectedKey, !node.selected)
-            this.$emit('on-select', {data: node, selectedNodes: this.getSelectedNodes()})
+            if (!isFormat) this.$emit('on-select', {data: node, selectedNodes: this.getSelectedNodes()})
         },
         // 选中
         handleCheck ({checked, nodeKey, isFormat = false}) {

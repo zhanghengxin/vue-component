@@ -255,11 +255,11 @@ export default {
                 if (this.showCheckbox) {
                     let nodeKeys = data.filter(item => arr.includes(item.node[idKey])).map(item => item.nodeKey)
                     nodeKeys.forEach(item => {
-                        this.$refs.tree.handleCheck({checked: true, nodeKey: item})
+                        this.$refs.tree.handleCheck({checked: true, nodeKey: item, isFormat: true})
                     })
                 } else {
                     let [node] = data.filter(item => (item.node[idKey] === arr[0]))
-                    this.$refs.tree.handleSelect(node.nodeKey)
+                    this.$refs.tree.handleSelect(node.nodeKey, true)
                 }
             }
         },
@@ -268,6 +268,7 @@ export default {
             this.data.forEach((item) => {
                 changes = {
                     checked: status,
+                    isFormat: true,
                     nodeKey: item.nodeKey
                 }
                 this.$refs.tree.handleCheck(changes)
