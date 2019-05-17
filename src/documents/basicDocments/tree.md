@@ -950,21 +950,22 @@ export default {
 |---------- |-------- |---------- |-------------  |-------- |
 | data     |  可嵌套的节点属性的数组，标准 tree 数据  | Array  |  -    |    []   |
 | accordion     |  是否支持手风琴效果   |  Boolean    |  -|     false  |
-| accordionOptions     | 手风琴配置项，具体配置见下文   | Object    |  -  |     -  |
+| accordion-options     | 手风琴配置项，具体配置见下文   | Object    |  -  |     -  |
 | show-checkbox     | 是否显示多选框	   | Boolean    |  -  |     false  |
-| checkboxOptions     |  多选配置项，具体配置见下文 | Object    |  -  |     -  |
+| checkbox-options     |  多选配置项，具体配置见下文 | Object    |  -  |     -  |
 | loading     | 是否开启懒加载   | Boolean    |  -  |     false  |
 | load-method     |  异步加载数据的方法，详见例子 | Function    |  -  |     -  |
 | filter-text     |  模糊搜索的关键字 |  String \ Number    |  -  |     ''  |
 | filter-method     |  模糊检索的自定义函数   | 	string    |   -  |     -  |
-| defaultOpt     | 各种选中效果的配置项，具体配置见下文   | 	Object    |  -  |   -    |
+| default-opt     | 各种选中效果的配置项，具体配置见下文   | 	Object    |  -  |   -    |
 | draggable     |  是否开启节点拖拽编辑 | 	Boolean    |  -  |    fasle    |
+| check-cascade     |  是否开启父子级联效果 | 	Boolean    |  -  |     true    |
 | render     |  自定义渲染内容，见示例	 | 	Function    |  -  |    -    |
-| className      | 给 item-name 附加的 class	| String | - |   -  |
+| class-name      | 给 item-name 附加的 class	| String | - |   -  |
 | width | 开启 `label` 模式时生效,自定义宽度	| Number |	-   |     -   |
 | placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
-| labelWidth | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
-| transfer     |  是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果 | Boolean    |  -  |     false  |
+| label-width | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
+
 
 ### Tree methods
 | 方法名		      | 说明	    | 参数 |
