@@ -945,7 +945,7 @@ export default {
 }
 </script>
 
-### props
+### Tree props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | data     |  可嵌套的节点属性的数组，标准 tree 数据  | Array  |  -    |    []   |
@@ -966,8 +966,15 @@ export default {
 | labelWidth | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
 | transfer     |  是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果 | Boolean    |  -  |     false  |
 
+### Tree methods
+| 方法名		      | 说明	    | 参数 |
+|---------- |-------- |---------- |
+| getCheckedNodes   |  获取被勾选的节点集合	   | - |
+| getSelectedNodes   |  获取被选中的节点	集合	   | - |
+| getIndeterminateNodes   |  获取半选状态节点集合	   | - |
 
-### children
+
+### data props
 | 属性      | 说明    | 类型      | 默认值       |
 |---------- |-------- |---------- |-------------  |-------- |
 | children     |  子节点属性  |  Array  |  -    |
@@ -978,7 +985,7 @@ export default {
 | draggable     |  是否开拖拽状态  |  Boolean  |  -   |
 | render     |  自定义渲染内容	 | 	Function    |  -  |
 
-### defaultOpt
+### defaultOpt props
 | 属性      | 说明    | 类型      | 默认值       |
 |---------- |-------- |---------- |-------------  |-------- |
 | childrenKey     |  子节点属性配置项Key值  |  String  |  children    |
@@ -989,12 +996,12 @@ export default {
 | expandKey     |  展开属性配置项Key值  |  String  |  expand   |
 | selectedKey     |  选中属性配置项Key值  |  String  |  selected   |
 
-### accordionOptions
+### accordionOptions props
 | 属性      | 说明    | 类型      | 默认值       |
 |---------- |-------- |---------- |-------------  |
 | isCache      |  是否缓存其他同级节点的展开状态  |  Boolean  |  true    |
 
-### checkboxOptions
+### checkboxOptions props
 | 属性      | 说明    | 类型      | 默认值       |
 |---------- |-------- |---------- |-------------  |
 | parent      |   勾选时是否级联父级节点 |  Boolean  |  true    |
@@ -1004,6 +1011,6 @@ export default {
 | 方法名	      | 说明	    | 参数 |
 |---------- |-------- |---------- |
 | on-select     |  当选中节点时触发   |  options【Object】 : <br> `data`:  当前选中的数据<br> `getSelectedNodes`:  当前选中的数据集合<br> |
-| on-check     |  当勾选/取消节点时触发   |  options【Object】 : <br> `checkedNodes`:  当前选中的数据<br> `indeterminateNodes`:  当前半选节点集合<br>`checkedAndIndeterminateNodes`:  当前半选节点和全选节点合集<br>`checkedNodes`:  当前选中节点集合 |
+| on-check     |  当勾选/取消节点时触发   |  options【Object】 : <br> `checkedNodes`:  当前全选节点集合<br> `indeterminateNodes`:  当前半选节点集合<br>`checkedAndIndeterminateNodes`:  当前半选节点和全选节点合集<br>`currentNode`:  当前选中节点 |
 | on-expand     |  当展开/收起节点时触发   |  options【Object】 : <br> `data`:  当前选中的数据 |
 
