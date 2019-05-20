@@ -282,7 +282,7 @@ $css-prefix-form-item: $css-prefix+'form-item';
   @include transitionAll();
   background: $white;
 
-  &:hover {
+  &:hover,&-focus {
     background: $Divider;
     @include _background($Divider);
   }
