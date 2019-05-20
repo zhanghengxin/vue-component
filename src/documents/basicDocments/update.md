@@ -1,5 +1,20 @@
 ### 更新日志
 
+### 0.6.8
+## `2019-05-20`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 select支持键盘事件
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 SelectTree、Tree 默认选中动态变化不正常回显优化
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Select在v-show下的label fixed 的情况下labelwidth取值为undefined产生的width计算bug
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.6.7
 ## `2019-05-17`
 <br>

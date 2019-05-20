@@ -17,10 +17,16 @@
                 @blur="toggleHeaderFocus"
                 @focus="toggleHeaderFocus"
                 @click="toggleMenu"
+                @keydown.esc="handleKeydown"
+                @keydown.enter="handleKeydown"
+                @keydown.up.prevent="handleKeydown"
+                @keydown.down.prevent="handleKeydown"
+                @keydown.tab="handleKeydown"
+                @keydown.delete="handleInputDelete"
                 @mouseenter="clearShow = clearable && true"
                 @mouseleave="clearShow = clearable && false">
                 <input type="hidden" :name="name" :value="publicValue">
-                <div :class='[`${prefixCls}-main-flex`]' :style='[selectWidth]'>
+                <div :class='[`${prefixCls}-main-flex`]'>
                     <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
                     <template v-if='multiple'>
                         <div
@@ -86,6 +92,7 @@
                             :value='item.value'
                             :label='item.label'
                             :disabled='item.disabled'
+                            :isFocused='JSON.stringify(item) === focusValue'
                             :multiple='multiple'
                             :publicValue='publicValue'>
                         </Option>
@@ -99,6 +106,7 @@
                                     :key='item.value'
                                     :value='item.value'
                                     :label='item.label'
+                                    :isFocused='JSON.stringify(item) === focusValue'
                                     :disabled='item.disabled'
                                     :multiple='multiple'
                                     :publicValue='publicValue'>
@@ -130,6 +138,7 @@ import Icon from '../icon'
 import FunctionalOptions from './functional-options.vue'
 
 const prefixCls = prefix + 'select'
+
 const findChildrenText = (componentOptions = {}, cData = {}) => {
     let text = ''
     let children = componentOptions.children
@@ -142,6 +151,24 @@ const findChildrenText = (componentOptions = {}, cData = {}) => {
         text += findChildrenText(cOptions, cData)
     }
     return text
+}
+
+const initGroupList = (list) => {
+    let container = []
+    for (let item of list) {
+        container = container.concat(item.options)
+    }
+    return container
+}
+
+const findChild = (instance, checkFn) => {
+    let match = checkFn(instance)
+    if (match) return instance
+    for (let i = 0, l = instance.$children.length; i < l; i++) {
+        const child = instance.$children[i]
+        match = findChild(child, checkFn)
+        if (match) return match
+    }
 }
 
 export default {
@@ -163,7 +190,9 @@ export default {
             stylePloyfill: false,
             selectWidth: {},
             slotOptions: this.$slots.default,
-            selectOptions: this.options
+            selectOptions: this.options,
+            focusIndex: -1,
+            focusValue: null
         }
     },
     props: {
@@ -257,7 +286,8 @@ export default {
                     expandKey: 'expand',
                     selectedKey: 'selected',
                     indeterminateKey: 'indeterminate',
-                    idKey: 'id'
+                    idKey: 'id',
+                    focusIndex: -1
                 }
             }
         },
@@ -547,6 +577,7 @@ export default {
                 toggleMenu()
             }
             broadcastPopperUpdate()
+            this.focusValue = JSON.stringify(option)
         },
         getInitValue () { // []
             const {multiple, value} = this
@@ -609,7 +640,8 @@ export default {
         clearValues () {
             this.values = []
             this.query = ''
-            this.$emit('on-clear', 'select')
+            let type = this.multiple ? 'checked' : 'select'
+            this.$emit('on-clear', type)
         },
         slideDropAndSetInput () {
             this.show = true
@@ -634,8 +666,73 @@ export default {
         showMultipleValues (item) {
             const {defaultOpt, treeValues} = this
             return treeValues.length ? item[defaultOpt.nameKey] : item.label
-        }
+        },
+        handleKeydown (e) {
+            if (e.key === 'Backspace') {
+                return // so we don't call preventDefault
+            }
+            if (this.show) {
+                if (this.$slots.tree) return
+                e.preventDefault()
+                if (e.key === 'Tab') {
+                    e.stopPropagation()
+                }
 
+                // Esc
+                if (e.key === 'Escape') {
+                    e.stopPropagation()
+                    this.show = false
+                }
+                // next
+                if (e.key === 'ArrowUp') {
+                    this.navigateOptions(-1)
+                }
+                // prev
+                if (e.key === 'ArrowDown') {
+                    this.navigateOptions(1)
+                }
+                // enter
+                if (e.key === 'Enter') {
+                    if (this.focusIndex === -1) this.show = false
+                    this.onOptionClick(JSON.parse(this.focusValue))
+                }
+            } else {
+                const keysThatCanOpenSelect = ['ArrowUp', 'ArrowDown']
+                if (keysThatCanOpenSelect.includes(e.key)) this.toggleMenu()
+            }
+        },
+        navigateOptions (direction) {
+            let dropList = this.dropList
+            if (this.group) {
+                dropList = initGroupList(this.dropList)
+            }
+            const optionsLength = dropList.length - 1
+
+            let index = this.focusIndex + direction
+
+            if (index < 0) index = optionsLength
+            if (index > optionsLength) index = 0
+
+            if (direction > 0) {
+                let nearestActiveOption = -1
+                for (let i = 0; i < dropList.length; i++) {
+                    const optionIsActive = !dropList[i].disabled
+                    if (optionIsActive) nearestActiveOption = i
+                    if (nearestActiveOption >= index) break
+                }
+                index = nearestActiveOption
+            } else {
+                let nearestActiveOption = dropList.length
+                for (let i = optionsLength; i >= 0; i--) {
+                    const optionIsActive = !dropList[i].disabled
+                    if (optionIsActive) nearestActiveOption = i
+                    if (nearestActiveOption <= index) break
+                }
+                index = nearestActiveOption
+            }
+            this.focusIndex = index
+            this.focusValue = JSON.stringify(dropList[index])
+        }
     },
     watch: {
         value (val) {
@@ -643,6 +740,8 @@ export default {
             if (val === '') {
                 this.values = []
                 this.query = ''
+                this.focusIndex = -1
+                this.focusValue = null
             } else if (JSON.stringify(val) !== JSON.stringify(publicValue)) {
                 if (autoComplete) { this.query = val }
                 this.$nextTick(() => {
@@ -710,6 +809,22 @@ export default {
         },
         options (now, before) {
             this.selectOptions = now
+        },
+        focusIndex (index) {
+            if (index < 0 || this.autoComplete) return
+
+            const optionValue = JSON.parse(this.focusValue)[this.codeKey]
+            const optionInstance = findChild(this, ({$options}) => {
+                return $options.name === (prefix + 'option') && $options.propsData.value === optionValue
+            })
+            let bottomOverflowDistance = optionInstance.$el.getBoundingClientRect().bottom - this.$refs.dropdown.$el.getBoundingClientRect().bottom
+            let topOverflowDistance = optionInstance.$el.getBoundingClientRect().top - this.$refs.dropdown.$el.getBoundingClientRect().top
+            if (bottomOverflowDistance > 0) {
+                this.$refs.dropdown.$el.scrollTop += bottomOverflowDistance
+            }
+            if (topOverflowDistance < 0) {
+                this.$refs.dropdown.$el.scrollTop += topOverflowDistance
+            }
         }
     }
 }
