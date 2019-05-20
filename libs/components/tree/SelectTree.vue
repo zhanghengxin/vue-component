@@ -248,6 +248,7 @@ export default {
         allCheckClick (status) {
             this.$refs.tree.allCheckedData(status)
             this.$emit('on-all-check', status)
+            this.getTreeValues()
         },
         handleCheck (options) {
             this.values = options.checkedNodes
