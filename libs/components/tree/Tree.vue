@@ -24,6 +24,7 @@ import { prefix, propsInit } from '../../utils/common'
 import TreeNode from './Node.vue'
 import Emitter from '../../mixins/emitter'
 import clickOutside from '../../utils/directives/clickOutside'
+import { deepCopy } from '../../utils/assist'
 
 const prefixCls = prefix + 'tree'
 export default {
@@ -36,7 +37,7 @@ export default {
     data () {
         return {
             prefixCls: prefixCls,
-            rootData: this.data,
+            rootData: [],
             dataList: [],
             dargState: {}
         }
@@ -45,16 +46,13 @@ export default {
         data: {
             deep: true,
             handler () {
-                this.rootData = this.data
-                this.dataList = this.indexArrCreate()
-                // TODO 当选中不级联父级元素且级联子元素的时候，无法区分是原数据动态变化和操作引起的数据变化，所以如果有此配置的话，需要手动触发一次formatTreeData方法
-                if (!this.checkboxOptions.parent && this.checkboxOptions.children) return
-                this.formatTreeData()
+                this.rebuidData()
             }
         },
         defaultCheckedValues: {
             deep: true,
             handler () {
+                this.rebuidData()
                 this.defaultRebuild('checked')
             }
         },
@@ -144,8 +142,7 @@ export default {
         }
     },
     created () {
-        this.dataList = this.indexArrCreate()
-        this.formatTreeData()
+        this.rebuidData()
         this.defaultRebuild('checked')
         this.filterTreeData(this.filterText)
     },
@@ -167,6 +164,13 @@ export default {
         }
     },
     methods: {
+        rebuidData () {
+            this.rootData = deepCopy(this.data)
+            this.dataList = this.indexArrCreate()
+            // TODO 当选中不级联父级元素且级联子元素的时候，无法区分是原数据动态变化和操作引起的数据变化，所以如果有此配置的话，需要手动触发一次formatTreeData方法
+            if (!this.checkboxOptions.parent && this.checkboxOptions.children) return
+            this.formatTreeData()
+        },
         getCheckedNodes () {
             const checkedKey = this.defaultOpt.checkedKey
             return this.dataList.filter(obj => obj.node[checkedKey]).map(obj => obj.node)
@@ -205,12 +209,12 @@ export default {
             if (arr.length) {
                 if (type === 'checked') {
                     if (this.showCheckbox) {
-                        let nodeKeys = data.filter(item => arr.includes(item.node[idKey])).map(item => item.nodeKey)
+                        let nodeKeys = data.filter(item => arr.includes(item.node[idKey]) || arr.includes(String(item.node[idKey]))).map(item => item.nodeKey)
                         nodeKeys.forEach(item => {
                             this.handleCheck({checked: true, nodeKey: item, isFormat: true})
                         })
                     } else {
-                        let [node] = data.filter(item => (item.node[idKey] === arr[0]))
+                        let [node] = data.filter(item => (String(item.node[idKey]) === String(arr[0])))
                         this.handleSelect(node.nodeKey, true)
                     }
                 }
@@ -301,6 +305,7 @@ export default {
                 currentNode: node
             }
             options.checkedAndIndeterminateNodes = options.checkedNodes.concat(options.indeterminateNodes)
+            console.log(options, 'options')
             if (!isFormat) this.$emit('on-check', options)
         },
         // 展开/关闭
