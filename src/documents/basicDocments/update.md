@@ -1,5 +1,14 @@
 ### 更新日志
 
+### 0.6.9
+## `2019-05-20`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 SelectTree、Tree 文档优化
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.6.8
 ## `2019-05-20`
 <br>

@@ -405,11 +405,11 @@ export default {
             return !disabled && clearShow && (values.length || treeValues.length || (autoComplete && query !== ''))
         },
         showValue () {
-            const {multiple, values, treeValues} = this
+            const {multiple, values, treeValues, defaultOpt} = this
             if (multiple) {
                 return ''
             } else if (treeValues.length) {
-                return treeValues[0] ? treeValues[0].name : ''
+                return treeValues[0] ? treeValues[0][defaultOpt.nameKey] : ''
             } else {
                 return values[0] ? values[0].label : ''
             }
