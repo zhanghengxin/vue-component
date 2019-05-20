@@ -190,21 +190,18 @@ export default {
         data: {
             deep: true,
             handler () {
-                this.$nextTick(() => {
-                    this.getTreeValues()
-                })
+                this.getTreeValues()
             }
         },
         filterText () {
             if (this.autoFilter) this.treeFilterText = this.filterText
+        },
+        defaultValues: {
+            deep: true,
+            handler () {
+                this.getTreeValues()
+            }
         }
-        // ,
-        // defaultValues: {
-        //     deep: true,
-        //     handler () {
-        //         this.defaultRebuild()
-        //     }
-        // }
     },
     computed: {
         wrapSty () {
@@ -233,7 +230,7 @@ export default {
         }
     },
     mounted () {
-        if (this.showCheckbox) this.getTreeValues()
+        this.getTreeValues()
     },
     methods: {
         clickPopup () {
@@ -249,15 +246,7 @@ export default {
             this.popupVisible = false
         },
         allCheckClick (status) {
-            let changes
-            this.data.forEach((item) => {
-                changes = {
-                    checked: status,
-                    isFormat: true,
-                    nodeKey: item.nodeKey
-                }
-                this.$refs.tree.handleCheck(changes)
-            })
+            this.$refs.tree.allCheckedData(status)
             this.$emit('on-all-check', status)
         },
         handleCheck (options) {
@@ -283,31 +272,19 @@ export default {
         handleExpand (options) {
             this.$emit('on-expand', options)
         },
-        clearValues () {
-            const {data} = this
-            data.forEach((node) => {
-                this.downTraversal(node, {
-                    isSelectCancel: true,
-                    id: this.values[0].id
-                })
-            })
+        clearValues (type) {
+            if (type === 'select') {
+                this.$refs.tree.allCheckedData(false, type)
+            } else {
+                this.$refs.tree.allCheckedData(false)
+            }
+            this.values = []
             this.$emit('on-clear')
         },
         getTreeValues () {
-            this.values = this.showCheckbox ? this.$refs.tree.getCheckedNodes() : this.$refs.tree.getSelectedNodes()
-        },
-        downTraversal (node, options) {
-            const {defaultOpt} = this
-            const childrenKey = defaultOpt.childrenKey
-            const selectedKey = defaultOpt.selectedKey
-            if (options && options.isSelectCancel) {
-                if (node[defaultOpt.idKey] === options.id) this.$set(node, selectedKey, false)
-            }
-            if (node[childrenKey]) {
-                node[childrenKey].forEach(child => {
-                    this.downTraversal(child, options)
-                })
-            }
+            this.$nextTick(() => {
+                this.values = this.showCheckbox ? this.$refs.tree.getCheckedNodes() : this.$refs.tree.getSelectedNodes()
+            })
         },
         getDropWidth (width) {
             this.dropWidth = width

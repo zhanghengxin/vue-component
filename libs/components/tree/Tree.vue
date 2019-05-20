@@ -143,8 +143,10 @@ export default {
     },
     created () {
         this.rebuidData()
-        this.defaultRebuild('checked')
-        this.filterTreeData(this.filterText)
+        this.$nextTick(() => {
+            this.defaultRebuild('checked')
+            this.filterTreeData(this.filterText)
+        })
     },
     mounted () {
         this.$on('on-selected-change', this.handleSelect)
@@ -167,9 +169,29 @@ export default {
         rebuidData () {
             this.rootData = deepCopy(this.data)
             this.dataList = this.indexArrCreate()
-            // TODO 当选中不级联父级元素且级联子元素的时候，无法区分是原数据动态变化和操作引起的数据变化，所以如果有此配置的话，需要手动触发一次formatTreeData方法
             if (!this.checkboxOptions.parent && this.checkboxOptions.children) return
             this.formatTreeData()
+        },
+        allCheckedData (status, type) {
+            let changes = {}
+            if (type === 'select') {
+                this.clearSelectedState()
+                return
+            }
+            this.rootData.forEach((item) => {
+                changes = {
+                    checked: status,
+                    isFormat: true,
+                    nodeKey: item.nodeKey
+                }
+                this.handleCheck(changes)
+            })
+        },
+        clearSelectedState () {
+            let defaultOpt = this.defaultOpt
+            this.dataList.map(item => {
+                this.$set(item.node, defaultOpt.selectedKey, false)
+            })
         },
         getCheckedNodes () {
             const checkedKey = this.defaultOpt.checkedKey
@@ -305,7 +327,6 @@ export default {
                 currentNode: node
             }
             options.checkedAndIndeterminateNodes = options.checkedNodes.concat(options.indeterminateNodes)
-            console.log(options, 'options')
             if (!isFormat) this.$emit('on-check', options)
         },
         // 展开/关闭

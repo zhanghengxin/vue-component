@@ -486,6 +486,8 @@ Render 函数的第二个参数，包含三个字段：
 <div class="example">
     <div class="example-box">
         <div>
+            <b-button @on-click='clear' type="primary">primary</b-button>
+            <b-button @on-click='add' type="primary">primary</b-button>
             <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
             <b-checkbox v-model="checkCascade">包含下级</b-checkbox>
             <b-tree :default-checked-values='defaultCheckedValues' showCheckbox :check-cascade='checkCascade' :data='data7' :filter-text='filterText' :filter-method='filterMethod'></b-tree>

@@ -289,6 +289,8 @@
 <div class="example">
     <div class="example-box">
         <div>
+             <b-button @on-click='clear' type="primary">primary</b-button>
+                        <b-button @on-click='add' type="primary">primary</b-button>
            <b-select-tree :default-values='defaltValues' fixed label='复选'  width='250' :data='data6' show-checkbox></b-select-tree>
            <b-select-tree :default-values='selectValues' fixed label='单选'  width='250' :data='data7'></b-select-tree>
         </div>
@@ -443,18 +445,15 @@ export default {
                    children: [
                        {
                            name: 'parent1',
-                           checked:true,
                            expand: true,
                            id:2,
                            children: [
                                {
                                    id:3,
-                                   checked:true,
                                    name: 'leaf1'
                                },
                                {
                                    id:4,
-                                   checked:true,
                                    name: 'leaf2'
                                }
                            ]
@@ -629,6 +628,12 @@ export default {
         handleChange (status){
             this.checkboxOptions.parent = status
             this.checkboxOptions.children = status
+        },
+        clear(){
+             this.selectValues=[]
+        },
+        add(){
+             this.selectValues=[3]
         }
     }
 }

@@ -1,69 +1,69 @@
 <template>
-   <div :class='[boxClasses]'
-        :style='selectBoxStyles'
-        v-click-outside="clickOutside"
-        >
-    <div :class='selectGroupClasses'>
-        <div v-if='label'
-             :class='[prefixCls+`-label`]'
-             :style='labelStyles'
-        >{{label}}
-        </div>
-        <div
-            ref="reference"
-            :class="classes"
-            :style='[selectWidth]'
-            :tabindex="tabindex"
-            @blur="toggleHeaderFocus"
-            @focus="toggleHeaderFocus"
-            @click="toggleMenu"
-            @mouseenter="clearShow = clearable && true"
-            @mouseleave="clearShow = clearable && false">
-            <input type="hidden" :name="name" :value="publicValue">
-            <div :class='[`${prefixCls}-main-flex`]' :style='[selectWidth]'>
-                <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
-                <template v-if='multiple'>
-                    <div
-                        v-for="item in multipleValues"
-                        :key='item.value'
-                        :class="[prefixCls+`-tag`]">
-                        <span v-text="showMultipleValues(item)"></span>
-                        <Icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu'
-                                @click.native.stop='removeTag(item)'></Icon>
-                    </div>
-                </template>
-                <input
-                    type="text"
-                    v-if="filterabled"
-                    v-show='inputShow'
-                    v-model="query"
-                    :disabled="disabled"
-                    :class="[prefixCls + '-input']"
-                    :placeholder="localePlaceholder"
-                    :style="inputStyle"
-                    autocomplete="off"
-                    spellcheck="false"
-                    @blur='onInputBlur'
-                    @keydown.exact="slideDropAndSetInput"
-                    @focus="onInputFocus"
-                    @keydown.delete="handleInputDelete"
-                />
+    <div :class='[boxClasses]'
+         :style='selectBoxStyles'
+         v-click-outside="clickOutside"
+    >
+        <div :class='selectGroupClasses'>
+            <div v-if='label'
+                 :class='[prefixCls+`-label`]'
+                 :style='labelStyles'
+            >{{label}}
             </div>
-            <Icon
-                type='xia'
-                v-if='!disabled && !autoComplete'
-                v-show='iconShow'
-                :class="[prefixCls+`-arrow`]">
-            </Icon>
-            <Icon
-                type='shibai-mian'
-                v-if='clearable && showMultipleIcon'
-                v-show='closeIcon'
-                :class="[prefixCls+`-arrow`]"
-                @click.native.stop='clearValues'>
-            </Icon>
+            <div
+                ref="reference"
+                :class="classes"
+                :style='[selectWidth]'
+                :tabindex="tabindex"
+                @blur="toggleHeaderFocus"
+                @focus="toggleHeaderFocus"
+                @click="toggleMenu"
+                @mouseenter="clearShow = clearable && true"
+                @mouseleave="clearShow = clearable && false">
+                <input type="hidden" :name="name" :value="publicValue">
+                <div :class='[`${prefixCls}-main-flex`]' :style='[selectWidth]'>
+                    <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
+                    <template v-if='multiple'>
+                        <div
+                            v-for="item in multipleValues"
+                            :key='item.value'
+                            :class="[prefixCls+`-tag`]">
+                            <span v-text="showMultipleValues(item)"></span>
+                            <Icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu'
+                                  @click.native.stop='removeTag(item)'></Icon>
+                        </div>
+                    </template>
+                    <input
+                        type="text"
+                        v-if="filterabled"
+                        v-show='inputShow'
+                        v-model="query"
+                        :disabled="disabled"
+                        :class="[prefixCls + '-input']"
+                        :placeholder="localePlaceholder"
+                        :style="inputStyle"
+                        autocomplete="off"
+                        spellcheck="false"
+                        @blur='onInputBlur'
+                        @keydown.exact="slideDropAndSetInput"
+                        @focus="onInputFocus"
+                        @keydown.delete="handleInputDelete"
+                    />
+                </div>
+                <Icon
+                    type='xia'
+                    v-if='!disabled && !autoComplete'
+                    v-show='iconShow'
+                    :class="[prefixCls+`-arrow`]">
+                </Icon>
+                <Icon
+                    type='shibai-mian'
+                    v-if='clearable'
+                    v-show='closeIcon'
+                    :class="[prefixCls+`-arrow`]"
+                    @click.native.stop='clearValues'>
+                </Icon>
+            </div>
         </div>
-    </div>
         <slot name='tree'>
             <transition name='slide'>
                 <Drop
@@ -305,7 +305,7 @@ export default {
                 `${prefixCls}-main-content`,
                 {
                     [`${prefixCls}-main-placeholder`]: this.localePlaceholder && (!this.showValue || this.multiple),
-                     [`${prefixCls}-filterabled`]: !this.filterabled && this.multiple
+                    [`${prefixCls}-filterabled`]: !this.filterabled && this.multiple
                 }
             ]
         },
@@ -609,7 +609,7 @@ export default {
         clearValues () {
             this.values = []
             this.query = ''
-            this.$emit('on-clear')
+            this.$emit('on-clear', 'select')
         },
         slideDropAndSetInput () {
             this.show = true
@@ -679,7 +679,7 @@ export default {
         },
         query () {
             const {filterabled, remoteFn, query, autoComplete} = this
-             if (autoComplete && this.query === '') {
+            if (autoComplete && this.query === '') {
                 this.values = []
             }
             if ((filterabled && remoteFn && query !== '') || autoComplete) {
