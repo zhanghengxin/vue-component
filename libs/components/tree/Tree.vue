@@ -58,6 +58,12 @@ export default {
         },
         filterText (value) {
             this.filterTreeData(value)
+        },
+        rootData: {
+            deep: true,
+            handler () {
+                this.$emit('data-change', deepCopy(this.rootData))
+            }
         }
     },
     props: {

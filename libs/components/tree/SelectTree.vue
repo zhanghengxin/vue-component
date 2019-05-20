@@ -48,6 +48,7 @@
                         :default-checked-values="defaultValues"
                         :draggable='draggable'
                         :accordion='accordion'
+                        @data-change="dateChange"
                         :loading='loading'
                         :show-checkbox="showCheckbox"
                         :load-method="loadMethod"
@@ -91,6 +92,8 @@ export default {
             values: [],
             dropWidth: '',
             options: [],
+            allCheckText: '',
+            showAllcheckbox: false,
             popupVisible: false
         }
     },
@@ -213,26 +216,25 @@ export default {
             return {
                 [prefix + 'drop-transfer']: this.transfer
             }
-        },
-        allCheckText () {
-            let status = true
-            this.data.forEach((item) => {
-                if (!item[this.defaultOpt.checkedKey]) status = false
-            })
-            return status ? '取消全选' : '全选'
-        },
-        showAllcheckbox () {
-            let status = true
-            this.data.forEach((item) => {
-                if (item.invisible) status = false
-            })
-            return this.showAllcheck && this.showCheckbox && status
         }
     },
     mounted () {
         this.getTreeValues()
+        this.dateChange(this.data)
     },
     methods: {
+        dateChange (data) {
+            let status = true
+            data.forEach((item) => {
+                if (!item[this.defaultOpt.checkedKey]) status = false
+            })
+            this.allCheckText = status ? '取消全选' : '全选'
+            let showStatus = true
+            data.forEach((item) => {
+                if (item.invisible) showStatus = false
+            })
+            this.showAllcheckbox = this.showAllcheck && this.showCheckbox && showStatus
+        },
         clickPopup () {
             this.popupVisible = !this.popupVisible
         },
