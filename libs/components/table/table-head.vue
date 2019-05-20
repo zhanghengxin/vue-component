@@ -122,6 +122,7 @@ export default {
     props: {
         columns: Array,
         columnRows: Array,
+        cloneColumns: Array,
         fixedColumnRows: Array,
         fixed: String,
         preCls: String,
@@ -164,12 +165,14 @@ export default {
             return status
         },
         groupRows () {
-            const isGroup = this.columnRows && this.columnRows.length > 1
-            if (isGroup) {
+            if (this.isGroup) {
                 return this.fixed ? this.fixedColumnRows : this.columnRows
             } else {
                 return [this.visibleColumns]
             }
+        },
+        isGroup () {
+            return this.columnRows && this.columnRows.length > 1
         }
     },
     methods: {
@@ -246,7 +249,7 @@ export default {
             if (!this.isResizing) return
             this.isResizing = true
             if (!this.getColumn(rowindex, _index)) return
-            let index = this.getColumn(rowindex, _index)._index
+            let index = this.isGroup ? this.getColumn(rowindex, _index)._index : _index
             const table = findComponentUpward(this, this.preCls).$el
             const cellMinWidth = 80
             // document.onselectstart = function () { return false }
@@ -256,7 +259,8 @@ export default {
                 target = target.parentNode
             }
             let startX = e.pageX
-            let columns = this.columns
+            let columns = this.fixed ? this.cloneColumns : this.visibleColumns
+            // let columns = this.fixed ? this.cloneColumns : this.columns
             let columnsWidth = columns[index]._width
             let x = table.getBoundingClientRect().left
             let tableWidth = table.getBoundingClientRect().width
@@ -294,6 +298,7 @@ export default {
                     deltaX: deltaX,
                     index: columns[index]._index
                 })
+                console.log(columns, 'columns[index]')
                 document.removeEventListener('mousemove', handleMouseMove)
                 document.removeEventListener('mouseup', handleMouseUp)
                 document.removeEventListener('mousedown', handleMouseDown)
@@ -309,7 +314,7 @@ export default {
                 // the content has to be '' so dragging a node out of the tree won't open a new tab in FireFox
                 event.dataTransfer.setData('text/plain', '')
             } catch (e) {}
-            this.dispatch(this.preCls, 'drag-start', this.columns[index]._index)
+            this.dispatch(this.preCls, 'drag-start', this.visibleColumns[index]._index)
         },
         handleDragOver (event) {
             if (!this.draggable || this.columnRows.length > 1) return false
@@ -333,10 +338,10 @@ export default {
         },
         handleDrop (event, index) {
             if (!this.draggable || this.columnRows.length > 1) return false
-            this.dispatch(this.preCls, 'drag-drop', this.columns[index]._index)
+            this.dispatch(this.preCls, 'drag-drop', this.visibleColumns[index]._index)
         },
         rightClick (event) {
-            if (event.button === 2) {
+            if (event.button === 2 && !this.isGroup) {
                 const oncontextmenu = (event) => {
                     preventDefault(event)
                     document.removeEventListener('contextmenu', oncontextmenu)

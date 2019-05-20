@@ -376,6 +376,61 @@
 :::
 </div>
 
+### 禁用状态
+设置 `disabled`修改禁用状态
+
+<div class="example">
+    <div class="example-box">
+        <div>
+           <b-select-tree disabled label='复选'  width='250' :data='data6'></b-select-tree>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+         <b-select-tree disabled label='复选'  width='250' :data='data6'></b-select-tree>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    data6:[
+                       {
+                           name: 'root',
+                           expand: true,
+                           id:1,
+                           children: [
+                               {
+                                   name: 'parent1',
+                                   id:2,
+                                   expand: true,
+                                   children: [
+                                       {
+                                           id:3,
+                                           name: 'leaf1'
+                                       },
+                                       {
+                                           id:4,
+                                           name: 'leaf2'
+                                       },
+                                       {
+                                           id:5,
+                                           name: 'leaf3'
+                                       }
+                                   ]
+                               }
+                           ]
+                        }
+                    ]
+                }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
 <script>
 export default {
     data () {
@@ -594,6 +649,7 @@ export default {
 | auto-filter     |  是否开启组件的自动检索模式   | 	Boolean    |   -  |     false  |
 | defaultOpt     | 各种选中效果的配置项，具体配置见下文   | 	Object    |  -  |   -    |
 | draggable     |  是否开启节点拖拽编辑 | 	Boolean    |  -  |    fasle    |
+| disabled     |   是否禁用 | 	Boolean    |  -  |    fasle    |
 | clearable     |  是否开启清除数据【只有单选模式生效】 | 	Boolean    |  -  |    true    |
 | label      | 设置说明文字 	| String，Number | - |  -  |
 | fixed      | 搭配文字的两种样式类型	| Boolean | - |   false  |
@@ -640,9 +696,8 @@ export default {
 ### events
 | 方法名	      | 说明	    | 参数 |
 |---------- |-------- |---------- |
-| on-select     |  当选中节点时触发   |  options  |
-| on-check     |  当勾选/取消节点时触发   |  options  |
-| on-expand     |  当展开/收起节点时触发   |  options  |
 | on-all-check     |  点击全选时触发   |   status  |
 | on-clear     |  清除数据时触发   |   -  |
-
+| on-select     |  当选中节点时触发   |  options【Object】 : <br> `data`:  当前选中的数据<br> `getSelectedNodes`:  当前选中的数据集合<br> |
+| on-check     |  当勾选/取消节点时触发   |  options【Object】 : <br> `checkedNodes`:  当前选中的数据<br> `indeterminateNodes`:  当前半选节点集合<br>`checkedNodes`:  当前选中节点集合 |
+| on-expand     |  当展开/收起节点时触发   |  options【Object】 : <br> `data`:  当前选中的数据 |

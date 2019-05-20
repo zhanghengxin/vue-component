@@ -478,80 +478,76 @@ Render 函数的第二个参数，包含三个字段：
 :::
 </div>
 
-### 模糊检索
-在需要对节点进行过滤时，传入`filterText`关键字进行过滤，同时也需要设置`filter-method`作为过滤函数。
+### 综合应用
+在需要对节点进行过滤时，传入`filterText`关键字进行过滤，同时也需要设置`filter-method`作为过滤函数。<br>
+通过`default-expanded-values` 默认选中的节点。<br>
+通过`check-cascade` 控制树形数据的级联效果。
+
 <div class="example">
     <div class="example-box">
         <div>
-            <b-input v-model='filterText'></b-input>
-            <b-tree :data='data4' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
+            <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
+            <b-checkbox v-model="checkCascade">包含下级</b-checkbox>
+            <b-tree :default-checked-values='defaultCheckedValues' showCheckbox :check-cascade='checkCascade' :data='data7' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-input v-model='filterText'></b-input>
-        <b-tree :data='data4' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
+        <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
+        <b-checkbox v-model="checkCascade">包含下级</b-checkbox>
+        <b-tree :default-checked-values='defaultCheckedValues' showCheckbox :check-cascade='checkCascade' :data='data7' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
     </div>
     <script>
         export default {
             data () {
                 return {
-                    data4:[
-                       {
-                           name: 'parent 1',
+                    data7:[
+                        {
+                            name: 'parent-0',
+                            id:1
+                        },
+                        {
+                           name: 'parent-1',
                            expand: true,
+                           id:2,
                            children: [
                                {
                                    name: 'parent 1-1',
+                                   expand: true,
+                                   id:3,
                                    children: [
                                        {
+                                           id:4,
                                            name: 'leaf 1-1-1'
                                        },
                                        {
+                                           id:5,
                                            name: 'leaf 1-1-2'
                                        }
                                    ]
                                },
                                {
                                    name: 'parent 1-2',
+                                   id:6,
+                                   expand: true,
                                    children: [
                                        {
+                                           id:7,
                                            name: 'leaf 1-2-1'
                                        },
                                        {
-                                           name: 'leaf 1-2-2',
-                                           children: [
-                                              {
-                                                  name: 'parent 1-2-2-1',
-                                                  children: [
-                                                      {
-                                                          name: 'leaf 1-2-2-1-1'
-                                                      },
-                                                      {
-                                                          name: 'leaf 1-2-2-1-2'
-                                                      }
-                                                  ]
-                                              },
-                                              {
-                                                  name: 'parent 1-2-2-1',
-                                                  children: [
-                                                      {
-                                                          name: 'leaf 1-2-2-1-1'
-                                                      },
-                                                      {
-                                                          name: 'leaf 1-2-2-1-2'
-                                                      }
-                                                  ]
-                                              }
-                                          ]
+                                           id:8,
+                                           name: 'leaf 1-2-1'
                                        }
                                    ]
                                }
                            ]
                        }
-                    ]
+                    ],
+                    checkCascade:true,
+                    defaultCheckedValues:[4,7]
                 }
             },
             methods: {
@@ -569,6 +565,8 @@ Render 函数的第二个参数，包含三个字段：
 export default {
     data () {
         return {
+            checkCascade:true,
+            defaultCheckedValues:[4,7],
             data1:[
                {
                    name: 'parent 1',
@@ -818,30 +816,41 @@ export default {
                }
             ],
             data7:[
-               {
-                   name: 'parent 1',
+                {
+                    name: 'parent-0',
+                    id:1
+                },
+                {
+                   name: 'parent-1',
                    expand: true,
+                   id:2,
                    children: [
                        {
                            name: 'parent 1-1',
                            expand: true,
+                           id:3,
                            children: [
                                {
+                                   id:4,
                                    name: 'leaf 1-1-1'
                                },
                                {
+                                   id:5,
                                    name: 'leaf 1-1-2'
                                }
                            ]
                        },
                        {
                            name: 'parent 1-2',
+                           id:6,
                            expand: true,
                            children: [
                                {
+                                   id:7,
                                    name: 'leaf 1-2-1'
                                },
                                {
+                                   id:8,
                                    name: 'leaf 1-2-1'
                                }
                            ]
@@ -856,7 +865,7 @@ export default {
                 parent: true, // 是否影响父级节点
                 children: true // 是否影响子级节点
             },
-            filterText:'1-1'
+            filterText:''
         }
     },
     methods: {
@@ -936,29 +945,37 @@ export default {
 }
 </script>
 
-### props
+### Tree props
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | data     |  可嵌套的节点属性的数组，标准 tree 数据  | Array  |  -    |    []   |
 | accordion     |  是否支持手风琴效果   |  Boolean    |  -|     false  |
-| accordionOptions     | 手风琴配置项，具体配置见下文   | Object    |  -  |     -  |
+| accordion-options     | 手风琴配置项，具体配置见下文   | Object    |  -  |     -  |
 | show-checkbox     | 是否显示多选框	   | Boolean    |  -  |     false  |
-| checkboxOptions     |  多选配置项，具体配置见下文 | Object    |  -  |     -  |
+| checkbox-options     |  多选配置项，具体配置见下文 | Object    |  -  |     -  |
 | loading     | 是否开启懒加载   | Boolean    |  -  |     false  |
 | load-method     |  异步加载数据的方法，详见例子 | Function    |  -  |     -  |
 | filter-text     |  模糊搜索的关键字 |  String \ Number    |  -  |     ''  |
 | filter-method     |  模糊检索的自定义函数   | 	string    |   -  |     -  |
-| defaultOpt     | 各种选中效果的配置项，具体配置见下文   | 	Object    |  -  |   -    |
+| default-opt     | 各种选中效果的配置项，具体配置见下文   | 	Object    |  -  |   -    |
 | draggable     |  是否开启节点拖拽编辑 | 	Boolean    |  -  |    fasle    |
+| check-cascade     |  是否开启父子级联效果 | 	Boolean    |  -  |     true    |
 | render     |  自定义渲染内容，见示例	 | 	Function    |  -  |    -    |
-| className      | 给 item-name 附加的 class	| String | - |   -  |
+| class-name      | 给 item-name 附加的 class	| String | - |   -  |
 | width | 开启 `label` 模式时生效,自定义宽度	| Number |	-   |     -   |
 | placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
-| labelWidth | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
-| transfer     |  是否将弹层放置于 body 内，在 Tabs、带有 fixed 的 Table 列内使用时，建议添加此属性，它将不受父级样式影响，从而达到更好的效果 | Boolean    |  -  |     false  |
+| label-width | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
 
 
-### children
+### Tree methods
+| 方法名		      | 说明	    | 参数 |
+|---------- |-------- |---------- |
+| getCheckedNodes   |  获取被勾选的节点集合	   | - |
+| getSelectedNodes   |  获取被选中的节点	集合	   | - |
+| getIndeterminateNodes   |  获取半选状态节点集合	   | - |
+
+
+### data props
 | 属性      | 说明    | 类型      | 默认值       |
 |---------- |-------- |---------- |-------------  |-------- |
 | children     |  子节点属性  |  Array  |  -    |
@@ -969,22 +986,23 @@ export default {
 | draggable     |  是否开拖拽状态  |  Boolean  |  -   |
 | render     |  自定义渲染内容	 | 	Function    |  -  |
 
-### defaultOpt
+### defaultOpt props
 | 属性      | 说明    | 类型      | 默认值       |
 |---------- |-------- |---------- |-------------  |-------- |
 | childrenKey     |  子节点属性配置项Key值  |  String  |  children    |
 | nameKey     |  显示文本配置项Key值  |  String  |  name    |
+| idKey     |  数据的唯一标识字段  |  String  |   id    |
 | disabledKey     |  失效属性配置项Key值  |  String  |  disabled    |
 | checkedKey     |  勾选属性配置项Key值  |  String  |  checked    |
 | expandKey     |  展开属性配置项Key值  |  String  |  expand   |
 | selectedKey     |  选中属性配置项Key值  |  String  |  selected   |
 
-### accordionOptions
+### accordionOptions props
 | 属性      | 说明    | 类型      | 默认值       |
 |---------- |-------- |---------- |-------------  |
 | isCache      |  是否缓存其他同级节点的展开状态  |  Boolean  |  true    |
 
-### checkboxOptions
+### checkboxOptions props
 | 属性      | 说明    | 类型      | 默认值       |
 |---------- |-------- |---------- |-------------  |
 | parent      |   勾选时是否级联父级节点 |  Boolean  |  true    |
@@ -993,7 +1011,7 @@ export default {
 ### events
 | 方法名	      | 说明	    | 参数 |
 |---------- |-------- |---------- |
-| on-select     |  当选中节点时触发   |  options  |
-| on-check     |  当勾选/取消节点时触发   |  options  |
-| on-expand     |  当展开/收起节点时触发   |  options  |
+| on-select     |  当选中节点时触发   |  options【Object】 : <br> `data`:  当前选中的数据<br> `getSelectedNodes`:  当前选中的数据集合<br> |
+| on-check     |  当勾选/取消节点时触发   |  options【Object】 : <br> `checkedNodes`:  当前全选节点集合<br> `indeterminateNodes`:  当前半选节点集合<br>`checkedAndIndeterminateNodes`:  当前半选节点和全选节点合集<br>`currentNode`:  当前选中节点 |
+| on-expand     |  当展开/收起节点时触发   |  options【Object】 : <br> `data`:  当前选中的数据 |
 

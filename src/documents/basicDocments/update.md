@@ -1,4 +1,65 @@
 ### 更新日志
+
+### 0.6.7
+## `2019-05-17`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 Tree 解决模糊检索顶点特殊处理以及综合应用文档更新
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Tree 修复单选多次触发的问题
+    </b-timeline-item>
+</b-timeline>
+
+### 0.6.6
+## `2019-05-16`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 SelectTree on-check 多次触发问题
+    </b-timeline-item>
+</b-timeline>
+
+### 0.6.5
+## `2019-05-15`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 table 支持clearCurrentRowAPI 以及on-current-change事件
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 tree 的模糊检索 bug 修复，API完善
+    </b-timeline-item>
+</b-timeline>
+
+### 0.6.4
+## `2019-05-15`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 table-width 支持字符串、拖拽和调整列宽支持显示隐藏列模式
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 menu的样式部分优化
+    </b-timeline-item>
+</b-timeline>
+
+### 0.6.3
+## `2019-05-13`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    修复 Table悬浮列不能正常拖拽的 bug
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 添加color-picker、cascader、tree、menu的动画效果、修改autocomplete的padding
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 提交menu的样式调整，横向的menu的border取消添加
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.6.2
 ## `2019-05-10`
 <br>

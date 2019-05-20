@@ -515,7 +515,7 @@ export default {
             let cloneColumns = isDynamicColumns ? this.dynamicColumns : this.cloneColumns
             return cloneColumns.map(cell => {
                 if (cell._visible) {
-                    return cell._width
+                    return parseInt(cell._width)
                 } else {
                     return 0
                 }
@@ -720,21 +720,33 @@ export default {
             if (!this.formatData[_index]._isHover) return
             this.$set(this.formatData[_index], '_isHover', false)
         },
-        handleCurrentRow (_index) {
-            this.formatData.forEach((item, index) => {
-                this.$set(this.formatData[index], '_isHighlight', false)
-            })
-            this.$set(this.formatData[_index], '_isHighlight', true)
+        handleCurrentRow (type, _index) {
+            // 通用处理 highlightCurrentRow 和 clearCurrentRow
+            let oldIndex = -1
+            for (let i in this.formatData) {
+                if (this.formatData[i]._isHighlight) {
+                    oldIndex = parseInt(i)
+                    this.$set(this.formatData[i], '_isHighlight', false)
+                }
+            }
+            if (type === 'highlight') this.$set(this.formatData[_index], '_isHighlight', true)
+            const oldData = oldIndex < 0 ? null : deepCopy(this.formatData[oldIndex])
+            const newData = type === 'highlight' ? deepCopy(this.formatData[_index]) : null
+            this.$emit('on-current-change', newData, oldData)
         },
         handleClick (_index) {
             this.$emit('on-row-click', deepCopy(this.data[this.formatData[_index]._index]))
             if (!this.highlightRow) return
-            this.handleCurrentRow(_index)
+            this.handleCurrentRow('highlight', _index)
         },
         handleDbclick (_index) {
             this.$emit('on-row-dbclick', deepCopy(this.data[this.formatData[_index]._index]))
             if (!this.highlightRow) return
-            this.handleCurrentRow(_index)
+            this.handleCurrentRow('highlight', _index)
+        },
+        clearCurrentRow () {
+            if (!this.highlightRow) return
+            this.handleCurrentRow('clear')
         },
         handleMouse (options) {
             let tableWidth = this.$el.offsetWidth
@@ -835,6 +847,7 @@ export default {
                     this.$set(cloneColumns[index], '_visible', status)
                 }
             }
+            this.handleResize()
         },
         // filter
         handleFilterReset (_index) {

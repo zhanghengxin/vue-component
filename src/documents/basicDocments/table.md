@@ -1479,7 +1479,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-table dynamicable border width=1000 :columns='columns3' :data='data3'></b-table>
+            <b-table dynamicable  border width=1000 :columns='columns3' :data='data3'></b-table>
             <br/>
             <b-table dynamicable border width=1000 :columns='columns2' :data='data2'></b-table>
             <br/>
@@ -3994,6 +3994,7 @@ column 设置 children，可以渲染出多级表头<br/>
 | on-selection-all-cancel     |  当全部取消数据时触发   |  -  |
 | on-row-click     |  当选中节点时触发   |  `row`: 当前选中的数据  |
 | on-row-dbclick     |  当选中节点时触发   |  `row`: 当前选中的数据  |
+| on-current-change     开启 `highlight-row` 后有效，当表格的当前行发生变化的时候会触发|  当选中节点时触发   |  `currentRow`: 当前高亮行的数据 <br> `oldCurrentRow`: 上一次高亮的数据  |
 | on-sort-change     |  当选中节点时触发   |  `column`: 当前列数据 <br> `key`: 排序依据的指标 <br> `order`: 排序的顺序，值为 asc 或 desc|
 | on-filter-change	    |  筛选条件发生变化时触发	   |  当前列数据 |
 | on-expand-change	    |  扩展状态改变时触发	   |  `row`: 当前扩展的数据<br> `status`: 展开状态 |

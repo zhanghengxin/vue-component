@@ -1,6 +1,7 @@
 <template>
-    <collapse-transition :appear="appear">
+    <transition name="slide">
         <ul
+            v-show="!data.invisible"
             :class="wrapCls"
             @dragstart.stop="handleDragStart"
             @dragover.stop="handleDragOver"
@@ -36,14 +37,13 @@
                 </template>
             </li>
         </ul>
-    </collapse-transition>
+    </transition>
 </template>
 <script>
 import { findComponentUpwards, findComponentUpward } from '../../utils/assist'
 import Render from './render'
 import Checkbox from '../checkbox/Checkbox.vue'
 import Icon from '../icon/Icon.vue'
-import CollapseTransition from '../base/collapse-transition'
 import { prefix } from '../../utils/common'
 import Emitter from '../../mixins/emitter'
 
@@ -51,7 +51,7 @@ const prefixCls = prefix + 'tree'
 
 export default {
     name: 'tree-node',
-    components: {Checkbox, Icon, Render, CollapseTransition},
+    components: {Checkbox, Icon, Render},
     mixins: [Emitter],
     props: {
         data: {

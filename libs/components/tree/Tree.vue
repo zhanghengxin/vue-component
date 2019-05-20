@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { prefix } from '../../utils/common'
+import { prefix, propsInit } from '../../utils/common'
 import TreeNode from './Node.vue'
 import Emitter from '../../mixins/emitter'
 import clickOutside from '../../utils/directives/clickOutside'
@@ -52,6 +52,12 @@ export default {
                 this.formatTreeData()
             }
         },
+        defaultCheckedValues: {
+            deep: true,
+            handler () {
+                this.defaultRebuild('checked')
+            }
+        },
         filterText (value) {
             this.filterTreeData(value)
         }
@@ -60,22 +66,13 @@ export default {
         className: {
             type: String
         },
-        data: {
-            type: Array,
-            default () {
-                return []
-            }
-        },
-        showCheckbox: {
-            type: Boolean,
-            default: false
-        },
         defaultOpt: {
             type: Object,
             default () {
                 return {
                     childrenKey: 'children',
                     nameKey: 'name',
+                    idKey: 'id',
                     disabledKey: 'disabled',
                     checkedKey: 'checked',
                     expandKey: 'expand',
@@ -83,10 +80,6 @@ export default {
                     indeterminateKey: 'indeterminate'
                 }
             }
-        },
-        accordion: {
-            type: Boolean,
-            default: false
         },
         checkboxOptions: { // 多选级联配置
             type: Object,
@@ -105,14 +98,6 @@ export default {
                 }
             }
         },
-        loading: {
-            type: Boolean,
-            default: false
-        },
-        draggable: {
-            type: Boolean,
-            default: false
-        },
         filterMethod: {
             type: Function,
             default (value, data) {
@@ -123,16 +108,46 @@ export default {
             type: Function
         },
         filterText: {
-            type: [String, Number]
+            type: [String, Number],
+            default: ''
         },
+        ...propsInit({
+            // draggable 开启拖拽模式
+            // loading 开启懒加载模式
+            // accordion 开启手风琴模式
+            // showCheckbox 开启多选模式
+            props: ['draggable', 'loading', 'accordion', 'showCheckbox'],
+            config: {
+                type: Boolean,
+                default: false
+            }
+        }),
+        ...propsInit({
+            // defaultCheckedValues 默认选中集合【多选】
+            // defaultExpandedValues 默认展现集合
+            // data  树形数据
+            props: ['defaultCheckedValues', 'defaultExpandedValues', 'data'],
+            config: {
+                type: Array,
+                default () {
+                    return []
+                }
+            }
+        }),
         render: {
             type: [Function, Boolean],
             default: false
+        },
+        checkCascade: {
+            type: Boolean,
+            default: true
         }
     },
     created () {
         this.dataList = this.indexArrCreate()
         this.formatTreeData()
+        this.defaultRebuild('checked')
+        this.filterTreeData(this.filterText)
     },
     mounted () {
         this.$on('on-selected-change', this.handleSelect)
@@ -173,15 +188,33 @@ export default {
             let dataList = this.dataList
             const checkedNodes = this.getCheckedNodes()
             checkedNodes.forEach(node => {
-                if (this.checkboxOptions.children) this.downTraversal(node, {[`${defaultOpt.checkedKey}`]: true})
+                if (this.checkboxOptions.children && this.checkCascade) this.downTraversal(node, {[`${defaultOpt.checkedKey}`]: true})
                 const parentKey = dataList[node.nodeKey].parent
                 if (!parentKey && parentKey !== 0) return
                 const parent = dataList[parentKey].node
                 const childHasCheckSetter = typeof node[defaultOpt.checked] !== 'undefined' && node[defaultOpt.checked]
                 if (childHasCheckSetter && parent[defaultOpt.checked] !== node[defaultOpt.checked]) {
-                    if (this.checkboxOptions.parent) this.upwardTraversal(node.nodeKey)
+                    if (this.checkboxOptions.parent && this.checkCascade) this.upwardTraversal(node.nodeKey)
                 }
             })
+        },
+        defaultRebuild (type) {
+            let {idKey} = this.defaultOpt
+            let arr = type === 'checked' ? this.defaultCheckedValues : this.defaultExpandedValues
+            let data = this.dataList
+            if (arr.length) {
+                if (type === 'checked') {
+                    if (this.showCheckbox) {
+                        let nodeKeys = data.filter(item => arr.includes(item.node[idKey])).map(item => item.nodeKey)
+                        nodeKeys.forEach(item => {
+                            this.handleCheck({checked: true, nodeKey: item, isFormat: true})
+                        })
+                    } else {
+                        let [node] = data.filter(item => (item.node[idKey] === arr[0]))
+                        this.handleSelect(node.nodeKey, true)
+                    }
+                }
+            }
         },
         // 建立索引数组
         indexArrCreate () {
@@ -241,22 +274,22 @@ export default {
             }
         },
         // 单选
-        handleSelect (nodeKey) {
+        handleSelect (nodeKey, isFormat = false) {
             const selectedKey = this.defaultOpt.selectedKey
             const node = this.dataList[nodeKey].node
             const selectedIndex = this.dataList.findIndex(obj => obj.node.selected)
             if (selectedIndex >= 0 && selectedIndex !== nodeKey) this.$set(this.dataList[selectedIndex].node, selectedKey, false)
             this.$set(node, selectedKey, !node.selected)
-            this.$emit('on-select', {data: node, selectedNodes: this.getSelectedNodes()})
+            if (!isFormat) this.$emit('on-select', {data: node, selectedNodes: this.getSelectedNodes()})
         },
         // 选中
-        handleCheck ({checked, nodeKey}) {
+        handleCheck ({checked, nodeKey, isFormat = false}) {
             const defaultOpt = this.defaultOpt
             const node = this.dataList[nodeKey].node
             this.$set(node, defaultOpt.checkedKey, checked)
             this.$set(node, defaultOpt.indeterminateKey, false)
-            if (this.checkboxOptions.parent) this.upwardTraversal(nodeKey)
-            if (this.checkboxOptions.children) {
+            if (this.checkboxOptions.parent && this.checkCascade) this.upwardTraversal(nodeKey)
+            if (this.checkboxOptions.children && this.checkCascade) {
                 this.downTraversal(node, {
                     [`${defaultOpt.checkedKey}`]: checked,
                     [`${defaultOpt.indeterminateKey}`]: false
@@ -268,7 +301,7 @@ export default {
                 currentNode: node
             }
             options.checkedAndIndeterminateNodes = options.checkedNodes.concat(options.indeterminateNodes)
-            this.$emit('on-check', options)
+            if (!isFormat) this.$emit('on-check', options)
         },
         // 展开/关闭
         handleExpand (options) {
@@ -305,13 +338,18 @@ export default {
         filterTreeData (value) {
             const defaultOpt = this.defaultOpt
             const _this = this
-            const cascadeParent = function (data) {
+            const cascadeParent = function (data, isRoot = false) {
                 let allHidden = true
                 const childNodes = data[defaultOpt.childrenKey] || []
                 childNodes.forEach((child) => {
                     if (!child.invisible) allHidden = false
                 })
-                _this.$set(data, 'invisible', allHidden)
+                if (isRoot) {
+                    _this.$set(data, 'invisible', !_this.filterMethod(value, data))
+                }
+                if (childNodes.length) {
+                    _this.$set(data, 'invisible', allHidden && !_this.filterMethod(value, data))
+                }
             }
             const traverseVisible = function (data) {
                 const childNodes = data[defaultOpt.childrenKey] || []
@@ -325,7 +363,7 @@ export default {
             }
             this.rootData.forEach(rootNode => {
                 traverseVisible(rootNode)
-                cascadeParent(rootNode)
+                cascadeParent(rootNode, true)
             })
         },
         handleDragStart (options) {

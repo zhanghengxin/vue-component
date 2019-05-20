@@ -159,14 +159,12 @@ export default {
         },
         updateTitleOffset () {
             const links = findComponentsDownward(this, `${prefixCls}-link`).map(link => link.href)
-            // console.log('links', links)
             const idArr = links.map(link => {
                 return link.split('#')[1]
             })
             let offsetArr = []
             idArr.forEach(id => {
                 const titleEle = document.getElementById(id)
-                // console.log('title ele', titleEle)
                 if (titleEle) {
                     offsetArr.push({
                         link: `#${id}`,
