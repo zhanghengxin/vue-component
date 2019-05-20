@@ -819,11 +819,9 @@ export default {
             let bottomOverflowDistance = optionInstance.$el.getBoundingClientRect().bottom - this.$refs.dropdown.$el.getBoundingClientRect().bottom
             let topOverflowDistance = optionInstance.$el.getBoundingClientRect().top - this.$refs.dropdown.$el.getBoundingClientRect().top
             if (bottomOverflowDistance > 0) {
-                console.log('bottomOverflowDistance', optionInstance.$el.getBoundingClientRect(), this.$refs.dropdown.$el.getBoundingClientRect())
                 this.$refs.dropdown.$el.scrollTop += bottomOverflowDistance
             }
             if (topOverflowDistance < 0) {
-                console.log('topOverflowDistance', optionInstance.$el.getBoundingClientRect().top, this.$refs.dropdown.$el.getBoundingClientRect().top)
                 this.$refs.dropdown.$el.scrollTop += topOverflowDistance
             }
         }
