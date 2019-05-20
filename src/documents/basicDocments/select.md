@@ -675,15 +675,17 @@ fixed为true时可设置通过width来设置整体select的宽度，labelWidth�
                 style='width:200px'
                 :options='options' >
             </b-select>
-            <b-select 
-                v-model="value05"  
-                label='发票类型'
-                :multiple='multiple'
-                :fixed='fixed'
-                width='280'
-                labelWidth='100'
-                :options='options' >
-            </b-select>
+            <div style='position:relative;'>
+                <b-select 
+                    v-model="value05"  
+                    label='发票类型'
+                    :multiple='multiple'
+                    :fixed='fixed'
+                    width='280'
+                    labelWidth='100'
+                    :options='options' >
+                </b-select>
+            </div>
             <br/>
             <br/>
             <b-select 
