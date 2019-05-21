@@ -179,18 +179,15 @@ export default {
             this.formatTreeData()
         },
         allCheckedData (status, type) {
-            let changes = {}
             if (type === 'select') {
                 this.clearSelectedState()
-                return
+            } else {
+                this.clearCheckedState(status)
             }
-            this.rootData.forEach((item) => {
-                changes = {
-                    checked: status,
-                    isFormat: true,
-                    nodeKey: item.nodeKey
-                }
-                this.handleCheck(changes)
+        },
+        clearCheckedState (status) {
+            this.dataList.forEach((item) => {
+                this.$set(item.node, this.defaultOpt.checkedKey, status)
             })
         },
         clearSelectedState () {
