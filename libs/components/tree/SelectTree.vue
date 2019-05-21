@@ -253,6 +253,7 @@ export default {
             this.getTreeValues()
         },
         handleCheck (options) {
+            console.log(options, 'options')
             this.values = options.checkedNodes
             this.$emit('on-check', options)
         },
@@ -286,7 +287,9 @@ export default {
         },
         getTreeValues () {
             this.$nextTick(() => {
-                this.values = this.showCheckbox ? this.$refs.tree.getCheckedNodes() : this.$refs.tree.getSelectedNodes()
+                if(this.$refs.tree){
+                    this.values = this.showCheckbox ? this.$refs.tree.getCheckedNodes() : this.$refs.tree.getSelectedNodes()
+                }
             })
         },
         getDropWidth (width) {
