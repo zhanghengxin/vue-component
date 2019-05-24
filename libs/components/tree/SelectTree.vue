@@ -253,7 +253,6 @@ export default {
             this.getTreeValues()
         },
         handleCheck (options) {
-            console.log(options, 'options')
             this.values = options.checkedNodes
             this.$emit('on-check', options)
         },
@@ -287,7 +286,7 @@ export default {
         },
         getTreeValues () {
             this.$nextTick(() => {
-                if(this.$refs.tree){
+                if (this.$refs.tree) {
                     this.values = this.showCheckbox ? this.$refs.tree.getCheckedNodes() : this.$refs.tree.getSelectedNodes()
                 }
             })

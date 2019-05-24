@@ -487,17 +487,17 @@ Render 函数的第二个参数，包含三个字段：
     <div class="example-box">
         <div>
             <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
-            <b-checkbox v-model="checkCascade">包含下级</b-checkbox>
-            <b-tree :default-checked-values='defaultCheckedValues' showCheckbox :check-cascade='checkCascade' :data='data7' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
+            <b-checkbox :value="checkCascade" @on-change='changeCascade'>包含下级</b-checkbox>
+            <b-tree :default-checked-values='defaultCheckedValues' showCheckbox :checkbox-options='dataOptions' :data='data7' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
-        <b-checkbox v-model="checkCascade">包含下级</b-checkbox>
-        <b-tree :default-checked-values='defaultCheckedValues' showCheckbox :check-cascade='checkCascade' :data='data7' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
+       <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
+       <b-checkbox :value="checkCascade" @on-change='changeCascade'>包含下级</b-checkbox>
+       <b-tree :default-checked-values='defaultCheckedValues' showCheckbox :checkbox-options='dataOptions' :data='data7' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
     </div>
     <script>
         export default {
@@ -547,12 +547,19 @@ Render 函数的第二个参数，包含三个字段：
                        }
                     ],
                     checkCascade:true,
+                    dataOptions: { // 多选级联配置
+                        parent: false, // 是否影响父级节点
+                        children: true // 是否影响子级节点
+                    },
                     defaultCheckedValues:[4,7]
                 }
             },
             methods: {
                 filterMethod(value, data){
                      return data.name.indexOf(value) !== -1
+                },
+                changeCascade(status){
+                    this.dataOptions.children = status
                 }
             }
         }
@@ -861,6 +868,10 @@ export default {
             accordionOptions: {
                 isCache: true // 是否缓存其他同级节点的展开状态
             },
+            dataOptions: { // 多选级联配置
+                parent: false, // 是否影响父级节点
+                children: true // 是否影响子级节点
+            },
             checkboxOptions: { // 多选级联配置
                 parent: true, // 是否影响父级节点
                 children: true // 是否影响子级节点
@@ -874,6 +885,9 @@ export default {
         },
         handleChecked (options){
             console.log(`选中获取的数据:`,options)
+        },
+        changeCascade(status){
+            this.dataOptions.children = status
         },
         filterMethod(value, data){
              return data.name.indexOf(value) !== -1

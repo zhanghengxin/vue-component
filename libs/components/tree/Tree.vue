@@ -175,7 +175,7 @@ export default {
         rebuidData () {
             this.rootData = deepCopy(this.data)
             this.dataList = this.indexArrCreate()
-            if (!this.checkboxOptions.parent && this.checkboxOptions.children) return
+            // if (!this.checkboxOptions.parent && this.checkboxOptions.children) return
             this.formatTreeData()
         },
         allCheckedData (status, type) {
