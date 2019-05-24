@@ -1,5 +1,14 @@
 ### 更新日志
 
+### 0.7.1
+## `2019-05-24`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 Tree 关于父子级联数据格式化的判断
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.7.0
 ## `2019-05-21`
 <br>
