@@ -735,11 +735,13 @@ export default {
             this.$emit('on-current-change', newData, oldData)
         },
         handleClick (_index) {
+            if (!this.formatData[_index]) return
             this.$emit('on-row-click', deepCopy(this.data[this.formatData[_index]._index]))
             if (!this.highlightRow) return
             this.handleCurrentRow('highlight', _index)
         },
         handleDbclick (_index) {
+            if (!this.formatData[_index]) return
             this.$emit('on-row-dbclick', deepCopy(this.data[this.formatData[_index]._index]))
             if (!this.highlightRow) return
             this.handleCurrentRow('highlight', _index)
