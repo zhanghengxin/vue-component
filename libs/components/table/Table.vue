@@ -286,7 +286,9 @@ export default {
         this.showSlotFooter = this.$slots.footer !== undefined
     },
     mounted () {
-        this.handleResize()
+        this.$nextTick(() => {
+            this.handleResize()
+        })
         this.dragBorderHeight = this.getDragBorderHeight()
         on(window, 'resize', this.handleResize)
         // If you don't click on the dynamicColumn, hide it.

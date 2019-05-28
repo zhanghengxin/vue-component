@@ -16,6 +16,7 @@
     "tinycolor2": "^1.4.1",
     "v-click-outside-x": "^4.0.2",
     "vue": "^2.6.0",
+    "vue-codemirror": "^4.0.6",
     "vue-loader": "^14.2.2",
     "vue-markdown-loader": "^2.4.1",
     "vue-router": "^3.0.1"

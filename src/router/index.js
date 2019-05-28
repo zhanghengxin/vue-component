@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import menuList from '../utils/menu.json'
+import onlineRun from '../components/onlineRun'
 
 Vue.use(Router)
 
@@ -29,6 +30,15 @@ let addRoute = (router) => {
     })
 }
 addRoute(routes)
+
+routes.push(
+    {
+        path: '/run',
+        components: {
+            run: onlineRun
+        }
+    }
+)
 export default new Router({
     routes: routes
 })

@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <div class="logo">
+        <div class="logo" @click="handleClick">
             <img src="../assets/logo.png">
             <span>百望 UI</span>
         </div>
@@ -22,6 +22,12 @@
             type="primary"
             @on-click="changeColor">
             一键换肤
+        </b-button>
+        <b-button
+            class="color-change"
+            type="success"
+            @on-click="inlineCode">
+            在线运行
         </b-button>
     </div>
 </template>
@@ -67,6 +73,12 @@ export default {
                 this.value = ''
             })
         },
+        handleClick () {
+            this.$router.push('/')
+        },
+        inlineCode () {
+            this.$router.push('/run')
+        },
         optionsInit (f, options) {
             f.map(item => {
                 if (item.items) {
@@ -103,6 +115,7 @@ export default {
     .header .logo {
         float: left;
         margin-left: 60px;
+        cursor: pointer;
     }
 
     .header .logo img {

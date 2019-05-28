@@ -1,7 +1,8 @@
 <template>
     <div id="app">
+        <router-view name="run"/>
         <main-header></main-header>
-        <div class="content clearfix" ref="content">
+        <div v-if="docShow" class="content clearfix" ref="content">
             <menu-nav class="nav"></menu-nav>
             <div class="nav-right" v-if="anchors.length">
                 <b-anchor affix show-ink>
@@ -30,11 +31,24 @@ export default {
     },
     data () {
         return {
-            anchors: []
+            anchors: [],
+            docShow: true
+        }
+    },
+    mounted () {
+        if (this.$route.path === '/run') {
+            this.docShow = false
+        } else {
+            this.docShow = true
         }
     },
     watch: {
-        '$route.path' () {
+        '$route.path' (value) {
+            if (value === '/run') {
+                this.docShow = false
+            } else {
+                this.docShow = true
+            }
             this.$nextTick(() => {
                 // 兼容 IE11 浏览器，将 NodeList 类似数组转成数组
                 let h3s = Array.prototype.slice.call(this.$refs.content.querySelectorAll('h3'))

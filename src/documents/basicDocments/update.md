@@ -1,5 +1,17 @@
 ### 更新日志
 
+### 0.7.2
+## `2019-05-28`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 bwUi 在线代码运行功能，方便重现问题和功能测试
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Table组件初始化宽度不正常问题修复
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.7.1
 ## `2019-05-24`
 <br>

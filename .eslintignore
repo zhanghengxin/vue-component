@@ -4,6 +4,8 @@
 /*.js
 /test/unit/coverage/
 /src/documents/
+/src/components/
+/src/codeMirror/
 /businessLibs/
 /src/assets/
 /node_modules/
