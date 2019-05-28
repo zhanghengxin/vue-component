@@ -138,7 +138,7 @@ export default {
         }
         .main {
             border: 1px solid $Border;
-            height: 1000px;
+            height: 800px;
         }
         .cm-tag {
             color: $LightPrimary;

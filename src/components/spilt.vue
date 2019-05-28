@@ -91,6 +91,7 @@ export default {
         .right-pane {
             right: 0;
             padding: 10px 10px 10px 16px;
+            overflow: auto;
         }
         .split-line {
             width: 6px;
