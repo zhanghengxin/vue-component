@@ -131,7 +131,7 @@
 <script>
 import { prefix } from '../../utils/common'
 import { deepCopy } from '../../utils/assist'
-import { getStyle, getScrollBarSize, on, containsElement } from '../../utils/dom'
+import { getStyle, getScrollBarSize, on, off, containsElement } from '../../utils/dom'
 import tableHead from './table-head'
 import tableBody from './table-body'
 import tableFixed from './table-fixed'
@@ -142,6 +142,7 @@ import CsvTable from '../../utils/csv'
 import Exports from './export'
 import Checkbox from '../checkbox'
 import Emitter from '../../mixins/emitter'
+import elementResizeDetectorMaker from 'element-resize-detector'
 import { getRandomStr, convertToRows, getAllColumns } from './utils'
 
 const preCls = prefix + 'table'
@@ -291,6 +292,8 @@ export default {
         })
         this.dragBorderHeight = this.getDragBorderHeight()
         on(window, 'resize', this.handleResize)
+        this.observer = elementResizeDetectorMaker()
+        this.observer.listenTo(this.$el, this.handleResize)
         // If you don't click on the dynamicColumn, hide it.
         const handleClick = (event) => {
             if (this.dynamicColumnBoxShow) {
@@ -300,6 +303,10 @@ export default {
             }
         }
         document.addEventListener('click', handleClick)
+    },
+    beforeDestroy () {
+        off(window, 'resize', this.handleResize)
+        this.observer.removeListener(this.$el, this.handleResize)
     },
     watch: {
         data: {
