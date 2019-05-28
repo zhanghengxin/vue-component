@@ -7,13 +7,11 @@ const charSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 function getSource (source, type) {
     const regex = new RegExp(`<${type}[^>]*>`)
     let openingTag = source.match(regex)
-    
     if (!openingTag) {
         return ''
     } else {
         openingTag = openingTag[0]
     }
-    
     return source.slice(
         source.indexOf(openingTag) + openingTag.length,
         source.lastIndexOf(`</${type}>`)
