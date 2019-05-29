@@ -298,7 +298,6 @@ export default {
                     deltaX: deltaX,
                     index: columns[index]._index
                 })
-                console.log(columns, 'columns[index]')
                 document.removeEventListener('mousemove', handleMouseMove)
                 document.removeEventListener('mouseup', handleMouseUp)
                 document.removeEventListener('mousedown', handleMouseDown)

@@ -172,7 +172,6 @@ export default {
                     })
                 }
             })
-            // console.log('offsetArr', offsetArr)
             this.titlesOffsetArr = offsetArr
         },
         getCurrentScrollAtTitleId (scrollTop) {

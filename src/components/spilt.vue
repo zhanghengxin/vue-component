@@ -46,7 +46,6 @@ export default {
             this.$refs.line.style = `left:${leftWidth}`
         },
         beginMove () {
-            console.log('beginMove')
             this.canMove = true
         },
         lineMove (e) {
@@ -64,7 +63,6 @@ export default {
             }
         },
         endMove () {
-            console.log('endMove')
             this.canMove = false
         }
     },
