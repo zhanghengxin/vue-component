@@ -1648,7 +1648,7 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table show-index border width=1000 :columns='columns11' :data='data11'></b-table>
+           <b-table  show-index border width=1000 :columns='columns11' :data='data11'></b-table>
            <b-table border width=1000 :columns='columns13' :data='data11'></b-table>
         </div>
     </div>

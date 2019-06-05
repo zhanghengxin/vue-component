@@ -8,7 +8,7 @@
             </Checkbox>
         </template>
         <template v-if="renderType === 'index'">
-            <span v-html="index + 1"></span>
+            <span v-html="row._indexNo"></span>
         </template>
         <template v-if="renderType === 'normal'">
             <span :title="row[column.key]">{{row[column.key]}}</span>

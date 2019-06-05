@@ -1,5 +1,17 @@
 ### 更新日志
 
+### 0.7.3
+## `2019-06-05`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        新增 Tree 组件自动滚动功能
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 Table index-info 在 type='index'下的兼容问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.7.2
 ## `2019-05-28`
 <br>

@@ -319,6 +319,9 @@ export default {
         horizontalScroll () {
             this.dragBorderHeight = this.getDragBorderHeight()
         },
+        height () {
+            this.handleResize()
+        },
         columns: {
             handler () {
                 this.buildColumnsData()
@@ -326,6 +329,9 @@ export default {
                 this.handleResize()
             },
             deep: true
+        },
+        verticalScroll () {
+            this.handleResize()
         },
         cloneColumns: {
             handler () {
