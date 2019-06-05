@@ -31,6 +31,7 @@
                         :appear='appearByClickArrow'
                         :class-name="className"
                         :data="item"
+                        :auto-scroll="autoScroll"
                         :show-checkbox="showCheckbox"
                         :default-opt="defaultOpt">
                     </tree-node>
@@ -84,6 +85,10 @@ export default {
             type: Boolean,
             default: false
         },
+        autoScroll: {
+            type: Boolean,
+            default: false
+        },
         appear: {
             type: Boolean,
             default: false
@@ -94,6 +99,17 @@ export default {
             prefixCls: prefixCls,
             appearByClickArrow: false
         }
+    },
+    watch: {
+        data: {
+            deep: true,
+            handler () {
+                this.autoScrollHandle()
+            }
+        }
+    },
+    mounted () {
+        this.autoScrollHandle()
     },
     computed: {
         wrapCls () {
@@ -152,6 +168,12 @@ export default {
         }
     },
     methods: {
+        autoScrollHandle () {
+            if (this.data[this.defaultOpt.selectedKey] && this.autoScroll) {
+                const Tree = findComponentUpward(this, prefix + 'tree')
+                Tree.$el.scrollTop = this.$el.offsetTop
+            }
+        },
         expanded () {
             const data = this.data
             const defaultOpt = this.defaultOpt

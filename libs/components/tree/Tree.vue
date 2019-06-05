@@ -9,6 +9,7 @@
             :data="item"
             :class-name="className"
             :draggable="draggable"
+            :auto-scroll="autoScroll"
             :show-checkbox="showCheckbox"
             :default-opt="defaultOpt"
         >
@@ -120,7 +121,8 @@ export default {
             // loading 开启懒加载模式
             // accordion 开启手风琴模式
             // showCheckbox 开启多选模式
-            props: ['draggable', 'loading', 'accordion', 'showCheckbox'],
+            // autoScroll  选中后自动滚动到选中位置
+            props: ['draggable', 'loading', 'accordion', 'showCheckbox', 'autoScroll'],
             config: {
                 type: Boolean,
                 default: false
