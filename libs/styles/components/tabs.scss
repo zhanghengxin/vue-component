@@ -5,7 +5,7 @@ $tabExtra: $css-prefix + 'tabs-extra';
 //tabs区域
 .#{$tabs} {
   font-size: 14px;
-  overflow: hidden;
+  //overflow: hidden;
   position:relative;
 }
 
