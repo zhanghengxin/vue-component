@@ -1,5 +1,20 @@
 ### 更新日志
 
+### 0.7.4
+## `2019-06-13`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        优化 SelectTree 组件nameKey 渲染不正常的问题
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 Tabs的样式调整修复overflow的负面影响
+    </b-timeline-item>
+    <b-timeline-item>
+        修复 Tree 组件默认数据格式化不正常的问题
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.7.3
 ## `2019-06-05`
 <br>

@@ -262,13 +262,7 @@ export default {
             }
         },
         handleSelect (options) {
-            const {defaultOpt} = this
-            this.values = [
-                {
-                    name: options.data[defaultOpt.nameKey],
-                    id: options.data[defaultOpt.idKey]
-                }
-            ]
+            this.values = [options.data]
             this.$emit('on-select', options)
             this.popupVisible = false
         },

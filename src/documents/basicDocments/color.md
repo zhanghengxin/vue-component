@@ -20,7 +20,6 @@ bwUI的color管理
 <color-show type = "Error"></color-show>
 <color-show type = "Badge"></color-show>
 
-
 #### 中性色
 中性色常用于文本、背景、边框、阴影等，可以体现出页面的层次结构。
 

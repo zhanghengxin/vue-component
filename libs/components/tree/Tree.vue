@@ -223,8 +223,8 @@ export default {
                 const parentKey = dataList[node.nodeKey].parent
                 if (!parentKey && parentKey !== 0) return
                 const parent = dataList[parentKey].node
-                const childHasCheckSetter = typeof node[defaultOpt.checked] !== 'undefined' && node[defaultOpt.checked]
-                if (childHasCheckSetter && parent[defaultOpt.checked] !== node[defaultOpt.checked]) {
+                const childHasCheckSetter = typeof node[defaultOpt.checkedKey] !== 'undefined' && node[defaultOpt.checkedKey]
+                if (childHasCheckSetter && parent[defaultOpt.checkedKey] !== node[defaultOpt.checkedKey]) {
                     if (this.checkboxOptions.parent && this.checkCascade) this.upwardTraversal(node.nodeKey)
                 }
             })
