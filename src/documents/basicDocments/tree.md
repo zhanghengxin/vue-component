@@ -49,7 +49,8 @@
                                    name: 'parent 1-2',
                                    children: [
                                        {
-                                           name: 'leaf 1-2-1'
+                                           name: 'leaf 1-2-1',
+                                           disabled:true
                                        },
                                        {
                                            name: 'leaf 1-2-1'
@@ -705,7 +706,8 @@ export default {
                            name: 'parent 1-2',
                            children: [
                                {
-                                   name: 'leaf 1-2-1'
+                                   name: 'leaf 1-2-1',
+                                   disabled:true
                                },
                                {
                                    name: 'leaf 1-2-1'

@@ -133,6 +133,7 @@ export default {
                 `${prefixCls}-name`,
                 {
                     [`${prefixCls}-name-selected`]: this.data[this.defaultOpt.selectedKey],
+                    [`${prefixCls}-name-disabled`]: this.data[this.defaultOpt.disabledKey],
                     [`${this.className}`]: !!this.className,
                     [`${prefixCls}-name-draggable`]: this.draggable
 
@@ -206,7 +207,7 @@ export default {
         },
         selectData () {
             const defaultOpt = this.defaultOpt
-            if (this.data[defaultOpt.disabled] || this.showCheckbox) return
+            if (this.data[defaultOpt.disabledKey] || this.showCheckbox) return
             this.dispatch(prefix + 'tree', 'on-selected-change', this.data.nodeKey)
         },
         handleCheck () {

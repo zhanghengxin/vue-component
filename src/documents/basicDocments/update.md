@@ -1,5 +1,14 @@
 ### 更新日志
 
+### 0.7.5
+## `2019-06-17`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        新增 Tree  单选模式下，data添加 disblead 属性添加禁用状态
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.7.4
 ## `2019-06-13`
 <br>
