@@ -1,5 +1,14 @@
 ### 更新日志
 
+### 0.7.6
+## `2019-06-18`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        新增 复选模式下，checkbox-options新增disabled属性，控制级联禁用数据状态
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.7.5
 ## `2019-06-17`
 <br>

@@ -11,6 +11,7 @@
             :draggable="draggable"
             :auto-scroll="autoScroll"
             :show-checkbox="showCheckbox"
+            :checkbox-options="checkboxOptions"
             :default-opt="defaultOpt"
         >
         </tree-node>
@@ -90,8 +91,9 @@ export default {
             type: Object,
             default () {
                 return {
-                    parent: true, // 是否影响父级节点
-                    children: true // 是否影响子级节点
+                    parent: true, // 是否级联父级节点
+                    disabled: false, // 是否级联禁用节点
+                    children: true // 是否级联子级节点
                 }
             }
         },
@@ -199,15 +201,17 @@ export default {
             })
         },
         getCheckedNodes () {
-            const checkedKey = this.defaultOpt.checkedKey
-            return this.dataList.filter(obj => obj.node[checkedKey]).map(obj => obj.node)
+            const {checkboxOptions, defaultOpt, dataList} = this
+            const checkedKey = defaultOpt.checkedKey
+            return dataList.filter(obj => obj.node[checkedKey] && !(!checkboxOptions.disabled && obj.node[defaultOpt.disabledKey])).map(obj => obj.node)
         },
         getVisibleNodes () {
             return this.dataList.filter(obj => (!obj.node.invisible)).map(obj => obj.node)
         },
         getIndeterminateNodes () {
-            const indeterminateKey = this.defaultOpt.indeterminateKey
-            return this.dataList.filter(obj => (obj.node[indeterminateKey])).map(obj => obj.node)
+            const {checkboxOptions, defaultOpt, dataList} = this
+            const indeterminateKey = defaultOpt.indeterminateKey
+            return dataList.filter(obj => (obj.node[indeterminateKey] && !(!checkboxOptions.disabled && obj.node[defaultOpt.disabledKey]))).map(obj => obj.node)
         },
         getSelectedNodes () {
             const selectedKey = this.defaultOpt.selectedKey

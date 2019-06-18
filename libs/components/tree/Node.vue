@@ -15,8 +15,8 @@
             </span>
                 <Checkbox
                     v-if="showCheckbox"
-                    :value="data[defaultOpt.checkedKey]"
-                    :indeterminate="data[defaultOpt.indeterminateKey]"
+                    :value="checkValue"
+                    :indeterminate="checkIndeterminate"
                     :disabled="data[defaultOpt.disabledKey]"
                     @click.native.prevent="handleCheck">
                 </Checkbox>
@@ -33,6 +33,7 @@
                         :data="item"
                         :auto-scroll="autoScroll"
                         :show-checkbox="showCheckbox"
+                        :checkbox-options="checkboxOptions"
                         :default-opt="defaultOpt">
                     </tree-node>
                 </template>
@@ -74,6 +75,7 @@ export default {
                 }
             }
         },
+        checkboxOptions: Object,
         showCheckbox: {
             type: Boolean,
             default: false
@@ -112,6 +114,22 @@ export default {
         this.autoScrollHandle()
     },
     computed: {
+        checkIndeterminate () {
+            let {data, checkboxOptions, defaultOpt} = this
+            if (!checkboxOptions.disabled && data[defaultOpt.disabledKey]) {
+                return false
+            } else {
+                return data[defaultOpt.indeterminateKey]
+            }
+        },
+        checkValue () {
+            let {data, checkboxOptions, defaultOpt} = this
+            if (!checkboxOptions.disabled && data[defaultOpt.disabledKey]) {
+                return false
+            } else {
+                return data[defaultOpt.checkedKey]
+            }
+        },
         wrapCls () {
             return [
                 `${prefixCls}-children`
