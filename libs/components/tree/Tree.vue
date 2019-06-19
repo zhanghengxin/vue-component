@@ -9,7 +9,9 @@
             :data="item"
             :class-name="className"
             :draggable="draggable"
+            :auto-scroll="autoScroll"
             :show-checkbox="showCheckbox"
+            :checkbox-options="checkboxOptions"
             :default-opt="defaultOpt"
         >
         </tree-node>
@@ -24,6 +26,7 @@ import { prefix, propsInit } from '../../utils/common'
 import TreeNode from './Node.vue'
 import Emitter from '../../mixins/emitter'
 import clickOutside from '../../utils/directives/clickOutside'
+import { deepCopy } from '../../utils/assist'
 
 const prefixCls = prefix + 'tree'
 export default {
@@ -36,7 +39,7 @@ export default {
     data () {
         return {
             prefixCls: prefixCls,
-            rootData: this.data,
+            rootData: [],
             dataList: [],
             dargState: {}
         }
@@ -45,11 +48,7 @@ export default {
         data: {
             deep: true,
             handler () {
-                this.rootData = this.data
-                this.dataList = this.indexArrCreate()
-                // TODO 当选中不级联父级元素且级联子元素的时候，无法区分是原数据动态变化和操作引起的数据变化，所以如果有此配置的话，需要手动触发一次formatTreeData方法
-                if (!this.checkboxOptions.parent && this.checkboxOptions.children) return
-                this.formatTreeData()
+                this.rebuidData()
             }
         },
         defaultCheckedValues: {
@@ -58,8 +57,20 @@ export default {
                 this.defaultRebuild('checked')
             }
         },
+        defaultExpandedValues: {
+            deep: true,
+            handler () {
+                this.defaultRebuild('expaned')
+            }
+        },
         filterText (value) {
             this.filterTreeData(value)
+        },
+        rootData: {
+            deep: true,
+            handler () {
+                this.$emit('data-change', deepCopy(this.rootData))
+            }
         }
     },
     props: {
@@ -85,8 +96,9 @@ export default {
             type: Object,
             default () {
                 return {
-                    parent: true, // 是否影响父级节点
-                    children: true // 是否影响子级节点
+                    parent: true, // 是否级联父级节点
+                    disabled: false, // 是否级联禁用节点
+                    children: true // 是否级联子级节点
                 }
             }
         },
@@ -116,7 +128,8 @@ export default {
             // loading 开启懒加载模式
             // accordion 开启手风琴模式
             // showCheckbox 开启多选模式
-            props: ['draggable', 'loading', 'accordion', 'showCheckbox'],
+            // autoScroll  选中后自动滚动到选中位置
+            props: ['draggable', 'loading', 'accordion', 'showCheckbox', 'autoScroll'],
             config: {
                 type: Boolean,
                 default: false
@@ -144,10 +157,12 @@ export default {
         }
     },
     created () {
-        this.dataList = this.indexArrCreate()
-        this.formatTreeData()
-        this.defaultRebuild('checked')
-        this.filterTreeData(this.filterText)
+        this.rebuidData()
+        this.$nextTick(() => {
+            this.defaultRebuild('checked')
+            this.defaultRebuild('expaned')
+            this.filterTreeData(this.filterText)
+        })
     },
     mounted () {
         this.$on('on-selected-change', this.handleSelect)
@@ -167,16 +182,42 @@ export default {
         }
     },
     methods: {
+        rebuidData () {
+            this.rootData = deepCopy(this.data)
+            this.dataList = this.indexArrCreate()
+            // if (!this.checkboxOptions.parent && this.checkboxOptions.children) return
+            this.formatTreeData()
+        },
+        allCheckedData (status, type) {
+            if (type === 'select') {
+                this.clearSelectedState()
+            } else {
+                this.clearCheckedState(status)
+            }
+        },
+        clearCheckedState (status) {
+            this.dataList.forEach((item) => {
+                this.$set(item.node, this.defaultOpt.checkedKey, status)
+            })
+        },
+        clearSelectedState () {
+            let defaultOpt = this.defaultOpt
+            this.dataList.map(item => {
+                this.$set(item.node, defaultOpt.selectedKey, false)
+            })
+        },
         getCheckedNodes () {
-            const checkedKey = this.defaultOpt.checkedKey
-            return this.dataList.filter(obj => obj.node[checkedKey]).map(obj => obj.node)
+            const {checkboxOptions, defaultOpt, dataList} = this
+            const checkedKey = defaultOpt.checkedKey
+            return dataList.filter(obj => obj.node[checkedKey] && !(!checkboxOptions.disabled && obj.node[defaultOpt.disabledKey])).map(obj => obj.node)
         },
         getVisibleNodes () {
             return this.dataList.filter(obj => (!obj.node.invisible)).map(obj => obj.node)
         },
         getIndeterminateNodes () {
-            const indeterminateKey = this.defaultOpt.indeterminateKey
-            return this.dataList.filter(obj => (obj.node[indeterminateKey])).map(obj => obj.node)
+            const {checkboxOptions, defaultOpt, dataList} = this
+            const indeterminateKey = defaultOpt.indeterminateKey
+            return dataList.filter(obj => (obj.node[indeterminateKey] && !(!checkboxOptions.disabled && obj.node[defaultOpt.disabledKey]))).map(obj => obj.node)
         },
         getSelectedNodes () {
             const selectedKey = this.defaultOpt.selectedKey
@@ -192,27 +233,33 @@ export default {
                 const parentKey = dataList[node.nodeKey].parent
                 if (!parentKey && parentKey !== 0) return
                 const parent = dataList[parentKey].node
-                const childHasCheckSetter = typeof node[defaultOpt.checked] !== 'undefined' && node[defaultOpt.checked]
-                if (childHasCheckSetter && parent[defaultOpt.checked] !== node[defaultOpt.checked]) {
+                const childHasCheckSetter = typeof node[defaultOpt.checkedKey] !== 'undefined' && node[defaultOpt.checkedKey]
+                if (childHasCheckSetter && parent[defaultOpt.checkedKey] !== node[defaultOpt.checkedKey]) {
                     if (this.checkboxOptions.parent && this.checkCascade) this.upwardTraversal(node.nodeKey)
                 }
             })
         },
         defaultRebuild (type) {
-            let {idKey} = this.defaultOpt
+            let {dataList, defaultOpt} = this
+            let {idKey} = defaultOpt
             let arr = type === 'checked' ? this.defaultCheckedValues : this.defaultExpandedValues
-            let data = this.dataList
             if (arr.length) {
                 if (type === 'checked') {
                     if (this.showCheckbox) {
-                        let nodeKeys = data.filter(item => arr.includes(item.node[idKey])).map(item => item.nodeKey)
+                        let nodeKeys = dataList.filter(item => arr.includes(item.node[idKey]) || arr.includes(String(item.node[idKey]))).map(item => item.nodeKey)
                         nodeKeys.forEach(item => {
                             this.handleCheck({checked: true, nodeKey: item, isFormat: true})
                         })
                     } else {
-                        let [node] = data.filter(item => (item.node[idKey] === arr[0]))
+                        let [node] = dataList.filter(item => (String(item.node[idKey]) === String(arr[0])))
                         this.handleSelect(node.nodeKey, true)
                     }
+                } else {
+                    let nodes = dataList.filter(item => arr.includes(item.node[idKey]) || arr.includes(String(item.node[idKey]))).map(item => item)
+                    nodes.forEach(item => {
+                        this.$set(item.node, defaultOpt.expandKey, !item.node[defaultOpt.expandKey])
+                        this.handleExpand({data: item.node, isFormat: true})
+                    })
                 }
             }
         },
@@ -305,34 +352,32 @@ export default {
         },
         // 展开/关闭
         handleExpand (options) {
-            const _this = this
-            const expandKey = this.defaultOpt.expandKey
-            const childrenKey = this.defaultOpt.childrenKey
+            const {defaultOpt, dataList, accordionOptions, accordion} = this
+            const {expandKey, childrenKey} = defaultOpt
             const node = options.data
-            let dataList = this.dataList
-            if (this.accordion) { // 是否开启手风琴
-                if (!this.accordionOptions.isCache) { // 是否开启缓存
+            if (accordion) { // 是否开启手风琴
+                if (!accordionOptions.isCache && options.parents) { // 是否开启缓存
                     const parents = options.parents.map(item => {
                         return item.nodeKey
                     })
-                    this.dataList.forEach((item, index) => {
+                    dataList.forEach((item, index) => {
                         if (parents.indexOf(index) < 0) {
-                            _this.$set(dataList[index].node, expandKey, false)
+                            this.$set(dataList[index].node, expandKey, false)
                         }
                     })
                 } else {
                     let parentKey = dataList[node.nodeKey].parent
                     if (parentKey !== undefined) {
                         let parent = dataList[parentKey].node
-                        parent[childrenKey].forEach(function (item) {
+                        parent[childrenKey].forEach((item) => {
                             if (item.nodeKey !== node.nodeKey) {
-                                _this.$set(dataList[item.nodeKey].node, expandKey, false)
+                                this.$set(dataList[item.nodeKey].node, expandKey, false)
                             }
                         })
                     }
                 }
             }
-            this.$emit('on-expand', {data: node})
+            if (!options.isFormat) this.$emit('on-expand', {data: node})
         },
         // 模糊检索
         filterTreeData (value) {

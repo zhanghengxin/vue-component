@@ -131,7 +131,7 @@
 <script>
 import { prefix } from '../../utils/common'
 import { deepCopy } from '../../utils/assist'
-import { getStyle, getScrollBarSize, on, containsElement } from '../../utils/dom'
+import { getStyle, getScrollBarSize, on, off, containsElement } from '../../utils/dom'
 import tableHead from './table-head'
 import tableBody from './table-body'
 import tableFixed from './table-fixed'
@@ -142,6 +142,7 @@ import CsvTable from '../../utils/csv'
 import Exports from './export'
 import Checkbox from '../checkbox'
 import Emitter from '../../mixins/emitter'
+import elementResizeDetectorMaker from 'element-resize-detector'
 import { getRandomStr, convertToRows, getAllColumns } from './utils'
 
 const preCls = prefix + 'table'
@@ -286,9 +287,13 @@ export default {
         this.showSlotFooter = this.$slots.footer !== undefined
     },
     mounted () {
-        this.handleResize()
+        this.$nextTick(() => {
+            this.handleResize()
+        })
         this.dragBorderHeight = this.getDragBorderHeight()
         on(window, 'resize', this.handleResize)
+        this.observer = elementResizeDetectorMaker()
+        this.observer.listenTo(this.$el, this.handleResize)
         // If you don't click on the dynamicColumn, hide it.
         const handleClick = (event) => {
             if (this.dynamicColumnBoxShow) {
@@ -298,6 +303,10 @@ export default {
             }
         }
         document.addEventListener('click', handleClick)
+    },
+    beforeDestroy () {
+        off(window, 'resize', this.handleResize)
+        this.observer.removeListener(this.$el, this.handleResize)
     },
     watch: {
         data: {
@@ -310,6 +319,9 @@ export default {
         horizontalScroll () {
             this.dragBorderHeight = this.getDragBorderHeight()
         },
+        height () {
+            this.handleResize()
+        },
         columns: {
             handler () {
                 this.buildColumnsData()
@@ -317,6 +329,9 @@ export default {
                 this.handleResize()
             },
             deep: true
+        },
+        verticalScroll () {
+            this.handleResize()
         },
         cloneColumns: {
             handler () {
@@ -735,11 +750,13 @@ export default {
             this.$emit('on-current-change', newData, oldData)
         },
         handleClick (_index) {
+            if (!this.formatData[_index]) return
             this.$emit('on-row-click', deepCopy(this.data[this.formatData[_index]._index]))
             if (!this.highlightRow) return
             this.handleCurrentRow('highlight', _index)
         },
         handleDbclick (_index) {
+            if (!this.formatData[_index]) return
             this.$emit('on-row-dbclick', deepCopy(this.data[this.formatData[_index]._index]))
             if (!this.highlightRow) return
             this.handleCurrentRow('highlight', _index)

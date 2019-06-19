@@ -32,14 +32,6 @@
                  },
                  nextStep() {
                     this.step == 2?(this.step = 0):(this.step += 1)
-                 },
-                 consoleLog(option){
-                    console.log(111)
-                    console.log(option)
-                 },
-                 consoleLog2(option){
-                    console.log(222)
-                    console.log(option)
                  }
              },
              data:function(){

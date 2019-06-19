@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
    <div :class='[boxClasses]'
         :style='selectBoxStyles'
         v-click-outside="clickOutside"
@@ -71,6 +72,79 @@
             @click.native.stop='clearValues'>
         </Icon>
     </div>
+=======
+    <div :class='[boxClasses]'
+         :style='selectBoxStyles'
+         v-click-outside="clickOutside"
+    >
+        <div :class='selectGroupClasses'>
+            <div v-if='label'
+                 :class='[prefixCls+`-label`]'
+                 :style='labelStyles'
+            >{{label}}
+            </div>
+            <div
+                ref="reference"
+                :class="classes"
+                :style='[selectWidth]'
+                :tabindex="tabindex"
+                @blur="toggleHeaderFocus"
+                @focus="toggleHeaderFocus"
+                @click="toggleMenu"
+                @keydown.esc="handleKeydown"
+                @keydown.enter="handleKeydown"
+                @keydown.up.prevent="handleKeydown"
+                @keydown.down.prevent="handleKeydown"
+                @keydown.tab="handleKeydown"
+                @keydown.delete="handleInputDelete"
+                @mouseenter="clearShow = clearable && true"
+                @mouseleave="clearShow = clearable && false">
+                <input type="hidden" :name="name" :value="publicValue">
+                <div :class='[`${prefixCls}-main-flex`]'>
+                    <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
+                    <template v-if='multiple'>
+                        <div
+                            v-for="item in multipleValues"
+                            :key='item.value'
+                            :class="[prefixCls+`-tag`]">
+                            <span v-text="showMultipleValues(item)"></span>
+                            <Icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu'
+                                  @click.native.stop='removeTag(item)'></Icon>
+                        </div>
+                    </template>
+                    <input
+                        type="text"
+                        v-if="filterabled"
+                        v-show='inputShow'
+                        v-model="query"
+                        :disabled="disabled"
+                        :class="[prefixCls + '-input']"
+                        :placeholder="localePlaceholder"
+                        :style="inputStyle"
+                        autocomplete="off"
+                        spellcheck="false"
+                        @blur='onInputBlur'
+                        @keydown.exact="slideDropAndSetInput"
+                        @focus="onInputFocus"
+                        @keydown.delete="handleInputDelete"
+                    />
+                </div>
+                <Icon
+                    type='xia'
+                    v-if='!disabled && !autoComplete'
+                    v-show='iconShow'
+                    :class="[prefixCls+`-arrow`]">
+                </Icon>
+                <Icon
+                    type='shibai-mian'
+                    v-if='clearable'
+                    v-show='closeIcon'
+                    :class="[prefixCls+`-arrow`]"
+                    @click.native.stop='clearValues'>
+                </Icon>
+            </div>
+        </div>
+>>>>>>> develop
         <slot name='tree'>
             <transition name='slide'>
                 <Drop
@@ -336,7 +410,7 @@ export default {
                 `${prefixCls}-main-content`,
                 {
                     [`${prefixCls}-main-placeholder`]: this.localePlaceholder && (!this.showValue || this.multiple),
-                     [`${prefixCls}-filterabled`]: !this.filterabled && this.multiple
+                    [`${prefixCls}-filterabled`]: !this.filterabled && this.multiple
                 }
             ]
         },
@@ -406,11 +480,11 @@ export default {
             return !disabled && clearShow && (values.length || treeValues.length || (autoComplete && query !== ''))
         },
         showValue () {
-            const {multiple, values, treeValues} = this
+            const {multiple, values, treeValues, defaultOpt} = this
             if (multiple) {
                 return ''
             } else if (treeValues.length) {
-                return treeValues[0] ? treeValues[0].name : ''
+                return treeValues[0] ? treeValues[0][defaultOpt.nameKey] : ''
             } else {
                 return values[0] ? values[0].label : ''
             }
@@ -641,7 +715,8 @@ export default {
         clearValues () {
             this.values = []
             this.query = ''
-            this.$emit('on-clear')
+            let type = this.multiple ? 'checked' : 'select'
+            this.$emit('on-clear', type)
         },
         slideDropAndSetInput () {
             this.show = true
@@ -671,7 +746,6 @@ export default {
             if (e.key === 'Backspace') {
                 return // so we don't call preventDefault
             }
-
             if (this.show) {
                 if (this.$slots.tree) return
                 e.preventDefault()
@@ -702,7 +776,7 @@ export default {
                 if (keysThatCanOpenSelect.includes(e.key)) this.toggleMenu()
             }
         },
-         navigateOptions (direction) {
+        navigateOptions (direction) {
             let dropList = this.dropList
             if (this.group) {
                 dropList = initGroupList(this.dropList)
@@ -779,7 +853,7 @@ export default {
         },
         query () {
             const {filterabled, remoteFn, query, autoComplete} = this
-             if (autoComplete && this.query === '') {
+            if (autoComplete && this.query === '') {
                 this.values = []
             }
             if ((filterabled && remoteFn && query !== '') || autoComplete) {

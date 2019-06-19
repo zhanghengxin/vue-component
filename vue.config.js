@@ -77,29 +77,6 @@ module.exports = {
                 '&': resolve('libs')
             }
         }
-        // 删除console插件
-        let plugins = [
-            new UglifyJsPlugin({
-                uglifyOptions: {
-                    warnings: false,// 在UglifyJs删除没有用到的代码时不输出警告
-                    compress: {
-                        drop_console: true,// 是否删除 console.log
-                        drop_debugger: true,// 是否删除 debugger
-                        collapse_vars: true// 内嵌定义了但是只用到一次的变量
-                    },
-                    output: {
-                        // 去掉注释内容
-                        comments: false
-                    }
-                },
-                sourceMap: false,
-                parallel: true
-            })
-        ]
-        // 只有打包生产环境才需要将console删除
-        if (isProduction) {
-            config.plugins = [...config.plugins, ...plugins]
-        }
     }
 }
 

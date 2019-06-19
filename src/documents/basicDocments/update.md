@@ -1,5 +1,104 @@
 ### 更新日志
 
+### 0.7.6
+## `2019-06-18`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        新增 复选模式下，checkbox-options新增disabled属性，控制级联禁用数据状态
+    </b-timeline-item>
+</b-timeline>
+
+### 0.7.5
+## `2019-06-17`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        新增 Tree  单选模式下，data添加 disblead 属性添加禁用状态
+    </b-timeline-item>
+</b-timeline>
+
+### 0.7.4
+## `2019-06-13`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        优化 SelectTree 组件nameKey 渲染不正常的问题
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 Tabs的样式调整修复overflow的负面影响
+    </b-timeline-item>
+    <b-timeline-item>
+        修复 Tree 组件默认数据格式化不正常的问题
+    </b-timeline-item>
+</b-timeline>
+
+### 0.7.3
+## `2019-06-05`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        新增 Tree 组件自动滚动功能
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 Table index-info 在 type='index'下的兼容问题
+    </b-timeline-item>
+</b-timeline>
+
+### 0.7.2
+## `2019-05-28`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 bwUi 在线代码运行功能，方便重现问题和功能测试
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 Table组件初始化宽度不正常问题修复
+    </b-timeline-item>
+</b-timeline>
+
+### 0.7.1
+## `2019-05-24`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 Tree 关于父子级联数据格式化的判断
+    </b-timeline-item>
+</b-timeline>
+
+### 0.7.0
+## `2019-05-21`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 SelectTree 全选条件判定
+    </b-timeline-item>
+</b-timeline>
+
+### 0.6.9
+## `2019-05-20`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    优化 SelectTree、Tree 文档优化
+    </b-timeline-item>
+</b-timeline>
+
+### 0.6.8
+## `2019-05-20`
+<br>
+<b-timeline>
+    <b-timeline-item>
+    新增 select支持键盘事件
+    </b-timeline-item>
+    <b-timeline-item>
+    优化 SelectTree、Tree 默认选中动态变化不正常回显优化
+    </b-timeline-item>
+    <b-timeline-item>
+    修复 Select在v-show下的label fixed 的情况下labelwidth取值为undefined产生的width计算bug
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.6.7
 ## `2019-05-17`
 <br>

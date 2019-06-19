@@ -15,8 +15,8 @@
             </span>
                 <Checkbox
                     v-if="showCheckbox"
-                    :value="data[defaultOpt.checkedKey]"
-                    :indeterminate="data[defaultOpt.indeterminateKey]"
+                    :value="checkValue"
+                    :indeterminate="checkIndeterminate"
                     :disabled="data[defaultOpt.disabledKey]"
                     @click.native.prevent="handleCheck">
                 </Checkbox>
@@ -31,7 +31,9 @@
                         :appear='appearByClickArrow'
                         :class-name="className"
                         :data="item"
+                        :auto-scroll="autoScroll"
                         :show-checkbox="showCheckbox"
+                        :checkbox-options="checkboxOptions"
                         :default-opt="defaultOpt">
                     </tree-node>
                 </template>
@@ -73,6 +75,7 @@ export default {
                 }
             }
         },
+        checkboxOptions: Object,
         showCheckbox: {
             type: Boolean,
             default: false
@@ -81,6 +84,10 @@ export default {
             type: String
         },
         draggable: {
+            type: Boolean,
+            default: false
+        },
+        autoScroll: {
             type: Boolean,
             default: false
         },
@@ -95,7 +102,34 @@ export default {
             appearByClickArrow: false
         }
     },
+    watch: {
+        data: {
+            deep: true,
+            handler () {
+                this.autoScrollHandle()
+            }
+        }
+    },
+    mounted () {
+        this.autoScrollHandle()
+    },
     computed: {
+        checkIndeterminate () {
+            let {data, checkboxOptions, defaultOpt} = this
+            if (!checkboxOptions.disabled && data[defaultOpt.disabledKey]) {
+                return false
+            } else {
+                return data[defaultOpt.indeterminateKey]
+            }
+        },
+        checkValue () {
+            let {data, checkboxOptions, defaultOpt} = this
+            if (!checkboxOptions.disabled && data[defaultOpt.disabledKey]) {
+                return false
+            } else {
+                return data[defaultOpt.checkedKey]
+            }
+        },
         wrapCls () {
             return [
                 `${prefixCls}-children`
@@ -117,6 +151,7 @@ export default {
                 `${prefixCls}-name`,
                 {
                     [`${prefixCls}-name-selected`]: this.data[this.defaultOpt.selectedKey],
+                    [`${prefixCls}-name-disabled`]: this.data[this.defaultOpt.disabledKey],
                     [`${this.className}`]: !!this.className,
                     [`${prefixCls}-name-draggable`]: this.draggable
 
@@ -152,6 +187,12 @@ export default {
         }
     },
     methods: {
+        autoScrollHandle () {
+            if (this.data[this.defaultOpt.selectedKey] && this.autoScroll) {
+                const Tree = findComponentUpward(this, prefix + 'tree')
+                Tree.$el.scrollTop = this.$el.offsetTop
+            }
+        },
         expanded () {
             const data = this.data
             const defaultOpt = this.defaultOpt
@@ -184,7 +225,7 @@ export default {
         },
         selectData () {
             const defaultOpt = this.defaultOpt
-            if (this.data[defaultOpt.disabled] || this.showCheckbox) return
+            if (this.data[defaultOpt.disabledKey] || this.showCheckbox) return
             this.dispatch(prefix + 'tree', 'on-selected-change', this.data.nodeKey)
         },
         handleCheck () {

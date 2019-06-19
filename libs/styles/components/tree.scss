@@ -37,6 +37,10 @@ $css-prefix-select-tree: $css-prefix + 'select-tree';
         &:hover {
             @include _background(transparentize($Primary, 0.9));
         }
+        &-disabled {
+            cursor: not-allowed;
+            background: $Disabled;
+        }
     }
     &-name-selected {
         @include _color($Primary);

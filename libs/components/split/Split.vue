@@ -33,12 +33,13 @@
 import { oneOf, prefix } from '../../utils/common'
 import { on, off } from '../../utils/dom'
 import Trigger from './Trigger'
+
 const prefixCls = `${prefix}split`
 const defaultHeight = '40px'
 
 export default {
     name: prefixCls,
-    components: { Trigger },
+    components: {Trigger},
     props: {
         value: {
             type: [Number, String],
@@ -115,21 +116,33 @@ export default {
         },
         getComputedThresholdValue (type) {
             const size = this.$refs.split[this.offsetSize]
-            if (this.valueIsPx) return typeof this[type] === 'string' ? this[type] : size * this[type]
-            else return typeof this[type] === 'string' ? this.px2percent(this[type], size) : this[type]
+            if (this.valueIsPx) {
+                return typeof this[type] === 'string' ? this[type] : size * this[type]
+            } else {
+                return typeof this[type] === 'string' ? this.px2percent(this[type], size) : this[type]
+            }
         },
         getMin (value1, value2) {
-            if (this.valueIsPx) return `${Math.min(parseFloat(value1), parseFloat(value2))}px`
-            else return Math.min(value1, value2)
+            if (this.valueIsPx) {
+                return `${Math.min(parseFloat(value1), parseFloat(value2))}px`
+            } else {
+                return Math.min(value1, value2)
+            }
         },
         getMax (value1, value2) {
-            if (this.valueIsPx) return `${Math.max(parseFloat(value1), parseFloat(value2))}px`
-            else return Math.max(value1, value2)
+            if (this.valueIsPx) {
+                return `${Math.max(parseFloat(value1), parseFloat(value2))}px`
+            } else {
+                return Math.max(value1, value2)
+            }
         },
         getAnotherOffset (value) {
             let res = 0
-            if (this.valueIsPx) res = `${this.$refs.split[this.offsetSize] - parseFloat(value)}px`
-            else res = 1 - value
+            if (this.valueIsPx) {
+                res = `${this.$refs.split[this.offsetSize] - parseFloat(value)}px`
+            } else {
+                res = 1 - value
+            }
             return res
         },
         handleMove (e) {

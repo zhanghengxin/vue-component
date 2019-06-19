@@ -328,7 +328,6 @@ const actions = {
             // }
             return item
         })
-        console.log('负数detailList', detailList)
         let currentData = {
             verifyCode: '',
             place: invoiceTerminalCode,

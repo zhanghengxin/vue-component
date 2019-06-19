@@ -30,18 +30,15 @@
                            children: [
                                {
                                    name: 'parent1',
-                                   checked:true,
                                    expand: true,
                                    id:2,
                                    children: [
                                        {
                                            id:3,
-                                           checked:true,
                                            name: 'leaf1'
                                        },
                                        {
                                            id:4,
-                                           checked:true,
                                            name: 'leaf2'
                                        }
                                    ]
@@ -87,18 +84,15 @@
                            children: [
                                {
                                    name: 'parent1',
-                                   checked:true,
                                    expand: true,
                                    id:2,
                                    children: [
                                        {
                                            id:3,
-                                           checked:true,
                                            name: 'leaf1'
                                        },
                                        {
                                            id:4,
-                                           checked:true,
                                            name: 'leaf2'
                                        }
                                    ]
@@ -141,7 +135,6 @@
                        {
                            name: 'root',
                            expand: true,
-                           checked:true,
                            id:1,
                            children: [
                                {
@@ -192,7 +185,6 @@
                        {
                            name: 'root',
                            expand: true,
-                           checked:true,
                            id:1,
                            children: [
                                {
@@ -249,7 +241,6 @@
                             children: [
                                 {
                                     name: 'parent1',
-                                    checked:true,
                                     id:2,
                                     children: [
                                         {
@@ -443,18 +434,15 @@ export default {
                    children: [
                        {
                            name: 'parent1',
-                           checked:true,
                            expand: true,
                            id:2,
                            children: [
                                {
                                    id:3,
-                                   checked:true,
                                    name: 'leaf1'
                                },
                                {
                                    id:4,
-                                   checked:true,
                                    name: 'leaf2'
                                }
                            ]
@@ -470,18 +458,15 @@ export default {
                    children: [
                        {
                            name: 'parent1',
-                           checked:true,
                            expand: true,
                            id:2,
                            children: [
                                {
                                    id:3,
-                                   checked:true,
                                    name: 'leaf1'
                                },
                                {
                                    id:4,
-                                   checked:true,
                                    name: 'leaf2'
                                }
                            ]
@@ -493,7 +478,6 @@ export default {
                {
                    name: 'root',
                    expand: true,
-                   checked:true,
                    id:1,
                    children: [
                        {
@@ -521,7 +505,6 @@ export default {
                    children: [
                        {
                            name: 'parent1',
-                           checked:true,
                            id:2,
                            children: [
                                {
@@ -545,7 +528,6 @@ export default {
                    children: [
                        {
                            name: 'parent1',
-                           checked:true,
                            id:2,
                            children: [
                                {
@@ -658,7 +640,7 @@ export default {
 | show-allcheck |  是否开启组件的全选模式	| Boolean |	-   |     false   |
 | placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
 | labelWidth | 自定义说明文字的宽度	| Number、String |	-   |     -   |
-| defaltValues | 默认选中的数据	| Array |	-   |     []   |
+| defalt-values | 默认选中的数据	| Array |	-   |     []   |
 
 ### children
 | 属性      | 说明    | 类型      | 默认值       |

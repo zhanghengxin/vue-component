@@ -74,6 +74,9 @@
             }
         },
         components: {Icon},
+        provide () {
+            return { TabsInstance: this }
+        },
         data () {
             return {
                 currentValue: this.value,

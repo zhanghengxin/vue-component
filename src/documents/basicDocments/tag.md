@@ -104,7 +104,6 @@
         methods: {
             click(){
                 this.list.push({name:'新增标签'})
-                console.log(this.list)
             }
         }
     }

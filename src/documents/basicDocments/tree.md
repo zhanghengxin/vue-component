@@ -49,7 +49,8 @@
                                    name: 'parent 1-2',
                                    children: [
                                        {
-                                           name: 'leaf 1-2-1'
+                                           name: 'leaf 1-2-1',
+                                           disabled:true
                                        },
                                        {
                                            name: 'leaf 1-2-1'
@@ -167,6 +168,7 @@
         <div>
            <b-checkbox v-model="checkboxOptions.parent">是否级联父级数据</b-checkbox>
            <b-checkbox v-model="checkboxOptions.children">是否级联子级数据</b-checkbox>
+           <b-checkbox v-model="checkboxOptions.disabled">是否级联禁用数据</b-checkbox>
            <b-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions' @on-check='handleChecked'></b-tree>
         </div>
     </div>
@@ -174,6 +176,9 @@
 ::: code
 ```html
     <div>
+        <b-checkbox v-model="checkboxOptions.parent">是否级联父级数据</b-checkbox>
+        <b-checkbox v-model="checkboxOptions.children">是否级联子级数据</b-checkbox>
+        <b-checkbox v-model="checkboxOptions.disabled">是否级联禁用数据</b-checkbox>
         <b-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions' @on-check='handleChecked'></b-tree>
     </div>
     <script>
@@ -181,62 +186,81 @@
             data () {
                 return {
                     data3:[
-                       {
-                           name: 'parent 1',
-                           expand: true,
-                           children: [
-                               {
-                                   name: 'parent 1-1',
-                                   checked:true,
-                                   children: [
-                                       {
-                                           name: 'leaf 1-1-1'
-                                       },
-                                       {
-                                           name: 'leaf 1-1-2'
-                                       }
-                                   ]
-                               },
-                               {
-                                   name: 'parent 1-2',
-                                   children: [
-                                       {
-                                           name: 'leaf 1-2-1'
-                                       },
-                                       {
-                                           name: 'leaf 1-2-2',
-                                           children: [
-                                              {
-                                                  name: 'parent 1-2-2-1',
-                                                  children: [
-                                                      {
-                                                          name: 'leaf 1-2-2-1-1'
-                                                      },
-                                                      {
-                                                          name: 'leaf 1-2-2-1-2'
-                                                      }
-                                                  ]
-                                              },
-                                              {
-                                                  name: 'parent 1-2-2-1',
-                                                  children: [
-                                                      {
-                                                          name: 'leaf 1-2-2-1-1'
-                                                      },
-                                                      {
-                                                          name: 'leaf 1-2-2-1-2'
-                                                      }
-                                                  ]
-                                              }
-                                          ]
-                                       }
-                                   ]
-                               }
-                           ]
-                       }
+                        {
+                            name: 'root',
+                            expand: true,
+                            id:1,
+                            children: [
+                                {
+                                    name: 'parent1',
+                                    checked:true,
+                                    id:2,
+                                    children: [
+                                        {
+                                            id:3,
+                                            checked:true,
+                                            name: 'leaf1'
+                                        },
+                                        {
+                                            id:4,
+                                            checked:true,
+                                            name: 'leaf2'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id:5,
+                                    name: 'parent2',
+                                    expand: true,
+                                    children: [
+                                        {
+                                            id:6,
+                                            name: 'leaf 1-2-1'
+                                        },
+                                        {
+                                            id:7,
+                                            name: 'leaf 1-2-2',
+                                            expand: true,
+                                            children: [
+                                                {
+                                                    id:8,
+                                                    name: 'parent 1-2-2-1',
+                                                    disabled:true,
+                                                    children: [
+                                                        {
+                                                            id:10,
+                                                            name: 'leaf 1-2-2-1-1'
+                                                        },
+                                                        {
+                                                            id:11,
+                                                            name: 'leaf 1-2-2-1-2'
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    id:9,
+                                                    name: 'parent 1-2-2-1',
+                                                    children: [
+                                                        {
+                                                            id:12,
+                                                            name: 'leaf 1-2-2-1-1'
+                                                        },
+                                                        {
+                                                            id:13,
+                                                            name: 'leaf 1-2-2-1-2'
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
                     ],
                     checkboxOptions: {
                         parent: true,
+                        disabled: false,
                         children: true
                     }
                 }
@@ -424,7 +448,7 @@ Render 函数的第二个参数，包含三个字段：
             methods: {
                 remove (root, node, data) {
                     const parentKey = root.find(el => el === node).parent;
-                    if(parentKey === undefined) return;
+                    if (parentKey === undefined) return;
                     const parent = root.find(el => el.nodeKey === parentKey).node;
                     const index = parent.children.indexOf(data);
                     parent.children.splice(index, 1);
@@ -437,7 +461,7 @@ Render 函数的第二个参数，包含三个字段：
                     });
                     this.$set(data, 'children', children);
                 },
-                renderContent (h, { root, node, data }) {
+                renderContent (h, {root, node, data}) {
                     return h('span', {
                         style: {
                             display: 'inline-block',
@@ -455,7 +479,7 @@ Render 函数的第二个参数，包含三个字段：
                             }
                         }, [
                             h('b-icon', {
-                                props: {type:'tianjia-chuangjian'},
+                                props: {type: 'tianjia-chuangjian'},
                                 style: {
                                     marginRight: '8px'
                                 },
@@ -464,7 +488,7 @@ Render 函数的第二个参数，包含三个字段：
                                 }
                             }),
                             h('b-icon', {
-                                props: {type:'quxiao-guanbi-shanchu'},
+                                props: {type: 'quxiao-guanbi-shanchu'},
                                 on: {
                                     'on-click': () => { this.remove(root, node, data) }
                                 }
@@ -472,6 +496,116 @@ Render 函数的第二个参数，包含三个字段：
                         ])
                     ]);
                 }
+            }
+        }
+    </script>
+```
+:::
+</div>
+
+### 自动滚动
+
+单选模式下，设置 `auto-scroll` 可开启自动滚动功能，选中数据时滚动条自动调节。
+
+<div class="example">
+    <div class="example-box">
+        <div>
+            <b-tree style="height:150px;overflow: scroll"  auto-scroll :data='data8'></b-tree>
+        </div>
+    </div>
+
+::: code
+```html
+    <div>
+        <b-tree style="height:150px;overflow: scroll" auto-scroll :data='data8'></b-tree>
+    </div>
+    <script>
+        export default {
+            data () {
+                return {
+                    data8:[
+                        {
+                            name: 'parent 1',
+                            expand: true,
+                            children: [
+                                {
+                                    name: 'parent 1-1',
+                                    expand: true,
+                                    children: [
+                                        {
+                                            name: 'leaf 1-1-1'
+                                        },
+                                        {
+                                            name: 'leaf 1-1-2'
+                                        }
+                                    ]
+                                },
+                                {
+                                    name: 'parent 1-2',
+                                    expand: true,
+                                    children: [
+                                        {
+                                            name: 'leaf 1-1-1'
+                                        },
+                                        {
+                                            name: 'leaf 1-1-2'
+                                        }
+                                    ]
+                                },
+                                {
+                                    name: 'parent 1-3',
+                                    expand: true,
+                                    children: [
+                                        {
+                                            name: 'leaf 1-1-1'
+                                        },
+                                        {
+                                            name: 'leaf 1-1-2'
+                                        }
+                                    ]
+                                },
+                                {
+                                    name: 'parent 1-4',
+                                    expand: true,
+                                    children: [
+                                        {
+                                            selected:true,
+                                            name: 'leaf 1-2-1'
+                                        },
+                                        {
+                                            name: 'leaf 1-2-1'
+                                        }
+                                    ]
+                                },
+                                {
+                                    name: 'parent 1-5',
+                                    expand: true,
+                                    children: [
+                                        {
+                                            name: 'leaf 1-1-1'
+                                        },
+                                        {
+                                            name: 'leaf 1-1-2'
+                                        }
+                                    ]
+                                },
+                                {
+                                    name: 'parent 1-6',
+                                    expand: true,
+                                    children: [
+                                        {
+                                            name: 'leaf 1-1-1'
+                                        },
+                                        {
+                                            name: 'leaf 1-1-2'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
         }
     </script>
 ```
@@ -481,23 +615,39 @@ Render 函数的第二个参数，包含三个字段：
 ### 综合应用
 在需要对节点进行过滤时，传入`filterText`关键字进行过滤，同时也需要设置`filter-method`作为过滤函数。<br>
 通过`default-expanded-values` 默认选中的节点。<br>
-通过`check-cascade` 控制树形数据的级联效果。
-
+通过`default-expanded-values` 默认展开的节点。<br>
+通过`checkboxOptions`来配置级联的效果
 <div class="example">
     <div class="example-box">
         <div>
             <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
-            <b-checkbox v-model="checkCascade">包含下级</b-checkbox>
-            <b-tree :default-checked-values='defaultCheckedValues' showCheckbox :check-cascade='checkCascade' :data='data7' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
+            <b-checkbox  @on-change='changeCascade'>包含下级</b-checkbox>
+            <b-tree
+                :default-checked-values='defaultCheckedValues'
+                :default-expanded-values='defaultExpandedValues'
+                showCheckbox
+                :checkbox-options='dataOptions'
+                :data='data7'
+                :filter-text='filterText'
+                :filter-method='filterMethod'>
+            </b-tree>
         </div>
     </div>
 
 ::: code
 ```html
     <div>
-        <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
-        <b-checkbox v-model="checkCascade">包含下级</b-checkbox>
-        <b-tree :default-checked-values='defaultCheckedValues' showCheckbox :check-cascade='checkCascade' :data='data7' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
+       <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
+       <b-checkbox @on-change='changeCascade'>包含下级</b-checkbox>
+       <b-tree
+            :default-checked-values='defaultCheckedValues'
+            :default-expanded-values='defaultExpandedValues'
+            showCheckbox
+            :checkbox-options='dataOptions'
+            :data='data7'
+            :filter-text='filterText'
+            :filter-method='filterMethod'>
+       </b-tree>
     </div>
     <script>
         export default {
@@ -510,12 +660,10 @@ Render 函数的第二个参数，包含三个字段：
                         },
                         {
                            name: 'parent-1',
-                           expand: true,
                            id:2,
                            children: [
                                {
                                    name: 'parent 1-1',
-                                   expand: true,
                                    id:3,
                                    children: [
                                        {
@@ -531,7 +679,6 @@ Render 函数的第二个参数，包含三个字段：
                                {
                                    name: 'parent 1-2',
                                    id:6,
-                                   expand: true,
                                    children: [
                                        {
                                            id:7,
@@ -546,13 +693,20 @@ Render 函数的第二个参数，包含三个字段：
                            ]
                        }
                     ],
-                    checkCascade:true,
-                    defaultCheckedValues:[4,7]
+                    dataOptions: { // 多选级联配置
+                        parent: false, // 是否影响父级节点
+                        children: true // 是否影响子级节点
+                    },
+                    defaultCheckedValues:[4,7],
+                    defaultExpandedValues:[2,3]
                 }
             },
             methods: {
                 filterMethod(value, data){
                      return data.name.indexOf(value) !== -1
+                },
+                changeCascade(status){
+                    this.dataOptions.children = status
                 }
             }
         }
@@ -565,8 +719,8 @@ Render 函数的第二个参数，包含三个字段：
 export default {
     data () {
         return {
-            checkCascade:true,
             defaultCheckedValues:[4,7],
+            defaultExpandedValues:[2,3],
             data1:[
                {
                    name: 'parent 1',
@@ -588,7 +742,8 @@ export default {
                            name: 'parent 1-2',
                            children: [
                                {
-                                   name: 'leaf 1-2-1'
+                                   name: 'leaf 1-2-1',
+                                   disabled:true
                                },
                                {
                                    name: 'leaf 1-2-1'
@@ -652,74 +807,76 @@ export default {
                    ]}
                ],
             data3:[
-               {
-                   name: 'root',
-                   expand: true,
-                   id:1,
-                   children: [
-                       {
-                           name: 'parent1',
-                           checked:true,
-                           disabled:true,
-                           id:2,
-                           children: [
-                               {
-                                   id:3,
-                                   checked:true,
-                                   name: 'leaf1'
-                               },
-                               {
-                                   id:4,
-                                   checked:true,
-                                   name: 'leaf2'
-                               }
-                           ]
-                       },
-                       {
-                           id:5,
-                           name: 'parent2',
-                           children: [
-                               {
-                                   id:6,
-                                   name: 'leaf 1-2-1'
-                               },
-                               {
-                                   id:7,
-                                   name: 'leaf 1-2-2',
-                                   children: [
-                                      {
-                                          id:8,
-                                          name: 'parent 1-2-2-1',
-                                          children: [
-                                              {
-                                                  id:10,
-                                                  name: 'leaf 1-2-2-1-1'
-                                              },
-                                              {
-                                                  id:11,
-                                                  name: 'leaf 1-2-2-1-2'
-                                              }
-                                          ]
-                                      },
-                                      {
-                                          id:9,
-                                          name: 'parent 1-2-2-1',
-                                          children: [
-                                              {
-                                                  id:12,
-                                                  name: 'leaf 1-2-2-1-1'
-                                              },
-                                              {
-                                                  id:13,
-                                                  name: 'leaf 1-2-2-1-2'
-                                              }
-                                          ]
-                                      }
-                                  ]
-                               }
-                           ]
-                       }
-                   ]
+                {
+                    name: 'root',
+                    expand: true,
+                    id:1,
+                    children: [
+                        {
+                            name: 'parent1',
+                            checked:true,
+                            id:2,
+                            children: [
+                                {
+                                    id:3,
+                                    checked:true,
+                                    name: 'leaf1'
+                                },
+                                {
+                                    id:4,
+                                    checked:true,
+                                    name: 'leaf2'
+                                }
+                            ]
+                        },
+                        {
+                            id:5,
+                            name: 'parent2',
+                            expand: true,
+                            children: [
+                                {
+                                    id:6,
+                                    name: 'leaf 1-2-1'
+                                },
+                                {
+                                    id:7,
+                                    name: 'leaf 1-2-2',
+                                    expand: true,
+                                    children: [
+                                        {
+                                            id:8,
+                                            name: 'parent 1-2-2-1',
+                                            disabled:true,
+                                            children: [
+                                                {
+                                                    id:10,
+                                                    name: 'leaf 1-2-2-1-1'
+                                                },
+                                                {
+                                                    id:11,
+                                                    name: 'leaf 1-2-2-1-2'
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            id:9,
+                                            name: 'parent 1-2-2-1',
+                                            children: [
+                                                {
+                                                    id:12,
+                                                    name: 'leaf 1-2-2-1-1'
+                                                },
+                                                {
+                                                    id:13,
+                                                    name: 'leaf 1-2-2-1-2'
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ],
             data4:[
@@ -822,12 +979,10 @@ export default {
                 },
                 {
                    name: 'parent-1',
-                   expand: true,
                    id:2,
                    children: [
                        {
                            name: 'parent 1-1',
-                           expand: true,
                            id:3,
                            children: [
                                {
@@ -843,7 +998,6 @@ export default {
                        {
                            name: 'parent 1-2',
                            id:6,
-                           expand: true,
                            children: [
                                {
                                    id:7,
@@ -858,11 +1012,97 @@ export default {
                    ]
                }
             ],
+            data8:[
+                {
+                    name: 'parent 1',
+                    expand: true,
+                    children: [
+                        {
+                            name: 'parent 1-1',
+                            expand: true,
+                            children: [
+                                {
+                                    name: 'leaf 1-1-1'
+                                },
+                                {
+                                    name: 'leaf 1-1-2'
+                                }
+                            ]
+                        },
+                        {
+                            name: 'parent 1-2',
+                            expand: true,
+                            children: [
+                                {
+                                    name: 'leaf 1-1-1'
+                                },
+                                {
+                                    name: 'leaf 1-1-2'
+                                }
+                            ]
+                        },
+                        {
+                            name: 'parent 1-3',
+                            expand: true,
+                            children: [
+                                {
+                                    name: 'leaf 1-1-1'
+                                },
+                                {
+                                    name: 'leaf 1-1-2'
+                                }
+                            ]
+                        },
+                        {
+                            name: 'parent 1-4',
+                            expand: true,
+                            children: [
+                                {
+                                    selected:true,
+                                    name: 'leaf 1-2-1'
+                                },
+                                {
+                                    name: 'leaf 1-2-1'
+                                }
+                            ]
+                        },
+                        {
+                            name: 'parent 1-5',
+                            expand: true,
+                            children: [
+                                {
+                                    name: 'leaf 1-1-1'
+                                },
+                                {
+                                    name: 'leaf 1-1-2'
+                                }
+                            ]
+                        },
+                        {
+                            name: 'parent 1-6',
+                            expand: true,
+                            children: [
+                                {
+                                    name: 'leaf 1-1-1'
+                                },
+                                {
+                                    name: 'leaf 1-1-2'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
             accordionOptions: {
                 isCache: true // 是否缓存其他同级节点的展开状态
             },
+            dataOptions: { // 多选级联配置
+                parent: false, // 是否影响父级节点
+                children: true // 是否影响子级节点
+            },
             checkboxOptions: { // 多选级联配置
                 parent: true, // 是否影响父级节点
+                disabled: false, // 是否影响父级节点
                 children: true // 是否影响子级节点
             },
             filterText:''
@@ -875,11 +1115,13 @@ export default {
         handleChecked (options){
             console.log(`选中获取的数据:`,options)
         },
+        changeCascade(status){
+            this.dataOptions.children = status
+        },
         filterMethod(value, data){
              return data.name.indexOf(value) !== -1
         },
         loadMethod (item, callback) {
-            console.log(3123)
             setTimeout(() => {
                 const data = [
                     {
@@ -960,11 +1202,13 @@ export default {
 | default-opt     | 各种选中效果的配置项，具体配置见下文   | 	Object    |  -  |   -    |
 | draggable     |  是否开启节点拖拽编辑 | 	Boolean    |  -  |    fasle    |
 | check-cascade     |  是否开启父子级联效果 | 	Boolean    |  -  |     true    |
+| auto-scroll     |  是否开启自动滚动功能、此功能只在单选模式生效，选中数据时滚动条自动调节 | 	Boolean    |  -  |     true    |
 | render     |  自定义渲染内容，见示例	 | 	Function    |  -  |    -    |
 | class-name      | 给 item-name 附加的 class	| String | - |   -  |
 | width | 开启 `label` 模式时生效,自定义宽度	| Number |	-   |     -   |
 | placement    | 下拉框出现的位置 | string | `top`, `top-start`, `top-end`, `bottom`, `bottom-start`,<br/>`bottom-end`, `left`,`left-start`, `left-end`, <br/>`right`, `right-start`, `right-end`| bottom-start |
 | label-width | 开启 `label` 和`fixed` 模式时生效,自定义label文字宽度	| Number |	-   |     -   |
+| default-expanded-values | 默认勾选的节点的 key 的数组		| Array |	-   |    []   |
 
 
 ### Tree methods
@@ -1007,6 +1251,7 @@ export default {
 |---------- |-------- |---------- |-------------  |
 | parent      |   勾选时是否级联父级节点 |  Boolean  |  true    |
 | children      |  勾选时是否级联子级节点  |  Boolean  |  true    |
+| disabled      |  勾选时是否级联禁用节点 |  Boolean  |  true    |
 
 ### events
 | 方法名	      | 说明	    | 参数 |

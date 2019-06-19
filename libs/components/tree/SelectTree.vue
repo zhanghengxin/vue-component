@@ -48,6 +48,7 @@
                         :default-checked-values="defaultValues"
                         :draggable='draggable'
                         :accordion='accordion'
+                        @data-change="dateChange"
                         :loading='loading'
                         :show-checkbox="showCheckbox"
                         :load-method="loadMethod"
@@ -91,6 +92,8 @@ export default {
             values: [],
             dropWidth: '',
             options: [],
+            allCheckText: '',
+            showAllcheckbox: false,
             popupVisible: false
         }
     },
@@ -190,21 +193,18 @@ export default {
         data: {
             deep: true,
             handler () {
-                this.$nextTick(() => {
-                    this.getTreeValues()
-                })
+                this.getTreeValues()
             }
         },
         filterText () {
             if (this.autoFilter) this.treeFilterText = this.filterText
+        },
+        defaultValues: {
+            deep: true,
+            handler () {
+                this.getTreeValues()
+            }
         }
-        // ,
-        // defaultValues: {
-        //     deep: true,
-        //     handler () {
-        //         this.defaultRebuild()
-        //     }
-        // }
     },
     computed: {
         wrapSty () {
@@ -216,26 +216,25 @@ export default {
             return {
                 [prefix + 'drop-transfer']: this.transfer
             }
-        },
-        allCheckText () {
-            let status = true
-            this.data.forEach((item) => {
-                if (!item[this.defaultOpt.checkedKey]) status = false
-            })
-            return status ? '取消全选' : '全选'
-        },
-        showAllcheckbox () {
-            let status = true
-            this.data.forEach((item) => {
-                if (item.invisible) status = false
-            })
-            return this.showAllcheck && this.showCheckbox && status
         }
     },
     mounted () {
-        if (this.showCheckbox) this.getTreeValues()
+        this.getTreeValues()
+        this.dateChange(this.data)
     },
     methods: {
+        dateChange (data) {
+            let status = true
+            data.forEach((item) => {
+                if (!item[this.defaultOpt.checkedKey]) status = false
+            })
+            this.allCheckText = status ? '取消全选' : '全选'
+            let showStatus = true
+            data.forEach((item) => {
+                if (item.invisible) showStatus = false
+            })
+            this.showAllcheckbox = this.showAllcheck && this.showCheckbox && showStatus
+        },
         clickPopup () {
             this.popupVisible = !this.popupVisible
         },
@@ -249,16 +248,9 @@ export default {
             this.popupVisible = false
         },
         allCheckClick (status) {
-            let changes
-            this.data.forEach((item) => {
-                changes = {
-                    checked: status,
-                    isFormat: true,
-                    nodeKey: item.nodeKey
-                }
-                this.$refs.tree.handleCheck(changes)
-            })
+            this.$refs.tree.allCheckedData(status)
             this.$emit('on-all-check', status)
+            this.getTreeValues()
         },
         handleCheck (options) {
             this.values = options.checkedNodes
@@ -270,44 +262,28 @@ export default {
             }
         },
         handleSelect (options) {
-            const {defaultOpt} = this
-            this.values = [
-                {
-                    name: options.data[defaultOpt.nameKey],
-                    id: options.data[defaultOpt.idKey]
-                }
-            ]
+            this.values = [options.data]
             this.$emit('on-select', options)
             this.popupVisible = false
         },
         handleExpand (options) {
             this.$emit('on-expand', options)
         },
-        clearValues () {
-            const {data} = this
-            data.forEach((node) => {
-                this.downTraversal(node, {
-                    isSelectCancel: true,
-                    id: this.values[0].id
-                })
-            })
+        clearValues (type) {
+            if (type === 'select') {
+                this.$refs.tree.allCheckedData(false, type)
+            } else {
+                this.$refs.tree.allCheckedData(false)
+            }
+            this.values = []
             this.$emit('on-clear')
         },
         getTreeValues () {
-            this.values = this.showCheckbox ? this.$refs.tree.getCheckedNodes() : this.$refs.tree.getSelectedNodes()
-        },
-        downTraversal (node, options) {
-            const {defaultOpt} = this
-            const childrenKey = defaultOpt.childrenKey
-            const selectedKey = defaultOpt.selectedKey
-            if (options && options.isSelectCancel) {
-                if (node[defaultOpt.idKey] === options.id) this.$set(node, selectedKey, false)
-            }
-            if (node[childrenKey]) {
-                node[childrenKey].forEach(child => {
-                    this.downTraversal(child, options)
-                })
-            }
+            this.$nextTick(() => {
+                if (this.$refs.tree) {
+                    this.values = this.showCheckbox ? this.$refs.tree.getCheckedNodes() : this.$refs.tree.getSelectedNodes()
+                }
+            })
         },
         getDropWidth (width) {
             this.dropWidth = width

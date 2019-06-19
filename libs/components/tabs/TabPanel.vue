@@ -1,5 +1,5 @@
 <template>
-    <div v-if="show" :class="tabPanel">
+    <div v-if="show" :class="tabPanel" :style="contentStyle">
         <slot> </slot>
     </div>
 </template>
@@ -19,8 +19,14 @@ export default {
     computed: {
         tabPanel () {
             return TABPANELCSS
+        },
+        contentStyle () {
+            return {
+                visibility: this.TabsInstance.activeKey !== this.currentName ? 'hidden' : 'visible'
+            }
         }
     },
+    inject: ['TabsInstance'],
     props: {
         name: {
             type: String
