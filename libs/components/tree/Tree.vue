@@ -57,6 +57,12 @@ export default {
                 this.defaultRebuild('checked')
             }
         },
+        defaultExpandedValues: {
+            deep: true,
+            handler () {
+                this.defaultRebuild('expaned')
+            }
+        },
         filterText (value) {
             this.filterTreeData(value)
         },
@@ -154,6 +160,7 @@ export default {
         this.rebuidData()
         this.$nextTick(() => {
             this.defaultRebuild('checked')
+            this.defaultRebuild('expaned')
             this.filterTreeData(this.filterText)
         })
     },
@@ -233,20 +240,26 @@ export default {
             })
         },
         defaultRebuild (type) {
-            let {idKey} = this.defaultOpt
+            let {dataList, defaultOpt} = this
+            let {idKey} = defaultOpt
             let arr = type === 'checked' ? this.defaultCheckedValues : this.defaultExpandedValues
-            let data = this.dataList
             if (arr.length) {
                 if (type === 'checked') {
                     if (this.showCheckbox) {
-                        let nodeKeys = data.filter(item => arr.includes(item.node[idKey]) || arr.includes(String(item.node[idKey]))).map(item => item.nodeKey)
+                        let nodeKeys = dataList.filter(item => arr.includes(item.node[idKey]) || arr.includes(String(item.node[idKey]))).map(item => item.nodeKey)
                         nodeKeys.forEach(item => {
                             this.handleCheck({checked: true, nodeKey: item, isFormat: true})
                         })
                     } else {
-                        let [node] = data.filter(item => (String(item.node[idKey]) === String(arr[0])))
+                        let [node] = dataList.filter(item => (String(item.node[idKey]) === String(arr[0])))
                         this.handleSelect(node.nodeKey, true)
                     }
+                } else {
+                    let nodes = dataList.filter(item => arr.includes(item.node[idKey]) || arr.includes(String(item.node[idKey]))).map(item => item)
+                    nodes.forEach(item => {
+                        this.$set(item.node, defaultOpt.expandKey, !item.node[defaultOpt.expandKey])
+                        this.handleExpand({data: item.node, isFormat: true})
+                    })
                 }
             }
         },
@@ -339,34 +352,32 @@ export default {
         },
         // 展开/关闭
         handleExpand (options) {
-            const _this = this
-            const expandKey = this.defaultOpt.expandKey
-            const childrenKey = this.defaultOpt.childrenKey
+            const {defaultOpt, dataList, accordionOptions, accordion} = this
+            const {expandKey, childrenKey} = defaultOpt
             const node = options.data
-            let dataList = this.dataList
-            if (this.accordion) { // 是否开启手风琴
-                if (!this.accordionOptions.isCache) { // 是否开启缓存
+            if (accordion) { // 是否开启手风琴
+                if (!accordionOptions.isCache && options.parents) { // 是否开启缓存
                     const parents = options.parents.map(item => {
                         return item.nodeKey
                     })
-                    this.dataList.forEach((item, index) => {
+                    dataList.forEach((item, index) => {
                         if (parents.indexOf(index) < 0) {
-                            _this.$set(dataList[index].node, expandKey, false)
+                            this.$set(dataList[index].node, expandKey, false)
                         }
                     })
                 } else {
                     let parentKey = dataList[node.nodeKey].parent
                     if (parentKey !== undefined) {
                         let parent = dataList[parentKey].node
-                        parent[childrenKey].forEach(function (item) {
+                        parent[childrenKey].forEach((item) => {
                             if (item.nodeKey !== node.nodeKey) {
-                                _this.$set(dataList[item.nodeKey].node, expandKey, false)
+                                this.$set(dataList[item.nodeKey].node, expandKey, false)
                             }
                         })
                     }
                 }
             }
-            this.$emit('on-expand', {data: node})
+            if (!options.isFormat) this.$emit('on-expand', {data: node})
         },
         // 模糊检索
         filterTreeData (value) {

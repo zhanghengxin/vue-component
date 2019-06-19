@@ -615,14 +615,22 @@ Render 函数的第二个参数，包含三个字段：
 ### 综合应用
 在需要对节点进行过滤时，传入`filterText`关键字进行过滤，同时也需要设置`filter-method`作为过滤函数。<br>
 通过`default-expanded-values` 默认选中的节点。<br>
-通过`check-cascade` 控制树形数据的级联效果。
-
+通过`default-expanded-values` 默认展开的节点。<br>
+通过`checkboxOptions`来配置级联的效果
 <div class="example">
     <div class="example-box">
         <div>
             <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
-            <b-checkbox :value="checkCascade" @on-change='changeCascade'>包含下级</b-checkbox>
-            <b-tree :default-checked-values='defaultCheckedValues' showCheckbox :checkbox-options='dataOptions' :data='data7' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
+            <b-checkbox  @on-change='changeCascade'>包含下级</b-checkbox>
+            <b-tree
+                :default-checked-values='defaultCheckedValues'
+                :default-expanded-values='defaultExpandedValues'
+                showCheckbox
+                :checkbox-options='dataOptions'
+                :data='data7'
+                :filter-text='filterText'
+                :filter-method='filterMethod'>
+            </b-tree>
         </div>
     </div>
 
@@ -630,8 +638,16 @@ Render 函数的第二个参数，包含三个字段：
 ```html
     <div>
        <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
-       <b-checkbox :value="checkCascade" @on-change='changeCascade'>包含下级</b-checkbox>
-       <b-tree :default-checked-values='defaultCheckedValues' showCheckbox :checkbox-options='dataOptions' :data='data7' :filter-text='filterText' :filter-method='filterMethod'></b-tree>
+       <b-checkbox @on-change='changeCascade'>包含下级</b-checkbox>
+       <b-tree
+            :default-checked-values='defaultCheckedValues'
+            :default-expanded-values='defaultExpandedValues'
+            showCheckbox
+            :checkbox-options='dataOptions'
+            :data='data7'
+            :filter-text='filterText'
+            :filter-method='filterMethod'>
+       </b-tree>
     </div>
     <script>
         export default {
@@ -644,12 +660,10 @@ Render 函数的第二个参数，包含三个字段：
                         },
                         {
                            name: 'parent-1',
-                           expand: true,
                            id:2,
                            children: [
                                {
                                    name: 'parent 1-1',
-                                   expand: true,
                                    id:3,
                                    children: [
                                        {
@@ -665,7 +679,6 @@ Render 函数的第二个参数，包含三个字段：
                                {
                                    name: 'parent 1-2',
                                    id:6,
-                                   expand: true,
                                    children: [
                                        {
                                            id:7,
@@ -680,12 +693,12 @@ Render 函数的第二个参数，包含三个字段：
                            ]
                        }
                     ],
-                    checkCascade:true,
                     dataOptions: { // 多选级联配置
                         parent: false, // 是否影响父级节点
                         children: true // 是否影响子级节点
                     },
-                    defaultCheckedValues:[4,7]
+                    defaultCheckedValues:[4,7],
+                    defaultExpandedValues:[2,3]
                 }
             },
             methods: {
@@ -706,8 +719,8 @@ Render 函数的第二个参数，包含三个字段：
 export default {
     data () {
         return {
-            checkCascade:true,
             defaultCheckedValues:[4,7],
+            defaultExpandedValues:[2,3],
             data1:[
                {
                    name: 'parent 1',
@@ -966,12 +979,10 @@ export default {
                 },
                 {
                    name: 'parent-1',
-                   expand: true,
                    id:2,
                    children: [
                        {
                            name: 'parent 1-1',
-                           expand: true,
                            id:3,
                            children: [
                                {
@@ -987,7 +998,6 @@ export default {
                        {
                            name: 'parent 1-2',
                            id:6,
-                           expand: true,
                            children: [
                                {
                                    id:7,
