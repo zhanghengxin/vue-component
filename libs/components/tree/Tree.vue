@@ -54,7 +54,6 @@ export default {
         defaultCheckedValues: {
             deep: true,
             handler () {
-                this.rebuidData()
                 this.defaultRebuild('checked')
             }
         },
