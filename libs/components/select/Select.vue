@@ -1,83 +1,11 @@
 <template>
-<<<<<<< HEAD
-   <div :class='[boxClasses]'
-        :style='selectBoxStyles'
-        v-click-outside="clickOutside"
-        >
-    <div :class='selectGroupClasses'
-        @mouseenter="clearShow = clearable && true"
-        @mouseleave="clearShow = clearable && false">
-        <div v-if='label'
-             :class='[prefixCls+`-label`]'
-             :style='labelStyles'
-        >{{label}}
-        </div>
-        <div
-            ref="reference"
-            :class="classes"
-            :style='[selectWidth]'
-            :tabindex="tabindex"
-            @blur="toggleHeaderFocus"
-            @focus="toggleHeaderFocus"
-            @click="toggleMenu"
-            @keydown.esc="handleKeydown"
-            @keydown.enter="handleKeydown"
-            @keydown.up.prevent="handleKeydown"
-            @keydown.down.prevent="handleKeydown"
-            @keydown.tab="handleKeydown"
-            @keydown.delete="handleInputDelete"
-            >
-            <input type="hidden" :name="name" :value="publicValue">
-            <div :class='[`${prefixCls}-main-flex`]'>
-                <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
-                <template v-if='multiple'>
-                    <div
-                        v-for="item in multipleValues"
-                        :key='item.value'
-                        :class="[prefixCls+`-tag`]">
-                        <span v-text="showMultipleValues(item)"></span>
-                        <Icon v-if="showMultipleIcon" type='quxiao-guanbi-shanchu'
-                                @click.native.stop='removeTag(item)'></Icon>
-                    </div>
-                </template>
-                <input
-                    type="text"
-                    v-if="filterabled"
-                    v-show='inputShow'
-                    v-model="query"
-                    :disabled="disabled"
-                    :class="[prefixCls + '-input']"
-                    :placeholder="localePlaceholder"
-                    :style="inputStyle"
-                    autocomplete="off"
-                    spellcheck="false"
-                    @blur='onInputBlur'
-                    @keydown.exact="slideDropAndSetInput"
-                    @focus="onInputFocus"
-                    @keydown.delete="handleInputDelete"
-                />
-            </div>
-        </div>
-        <Icon
-            type='xia'
-            v-if='!disabled && !autoComplete'
-            v-show='iconShow'
-            :class="[prefixCls+`-arrow`]">
-        </Icon>
-        <Icon
-            type='shibai-mian'
-            v-if='clearable && showMultipleIcon'
-            v-show='closeIcon'
-            :class="[prefixCls+`-arrow`]"
-            @click.native.stop='clearValues'>
-        </Icon>
-    </div>
-=======
     <div :class='[boxClasses]'
          :style='selectBoxStyles'
          v-click-outside="clickOutside"
     >
-        <div :class='selectGroupClasses'>
+        <div :class='selectGroupClasses'
+            @mouseenter="clearShow = clearable && true"
+            @mouseleave="clearShow = clearable && false">
             <div v-if='label'
                  :class='[prefixCls+`-label`]'
                  :style='labelStyles'
@@ -96,9 +24,7 @@
                 @keydown.up.prevent="handleKeydown"
                 @keydown.down.prevent="handleKeydown"
                 @keydown.tab="handleKeydown"
-                @keydown.delete="handleInputDelete"
-                @mouseenter="clearShow = clearable && true"
-                @mouseleave="clearShow = clearable && false">
+                @keydown.delete="handleInputDelete">
                 <input type="hidden" :name="name" :value="publicValue">
                 <div :class='[`${prefixCls}-main-flex`]'>
                     <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
@@ -129,22 +55,21 @@
                         @keydown.delete="handleInputDelete"
                     />
                 </div>
-                <Icon
-                    type='xia'
-                    v-if='!disabled && !autoComplete'
-                    v-show='iconShow'
-                    :class="[prefixCls+`-arrow`]">
-                </Icon>
-                <Icon
-                    type='shibai-mian'
-                    v-if='clearable'
-                    v-show='closeIcon'
-                    :class="[prefixCls+`-arrow`]"
-                    @click.native.stop='clearValues'>
-                </Icon>
             </div>
+            <Icon
+                type='xia'
+                v-if='!disabled && !autoComplete'
+                v-show='iconShow'
+                :class="[prefixCls+`-arrow`]">
+            </Icon>
+            <Icon
+                type='shibai-mian'
+                v-if='clearable'
+                v-show='closeIcon'
+                :class="[prefixCls+`-arrow`]"
+                @click.native.stop='clearValues'>
+            </Icon>
         </div>
->>>>>>> develop
         <slot name='tree'>
             <transition name='slide'>
                 <Drop
