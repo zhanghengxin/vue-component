@@ -3,7 +3,9 @@
         :style='selectBoxStyles'
         v-click-outside="clickOutside"
         >
-    <div :class='selectGroupClasses'>
+    <div :class='selectGroupClasses'
+        @mouseenter="clearShow = clearable && true"
+        @mouseleave="clearShow = clearable && false">
         <div v-if='label'
              :class='[prefixCls+`-label`]'
              :style='labelStyles'
@@ -23,8 +25,7 @@
             @keydown.down.prevent="handleKeydown"
             @keydown.tab="handleKeydown"
             @keydown.delete="handleInputDelete"
-            @mouseenter="clearShow = clearable && true"
-            @mouseleave="clearShow = clearable && false">
+            >
             <input type="hidden" :name="name" :value="publicValue">
             <div :class='[`${prefixCls}-main-flex`]'>
                 <span v-if='showContent' :class="showSelectedCls">{{showValue || localePlaceholder}}</span>
@@ -55,20 +56,20 @@
                     @keydown.delete="handleInputDelete"
                 />
             </div>
-            <Icon
-                type='xia'
-                v-if='!disabled && !autoComplete'
-                v-show='iconShow'
-                :class="[prefixCls+`-arrow`]">
-            </Icon>
-            <Icon
-                type='shibai-mian'
-                v-if='clearable && showMultipleIcon'
-                v-show='closeIcon'
-                :class="[prefixCls+`-arrow`]"
-                @click.native.stop='clearValues'>
-            </Icon>
         </div>
+        <Icon
+            type='xia'
+            v-if='!disabled && !autoComplete'
+            v-show='iconShow'
+            :class="[prefixCls+`-arrow`]">
+        </Icon>
+        <Icon
+            type='shibai-mian'
+            v-if='clearable && showMultipleIcon'
+            v-show='closeIcon'
+            :class="[prefixCls+`-arrow`]"
+            @click.native.stop='clearValues'>
+        </Icon>
     </div>
         <slot name='tree'>
             <transition name='slide'>
@@ -672,6 +673,7 @@ export default {
             }
 
             if (this.show) {
+                if (this.$slots.tree) return
                 e.preventDefault()
                 if (e.key === 'Tab') {
                     e.stopPropagation()

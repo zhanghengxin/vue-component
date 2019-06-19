@@ -17,7 +17,7 @@ $css-prefix-form-item: $css-prefix+'form-item';
     @include _borderColor($color);
     box-shadow: $shadow;
 
-    .#{$css-prefix-select}-arrow {
+    +.#{$css-prefix-select}-arrow {
       transform: rotate(180deg);
     }
   }
@@ -81,6 +81,10 @@ $css-prefix-form-item: $css-prefix+'form-item';
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
+
+  >div{
+    position: relative;
+  }
 
   //label
   &-label {
@@ -158,7 +162,6 @@ $css-prefix-form-item: $css-prefix+'form-item';
     font-size: 12px;
     user-select: none;
     cursor: pointer;
-    position: relative;
     background-color: $white;
     overflow: hidden;
     width: 100%;
