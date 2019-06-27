@@ -30,54 +30,56 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table :columns='columns1' :data='data1'></b-table>
+            <b-table :columns='columns1' :data='data1'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-         <b-table :columns='columns1' :data='data1'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table :columns='columns1' :data='data1'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
-                      columns1: [
-                          {
-                              title: 'Name',
-                              key: 'name',
-                              width:200
-                          },
-                          {
-                              title: 'Age',
-                              key: 'age',
-                              width:400
-                          },
-                          {
-                              title: 'Sex',
-                              key: 'sex',
-                              width:400
-                          }
-                      ],
-                      data1: [
-                          {
-                              name: '欧阳',
-                              age: 12,
-                              sex: '男'
-                          },
-                          {
-                              name: '青蛙',
-                              age: 18,
-                              sex: '男'
-                          },
-                          {
-                              name: '警长',
-                              age: 28,
-                              sex: '男'
-                          }
-                      ]
-                    }
+                    columns1: [
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width: 400
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 400
+                        }
+                    ],
+                    data1: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男'
+                        },
+                        {
+                            name: '青蛙',
+                            age: 18,
+                            sex: '男'
+                        },
+                        {
+                            name: '警长',
+                            age: 28,
+                            sex: '男'
+                        }
+                    ]
+                }
             }
         }
     </script>
@@ -90,51 +92,53 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border :columns='columns1' :data='data1'></b-table>
+            <b-table border :columns='columns1' :data='data1'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-         <b-table border :columns='columns1' :data='data1'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table border :columns='columns1' :data='data1'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
-                     columns1: [
-                          {
-                              title: 'Name',
-                              key: 'name',
-                              width:200
-                          },
-                          {
-                              title: 'Age',
-                              key: 'age'
-                          },
-                          {
-                              title: 'Sex',
-                              key: 'sex',
-                          }
-                     ],
-                     data1: [
-                          {
-                              name: '欧阳',
-                              age: 12,
-                              sex: '男'
-                          },
-                          {
-                              name: '青蛙',
-                              age: 18,
-                              sex: '男'
-                          },
-                          {
-                              name: '警长',
-                              age: 28,
-                              sex: '男'
-                          }
-                     ]
+                    columns1: [
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age'
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex'
+                        }
+                    ],
+                    data1: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男'
+                        },
+                        {
+                            name: '青蛙',
+                            age: 18,
+                            sex: '男'
+                        },
+                        {
+                            name: '警长',
+                            age: 28,
+                            sex: '男'
+                        }
+                    ]
                 }
             }
         }
@@ -148,52 +152,54 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border stripe :columns='columns1' :data='data1'></b-table>
+            <b-table border stripe :columns='columns1' :data='data1'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-         <b-table stripe border :columns='columns1' :data='data1'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table stripe border :columns='columns1' :data='data1'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
-                      columns1: [
-                          {
-                              title: 'Name',
-                              key: 'name',
-                              width:200
-                          },
-                          {
-                              title: 'Age',
-                              key: 'age'
-                          },
-                          {
-                              title: 'Sex',
-                              key: 'sex',
-                          }
-                      ],
-                      data1: [
-                          {
-                              name: '欧阳',
-                              age: 12,
-                              sex: '男'
-                          },
-                          {
-                              name: '青蛙',
-                              age: 18,
-                              sex: '男'
-                          },
-                          {
-                              name: '警长',
-                              age: 28,
-                              sex: '男'
-                          }
-                      ]
-                    }
+                    columns1: [
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age'
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex'
+                        }
+                    ],
+                    data1: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男'
+                        },
+                        {
+                            name: '青蛙',
+                            age: 18,
+                            sex: '男'
+                        },
+                        {
+                            name: '警长',
+                            age: 28,
+                            sex: '男'
+                        }
+                    ]
+                }
             }
         }
     </script>
@@ -206,57 +212,59 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border :columns='columns1' :data='data1'>
+            <b-table border :columns='columns1' :data='data1'>
                 <span class='example-render' slot='header'>自定义表头</span>
                 <span class='example-render' slot='footer'>自定义页脚</span>
-           </b-table>
+            </b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-         <b-table border :columns='columns1' :data='data1'>
-             <span class='example-render' slot='header'>自定义表头</span>
-             <span class='example-render' slot='footer'>自定义页脚</span>
-         </b-table>
-    </div>
+    <template>
+        <div>
+            <b-table border :columns='columns1' :data='data1'>
+                <span class='example-render' slot='header'>自定义表头</span>
+                <span class='example-render' slot='footer'>自定义页脚</span>
+            </b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
-                     columns1: [
-                          {
-                              title: 'Name',
-                              key: 'name',
-                              width:200
-                          },
-                          {
-                              title: 'Age',
-                              key: 'age'
-                          },
-                          {
-                              title: 'Sex',
-                              key: 'sex',
-                          }
-                     ],
-                     data1: [
-                          {
-                              name: '欧阳',
-                              age: 12,
-                              sex: '男'
-                          },
-                          {
-                              name: '青蛙',
-                              age: 18,
-                              sex: '男'
-                          },
-                          {
-                              name: '警长',
-                              age: 28,
-                              sex: '男'
-                          }
-                     ]
+                    columns1: [
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age'
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex'
+                        }
+                    ],
+                    data1: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男'
+                        },
+                        {
+                            name: '青蛙',
+                            age: 18,
+                            sex: '男'
+                        },
+                        {
+                            name: '警长',
+                            age: 28,
+                            sex: '男'
+                        }
+                    ]
                 }
             }
         }
@@ -265,82 +273,83 @@
 :::
 </div>
 
-
-
 ### 固定表头
 设置属性 `height` 给表格指定高度，会自动固定表头，设置`width` 会固定表格宽度。
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border width=1000 :columns='columns2' :data='data2'></b-table>
-           <br/>
-           <b-table border width=1000 height=150 :columns='columns2' :data='data2'></b-table>
+            <b-table border width=1000 :columns='columns2' :data='data2'></b-table>
+            <br/>
+            <b-table border width=1000 height=150 :columns='columns2' :data='data2'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-        <b-table border width=1000 :columns='columns2' :data='data2'></b-table>
-        <br/>
-        <b-table border width=1000 height=150 :columns='columns2' :data='data2'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table border width=1000 :columns='columns2' :data='data2'></b-table>
+            <br/>
+            <b-table border width=1000 height=150 :columns='columns2' :data='data2'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
                     columns2: [
                         {
-                          title: 'Name',
-                          key: 'name',
-                          width:200
+                            title: 'Name',
+                            key: 'name',
+                            width: 200
                         },
                         {
-                          title: 'Age',
-                          key: 'age',
-                          width:300
+                            title: 'Age',
+                            key: 'age',
+                            width: 300
                         },
                         {
-                          title: 'Sex',
-                          key: 'sex',
-                          width:300
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 300
                         },
                         {
-                          title: 'hobby',
-                          key: 'hobby',
-                          width:200
+                            title: 'hobby',
+                            key: 'hobby',
+                            width: 200
                         },
                         {
-                          title: 'occupation',
-                          key: 'occupation',
-                          width:200
+                            title: 'occupation',
+                            key: 'occupation',
+                            width: 200
                         }
                     ],
                     data2: [
                         {
-                          name: '欧阳',
-                          age: 12,
-                          sex: '男',
-                          hobby:'Swimming',
-                          occupation:'Doctor'
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         },
                         {
-                          name: '青蛙',
-                          age: 18,
-                          sex: '男',
-                          hobby:'Swimming',
-                          occupation:'Doctor'
+                            name: '青蛙',
+                            age: 18,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         },
                         {
-                          name: '警长',
-                          age: 28,
-                          sex: '男',
-                          hobby:'Swimming',
-                          occupation:'Doctor'
+                            name: '警长',
+                            age: 28,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         }
                     ]
                 }
             }
+        }
     </script>
 ```
 :::
@@ -351,18 +360,20 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border width=1000 height=200 :columns='columns3' :data='data3'></b-table>
-           <br/>
-           <b-table border width=1000 :columns='columns3' :data='data3'></b-table>
+            <b-table border width=1000 height=200 :columns='columns3' :data='data3'></b-table>
+            <br/>
+            <b-table border width=1000 :columns='columns3' :data='data3'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-         <b-table border width=1000 height=200 :columns='columns3' :data='data3'></b-table>
-         <b-table border width=1000 :columns='columns3' :data='data3'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table border width=1000 height=200 :columns='columns3' :data='data3'></b-table>
+            <b-table border width=1000 :columns='columns3' :data='data3'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
@@ -371,80 +382,81 @@
                         {
                             title: 'Name',
                             key: 'name',
-                            width:200,
-                            fixed:'left'
+                            width: 200,
+                            fixed: 'left'
                         },
                         {
                             title: 'Age',
                             key: 'age',
-                            width:300
+                            width: 300
                         },
                         {
                             title: 'Sex',
                             key: 'sex',
-                            width:300
+                            width: 300
                         },
                         {
                             title: 'hobby',
                             key: 'hobby',
-                            width:200
+                            width: 200
                         },
                         {
                             title: 'occupation',
                             key: 'occupation',
-                            width:400
+                            width: 400
                         },
                         {
                             title: 'Pets',
                             key: 'pets',
-                            width:200,
-                            fixed:'right'
-                        },
+                            width: 200,
+                            fixed: 'right'
+                        }
                     ],
                     data3: [
                         {
                             name: '欧阳',
                             age: 12,
                             sex: '男',
-                            hobby:'Swimming',
-                            pets:'dog',
-                            occupation:'Doctor'
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '青蛙',
                             age: 18,
                             sex: '男',
-                            pets:'cat',
-                            hobby:'Swimming',
-                            occupation:'Doctor'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '警长',
                             age: 28,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Swimming',
-                            occupation:'Doctor'
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '球形闪电',
                             age: 38,
                             sex: '男',
-                            pets:'cat',
-                            hobby:'Swimming',
-                            occupation:'Bodyguard'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Bodyguard'
                         },
                         {
                             name: '会长',
                             age: 48,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Thousand-hand Bodhisattva',
-                            occupation:'President'
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
                         }
                     ]
                 }
             }
+        }
     </script>
 ```
 :::
@@ -460,137 +472,141 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border width=1000 height=200 :columns='columns4' :data='data3'></b-table>
-           <br/>
-           <b-table border width=1000 height=200 :columns='columns5' :data='data3'></b-table>
-           <br/>
-           <b-table border width=1000 :columns='columns5' :data='data4'></b-table>
-           <br/>
+            <b-table border width=1000 height=200 :columns='columns4' :data='data3'></b-table>
+            <br/>
+            <b-table border width=1000 height=200 :columns='columns5' :data='data3'></b-table>
+            <br/>
+            <b-table border width=1000 :columns='columns5' :data='data4'></b-table>
+            <br/>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-        <b-table border width=1000 height=200 :columns='columns4' :data='data3'></b-table>
-        <b-table border width=1000 height=200 :columns='columns5' :data='data3'></b-table>
-        <b-table border width=1000 :columns='columns5' :data='data4'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table border width=1000 height=200 :columns='columns4' :data='data3'></b-table>
+            <b-table border width=1000 height=200 :columns='columns5' :data='data3'></b-table>
+            <b-table border width=1000 :columns='columns5' :data='data4'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
                     columns4: [
-                         {
-                             title: 'selection',
-                             type:'selection',
-                             fixed:'left',
-                             width:80,
-                             align:'center'
-                         },
-                         {
-                             title: 'Name',
-                             key: 'name',
-                             width:200
-                         },
-                         {
-                             title: 'Age',
-                             key: 'age',
-                             width:300
-                         },
-                         {
-                             title: 'Sex',
-                             key: 'sex',
-                             width:300
-                         },
-                         {
-                             title: 'hobby',
-                             key: 'hobby',
-                             width:200
-                         },
-                         {
-                             title: 'occupation',
-                             key: 'occupation',
-                             width:200
-                         }
+                        {
+                            title: 'selection',
+                            type: 'selection',
+                            fixed: 'left',
+                            width: 80,
+                            align: 'center'
+                        },
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width: 300
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 300
+                        },
+                        {
+                            title: 'hobby',
+                            key: 'hobby',
+                            width: 200
+                        },
+                        {
+                            title: 'occupation',
+                            key: 'occupation',
+                            width: 200
+                        }
                     ],
                     columns5: [
-                         {
-                             title: 'selection',
-                             type:'selection',
-                             width:80,
-                             align:'center'
-                         },
-                         {
-                             title: 'Name',
-                             key: 'name',
-                             width:200
-                         },
-                         {
-                             title: 'Age',
-                             key: 'age',
-                             width:300
-                         },
-                         {
-                             title: 'Sex',
-                             key: 'sex',
-                             width:300
-                         },
-                         {
-                             title: 'hobby',
-                             key: 'hobby',
-                             width:200
-                         },
-                         {
-                             title: 'occupation',
-                             key: 'occupation',
-                             width:200
-                         }
+                        {
+                            title: 'selection',
+                            type: 'selection',
+                            width: 80,
+                            align: 'center'
+                        },
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width: 300
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 300
+                        },
+                        {
+                            title: 'hobby',
+                            key: 'hobby',
+                            width: 200
+                        },
+                        {
+                            title: 'occupation',
+                            key: 'occupation',
+                            width: 200
+                        }
                     ],
                     data3: [
                         {
                             name: '欧阳',
                             age: 12,
                             sex: '男',
-                            hobby:'Swimming',
-                            pets:'dog',
-                            occupation:'Doctor'
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '青蛙',
                             age: 18,
                             sex: '男',
-                            pets:'cat',
-                            hobby:'Swimming',
-                            occupation:'Doctor'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '警长',
                             age: 28,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Swimming',
-                            occupation:'Doctor'
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '球形闪电',
                             age: 38,
                             sex: '男',
-                            pets:'cat',
-                            hobby:'Swimming',
-                            occupation:'Bodyguard'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Bodyguard'
                         },
                         {
                             name: '会长',
                             age: 48,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Thousand-hand Bodhisattva',
-                            occupation:'President'
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
                         }
-                    ]
+                    ],
+                    data4: []
                 }
             }
+        }
     </script>
 ```
 :::
@@ -605,15 +621,17 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border width=1000 :columns='columns6' :data='data5'></b-table>
+            <b-table border width=1000 :columns='columns6' :data='data5'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-         <b-table border width=1000 :columns='columns6' :data='data5'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table border width=1000 :columns='columns6' :data='data5'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
@@ -623,102 +641,103 @@
                             name: '欧阳',
                             age: 12,
                             sex: '男',
-                            hobby:'Swimming',
-                            pets:'dog',
-                            occupation:'Doctor',
-                            _disabled:true
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor',
+                            _disabled: true
                         },
                         {
                             name: '青蛙',
                             age: 18,
                             sex: '男',
-                            pets:'cat',
-                            _checked:true,
-                            hobby:'Swimming',
-                            occupation:'Doctor'
+                            pets: 'cat',
+                            _checked: true,
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '警长',
                             age: 28,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Swimming',
-                            occupation:'Doctor'
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         }
                     ],
                     columns6: [
-                       {
-                           title: 'selection',
-                           type:'selection',
-                           fixed:'left',
-                           width:35,
-                           align:'center'
-                       },
-                       {
-                           title: 'Name',
-                           key: 'name',
-                           width:200,
-                           render: (h, params) => {
-                               return h('div', [
-                                   h('b-input', {
-                                       on: {
-                                           'on-change': (data) => {
-                                               this.edit(data,params.index)
-                                           }
-                                       },
-                                       value:params
-                                   })
-                               ])
-                           }
-                       },
-                       {
-                           title: 'Age',
-                           key: 'age',
-                           width:300
-                       },
-                       {
-                           title: 'Sex',
-                           key: 'sex',
-                           width:300
-                       },
-                       {
-                           title: 'hobby',
-                           key: 'hobby',
-                           width:200
-                       },
-                       {
-                           title: 'occupation',
-                           key: 'occupation',
-                           width:120,
-                           fixed:'right',
-                           align:'center',
-                           render: (h, params) => {
-                               return h('div', [
-                                   h('b-button', {
-                                       props: {
-                                           type: 'error',
-                                           size: 'small'
-                                       },
-                                       on: {
-                                           'on-click': () => {
-                                               this.remove(params.index)
-                                           }
-                                       }
-                                   }, 'Delete')
-                               ])
-                           }
-                       }
+                        {
+                            title: 'selection',
+                            type: 'selection',
+                            fixed: 'left',
+                            width: 35,
+                            align: 'center'
+                        },
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200,
+                            render: (h, params) => {
+                                return h('div', [
+                                    h('b-input', {
+                                        on: {
+                                            'on-change': (data) => {
+                                                this.edit(data, params.index)
+                                            }
+                                        },
+                                        value: params
+                                    })
+                                ])
+                            }
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width: 300
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 300
+                        },
+                        {
+                            title: 'hobby',
+                            key: 'hobby',
+                            width: 200
+                        },
+                        {
+                            title: 'occupation',
+                            key: 'occupation',
+                            width: 120,
+                            fixed: 'right',
+                            align: 'center',
+                            render: (h, params) => {
+                                return h('div', [
+                                    h('b-button', {
+                                        props: {
+                                            type: 'error',
+                                            size: 'small'
+                                        },
+                                        on: {
+                                            'on-click': () => {
+                                                this.remove(params.index)
+                                            }
+                                        }
+                                    }, 'Delete')
+                                ])
+                            }
+                        }
                     ]
                 }
             },
-            methods:{
-                remove(index){
-                    this.data5.splice(index,1)
+            methods: {
+                remove (index) {
+                    this.data5.splice(index, 1)
                 },
-                edit(data,index) {
+                edit (data, index) {
                     this.data5[index].age = new Date()
                 }
             }
+        }
     </script>
 ```
 :::
@@ -734,101 +753,104 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table @on-sort-change="sortChange" border width=1000 :columns='columns7' :data='data6'></b-table>
+            <b-table @on-sort-change="sortChange" border width=1000 :columns='columns7' :data='data6'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-         <b-table @on-sort-change="sortChange" border width=1000 :columns='columns7' :data='data6'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table @on-sort-change="sortChange" border width=1000 :columns='columns7' :data='data6'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
                     columns7: [
-                       {
-                           title: 'Name',
-                           key: 'name',
-                           width:200
-                       },
-                       {
-                           title: 'Age',
-                           key: 'age',
-                           sortable:true,
-                           sortType:'asc',
-                           width:300
-                       },
-                       {
-                           title: 'Sex',
-                           key: 'sex',
-                           width:300
-                       },
-                       {
-                           title: 'hobby',
-                           key: 'hobby',
-                           width:200
-                       },
-                       {
-                           title: 'Pets',
-                           key: 'pets',
-                           width:200,
-                           sortable:true,
-                           fixed:'right'
-                       }
-                   ],
-                   data6: [
-                       {
-                           name: '欧阳',
-                           age: 12,
-                           sex: '男',
-                           hobby:'Swimming',
-                           pets:'dog',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '青蛙',
-                           sex: '男',
-                           age: 22,
-                           pets:'cat',
-                           hobby:'Swimming',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '警长',
-                           age: 18,
-                           sex: '男',
-                           pets:'rhizomys',
-                           hobby:'Swimming',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '球形闪电',
-                           age: 6,
-                           sex: '男',
-                           pets:'cat',
-                           hobby:'Swimming',
-                           occupation:'Bodyguard'
-                       },
-                       {
-                           name: '会长',
-                           age: 38,
-                           sex: '男',
-                           pets:'rhizomys',
-                           hobby:'Thousand-hand Bodhisattva',
-                           occupation:'President'
-                       }
-                   ]
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            sortable: true,
+                            sortType: 'asc',
+                            width: 300
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 300
+                        },
+                        {
+                            title: 'hobby',
+                            key: 'hobby',
+                            width: 200
+                        },
+                        {
+                            title: 'Pets',
+                            key: 'pets',
+                            width: 200,
+                            sortable: true,
+                            fixed: 'right'
+                        }
+                    ],
+                    data6: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            sex: '男',
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
+                        }
+                    ]
                 }
             },
-            methods:{
-                sortChange(options){
-                    console.log(options.column,'column')
-                    console.log(options.key,'key')
-                    console.log(options.order,'order')
+            methods: {
+                sortChange (options) {
+                    console.log(options.column, 'column')
+                    console.log(options.key, 'key')
+                    console.log(options.order, 'order')
                 }
             }
+        }
     </script>
 ```
 :::
@@ -843,162 +865,201 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border width=1000 :columns='columns8' :data='data7'></b-table>
-           <br/>
-           <b-table border width=1000 :columns='columns3' :data='data8'></b-table>
+            <b-table border width=1000 :columns='columns8' :data='data7'></b-table>
+            <br/>
+            <b-table border width=1000 :columns='columns3' :data='data8'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-        <b-table border width=1000 :columns='columns8' :data='data7'></b-table>
-        <br/>
-        <b-table border width=1000 :columns='columns3' :data='data8'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table border width=1000 :columns='columns8' :data='data7'></b-table>
+            <br/>
+            <b-table border width=1000 :columns='columns3' :data='data8'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
-                   columns8: [
-                       {
-                           title: 'Name',
-                           key: 'name',
-                           width:200
-                       },
-                       {
-                           title: 'Age',
-                           key: 'age',
-                           width:300,
-                           className:'test-table-columns'
-                       },
-                       {
-                           title: 'Sex',
-                           key: 'sex',
-                           width:300
-                       },
-                       {
-                           title: 'hobby',
-                           key: 'hobby',
-                           width:200
-                       },
-                       {
-                           title: 'Pets',
-                           key: 'pets',
-                           width:200,
-                           fixed:'right'
-                       }
-                   ],
-                   data7: [
-                       {
-                           name: '欧阳',
-                           age: 12,
-                           sex: '男',
-                           hobby:'Swimming',
-                           pets:'dog',
-                           _cellClass:{
-                               name:'test-table-cell'
-                           },
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '青蛙',
-                           sex: '男',
-                           age: 22,
-                           pets:'cat',
-                           hobby:'Swimming',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '警长',
-                           age: 18,
-                           sex: '男',
-                           pets:'rhizomys',
-                           hobby:'Swimming',
-                           _cellClass:{
-                               sex:'test-table-cell'
-                           },
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '球形闪电',
-                           age: 6,
-                           sex: '男',
-                           pets:'cat',
-                           hobby:'Swimming',
-                           occupation:'Bodyguard'
-                       },
-                       {
-                           name: '会长',
-                           age: 38,
-                           sex: '男',
-                           pets:'rhizomys',
-                           hobby:'Thousand-hand Bodhisattva',
-                           occupation:'President'
-                       }
-                   ],
-                   data8: [
-                       {
-                           name: '欧阳',
-                           age: 12,
-                           sex: '男',
-                           hobby:'Swimming',
-                           pets:'dog',
-                           _cellClass:{
-                               name:'test-table-cell'
-                           },
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '青蛙',
-                           sex: '男',
-                           age: 22,
-                           pets:'cat',
-                           hobby:'Swimming',
-                           _className:'test-table-row',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '警长',
-                           age: 18,
-                           sex: '男',
-                           pets:'rhizomys',
-                           hobby:'Swimming',
-                           _cellClass:{
-                               sex:'test-table-cell'
-                           },
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '球形闪电',
-                           age: 6,
-                           sex: '男',
-                           pets:'cat',
-                           hobby:'Swimming',
-                           occupation:'Bodyguard'
-                       },
-                       {
-                           name: '会长',
-                           age: 38,
-                           sex: '男',
-                           pets:'rhizomys',
-                           hobby:'Thousand-hand Bodhisattva',
-                           occupation:'President'
-                       }
-                   ]
+                    columns8: [
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width: 300,
+                            className: 'test-table-columns'
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 300
+                        },
+                        {
+                            title: 'hobby',
+                            key: 'hobby',
+                            width: 200
+                        },
+                        {
+                            title: 'Pets',
+                            key: 'pets',
+                            width: 200,
+                            fixed: 'right'
+                        }
+                    ],
+                    columns3: [
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200,
+                            fixed: 'left'
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width: 300
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 300
+                        },
+                        {
+                            title: 'Pets',
+                            key: 'pets',
+                            width: 200,
+                            fixed: 'right'
+                        },
+                        {
+                            title: 'hobby',
+                            key: 'hobby',
+                            width: 200
+                        },
+                        {
+                            title: 'occupation',
+                            key: 'occupation',
+                            width: 400
+                        }
+                    ],
+                    data7: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            _cellClass: {
+                                name: 'test-table-cell'
+                            },
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            _cellClass: {
+                                sex: 'test-table-cell'
+                            },
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            sex: '男',
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
+                        }
+                    ],
+                    data8: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            _cellClass: {
+                                name: 'test-table-cell'
+                            },
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            _className: 'test-table-row',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            _cellClass: {
+                                sex: 'test-table-cell'
+                            },
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            sex: '男',
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
+                        }
+                    ]
                 }
             }
+        }
     </script>
     <style>
-          td.test-table-columns {
+        td.test-table-columns {
             background: cornflowerblue;
-          }
-          .test-table-cell{
+        }
+
+        td.test-table-cell {
             background: red;
-          }
-          .test-table-row td{
+        }
+
+        .test-table-row td {
             background: greenyellow;
-          }
+        }
     </style>
 ```
 :::
@@ -1012,109 +1073,101 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table border width=1000 :columns='columns9' :data='data9'></b-table>
+            <b-table border width=1000 :columns='columns9' :data='data9'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-         <b-table border width=1000 :columns='columns9' :data='data9'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table border width=1000 :columns='columns9' :data='data9'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
-                      columns9: [
-                          {
-                              title: 'Name',
-                              key: 'name',
-                              width:200
-                          },
-                          {
-                              title: 'Age',
-                              key: 'age',
-                              width:300
-                          },
-                          {
-                              title: 'Sex',
-                              key: 'sex',
-                              width:300
-                          },
-                          {
-                              title: 'hobby',
-                              key: 'hobby',
-                              width:200
-                          },
-                          {
-                              title: 'Pets',
-                              key: 'pets',
-                              width:200,
-                              fixed:'right'
-                          }
-                      ],
-                      data9: [
-                          {
-                              name: '欧阳',
-                              age: 12,
-                              sex: '男',
-                              hobby:'Swimming',
-                              pets:'dog',
-                              occupation:'Doctor'
-                          },
-                          {
-                              name: '青蛙',
-                              sex: '男',
-                              age: 22,
-                              pets:'cat',
-                              _rowspan:{
-                                  name:3
-                              },
-                              hobby:'Swimming',
-                              occupation:'Doctor'
-                          },
-                          {
-                              name: '警长',
-                              age: 18,
-                              sex: '男',
-                              pets:'rhizomys',
-                              hobby:'Swimming',
-                              _colspan:{
-                                  age:2
-                              },
-                              occupation:'Doctor'
-                          },
-                          {
-                              name: '球形闪电',
-                              age: 6,
-                              sex: '男',
-                              pets:'cat',
-                              hobby:'Swimming',
-                              occupation:'Bodyguard'
-                          },
-                          {
-                              name: '会长',
-                              age: 38,
-                              sex: '男',
-                              pets:'rhizomys',
-                              hobby:'Thousand-hand Bodhisattva',
-                              occupation:'President'
-                          }
-                      ]
+                    columns9: [
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width: 300
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 300
+                        },
+                        {
+                            title: 'hobby',
+                            key: 'hobby',
+                            width: 200
+                        },
+                        {
+                            title: 'Pets',
+                            key: 'pets',
+                            width: 200,
+                            fixed: 'right'
+                        }
+                    ],
+                    data9: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets: 'cat',
+                            _rowspan: {
+                                name: 3
+                            },
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            _colspan: {
+                                age: 2
+                            },
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            sex: '男',
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
+                        }
+                    ]
                 }
             }
+        }
     </script>
-    <style>
-          td.test-table-columns {
-            background: cornflowerblue;
-          }
-          .test-table-cell{
-            background: red;
-          }
-          .test-table-row td{
-            background: greenyellow;
-          }
-    </style>
 ```
 :::
 </div>
@@ -1127,117 +1180,120 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table
-               @on-row-click='handleClick'
-               @on-row-dbclick='handleDbclick'
-               border
-               highlightRow
-               width=1000
-               :columns='columns7'
-               :data='data6'>
-           </b-table>
+            <b-table
+                    @on-row-click='handleClick'
+                    @on-row-dbclick='handleDbclick'
+                    border
+                    highlightRow
+                    width=1000
+                    :columns='columns7'
+                    :data='data6'>
+            </b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-         <b-table
-             @on-row-click='handleClick'
-             @on-row-dbclick='handleDbclick'
-             border
-             highlightRow
-             width=1000
-             :columns='columns7'
-             :data='data6'>
-         </b-table>
-    </div>
+    <template>
+        <div>
+            <b-table
+                    @on-row-click='handleClick'
+                    @on-row-dbclick='handleDbclick'
+                    border
+                    highlightRow
+                    width=1000
+                    :columns='columns7'
+                    :data='data6'>
+            </b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
                     columns7: [
-                       {
-                           title: 'Name',
-                           key: 'name',
-                           width:200
-                       },
-                       {
-                           title: 'Age',
-                           key: 'age',
-                           sortable:true,
-                           width:300
-                       },
-                       {
-                           title: 'Sex',
-                           key: 'sex',
-                           width:300
-                       },
-                       {
-                           title: 'hobby',
-                           key: 'hobby',
-                           width:200
-                       },
-                       {
-                           title: 'Pets',
-                           key: 'pets',
-                           width:200,
-                           sortable:true,
-                           fixed:'right'
-                       }
-                   ],
-                   data6: [
-                       {
-                           name: '欧阳',
-                           age: 12,
-                           sex: '男',
-                           hobby:'Swimming',
-                           pets:'dog',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '青蛙',
-                           sex: '男',
-                           age: 22,
-                           pets:'cat',
-                           hobby:'Swimming',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '警长',
-                           age: 18,
-                           sex: '男',
-                           pets:'rhizomys',
-                           hobby:'Swimming',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '球形闪电',
-                           age: 6,
-                           sex: '男',
-                           pets:'cat',
-                           hobby:'Swimming',
-                           occupation:'Bodyguard'
-                       },
-                       {
-                           name: '会长',
-                           age: 38,
-                           sex: '男',
-                           pets:'rhizomys',
-                           hobby:'Thousand-hand Bodhisattva',
-                           occupation:'President'
-                       }
-                   ]
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            sortable: true,
+                            width: 300
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 300
+                        },
+                        {
+                            title: 'hobby',
+                            key: 'hobby',
+                            width: 200
+                        },
+                        {
+                            title: 'Pets',
+                            key: 'pets',
+                            width: 200,
+                            sortable: true,
+                            fixed: 'right'
+                        }
+                    ],
+                    data6: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            sex: '男',
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
+                        }
+                    ]
                 }
             },
-            methods:{
-                 handleClick(row){
-                     console.log('单击事件,当前选中的数据为：',row)
-                 },
-                 handleDbclick(row){
-                     console.log('双击事件,当前选中的数据为：',row)
-                 }
+            methods: {
+                handleClick (row) {
+                    console.log('单击事件,当前选中的数据为：', row)
+                },
+                handleDbclick (row) {
+                    console.log('双击事件,当前选中的数据为：', row)
+                }
             }
+        }
     </script>
 ```
 :::
@@ -1257,93 +1313,147 @@
 
 ::: code
 ```html
-    <div>
-         <b-table resizeable border width=1000 height=200 :columns='columns3' :data='data3'></b-table>
-         <br/>
-         <b-table resizeable border width=1000 :columns='columns2' :data='data2'></b-table>
-    </div>
+    <template>
+        <div>
+
+            <b-table resizeable border width=1000 height=200 :columns='columns3' :data='data3'></b-table>
+            <br/>
+            <b-table resizeable border width=1000 :columns='columns2' :data='data2'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
-                    columns3: [
+                    columns2: [
                         {
                             title: 'Name',
                             key: 'name',
-                            width:200,
-                            fixed:'left'
+                            width: 200
                         },
                         {
                             title: 'Age',
                             key: 'age',
-                            width:300
+                            width: 300
                         },
                         {
                             title: 'Sex',
                             key: 'sex',
-                            width:300
+                            width: 300
                         },
                         {
                             title: 'hobby',
                             key: 'hobby',
-                            width:200
+                            width: 200
                         },
                         {
                             title: 'occupation',
                             key: 'occupation',
-                            width:400
+                            width: 200
+                        }
+                    ],
+                    data2: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '青蛙',
+                            age: 18,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 28,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        }
+                    ],
+                    columns3: [
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200,
+                            fixed: 'left'
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width: 300
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 300
+                        },
+                        {
+                            title: 'hobby',
+                            key: 'hobby',
+                            width: 200
+                        },
+                        {
+                            title: 'occupation',
+                            key: 'occupation',
+                            width: 400
                         },
                         {
                             title: 'Pets',
                             key: 'pets',
-                            width:200,
-                            fixed:'right'
-                        },
+                            width: 200,
+                            fixed: 'right'
+                        }
                     ],
                     data3: [
                         {
                             name: '欧阳',
                             age: 12,
                             sex: '男',
-                            hobby:'Swimming',
-                            pets:'dog',
-                            occupation:'Doctor'
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '青蛙',
                             age: 18,
                             sex: '男',
-                            pets:'cat',
-                            hobby:'Swimming',
-                            occupation:'Doctor'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '警长',
                             age: 28,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Swimming',
-                            occupation:'Doctor'
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '球形闪电',
                             age: 38,
                             sex: '男',
-                            pets:'cat',
-                            hobby:'Swimming',
-                            occupation:'Bodyguard'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Bodyguard'
                         },
                         {
                             name: '会长',
                             age: 48,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Thousand-hand Bodhisattva',
-                            occupation:'President'
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
                         }
                     ]
                 }
             }
+        }
     </script>
 ```
 :::
@@ -1354,119 +1464,122 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table  draggable border width=1000 height=200 :columns='columns10' :data='data10'></b-table>
+            <b-table draggable border width=1000 height=200 :columns='columns10' :data='data10'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-       <b-table  draggable border width=1000 height=200 :columns='columns10' :data='data10'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table draggable border width=1000 height=200 :columns='columns10' :data='data10'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
-                   columns10: [
-                       {
-                           title: 'Name',
-                           key: 'name',
-                           width:100,
-                           fixed:'left'
-                       },
-                       {
-                           title: 'Age',
-                           key: 'age',
-                           width:100
-                       },
-                       {
-                           title: 'Sex',
-                           key: 'sex',
-                           width:150
-                       },
-                       {
-                           title: 'Hobby',
-                           key: 'hobby',
-                           width:100
-                       },
-                       {
-                           title: 'Pets',
-                           key: 'pets',
-                           width:200
-                       },
-                       {
-                           title: 'Like',
-                           key: 'like',
-                           width:200
-                       },
-                       {
-                           title: 'ID',
-                           key: 'id',
-                           width:200,
-                           fixed:'right'
-                       },
-                       {
-                           title: 'Book',
-                           key: 'book',
-                           width:200,
-                           fixed:'right'
-                       }
-                   ],
-                   data10: [
-                       {
-                           name: '欧阳',
-                           age: 12,
-                           sex: '男',
-                           hobby:'Swimming',
-                           pets:'dog',
-                           occupation:'Doctor',
-                           like:'red',
-                           id:'1',
-                           book:'《贩罪》'
-                       },
-                       {
-                           name: '青蛙',
-                           sex: '男',
-                           age: 22,
-                           pets:'cat',
-                           hobby:'Swimming',
-                           id:'2',
-                           book:'《霸皇纪》',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '警长',
-                           age: 18,
-                           sex: '男',
-                           pets:'rhizomys',
-                           hobby:'Swimming',
-                           id:'3',
-                           book:'《龙族》',
-                           occupation:'Doctor'
-                       },
-                       {
-                           name: '球形闪电',
-                           age: 6,
-                           sex: '男',
-                           pets:'cat',
-                           hobby:'Swimming',
-                           book:'《卡徒》',
-                           id:'4',
-                           occupation:'Bodyguard'
-                       },
-                       {
-                           name: '会长',
-                           age: 38,
-                           sex: '男',
-                           book:'《无限道武者路》',
-                           id:'5',
-                           pets:'rhizomys',
-                           hobby:'Thousand-hand Bodhisattva',
-                           occupation:'President'
-                       }
-                   ]
+                    columns10: [
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 100,
+                            fixed: 'left'
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width: 100
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 150
+                        },
+                        {
+                            title: 'Hobby',
+                            key: 'hobby',
+                            width: 100
+                        },
+                        {
+                            title: 'Pets',
+                            key: 'pets',
+                            width: 200
+                        },
+                        {
+                            title: 'Like',
+                            key: 'like',
+                            width: 200
+                        },
+                        {
+                            title: 'ID',
+                            key: 'id',
+                            width: 200,
+                            fixed: 'right'
+                        },
+                        {
+                            title: 'Book',
+                            key: 'book',
+                            width: 200,
+                            fixed: 'right'
+                        }
+                    ],
+                    data10: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor',
+                            like: 'red',
+                            id: '1',
+                            book: '《贩罪》'
+                        },
+                        {
+                            name: '青蛙',
+                            sex: '男',
+                            age: 22,
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            id: '2',
+                            book: '《霸皇纪》',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 18,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            id: '3',
+                            book: '《龙族》',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '球形闪电',
+                            age: 6,
+                            sex: '男',
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            book: '《卡徒》',
+                            id: '4',
+                            occupation: 'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 38,
+                            sex: '男',
+                            book: '《无限道武者路》',
+                            id: '5',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
+                        }
+                    ]
                 }
             }
+        }
     </script>
 ```
 :::
@@ -1479,165 +1592,163 @@
 <div class="example">
     <div class="example-box">
         <div>
-            <b-table dynamicable  border width=1000 :columns='columns3' :data='data3'></b-table>
+            <b-table dynamicable border width=1000 :columns='columns3' :data='data3'></b-table>
             <br/>
             <b-table dynamicable border width=1000 :columns='columns2' :data='data2'></b-table>
             <br/>
             <p>弹层版本</p>
-            <b-table style="margin-top:10px" dynamicallocation border width=1000 :columns='columns3' :data='data3'></b-table>
+            <b-table style="margin-top:10px" dynamicallocation border width=1000 :columns='columns3'
+                     :data='data3'></b-table>
             <br/>
-            <b-table style="margin-top:20px" dynamicallocation border width=1000 :columns='columns2' :data='data2'></b-table>
+            <b-table style="margin-top:20px" dynamicallocation border width=1000 :columns='columns2'
+                     :data='data2'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-        <b-table dynamicable border width=1000 :columns='columns3' :data='data3'></b-table>
-        <b-table dynamicable border width=1000 :columns='columns2' :data='data2'></b-table>
-        <b-table dynamicallocation border width=1000 :columns='columns3' :data='data3'></b-table>
-        <b-table dynamicallocation border width=1000 :columns='columns2' :data='data2'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table dynamicable border width=1000 :columns='columns3' :data='data3'></b-table>
+            <b-table dynamicable border width=1000 :columns='columns2' :data='data2'></b-table>
+            <p>弹层版本</p>
+            <b-table style="margin-top:20px" dynamicallocation border width=1000 :columns='columns3' :data='data3'></b-table>
+            <b-table style="margin-top:20px" dynamicallocation border width=1000 :columns='columns2' :data='data2'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
-                    columns11: [
-                         {
-                             title: 'Name',
-                             key: 'name',
-                             width:100
-                         },
-                         {
-                             title: 'Age',
-                             key: 'age',
-                             width:100
-                         },
-                         {
-                             title: 'Pets',
-                             key: 'pets',
-                             width:200
-                         },
-                         {
-                             title: 'Like',
-                             key: 'like',
-                             width:200
-                         },
-                         {
-                             title: 'ID',
-                             key: 'id',
-                             width:200
-                         },
-                         {
-                             title: 'Book',
-                             key: 'book',
-                             width:200
-                         }
-                    ],
-                    data10: [
-                         {
-                             name: '欧阳',
-                             age: 12,
-                             sex: '男',
-                             hobby:'Swimming',
-                             pets:'dog',
-                             occupation:'Doctor',
-                             like:'red',
-                             id:'1',
-                             book:'《贩罪》'
-                         },
-                         {
-                             name: '青蛙',
-                             sex: '男',
-                             age: 22,
-                             pets:'cat',
-                             like:'green',
-                             hobby:'Swimming',
-                             id:'2',
-                             book:'《霸皇纪》',
-                             occupation:'Doctor'
-                         },
-                         {
-                             name: '警长',
-                             age: 18,
-                             sex: '男',
-                             pets:'rhizomys',
-                             hobby:'Swimming',
-                             like:'orange',
-                             id:'3',
-                             book:'《龙族》',
-                             occupation:'Doctor'
-                         },
-                         {
-                             name: '球形闪电',
-                             age: 6,
-                             sex: '男',
-                             pets:'cat',
-                             hobby:'Swimming',
-                             like:'pink',
-                             book:'《卡徒》',
-                             id:'4',
-                             occupation:'Bodyguard'
-                         },
-                         {
-                             name: '会长',
-                             age: 38,
-                             sex: '男',
-                             book:'《无限道武者路》',
-                             id:'5',
-                             like:'blue',
-                             pets:'rhizomys',
-                             hobby:'Thousand-hand Bodhisattva',
-                             occupation:'President'
-                         }
-                    ],
-                    columns10: [
+                    columns2: [
                         {
                             title: 'Name',
                             key: 'name',
-                            width:100,
-                            fixed:'left'
+                            width: 200
                         },
                         {
                             title: 'Age',
                             key: 'age',
-                            width:100
+                            width: 300
                         },
                         {
                             title: 'Sex',
                             key: 'sex',
-                            width:150
+                            width: 300
                         },
                         {
-                            title: 'Hobby',
+                            title: 'hobby',
                             key: 'hobby',
-                            width:100
+                            width: 200
+                        },
+                        {
+                            title: 'occupation',
+                            key: 'occupation',
+                            width: 200
+                        }
+                    ],
+                    data2: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '青蛙',
+                            age: 18,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        },
+                        {
+                            name: '警长',
+                            age: 28,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
+                        }
+                    ],
+                    columns3: [
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 200,
+                            fixed: 'left'
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width: 300
+                        },
+                        {
+                            title: 'Sex',
+                            key: 'sex',
+                            width: 300
+                        },
+                        {
+                            title: 'hobby',
+                            key: 'hobby',
+                            width: 200
+                        },
+                        {
+                            title: 'occupation',
+                            key: 'occupation',
+                            width: 400
                         },
                         {
                             title: 'Pets',
                             key: 'pets',
-                            width:200
+                            width: 200,
+                            fixed: 'right'
+                        }
+                    ],
+                    data3: [
+                        {
+                            name: '欧阳',
+                            age: 12,
+                            sex: '男',
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor'
                         },
                         {
-                            title: 'Like',
-                            key: 'like',
-                            width:200
+                            name: '青蛙',
+                            age: 18,
+                            sex: '男',
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         },
                         {
-                            title: 'ID',
-                            key: 'id',
-                            width:200,
-                            fixed:'right'
+                            name: '警长',
+                            age: 28,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            occupation: 'Doctor'
                         },
                         {
-                            title: 'Book',
-                            key: 'book',
-                            width:200,
-                            fixed:'right'
+                            name: '球形闪电',
+                            age: 38,
+                            sex: '男',
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            occupation: 'Bodyguard'
+                        },
+                        {
+                            name: '会长',
+                            age: 48,
+                            sex: '男',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
                         }
                     ]
                 }
             }
+        }
     </script>
 ```
 :::
@@ -1648,82 +1759,84 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table  show-index border width=1000 :columns='columns11' :data='data11'></b-table>
-           <b-table border width=1000 :columns='columns13' :data='data11'></b-table>
+            <b-table show-index border width=1000 :columns='columns11' :data='data11'></b-table>
+            <b-table border width=1000 :columns='columns13' :data='data11'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-        <b-table show-index border width=1000 :columns='columns11' :data='data11'></b-table>
-        <b-table border width=1000 :columns='columns13' :data='data11'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table show-index border width=1000 :columns='columns11' :data='data11'></b-table>
+            <b-table border width=1000 :columns='columns13' :data='data11'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
                     columns11: [
-                         {
-                             title: 'Name',
-                             key: 'name',
-                             width:100
-                         },
-                         {
-                             title: 'Age',
-                             key: 'age',
-                             width:100
-                         },
-                         {
-                             title: 'Pets',
-                             key: 'pets',
-                             width:200
-                         },
-                         {
-                             title: 'Like',
-                             key: 'like',
-                             width:200
-                         },
-                         {
-                             title: 'ID',
-                             key: 'id',
-                             width:200
-                         },
-                         {
-                             title: 'Book',
-                             key: 'book',
-                             width:200
-                         }
+                        {
+                            title: 'Name',
+                            key: 'name',
+                            width: 100
+                        },
+                        {
+                            title: 'Age',
+                            key: 'age',
+                            width: 100
+                        },
+                        {
+                            title: 'Pets',
+                            key: 'pets',
+                            width: 200
+                        },
+                        {
+                            title: 'Like',
+                            key: 'like',
+                            width: 200
+                        },
+                        {
+                            title: 'ID',
+                            key: 'id',
+                            width: 200
+                        },
+                        {
+                            title: 'Book',
+                            key: 'book',
+                            width: 200
+                        }
                     ],
                     columns13: [
                         {
-                           title: '序号',
-                           width:60,
-                           align:'center',
-                           type:'index'
+                            title: '序号',
+                            width: 60,
+                            align: 'center',
+                            type: 'index'
                         },
                         {
-                           title: 'Age',
-                           key: 'age',
-                           width:100
+                            title: 'Age',
+                            key: 'age',
+                            width: 100
                         },
                         {
-                           title: 'Pets',
-                           key: 'pets',
-                           minWidth:100
+                            title: 'Pets',
+                            key: 'pets',
+                            minWidth: 100
                         },
                         {
-                           title: 'Like',
-                           key: 'like',
-                           maxWidth:100
+                            title: 'Like',
+                            key: 'like',
+                            maxWidth: 100
                         },
                         {
-                           title: 'ID',
-                           key: 'id',
+                            title: 'ID',
+                            key: 'id',
                         },
                         {
-                           title: 'Book',
-                           key: 'book'
+                            title: 'Book',
+                            key: 'book'
                         }
                     ],
                     data11: [
@@ -1731,56 +1844,57 @@
                             name: '欧阳',
                             age: 12,
                             sex: '男',
-                            hobby:'Swimming',
-                            pets:'dog',
-                            occupation:'Doctor',
-                            like:'red',
-                            id:'1',
-                            book:'《贩罪》'
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor',
+                            like: 'red',
+                            id: '1',
+                            book: '《贩罪》'
                         },
                         {
                             name: '青蛙',
                             sex: '男',
                             age: 22,
-                            pets:'cat',
-                            hobby:'Swimming',
-                            id:'2',
-                            book:'《霸皇纪》',
-                            occupation:'Doctor'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            id: '2',
+                            book: '《霸皇纪》',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '警长',
                             age: 18,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Swimming',
-                            id:'3',
-                            book:'《龙族》',
-                            occupation:'Doctor'
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            id: '3',
+                            book: '《龙族》',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '球形闪电',
                             age: 6,
                             sex: '男',
-                            pets:'cat',
-                            hobby:'Swimming',
-                            book:'《卡徒》',
-                            id:'4',
-                            occupation:'Bodyguard'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            book: '《卡徒》',
+                            id: '4',
+                            occupation: 'Bodyguard'
                         },
                         {
                             name: '会长',
                             age: 38,
                             sex: '男',
-                            book:'《无限道武者路》',
-                            id:'5',
-                            pets:'rhizomys',
-                            hobby:'Thousand-hand Bodhisattva',
-                            occupation:'President'
+                            book: '《无限道武者路》',
+                            id: '5',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
                         }
                     ]
                 }
             }
+        }
     </script>
 ```
 :::
@@ -1794,47 +1908,49 @@
 <div class="example">
     <div class="example-box">
         <div>
-           <b-table show-index border width=1000 :columns='columns12' :data='data11'></b-table>
+            <b-table show-index border width=1000 :columns='columns12' :data='data11'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-       <b-table border width=1000 :columns='columns12' :data='data11'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table border width=1000 :columns='columns12' :data='data11'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
                     columns12: [
                         {
-                           title: 'Name',
-                           key: 'name',
-                           width:100
+                            title: 'Name',
+                            key: 'name',
+                            width: 100
                         },
                         {
-                           title: 'Age',
-                           key: 'age',
-                           width:100
+                            title: 'Age',
+                            key: 'age',
+                            width: 100
                         },
                         {
-                           title: 'Pets',
-                           key: 'pets',
-                           minWidth:100
+                            title: 'Pets',
+                            key: 'pets',
+                            minWidth: 100
                         },
                         {
-                           title: 'Like',
-                           key: 'like',
-                           maxWidth:100
+                            title: 'Like',
+                            key: 'like',
+                            maxWidth: 100
                         },
                         {
-                           title: 'ID',
-                           key: 'id',
+                            title: 'ID',
+                            key: 'id',
                         },
                         {
-                           title: 'Book',
-                           key: 'book'
+                            title: 'Book',
+                            key: 'book'
                         }
                     ],
                     data11: [
@@ -1842,56 +1958,57 @@
                             name: '欧阳',
                             age: 12,
                             sex: '男',
-                            hobby:'Swimming',
-                            pets:'dog',
-                            occupation:'Doctor',
-                            like:'red',
-                            id:'1',
-                            book:'《贩罪》'
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor',
+                            like: 'red',
+                            id: '1',
+                            book: '《贩罪》'
                         },
                         {
                             name: '青蛙',
                             sex: '男',
                             age: 22,
-                            pets:'cat',
-                            hobby:'Swimming',
-                            id:'2',
-                            book:'《霸皇纪》',
-                            occupation:'Doctor'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            id: '2',
+                            book: '《霸皇纪》',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '警长',
                             age: 18,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Swimming',
-                            id:'3',
-                            book:'《龙族》',
-                            occupation:'Doctor'
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            id: '3',
+                            book: '《龙族》',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '球形闪电',
                             age: 6,
                             sex: '男',
-                            pets:'cat',
-                            hobby:'Swimming',
-                            book:'《卡徒》',
-                            id:'4',
-                            occupation:'Bodyguard'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            book: '《卡徒》',
+                            id: '4',
+                            occupation: 'Bodyguard'
                         },
                         {
                             name: '会长',
                             age: 38,
                             sex: '男',
-                            book:'《无限道武者路》',
-                            id:'5',
-                            pets:'rhizomys',
-                            hobby:'Thousand-hand Bodhisattva',
-                            occupation:'President'
+                            book: '《无限道武者路》',
+                            id: '5',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
                         }
                     ]
                 }
             }
+        }
     </script>
 ```
 :::
@@ -1903,49 +2020,53 @@
 <div class="example">
     <div class="example-box">
         <div>
-             <b-table :loading="loading" border width=1000 :columns='columns12' :data='data11'></b-table>
-             <span>切换loading 效果</span><b-switch v-model="loading"></b-switch>
+            <b-table :loading="loading" border width=1000 :columns='columns12' :data='data11'></b-table>
+            <span>切换loading 效果</span>
+            <b-switch v-model="loading"></b-switch>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-       <b-table :loading="loading" border width=1000 :columns='columns12' :data='data11'></b-table>
-       <span>切换loading 效果</span><b-switch v-model="loading"></b-switch>
-    </div>
+    <template>
+        <div>
+            <b-table :loading="loading" border width=1000 :columns='columns12' :data='data11'></b-table>
+            <span>切换loading 效果</span>
+            <b-switch v-model="loading"></b-switch>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
                     columns12: [
                         {
-                           title: 'Name',
-                           key: 'name',
-                           width:100
+                            title: 'Name',
+                            key: 'name',
+                            width: 100
                         },
                         {
-                           title: 'Age',
-                           key: 'age',
-                           width:100
+                            title: 'Age',
+                            key: 'age',
+                            width: 100
                         },
                         {
-                           title: 'Pets',
-                           key: 'pets',
-                           minWidth:100
+                            title: 'Pets',
+                            key: 'pets',
+                            minWidth: 100
                         },
                         {
-                           title: 'Like',
-                           key: 'like',
-                           maxWidth:100
+                            title: 'Like',
+                            key: 'like',
+                            maxWidth: 100
                         },
                         {
-                           title: 'ID',
-                           key: 'id',
+                            title: 'ID',
+                            key: 'id',
                         },
                         {
-                           title: 'Book',
-                           key: 'book'
+                            title: 'Book',
+                            key: 'book'
                         }
                     ],
                     data11: [
@@ -1953,57 +2074,58 @@
                             name: '欧阳',
                             age: 12,
                             sex: '男',
-                            hobby:'Swimming',
-                            pets:'dog',
-                            occupation:'Doctor',
-                            like:'red',
-                            id:'1',
-                            book:'《贩罪》'
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor',
+                            like: 'red',
+                            id: '1',
+                            book: '《贩罪》'
                         },
                         {
                             name: '青蛙',
                             sex: '男',
                             age: 22,
-                            pets:'cat',
-                            hobby:'Swimming',
-                            id:'2',
-                            book:'《霸皇纪》',
-                            occupation:'Doctor'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            id: '2',
+                            book: '《霸皇纪》',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '警长',
                             age: 18,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Swimming',
-                            id:'3',
-                            book:'《龙族》',
-                            occupation:'Doctor'
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            id: '3',
+                            book: '《龙族》',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '球形闪电',
                             age: 6,
                             sex: '男',
-                            pets:'cat',
-                            hobby:'Swimming',
-                            book:'《卡徒》',
-                            id:'4',
-                            occupation:'Bodyguard'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            book: '《卡徒》',
+                            id: '4',
+                            occupation: 'Bodyguard'
                         },
                         {
                             name: '会长',
                             age: 38,
                             sex: '男',
-                            book:'《无限道武者路》',
-                            id:'5',
-                            pets:'rhizomys',
-                            hobby:'Thousand-hand Bodhisattva',
-                            occupation:'President'
+                            book: '《无限道武者路》',
+                            id: '5',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
                         }
                     ],
-                    loading:true
+                    loading: true
                 }
             }
+        }
     </script>
 ```
 :::
@@ -2015,83 +2137,85 @@
 <div class="example">
     <div class="example-box">
         <div>
-             <b-table border width=1000 :columns='columns14' :data='data11'></b-table>
+            <b-table border width=1000 :columns='columns14' :data='data11'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
+    <template>
+        <div>
             <b-table border width=1000 :columns='columns14' :data='data11'></b-table>
-    </div>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
                     columns14: [
                         {
-                           title: '序号',
-                           width:60,
-                           align:'center',
-                           type:'index'
+                            title: '序号',
+                            width: 60,
+                            align: 'center',
+                            type: 'index'
                         },
                         {
-                           title: 'Age',
-                           key: 'age',
-                           width:100,
-                           filters: [
-                               {
-                                   label: 'Greater than 18',
-                                   value: 1
-                               },
-                               {
-                                   label: 'Less than 18',
-                                   value: 2
-                               }
-                           ],
-                           filterMethod (value, row) {
-                               if (value === 1) {
-                                   return row.age >= 18;
-                               } else if (value === 2) {
-                                   return row.age < 18;
-                               }
-                           }
-                        },
-                       {
-                          title: 'Pets',
-                          key: 'pets',
-                          filters: [
-                              {
-                                  label: 'dog',
-                                  value: 'dog'
-                              },
-                              {
-                                  label: 'rhizomys',
-                                  value: 'rhizomys'
-                              },
-                              {
-                                  label: 'cat',
-                                  value: 'cat'
-                              }
-                          ],
-                          filterMultiple:true,
-                          filterMethod (value, row) {
-                              return row.pets.indexOf(value) > -1;
-                          },
-                          minWidth:100
-                       },
-                        {
-                           title: 'Like',
-                           key: 'like',
-                           maxWidth:100
+                            title: 'Age',
+                            key: 'age',
+                            width: 100,
+                            filters: [
+                                {
+                                    label: 'Greater than 18',
+                                    value: 1
+                                },
+                                {
+                                    label: 'Less than 18',
+                                    value: 2
+                                }
+                            ],
+                            filterMethod (value, row) {
+                                if (value === 1) {
+                                    return row.age >= 18
+                                } else if (value === 2) {
+                                    return row.age < 18
+                                }
+                            }
                         },
                         {
-                           title: 'ID',
-                           key: 'id',
+                            title: 'Pets',
+                            key: 'pets',
+                            filters: [
+                                {
+                                    label: 'dog',
+                                    value: 'dog'
+                                },
+                                {
+                                    label: 'rhizomys',
+                                    value: 'rhizomys'
+                                },
+                                {
+                                    label: 'cat',
+                                    value: 'cat'
+                                }
+                            ],
+                            filterMultiple: true,
+                            filterMethod (value, row) {
+                                return row.pets.indexOf(value) > -1
+                            },
+                            minWidth: 100
                         },
                         {
-                           title: 'Book',
-                           key: 'book'
+                            title: 'Like',
+                            key: 'like',
+                            maxWidth: 100
+                        },
+                        {
+                            title: 'ID',
+                            key: 'id',
+                        },
+                        {
+                            title: 'Book',
+                            key: 'book'
                         }
                     ],
                     data11: [
@@ -2099,56 +2223,57 @@
                             name: '欧阳',
                             age: 12,
                             sex: '男',
-                            hobby:'Swimming',
-                            pets:'dog',
-                            occupation:'Doctor',
-                            like:'red',
-                            id:'1',
-                            book:'《贩罪》'
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor',
+                            like: 'red',
+                            id: '1',
+                            book: '《贩罪》'
                         },
                         {
                             name: '青蛙',
                             sex: '男',
                             age: 22,
-                            pets:'cat',
-                            hobby:'Swimming',
-                            id:'2',
-                            book:'《霸皇纪》',
-                            occupation:'Doctor'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            id: '2',
+                            book: '《霸皇纪》',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '警长',
                             age: 18,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Swimming',
-                            id:'3',
-                            book:'《龙族》',
-                            occupation:'Doctor'
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            id: '3',
+                            book: '《龙族》',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '球形闪电',
                             age: 6,
                             sex: '男',
-                            pets:'cat',
-                            hobby:'Swimming',
-                            book:'《卡徒》',
-                            id:'4',
-                            occupation:'Bodyguard'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            book: '《卡徒》',
+                            id: '4',
+                            occupation: 'Bodyguard'
                         },
                         {
                             name: '会长',
                             age: 38,
                             sex: '男',
-                            book:'《无限道武者路》',
-                            id:'5',
-                            pets:'rhizomys',
-                            hobby:'Thousand-hand Bodhisattva',
-                            occupation:'President'
+                            book: '《无限道武者路》',
+                            id: '5',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
                         }
                     ]
                 }
             }
+        }
     </script>
 ```
 :::
@@ -2163,31 +2288,34 @@
 <div class="example">
     <div class="example-box">
         <div>
-             <b-table height=200 width=1000 :columns='columns15' :data='data12'></b-table>
+            <b-table height=200 width=1000 :columns='columns15' :data='data12'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-         <b-table height=200 width=1000 :columns='columns15' :data='data12'></b-table>
-    </div>
-    <style>
-    .b-table {
-        b-table-expand-cell {
-          border-bottom: none;
-          .expend-table {
-            margin-bottom: 0px;
-            border: none;
-            td {
-              background: $Background;
+    <template>
+        <div>
+            <b-table height=200 width=1000 :columns='columns15' :data='data12'></b-table>
+        </div>
+    </template>
+    <style lang="scss">
+        .b-table {
+            b-table-expand-cell {
+                border-bottom: none;
+                .expend-table {
+                    margin-bottom: 0px;
+                    border: none;
+                    td {
+                        background: #f8f8f9;
+                    }
+                }
             }
-          }
         }
-    }
     </style>
     <script>
         import RenderTable from '../../components/RenderTable.vue'
+
         export default {
             data () {
                 return {
@@ -2195,23 +2323,23 @@
                         {
                             name: '欧阳',
                             age: 12,
-                            pets:'dog',
-                            occupation:'red',
-                            book:'《贩罪》',
-                            children:[
+                            pets: 'dog',
+                            occupation: 'red',
+                            book: '《贩罪》',
+                            children: [
                                 {
                                     name: '佐罗',
                                     age: 15,
-                                    pets:'pig',
-                                    occupation:'yellow',
-                                    book:'《惊悚乐园》'
+                                    pets: 'pig',
+                                    occupation: 'yellow',
+                                    book: '《惊悚乐园》'
                                 },
                                 {
                                     name: '轩辕',
                                     age: 12,
-                                    pets:'drag',
-                                    occupation:'red',
-                                    book:'《龙族》'
+                                    pets: 'drag',
+                                    occupation: 'red',
+                                    book: '《龙族》'
                                 }
                             ]
                         },
@@ -2219,43 +2347,43 @@
                             name: '青蛙',
                             sex: '男',
                             age: 22,
-                            pets:'cat',
-                            book:'《霸皇纪》',
-                            _disableExpand:true,
-                            occupation:'Doctor'
+                            pets: 'cat',
+                            book: '《霸皇纪》',
+                            _disableExpand: true,
+                            occupation: 'Doctor'
                         },
                         {
                             name: '警长',
                             age: 18,
                             sex: '男',
-                            pets:'rhizomys',
-                            _disableExpand:true,
-                            book:'《龙族》',
-                            _disableExpand:true,
-                            occupation:'Doctor'
+                            pets: 'rhizomys',
+                            _disableExpand: true,
+                            book: '《龙族》',
+                            _disableExpand: true,
+                            occupation: 'Doctor'
                         },
                         {
                             name: '球形闪电',
                             age: 6,
-                            pets:'cat',
-                            book:'《卡徒》',
-                            _disableExpand:true,
-                            occupation:'Bodyguard'
+                            pets: 'cat',
+                            book: '《卡徒》',
+                            _disableExpand: true,
+                            occupation: 'Bodyguard'
                         },
                         {
                             name: '会长',
                             age: 38,
-                            book:'《无限道武者路》',
-                            pets:'rhizomys',
-                            _disableExpand:true,
-                            occupation:'President'
+                            book: '《无限道武者路》',
+                            pets: 'rhizomys',
+                            _disableExpand: true,
+                            occupation: 'President'
                         }
                     ],
                     columns15: [
                         {
                             type: 'expand',
                             width: 40,
-                            center:'align',
+                            center: 'align',
                             expandRender: (h, params) => {
                                 return h(RenderTable, {
                                     props: {
@@ -2266,76 +2394,77 @@
                             }
                         },
                         {
-                           title: 'Name',
-                           key: 'name',
-                           width:100
+                            title: 'Name',
+                            key: 'name',
+                            width: 100
                         },
                         {
-                           title: 'Age',
-                           key: 'age',
-                           width:100,
-                           sortable:true
+                            title: 'Age',
+                            key: 'age',
+                            width: 100,
+                            sortable: true
                         },
                         {
-                           title: 'Pets',
-                           key: 'pets',
-                           minWidth:100
+                            title: 'Pets',
+                            key: 'pets',
+                            minWidth: 100
                         },
                         {
-                           title: 'Occupation',
-                           key: 'occupation',
-                           maxWidth:100
+                            title: 'Occupation',
+                            key: 'occupation',
+                            maxWidth: 100
                         },
                         {
-                           title: 'Book',
-                           key: 'book',
-                           width:100
+                            title: 'Book',
+                            key: 'book',
+                            width: 100
                         }
                     ],
-                    columns16:[
+                    columns16: [
                         {
-                          width: 40
+                            width: 40
                         },
                         {
-                         title: 'Name',
-                         key: 'name',
-                         width:100
+                            title: 'Name',
+                            key: 'name',
+                            width: 100
                         },
                         {
-                         title: 'Age',
-                         key: 'age',
-                         width:100,
-                         sortable:true
+                            title: 'Age',
+                            key: 'age',
+                            width: 100,
+                            sortable: true
                         },
                         {
-                         title: 'Pets',
-                         key: 'pets',
-                         minWidth:100
+                            title: 'Pets',
+                            key: 'pets',
+                            minWidth: 100
                         },
                         {
-                         title: 'Occupation',
-                         key: 'occupation',
-                         maxWidth:100
+                            title: 'Occupation',
+                            key: 'occupation',
+                            maxWidth: 100
                         },
                         {
-                         title: 'Book',
-                         key: 'book',
-                         width:100
+                            title: 'Book',
+                            key: 'book',
+                            width: 100
                         }
                     ]
                 }
             }
+        }
     </script>
 
     // render-tabele
     <b-table
-        class="expend-table"
-        :border="border"
-        :columns='columns'
-        disHover
-        :stripe='stripe'
-        :show-header="showHeader"
-        :data='data'>
+            class="expend-table"
+            :border="border"
+            :columns='columns'
+            disHover
+            :stripe='stripe'
+            :show-header="showHeader"
+            :data='data'>
     </b-table>
 
     export default {
@@ -2380,27 +2509,29 @@ column 设置 children，可以渲染出多级表头<br/>
 <div class="example">
     <div class="example-box">
         <div>
-             <b-table resizeable border width=1000 :columns='columns17' :data='data11'></b-table>
+            <b-table resizeable border width=1000 :columns='columns17' :data='data11'></b-table>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
-         <b-table resizeable height=200 width=1000 :columns='columns17' :data='data11'></b-table>
-    </div>
+    <template>
+        <div>
+            <b-table border resizeable width=1000 :columns='columns17' :data='data11'></b-table>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
-                    columns17:[
+                    columns17: [
                         {
-                             title: 'Age',
-                             key: 'age',
-                             width:100,
-                             fixed: 'left',
-                             sortable:true,
-                             filters: [
+                            title: 'Age',
+                            key: 'age',
+                            width: 100,
+                            fixed: 'left',
+                            sortable: true,
+                            filters: [
                                 {
                                     label: 'Greater than 18',
                                     value: 1
@@ -2412,60 +2543,60 @@ column 设置 children，可以渲染出多级表头<br/>
                             ],
                             filterMethod (value, row) {
                                 if (value === 1) {
-                                    return row.age >= 18;
+                                    return row.age >= 18
                                 } else if (value === 2) {
-                                    return row.age < 18;
+                                    return row.age < 18
                                 }
                             }
                         },
                         {
-                             title: '测试',
-                             align:'center',
-                             children:[
+                            title: '测试',
+                            align: 'center',
+                            children: [
                                 {
-                                  title: 'Name',
-                                  key: 'name',
-                                  width:200,
-                                  sortable:true
+                                    title: 'Name',
+                                    key: 'name',
+                                    width: 200,
+                                    sortable: true
                                 },
                                 {
-                                  title: 'Sex',
-                                  key: 'sex',
-                                  width:200,
-                                  sortable:true
+                                    title: 'Sex',
+                                    key: 'sex',
+                                    width: 200,
+                                    sortable: true
                                 },
                                 {
                                     title: '合计',
-                                    children:[
-                                      {
-                                        title: 'Hobby',
-                                        key: 'hobby',
-                                        width:100,
-                                        sortable:true
-                                      },
-                                      {
-                                        title: 'id',
-                                        key: 'id',
-                                        width:100
-                                      }
+                                    children: [
+                                        {
+                                            title: 'Hobby',
+                                            key: 'hobby',
+                                            width: 100,
+                                            sortable: true
+                                        },
+                                        {
+                                            title: 'id',
+                                            key: 'id',
+                                            width: 100
+                                        }
                                     ]
                                 }
-                             ]
+                            ]
                         },
                         {
-                         title: 'Pets',
-                         key: 'pets',
-                         width:100
+                            title: 'Pets',
+                            key: 'pets',
+                            width: 100
                         },
                         {
-                         title: 'Occupation',
-                         key: 'occupation',
-                         width:100
+                            title: 'Occupation',
+                            key: 'occupation',
+                            width: 100
                         },
                         {
-                         title: 'Book',
-                         key: 'book',
-                         width:200
+                            title: 'Book',
+                            key: 'book',
+                            width: 200
                         }
                     ],
                     data11: [
@@ -2473,56 +2604,57 @@ column 设置 children，可以渲染出多级表头<br/>
                             name: '欧阳',
                             age: 12,
                             sex: '男',
-                            hobby:'Swimming',
-                            pets:'dog',
-                            occupation:'Doctor',
-                            like:'red',
-                            id:'1',
-                            book:'《贩罪》'
+                            hobby: 'Swimming',
+                            pets: 'dog',
+                            occupation: 'Doctor',
+                            like: 'red',
+                            id: '1',
+                            book: '《贩罪》'
                         },
                         {
                             name: '青蛙',
                             sex: '男',
                             age: 22,
-                            pets:'cat',
-                            hobby:'Swimming',
-                            id:'2',
-                            book:'《霸皇纪》',
-                            occupation:'Doctor'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            id: '2',
+                            book: '《霸皇纪》',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '警长',
                             age: 18,
                             sex: '男',
-                            pets:'rhizomys',
-                            hobby:'Swimming',
-                            id:'3',
-                            book:'《龙族》',
-                            occupation:'Doctor'
+                            pets: 'rhizomys',
+                            hobby: 'Swimming',
+                            id: '3',
+                            book: '《龙族》',
+                            occupation: 'Doctor'
                         },
                         {
                             name: '球形闪电',
                             age: 6,
                             sex: '男',
-                            pets:'cat',
-                            hobby:'Swimming',
-                            book:'《卡徒》',
-                            id:'4',
-                            occupation:'Bodyguard'
+                            pets: 'cat',
+                            hobby: 'Swimming',
+                            book: '《卡徒》',
+                            id: '4',
+                            occupation: 'Bodyguard'
                         },
                         {
                             name: '会长',
                             age: 38,
                             sex: '男',
-                            book:'《无限道武者路》',
-                            id:'5',
-                            pets:'rhizomys',
-                            hobby:'Thousand-hand Bodhisattva',
-                            occupation:'President'
+                            book: '《无限道武者路》',
+                            id: '5',
+                            pets: 'rhizomys',
+                            hobby: 'Thousand-hand Bodhisattva',
+                            occupation: 'President'
                         }
                     ]
                 }
             }
+        }
     </script>
 ```
 :::
@@ -2536,124 +2668,141 @@ column 设置 children，可以渲染出多级表头<br/>
 <div class="example">
     <div class="example-box">
         <div>
-             <b-table border ref="table" width=1000 :columns='columns18' :data='data18'></b-table>
-             <b-button type="primary" size="large" @on-click="exportData(1)">导出全部数据</b-button>
-             <b-button type="primary" size="large" @on-click="exportData(2)">导出排序和过滤的数据</b-button>
+            <b-table border ref="table" width=1000 :columns='columns18' :data='data18'></b-table>
+            <b-button type="primary" size="large" @on-click="exportData(1)">导出全部数据</b-button>
+            <b-button type="primary" size="large" @on-click="exportData(2)">导出排序和过滤的数据</b-button>
         </div>
     </div>
 
 ::: code
 ```html
-    <div>
+    <template>
+        <div>
             <b-table border ref="table" width=1000 :columns='columns18' :data='data18'></b-table>
             <b-button type="primary" size="large" @on-click="exportData(1)">导出全部数据</b-button>
             <b-button type="primary" size="large" @on-click="exportData(2)">导出排序和过滤的数据</b-button>
-    </div>
+        </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
                     columns18: [
                         {
-                           title: 'Name',
-                           key: 'name',
-                           width:150
+                            title: 'Name',
+                            key: 'name',
+                            width: 150
                         },
                         {
-                           title: 'Age',
-                           key: 'age',
-                           width:100,
-                           sortable:true,
-                           filters: [
-                               {
-                                   label: 'Greater than 18',
-                                   value: 1
-                               },
-                               {
-                                   label: 'Less than 18',
-                                   value: 2
-                               }
-                           ],
-                           filterMethod (value, row) {
-                               if (value === 1) {
-                                   return row.age >= 18;
-                               } else if (value === 2) {
-                                   return row.age < 18;
-                               }
-                           }
+                            title: 'Age',
+                            key: 'age',
+                            width: 100,
+                            sortable: true,
+                            filters: [
+                                {
+                                    label: 'Greater than 18',
+                                    value: 1
+                                },
+                                {
+                                    label: 'Less than 18',
+                                    value: 2
+                                }
+                            ],
+                            filterMethod (value, row) {
+                                if (value === 1) {
+                                    return row.age >= 18
+                                } else if (value === 2) {
+                                    return row.age < 18
+                                }
+                            }
                         },
                         {
-                           title: 'Pets',
-                           key: 'pets',
-                           filters: [
-                               {
-                                   label: 'dog',
-                                   value: 'dog'
-                               },
-                               {
-                                   label: 'rhizomys',
-                                   value: 'rhizomys'
-                               },
-                               {
-                                   label: 'cat',
-                                   value: 'cat'
-                               }
-                           ],
-                           filterMultiple:true,
-                           filterMethod (value, row) {
-                               return row.pets.indexOf(value) > -1;
-                           },
-                           minWidth:100
+                            title: 'Pets',
+                            key: 'pets',
+                            filters: [
+                                {
+                                    label: 'dog',
+                                    value: 'dog'
+                                },
+                                {
+                                    label: 'rhizomys',
+                                    value: 'rhizomys'
+                                },
+                                {
+                                    label: 'cat',
+                                    value: 'cat'
+                                }
+                            ],
+                            filterMultiple: true,
+                            filterMethod (value, row) {
+                                return row.pets.indexOf(value) > -1
+                            },
+                            minWidth: 100
                         },
                         {
-                           title: 'Like',
-                           key: 'like',
-                           maxWidth:100
+                            title: 'Like',
+                            key: 'like',
+                            maxWidth: 100
                         },
                         {
-                           title: 'Book',
-                           key: 'book'
+                            title: 'Book',
+                            key: 'book'
                         }
                     ],
                     data18: [
                         {
                             name: '欧阳',
                             age: 12,
-                            pets:'dog',
-                            like:'red',
-                            book:'《贩罪》'
+                            pets: 'dog',
+                            like: 'red',
+                            book: '《贩罪》'
                         },
                         {
                             name: '青蛙',
                             like: 'blue',
                             age: 22,
-                            pets:'cat',
-                            book:'《霸皇纪》',
+                            pets: 'cat',
+                            book: '《霸皇纪》',
                         },
                         {
                             name: '警长',
                             age: 18,
                             like: 'green',
-                            pets:'rhizomys',
-                            book:'《龙族》',
+                            pets: 'rhizomys',
+                            book: '《龙族》',
                         },
                         {
                             name: '球形闪电',
                             like: 'pet',
-                            pets:'cat',
-                            book:'《卡徒》',
-                            occupation:'Bodyguard'
+                            pets: 'cat',
+                            book: '《卡徒》',
+                            occupation: 'Bodyguard'
                         },
                         {
                             name: '会长',
                             age: 38,
-                            book:'《无限道武者路》',
-                            pets:'rhizomys',
-                            like:'book'
+                            book: '《无限道武者路》',
+                            pets: 'rhizomys',
+                            like: 'book'
                         }
                     ]
                 }
+            },
+            methods:{
+                exportData (type) {
+                    if (type === 1) {
+                        this.$refs.table.exportCsv({
+                            filename: 'The original data'
+                        })
+                    } else {
+                        this.$refs.table.exportCsv({
+                            filename: 'Sorting and filtering data',
+                            original: false
+                        })
+                    }
+                }
             }
+        }
     </script>
 ```
 :::
@@ -2662,6 +2811,7 @@ column 设置 children，可以渲染出多级表头<br/>
 
 <script>
     import RenderTable from '../../components/RenderTable.vue'
+
     export default {
         data () {
             return {
@@ -2669,7 +2819,7 @@ column 设置 children，可以渲染出多级表头<br/>
                     {
                         title: 'Name',
                         key: 'name',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Age',
@@ -2701,27 +2851,27 @@ column 设置 children，可以渲染出多级表头<br/>
                     {
                         title: 'Name',
                         key: 'name',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Age',
                         key: 'age',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'Sex',
                         key: 'sex',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'hobby',
                         key: 'hobby',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'occupation',
                         key: 'occupation',
-                        width:200
+                        width: 200
                     }
                 ],
                 data2: [
@@ -2729,56 +2879,56 @@ column 设置 children，可以渲染出多级表头<br/>
                         name: '欧阳',
                         age: 12,
                         sex: '男',
-                        hobby:'Swimming',
-                        occupation:'Doctor'
+                        hobby: 'Swimming',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '青蛙',
                         age: 18,
                         sex: '男',
-                        hobby:'Swimming',
-                        occupation:'Doctor'
+                        hobby: 'Swimming',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '警长',
                         age: 28,
                         sex: '男',
-                        hobby:'Swimming',
-                        occupation:'Doctor'
+                        hobby: 'Swimming',
+                        occupation: 'Doctor'
                     }
                 ],
                 columns3: [
                     {
                         title: 'Name',
                         key: 'name',
-                        width:200,
-                        fixed:'left'
+                        width: 200,
+                        fixed: 'left'
                     },
                     {
                         title: 'Age',
                         key: 'age',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'Sex',
                         key: 'sex',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'Pets',
                         key: 'pets',
-                        width:200,
-                        fixed:'right'
+                        width: 200,
+                        fixed: 'right'
                     },
                     {
                         title: 'hobby',
                         key: 'hobby',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'occupation',
                         key: 'occupation',
-                        width:400
+                        width: 400
                     }
                 ],
                 data3: [
@@ -2786,162 +2936,162 @@ column 设置 children，可以渲染出多级表头<br/>
                         name: '欧阳',
                         age: 12,
                         sex: '男',
-                        hobby:'Swimming',
-                        pets:'dog',
-                        occupation:'Doctor',
-                        _disabled:true
+                        hobby: 'Swimming',
+                        pets: 'dog',
+                        occupation: 'Doctor',
+                        _disabled: true
                     },
                     {
                         name: '青蛙',
                         age: 18,
                         sex: '男',
-                        pets:'cat',
-                        _checked:true,
-                        hobby:'Swimming',
-                        occupation:'Doctor'
+                        pets: 'cat',
+                        _checked: true,
+                        hobby: 'Swimming',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '警长',
                         age: 28,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Swimming',
-                        occupation:'Doctor'
+                        pets: 'rhizomys',
+                        hobby: 'Swimming',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '球形闪电',
                         age: 38,
                         sex: '男',
-                        pets:'cat',
-                        hobby:'Swimming',
-                        occupation:'Bodyguard'
+                        pets: 'cat',
+                        hobby: 'Swimming',
+                        occupation: 'Bodyguard'
                     },
                     {
                         name: '会长',
                         age: 48,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Thousand-hand Bodhisattva',
-                        occupation:'President'
+                        pets: 'rhizomys',
+                        hobby: 'Thousand-hand Bodhisattva',
+                        occupation: 'President'
                     }
                 ],
-                data4:[],
+                data4: [],
                 data5: [
                     {
                         name: '欧阳',
                         age: 12,
                         sex: '男',
-                        hobby:'Swimming',
-                        pets:'dog',
-                        occupation:'Doctor',
-                        _disabled:true
+                        hobby: 'Swimming',
+                        pets: 'dog',
+                        occupation: 'Doctor',
+                        _disabled: true
                     },
                     {
                         name: '青蛙',
                         age: 18,
                         sex: '男',
-                        pets:'cat',
-                        _checked:true,
-                        hobby:'Swimming',
-                        occupation:'Doctor'
+                        pets: 'cat',
+                        _checked: true,
+                        hobby: 'Swimming',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '警长',
                         age: 28,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Swimming',
-                        occupation:'Doctor'
+                        pets: 'rhizomys',
+                        hobby: 'Swimming',
+                        occupation: 'Doctor'
                     }
                 ],
                 columns4: [
                     {
                         title: 'selection',
-                        type:'selection',
-                        fixed:'left',
-                        width:80,
-                        align:'center'
+                        type: 'selection',
+                        fixed: 'left',
+                        width: 80,
+                        align: 'center'
                     },
                     {
                         title: 'Name',
                         key: 'name',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Age',
                         key: 'age',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'Sex',
                         key: 'sex',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'hobby',
                         key: 'hobby',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'occupation',
                         key: 'occupation',
-                        width:200
+                        width: 200
                     }
                 ],
                 columns5: [
                     {
                         title: 'selection',
-                        type:'selection',
-                        width:80,
-                        align:'center'
+                        type: 'selection',
+                        width: 80,
+                        align: 'center'
                     },
                     {
                         title: 'Name',
                         key: 'name',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Age',
                         key: 'age',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'Sex',
                         key: 'sex',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'hobby',
                         key: 'hobby',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'occupation',
                         key: 'occupation',
-                        width:200
+                        width: 200
                     }
                 ],
                 columns6: [
                     {
                         title: 'selection',
-                        type:'selection',
-                        fixed:'left',
-                        width:35,
-                        align:'center'
+                        type: 'selection',
+                        fixed: 'left',
+                        width: 35,
+                        align: 'center'
                     },
                     {
                         title: 'Name',
                         key: 'name',
-                        width:200,
+                        width: 200,
                         render: (h, params) => {
                             return h('div', [
                                 h('b-input', {
                                     on: {
                                         'on-change': (data) => {
-                                            this.edit(data,params.index)
+                                            this.edit(data, params.index)
                                         }
                                     },
-                                    value:params
+                                    value: params
                                 })
                             ])
                         }
@@ -2949,24 +3099,24 @@ column 设置 children，可以渲染出多级表头<br/>
                     {
                         title: 'Age',
                         key: 'age',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'Sex',
                         key: 'sex',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'hobby',
                         key: 'hobby',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'occupation',
                         key: 'occupation',
-                        width:120,
-                        fixed:'right',
-                        align:'center',
+                        width: 120,
+                        fixed: 'right',
+                        align: 'center',
                         render: (h, params) => {
                             return h('div', [
                                 h('b-button', {
@@ -2988,31 +3138,31 @@ column 设置 children，可以渲染出多级表头<br/>
                     {
                         title: 'Name',
                         key: 'name',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Age',
                         key: 'age',
-                        sortType:'asc',
-                        sortable:true,
-                        width:300
+                        sortType: 'asc',
+                        sortable: true,
+                        width: 300
                     },
                     {
                         title: 'Sex',
                         key: 'sex',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'hobby',
                         key: 'hobby',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Pets',
                         key: 'pets',
-                        width:200,
-                        sortable:true,
-                        fixed:'right'
+                        width: 200,
+                        sortable: true,
+                        fixed: 'right'
                     }
                 ],
                 data6: [
@@ -3020,70 +3170,70 @@ column 设置 children，可以渲染出多级表头<br/>
                         name: '欧阳',
                         age: 12,
                         sex: '男',
-                        hobby:'Swimming',
-                        pets:'dog',
-                        occupation:'Doctor'
+                        hobby: 'Swimming',
+                        pets: 'dog',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '青蛙',
                         sex: '男',
                         age: 22,
-                        pets:'cat',
-                        hobby:'Swimming',
-                        occupation:'Doctor'
+                        pets: 'cat',
+                        hobby: 'Swimming',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '警长',
                         age: 18,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Swimming',
-                        occupation:'Doctor'
+                        pets: 'rhizomys',
+                        hobby: 'Swimming',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '球形闪电',
                         age: 6,
                         sex: '男',
-                        pets:'cat',
-                        hobby:'Swimming',
-                        occupation:'Bodyguard'
+                        pets: 'cat',
+                        hobby: 'Swimming',
+                        occupation: 'Bodyguard'
                     },
                     {
                         name: '会长',
                         age: 38,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Thousand-hand Bodhisattva',
-                        occupation:'President'
+                        pets: 'rhizomys',
+                        hobby: 'Thousand-hand Bodhisattva',
+                        occupation: 'President'
                     }
                 ],
                 columns8: [
                     {
                         title: 'Name',
                         key: 'name',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Age',
                         key: 'age',
-                        width:300,
-                        className:'test-table-columns'
+                        width: 300,
+                        className: 'test-table-columns'
                     },
                     {
                         title: 'Sex',
                         key: 'sex',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'hobby',
                         key: 'hobby',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Pets',
                         key: 'pets',
-                        width:200,
-                        fixed:'right'
+                        width: 200,
+                        fixed: 'right'
                     }
                 ],
                 data7: [
@@ -3091,47 +3241,47 @@ column 设置 children，可以渲染出多级表头<br/>
                         name: '欧阳',
                         age: 12,
                         sex: '男',
-                        hobby:'Swimming',
-                        pets:'dog',
-                        _cellClass:{
-                            name:'test-table-cell'
+                        hobby: 'Swimming',
+                        pets: 'dog',
+                        _cellClass: {
+                            name: 'test-table-cell'
                         },
-                        occupation:'Doctor'
+                        occupation: 'Doctor'
                     },
                     {
                         name: '青蛙',
                         sex: '男',
                         age: 22,
-                        pets:'cat',
-                        hobby:'Swimming',
-                        occupation:'Doctor'
+                        pets: 'cat',
+                        hobby: 'Swimming',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '警长',
                         age: 18,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Swimming',
-                        _cellClass:{
-                            sex:'test-table-cell'
+                        pets: 'rhizomys',
+                        hobby: 'Swimming',
+                        _cellClass: {
+                            sex: 'test-table-cell'
                         },
-                        occupation:'Doctor'
+                        occupation: 'Doctor'
                     },
                     {
                         name: '球形闪电',
                         age: 6,
                         sex: '男',
-                        pets:'cat',
-                        hobby:'Swimming',
-                        occupation:'Bodyguard'
+                        pets: 'cat',
+                        hobby: 'Swimming',
+                        occupation: 'Bodyguard'
                     },
                     {
                         name: '会长',
                         age: 38,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Thousand-hand Bodhisattva',
-                        occupation:'President'
+                        pets: 'rhizomys',
+                        hobby: 'Thousand-hand Bodhisattva',
+                        occupation: 'President'
                     }
                 ],
                 data8: [
@@ -3139,76 +3289,76 @@ column 设置 children，可以渲染出多级表头<br/>
                         name: '欧阳',
                         age: 12,
                         sex: '男',
-                        hobby:'Swimming',
-                        pets:'dog',
-                        _cellClass:{
-                            name:'test-table-cell'
+                        hobby: 'Swimming',
+                        pets: 'dog',
+                        _cellClass: {
+                            name: 'test-table-cell'
                         },
-                        occupation:'Doctor'
+                        occupation: 'Doctor'
                     },
                     {
                         name: '青蛙',
                         sex: '男',
                         age: 22,
-                        pets:'cat',
-                        hobby:'Swimming',
-                        _className:'test-table-row',
-                        occupation:'Doctor'
+                        pets: 'cat',
+                        hobby: 'Swimming',
+                        _className: 'test-table-row',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '警长',
                         age: 18,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Swimming',
-                        _cellClass:{
-                            sex:'test-table-cell'
+                        pets: 'rhizomys',
+                        hobby: 'Swimming',
+                        _cellClass: {
+                            sex: 'test-table-cell'
                         },
-                        occupation:'Doctor'
+                        occupation: 'Doctor'
                     },
                     {
                         name: '球形闪电',
                         age: 6,
                         sex: '男',
-                        pets:'cat',
-                        hobby:'Swimming',
-                        occupation:'Bodyguard'
+                        pets: 'cat',
+                        hobby: 'Swimming',
+                        occupation: 'Bodyguard'
                     },
                     {
                         name: '会长',
                         age: 38,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Thousand-hand Bodhisattva',
-                        occupation:'President'
+                        pets: 'rhizomys',
+                        hobby: 'Thousand-hand Bodhisattva',
+                        occupation: 'President'
                     }
                 ],
                 columns9: [
                     {
                         title: 'Name',
                         key: 'name',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Age',
                         key: 'age',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'Sex',
                         key: 'sex',
-                        width:300
+                        width: 300
                     },
                     {
                         title: 'hobby',
                         key: 'hobby',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Pets',
                         key: 'pets',
-                        width:200,
-                        fixed:'right'
+                        width: 200,
+                        fixed: 'right'
                     }
                 ],
                 data9: [
@@ -3216,92 +3366,92 @@ column 设置 children，可以渲染出多级表头<br/>
                         name: '欧阳',
                         age: 12,
                         sex: '男',
-                        hobby:'Swimming',
-                        pets:'dog',
-                        occupation:'Doctor'
+                        hobby: 'Swimming',
+                        pets: 'dog',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '青蛙',
                         sex: '男',
                         age: 22,
-                        pets:'cat',
-                        _rowspan:{
-                            name:3
+                        pets: 'cat',
+                        _rowspan: {
+                            name: 3
                         },
-                        hobby:'Swimming',
-                        occupation:'Doctor'
+                        hobby: 'Swimming',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '警长',
                         age: 18,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Swimming',
-                        _colspan:{
-                            age:2
+                        pets: 'rhizomys',
+                        hobby: 'Swimming',
+                        _colspan: {
+                            age: 2
                         },
-                        occupation:'Doctor'
+                        occupation: 'Doctor'
                     },
                     {
                         name: '球形闪电',
                         age: 6,
                         sex: '男',
-                        pets:'cat',
-                        hobby:'Swimming',
-                        occupation:'Bodyguard'
+                        pets: 'cat',
+                        hobby: 'Swimming',
+                        occupation: 'Bodyguard'
                     },
                     {
                         name: '会长',
                         age: 38,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Thousand-hand Bodhisattva',
-                        occupation:'President'
+                        pets: 'rhizomys',
+                        hobby: 'Thousand-hand Bodhisattva',
+                        occupation: 'President'
                     }
                 ],
                 columns10: [
                     {
                         title: 'Name',
                         key: 'name',
-                        width:100,
-                        fixed:'left'
+                        width: 100,
+                        fixed: 'left'
                     },
                     {
                         title: 'Age',
                         key: 'age',
-                        width:100
+                        width: 100
                     },
                     {
                         title: 'Sex',
                         key: 'sex',
-                        width:150
+                        width: 150
                     },
                     {
                         title: 'Hobby',
                         key: 'hobby',
-                        width:100
+                        width: 100
                     },
                     {
                         title: 'Pets',
                         key: 'pets',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Like',
                         key: 'like',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'ID',
                         key: 'id',
-                        width:200,
-                        fixed:'right'
+                        width: 200,
+                        fixed: 'right'
                     },
                     {
                         title: 'Book',
                         key: 'book',
-                        width:200,
-                        fixed:'right'
+                        width: 200,
+                        fixed: 'right'
                     }
                 ],
                 data10: [
@@ -3309,88 +3459,88 @@ column 设置 children，可以渲染出多级表头<br/>
                         name: '欧阳',
                         age: 12,
                         sex: '男',
-                        hobby:'Swimming',
-                        pets:'dog',
-                        occupation:'Doctor',
-                        like:'red',
-                        id:'1',
-                        book:'《贩罪》'
+                        hobby: 'Swimming',
+                        pets: 'dog',
+                        occupation: 'Doctor',
+                        like: 'red',
+                        id: '1',
+                        book: '《贩罪》'
                     },
                     {
                         name: '青蛙',
                         sex: '男',
                         age: 22,
-                        pets:'cat',
-                        like:'green',
-                        hobby:'Swimming',
-                        id:'2',
-                        book:'《霸皇纪》',
-                        occupation:'Doctor'
+                        pets: 'cat',
+                        like: 'green',
+                        hobby: 'Swimming',
+                        id: '2',
+                        book: '《霸皇纪》',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '警长',
                         age: 18,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Swimming',
-                        like:'orange',
-                        id:'3',
-                        book:'《龙族》',
-                        occupation:'Doctor'
+                        pets: 'rhizomys',
+                        hobby: 'Swimming',
+                        like: 'orange',
+                        id: '3',
+                        book: '《龙族》',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '球形闪电',
                         age: 6,
                         sex: '男',
-                        pets:'cat',
-                        hobby:'Swimming',
-                        like:'pink',
-                        book:'《卡徒》',
-                        id:'4',
-                        occupation:'Bodyguard'
+                        pets: 'cat',
+                        hobby: 'Swimming',
+                        like: 'pink',
+                        book: '《卡徒》',
+                        id: '4',
+                        occupation: 'Bodyguard'
                     },
                     {
                         name: '会长',
                         age: 38,
                         sex: '男',
-                        book:'《无限道武者路》',
-                        id:'5',
-                        like:'blue',
-                        pets:'rhizomys',
-                        hobby:'Thousand-hand Bodhisattva',
-                        occupation:'President'
+                        book: '《无限道武者路》',
+                        id: '5',
+                        like: 'blue',
+                        pets: 'rhizomys',
+                        hobby: 'Thousand-hand Bodhisattva',
+                        occupation: 'President'
                     }
                 ],
                 columns11: [
                     {
                         title: 'Name',
                         key: 'name',
-                        width:100
+                        width: 100
                     },
                     {
                         title: 'Age',
                         key: 'age',
-                        width:100
+                        width: 100
                     },
                     {
                         title: 'Pets',
                         key: 'pets',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Like',
                         key: 'like',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'ID',
                         key: 'id',
-                        width:200
+                        width: 200
                     },
                     {
                         title: 'Book',
                         key: 'book',
-                        width:200
+                        width: 200
                     }
                 ],
                 data11: [
@@ -3398,322 +3548,128 @@ column 设置 children，可以渲染出多级表头<br/>
                         name: '欧阳',
                         age: 12,
                         sex: '男',
-                        hobby:'Swimming',
-                        pets:'dog',
-                        occupation:'Doctor',
-                        like:'red',
-                        id:'1',
-                        book:'《贩罪》'
+                        hobby: 'Swimming',
+                        pets: 'dog',
+                        occupation: 'Doctor',
+                        like: 'red',
+                        id: '1',
+                        book: '《贩罪》'
                     },
                     {
                         name: '青蛙',
                         sex: '男',
                         age: 22,
-                        pets:'cat',
-                        hobby:'Swimming',
-                        id:'2',
-                        book:'《霸皇纪》',
-                        occupation:'Doctor'
+                        pets: 'cat',
+                        hobby: 'Swimming',
+                        id: '2',
+                        book: '《霸皇纪》',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '警长',
                         age: 18,
                         sex: '男',
-                        pets:'rhizomys',
-                        hobby:'Swimming',
-                        id:'3',
-                        book:'《龙族》',
-                        occupation:'Doctor'
+                        pets: 'rhizomys',
+                        hobby: 'Swimming',
+                        id: '3',
+                        book: '《龙族》',
+                        occupation: 'Doctor'
                     },
                     {
                         name: '球形闪电',
                         age: 6,
                         sex: '男',
-                        pets:'cat',
-                        hobby:'Swimming',
-                        book:'《卡徒》',
-                        id:'4',
-                        occupation:'Bodyguard'
+                        pets: 'cat',
+                        hobby: 'Swimming',
+                        book: '《卡徒》',
+                        id: '4',
+                        occupation: 'Bodyguard'
                     },
                     {
                         name: '会长',
                         age: 38,
                         sex: '男',
-                        book:'《无限道武者路》',
-                        id:'5',
-                        pets:'rhizomys',
-                        hobby:'Thousand-hand Bodhisattva',
-                        occupation:'President'
+                        book: '《无限道武者路》',
+                        id: '5',
+                        pets: 'rhizomys',
+                        hobby: 'Thousand-hand Bodhisattva',
+                        occupation: 'President'
                     }
                 ],
                 columns12: [
                     {
-                       title: 'Name',
-                       key: 'name',
-                       width:100
+                        title: 'Name',
+                        key: 'name',
+                        width: 100
                     },
                     {
-                       title: 'Age',
-                       key: 'age',
-                       width:100
+                        title: 'Age',
+                        key: 'age',
+                        width: 100
                     },
                     {
-                       title: 'Pets',
-                       key: 'pets',
-                       minWidth:100
+                        title: 'Pets',
+                        key: 'pets',
+                        minWidth: 100
                     },
                     {
-                       title: 'Like',
-                       key: 'like',
-                       maxWidth:100
+                        title: 'Like',
+                        key: 'like',
+                        maxWidth: 100
                     },
                     {
-                       title: 'ID',
-                       key: 'id',
+                        title: 'ID',
+                        key: 'id',
                     },
                     {
-                       title: 'Book',
-                       key: 'book'
+                        title: 'Book',
+                        key: 'book'
                     }
                 ],
                 columns13: [
                     {
-                       title: '序号',
-                       width:60,
-                       align:'center',
-                       type:'index'
+                        title: '序号',
+                        width: 60,
+                        align: 'center',
+                        type: 'index'
                     },
                     {
-                       title: 'Age',
-                       key: 'age',
-                       width:100
+                        title: 'Age',
+                        key: 'age',
+                        width: 100
                     },
                     {
-                       title: 'Pets',
-                       key: 'pets',
-                       minWidth:100
+                        title: 'Pets',
+                        key: 'pets',
+                        minWidth: 100
                     },
                     {
-                       title: 'Like',
-                       key: 'like',
-                       maxWidth:100
+                        title: 'Like',
+                        key: 'like',
+                        maxWidth: 100
                     },
                     {
-                       title: 'ID',
-                       key: 'id',
+                        title: 'ID',
+                        key: 'id',
                     },
                     {
-                       title: 'Book',
-                       key: 'book'
+                        title: 'Book',
+                        key: 'book'
                     }
                 ],
                 columns14: [
                     {
-                       title: '序号',
-                       width:60,
-                       align:'center',
-                       type:'index'
+                        title: '序号',
+                        width: 60,
+                        align: 'center',
+                        type: 'index'
                     },
                     {
-                       title: 'Age',
-                       key: 'age',
-                       width:100,
-                       sortable:true,
-                       filters: [
-                           {
-                               label: 'Greater than 18',
-                               value: 1
-                           },
-                           {
-                               label: 'Less than 18',
-                               value: 2
-                           }
-                       ],
-                       filterMethod (value, row) {
-                           if (value === 1) {
-                               return row.age >= 18;
-                           } else if (value === 2) {
-                               return row.age < 18;
-                           }
-                       }
-                    },
-                    {
-                       title: 'Pets',
-                       key: 'pets',
-                       filters: [
-                           {
-                               label: 'dog',
-                               value: 'dog'
-                           },
-                           {
-                               label: 'rhizomys',
-                               value: 'rhizomys'
-                           },
-                           {
-                               label: 'cat',
-                               value: 'cat'
-                           }
-                       ],
-                       filterMultiple:true,
-                       filterMethod (value, row) {
-                           return row.pets.indexOf(value) > -1;
-                       },
-                       minWidth:100
-                    },
-                    {
-                       title: 'Like',
-                       key: 'like',
-                       maxWidth:100
-                    },
-                    {
-                       title: 'ID',
-                       key: 'id',
-                    },
-                    {
-                       title: 'Book',
-                       key: 'book'
-                    }
-                ],
-                data12: [
-                    {
-                        name: '欧阳',
-                        age: 12,
-                        pets:'dog',
-                        occupation:'red',
-                        book:'《贩罪》',
-                        children:[
-                            {
-                                name: '佐罗',
-                                age: 15,
-                                pets:'pig',
-                                occupation:'yellow',
-                                book:'《惊悚乐园》'
-                            },
-                            {
-                                name: '轩辕',
-                                age: 12,
-                                pets:'drag',
-                                occupation:'red',
-                                book:'《龙族》'
-                            }
-                        ]
-                    },
-                    {
-                        name: '青蛙',
-                        sex: '男',
-                        age: 22,
-                        pets:'cat',
-                        book:'《霸皇纪》',
-                        _disableExpand:true,
-                        occupation:'Doctor'
-                    },
-                    {
-                        name: '警长',
-                        age: 18,
-                        sex: '男',
-                        pets:'rhizomys',
-                        _disableExpand:true,
-                        book:'《龙族》',
-                        _disableExpand:true,
-                        occupation:'Doctor'
-                    },
-                    {
-                        name: '球形闪电',
-                        age: 6,
-                        pets:'cat',
-                        book:'《卡徒》',
-                        _disableExpand:true,
-                        occupation:'Bodyguard'
-                    },
-                    {
-                        name: '会长',
-                        age: 38,
-                        book:'《无限道武者路》',
-                        pets:'rhizomys',
-                        _disableExpand:true,
-                        occupation:'President'
-                    }
-                ],
-                columns15: [
-                    {
-                        type: 'expand',
-                        width: 40,
-                        center:'align',
-                        expandRender: (h, params) => {
-                           return h(RenderTable, {
-                               props: {
-                                   data: params.row.children,
-                                   columns: this.columns16
-                               }
-                           })
-                        }
-                    },
-                    {
-                       title: 'Name',
-                       key: 'name',
-                       width:100
-                    },
-                    {
-                       title: 'Age',
-                       key: 'age',
-                       width:100,
-                       sortable:true
-                    },
-                    {
-                       title: 'Pets',
-                       key: 'pets',
-                       minWidth:100
-                    },
-                    {
-                       title: 'Occupation',
-                       key: 'occupation',
-                       maxWidth:100
-                    },
-                    {
-                       title: 'Book',
-                       key: 'book',
-                       width:100
-                    }
-                ],
-                columns16:[
-                    {
-                      width: 40
-                    },
-                    {
-                     title: 'Name',
-                     key: 'name',
-                     width:100
-                    },
-                    {
-                     title: 'Age',
-                     key: 'age',
-                     width:100,
-                     sortable:true
-                    },
-                    {
-                     title: 'Pets',
-                     key: 'pets',
-                     minWidth:100
-                    },
-                    {
-                     title: 'Occupation',
-                     key: 'occupation',
-                     maxWidth:100
-                    },
-                    {
-                     title: 'Book',
-                     key: 'book',
-                     width:100
-                    }
-                ],
-                columns17:[
-                    {
-                         title: 'Age',
-                         key: 'age',
-                         width:100,
-                         fixed: 'left',
-                         sortable:true,
-                         filters: [
+                        title: 'Age',
+                        key: 'age',
+                        width: 100,
+                        sortable: true,
+                        filters: [
                             {
                                 label: 'Greater than 18',
                                 value: 1
@@ -3725,181 +3681,375 @@ column 设置 children，可以渲染出多级表头<br/>
                         ],
                         filterMethod (value, row) {
                             if (value === 1) {
-                                return row.age >= 18;
+                                return row.age >= 18
                             } else if (value === 2) {
-                                return row.age < 18;
+                                return row.age < 18
                             }
                         }
                     },
                     {
-                         title: '测试',
-                         align:'center',
-                         children:[
+                        title: 'Pets',
+                        key: 'pets',
+                        filters: [
                             {
-                              title: 'Name',
-                              key: 'name',
-                              width:200,
-                              sortable:true
+                                label: 'dog',
+                                value: 'dog'
                             },
                             {
-                              title: 'Sex',
-                              key: 'sex',
-                              width:200,
-                              sortable:true
+                                label: 'rhizomys',
+                                value: 'rhizomys'
+                            },
+                            {
+                                label: 'cat',
+                                value: 'cat'
+                            }
+                        ],
+                        filterMultiple: true,
+                        filterMethod (value, row) {
+                            return row.pets.indexOf(value) > -1
+                        },
+                        minWidth: 100
+                    },
+                    {
+                        title: 'Like',
+                        key: 'like',
+                        maxWidth: 100
+                    },
+                    {
+                        title: 'ID',
+                        key: 'id',
+                    },
+                    {
+                        title: 'Book',
+                        key: 'book'
+                    }
+                ],
+                data12: [
+                    {
+                        name: '欧阳',
+                        age: 12,
+                        pets: 'dog',
+                        occupation: 'red',
+                        book: '《贩罪》',
+                        children: [
+                            {
+                                name: '佐罗',
+                                age: 15,
+                                pets: 'pig',
+                                occupation: 'yellow',
+                                book: '《惊悚乐园》'
+                            },
+                            {
+                                name: '轩辕',
+                                age: 12,
+                                pets: 'drag',
+                                occupation: 'red',
+                                book: '《龙族》'
+                            }
+                        ]
+                    },
+                    {
+                        name: '青蛙',
+                        sex: '男',
+                        age: 22,
+                        pets: 'cat',
+                        book: '《霸皇纪》',
+                        _disableExpand: true,
+                        occupation: 'Doctor'
+                    },
+                    {
+                        name: '警长',
+                        age: 18,
+                        sex: '男',
+                        pets: 'rhizomys',
+                        _disableExpand: true,
+                        book: '《龙族》',
+                        _disableExpand: true,
+                        occupation: 'Doctor'
+                    },
+                    {
+                        name: '球形闪电',
+                        age: 6,
+                        pets: 'cat',
+                        book: '《卡徒》',
+                        _disableExpand: true,
+                        occupation: 'Bodyguard'
+                    },
+                    {
+                        name: '会长',
+                        age: 38,
+                        book: '《无限道武者路》',
+                        pets: 'rhizomys',
+                        _disableExpand: true,
+                        occupation: 'President'
+                    }
+                ],
+                columns15: [
+                    {
+                        type: 'expand',
+                        width: 40,
+                        center: 'align',
+                        expandRender: (h, params) => {
+                            return h(RenderTable, {
+                                props: {
+                                    data: params.row.children,
+                                    columns: this.columns16
+                                }
+                            })
+                        }
+                    },
+                    {
+                        title: 'Name',
+                        key: 'name',
+                        width: 100
+                    },
+                    {
+                        title: 'Age',
+                        key: 'age',
+                        width: 100,
+                        sortable: true
+                    },
+                    {
+                        title: 'Pets',
+                        key: 'pets',
+                        minWidth: 100
+                    },
+                    {
+                        title: 'Occupation',
+                        key: 'occupation',
+                        maxWidth: 100
+                    },
+                    {
+                        title: 'Book',
+                        key: 'book',
+                        width: 100
+                    }
+                ],
+                columns16: [
+                    {
+                        width: 40
+                    },
+                    {
+                        title: 'Name',
+                        key: 'name',
+                        width: 100
+                    },
+                    {
+                        title: 'Age',
+                        key: 'age',
+                        width: 100,
+                        sortable: true
+                    },
+                    {
+                        title: 'Pets',
+                        key: 'pets',
+                        minWidth: 100
+                    },
+                    {
+                        title: 'Occupation',
+                        key: 'occupation',
+                        maxWidth: 100
+                    },
+                    {
+                        title: 'Book',
+                        key: 'book',
+                        width: 100
+                    }
+                ],
+                columns17: [
+                    {
+                        title: 'Age',
+                        key: 'age',
+                        width: 100,
+                        fixed: 'left',
+                        sortable: true,
+                        filters: [
+                            {
+                                label: 'Greater than 18',
+                                value: 1
+                            },
+                            {
+                                label: 'Less than 18',
+                                value: 2
+                            }
+                        ],
+                        filterMethod (value, row) {
+                            if (value === 1) {
+                                return row.age >= 18
+                            } else if (value === 2) {
+                                return row.age < 18
+                            }
+                        }
+                    },
+                    {
+                        title: '测试',
+                        align: 'center',
+                        children: [
+                            {
+                                title: 'Name',
+                                key: 'name',
+                                width: 200,
+                                sortable: true
+                            },
+                            {
+                                title: 'Sex',
+                                key: 'sex',
+                                width: 200,
+                                sortable: true
                             },
                             {
                                 title: '合计',
-                                children:[
-                                  {
-                                    title: 'Hobby',
-                                    key: 'hobby',
-                                    width:100,
-                                    sortable:true
-                                  },
-                                  {
-                                    title: 'id',
-                                    key: 'id',
-                                    width:100
-                                  }
+                                children: [
+                                    {
+                                        title: 'Hobby',
+                                        key: 'hobby',
+                                        width: 100,
+                                        sortable: true
+                                    },
+                                    {
+                                        title: 'id',
+                                        key: 'id',
+                                        width: 100
+                                    }
                                 ]
                             }
-                         ]
+                        ]
                     },
                     {
-                     title: 'Pets',
-                     key: 'pets',
-                     width:100
+                        title: 'Pets',
+                        key: 'pets',
+                        width: 100
                     },
                     {
-                     title: 'Occupation',
-                     key: 'occupation',
-                     width:100
+                        title: 'Occupation',
+                        key: 'occupation',
+                        width: 100
                     },
                     {
-                     title: 'Book',
-                     key: 'book',
-                     width:200
+                        title: 'Book',
+                        key: 'book',
+                        width: 200
                     }
                 ],
                 columns18: [
                     {
-                       title: 'Name',
-                       key: 'name',
-                       width:150
+                        title: 'Name',
+                        key: 'name',
+                        width: 150
                     },
                     {
-                       title: 'Age',
-                       key: 'age',
-                       width:100,
-                       sortable:true,
-                       filters: [
-                           {
-                               label: 'Greater than 18',
-                               value: 1
-                           },
-                           {
-                               label: 'Less than 18',
-                               value: 2
-                           }
-                       ],
-                       filterMethod (value, row) {
-                           if (value === 1) {
-                               return row.age >= 18;
-                           } else if (value === 2) {
-                               return row.age < 18;
-                           }
-                       }
+                        title: 'Age',
+                        key: 'age',
+                        width: 100,
+                        sortable: true,
+                        filters: [
+                            {
+                                label: 'Greater than 18',
+                                value: 1
+                            },
+                            {
+                                label: 'Less than 18',
+                                value: 2
+                            }
+                        ],
+                        filterMethod (value, row) {
+                            if (value === 1) {
+                                return row.age >= 18
+                            } else if (value === 2) {
+                                return row.age < 18
+                            }
+                        }
                     },
                     {
-                       title: 'Pets',
-                       key: 'pets',
-                       filters: [
-                           {
-                               label: 'dog',
-                               value: 'dog'
-                           },
-                           {
-                               label: 'rhizomys',
-                               value: 'rhizomys'
-                           },
-                           {
-                               label: 'cat',
-                               value: 'cat'
-                           }
-                       ],
-                       filterMultiple:true,
-                       filterMethod (value, row) {
-                           return row.pets.indexOf(value) > -1;
-                       },
-                       minWidth:100
+                        title: 'Pets',
+                        key: 'pets',
+                        filters: [
+                            {
+                                label: 'dog',
+                                value: 'dog'
+                            },
+                            {
+                                label: 'rhizomys',
+                                value: 'rhizomys'
+                            },
+                            {
+                                label: 'cat',
+                                value: 'cat'
+                            }
+                        ],
+                        filterMultiple: true,
+                        filterMethod (value, row) {
+                            return row.pets.indexOf(value) > -1
+                        },
+                        minWidth: 100
                     },
                     {
-                       title: 'Like',
-                       key: 'like',
-                       maxWidth:100
+                        title: 'Like',
+                        key: 'like',
+                        maxWidth: 100
                     },
                     {
-                       title: 'Book',
-                       key: 'book'
+                        title: 'Book',
+                        key: 'book'
                     }
                 ],
                 data18: [
                     {
                         name: '欧阳',
                         age: 12,
-                        pets:'dog',
-                        like:'red',
-                        book:'《贩罪》'
+                        pets: 'dog',
+                        like: 'red',
+                        book: '《贩罪》'
                     },
                     {
                         name: '青蛙',
                         like: 'blue',
                         age: 22,
-                        pets:'cat',
-                        book:'《霸皇纪》',
+                        pets: 'cat',
+                        book: '《霸皇纪》',
                     },
                     {
                         name: '警长',
                         age: 18,
                         like: 'green',
-                        pets:'rhizomys',
-                        book:'《龙族》',
+                        pets: 'rhizomys',
+                        book: '《龙族》',
                     },
                     {
                         name: '球形闪电',
                         like: 'pet',
-                        pets:'cat',
-                        book:'《卡徒》',
-                        occupation:'Bodyguard'
+                        pets: 'cat',
+                        book: '《卡徒》',
+                        occupation: 'Bodyguard'
                     },
                     {
                         name: '会长',
                         age: 38,
-                        book:'《无限道武者路》',
-                        pets:'rhizomys',
-                        like:'book'
+                        book: '《无限道武者路》',
+                        pets: 'rhizomys',
+                        like: 'book'
                     }
                 ],
-                loading:true
+                loading: true
             }
         },
-        methods:{
-            remove(index){
-                this.data5.splice(index,1)
+        methods: {
+            remove (index) {
+                this.data5.splice(index, 1)
             },
-            handleClick(row){
-                console.log('单击事件,当前选中的数据为：',row)
+            handleClick (row) {
+                console.log('单击事件,当前选中的数据为：', row)
             },
-            handleDbclick(row){
-                console.log('双击事件,当前选中的数据为：',row)
+            handleDbclick (row) {
+                console.log('双击事件,当前选中的数据为：', row)
             },
-            edit (data,index) {
+            edit (data, index) {
                 this.data5[index].age = new Date()
             },
-            sortChange(options){
-                console.log(options.column,'column')
-                console.log(options.key,'key')
-                console.log(options.order,'order')
+            sortChange (options) {
+                console.log(options.column, 'column')
+                console.log(options.key, 'key')
+                console.log(options.order, 'order')
             },
             exportData (type) {
                 if (type === 1) {
@@ -3929,20 +4079,23 @@ column 设置 children，可以渲染出多级表头<br/>
 | dynamicable     |  是否开启显示隐藏列  |  Boolean  |  false   |
 | dynamicallocation     |  是否开启显示隐藏列【弹层模式】，dynamicable显示隐藏列和此模式二者只能开启一种  |  Boolean  |   false   |
 | show-index     |  是否开启表格序号  |  Boolean  |  false   |
-| index-info     |  表格序号的配置项 |   Object  |   `page`:当前页【1】<br> `size`:页大小【10】<br>`width`: 序号列宽【50】<br>`align`:排列方式 【center】<br>`fixed`:固定列情况 【】<br>`title`:表头 【序号】<br> |
-| width     |  表格宽度	  |  Number / String  |   auto   |
-| height     |  表格高度，设置后，如果表格内容大于此值，会固定表头	  |  Number / String  |  -    |    auto   |
-| loading     |  	表格是否加载中	  |  Boolean  |    false   |
-| highlight-row     |  	是否支持高亮选中的行，即单选	  |  Boolean  |    false   |
-| no-data-text     |  	数据为空时显示的提示内容	  |  Number / String  |    暂无数据   |
-| loading-text     |  	加载数据时显示的文本	  |  Number / String  |    -   |
-| disHover     |  	关闭 hover 模式	  |  Boolean  |     false   |
-| show-header     |  	 是否显示表头	  |  Boolean  |      true   |
+| index-info     |  表格序号的配置项 |   Object  |   `page`:当前页【1】<br> `size`:页大小【10】<br>`width`: 序号列宽【50】
+<br>`align`:排列方式 【center】<br>`fixed`:固定列情况 【】<br>`title`:表头 【序号】<br> |
+| width     |  表格宽度      |  Number / String  |   auto   |
+| height     |  表格高度，设置后，如果表格内容大于此值，会固定表头      |  Number / String  |  -    |    auto   |
+| loading     |    表格是否加载中      |  Boolean  |    false   |
+| highlight-row     |    是否支持高亮选中的行，即单选      |  Boolean  |    false   |
+| no-data-text     |    数据为空时显示的提示内容      |  Number / String  |    暂无数据   |
+| loading-text     |    加载数据时显示的文本      |  Number / String  |    -   |
+| disHover     |    关闭 hover 模式      |  Boolean  |     false   |
+| show-header     |     是否显示表头      |  Boolean  |      true   |
 
 ### Table methods
-| 方法名	      | 说明	    | 参数 |
+| 方法名          | 说明        | 参数 |
 |---------- |-------- |---------- |
-| exportCsv     |   将数据导出为 .csv 文件  |  `filename`: 文件名，默认为 table.csv<br>`original`: 是否导出为原始数据，默认为 true <br>`noHeader`: 不显示表头，默认为 false <br>`columns`: 自定义导出的列数据 <br>`data`: 自定义导出的行数据 <br>`callback`: 添加此函数后，不会下载，而是返回数据<br>`separator`: 数据分隔符，默认是逗号(,) <br>`quoted`: 每项数据是否加引号，默认为 false|
+| exportCsv     |   将数据导出为 .csv 文件  |  `filename`: 文件名，默认为 table.csv<br>`original`: 是否导出为原始数据，默认为 true
+<br>`noHeader`: 不显示表头，默认为 false <br>`columns`: 自定义导出的列数据 <br>`data`: 自定义导出的行数据 <br>`callback`: 添加此函数后，不会下载，而是返回数据
+<br>`separator`: 数据分隔符，默认是逗号(,) <br>`quoted`: 每项数据是否加引号，默认为 false|
 
 ### columns
 | 属性      | 说明    | 类型      | 可选值       | 默认值       |
@@ -3950,21 +4103,21 @@ column 设置 children，可以渲染出多级表头<br/>
 | type     |  列类型，可选值为   |  String  | `selection`、`html`、`index`、`expand`   | html    |
 | title     |  列头显示文字  |  String  |  -    | '...'    |
 | key     |  对应列内容的字段名  |  String  |  -    | -    |
-| width     |  列宽	  |  Number  |  -    | -    |
-| minWidth     |  最小列宽	  |  Number  |  -    | -    |
-| maxWidth     |  最小列宽	  |  Number  |  -    | -    |
-| align     |  对齐方式	  |  String  |  `left`、`right`、`center`    | -    |
-| className     |  列的样式名称		  |  String  |  -    | -    |
-| fixed     |  列是否固定在左侧或者右侧	  |  String  |  `left`、`right`   | -    |
-| render     |  自定义渲染列，使用 Vue 的 Render 函数。详见示例	  |  Function  | -  | -    |
-| sortable     |  对应列是否可以排序，如果设置为 `custom`，则开启远程排序，需要配合 `on-sort-change` 事件	  |  Boolean / 'custom'  | -  | false   |
-| sortMethod     |  自定义排序使用的方法，当设置 sortable: true 时有效。详见示例	  |  Boolean  | -  | -   |
-| sortType     |  设置初始化排序	  |  Boolean  | `asc`、`desc`  | -   |
-| filters     |  过滤数据的选项，格式为数组，数组中每项包含 label 和 value 属性，使用过滤，必须同时配置 filterMethod	  |  Array  |-  | -   |
-| filterMethod     |  数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示		  |  Function  | -  | -   |
+| width     |  列宽      |  Number  |  -    | -    |
+| minWidth     |  最小列宽      |  Number  |  -    | -    |
+| maxWidth     |  最小列宽      |  Number  |  -    | -    |
+| align     |  对齐方式      |  String  |  `left`、`right`、`center`    | -    |
+| className     |  列的样式名称          |  String  |  -    | -    |
+| fixed     |  列是否固定在左侧或者右侧      |  String  |  `left`、`right`   | -    |
+| render     |  自定义渲染列，使用 Vue 的 Render 函数。详见示例      |  Function  | -  | -    |
+| sortable     |  对应列是否可以排序，如果设置为 `custom`，则开启远程排序，需要配合 `on-sort-change` 事件      |  Boolean / 'custom'  | -  | false   |
+| sortMethod     |  自定义排序使用的方法，当设置 sortable: true 时有效。详见示例      |  Boolean  | -  | -   |
+| sortType     |  设置初始化排序      |  Boolean  | `asc`、`desc`  | -   |
+| filters     |  过滤数据的选项，格式为数组，数组中每项包含 label 和 value 属性，使用过滤，必须同时配置 filterMethod      |  Array  |-  | -   |
+| filterMethod     |  数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示          |  Function  | -  | -   |
 | filterMultiple     |  数据过滤的选项是否多选  |  Boolean  | -  | false   |
-| filteredValue     |  在初始化时使用过滤，值为需要过滤的 value 集合	  |  Array  | -  | -   |
-| filterRemote     |  使用远程过滤	  |   Function  | -  | -   |
+| filteredValue     |  在初始化时使用过滤，值为需要过滤的 value 集合      |  Array  | -  | -   |
+| filterRemote     |  使用远程过滤      |   Function  | -  | -   |
 | children     |  多级表头配置项，具体见示例  |   Array  | -  | -   |
 
 ### data
@@ -3973,8 +4126,8 @@ column 设置 children，可以渲染出多级表头<br/>
 | _checked     |  设定当前行默认选中状态  |  Boolean  | - | false |
 | _disabled     |  设定当前行默认禁止状态  |  Boolean  |  -    | false    |
 | _className     |  给某一行指定一个样式名称,详见特定样式  |  String  |  -    | -    |
-| _cellClass     |  给任意一个单元格指定样式,详见特定样式	  |  Object  |  -    | -    |
-| _colspan     |  某一行的合并单元格,详见合并行、列	  |  Object  |  -    | -    |
+| _cellClass     |  给任意一个单元格指定样式,详见特定样式      |  Object  |  -    | -    |
+| _colspan     |  某一行的合并单元格,详见合并行、列      |  Object  |  -    | -    |
 | _rowspan     |  某一列的合并单元格,详见合并行、列  |  Object  |  -    | -    |
 | _disableExpand     |   某一行禁用扩展功能  |   Boolean  |  -    | false    |
 
@@ -3985,19 +4138,21 @@ column 设置 children，可以渲染出多级表头<br/>
 | footer     |  页脚  |
 
 ### events
-| 方法名	      | 说明	    | 参数 |
+| 方法名          | 说明        | 参数 |
 |---------- |-------- |---------- |
 | on-select     |  当选中节点时触发   |  `selection`: 已经选中的数据<br>`row`: 当前选中的数据  |
-| on-select-cancel     |  当取消选中节点时触发   |  `selection`: 已经选中的数据<br>`row`: 当前取消选中的数据  |
+| on-select-cancel     |  当取消选中节点时触发   |  `seflection`: 已经选中的数据<br>`row`: 当前取消选中的数据  |
 | on-selection-change     |  当选中状态改变时触发   |  `selection`: 已经选中的数据  |
 | on-selection-all     |  当全选数据时触发   |  `selection`: 已经选中的数据  |
 | on-selection-all-cancel     |  当全部取消数据时触发   |  -  |
 | on-row-click     |  当选中节点时触发   |  `row`: 当前选中的数据  |
 | on-row-dbclick     |  当选中节点时触发   |  `row`: 当前选中的数据  |
-| on-current-change     开启 `highlight-row` 后有效，当表格的当前行发生变化的时候会触发|  当选中节点时触发   |  `currentRow`: 当前高亮行的数据 <br> `oldCurrentRow`: 上一次高亮的数据  |
+| on-current-change     开启 `highlight-row` 后有效，当表格的当前行发生变化的时候会触发|  当选中节点时触发   |  `currentRow`: 当前高亮行的数据
+<br> `oldCurrentRow`: 上一次高亮的数据  |
 | on-sort-change     |  当选中节点时触发   |  `column`: 当前列数据 <br> `key`: 排序依据的指标 <br> `order`: 排序的顺序，值为 asc 或 desc|
-| on-filter-change	    |  筛选条件发生变化时触发	   |  当前列数据 |
-| on-expand-change	    |  扩展状态改变时触发	   |  `row`: 当前扩展的数据<br> `status`: 展开状态 |
-| on-dynamic-save	    |  显示隐藏列弹层版本保存时触发	   |  `columns`:  修改状态后的数据 |
-| on-draggable-change	    |  拖拽编辑保存时触发	   |  `columns`:  修改状态后的数据 |
-| on-resizeable-change	    |  拖拽列宽保存时触发	   |  `columns`:  修改状态后的数据<br> `index`: 当前修改点下标 <br> `column`: 当前编辑列column|
+| on-filter-change        |  筛选条件发生变化时触发       |  当前列数据 |
+| on-expand-change        |  扩展状态改变时触发       |  `row`: 当前扩展的数据<br> `status`: 展开状态 |
+| on-dynamic-save        |  显示隐藏列弹层版本保存时触发       |  `columns`:  修改状态后的数据 |
+| on-draggable-change        |  拖拽编辑保存时触发       |  `columns`:  修改状态后的数据 |
+| on-resizeable-change        |  拖拽列宽保存时触发       |  `columns`:  修改状态后的数据<br> `index`: 当前修改点下标
+<br> `column`: 当前编辑列column|

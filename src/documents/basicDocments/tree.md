@@ -21,9 +21,11 @@
 
 ::: code
 ```html
-    <div>
-        <b-tree :data='data1' @on-select='handleselect'></b-tree>
-    </div>
+    <template>
+        <div>
+            <b-tree :data='data1' @on-select='handleselect'></b-tree>
+        </div>
+    </template>
     <script>
         export default {
             data () {
@@ -86,9 +88,12 @@
 
 ::: code
 ```html
-    <div>
-        <b-tree :data='data2' accordion :accordionOptions='accordionOptions'></b-tree>
-    </div>
+    <template>
+        <div>
+            <b-checkbox v-model="accordionOptions.isCache">手风琴是否开启缓存</b-checkbox>
+            <b-tree :data='data2' accordion :accordionOptions='accordionOptions'></b-tree>
+        <div>
+    </template>
     <script>
         export default {
             data () {
@@ -175,12 +180,14 @@
 
 ::: code
 ```html
-    <div>
-        <b-checkbox v-model="checkboxOptions.parent">是否级联父级数据</b-checkbox>
-        <b-checkbox v-model="checkboxOptions.children">是否级联子级数据</b-checkbox>
-        <b-checkbox v-model="checkboxOptions.disabled">是否级联禁用数据</b-checkbox>
-        <b-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions' @on-check='handleChecked'></b-tree>
-    </div>
+    <template>
+        <div>
+            <b-checkbox v-model="checkboxOptions.parent">是否级联父级数据</b-checkbox>
+            <b-checkbox v-model="checkboxOptions.children">是否级联子级数据</b-checkbox>
+            <b-checkbox v-model="checkboxOptions.disabled">是否级联禁用数据</b-checkbox>
+            <b-tree :data='data3' show-checkbox :checkboxOptions='checkboxOptions' @on-check='handleChecked'></b-tree>
+        </div>
+    </template>
     <script>
         export default {
             data () {
@@ -288,32 +295,32 @@
 
 ::: code
 ```html
-    <div>
+    <template>
         <b-tree :data='data5' loading :load-method="loadMethod"></b-tree>
-    </div>
+    </template>
     <script>
         export default {
             data () {
                 return {
                     data5:[
                         {
-                            title: '根节点',
+                            name: '根节点',
                             loading: false
                         }
                     ]
                 }
             },
             methods:{
-                loadData (item, callback) {
+                loadMethod (item, callback) {
                     setTimeout(() => {
                         const data = [
                             {
                                 name: '懒加载数据',
                                 loading: false
                             }
-                        ];
-                        callback(data);
-                    }, 1000);
+                        ]
+                        callback(data)
+                    }, 1000)
                 }
             }
         }
@@ -333,9 +340,9 @@
 
 ::: code
 ```html
-    <div>
+    <template>
         <b-tree :data='data6' draggable></b-tree>
-    </div>
+    </template>
     <script>
         export default {
             data () {
@@ -404,9 +411,9 @@ Render 函数的第二个参数，包含三个字段：
 
 ::: code
 ```html
-    <div>
+    <template>
          <b-tree :data='data6' :render='renderContent'></b-tree>
-    </div>
+    </template>
     <script>
         export default {
             data () {
@@ -516,9 +523,9 @@ Render 函数的第二个参数，包含三个字段：
 
 ::: code
 ```html
-    <div>
+    <template>
         <b-tree style="height:150px;overflow: scroll" auto-scroll :data='data8'></b-tree>
-    </div>
+    </template>
     <script>
         export default {
             data () {
@@ -636,19 +643,21 @@ Render 函数的第二个参数，包含三个字段：
 
 ::: code
 ```html
-    <div>
-       <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
-       <b-checkbox @on-change='changeCascade'>包含下级</b-checkbox>
-       <b-tree
-            :default-checked-values='defaultCheckedValues'
-            :default-expanded-values='defaultExpandedValues'
-            showCheckbox
-            :checkbox-options='dataOptions'
-            :data='data7'
-            :filter-text='filterText'
-            :filter-method='filterMethod'>
-       </b-tree>
-    </div>
+    <template>
+        <div>
+           <b-input width=200 v-model='filterText' suffix='chaxun'></b-input>
+           <b-checkbox @on-change='changeCascade'>包含下级</b-checkbox>
+           <b-tree
+                :default-checked-values='defaultCheckedValues'
+                :default-expanded-values='defaultExpandedValues'
+                showCheckbox
+                :checkbox-options='dataOptions'
+                :data='data7'
+                :filter-text='filterText'
+                :filter-method='filterMethod'>
+           </b-tree>
+        </div>
+    </template>
     <script>
         export default {
             data () {
@@ -693,6 +702,7 @@ Render 函数的第二个参数，包含三个字段：
                            ]
                        }
                     ],
+                    filterText:'',
                     dataOptions: { // 多选级联配置
                         parent: false, // 是否影响父级节点
                         children: true // 是否影响子级节点
