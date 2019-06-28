@@ -56,19 +56,21 @@
                     />
                 </div>
             </div>
-            <Icon
-                type='xia'
-                v-if='!disabled && !autoComplete'
-                v-show='iconShow'
-                :class="[prefixCls+`-arrow`]">
-            </Icon>
-            <Icon
-                type='shibai-mian'
-                v-if='clearable'
-                v-show='closeIcon'
-                :class="[prefixCls+`-arrow`]"
-                @click.native.stop='clearValues'>
-            </Icon>
+            <div :class="[prefixCls+`-icon`]">
+                <Icon
+                    type='xia'
+                    v-if='!disabled && !autoComplete'
+                    v-show='iconShow'
+                    :class="[prefixCls+`-arrow`]">
+                </Icon>
+                <Icon
+                    type='shibai-mian'
+                    v-if='clearable'
+                    v-show='closeIcon'
+                    :class="[prefixCls+`-arrow`]"
+                    @click.native.stop='clearValues'>
+                </Icon>
+            </div>
         </div>
         <slot name='tree'>
             <transition name='slide'>
@@ -326,7 +328,7 @@ export default {
                     [`${prefixCls}-show`]: this.show, // 旋转小icon
                     [`${prefixCls}-focused`]: this.isFocused && this.show && (!this.label || !this.fixed),
                     [`${prefixCls}-disabled`]: this.disabled,
-                    [`${prefixCls}-autowarp`]: this.multiple && !this.autowarp
+                    [`${prefixCls}-autowarp`]: this.multiple && this.autowarp
                 }
             ]
         },
