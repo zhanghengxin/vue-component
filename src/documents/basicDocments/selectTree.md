@@ -196,26 +196,40 @@
             data () {
                 return {
                     data4:[
-                       {
-                           name: 'root',
-                           expand: true,
-                           id:1,
-                           children: [
-                               {
-                                   name: 'parent1',
-                                   id:2,
-                                   children: [
-                                       {
-                                           id:3,
-                                           name: 'leaf1'
-                                       },
-                                       {
-                                           id:4,
-                                           name: 'leaf2'
-                                       }
-                                   ]
-                               }
-                           ]
+                        {
+                            name: 'root',
+                            expand: true,
+                            id:1,
+                            children: [
+                                {
+                                    name: 'parent1',
+                                    id:2,
+                                    children: [
+                                        {
+                                            id:3,
+                                            name: 'leaf1'
+                                        },
+                                        {
+                                            id:4,
+                                            name: 'leaf2'
+                                        }
+                                    ]
+                                },
+                                {
+                                    name: 'parent2',
+                                    id:5,
+                                    children: [
+                                        {
+                                            id:6,
+                                            name: 'leaf2-1'
+                                        },
+                                        {
+                                            id:7,
+                                            name: 'leaf2-2'
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }
@@ -532,6 +546,20 @@ export default {
                                {
                                    id:4,
                                    name: 'leaf2'
+                               }
+                           ]
+                       },
+                       {
+                           name: 'parent2',
+                           id:5,
+                           children: [
+                               {
+                                   id:6,
+                                   name: 'leaf2-1'
+                               },
+                               {
+                                   id:7,
+                                   name: 'leaf2-2'
                                }
                            ]
                        }

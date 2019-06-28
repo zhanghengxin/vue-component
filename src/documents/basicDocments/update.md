@@ -1,5 +1,20 @@
 ### 更新日志
 
+### 0.7.8
+## `2019-06-20`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        修复 selectTree 在全选状态在下，半选显示不正常问题修复
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 selectTree 多选支持tag 关闭效果
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 select的多选展示效果，不再有留白现象
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.7.7
 ## `2019-06-19`
 <br>
