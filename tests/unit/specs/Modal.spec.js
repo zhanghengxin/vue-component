@@ -123,17 +123,22 @@ describe('Modal', () => {
         it('width', () => {
             vm = getModalVm('width="360px"')
             expect(vm.$children[0].$el.querySelector(`${prefixCls}`).style.width).toBe('360px')
+            destroyVM(vm)
         })
 
         it('fullscreen', () => {
             vm = getModalVm('fullscreen')
             const modalEl = vm.$children[0].$el.querySelector(`${prefixCls}`)
             expect(modalEl.classList).toContain('b-modal-fullscreen')
+            destroyVM(vm)
         })
 
         it('z-index', () => {
-            vm = getModalVm('z-index=1024')
-            expect(vm.$children[0].$el.querySelector(`${prefixCls}-wrap`).style.zIndex).toBe('1024')
+            vm = getModalVm('style:"z-index:1024"')
+            console.log(vm)
+            // expect(vm.$children[0].$el.querySelector(`${prefixCls}-wrap`).style.zIndex).toBe('1024')
+            expect(vm.$el.style.zIndex).toBe('1024')
+            expect(vm.style.zIndex).toBe('1024')
         })
 
         it('class-name', () => {
