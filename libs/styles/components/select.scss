@@ -17,7 +17,7 @@ $css-prefix-form-item: $css-prefix+'form-item';
     @include _borderColor($color);
     box-shadow: $shadow;
 
-    .#{$css-prefix-select}-arrow {
+    +.#{$css-prefix-select}-arrow {
       transform: rotate(180deg);
     }
   }
@@ -30,10 +30,14 @@ $css-prefix-form-item: $css-prefix+'form-item';
 @mixin size($type, $height, $tagHeight) {
   &-#{$type} {
     .#{$css-prefix-select} {
+      .#{$css-prefix-select}-main-flex {
+        max-height: $height;
+        overflow: hidden;
+      }
       &-autowarp {
         .#{$css-prefix-select}-main-flex {
-          max-height: $height;
-          overflow: hidden;
+          display: flex;
+          flex-wrap: wrap;;
         }
       }
 
@@ -81,6 +85,10 @@ $css-prefix-form-item: $css-prefix+'form-item';
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
+
+  >div{
+    position: relative;
+  }
 
   //label
   &-label {
@@ -139,14 +147,23 @@ $css-prefix-form-item: $css-prefix+'form-item';
   &-multiple {
     .#{$css-prefix-select} {
       &-main-flex {
-        display: flex;
-        flex-wrap: wrap;
         padding-left: 4px;
+        white-space:nowrap; 
       }
       &-input {
         padding-left: 4px;
       }
     }
+  }
+
+  &-icon{
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 24px;
+    height: calc(100% - 2px);
+    border-radius: 4px;
+    background: $white;
   }
 
 
@@ -158,7 +175,6 @@ $css-prefix-form-item: $css-prefix+'form-item';
     font-size: 12px;
     user-select: none;
     cursor: pointer;
-    position: relative;
     background-color: $white;
     overflow: hidden;
     width: 100%;
@@ -232,6 +248,9 @@ $css-prefix-form-item: $css-prefix+'form-item';
     cursor: not-allowed;
 
     .#{$css-prefix-select}-input {
+      background: $Disabled;
+    }
+    +.#{$css-prefix-select}-icon {
       background: $Disabled;
     }
   }

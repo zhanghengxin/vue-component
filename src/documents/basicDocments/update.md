@@ -1,5 +1,35 @@
 ### 更新日志
 
+### 0.7.8
+## `2019-06-28`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        修复 selectTree 在全选状态在下，半选显示不正常问题修复
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 selectTree 多选支持tag 关闭效果
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 select的多选展示效果，不再有留白现象
+    </b-timeline-item>
+</b-timeline>
+
+### 0.7.7
+## `2019-06-19`
+<br>
+<b-timeline>
+    <b-timeline-item>
+        修复 select的样式布局 解决fixed下tag超长 将icon挤消失的问题
+    </b-timeline-item>
+    <b-timeline-item>
+        优化 selectTree defaltValues动态修改，格式化数据逻辑优化
+    </b-timeline-item>
+    <b-timeline-item>
+        新增 defaultExpandedValues默认展开项支持
+    </b-timeline-item>
+</b-timeline>
+
 ### 0.7.6
 ## `2019-06-18`
 <br>

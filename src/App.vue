@@ -79,6 +79,8 @@ export default {
     .nav {
         float: left;
         width: 200px;
+        border-right: 1px solid #eaeefb;
+        margin-right: -1px;
     }
 
     .nav-right {

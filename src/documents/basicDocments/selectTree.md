@@ -14,10 +14,12 @@
 
 ::: code
 ```html
-    <div>
-        <b-select-tree label='单选' width='200' :data='data1'></b-select-tree>
-        <b-select-tree show-checkbox label='复选' width='250' :data='data1'></b-select-tree>
-    </div>
+    <template>
+        <div>
+            <b-select-tree label='单选' width='200' :data='data1'></b-select-tree>
+            <b-select-tree show-checkbox label='复选' width='250' :data='data1'></b-select-tree>
+        </div>
+    </template>
     <script>
         export default {
             data () {
@@ -68,10 +70,12 @@
 
 ::: code
 ```html
-    <div>
-        <b-select-tree label='无边框' width='200' :data='data2'></b-select-tree>
-        <b-select-tree fixed label='边框' width='300' :data='data2'></b-select-tree>
-    </div>
+    <template>
+        <div>
+            <b-select-tree label='无边框' width='200' :data='data2'></b-select-tree>
+            <b-select-tree fixed label='边框' width='300' :data='data2'></b-select-tree>
+        </div>
+    </template>
     <script>
         export default {
             data () {
@@ -123,10 +127,12 @@
 
 ::: code
 ```html
-    <div>
-        <b-select-tree fixed label='复选' filterable width='250' :data='data3' show-checkbox></b-select-tree>
-        <b-select-tree fixed auto-filter label='模糊检索' width='250' filterable :data='data3'></b-select-tree>
-    </div>
+    <template>
+        <div>
+            <b-select-tree fixed label='复选' filterable width='250' :data='data3' show-checkbox></b-select-tree>
+            <b-select-tree fixed auto-filter label='模糊检索' width='250' filterable :data='data3'></b-select-tree>
+        </div>
+    </template>
     <script>
         export default {
             data () {
@@ -174,34 +180,56 @@
 
 ::: code
 ```html
-    <div>
-        <b-select-tree show-allcheck fixed label='复选' filterable width='250' :data='data4' show-checkbox></b-select-tree>
-    </div>
+    <template>
+        <b-select-tree
+            show-allcheck
+            fixed
+            label='复选'
+            filterable
+            width='250'
+            :data='data4'
+            show-checkbox>
+        </b-select-tree>
+    </template>
     <script>
         export default {
             data () {
                 return {
                     data4:[
-                       {
-                           name: 'root',
-                           expand: true,
-                           id:1,
-                           children: [
-                               {
-                                   name: 'parent1',
-                                   id:2,
-                                   children: [
-                                       {
-                                           id:3,
-                                           name: 'leaf1'
-                                       },
-                                       {
-                                           id:4,
-                                           name: 'leaf2'
-                                       }
-                                   ]
-                               }
-                           ]
+                        {
+                            name: 'root',
+                            expand: true,
+                            id:1,
+                            children: [
+                                {
+                                    name: 'parent1',
+                                    id:2,
+                                    children: [
+                                        {
+                                            id:3,
+                                            name: 'leaf1'
+                                        },
+                                        {
+                                            id:4,
+                                            name: 'leaf2'
+                                        }
+                                    ]
+                                },
+                                {
+                                    name: 'parent2',
+                                    id:5,
+                                    children: [
+                                        {
+                                            id:6,
+                                            name: 'leaf2-1'
+                                        },
+                                        {
+                                            id:7,
+                                            name: 'leaf2-2'
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }
@@ -225,10 +253,12 @@
 
 ::: code
 ```html
-    <div>
-        <b-select-tree :checkbox-options='checkboxOptions' fixed label='复选'  width='250' :data='data5' show-checkbox></b-select-tree>
-        <span><b-checkbox @on-change='handleChange'>是否级联父级数据</b-checkbox></span>
-    </div>
+    <template>
+        <div>
+            <b-select-tree :checkbox-options='checkboxOptions' fixed label='复选'  width='250' :data='data5' show-checkbox></b-select-tree>
+            <span><b-checkbox @on-change='handleChange'>是否级联父级数据</b-checkbox></span>
+        </div>
+    </template>
     <script>
         export default {
             data () {
@@ -287,10 +317,12 @@
 
 ::: code
 ```html
-    <div>
-        <b-select-tree :default-values='defaltValues' fixed label='复选'  width='250' :data='data6' show-checkbox></b-select-tree>
-        <b-select-tree :default-values='selectValues' fixed label='单选'  width='250' :data='data7'></b-select-tree>
-    </div>
+    <template>
+        <div>
+            <b-select-tree :default-values='defaltValues' fixed label='复选'  width='250' :data='data6' show-checkbox></b-select-tree>
+            <b-select-tree :default-values='selectValues' fixed label='单选'  width='250' :data='data7'></b-select-tree>
+        </div>
+    </template>
     <script>
         export default {
             data () {
@@ -379,9 +411,9 @@
 
 ::: code
 ```html
-    <div>
+    <template>
          <b-select-tree disabled label='复选'  width='250' :data='data6'></b-select-tree>
-    </div>
+    </template>
     <script>
         export default {
             data () {
@@ -514,6 +546,20 @@ export default {
                                {
                                    id:4,
                                    name: 'leaf2'
+                               }
+                           ]
+                       },
+                       {
+                           name: 'parent2',
+                           id:5,
+                           children: [
+                               {
+                                   id:6,
+                                   name: 'leaf2-1'
+                               },
+                               {
+                                   id:7,
+                                   name: 'leaf2-2'
                                }
                            ]
                        }

@@ -8,7 +8,9 @@ import Vue from 'vue'
 import BModal from './Modal'
 import BButton from '../button'
 import BIcon from '../icon'
-import { prefix } from '../../utils/common'
+import {
+    prefix
+} from '../../utils/common'
 
 const prefixCls = prefix + 'modal-confirm'
 const prefixIcon = prefix + 'icon'
